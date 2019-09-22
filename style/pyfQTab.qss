@@ -1,0 +1,218 @@
+/* QTabWiget -------------------------------------------------------------- */
+QTabWidget {
+    padding: 2px;
+    selection-background-color: #32414B;
+}
+QTabWidget QFrame{
+    border: 0;
+}
+QTabWidget::pane {
+    border: 1px solid #32414B;
+    border-radius: 4px;
+    padding: 2px;
+    margin: 0px;
+}
+QTabWidget::pane:selected {
+    background-color: #32414B;
+    border: 1px solid #1464A0;
+}
+/* QTabBar ---------------------------------------------------------------- */
+QTabBar {
+    qproperty-drawBase: 0;
+    border-radius: 4px;
+    margin: 0px;
+    padding: 2px;
+    border: 0;
+    /* left: 5px; move to the right by 5px - removed for fix */
+    }
+QTabBar::close-button {
+    border: 0;
+    margin: 2px;
+    padding: 0;
+    image: url(:/qss_icons/rc/close.png);
+}
+QTabBar::close-button:hover {
+    image: url(:/qss_icons/rc/close-hover.png);
+}
+QTabBar::close-button:pressed {
+    image: url(:/qss_icons/rc/close-pressed.png);
+}
+/* QTabBar::tab - selected ----------------------------------------------- */
+QTabBar::tab:top:selected:disabled {
+    border-bottom: 3px solid #14506E;
+    color: #787878;
+    background-color: #32414B;
+}
+QTabBar::tab:bottom:selected:disabled {
+    border-top: 3px solid #14506E;
+    color: #787878;
+    background-color: #32414B;
+}
+QTabBar::tab:left:selected:disabled {
+    border-left: 3px solid #14506E;
+    color: #787878;
+    background-color: #32414B;
+}
+QTabBar::tab:right:selected:disabled {
+    border-right: 3px solid #14506E;
+    color: #787878;
+    background-color: #32414B;
+}
+/* QTabBar::tab - !selected and disabled ---------------------------------- */
+QTabBar::tab:top:!selected:disabled {
+    border-bottom: 3px solid #19232D;
+    color: #787878;
+    background-color: #19232D;
+}
+QTabBar::tab:bottom:!selected:disabled {
+    border-top: 3px solid #19232D;
+    color: #787878;
+    background-color: #19232D;
+}
+QTabBar::tab:left:!selected:disabled {
+    border-right: 3px solid #19232D;
+    color: #787878;
+    background-color: #19232D;
+}
+QTabBar::tab:right:!selected:disabled {
+    border-left: 3px solid #19232D;
+    color: #787878;
+    background-color: #19232D;
+}
+/* QTabBar::tab - selected ----------------------------------------------- */
+QTabBar::tab:top:!selected {
+    border-bottom: 2px solid #19232D;
+    margin-top: 2px;
+}
+QTabBar::tab:bottom:!selected {
+    border-top: 2px solid #19232D;
+    margin-bottom: 3px;
+}
+QTabBar::tab:left:!selected {
+    border-left: 2px solid #19232D;
+    margin-right: 2px;
+}
+QTabBar::tab:right:!selected {
+    border-right: 2px solid #19232D;
+    margin-left: 2px;
+}
+QTabBar::tab:top {
+    background-color: #32414B;
+    color: #F0F0F0;
+    margin-left: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    min-width: 5px;
+    border-bottom: 3px solid #32414B;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+QTabBar::tab:top:selected {
+    background-color: #505F69;
+    color: #F0F0F0;
+    border-bottom: 3px solid #1464A0;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+QTabBar::tab:top:!selected:hover {
+    border: 1px solid #148CD2;
+    border-bottom: 3px solid #148CD2;
+    padding: 0px;
+}
+QTabBar::tab:bottom {
+    color: #F0F0F0;
+    border-top: 3px solid #32414B;
+    background-color: #32414B;
+    margin-left: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    min-width: 5px;
+}
+QTabBar::tab:bottom:selected {
+    color: #F0F0F0;
+    background-color: #505F69;
+    border-top: 3px solid #1464A0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+QTabBar::tab:bottom:!selected:hover {
+    border: 1px solid #148CD2;
+    border-top: 3px solid #148CD2;
+    padding: 0px;
+}
+QTabBar::tab:left {
+    color: #F0F0F0;
+    background-color: #32414B;
+    margin-top: 2px;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    min-height: 5px;
+}
+QTabBar::tab:left:selected {
+    color: #F0F0F0;
+    background-color: #505F69;
+    border-left: 3px solid #1464A0;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+QTabBar::tab:left:!selected:hover {
+    border: 1px solid #148CD2;
+    border-left: 3px solid #148CD2;
+    padding: 0px;
+}
+QTabBar::tab:right {
+    color: #F0F0F0;
+    background-color: #32414B;
+    margin-top: 2px;
+    padding-left: 2px;
+    padding-right: 2px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    min-height: 5px;
+}
+QTabBar::tab:right:selected {
+    color: #F0F0F0;
+    background-color: #505F69;
+    border-right: 3px solid #1464A0;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+QTabBar::tab:right:!selected:hover {
+    border: 1px solid #148CD2;
+    border-right: 3px solid #148CD2;
+    padding: 0px;
+}
+QTabBar QToolButton::right-arrow:enabled {
+    image: url(:/qss_icons/rc/right_arrow.png);
+}
+QTabBar QToolButton::left-arrow:enabled {
+    image: url(:/qss_icons/rc/left_arrow.png);
+}
+QTabBar QToolButton::right-arrow:disabled {
+    image: url(:/qss_icons/rc/right_arrow_disabled.png);
+}
+QTabBar QToolButton::left-arrow:disabled {
+    image: url(:/qss_icons/rc/left_arrow_disabled.png);
+}
+/*  Some examples from internet to check
+QTabBar::tabButton() and QTabBar::tabIcon()
+QTabBar::tear {width: 0px; border: none;}
+QTabBar::tear {image: url(tear_indicator.png);}
+QTabBar::scroller{width:85pix;}
+QTabBar QToolbutton{background-color:"light blue";}
+But that left the buttons transparant.
+Looked confusing as the tab buttons migrated behind the scroller buttons.
+So we had to color the back ground of the scroller buttons
+*/

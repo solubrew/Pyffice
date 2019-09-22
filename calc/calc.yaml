@@ -1,0 +1,3350 @@
+
+
+
+
+https'://support.office.com/en-us/article/excel-functions-alphabetical-b3944572-255d-4efb-bb96-c6d90033e188
+
+excel':
+	description': >
+		A dynamic system for finding excel formulas for
+		translation during import export, usage
+	ex':
+		-
+			code': =FUNC(opt1,opt2)
+			explanation': >
+	pattern':
+		initialize':
+			-
+				symbol': '='
+				name': &SFS 'Start Function Symbol'
+				description': >
+					Signal the start of a function based command
+				obligation': required
+			-
+				symbol': '{'
+				name': &WFS 'Matrix Function Start Symbol'
+				description': >
+						Signal the start of a function based command
+				obligation': required
+			-
+				symbol': '+'
+				name': &SSFS 'Start Summation Function Symbol'
+				description': >
+						'Signal the start of a function based command'
+				obligation': required
+			-
+				symbol': '`'
+				name': &WFS 'WYSIWYG Function Start Symbol'
+				description': >
+						'Signal the start of a function based command'
+				obligation': required
+		processors':
+			prefix':
+			midfix':
+			suffix':
+		finalize':
+			-
+				symbol': '}>'
+				name': &EFS End Function Symbol
+				description': >
+						Signal the start of a function based command
+				obligation': required
+			-
+				symbol': '}^>'
+				name': &REFS Request End Function Symbol
+				description': >
+					Signal the start of a function based command
+				obligation': required
+			-
+				symbol': '}~>'
+				name': &OEFS Optional End Function Symbol
+				description': >
+					Signal the start of a function based command
+				obligation': optional
+			-
+				symbol': '}o>'
+				name': &TEFS Templting End Function Symbol
+				description': >
+					Signal the start of a function based command
+				obligation': non-mutable
+		comments':
+			-
+				name': multiline comment
+				find':
+					initialize':
+						code': '<+[cmt0s]+>'
+						func': '<{<[FORMATS]>':=>LOAD]=[SELECT.START}>'
+					finalize':
+						code': '<+[cmt0e]+>'
+						func': '<{<[FORMATS]>':=>LOAD]=[SELECT.END}>'
+
+
+'ABS':
+	'Name':
+	'tags': ['Math', 'Trigonometry']
+	'Description': >
+		'Returns the absolute value of a number'
+	'formula': '=ABS(<[cell]>)'
+'ACCRINT':
+	'tags': ['Financial', ]
+	'Description': >
+		'Returns the accrued interest for a security that pays periodic interest'
+	'formula': '=ACCRINT()'
+'ACCRINTM':
+	'tags': ['Financial',]
+	'Description': >
+		'Returns the accrued interest for a security that pays interest at maturity'
+	'formula': '=ACCRINTM()'
+'ACOS':
+	'Name':
+	'tags': ['Math', 'Trigonometry']
+	'Description': >
+		'Returns the arccosine of a number'
+'ACOSH':
+	'Name':
+	'tags': ['Math', 'Trigonometry']
+	'Description': >
+		Returns the inverse hyperbolic cosine of a number
+'ACOT':
+	'Name':
+	'tags': ['Excel 2013', 'Math', 'Trigonometry']
+	'Description': >
+		'Returns the arccotangent of a number'
+'ACOTH':
+	'Name':
+	'tags': ['Excel 2013', 'Math', 'Trigonometry']
+	Description': >
+		Returns the hyperbolic arccotangent of a number
+'AGGREGATE':
+	'Name':
+	'tags': ['Math', 'Trigonometry']
+	'Description': >
+		'Returns an aggregate in a list or database'
+'ADDRESS':
+	'Name':
+	'tags': ['Lookup', 'Reference']
+	'Description': >
+		Returns a reference as text to a single cell in a worksheet
+'AMORDEGRC':
+	'Name':
+	'tags':	Financial':
+	Description': >
+		Returns the depreciation for each accounting period by using a depreciation coefficient
+'AMORLINC	'Name':
+	'tags': Financial':
+	Description': >
+		Returns the depreciation for each accounting period
+'AND':
+	'Name':
+	'tags': Logical':
+	Description': >
+		Returns TRUE if all of its arguments are TRUE
+'ARABIC':
+	'Name':
+	'tags': Excel 2013 Math, trigonometry':
+	Description': >
+		Converts a Roman number to Arabic, as a number
+'AREAS':
+	'Name':
+	'tags': Lookup, reference':
+	Description': >
+		Returns the number of areas in a reference
+'ASC':
+	'Name':
+	'tags': Text':
+	Description': >
+		Changes full-width (double-byte) English letters or katakana within a character string to half-width (single-byte) characters
+'ASIN':
+	'Name':
+	'tags': Math, trigonometry
+	Description': >
+		Returns the arcsine of a number
+'ASINH':
+	'Name':
+	'tags': Math, trigonometry':
+	Description': >
+		Returns the inverse hyperbolic sine of a number
+'ATAN':
+	'Name':
+	'tags': Math, trigonometry':
+	 	'Description': > 		Returns the arctangent of a number
+'ATAN2':
+	'Name':
+	'tags': Math, trigonometry':
+	 	'Description': > 		Returns the arctangent from x-, y-coordinates
+'ATANH':
+	'Name':
+	'tags': Math, trigonometry':
+	Description': >
+		Returns the inverse hyperbolic tangent of a number
+'AVEDEV':
+	'Name':
+	'tags': Statistical':
+	Description': >
+		Returns the average of the absolute deviations of data points from their mean
+'AVERAGE':
+	'Name':
+	'tags': Statistical':
+	Description': >
+		Returns the average of its arguments
+'AVERAGEA':
+	'Name':
+	'tags': [Statistical', ]
+	Description': >
+		Returns the average of its arguments, including numbers, text,, logical values
+'AVERAGEIF':
+	'Name':
+	'tags': ['Statistical', ]
+	Description': >
+		Returns the average (arithmetic mean) of all the cells in a range that meet a given criteria
+'AVERAGEIFS':
+	'Name':
+	'tags': [Statistical, ]
+	Description': >
+		Returns the average (arithmetic mean) of all cells that meet multiple criteria.
+'BAHTTEXT':
+	'Name':
+	'tags': Text':
+	Description': >
+		Converts a number to text, using the ß (baht) currency format
+'BASE':
+	'Name':
+	'tags': [Math, trigonometry'
+	Description': >
+		'Converts a number into a text representation with the given radix (base)'
+'BESSELI':
+	'Name':
+	'tags': ['Engineering', ]
+	'Description': >
+		Returns the modified Bessel  In(x)
+'BESSELJ':
+	'Name':
+	'tags': ['Engineering',]
+	'Description': >
+		'Returns the Bessel  Jn(x)'
+'BESSELK':
+	'Name':
+	'tags': ['Engineering', ]
+	'Description': >
+		'Returns the modified Bessel  Kn(x)'
+'BESSELY':
+	'Name':
+	'tags': ['Engineering', ]
+	Description': >
+		'Returns the Bessel  Yn(x)'
+'BETADIST':
+	'Name':
+	'tags': ['Compatibility', 'Excel 2007', 'Statistical']
+	'Description': >
+		'Returns the beta cumulative distribution'
+'BETA.DIST':
+	'Name':
+	'tags': ['Excel 2010', 'Statistical']
+	'Description': >
+		'Returns the beta cumulative distribution'
+'BETAINV':
+	'Name':
+	'tags': ['Compatibility', 'Excel 2007', 'Statistical']
+	'Description': >
+		'Returns the inverse of the cumulative distribution'
+		'for a specified beta distribution'
+'BETA.INV':
+	'Name':
+	'tags': ['Excel 2010', 'Statistical']
+	'Description': >
+		'Returns the inverse of the cumulative distribution'
+		'for a specified beta distribution'
+'BIN2DEC':
+	'Name':
+	'tags': [Engineering']
+	Description': >
+		Converts a binary number to decimal
+'BIN2HEX':
+	'Name':
+	'tags': [Engineering']
+	Description': >
+		Converts a binary number to hexadecimal
+'BIN2OCT':
+	'Name':
+	'tags': [Engineering]
+	Description': >
+		Converts a binary number to octal
+'BINOMDIST':
+	'Name':
+	'tags': [Compatibility]
+	Description': >
+		Returns the individual term binomial distribution probability
+		In Excel 2007, this is a Statistical .
+'BINOM.DIST':
+	'Name':
+	'tags': [Excel 2010 Statistical]
+	Description': >
+		Returns the individual term binomial distribution probability
+'BINOM.DIST.RANGE':
+	'Name':
+	'tags': [Excel 2013Statistical]
+	Description': >
+		Returns the probability of a trial result using a binomial distribution
+'BINOM.INV':
+	'Name':
+	'tags': [Excel 2010Statistical]
+	Description': >
+		Returns the smallest value for which the cumulative binomial
+		distribution is less than or equal to a criterion value
+'BITAND':
+	'Name':
+	'tags':Excel 2013 Engineering':
+	Description': >
+		Returns a 'Bitwise And' of two numbers
+'BITLSHIFT':
+	'Name':
+	'tags': Excel 2013 Engineering':
+	Description': >
+		Returns a value number shifted left by shift_amount bits
+'BITOR':
+	'Name':
+	'tags': Excel 2013 Engineering':
+	Description': >
+		Returns a bitwise OR of 2 numbers
+BITRSHIFT':
+	'Name':
+	'tags': Excel 2013 Engineering':
+	Description': >
+		Returns a value number shifted right by shift_amount bits
+BITXOR':
+	'Name':
+	'tags': Excel 2013 Engineering':
+	Description': >
+		Returns a bitwise 'Exclusive Or' of two numbers
+CALL':
+	'Name':
+	'tags': Add-in, Automation':
+	Description': >
+		Calls a procedure in a dynamic link library or code resource
+CEILING':
+	'Name':
+	'tags': Math, trigonometry':
+	Description': >
+		Rounds a number to the nearest integer or to the nearest multiple of significance
+CEILING.MATH':
+	'Name':
+	'tags': Excel 2013 Math, trigonometry':
+	Description': >
+		Rounds a number up, to the nearest integer or to the nearest multiple of significance
+CEILING.PRECISE':
+	'Name':
+	'tags': Math, trigonometry':
+	Description': >
+		Rounds a number the nearest integer or to the nearest multiple
+		of significance. Regardless of the sign of the number,
+		the number is rounded up.
+CELL':
+	'Name':
+	'tags': Information':
+	Description': >
+		Returns information about the formatting, location, or contents of a cell
+		not Excel Online.
+CHAR':
+	'Name':
+	'tags': Text':
+	Description': >
+		Returns the character specified by the code number
+CHIDIST':
+	'Name':
+	'tags': Compatibility':
+	Description': >
+		Returns the one-tailed probability of the chi-squared distribution
+Note': In Excel 2007, this is a Statistical .
+CHIINV':
+	'Name':
+	'tags':
+	'Compatibility':
+	'Description': >
+		Returns the inverse of the one-tailed probability of the chi-squared distribution
+Note': In Excel 2007, this is a Statistical .
+CHITEST':
+	'Name':
+	'tags': Compatibility':	'Description': >		Returns the test for independence
+Note': In Excel 2007, this is a Statistical .
+CHISQ.DIST':
+	'Name':
+	'tags': Excel 2010  Statistical':
+	'Description': >		Returns the cumulative beta probability density
+CHISQ.DIST.RT':
+	'Name':
+	'tags': Excel 2010 Statistical':
+	'Description': >		Returns the one-tailed probability of the chi-squared distribution
+CHISQ.INV':
+	'Name':
+	'tags': Excel 2010 Statistical':
+	'Description': >		Returns the cumulative beta probability density
+CHISQ.INV.RT':
+	'Name':
+	'tags': Excel 2010 Statistical':
+	'Description': >		Returns the inverse of the one-tailed probability of the chi-squared distribution
+CHISQ.TEST':
+	'Name':
+	'tags': Excel 2010 Statistical':
+	'Description': >		Returns the test for independence
+CHOOSE':
+	'Name':
+	'tags': Lookup, reference':
+	'Description': >		Chooses a value from a list of values
+CLEAN':
+	'Name':
+	'tags': Text':
+	'Description': >		Removes all nonprintable characters from text
+CODE':
+	'Name':
+	'tags': Text':
+	'Description': >		Returns a numeric code for the first character in a text string
+COLUMN':
+	'Name':
+	'tags': Lookup, reference':
+	'Description': >		Returns the column number of a reference
+COLUMNS':
+	'Name':
+	'tags': Lookup, reference':
+	'Description': >		Returns the number of columns in a reference
+COMBIN':
+	'Name':
+	'tags': Math, trigonometry':
+	'Description': >		Returns the number of combinations for a given number of objects
+COMBINA':
+	'Name':
+	'tags': Excel 2013 Math, trigonometry':
+Returns the number of combinations with repetitions for a given number of items
+COMPLEX':
+	'Name':
+	'tags':Engineering':
+	'Description': >		Converts real, imaginary coefficients into a complex number
+CONCAT':
+	'Name':
+	'tags':Excel 2016 Text':
+	'Description': >		Combines the text from multiple ranges and/or strings, but it doesn't provide the delimiter or IgnoreEmpty arguments.
+CONCATENATE':
+	'Name':
+	'tags': Text':
+	 	'Description': > 		Joins several text items into one text item
+CONFIDENCE':
+	'Name':
+	'tags':Compatibility':
+	'Description': >		Returns the confidence interval for a population mean
+In Excel 2007, this is a Statistical .
+CONFIDENCE.NORM':
+	'Name':
+	'tags':Excel 2010
+Statistical':
+'Description': >		Returns the confidence interval for a population mean
+CONFIDENCE.T':
+	'Name':
+	'tags':Excel 2010
+Statistical':
+'Description': >		Returns the confidence interval for a population mean, using a Student's t distribution
+CONVERT':
+	'Name':
+	'tags':Engineering':'Description': >		Converts a number from one measurement system to another
+CORREL':
+	'Name':
+	'tags':Statistical':'Description': >		Returns the correlation coefficient between two data sets
+COS':
+	'Name':
+	'tags':Math, trigonometry':'Description': >		Returns the cosine of a number
+COSH':
+	'Name':
+	'tags':Math, trigonometry':'Description': >		Returns the hyperbolic cosine of a number
+COT':
+	'Name':
+	'tags':Excel 2013
+Math, trigonometry':'Description': >		Returns the hyperbolic cosine of a number
+COTH':
+	'Name':
+	'tags':Excel 2013
+Math, trigonometry':'Description': >		Returns the cotangent of an angle
+COUNT':
+	'Name':
+	'tags':Statistical':'Description': >		Counts how many numbers are in the list of arguments
+COUNTA':
+	'Name':
+	'tags':Statistical':'Description': >		Counts how many values are in the list of arguments
+COUNTBLANK':
+	'Name':
+	'tags':Statistical':'Description': >		Counts the number of blank cells within a range
+COUNTIF':
+	'Name':
+	'tags':Statistical':'Description': >		Counts the number of cells within a range that meet the given criteria
+COUNTIFS':
+	'Name':
+	'tags':Statistical':'Description': >		Counts the number of cells within a range that meet multiple criteria
+COUPDAYBS':
+	'Name':
+	'tags':Financial':'Description': >		Returns the number of days from the beginning of the coupon period to the settlement date
+COUPDAYS':
+	'Name':
+	'tags':Financial':'Description': >		Returns the number of days in the coupon period that contains the settlement date
+COUPDAYSNC':
+	'Name':
+	'tags':Financial':'Description': >		Returns the number of days from the settlement date to the next coupon date
+COUPNCD':
+	'Name':
+	'tags':Financial':'Description': >		Returns the next coupon date after the settlement date
+COUPNUM':
+	'Name':
+	'tags':Financial':'Description': >		Returns the number of coupons payable between the settlement date, maturity date
+COUPPCD':
+	'Name':
+	'tags':Financial':'Description': >		Returns the previous coupon date before the settlement date
+COVAR':
+	'Name':
+	'tags':Compatibility':'Description': >		Returns covariance, the average of the products of paired deviations
+In Excel 2007, this is a Statistical .
+
+COVARIANCE.P':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns covariance, the average of the products of paired deviations
+
+COVARIANCE.S':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the sample covariance, the average of the products deviations for each data point pair in two data sets
+
+CRITBINOM':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Returns the smallest value for which the cumulative binomial distribution is less than or equal to a criterion value
+
+In Excel 2007, this is a Statistical .
+
+CSC':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Math, trigonometry':'Description': >		Returns the cosecant of an angle
+
+CSCH':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Math, trigonometry':'Description': >		Returns the hyperbolic cosecant of an angle
+
+CUBEKPIMEMBER':
+	'Name':
+	'tags':
+
+
+Cube':'Description': >		Returns a key performance indicator (KPI) name, property,, measure,, displays the name, property in the cell. A KPI is a quantifiable measurement, such as monthly gross profit or quarterly employee turnover, used to monitor an organization's performance.
+
+CUBEMEMBER':
+	'Name':
+	'tags':
+
+
+Cube':'Description': >		Returns a member or tuple in a cube hierarchy. Use to validate that the member or tuple exists in the cube.
+
+CUBEMEMBERPROPERTY':
+	'Name':
+	'tags':
+
+
+Cube':'Description': >		Returns the value of a member property in the cube. Use to validate that a member name exists within the cube, to return the specified property for this member.
+
+CUBERANKEDMEMBER':
+	'Name':
+	'tags':
+
+
+Cube':'Description': >		Returns the nth, or ranked, member in a set. Use to return one or more elements in a set, such as the top sales performer or top 10 students.
+
+CUBESET':
+	'Name':
+	'tags':
+
+
+Cube':'Description': >		Defines a calculated set of members or tuples by sending a set expression to the cube on the server, which creates the set,, then returns that set to Microsoft Office Excel.
+
+CUBESETCOUNT':
+	'Name':
+	'tags':
+
+
+Cube':'Description': >		Returns the number of items in a set.
+
+CUBEVALUE':
+	'Name':
+	'tags':
+
+
+Cube':'Description': >		Returns an aggregated value from a cube.
+
+CUMIPMT':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the cumulative interest paid between two periods
+
+CUMPRINC':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the cumulative principal paid on a loan between two periods
+
+DATE':
+	'Name':
+	'tags':
+
+
+Date, time':'Description': >		Returns the serial number of a particular date
+
+DATEDIF':
+	'Name':
+	'tags':
+
+
+Date, time':'Description': >		Calculates the number of days, months, or years between two dates. This  is useful in formulas where you need to calculate an age.
+
+DATEVALUE':
+	'Name':
+	'tags':
+
+
+Date, time':'Description': >		Converts a date in the form of text to a serial number
+
+DAVERAGE':
+	'Name':
+	'tags':
+
+
+Database':'Description': >		Returns the average of selected database entries
+
+DAY':
+	'Name':
+	'tags':
+
+
+Date, time':'Description': >		Converts a serial number to a day of the month
+
+DAYS':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Date, time':'Description': >		Returns the number of days between two dates
+
+DAYS360':
+	'Name':
+	'tags':
+
+
+Date, time':'Description': >		Calculates the number of days between two dates based on a 360-day year
+
+DB':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the depreciation of an asset for a specified period by using the fixed-declining balance method
+
+DBCS':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Text':'Description': >		Changes half-width (single-byte) English letters or katakana within a character string to full-width (double-byte) characters
+
+DCOUNT':
+	'Name':
+	'tags':
+
+
+Database':'Description': >		Counts the cells that contain numbers in a database
+
+DCOUNTA':
+	'Name':
+	'tags':
+
+
+Database':'Description': >		Counts nonblank cells in a database
+
+DDB':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the depreciation of an asset for a specified period by using the double-declining balance method or some other method that you specify
+
+DEC2BIN':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Converts a decimal number to binary
+
+DEC2HEX':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Converts a decimal number to hexadecimal
+
+DEC2OCT':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Converts a decimal number to octal
+
+DECIMAL':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Math, trigonometry':'Description': >		Converts a text representation of a number in a given base into a decimal number
+
+DEGREES':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Converts radians to degrees
+
+DELTA':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Tests whether two values are equal
+
+DEVSQ':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the sum of squares of deviations
+
+DGET':
+	'Name':
+	'tags':
+
+
+Database':'Description': >		Extracts from a database a single record that matches the specified criteria
+
+DISC':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the discount rate for a security
+
+DMAX':
+	'Name':
+	'tags':
+
+
+Database':'Description': >		Returns the maximum value from selected database entries
+
+DMIN':
+	'Name':
+	'tags':
+
+
+Database':'Description': >		Returns the minimum value from selected database entries
+
+DOLLAR':
+	'Name':
+	'tags':
+
+Text':'Description': >		Converts a number to text, using the $ (dollar) currency format
+
+DOLLARDE':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Converts a dollar price, expressed as a fraction, into a dollar price, expressed as a decimal number
+
+DOLLARFR':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Converts a dollar price, expressed as a decimal number, into a dollar price, expressed as a fraction
+
+DPRODUCT':
+	'Name':
+	'tags':
+
+
+Database':'Description': >		Multiplies the values in a particular field of records that match the criteria in a database
+
+DSTDEV':
+	'Name':
+	'tags':
+
+
+Database':'Description': >		Estimates the standard deviation based on a sample of selected database entries
+
+DSTDEVP':
+	'Name':
+	'tags':
+
+
+Database':'Description': >		Calculates the standard deviation based on the entire population of selected database entries
+
+DSUM':
+	'Name':
+	'tags':
+
+
+Database':'Description': >		Adds the numbers in the field column of records in the database that match the criteria
+
+DURATION':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the annual duration of a security with periodic interest payments
+
+DVAR':
+	'Name':
+	'tags':
+
+
+Database':'Description': >		Estimates variance based on a sample from selected database entries
+
+DVARP':
+	'Name':
+	'tags':
+
+
+Database':'Description': >		Calculates variance based on the entire population of selected database entries
+
+EDATE':
+	'Name':
+	'tags':
+
+
+Date, time':'Description': >		Returns the serial number of the date that is the indicated number of months before or after the start date
+
+EFFECT':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the effective annual interest rate
+
+ENCODEURL':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Web':'Description': >		Returns a URL-encoded string
+
+This  is not available in Excel Online.
+
+EOMONTH':
+	'Name':
+	'tags':
+
+
+Date, time':'Description': >		Returns the serial number of the last day of the month before or after a specified number of months
+
+ERF':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Returns the error
+
+ERF.PRECISE':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Engineering':'Description': >		Returns the error
+
+ERFC':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Returns the complementary error
+
+ERFC.PRECISE':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Engineering':'Description': >		Returns the complementary ERF  integrated between x, infinity
+
+ERROR.TYPE':
+	'Name':
+	'tags':
+
+
+Information':'Description': >		Returns a number corresponding to an error type
+
+EUROCONVERT':
+	'Name':
+	'tags':
+
+
+Add-in, Automation':'Description': >		Converts a number to euros, converts a number from euros to a euro member currency, or converts a number from one euro member currency to another by using the euro as an intermediary (triangulation).
+
+EVEN':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Rounds a number up to the nearest even integer
+
+EXACT':
+	'Name':
+	'tags':
+
+
+Text':'Description': >		Checks to see if two text values are identical
+
+EXP':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns e raised to the power of a given number
+
+EXPON.DIST':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the exponential distribution
+
+EXPONDIST':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Returns the exponential distribution
+
+In Excel 2007, this is a Statistical .
+
+FACT':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the factorial of a number
+
+FACTDOUBLE':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the double factorial of a number
+
+FALSE':
+	'Name':
+	'tags':
+
+
+Logical':'Description': >		Returns the logical value FALSE
+
+F.DIST':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the F probability distribution
+
+FDIST':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Returns the F probability distribution
+
+In Excel 2007, this is a Statistical .
+
+F.DIST.RT':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the F probability distribution
+
+FILTER':
+	'Name':
+	'tags':
+Office 365 button
+
+Lookup, reference':'Description': >		Filters a range of data based on criteria you define
+
+FILTERXML':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Web':'Description': >		Returns specific data from the XML content by using the specified XPath
+
+This  is not available in Excel Online.
+
+FIND':
+	'Name':
+	'tags':, FINDB s
+
+
+Text':'Description': >		Finds one text value within another (case-sensitive)
+
+F.INV':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the inverse of the F probability distribution
+
+F.INV.RT':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the inverse of the F probability distribution
+
+FINV':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the inverse of the F probability distribution
+
+FISHER':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the Fisher transformation
+
+FISHERINV':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the inverse of the Fisher transformation
+
+FIXED':
+	'Name':
+	'tags':
+
+
+Text':'Description': >		Formats a number as text with a fixed number of decimals
+
+FLOOR':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Rounds a number down, toward zero
+
+In Excel 2007, Excel 2010, this is a Math, trigonometry .
+
+FLOOR.MATH':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Math, trigonometry':'Description': >		Rounds a number down, to the nearest integer or to the nearest multiple of significance
+
+FLOOR.PRECISE':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Rounds a number the nearest integer or to the nearest multiple of significance. Regardless of the sign of the number, the number is rounded up.
+
+FORECAST':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns a value along a linear trend
+
+In Excel 2016, this  is replaced with FORECAST.LINEAR as part of the new Forecasting s, but it's still available for compatibility with earlier versions.
+
+FORECAST.ETS':
+	'Name':
+	'tags':
+Excel 2016
+
+
+Statistical':'Description': >		Returns a future value based on existing (historical) values by using the AAA version of the Exponential Smoothing (ETS) algorithm
+
+FORECAST.ETS.CONFINT':
+	'Name':
+	'tags':
+Excel 2016
+
+
+Statistical':'Description': >		Returns a confidence interval for the forecast value at the specified target date
+
+FORECAST.ETS.SEASONALITY':
+	'Name':
+	'tags':
+Excel 2016
+
+
+Statistical':'Description': >		Returns the length of the repetitive pattern Excel detects for the specified time series
+
+FORECAST.ETS.STAT':
+	'Name':
+	'tags':
+Excel 2016
+
+
+Statistical':'Description': >		Returns a statistical value as a result of time series forecasting
+
+FORECAST.LINEAR':
+	'Name':
+	'tags':
+Excel 2016
+
+
+Statistical':'Description': >		Returns a future value based on existing values
+
+FORMULATEXT':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Lookup, reference':'Description': >		Returns the formula at the given reference as text
+
+FREQUENCY':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns a frequency distribution as a vertical array
+
+F.TEST':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the result of an F-test
+
+FTEST':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Returns the result of an F-test
+
+In Excel 2007, this is a Statistical .
+
+FV':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the future value of an investment
+
+FVSCHEDULE':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the future value of an initial principal after applying a series of compound interest rates
+
+GAMMA':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Statistical':'Description': >		Returns the Gamma  value
+
+GAMMA.DIST':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the gamma distribution
+
+GAMMADIST':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Returns the gamma distribution
+
+In Excel 2007, this is a Statistical .
+
+GAMMA.INV':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the inverse of the gamma cumulative distribution
+
+GAMMAINV':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Returns the inverse of the gamma cumulative distribution
+
+In Excel 2007, this is a Statistical .
+
+GAMMALN':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the natural logarithm of the gamma , Γ(x)
+
+GAMMALN.PRECISE':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the natural logarithm of the gamma , Γ(x)
+
+GAUSS':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Statistical':'Description': >		Returns 0.5 less than the standard normal cumulative distribution
+
+GCD':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the greatest common divisor
+
+GEOMEAN':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the geometric mean
+
+GESTEP':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Tests whether a number is greater than a threshold value
+
+GETPIVOTDATA':
+	'Name':
+	'tags':
+
+
+Lookup, reference':'Description': >		Returns data stored in a PivotTable report
+
+GROWTH':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns values along an exponential trend
+
+HARMEAN':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the harmonic mean
+
+HEX2BIN':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Converts a hexadecimal number to binary
+
+HEX2DEC':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Converts a hexadecimal number to decimal
+
+HEX2OCT':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Converts a hexadecimal number to octal
+
+HLOOKUP':
+	'Name':
+	'tags':
+
+
+Lookup, reference':'Description': >		Looks in the top row of an array, returns the value of the indicated cell
+
+HOUR':
+	'Name':
+	'tags':
+
+
+Date, time':'Description': >		Converts a serial number to an hour
+
+HYPERLINK':
+	'Name':
+	'tags':
+
+
+Lookup, reference':'Description': >		Creates a shortcut or jump that opens a document stored on a network server, an intranet, or the Internet
+
+HYPGEOM.DIST':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the hypergeometric distribution
+
+HYPGEOMDIST':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Returns the hypergeometric distribution
+
+In Excel 2007, this is a Statistical .
+
+IF':
+	'Name':
+	'tags':
+
+
+Logical':'Description': >		Specifies a logical test to perform
+
+IFERROR':
+	'Name':
+	'tags':
+
+
+Logical':'Description': >		Returns a value you specify if a formula evaluates to an error; otherwise, returns the result of the formula
+
+IFNA':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Logical':'Description': >		Returns the value you specify if the expression resolves to #N/A, otherwise returns the result of the expression
+
+IFS':
+	'Name':
+	'tags':
+Excel 2016
+
+
+Logical':'Description': >		Checks whether one or more conditions are met, returns a value that corresponds to the first TRUE condition.
+
+IMABS':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Returns the absolute value (modulus) of a complex number
+
+IMAGINARY':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Returns the imaginary coefficient of a complex number
+
+IMARGUMENT':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Returns the argument theta, an angle expressed in radians
+
+IMCONJUGATE':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Returns the complex conjugate of a complex number
+
+IMCOS':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Returns the cosine of a complex number
+
+IMCOSH':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Engineering':'Description': >		Returns the hyperbolic cosine of a complex number
+
+IMCOT':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Engineering':'Description': >		Returns the cotangent of a complex number
+
+IMCSC':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Engineering':'Description': >		Returns the cosecant of a complex number
+
+IMCSCH':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Engineering':'Description': >		Returns the hyperbolic cosecant of a complex number
+
+IMDIV':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Returns the quotient of two complex numbers
+
+IMEXP':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Returns the exponential of a complex number
+
+IMLN':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Returns the natural logarithm of a complex number
+
+IMLOG10':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Returns the base-10 logarithm of a complex number
+
+IMLOG2':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Returns the base-2 logarithm of a complex number
+
+IMPOWER':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Returns a complex number raised to an integer power
+
+IMPRODUCT':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Returns the product of complex numbers
+
+IMREAL':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Returns the real coefficient of a complex number
+
+IMSEC':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Engineering':'Description': >		Returns the secant of a complex number
+
+IMSECH':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Engineering':'Description': >		Returns the hyperbolic secant of a complex number
+
+IMSIN':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Returns the sine of a complex number
+
+IMSINH':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Engineering':'Description': >		Returns the hyperbolic sine of a complex number
+
+IMSQRT':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Returns the square root of a complex number
+
+IMSUB':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Returns the difference between two complex numbers
+
+IMSUM':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Returns the sum of complex numbers
+
+IMTAN':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Engineering':'Description': >		Returns the tangent of a complex number
+
+INDEX':
+	'Name':
+	'tags':
+
+
+Lookup, reference':'Description': >		Uses an index to choose a value from a reference or array
+
+INDIRECT':
+	'Name':
+	'tags':
+
+
+Lookup, reference':'Description': >		Returns a reference indicated by a text value
+
+INFO':
+	'Name':
+	'tags':
+
+
+Information':'Description': >		Returns information about the current operating environment
+
+This  is not available in Excel Online.
+
+INT':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Rounds a number down to the nearest integer
+
+INTERCEPT':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the intercept of the linear regression line
+
+INTRATE':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the interest rate for a fully invested security
+
+IPMT':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the interest payment for an investment for a given period
+
+IRR':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the internal rate of return for a series of cash flows
+
+ISBLANK':
+	'Name':
+	'tags':
+
+
+Information':'Description': >		Returns TRUE if the value is blank
+
+ISERR':
+	'Name':
+	'tags':
+
+
+Information':'Description': >		Returns TRUE if the value is any error value except #N/A
+
+ISERROR':
+	'Name':
+	'tags':
+
+
+Information':'Description': >		Returns TRUE if the value is any error value
+
+ISEVEN':
+	'Name':
+	'tags':
+
+
+Information':'Description': >		Returns TRUE if the number is even
+
+ISFORMULA':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Information':'Description': >		Returns TRUE if there is a reference to a cell that contains a formula
+
+ISLOGICAL':
+	'Name':
+	'tags':
+
+
+Information':'Description': >		Returns TRUE if the value is a logical value
+
+ISNA':
+	'Name':
+	'tags':
+
+
+Information':'Description': >		Returns TRUE if the value is the #N/A error value
+
+ISNONTEXT':
+	'Name':
+	'tags':
+
+
+Information':'Description': >		Returns TRUE if the value is not text
+
+ISNUMBER':
+	'Name':
+	'tags':
+
+
+Information':'Description': >		Returns TRUE if the value is a number
+
+ISODD':
+	'Name':
+	'tags':
+
+
+Information':'Description': >		Returns TRUE if the number is odd
+
+ISREF':
+	'Name':
+	'tags':
+
+
+Information':'Description': >		Returns TRUE if the value is a reference
+
+ISTEXT':
+	'Name':
+	'tags':
+
+
+Information':'Description': >		Returns TRUE if the value is text
+
+ISO.CEILING':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Math, trigonometry':'Description': >		Returns a number that is rounded up to the nearest integer or to the nearest multiple of significance
+
+ISOWEEKNUM':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Date, time':'Description': >		Returns the number of the ISO week number of the year for a given date
+
+ISPMT':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Calculates the interest paid during a specific period of an investment
+
+JIS':
+	'Name':
+	'tags':
+
+
+Text':   Changes half-width (single-byte) characters within a string to full-width (double-byte) characters
+
+KURT':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the kurtosis of a data set
+
+LARGE':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the k-th largest value in a data set
+
+LCM':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the least common multiple
+
+LEFT':
+	'Name':
+	'tags':, LEFTB s
+
+
+Text':'Description': >		Returns the leftmost characters from a text value
+
+LEN':
+	'Name':
+	'tags':, LENB s
+
+
+Text':'Description': >		Returns the number of characters in a text string
+
+LINEST':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the parameters of a linear trend
+
+LN':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the natural logarithm of a number
+
+LOG':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the logarithm of a number to a specified base
+
+LOG10':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the base-10 logarithm of a number
+
+LOGEST':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the parameters of an exponential trend
+
+LOGINV':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Returns the inverse of the lognormal cumulative distribution
+
+LOGNORM.DIST':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the cumulative lognormal distribution
+
+LOGNORMDIST':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Returns the cumulative lognormal distribution
+
+LOGNORM.INV':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the inverse of the lognormal cumulative distribution
+
+LOOKUP':
+	'Name':
+	'tags':
+
+
+Lookup, reference':'Description': >		Looks up values in a vector or array
+
+LOWER':
+	'Name':
+	'tags':
+
+
+Text':'Description': >		Converts text to lowercase
+
+MATCH':
+	'Name':
+	'tags':
+
+
+Lookup, reference':'Description': >		Looks up values in a reference or array
+
+MAX':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the maximum value in a list of arguments
+
+MAXA':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the maximum value in a list of arguments, including numbers, text,, logical values
+
+MAXIFS':
+	'Name':
+	'tags':
+Excel 2016
+
+
+Statistical':'Description': >		Returns the maximum value among cells specified by a given set of conditions or criteria
+
+MDETERM':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the matrix determinant of an array
+
+MDURATION':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the Macauley modified duration for a security with an assumed par value of $100
+
+MEDIAN':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the median of the given numbers
+
+MID':
+	'Name':
+	'tags':, MIDB s
+
+
+Text':'Description': >		Returns a specific number of characters from a text string starting at the position you specify
+
+MIN':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the minimum value in a list of arguments
+
+MINIFS':
+	'Name':
+	'tags':
+Excel 2016
+
+
+Statistical':'Description': >		Returns the minimum value among cells specified by a given set of conditions or criteria.
+
+MINA':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the smallest value in a list of arguments, including numbers, text,, logical values
+
+MINUTE':
+	'Name':
+	'tags':
+
+
+Date, time':'Description': >		Converts a serial number to a minute
+
+MINVERSE':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the matrix inverse of an array
+
+MIRR':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the internal rate of return where positive, negative cash flows are financed at different rates
+
+MMULT':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the matrix product of two arrays
+
+MOD':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the remainder from division
+
+MODE':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Returns the most common value in a data set
+
+In Excel 2007, this is a Statistical .
+
+MODE.MULT':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns a vertical array of the most frequently occurring, or repetitive values in an array or range of data
+
+MODE.SNGL':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the most common value in a data set
+
+MONTH':
+	'Name':
+	'tags':
+
+
+Date, time':'Description': >		Converts a serial number to a month
+
+MROUND':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns a number rounded to the desired multiple
+
+MULTINOMIAL':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the multinomial of a set of numbers
+
+MUNIT':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Math, trigonometry':'Description': >		Returns the unit matrix or the specified dimension
+
+N':
+	'Name':
+	'tags':
+
+
+Information':'Description': >		Returns a value converted to a number
+
+NA':
+	'Name':
+	'tags':
+
+
+Information':'Description': >		Returns the error value #N/A
+
+NEGBINOM.DIST':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the negative binomial distribution
+
+NEGBINOMDIST':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Returns the negative binomial distribution
+
+In Excel 2007, this is a Statistical .
+
+NETWORKDAYS':
+	'Name':
+	'tags':
+
+
+Date, time':'Description': >		Returns the number of whole workdays between two dates
+
+NETWORKDAYS.INTL':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Date, time':'Description': >		Returns the number of whole workdays between two dates using parameters to indicate which, how many days are weekend days
+
+NOMINAL':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the annual nominal interest rate
+
+NORM.DIST':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the normal cumulative distribution
+
+NORMDIST':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Returns the normal cumulative distribution
+
+In Excel 2007, this is a Statistical .
+
+NORMINV':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the inverse of the normal cumulative distribution
+
+NORM.INV':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Compatibility':'Description': >		Returns the inverse of the normal cumulative distribution
+
+Note': In Excel 2007, this is a Statistical .
+
+NORM.S.DIST':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the standard normal cumulative distribution
+
+NORMSDIST':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Returns the standard normal cumulative distribution
+
+In Excel 2007, this is a Statistical .
+
+NORM.S.INV':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the inverse of the standard normal cumulative distribution
+
+NORMSINV':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Returns the inverse of the standard normal cumulative distribution
+
+In Excel 2007, this is a Statistical .
+
+NOT':
+	'Name':
+	'tags':
+
+
+Logical':'Description': >		Reverses the logic of its argument
+
+NOW':
+	'Name':
+	'tags':
+
+
+Date, time':'Description': >		Returns the serial number of the current date, time
+
+NPER':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the number of periods for an investment
+
+NPV':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the net present value of an investment based on a series of periodic cash flows, a discount rate
+
+NUMBERVALUE':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Text':'Description': >		Converts text to number in a locale-independent manner
+
+OCT2BIN':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Converts an octal number to binary
+
+OCT2DEC':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Converts an octal number to decimal
+
+OCT2HEX':
+	'Name':
+	'tags':
+
+
+Engineering':'Description': >		Converts an octal number to hexadecimal
+
+ODD':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Rounds a number up to the nearest odd integer
+
+ODDFPRICE':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the price per $100 face value of a security with an odd first period
+
+ODDFYIELD':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the yield of a security with an odd first period
+
+ODDLPRICE':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the price per $100 face value of a security with an odd last period
+
+ODDLYIELD':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the yield of a security with an odd last period
+
+OFFSET':
+	'Name':
+	'tags':
+
+
+Lookup, reference':'Description': >		Returns a reference offset from a given reference
+
+OR':
+	'Name':
+	'tags':
+
+
+Logical':'Description': >		Returns TRUE if any argument is TRUE
+
+PDURATION':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Financial':'Description': >		Returns the number of periods required by an investment to reach a specified value
+
+PEARSON':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the Pearson product moment correlation coefficient
+
+PERCENTILE.EXC':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the k-th percentile of values in a range, where k is in the range 0..1, exclusive
+
+PERCENTILE.INC':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the k-th percentile of values in a range
+
+PERCENTILE':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Returns the k-th percentile of values in a range
+
+In Excel 2007, this is a Statistical .
+
+PERCENTRANK.EXC':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the rank of a value in a data set as a percentage (0..1, exclusive) of the data set
+
+PERCENTRANK.INC':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the percentage rank of a value in a data set
+
+PERCENTRANK':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Returns the percentage rank of a value in a data set
+
+In Excel 2007, this is a Statistical .
+
+PERMUT':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the number of permutations for a given number of objects
+
+PERMUTATIONA':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Statistical':'Description': >		Returns the number of permutations for a given number of objects (with repetitions) that can be selected from the total objects
+
+PHI':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Statistical':'Description': >		Returns the value of the density  for a standard normal distribution
+
+PHONETIC':
+	'Name':
+	'tags':
+
+
+Text':'Description': >		Extracts the phonetic (furigana) characters from a text string
+
+PI':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the value of pi
+
+PMT':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the periodic payment for an annuity
+
+POISSON.DIST':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the Poisson distribution
+
+POISSON':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Returns the Poisson distribution
+
+In Excel 2007, this is a Statistical .
+
+POWER':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the result of a number raised to a power
+
+PPMT':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the payment on the principal for an investment for a given period
+
+PRICE':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the price per $100 face value of a security that pays periodic interest
+
+PRICEDISC':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the price per $100 face value of a discounted security
+
+PRICEMAT':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the price per $100 face value of a security that pays interest at maturity
+
+PROB':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the probability that values in a range are between two limits
+
+PRODUCT':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Multiplies its arguments
+
+PROPER':
+	'Name':
+	'tags':
+
+
+Text':'Description': >		Capitalizes the first letter in each word of a text value
+
+PV':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the present value of an investment
+
+QUARTILE':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Returns the quartile of a data set
+
+In Excel 2007, this is a Statistical .
+
+QUARTILE.EXC':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the quartile of the data set, based on percentile values from 0..1, exclusive
+
+QUARTILE.INC':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the quartile of a data set
+
+QUOTIENT':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the integer portion of a division
+
+RADIANS':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Converts degrees to radians
+
+RAND':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns a random number between 0, 1
+
+RANDARRAY':
+	'Name':
+	'tags':
+Office 365 button
+
+Math, trigonometry':'Description': >		Returns an array of random numbers between 0, 1
+
+RANDBETWEEN':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns a random number between the numbers you specify
+
+RANK.AVG':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the rank of a number in a list of numbers
+
+RANK.EQ':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the rank of a number in a list of numbers
+
+RANK':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Returns the rank of a number in a list of numbers
+
+In Excel 2007, this is a Statistical .
+
+RATE':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the interest rate per period of an annuity
+
+RECEIVED':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the amount received at maturity for a fully invested security
+
+REGISTER.ID':
+	'Name':
+	'tags':
+
+
+Add-in, Automation':'Description': >		Returns the register ID of the specified dynamic link library (DLL) or code resource that has been previously registered
+
+REPLACE':
+	'Name':
+	'tags':
+	, REPLACEB s
+
+
+Text':'Description': >		Replaces characters within text
+
+REPT':
+	'Name':
+	'tags':
+
+
+Text':'Description': >		Repeats text a given number of times
+
+RIGHT':
+	'Name':
+	'tags':, RIGHTB s
+
+
+Text':'Description': >		Returns the rightmost characters from a text value
+
+ROMAN':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Converts an arabic numeral to roman, as text
+
+ROUND':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Rounds a number to a specified number of digits
+
+ROUNDDOWN':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Rounds a number down, toward zero
+
+ROUNDUP':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Rounds a number up, away from zero
+
+ROW':
+	'Name':
+	'tags':
+
+
+Lookup, reference':'Description': >		Returns the row number of a reference
+
+ROWS':
+	'Name':
+	'tags':
+
+
+Lookup, reference':'Description': >		Returns the number of rows in a reference
+
+RRI':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Financial':'Description': >		Returns an equivalent interest rate for the growth of an investment
+
+RSQ':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the square of the Pearson product moment correlation coefficient
+
+RTD':
+	'Name':
+	'tags':
+
+
+Lookup, reference':'Description': >		Retrieves real-time data from a program that supports COM automation
+
+SEARCH':
+	'Name':
+	'tags':, SEARCHB s
+
+
+Text':'Description': >		Finds one text value within another (not case-sensitive)
+
+SEC':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Math, trigonometry':'Description': >		Returns the secant of an angle
+
+SECH':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Math, trigonometry':'Description': >		Returns the hyperbolic secant of an angle
+
+SECOND':
+	'Name':
+	'tags':
+
+
+Date, time':'Description': >		Converts a serial number to a second
+
+SEQUENCE':
+	'Name':
+	'tags':
+Office 365 button
+
+Math, trigonometry':'Description': >		Generates a list of sequential numbers in an array, such as 1, 2, 3, 4
+
+SERIESSUM':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the sum of a power series based on the formula
+
+SHEET':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Information':'Description': >		Returns the sheet number of the referenced sheet
+
+SHEETS':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Information':'Description': >		Returns the number of sheets in a reference
+
+SIGN':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the sign of a number
+
+SIN':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the sine of the given angle
+
+SINGLE':
+	'Name':
+	'tags':
+
+
+Lookup, reference':'Description': >		Returns a single value using logic known as implicit intersection
+
+SINH':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the hyperbolic sine of a number
+
+SKEW':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the skewness of a distribution
+
+SKEW.P':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Statistical':'Description': >		Returns the skewness of a distribution based on a population': a characterization of the degree of asymmetry of a distribution around its mean
+
+SLN':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the straight-line depreciation of an asset for one period
+
+SLOPE':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the slope of the linear regression line
+
+SMALL':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the k-th smallest value in a data set
+
+SORT':
+	'Name':
+	'tags':
+Office 365 button
+
+Lookup, reference':'Description': >		Sorts the contents of a range or array
+
+SORTBY':
+	'Name':
+	'tags':
+Office 365 button
+
+Lookup, reference':'Description': >		Sorts the contents of a range or array based on the values in a corresponding range or array
+
+SQRT':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns a positive square root
+
+SQRTPI':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the square root of (number * pi)
+
+STANDARDIZE':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns a normalized value
+
+STDEV':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Estimates standard deviation based on a sample
+
+STDEV.P':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Calculates standard deviation based on the entire population
+
+STDEV.S':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Estimates standard deviation based on a sample
+
+STDEVA':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Estimates standard deviation based on a sample, including numbers, text,, logical values
+
+STDEVP':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Calculates standard deviation based on the entire population
+
+In Excel 2007, this is a Statistical .
+
+STDEVPA':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Calculates standard deviation based on the entire population, including numbers, text,, logical values
+
+STEYX':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the standard error of the predicted y-value for each x in the regression
+
+SUBSTITUTE':
+	'Name':
+	'tags':
+
+
+Text':'Description': >		Substitutes new text for old text in a text string
+
+SUBTOTAL':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns a subtotal in a list or database
+
+SUM':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Adds its arguments
+
+SUMIF':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Adds the cells specified by a given criteria
+
+SUMIFS':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Adds the cells in a range that meet multiple criteria
+
+SUMPRODUCT':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the sum of the products of corresponding array components
+
+SUMSQ':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the sum of the squares of the arguments
+
+SUMX2MY2':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the sum of the difference of squares of corresponding values in two arrays
+
+SUMX2PY2':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the sum of the sum of squares of corresponding values in two arrays
+
+SUMXMY2':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the sum of squares of differences of corresponding values in two arrays
+
+SWITCH':
+	'Name':
+	'tags':
+Excel 2016
+
+
+Logical':'Description': >		Evaluates an expression against a list of values, returns the result corresponding to the first matching value. If there is no match, an optional default value may be returned.
+
+SYD':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the sum-of-years' digits depreciation of an asset for a specified period
+
+T':
+	'Name':
+	'tags':
+
+
+Text':'Description': >		Converts its arguments to text
+
+TAN':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the tangent of a number
+
+TANH':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Returns the hyperbolic tangent of a number
+
+TBILLEQ':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the bond-equivalent yield for a Treasury bill
+
+TBILLPRICE':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the price per $100 face value for a Treasury bill
+
+TBILLYIELD':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the yield for a Treasury bill
+
+T.DIST':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the Percentage Points (probability) for the Student t-distribution
+
+T.DIST.2T':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the Percentage Points (probability) for the Student t-distribution
+
+T.DIST.RT':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the Student's t-distribution
+
+TDIST':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Returns the Student's t-distribution
+
+TEXT':
+	'Name':
+	'tags':
+
+
+Text':'Description': >		Formats a number, converts it to text
+
+TEXTJOIN':
+	'Name':
+	'tags':
+Excel 2016
+
+
+Text':'Description': >		Combines the text from multiple ranges and/or strings,, includes a delimiter you specify between each text value that will be combined. If the delimiter is an empty text string, this  will effectively concatenate the ranges.
+
+TIME':
+	'Name':
+	'tags':
+
+
+Date, time':'Description': >		Returns the serial number of a particular time
+
+TIMEVALUE':
+	'Name':
+	'tags':
+
+
+Date, time':'Description': >		Converts a time in the form of text to a serial number
+
+T.INV':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the t-value of the Student's t-distribution as a  of the probability, the degrees of freedom
+
+T.INV.2T':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the inverse of the Student's t-distribution
+
+TINV':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Returns the inverse of the Student's t-distribution
+
+TODAY':
+	'Name':
+	'tags':
+
+
+Date, time':'Description': >		Returns the serial number of today's date
+
+TRANSPOSE':
+	'Name':
+	'tags':
+
+
+Lookup, reference':'Description': >		Returns the transpose of an array
+
+TREND':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns values along a linear trend
+
+TRIM':
+	'Name':
+	'tags':
+
+
+Text':'Description': >		Removes spaces from text
+
+TRIMMEAN':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Returns the mean of the interior of a data set
+
+TRUE':
+	'Name':
+	'tags':
+
+
+Logical':'Description': >		Returns the logical value TRUE
+
+TRUNC':
+	'Name':
+	'tags':
+
+
+Math, trigonometry':'Description': >		Truncates a number to an integer
+
+T.TEST':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the probability associated with a Student's t-test
+
+TTEST':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Returns the probability associated with a Student's t-test
+
+In Excel 2007, this is a Statistical .
+
+TYPE':
+	'Name':
+	'tags':
+
+
+Information':'Description': >		Returns a number indicating the data type of a value
+
+UNICHAR':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Text':'Description': >		Returns the Unicode character that is references by the given numeric value
+
+UNICODE':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Text':'Description': >		Returns the number (code point) that corresponds to the first character of the text
+
+UNIQUE':
+	'Name':
+	'tags':
+Office 365 button
+
+Lookup, reference':'Description': >		Returns a list of unique values in a list or range
+
+UPPER':
+	'Name':
+	'tags':
+
+
+Text':'Description': >		Converts text to uppercase
+
+VALUE':
+	'Name':
+	'tags':
+
+
+Text':'Description': >		Converts a text argument to a number
+
+VAR':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Estimates variance based on a sample
+
+In Excel 2007, this is a Statistical .
+
+VAR.P':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Calculates variance based on the entire population
+
+VAR.S':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Estimates variance based on a sample
+
+VARA':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Estimates variance based on a sample, including numbers, text,, logical values
+
+VARP':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Calculates variance based on the entire population
+
+In Excel 2007, this is a Statistical .
+
+VARPA':
+	'Name':
+	'tags':
+
+
+Statistical':'Description': >		Calculates variance based on the entire population, including numbers, text,, logical values
+
+VDB':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the depreciation of an asset for a specified or partial period by using a declining balance method
+
+VLOOKUP':
+	'Name':
+	'tags':
+
+
+Lookup, reference':'Description': >		Looks in the first column of an array, moves across the row to return the value of a cell
+
+WEBSERVICE':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Web':'Description': >		Returns data from a web service.
+
+This  is not available in Excel Online.
+
+WEEKDAY':
+	'Name':
+	'tags':
+
+
+Date, time':'Description': >		Converts a serial number to a day of the week
+
+WEEKNUM':
+	'Name':
+	'tags':
+
+
+Date, time':'Description': >		Converts a serial number to a number representing where the week falls numerically with a year
+
+WEIBULL':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Calculates variance based on the entire population, including numbers, text,, logical values
+
+In Excel 2007, this is a Statistical .
+
+WEIBULL.DIST':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the Weibull distribution
+
+WORKDAY':
+	'Name':
+	'tags':
+
+
+Date, time':'Description': >		Returns the serial number of the date before or after a specified number of workdays
+
+WORKDAY.INTL':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Date, time':
+	Description': >
+		Returns the serial number of the date before or after a specified number of workdays using parameters to indicate which, how many days are weekend days
+
+XIRR':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the internal rate of return for a schedule of cash flows that is not necessarily periodic
+
+XNPV':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the net present value for a schedule of cash flows that is not necessarily periodic
+
+XOR':
+	'Name':
+	'tags':
+Excel 2013
+
+
+Logical':'Description': >		Returns a logical exclusive OR of all arguments
+
+YEAR':
+	'Name':
+	'tags':
+
+
+Date, time':'Description': >		Converts a serial number to a year
+
+YEARFRAC':
+	'Name':
+	'tags':
+
+
+Date, time':'Description': >		Returns the year fraction representing the number of whole days between start_date, end_date
+
+YIELD':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the yield on a security that pays periodic interest
+
+YIELDDISC':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the annual yield for a discounted security; for example, a Treasury bill
+
+YIELDMAT':
+	'Name':
+	'tags':
+
+
+Financial':'Description': >		Returns the annual yield of a security that pays interest at maturity
+
+Z.TEST':
+	'Name':
+	'tags':
+Excel 2010
+
+
+Statistical':'Description': >		Returns the one-tailed probability-value of a z-test
+
+ZTEST':
+	'Name':
+	'tags':
+
+
+Compatibility':'Description': >		Returns the one-tailed probability-value of a z-test
+
+In Excel 2007, this is a Statistical .

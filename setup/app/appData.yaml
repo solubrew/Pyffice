@@ -1,0 +1,114 @@
+---
+'<(META)>':
+	'DOCid': '<^[uuid]^>'
+	'name':
+	'description': >
+	'expirary': '<[expiration]>'
+	'version': '<[version]>'
+	'path': '<[LEXIvrs]>'
+	'outline': '<[outline]>'
+	'authority': 'document|this'
+	'security': 'sec|lvl2'
+	'<(WT)>': -32
+'tables':
+	'_doc':
+		'name: '_doc'
+		'cmd': >
+			'DROP TABLE IF EXISTS _doc;'
+			'CREATE TABLE _doc ('
+				'docID INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT UNIQUE NOT NULL,'
+				'docUUID TEXT, histTag TEXT, Name TEXT, Seq TEXT, SectnUUID TEXT, DTID TEXT,'
+				'ownrUUID  TEXT, [Group]);'
+	'_msg':
+		name': '_msg'
+		cmd': >
+			'DROP TABLE IF EXISTS _msg;'
+			'CREATE TABLE _msg ('
+				'msgID INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT UNIQUE NOT NULL);'
+		size:
+			columns:
+				ids: [msgID, msgUUID]
+				admins:
+				content: ['From', 'To', 'Body', 'Anchor', 'Channel', 'Note', 'State']
+	'_opt':
+		name': '_opt'
+		cmd': >
+			'DROP TABLE IF EXISTS _opt;
+			'CREATE TABLE _opt ('
+				'optID INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT UNIQUE NOT NULL,'
+				'optUUID TEXT UNIQUE, [Table] TEXT, tblOptionID INTEGER, Type INTEGER, Name TEXT,'
+				'Description BLOB);'
+	'_perf':
+		name': '_perf'
+		cmd': >
+			DROP TABLE IF EXISTS _perf;
+			CREATE TABLE _perf (
+				perfID INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT UNIQUE NOT NULL,
+				perfUUID TEXT UNIQUE);
+	'_sectns':
+		columns:
+			sectnUUID: TEXT
+			sectnSize: TEXT
+			Text: BLOB
+			DTID: TEXT
+			Type: INTEGER
+			State: TEXT
+		cmd': >
+			DROP TABLE IF EXISTS _sectns;
+			CREATE TABLE _sectns (
+				sectnsID INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT UNIQUE NOT NULL,
+				sectnUUID TEXT, sectnSize TEXT, Text BLOB, DTID TEXT, Type INTEGER, State TEXT);
+	'_usr':
+		cmd': >
+			DROP TABLE IF EXISTS _usr;
+			CREATE TABLE _usr (
+				usrID INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT UNIQUE NOT NULL,
+				usrUUID TEXT UNIQUE, Name TEXT, sessionUUID TEXT);
+	'docbs':
+		'cmd': >
+			DROP TABLE IF EXISTS docbs;
+			CREATE TABLE docbs (
+				DocBs INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT UNIQUE NOT NULL,
+				DocBUUID TEXT, DocUUID TEXT UNIQUE, DocVersion TEXT, DBType TEXT, LOCI TEXT);
+	'm_bgFx':
+		'cmd': >
+			DROP TABLE IF EXISTS m_bgFx;
+			CREATE TABLE m_bgFx (
+				bgFxID INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT UNIQUE NOT NULL,
+				bgFxUUID TEXT UNIQUE, C0 TEXT, Cn TEXT);
+	'm_bgTbl':
+			size:
+				columns:
+					1_ids:
+						- 'ID'
+						- 'UUID'
+						- 'docUUID'
+						- 'SectnUUID'
+						- 'Name'
+						- 'Seq'
+						- 'SectnSize'
+					3_admins:
+						- '[CreBy] INTEGER'
+						- '[CreOn] FLOAT'
+						- '[ModBY] INTEGER'
+						- '[ModOn] FLOAT'
+						- '[DLT] BOOLEAN NOT NULL DEFAULT (0)'
+						- '[ACTV] BOOLEAN NOT NULL DEFAULT (1)'
+					2_content:
+						min: 15
+						max: 1975
+views:
+		DocGroups:
+			cmd: >
+
+		Docs:
+			cmd: >
+
+		DocStates:
+			cmd: >
+
+		FileTypes:
+			cmd: >
+
+		fullDoc:
+			cmd: >

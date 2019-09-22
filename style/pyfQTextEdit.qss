@@ -1,0 +1,41 @@
+/* QTextEdit--------------------------------------------------------------- */
+QTextEdit {
+    background-color: #19232D;
+    color: #F0F0F0;
+    border: 1px solid #32414B;
+}
+QTextEdit:hover {
+    border: 1px solid #148CD2;
+    color: #F0F0F0;
+}
+QTextEdit:selected {
+    background: #1464A0;
+    color: #32414B;
+}
+/* QPlainTextEdit --------------------------------------------------------- */
+QPlainTextEdit {
+    background-color: #19232D;
+    color: #F0F0F0;
+    border-radius: 4px;
+    border: 1px solid #32414B;
+}
+QPlainTextEdit:hover {
+    border: 1px solid #148CD2;
+    color: #F0F0F0;
+}
+QPlainTextEdit:selected {
+    background: #1464A0;
+    color: #32414B;
+}
+/* QSizeGrip --------------------------------------------------------------- */
+QSizeGrip {
+    image: url(:/qss_icons/rc/sizegrip.png);
+    width: 12px;
+    height: 12px;
+}
+/* QStackedWidget --------------------------------------------------------- */
+QStackedWidget {
+    padding: 4px;
+    border: 1px solid #32414B;
+    border: 1px solid #19232D;
+}

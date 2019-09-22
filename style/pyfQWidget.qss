@@ -1,0 +1,46 @@
+/* QWidget ---------------------------------------------------------------- */
+QWidget {
+    background-color: #19232D;
+    border: 0px solid #32414B;
+    padding: 0px;
+    color: #F0F0F0;
+    selection-background-color: #1464A0;
+    selection-color: #F0F0F0;
+}
+QWidget:disabled {
+    background-color: #19232D;
+    color: #787878;
+    selection-background-color: #14506E;
+    selection-color: #787878;
+}
+QWidget:item:selected {
+    background-color: #1464A0;
+}
+QWidget:item:hover {
+    background-color: #148CD2;
+    color: #32414B;
+}
+/* QMainWindow ------------------------------------------------------------ */
+/* This adjusts the splitter in the dock widget, not qsplitter              */
+QMainWindow::separator {
+    background-color: #32414B;
+    border: 0 solid #19232D;
+    spacing: 0;
+    padding: 2px;
+}
+QMainWindow::separator:hover {
+    background-color: #505F69;
+    border: 0px solid #148CD2;
+}
+QMainWindow::separator:horizontal {
+    width: 5px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    image: url(:/qss_icons/rc/Vsepartoolbar.png);
+}
+QMainWindow::separator:vertical {
+    height: 5px;
+    margin-left: 2px;
+    margin-right: 2px;
+    image: url(:/qss_icons/rc/Hsepartoolbar.png);
+}

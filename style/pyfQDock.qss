@@ -1,0 +1,36 @@
+/* QDockWiget ------------------------------------------------------------- */
+QDockWidget {
+    outline: 1px solid #32414B;
+    background-color: #19232D;
+    border: 1px solid #32414B;
+    border-radius: 4px;
+    titlebar-close-icon: url(:/qss_icons/rc/close.png);
+    titlebar-normal-icon: url(:/qss_icons/rc/undock.png);
+}
+QDockWidget::title {
+    padding: 6px;   /* better size for title bar */
+    border: none;
+    background-color: #32414B;
+}
+QDockWidget::close-button {
+    background-color: #32414B;
+    border-radius: 4px;
+    border: none;
+}
+QDockWidget::close-button:hover {
+    border: 1px solid #32414B;
+}
+QDockWidget::close-button:pressed {
+    border: 1px solid #32414B;
+}
+QDockWidget::float-button {
+    background-color: #32414B;
+    border-radius: 4px;
+    border: none;
+}
+QDockWidget::float-button:hover {
+    border: 1px solid #32414B;
+}
+QDockWidget::float-button:pressed {
+    border: 1px solid #32414B;
+}

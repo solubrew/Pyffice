@@ -1,0 +1,305 @@
+/* QDarkStyleSheet --------------------------------------------------------
+This is the main style sheet, the palette has nine main colors.
+It is based on three selecting colors, three greyish (background) colors
+plus three whitish (foreground) colors. Each set of widgets of the same
+type have a header like this:
+    ------------------
+    GroupName --------
+    ------------------
+And each widget is separated with a header like this:
+    QWidgetName ------
+This makes more easy to find and change some css field. The basic
+configuration is described bellow.
+    SELECTION ------------
+        sel_light  #179AE0 #148CD2 (selection/hover/active)
+        sel_normal #3375A3 #1464A0 (selected)
+        sel_dark   #18465D #14506E (selected disabled)
+    FOREGROUND -----------
+        for_light  #EFF0F1 #F0F0F0 (texts/labels)
+        for_dark   #505F69 #787878 (disabled texts)
+    BACKGROUND -----------
+        bac_light  #4D545B #505F69 (unpressed)
+        bac_normal #31363B #32414B (border, disabled, pressed, checked, toolbars, menus)
+        bac_dark   #232629 #19232D (background)
+If a stranger configuration is required because of a bugfix or anything
+else, keep the comment on that line to nobodys changed it, including the
+issue number.
+--------------------------------------------------------------------------- */
+/* QAbstractItemView ------------------------------------------------------ */
+QAbstractItemView {
+    alternate-background-color: #19232D;
+    color: #F0F0F0;
+    border: 1px solid #32414B;
+    border-radius: 4px;
+}
+QAbstractItemView QLineEdit {
+    padding: 2px;
+}
+/* QAbstractScrollArea ---------------------------------------------------- */
+QAbstractScrollArea {
+    background-color: #19232D;
+    border: 1px solid #32414B;
+    border-radius: 4px;
+    padding: 4px;
+    color: #F0F0F0;
+}
+QAbstractScrollArea:disabled {
+    color: #787878;
+}
+/* QScrollArea ------------------------------------------------------------ */
+QScrollArea QWidget QWidget:disabled {
+    background-color: #19232D;
+}
+/* QAbstractSpinBox ------------------------------------------------------- */
+QAbstractSpinBox {
+    background-color: #19232D;
+    border: 1px solid #32414B;
+    color: #F0F0F0;
+    padding-top: 2px;     /* This fix  103, 111*/
+    padding-bottom: 2px;  /* This fix  103, 111*/
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 4px;
+    /* min-width: 5px; removed to fix 109 */
+}
+QAbstractSpinBox:up-button {
+    background-color: transparent #19232D;
+    subcontrol-origin: border;
+    subcontrol-position: top right;
+    border-left: 1px solid #32414B;
+    margin: 1px;
+}
+QAbstractSpinBox::up-arrow,
+QAbstractSpinBox::up-arrow:disabled,
+QAbstractSpinBox::up-arrow:off {
+    image: url(:/qss_icons/rc/up_arrow_disabled.png);
+    width: 9px;
+    height: 9px;
+}
+QAbstractSpinBox::up-arrow:hover {
+    image: url(:/qss_icons/rc/up_arrow.png);
+}
+QAbstractSpinBox:down-button {
+    background-color: transparent #19232D;
+    subcontrol-origin: border;
+    subcontrol-position: bottom right;
+    border-left: 1px solid #32414B;
+    margin: 1px;
+}
+QAbstractSpinBox::down-arrow,
+QAbstractSpinBox::down-arrow:disabled,
+QAbstractSpinBox::down-arrow:off {
+    image: url(:/qss_icons/rc/down_arrow_disabled.png);
+    width: 9px;
+    height: 9px;
+}
+QAbstractSpinBox::down-arrow:hover {
+    image: url(:/qss_icons/rc/down_arrow.png);
+}
+QAbstractSpinBox:hover{
+    border: 1px solid #148CD2;
+    color: #F0F0F0;
+}
+QAbstractSpinBox:selected {
+    background: #1464A0;
+    color: #32414B;
+}
+/* ------------------------------------------------------------------------ */
+/* DISPLAYS --------------------------------------------------------------- */
+/* ------------------------------------------------------------------------ */
+/* QLabel ----------------------------------------------------------------- */
+QLabel {
+    background-color: #19232D;
+    border: 0px solid #32414B;
+    padding: 2px;
+    margin: 0px;
+    color: #F0F0F0
+}
+QLabel::disabled {
+    background-color: #19232D;
+    border: 0px solid #32414B;
+    color: #787878;
+}
+/* QTextBrowser ----------------------------------------------------------- */
+QTextBrowser {
+    background-color: #19232D;
+    border: 1px solid #32414B;
+    color: #F0F0F0;
+    border-radius: 4px;
+}
+QTextBrowser:disabled {
+    background-color: #19232D;
+    border: 1px solid #32414B;
+    color: #787878;
+    border-radius: 4px;
+}
+QTextBrowser:hover,
+QTextBrowser:!hover,
+QTextBrowser::selected,
+QTextBrowser::pressed {
+    border: 1px solid #32414B;
+}
+/* QLCDNumber ------------------------------------------------------------- */
+QLCDNumber {
+    background-color: #19232D;
+    color: #F0F0F0;
+}
+QLCDNumber:disabled {
+    background-color: #19232D;
+    color: #787878;
+}
+/* QCommandLinkButton ----------------------------------------------------- */
+QCommandLinkButton {
+    background-color: transparent;
+    border: 1px solid #32414B;
+    color: #F0F0F0;
+    border-radius: 4px;
+    padding: 0px;
+    margin: 0px;
+}
+QCommandLinkButton:disabled {
+    background-color: transparent;
+    color: #787878;
+}
+/* ------------------------------------------------------------------------ */
+/* INPUTS - NO FIELDS ----------------------------------------------------- */
+/* ------------------------------------------------------------------------ */
+/* QLine ------------------------------------------------------------------ */
+QLineEdit {
+    background-color: #19232D;
+    padding-top: 2px;     /* This QLineEdit fix  103, 111 */
+    padding-bottom: 2px;  /* This QLineEdit fix  103, 111 */
+    padding-left: 4px;
+    padding-right: 4px;
+    border-style: solid;
+    border: 1px solid #32414B;
+    border-radius: 4px;
+    color: #F0F0F0;
+}
+QLineEdit:disabled {
+    background-color: #19232D;
+    color: #787878;
+}
+QLineEdit:hover{
+    border: 1px solid #148CD2;
+    color: #F0F0F0;
+}
+QLineEdit:selected{
+    background: #1464A0;
+    color: #32414B;
+}
+QTableCornerButton::section {
+    background-color: #19232D;
+    border: 1px transparent #32414B;
+    border-radius: 0px;
+}
+/* QHeaderView ------------------------------------------------------------ */
+QHeaderView {
+    background-color: #32414B;
+    border: 0px transparent #32414B;
+    padding: 0px;
+    margin: 0px;
+    border-radius: 0px;
+}
+QHeaderView:disabled {
+    background-color: #32414B;
+    border: 1px transparent #32414B;
+    padding: 2px;
+}
+QHeaderView::section {
+    background-color: #32414B;
+    color: #F0F0F0;
+    padding: 2px;
+    border-radius: 0px;
+    text-align: left;
+}
+QHeaderView::section:checked {
+    color: #F0F0F0;
+    background-color: #1464A0;
+}
+QHeaderView::section:checked:disabled {
+    color: #787878;
+    background-color: #14506E;
+}
+QHeaderView::section::horizontal:disabled,
+QHeaderView::section::vertical:disabled {
+    color: #787878;
+}
+QHeaderView::section::vertical::first,
+QHeaderView::section::vertical::only-one {
+    border-top: 1px solid #32414B;
+}
+QHeaderView::section::vertical {
+    border-top: 1px solid #19232D;
+}
+QHeaderView::section::horizontal::first,
+QHeaderView::section::horizontal::only-one {
+    border-left: 1px solid #32414B;
+}
+QHeaderView::section::horizontal {
+    border-left: 1px solid #19232D;
+}
+/* Those settings (border/width/height/background-color) solve bug */
+/* transparent arrow background and size */
+QHeaderView::down-arrow {
+    background-color: #32414B;
+    width: 16px;
+    height: 16px;
+    border-right: 1px solid #19232D;
+    image: url(:/qss_icons/rc/down_arrow.png);
+}
+QHeaderView::up-arrow {
+    background-color: #32414B;
+    width: 16px;
+    height: 16px;
+    border-right: 1px solid #19232D;
+    image: url(:/qss_icons/rc/up_arrow.png);
+}
+
+/* QFrame ----------------------------------------------------------------- */
+QFrame {
+    border-radius: 4px;
+    border: 1px solid #32414B;
+}
+QFrame[frameShape="0"] {
+    border-radius: 4px;
+    border: 1px transparent #32414B;
+}
+QFrame[height="3"],
+QFrame[width="3"] {
+    background-color: #19232D;
+}
+/* QSplitter -------------------------------------------------------------- */
+QSplitter {
+    background-color: #32414B;
+    spacing: 0;
+    padding: 0;
+    margin: 0;
+}
+QSplitter::separator {
+    background-color: #32414B;
+    border: 0 solid #19232D;
+    spacing: 0;
+    padding: 1px;
+    margin: 0;
+}
+QSplitter::separator:hover {
+    background-color: #787878;
+}
+QSplitter::separator:horizontal {
+    width: 5px;
+    image: url(:/qss_icons/rc/Vsepartoolbar.png);
+}
+QSplitter::separator:vertical {
+    height: 5px;
+    image: url(:/qss_icons/rc/Hsepartoolbar.png);
+}
+
+QAbstractView:hover{
+    border: 1px solid #148CD2;
+    color: #F0F0F0;
+}
+QAbstractView:selected {
+    background: #1464A0;
+    color: #32414B;
+}

@@ -1,0 +1,54 @@
+
+
+
+
+
+
+
+
+models:
+	-
+		Name: Standard
+		tmplt:
+			python: <([(<[parent]>, [<[children]>, [])])>
+			yaml:
+				parent:
+					- child:
+
+					- child:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

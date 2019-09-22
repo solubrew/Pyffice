@@ -1,0 +1,107 @@
+---
+<(META)>:
+	DOCid: <^[uuid]^>
+	name:
+	description: >
+	expirary: <[expiration]>
+	version: <[version]>
+	path: <[LEXIvrs]>
+	outline: <[outline]>
+	authority: document|this
+	security: sec|lvl2
+	<(WT)>: -32
+
+Toolbars:
+	'addChart':
+		'Name': 'Add Chart'
+		'Checkable': False
+		'AutoExclusive': False
+		'Icon': 'addchart.png'
+		'HotKey':
+		'Tip': 'Add New Document to Workbook'
+	'addDashboard':
+		'Name': 'Add Dash'
+		'Icon': 'adddash.png'
+		'HotKey':
+		'Tip': 'Add New Document to Workbook'
+		'Checkable': False
+		'AutoExclusive': False
+		'Icon':
+	'addDocument':
+		'Name': 'Add Document'
+		'Icon': 'adddocument.png'
+		'HotKey':
+		'Tip': 'Add New Document to Workbook'
+	'addForm':
+		'Name': 'Add Form'
+		'Checkable': False
+		'AutoExclusive': False
+		'Icon': 'addform.png'
+		'HotKey':
+		'Tip': 'Add New Document to Workbook'
+	'addImage':
+		'Name': 'Add Image'
+		'Icon': 'addimage.png'
+		'HotKey':
+		'Tip': 'Add New Document to Workbook'
+		'Checkable': False
+		'AutoExclusive': False
+		'Icon':
+	'addLB':
+		'Name': 'Add Log Book'
+		'Icon': 'addlogbook.png'
+		'HotKey':
+		'Tip':
+	'addSpreadSheet':
+		'Name': 'Add Spread Sheet'
+		'Icon': 'addspreadhsheet.png'
+		'HotKey':
+		'Tip': 'Add New Document to Workbook'
+	'addSKRP':
+		'Name': 'Add SKRP'
+		'Checkable': False
+		'AutoExclusive': False
+		'Icon': 'addcode.png'
+		'HotKey':
+		'Tip': 'Add New Code Document with Syntax Highlighting to Workbook'
+	'addTab':
+		'Name': 'Add Tab'
+		'Icon': 'addtab.png'
+		'HotKey':
+		'Tip': 'Add New Document to Workbook'
+	'addWidget':
+		'Name': 'Add Widget'
+		'Checkable': False
+		'AutoExclusive': False
+		'Icon':
+		'HotKey':
+		'Tip': 'Add New Document to Workbook'
+	'addWorkBook':
+		'Name': 'Add Workbook'
+		'Checkable': False
+		'AutoExclusive': False
+		'Icon':
+		'HotKey':
+		'Tip': 'Add New Document to Workbook'
+	'addWorkFlow':
+		'Name': 'Add Workflow'
+		'Checkable': False
+		'AutoExclusive': False
+		'Icon':
+
+
+	'linkDataSource':
+		'Name': 'Link DataSource'
+		'Checkable': False
+		'AutoExclusive': False
+		'Icon':
+	'linkFile':
+		'Name': 'Link File'
+		'Checkable': False
+		'AutoExclusive': False
+		'Icon':
+	'linkFileSystem':
+		'Name': 'Link FileSystem'
+		'Checkable': False
+		'AutoExclusive': False
+		'Icon':

@@ -1,0 +1,39 @@
+---
+'<(META)>':
+	'DOCid': '<^[uuid]^>'
+	'name': Pyffice Application Configuration Data
+	'description': >
+	'expirary': '<[expiration]>'
+	'version': '<[version]>'
+	'path': '<[LEXIvrs]>'
+	'outline': '<[outline]>'
+	'authority': 'document|this'
+	'security': 'sec|lvl2'
+	'<(WT)>': -32
+tmplts:
+	creTable:
+		cmd: >
+			'DROP TABLE IF EXISTS <[table]>; CREATE TABLE <[table]> ('
+			'<[table]>Id INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT UNIQUE NOT NULL,'
+			'<[table]>UUID, <@[columns]@>);'
+	creView:
+		cmd: >
+	creIndex:
+		cmd: >
+			CREATE INDEX <[table]>_<[column]> ON <[table]> (<[column]>);
+column:
+	'1': 'I'
+	'5': 'V'
+	'10': 'X'
+	'50': 'L'
+	'100': 'C'
+	'500': 'D'
+	'1000': 'M'
+	'5000': 'F'
+	'10000': 'B'
+	'50000': 'Z'
+	'100000': 'K'
+	'500000': 'T'
+	'1000000': 'A'
+	'5000000': 'Q'
+	'10000000': 'H'

@@ -1,0 +1,87 @@
+/* QMenuBar --------------------------------------------------------------- */
+QMenuBar {
+    background-color: #32414B;
+    padding: 2px;
+    border: 1px solid #19232D;
+    color: #F0F0F0;
+}
+QMenuBar:focus {
+    border: 1px solid #148CD2;
+}
+QMenuBar::item {
+    background: transparent;
+    padding: 4px;
+}
+QMenuBar::item:selected {
+    padding: 4px;
+    background: transparent;
+    border: 0px solid #32414B;
+}
+QMenuBar::item:pressed {
+    padding: 4px;
+    border: 0px solid #32414B;
+    background-color: #148CD2;
+    color: #F0F0F0;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+/* QMenu ------------------------------------------------------------------ */
+QMenu {
+    border: 0px solid #32414B;
+    color: #F0F0F0;
+    margin: 0px;
+}
+QMenu::separator {
+    height: 2px;
+    background-color: #505F69;
+    color: #F0F0F0;
+    padding-left: 4px;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+QMenu::icon {
+    margin: 0px;
+    padding-left:4px;
+}
+QMenu::item {
+    padding: 4px 24px 4px 24px;
+    border: 1px transparent #32414B;  /* reserve space for selection border */
+}
+QMenu::item:selected {
+    color: #F0F0F0;
+}
+QMenu::indicator {
+    width: 12px;
+    height: 12px;
+    padding-left:6px;
+}
+/* non-exclusive indicator = check box style indicator (see QActionGroup::setExclusive) */
+QMenu::indicator:non-exclusive:unchecked {
+    image: url(:/qss_icons/rc/checkbox_unchecked.png);
+}
+QMenu::indicator:non-exclusive:unchecked:selected {
+    image: url(:/qss_icons/rc/checkbox_unchecked_disabled.png);
+}
+QMenu::indicator:non-exclusive:checked {
+    image: url(:/qss_icons/rc/checkbox_checked.png);
+}
+QMenu::indicator:non-exclusive:checked:selected {
+    image: url(:/qss_icons/rc/checkbox_checked_disabled.png);
+}
+/* exclusive indicator = radio button style indicator (see QActionGroup::setExclusive) */
+QMenu::indicator:exclusive:unchecked {
+    image: url(:/qss_icons/rc/radio_unchecked.png);
+}
+QMenu::indicator:exclusive:unchecked:selected {
+    image: url(:/qss_icons/rc/radio_unchecked_disabled.png);
+}
+QMenu::indicator:exclusive:checked {
+    image: url(:/qss_icons/rc/radio_checked.png);
+}
+QMenu::indicator:exclusive:checked:selected {
+    image: url(:/qss_icons/rc/radio_checked_disabled.png);
+}
+QMenu::right-arrow {
+    margin: 5px;
+    image: url(:/qss_icons/rc/right_arrow.png)
+}

@@ -1,0 +1,33 @@
+---
+<(META)>:
+	DOCid: <^[uuid]^>
+	name:
+	description: >
+	expirary: <[expiration]>
+	version: <[version]>
+	path: <[LEXIvrs]>
+	outline: <[outline]>
+	authority: document|this
+	security: sec|lvl2
+	<(WT)>: -32
+menu: <{LOAD:=><[APP]>/cfg/menus.yaml]=[SELECT:=>pyffice}>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

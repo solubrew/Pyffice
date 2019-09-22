@@ -1,0 +1,62 @@
+/* QRadioButton ----------------------------------------------------------- */
+QRadioButton {
+    background-color: #19232D;
+    color: #F0F0F0;
+    spacing: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+}
+QRadioButton:focus {
+    border: none;
+}
+QRadioButton:disabled {
+    background-color: #19232D;
+    color: #787878;
+    border: none;
+    outline: none;
+}
+QRadioButton QWidget {
+    background-color: #19232D;
+    color: #F0F0F0;
+    spacing: 0px;
+    padding: 0px;
+    outline: none;
+    border: none;
+}
+QRadioButton::indicator {
+    border: none;
+    outline: none;
+    margin-bottom: 2px;
+    width: 25px;
+    height: 25px;
+}
+QRadioButton::indicator:unchecked {
+    image: url(:/qss_icons/rc/radio_unchecked.png);
+}
+QRadioButton::indicator:unchecked:hover,
+QRadioButton::indicator:unchecked:focus,
+QRadioButton::indicator:unchecked:pressed {
+    border: none;
+    outline: none;
+    image: url(:/qss_icons/rc/radio_unchecked_focus.png);
+}
+QRadioButton::indicator:checked {
+    border: none;
+    outline: none;
+    image: url(:/qss_icons/rc/radio_checked.png);
+}
+QRadioButton::indicator:checked:hover,
+QRadioButton::indicator:checked:focus,
+QRadioButton::indicator:checked:pressed {
+    border: none;
+    outline: none;
+    image: url(:/qss_icons/rc/radio_checked_focus.png);
+}
+QRadioButton::indicator:checked:disabled {
+    outline: none;
+    image: url(:/qss_icons/rc/radio_checked_disabled.png);
+}
+QRadioButton::indicator:unchecked:disabled {
+    image: url(:/qss_icons/rc/radio_unchecked_disabled.png);
+}

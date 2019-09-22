@@ -1,0 +1,226 @@
+---
+<(META)>:
+	DOCid: <^[uuid]^>
+	name:
+	description: >
+	expirary: <[expiration]>
+	version: <[version]>
+	path: <[LEXIvrs]>
+	outline: <[outline]>
+	authority: document|this
+	security: sec|lvl2
+	<(WT)>: -32
+
+'pyffice':
+	'MenuBar':
+		'About':
+			'Name': '&About'
+			'Icon': 'about.png'
+			'Tip': 'About'
+		'Bookmarks':
+			'Icon':
+			'HotKey':
+			'Tip': 'Add New Document to Workbook'
+			'Name': '&Bookmarks'
+			'actions':
+				'addBookmark':
+				'mngBookmarks':
+				'Bookmarks':
+					'flyout':
+		'Data':
+			'Icon':
+			'HotKey':
+			'Tip': 'Get, Load, and Connect Data'
+			'Name': '&Data'
+			'actions':
+				'linkData':  #link to data available locally or remotely
+				'findData':  #search for data amoung various data marketplaces
+				'loadData':  #load a copy of the data into the current pyffice file
+		'Developer':  #allow for deep direct scripting integration with pyffice
+			'Name': '&Developer'  #allow for adhoc extensions for development purposes
+			'actions':
+				'':
+		'Edit':
+			'Icon':
+			'HotKey':
+			'Tip': 'Add New Document to Workbook'
+			'Name': '&Edit'
+			'actions':
+				'Copy':
+					'Icon': 'copy.png'
+					'Hotkey': 'Ctrl+c'
+					'Tip': 'Copy Selection'
+				'Cut':
+					'Icon': 'cut.png'
+					'HotKey': 'Ctrl+x'
+					'Tip': 'Cut Selection'
+				'Paste':
+					'Icon': 'paste.png'
+					'HotKey': 'Ctrl+v'
+					'Tip': 'Paste Cut or Copied Selection'
+				'Redo':
+					'Icon': 'redo.png'
+					'HotKey': 'Ctrl+y'
+					'Tip': 'Redo Last Undo'
+				'Undo':
+					'Icon': 'undo.png'
+					'HotKey': 'Ctrl+z
+					'Tip': 'Undo Last Edit'
+		'Export':
+			'Icon':
+			'HotKey':
+			'Tip': 'Add New Document to Workbook'
+			'Name': '&Export'
+			'actions':
+				'expExcel':
+				'expCSV':
+				'expPowerPoint':
+				'expPython':
+				'expCherryTree':
+				'expWord':
+				'expText':
+				'expHTML':
+				'expWebsite':
+				'expSQLite':
+				'expSQL':
+				'expAccess':
+		'Extensions':
+			'Name': '&Extensions'
+			'actions':
+				'manageExtensions':
+				'<(installed_extensions)>':
+				'addExtensions':
+		'File':
+			'Name': '&File'
+			'Icon':
+			'HotKey':
+			'Tip': 'Add New Document to Workbook'
+			'actions':
+				'Exit':
+					'Icon': 'exit.png'
+					'HotKey': 'Ctrl+q'
+					'Tip': 'Exit Application'
+				'Save':
+					'Icon': 'save.png'
+					'HotKey': 'Ctrl+s'
+					'Tip': 'Save Current Document'
+				'New':
+					'Icon': 'new.png',
+					'HotKey': 'Ctrl+n',
+					'Tip': 'Create New Document'
+				'Open':
+					'Icon': 'open.png'
+					'HotKey': 'Ctrl+o'
+					'Tip': 'Open Document'
+				'Quit':
+					'Name': '&Quit'
+					'Icon': 'quit.png'
+					'HotKey': '|[ctrl]|+|[Q]|'
+					'Func': '.fileQuit'
+		'Format':
+			'Icon':
+			'HotKey':
+			'Tip': 'Add New Document to Workbook'
+			'Name': '&Format'
+			'actions':
+		'Formulas':
+			'Name': '&Formulas'
+			'actions':
+		'Help':
+			'Name': '&Help'
+			'actions':
+			'Icon':
+			'HotKey':
+			'Tip': 'Add New Document to Workbook'
+		'History':
+			'Icon':
+			'HotKey':
+			'Tip': 'Add New Document to Workbook'
+		'Import':
+			'Icon':
+			'HotKey':
+			'Tip': 'Add '
+			'Name': '&Import'
+			'actions':
+				'impExcel':
+				'impCSV':
+				'impPowerPoint':
+				'impPython':
+				'impCherryTree':
+				'impEvernote':
+				'impGmail':
+				'impWord':
+				'impText':
+				'impHTML':
+				'impWebsite':
+				'impPDF':
+				'impAccess':
+				'impSQLite':
+				'impSQL':
+		'Insert':
+			'Icon':
+			'HotKey':
+			'Tip': 'Add New Document to Workbook'
+			'Name': '&Insert'
+			'actions':
+				'Image':
+				'Table':
+				'Code':
+		'Layouts':
+			'Name': '&Layouts'
+			'actions':
+				'Header':
+				'Footer':
+				'Margins':
+				'SheetSize':
+				'Forms:
+					'CAD':
+						'TitleBlock':
+					'Stationary':
+						'':
+					'findForms':
+					'loadForms':
+		'Search':
+			'Name': '&Search'
+			'actions':
+			'Icon':
+			'HotKey':
+			'Tip': ''
+		'Sheet':
+			'Icon':
+			'HotKey':
+			'Tip': ''
+		'Style':
+			'Icon':
+			'HotKey':
+			'Tip': ''
+			actions':
+				'static':  #global and consistent styling across document types
+					'background':  #
+					'text':  #
+				'dynamic':  #
+					'table':  #
+					'code':
+					'document':
+					'image':
+					'':
+		'Tools':
+			'Icon':
+			'HotKey':
+			'Tip': ''
+		'Tree':
+			'Name': '&Tree'
+			'actions':
+			'Icon':
+			'HotKey':
+			'Tip': ''
+		'View':
+			'Name': '&View'
+			'actions':
+			'Icon':
+			'HotKey':
+			'Tip': ''
+		'Window':
+			'Icon':
+			'HotKey':
+			'Tip': ''
