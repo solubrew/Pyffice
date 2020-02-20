@@ -12,7 +12,7 @@ Currently nominated modules for application integration
 
 - pandas
 
-- qtpandas
+- qt5pandas
 
 - openpyxl
 
@@ -30,3 +30,31 @@ Currently nominated modules for application integration
 
 - orange3
 
+### Built in
+- file imports
+	- HTML
+	- Excel
+	- CSV
+	- Word
+	- PDF
+	- Text
+	- Images
+	- Onenote
+	- Evernote
+	- LibreCalc
+	- MS Access
+	- MS Visio
+	- MS Project
+	- LibreProject
+
+Develop a Pluggin System to Integrate additional Python modules such as
+
+- zipline for backtesting algorythms
+
+- sklearn
+
+- tensorflow2
+
+- file imports
+	- cherrytree
+	- EssentialPIM HTML
