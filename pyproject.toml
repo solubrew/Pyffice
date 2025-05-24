@@ -3,9 +3,9 @@ requires = ["setuptools>=42", "wheel"]  # Specify required build tools
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "condor"  # Unique PyPI name
+name = "pyffice"  # Unique PyPI name
 version = "0.0.1"  # Semantic versioning
-description = "A Yaml based Cascading Configuration Parser."
+description = "A yaml based file structure and python classes and functions to import, export and store common office files"
 readme = "README.md"  # Points to the README file
 license = { file = "LICENSE" }
 authors = [{ name = "solubrew", email = "pypi@solutionsbrewer.com" }]
