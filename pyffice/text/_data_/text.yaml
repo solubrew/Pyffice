@@ -1,0 +1,85 @@
+PyfficeScript:
+    document:
+        file_path:
+        text:
+    template:
+        name:
+        did:
+        description:
+        metadata:
+          author:
+          editors:
+          path:
+          location:
+          syntax:
+          encoding:
+          tags:
+          context:
+          hash:
+          policy_fk:
+          rating:
+          creon_dttm:
+          modon_dttm:
+        document:
+            page0:
+                paragraphs:
+                    0:
+                    1:
+                objects:
+                    headers:
+                    body:
+                    footers:
+    file_formats:
+        "word": [".docx", ".dotx"]
+        "css": [".css", ".qss"]
+        "plaintext": [".txt",]
+        "python": [".py",]
+        "xml": [".xml",]
+        "javascript": [".js",]
+        "json": [".json",]
+        "yaml": [".yaml",]
+        "r": [".r"]
+        "toml": [".toml", ".ini", ".cfg"]
+        "markdown": [".md", ]
+        "bash": [".sh"]
+        "html": [".html"]
+PyfficeParagraph:
+    template:
+        name:
+        did:
+        description:
+        metadata:
+          author:
+          editors:
+          path:
+          location:
+          syntax:
+          encoding:
+          tags:
+          context:
+          hash:
+          policy_fk:
+          rating:
+          creon_dttm:
+          modon_dttm:
+        document:
+PyfficeObject:
+    template:
+        name:
+        did:
+        description:
+        metadata:
+          author:
+          editors:
+          path:
+          location:
+          syntax:
+          encoding:
+          tags:
+          context:
+          hash:
+          policy_fk:
+          rating:
+          creon_dttm:
+          modon_dttm:
+        document:

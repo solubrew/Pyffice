@@ -1,0 +1,12 @@
+---
+fixture_000:
+    inputs:
+        path: "../../fixtures/notes/cherrytree/"
+        cfg:
+    outputs:
+        doc: "../../fixtures/notes/cherrytree/"
+fixture_001:
+    inputs:
+        path:
+        cfg:
+    outputs:

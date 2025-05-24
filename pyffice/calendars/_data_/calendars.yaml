@@ -1,0 +1,82 @@
+---
+PyfficeCalendar:
+    template:
+        did:
+        name:
+        description:
+        metadata:
+          author:
+          editors:
+          path:
+          location:
+          syntax:
+          encoding:
+          tags:
+          context:
+          hash:
+          policy_fk:
+          rating:
+          creon_dttm:
+          modon_dttm:
+        document:
+            scope: hour
+            divisor: minute
+            <[divisor_code]>:
+                document:
+                events:
+                tasks:
+                entries:
+                info:
+PyfficeEvent:
+    template:
+        did:
+        name:
+        description:
+        metadata:
+          author:
+          editors:
+          path:
+          location:
+          syntax:
+          encoding:
+          tags:
+          context:
+          hash:
+          policy_fk:
+          rating:
+          creon_dttm:
+          modon_dttm:
+        document:
+            description:
+            start_dttm:
+            end_dttm:
+            required_attendance: False
+            recurrences:
+                -
+            alarms:
+                -
+            tasks:
+                -
+PyfficeRecurrence:
+    template:
+        did:
+        name:
+        description:
+        metadata:
+          author:
+          editors:
+          path:
+          location:
+          syntax:
+          encoding:
+          tags:
+          context:
+          hash:
+          policy_fk:
+          rating:
+          creon_dttm:
+          modon_dttm:
+        document:
+            unit:
+            unit_multiple:
+            end_after:

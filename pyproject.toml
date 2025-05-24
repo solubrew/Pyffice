@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]  # Specify required build tools
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "condor"  # Unique PyPI name
+version = "0.0.1"  # Semantic versioning
+description = "A Yaml based Cascading Configuration Parser."
+readme = "README.md"  # Points to the README file
+license = { file = "LICENSE" }
+authors = [{ name = "solubrew", email = "pypi@solutionsbrewer.com" }]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+requires-python = ">=3.6"
+dependencies = ["pyyaml==6.0.2", "pytest==8.3.3"]
+
+[tool.black]
+line-length = 120
+skip-string-normalization = false
+[tool.pytest.ini_options]
+testpaths = [
+    "test",
+]
+python_files = '*TEST.py'

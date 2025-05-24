@@ -1,0 +1,758 @@
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
+"""
+---
+<(META)>:
+	docid:
+	name:
+	description: >
+	version: 0.0.0.0.0.0
+	authority: filesystem
+	security: seclvl2
+	<(WT)>: -32
+"""
+# -*- coding: utf-8 -*
+# ======================================Standard Library Modules======================================================||
+from os.path import abspath, dirname, join
+import datetime as dt
+from io import BytesIO
+import json as j
+
+# ======================================3rd Party Library Modules=====================================================||
+import xml.etree.ElementTree as ET
+from bs4 import BeautifulSoup
+import nbformat
+
+from pyffice.items.items import PyfficeTable
+
+try:
+    import dia
+
+    HAS_DIA = True
+except ImportError:
+    HAS_DIA = False
+    pass
+# ======================================Solutions Brewer Library Modules==============================================||
+from condor import condor
+from subtrix.subtrix import uuid
+from ogma.logma import Logma
+from pyffice.document import PyfficeDocumentManager
+from pyffice.text.text import PyfficeScript
+from pyffice.images.images import PyfficeImage
+from pyffice.web.url import PyfficeURL
+from pyffice.items.text import PyfficeText
+from pycurity.pymatch import extract_urls
+from squirl.objnql import tblonql
+from squirl.orgnql import yonql
+
+# ====================================================================================================================||
+here = join(dirname(__file__), "")  # ||
+logma = Logma(__name__)
+logma.off()
+
+# ====================================================================================================================||
+pxcfg = join(here, "_data_", ".yaml")
+
+
+class PyfficePort(PyfficeDocumentManager):
+    """"""
+
+    def __init__(self, cfg=None):
+        """"""
+        super().__init__(cfg)
+        self.config.override(condor.Instruct(pxcfg).select("PyfficePort")).override(cfg)
+
+    def file_export(self, file_=None):
+        """"""
+        self.file_write(file_, self.to_dict())
+        return self
+
+    def file_import(self, file_path=None):
+        """"""
+
+    def file_open(self, file_path, open_=True):
+        """"""
+        text = super().file_open(file_path, open_)
+        return text
+
+    def file_write(self, path, dikt):
+        """"""
+        # with open(path, "w") as f:
+        #     f.write(text)
+        yonql.Doc(path).write(dikt)
+        return self
+
+    def to_dict(self):
+        """
+        This outputs a structure that is compatibile with Pyffice Documents and can be rebuilt as the
+        Native Document Syntax
+        """
+        doc = super().to_dict()
+        return doc
+
+    def to_native(self):
+        """"""
+
+    def to_xml(self):
+        """"""
+
+
+class PyfficePortCherryTree(PyfficePort):
+    """"""
+
+    def __init__(self, cfg=None):
+        """"""
+        logma.info(f"Init Cherry Tree {cfg}")
+        super().__init__(cfg)
+        self.config.override(condor.Instruct(pxcfg).select("PyfficePortCherryTree")).override(cfg)
+        logma.info(f"Init Cherry Tree {self.config.dikt}")
+        self.nodes = None
+        self.root = None
+        self.tree = None
+        self.codeboxes = None
+        self.links = None
+        self.tables = None
+        self.images = None
+
+    def extract_codeboxes(self, node):
+        """"""
+        codeboxes = node.findall("codebox")
+        self.codeboxes = []
+        for code in codeboxes:
+            cfg = {"document": {"content": code.text, "syntax": code.attrib.get("prog_lang", "")}}
+            box = PyfficeScript(cfg)
+            box.load_document()
+            self.codeboxes.append(box)
+        return self
+
+    def extract_images(self, node):
+        """"""
+        images = node.findall("encoded_png")
+        self.images = []
+        for image in images:
+            if image.attrib.get("filename", "") == "__ct_special.tex":
+                continue
+            cfg = {"document": {"LAY0": {"OBJ0": {"content": image.text}}}}
+            image_ = PyfficeImage(cfg)
+            image_.load_document()
+            self.images.append(image_)
+        return self
+
+    def extract_tables(self, node):
+        """"""
+        tables = node.findall("table")
+        tables_ = []
+        for table in tables:
+            rows = table.findall("row")
+            rows_ = []
+            for i, row in enumerate(rows):
+                cells = row.findall("cell")
+                row_ = []
+                for j, cell in enumerate(cells):
+                    row_.append(cell.text)
+                    # if i == 0:
+                    #     tables_[j] = cell.text if j < len(tables_) else cell.text + "|"
+                    # else:
+                    #     tables_[j] = tables_[j] + "\n" + cell.text + "|"
+                rows_.append(row_)
+            cfg = {"rows": rows}
+            table_ = PyfficeTable(cfg)
+            table_.load_unit()
+            tables_.append(table_)
+        return tables_
+
+    def extract_text(self, node):
+        """"""
+        full_text = ""
+        script = None
+        if node.text is not None:
+            full_text, pages = self.parse_text(node)
+            cfg = {"pages": pages}
+            script = PyfficeScript(cfg)
+            script.load_document()
+        logma.info(f"Full Text {full_text}")
+        return full_text, script
+
+    def file_import(self, file_path=None):
+        """"""
+        self.file_open(file_path)
+        return self.to_dict()
+
+    def file_open(self, file_path):
+        """"""
+        # logma.info(f"Open Cherry Tree {self.config.dikt["file_path"]}")
+        self.load_document(self.config.dikt.get("document", {}))
+        if file_path is None:
+            file_path = self.file_path
+        logma.info(f"Open Cherry Tree {self.file_path}")
+        xml_string = super().file_open(file_path)
+        self.tree = ET.ElementTree(ET.fromstring(xml_string))
+        self.root = self.tree.getroot()
+        self.parse()
+        return self
+
+    def load_document(self, document=None):
+        """"""
+        logma.info(f"Load Cherry Tree {document}")
+        super().load_document(document)
+        return self
+
+    def parse(self):
+        """
+        Parse the entire XML structure starting from the root.
+
+        :return: A list of parsed nodes.
+        """
+        self.nodes = [self.parse_node(node) for node in self.root.findall("node")]
+        return self
+
+    def parse_links(self, text):
+        # extract urls
+        links = extract_urls(text)
+        logma.info(f"Links: {links}")
+        self.links = []
+        if links is not None:
+            for link in links:
+                logma.info(f"Link: {link}")
+                link = link.replace("}", "").replace("{", "").strip()
+                if not link.startswith("http"):
+                    continue
+                # try:
+                # browser = PyfficeWebBrowser({"url": link}) Not sure how this should be organized at this level
+                # due to the PyfficeWebBrowser-PyfficeWebPage-PyfficeURL hiearchy
+                link = PyfficeURL({"unit": {"url": link}})
+                link.load_unit()
+                # except Exception as e:
+                #     logma.info(f"Link: {link}")
+                #     continue
+                if link.domain is None:
+                    continue
+                logma.info(f"Active Link {link.active_url} {link.domain}")
+                self.links.append(link)
+        return self
+
+    def parse_node(self, node):
+        """
+        Parse a single node and its children recursively.
+
+        :param node: The XML element representing the node.
+        :return: A dictionary representation of the node.
+        """
+        tab_id = uuid()
+        name = node.attrib.get("name", None)
+        if name is None or name == "":
+            name = tab_id[len(tab_id) - 5 :]
+        text, script = self.extract_text(node)
+        if text is None:
+            text = ""
+        logma.info(f"text {text}")
+        script_text = ""
+        script_dict = "{}"
+        if script is not None:
+            script_text = script.to_dict()["document"]["context"]
+            script_dict = script.to_dict()
+        self.parse_links(text)
+        self.extract_images(node)
+        # self.codeboxes = self.extract_codeboxes(node)
+        # self.tables = self.extract_tables(node)
+
+        # is this needed?
+        node_ = {
+            "name": name,
+            "custom_icon_id": node.attrib.get("custom_icon_id", ""),
+            "readonly": node.attrib.get("readonly", ""),
+            "tags": node.attrib.get("tags", ""),
+            "creation_dttm": node.attrib.get("ts_creation", self.time.get_current_datetime_str()),
+            "last_save_dttm": node.attrib.get("ts_lastsave", self.time.get_current_datetime_str()),
+            "unique_id": node.attrib.get("unique_id", uuid()),
+            "is_bold": node.attrib.get("is_bold", ""),
+            "foreground": node.attrib.get("foreground", ""),
+            "tabs": [
+                {
+                    "tags": node.attrib.get("tags", ""),
+                    "readonly": node.attrib.get("readonly", ""),
+                    "prog_lang": node.attrib.get("prog_lang", ""),
+                    "name": name,
+                    "unique_id": tab_id,
+                    "rich_text": text,
+                    "script": script_dict,
+                    "type": "script",
+                    "creation_dttm": node.attrib.get("ts_creation", self.time.store_now()),
+                    "last_save_dttm": node.attrib.get("ts_lastsave", self.time.store_now()),
+                }
+            ],
+        }
+        logma.info(f"Links: {self.links}")
+        if self.links is not None:
+            for i, link in enumerate(self.links):
+                logma.info(f"Link: {link.active_url} {link.domain}")
+                name = link.domain[:30]
+                if name is None or name == "":
+                    name = tab_id[len(tab_id) - 5 :] + f"_{i}"
+                node_["tabs"].append(
+                    {
+                        "tags": "",
+                        "readonly": "",
+                        "prog_lang": "",
+                        "name": link.domain[:30],
+                        "unique_id": link.did,
+                        "type": "browser",
+                        "rich_text": link.to_dict(),
+                        "creation_timestamp": self.time.store_now(),
+                        "last_save_timestamp": self.time.store_now(),
+                    }
+                )
+        self.links = None
+        if self.images is not None:
+            for image in self.images:
+                node_["tabs"].append(
+                    {
+                        "tags": "",
+                        "widget": "widgets.documents.media.images.NchantdOfficeImage",
+                        "readonly": "",
+                        "prog_lang": "",
+                        "name": image.name[:30],
+                        "unique_id": image.did,
+                        "type": "image",
+                        "rich_text": image.to_dict(),
+                        "creation_timestamp": self.time.store_now(),
+                        "last_save_timestamp": self.time.store_now(),
+                    }
+                )
+        if self.tables is not None:
+            for table in self.tables:
+                node_["tabs"].append(
+                    {
+                        "tags": "",
+                        "widget": "widgets.documents.workbooks.matricies.NchantdOfficeMatrix",
+                        "readonly": "",
+                        "prog_lang": "",
+                        "name": table.name[:30],
+                        "unique_id": table.did,
+                        "type": "table",
+                        "rich_text": table.to_dict(),
+                        "creation_timestamp": self.time.store_now(),
+                        "last_save_timestamp": self.time.store_now(),
+                    }
+                )
+        if self.codeboxes is not None:
+            for codebox in self.codeboxes:
+                logma.info(f"Codebox: {codebox}")
+                node_["tabs"].append(
+                    {
+                        "tags": "",
+                        "widget": "widgets.documents.media.scripts.NchantdOfficeScript",
+                        "readonly": "",
+                        "prog_lang": codebox.syntax,
+                        "name": codebox.name[:30],
+                        "unique_id": codebox.did,
+                        "type": "script",
+                        "rich_text": codebox.to_dict(),
+                        "creation_timestamp": self.time.store_now(),
+                        "last_save_timestamp": self.time.store_now(),
+                    }
+                )
+        node_["nodes"] = [self.parse_node(child) for child in node.findall("node")]
+        return node_
+
+    def parse_tables(self, node):
+        """"""
+        # extract tables
+        tables = node.findall("table")
+        for table in tables:
+            cfg = {"document": {"content": table}}
+            table_ = PyfficeMatrix(cfg)
+            table_.load_document()
+        return self
+
+    def parse_text(self, node):
+        """"""
+        text = node.findall("rich_text")
+        all_combined_text = []
+        pages = {0: {"paragraphs": {}, "full_text": ""}}
+        if len(text) > 0:
+            for i, tag in enumerate(text):
+                logma.info(f"Tag {tag.text}")
+                cfg = {"text": tag.text}  # , "color": tag.attrib.get("foreground", "")}
+                pages[0]["paragraphs"][i] = PyfficeText(cfg)
+                all_combined_text.append(tag.text)
+        combined_text = " ".join(filter(None, all_combined_text))
+        return combined_text, pages
+
+    def to_dict(self):
+        """"""
+        doc = super().to_dict()
+        for node in self.nodes:
+            doc["document"]["documents"].append(node)
+        return doc
+
+
+class PyfficePortCSV(PyfficePort):
+    """"""
+
+    def __init__(self, cfg=None):
+        """"""
+        super().__init__(cfg)
+        self.config.override(condor.Instruct(pxcfg).select("PyfficePortCSV")).override(cfg)
+
+    def open_file(self, file, if_data_only=False, read_only=False, keep_vba=False):
+        """"""
+        rdr = tblonql.Doc(file)
+        data = next(rdr.read(), None)
+        return data
+
+    def to_dict(self):
+        """"""
+        doc = super().to_dict()
+        return doc
+
+
+class PyfficePortDia(PyfficePort):
+    """Port Dia File and convert to Nchantd Sketch Document"""
+
+    def __init__(self, cfg=None):
+        """"""
+        super().__init__(cfg)
+        self.config.override(condor.Instruct(pxcfg).select("PyfficePortDia")).override(cfg)
+        self.is_dia_installed = HAS_DIA
+        self.diagram = None
+        self.nodes = None
+        self.root = None
+        self.tree = None
+        self.edges = None
+
+    def import_file(self, file_path=None):
+        """"""
+        self.open_file(file_path)
+        self.parse()
+        return self.to_dict()
+
+    def open_file(self, file_path):
+        """"""
+        super().open_file(file_path)
+        with open(str(self.file_path), "r") as f:
+            xml_string = f.read()
+        self.tree = ET.ElementTree(ET.fromstring(xml_string))
+        self.root = self.tree.getroot()
+
+        # tree = ET.parse("example.dia")
+
+        if self.is_dia_installed:
+            self.diagram = dia.open(file_path)
+
+    def parse(self):
+        """"""
+        if self.is_dia_installed:
+            self.parse_dia()
+        else:
+            self.parse_xml()
+        return self
+
+    def parse_dia(self):
+        """
+        Parse the entire XML structure starting from the root.
+
+        :return: A list of parsed nodes.
+        """
+        for layer in self.diagram.data.layers:
+            for obj in layer.objects:
+                for attr_name, attr_value in obj.properties.items():
+                    if attr_name == "name":
+                        obj.name = attr_value
+        return self
+
+    def parse_xml(self):
+        """"""
+        # Open and parse the .dia file (it's an XML file)
+        # Dia's XML namespaces
+        namespace = {"dia": "http://www.lysator.liu.se/~alla/dia/"}
+
+        # Diagramdata
+        # paper
+        # grid
+        # color
+        # display
+
+        # Background
+        #
+
+        # Iterate through objects in the Dia file
+        for obj in self.root.findall(".//dia:object", namespace):
+            obj_type = obj.get("type", "Unknown")
+            # Extract attributes
+            for attr in obj.findall("dia:attribute", namespace):
+                attr_name = attr.get("name", "Unknown")
+
+    def to_dict(self):
+        """"""
+        doc = super().to_dict()
+        for node in self.nodes:
+            doc["document"]["documents"].append(node)
+        for edge in self.edges:
+            doc["document"]["edges"].append(edge)
+        return doc
+
+    def to_native(self):
+        """"""
+
+    def to_xml(self):
+        """"""
+
+
+class PyfficePortFileSystem(PyfficePort):
+    """"""
+
+    def __init__(self, cfg=None):
+        """"""
+        super().__init__(cfg)
+        self.config.override(condor.Instruct(pxcfg).select("PyfficePortFileSystem")).override(cfg)
+
+    def to_dict(self):
+        """"""
+        doc = super().to_dict()
+        return doc
+
+
+class PyfficePortImage(PyfficePort):
+    """"""
+
+    def __init__(self, cfg=None):
+        """"""
+        super().__init__(cfg)
+        self.config.override(condor.Instruct(pxcfg).select("PyfficePortImage")).override(cfg)
+
+    def convert_svg_color(self, input_color, output_color):
+        """"""
+        if self.content is None:
+            self.read()
+        self.content = re.sub(input_color, output_color, self.content, flags=re.IGNORECASE)
+        return self
+
+    def encode(self, format="JPEG"):
+        """
+        Encode the image to a specific format and return bytes.
+
+        :param format: Image format to encode (e.g., JPEG, PNG).
+        :return: Bytes of the encoded image.
+        """
+        buffer = BytesIO()
+        self.image.save(buffer, format=format)
+        return buffer.getvalue()
+
+    def load_document(self):
+        """"""
+        # logma.info(f"Load Image {path}")
+        # if os.path.exists(path):
+        #     if path.endswith(".svg"):
+        #         self.image = self.load_svg(path)
+        #     else:
+        #         self.image = Image.open(path)
+        #         self.mode = self.image.mode
+        #         self.info = self.image.info
+        #         self.exif = self.image._getexif()  # Extract EXIF metadata (if available)
+
+    def open_file(self, file_=None):
+        """"""
+        if file_ is None:
+            file_ = self.file_path
+        else:
+            self.file_path = file_
+        if file_ is None:
+            raise Exception(f"No File Provided {file_}")
+        match file_.lower():
+            case s if s.endswith(".bmp"):
+                self.open_file_bmp(file_)
+            case s if s.endswith(".jpeg"):
+                self.open_file_jpeg(file_)
+            case s if s.endswith(".jpg"):
+                self.open_file_jpeg(file_)
+            case s if s.endswith(".gif"):
+                self.open_file_gif(file_)
+            case s if s.endswith(".png"):
+                self.open_file_png(file_)
+            case s if s.endswith(".svg"):
+                self.open_file_svg(file_)
+            case _:
+                raise Exception(f"Unknown File Type {file_}")
+        return self
+
+    def open_file_bmp(self, file_):
+        """"""
+        return self
+
+    def open_file_jpeg(self, file_):
+        """"""
+        image = Image.open(file_)
+        self.image = image
+        return self
+
+    def open_file_gif(self, file_):
+        """"""
+        return self
+
+    def open_file_png(self, file_):
+        """"""
+        return self
+
+    def open_file_svg(self, file_):
+        """"""
+        return self
+
+    def save(self, output_path, format_=None):
+        """
+        Save the current image to a file.
+
+        :param output_path: The output path to save the image.
+        :param format: Optional image format (e.g., 'JPEG', 'PNG').
+        :return: self
+        """
+        super().save(output_path, format_=format_)
+        if self.image is not None:
+            self.image.save(output_path, format=format_ or self.image.format)
+        return self
+
+    def set_layers(self, method="flatten"):
+        """
+        Merge all layers with the base image.
+
+        :return: self
+        """
+        self.image = self.image.resize(size)  # TODO not sure how to integrate this with other documents
+        for layer in self.layers:
+            self.image = Image.alpha_composite(self.image.convert("RGBA"), layer)
+        self.layers = []  # Clear layers after merging
+        return self
+
+    def set_size(self, width, height):
+        """
+        Resize the image.
+
+        :param width: New width.
+        :param height: New height.
+        :return: self
+        """
+        self.image = self.image.resize((width, height))
+        return self
+
+    def to_dict(self):
+        """"""
+        doc = super().to_dict()
+        return doc
+
+
+class PyfficePortJupyter(PyfficePort):
+    """"""
+
+    def __init__(self, cfg=None):
+        """"""
+        super().__init__(cfg)
+        self.config.override(condor.Instruct(pxcfg).select("PyfficePortJupyter")).override(cfg)
+        self.notebook = None
+
+    def file_export(self, file_=None):
+        """"""
+        if self.notebook is None:
+            self.load_document()
+        with open(file_, "w", encoding="utf-8") as f:
+            nbformat.write(self.notebook, f)
+        return self
+
+    def file_import(self, file_path=None):
+        """"""
+        self.file_open(file_path)
+        return self.to_dict()
+
+    def file_open(self, file_path):
+        """"""
+        super().file_open(file_path, False)
+        with open(self.file_path, "r", encoding="utf-8") as f:
+            self.notebook = nbformat.read(f, as_version=4)
+        return self
+
+    def load_document(self):
+        """"""
+        return self
+
+    def to_dict(self):
+        """"""
+        doc = super().to_dict()
+        doc["document"] = {"notebook": self.notebook}
+        return doc
+
+
+class PyfficePortText(PyfficePort):
+    """"""
+
+    def __init__(self, cfg=None):
+        """"""
+        super().__init__(cfg)
+        self.config.override(condor.Instruct(pxcfg).select("PyfficePortWebSession")).override(cfg)
+
+    def to_dict(self):
+        """"""
+        doc = super().to_dict()
+        return doc
+
+
+class PyfficePortWebSession(PyfficePort):
+    """"""
+
+    def __init__(self, cfg=None):
+        """"""
+        super().__init__(cfg)
+        self.config.override(condor.Instruct(pxcfg).select("PyfficePortWebSession")).override(cfg)
+        self.nodes = None
+        self.sessions = None
+
+    def file_import(self, file_path=None):
+        """"""
+        self.file_open(file_path)
+        return self.to_dict()
+
+    def file_open(self, file_path):
+        """"""
+        # logma.info(f"Open Cherry Tree {self.config.dikt["file_path"]}")
+        self.load_document(self.config.dikt.get("document", {}))
+        self.sessions = j.loads(super().file_open(file_path))
+        self.parse_session()
+        return self
+
+    def load_document(self, document=None):
+        """"""
+        logma.info(f"Load Web Session Tree {document}")
+        super().load_document(document)
+        self.nodes = []
+        return self
+
+    def parse_session(self):
+        """"""
+        for window in self.sessions.get("windows", []):
+            node = self.parse_window(window)
+            self.nodes.append(node)
+        return self
+
+    def parse_window(self, window):
+        """Each window is a Node"""
+        tabs = []
+        for tab in window:
+            tabs.append(self.parse_tab(tab))
+        node = {"tabs": tabs}
+        return node
+
+    def parse_tab(self, tab):
+        """"""
+        # extract url, favicon, metadata
+        url = tab["url"]
+        favicon = tab["favIconUrl"]
+        metadata = tab
+        return {"url": url, "favicon": favicon, "metadata": metadata}
+
+    def to_dict(self):
+        """"""
+        doc = super().to_dict()
+        doc["document"] = self.nodes
+        return doc
+
+
+# ====================================================================================================================||
+
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||

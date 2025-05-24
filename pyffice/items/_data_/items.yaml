@@ -1,0 +1,20 @@
+PyfficeItem:
+    template:
+        did:
+        name:
+        description:
+        metadata:
+          author:
+          editors:
+          path:
+          location:
+          syntax:
+          encoding:
+          tags:
+          context:
+          hash:
+          policy_fk:
+          rating:
+          creon_dttm:
+          modon_dttm:
+        document:

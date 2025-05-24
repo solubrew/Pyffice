@@ -1,0 +1,50 @@
+PyfficePrompt:
+    template:
+        did:
+        name:
+        description:
+        metadata:
+            author:
+            editors:
+            path:
+            location:
+            syntax:
+            encoding:
+            tags:
+            context:
+            hash:
+            creon_dttm:
+            modon_dttm:
+        document:
+            datetime:
+            context:
+                text:
+                metrics:
+            tags: ""
+            input:
+                text:
+                metrics:
+            responses:
+                - text:
+                  did:
+                  response_dttm:
+                  service:
+                  metrics:
+PyfficePromptManager:
+    template:
+        did:
+        name:
+        description:
+        metadata:
+            author:
+            editors:
+            path:
+            location:
+            syntax:
+            encoding:
+            tags:
+            context:
+            hash:
+            creon_dttm:
+            modon_dttm:
+        document:

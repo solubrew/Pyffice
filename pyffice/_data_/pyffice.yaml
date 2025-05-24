@@ -1,0 +1,69 @@
+---
+PyfficeCodex:
+  doc_types:
+    python: 'txtonql'
+    custom_colors: 'txtonql'
+    SQL: 'txtonql'
+    xml: 'txtonql'
+    sh: 'txtonql'
+    c: 'txtonql'
+    cpp: 'txtonql'
+    js: 'txtonql'
+    yaml: 'yonql'
+    css: 'txtonql'
+    html: 'txtonql'
+    php: 'txtonql'
+    go: 'txtonql'
+    tcl: 'txtonql'
+    vala: 'txtonql'
+    java: 'txtonql'
+    rust: 'txtonql'
+  cadLIST:
+  camLIST:
+    custom_colors: ['.gcode', '.stl']
+  textLIST:
+    python: ['.py', '.po', '.kv', '.cs', '.rkt']
+    custom_colors: ['.bat', '.txt', '.cfg', '.log', '.md', '.j', '.tab', '.csv',
+            '.cmake', '.rst', '', '.ini', '.in', '.kt', '.gradle', '.pro', '.bat',
+            '.properties', '.dll', '.jpg', '.jpeg', '.png', '.bmp', '.svg',
+            '.mime', '.ts']
+    SQL: ['.sql']
+    xml: ['.xml', '.ctd', '.rels', '.ui']
+    sh: ['.sh', '.zsh', '.fish', 'csh', '.xsh']
+    c: ['.h', '.c', '.cc', '.so', '.dll', '.scad', '.sip']
+    cpp: ['.cpp', '.ino', '.cs']
+    js: ['.json', '.js', '.ipynb', '.abi', '.sol', '.ts', '.tsx', '.vue']
+    yaml: ['.yaml', '.yml', '.toml', '.pug']
+    css: ['.css', '.qss']
+    html: ['.html', '.htm']
+    php: ['.php',]
+    go: ['.go', '.mod', '.sum']
+    tcl: ['.tcl',]
+    vala: ['.vala',]
+    java: ['.jar', '.java', '.class']
+    rust: ['.rs',]
+  imageLIST:
+    jpeg: ['.jpeg', '.jpg']
+    png: ['.png']
+    bmp: ['.bmp']
+    svg: ['.svg']
+  template:
+    uuid:
+    name:
+    description:
+    metadata:
+        author:
+        editors:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        policy_fk:
+        rating:
+        creon_dttm:
+        modon_dttm:
+    document:
+      documents:

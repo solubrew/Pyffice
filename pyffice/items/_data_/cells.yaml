@@ -1,0 +1,84 @@
+---
+PyfficeCell:
+    unit:
+        author:
+        changes:
+        context:
+        creon:
+        description:
+        did:
+        editors:
+        encoding:
+        hash:
+        location:
+        modon:
+        name:
+        path:
+        tags:
+    format:
+        "font":
+            "size": 12
+            "color": "black"
+            "style": "Arial"
+        "selections": {}
+        "border":
+            "top":
+                "style": ""
+                "size": 1
+                "color": "black"
+            "bottom":
+                "style": ""
+                "size": 1
+                "color": "black"
+            "left":
+                "style": ""
+                "size": 1
+                "color": "black"
+            "right":
+                "style": ""
+                "size": 1
+                "color": "black"
+        "background":
+            "color": None
+            "transparency": 100
+            "pattern": "solid"
+        "alignment":
+            "horizontal": "left"
+            "vertical": "top"
+        "data_format": "text"
+    template:
+        did:
+        name:
+        description:
+        metadata:
+          author:
+          editors:
+          path:
+          location:
+          syntax:
+          encoding:
+          tags:
+          context:
+          hash:
+          policy_fk:
+          rating:
+          creon_dttm:
+          modon_dttm:
+        unit:
+            address:
+            format:
+                font:
+                    size:
+                    style:
+                    color:
+                background:
+                    color:
+                    transparency:
+                    pattern:
+                alignment:
+                    horizontal:
+                    vertical:
+                data_format:
+            formula:
+            object:
+            value:
