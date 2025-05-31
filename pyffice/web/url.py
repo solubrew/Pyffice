@@ -69,6 +69,7 @@ class PyfficeURL(PyfficeUnit):
         self.sub_domain = None
         self.twofdns = None
         self.username = None
+        self.whois = None
         if self.active_url is not None:
             self._parse(self.active_url)
         self.doc_type = "url"
@@ -113,13 +114,19 @@ class PyfficeURL(PyfficeUnit):
     def get_parameters(self):
         """"""
         if not self.parsed:
-            self._parse(self.url)
+            self._parse(self.active_url)
         return self.parameters
+
+    def get_domain(self):
+        """"""
+        if not self.parsed:
+            self._parse(self.active_url)
+        return self.domain
 
     def get_sub_domain(self):
         """"""
         if not self.parsed:
-            self._parse(self.url)
+            self._parse(self.active_url)
         return self.sub_domain
 
     def get_url(self):
@@ -145,8 +152,8 @@ class PyfficeURL(PyfficeUnit):
         if unit is None:
             unit = self.config.dikt.get("unit", {})
         super().load_unit(unit)
-        self.set_given_url(unit.get("given_url", unit.get("url", {})))
-        self.set_active_url(unit.get("active_url", unit.get("url", {})))
+        self.set_given_url(unit.get("given_url", unit.get("url", None)))
+        self.set_active_url(unit.get("active_url", unit.get("url", None)))
         self.set_block_ads(unit.get("block_ads", False))
         self.set_block_adult(unit.get("block_adult", True))
         self.set_default_url(unit.get("default_url", "https://www.duckduckgo.com/search?q="))
@@ -185,6 +192,8 @@ class PyfficeURL(PyfficeUnit):
         if url != self.active_url:
             self.add_change("active_url", self.active_url, url)
             self.active_url = url
+
+            self.set_secure()
         return self
 
     def set_block_ads(self, block_ads):
@@ -324,12 +333,14 @@ class PyfficeURL(PyfficeUnit):
 
     def set_secure(self):
         """"""
-        if self.url[:7] == "http://":
-            self.secure_url = self.url.replace("http://", "https://")
-        elif self.url[:8] == "https://":
-            self.secure_url = self.url
+        logma.info(f"Active Url {self.active_url}")
+        if self.active_url[:7] == "http://":
+            self.secure_url = self.active_url.replace("http://", "https://")
+        elif self.active_url[:8] == "https://":
+            self.secure_url = self.active_url
         else:
-            self.secure_url = f"https://{self.url}"
+            self.secure_url = f"https://{self.active_url}"
+        self.active_url = self.secure_url
         return self
 
     def set_scheme(self, scheme):
@@ -360,14 +371,19 @@ class PyfficeURL(PyfficeUnit):
             self.username = username
         return self
 
+    def set_whois(self, whois):
+        """"""
+        self.whois = whois
+        return self
+
     def remove_www(self):
         """"""
-        if "www." == self.url[:4]:
-            self.no_www = self.url[4:]
-        if "http://www." == self.url[:11]:
-            self.no_www = f"http://{self.url[11:]}"
-        if "https://www." == self.url[:12]:
-            self.no_www = f"https://{self.url[12:]}"
+        if "www." == self.active_url[:4]:
+            self.no_www = self.active_url[4:]
+        if "http://www." == self.active_url[:11]:
+            self.no_www = f"http://{self.active_url[11:]}"
+        if "https://www." == self.active_url[:12]:
+            self.no_www = f"https://{self.active_url[12:]}"
         return self
 
     def to_dict(self):
@@ -390,9 +406,16 @@ class PyfficeURL(PyfficeUnit):
         this will be the first stemp towards TwoFDNS integration
         who provides data from the blockchain for TwoFDNS?
         """
-        if self.library.verify(self.url):
+        if self.library.verify(self.active_url):
             return True
         return False
+
+    def verify_full_address(self, url):
+        """
+        :return:
+        """
+
+        return url
 
     def _parse(self, url):
         """"""

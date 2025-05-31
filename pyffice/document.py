@@ -461,6 +461,11 @@ class PyfficeDocument(PyfficeUnit):
         self.set_file_type(document.get("file_type", None))
         return self
 
+    def update_document_time(self):
+        """"""
+        self.set_modon(self.time.get_current_datetime_str())
+        return self
+
     def save(self, path=None, syntax=None, encrypt_key=None):
         """"""
         if path is None:

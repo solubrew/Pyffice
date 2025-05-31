@@ -88,6 +88,20 @@ PyfficeWebProfile:
             creon_dttm:
             modon_dttm:
         document:
+            user_name:
+            group:
+            name_details:
+                full:
+                first:
+                middle:
+                last:
+                sur:
+                suffix:
+            nicknames:
+                0:
+                1:
+            channels:
+                -
 PyfficeWebProfileManager:
     document:
         home_url:

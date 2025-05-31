@@ -171,6 +171,11 @@ class PyfficeWebBrowser(PyfficeDocument):
             self.profile_manager = profile_manager
         return self
 
+    def set_refresh_time(self):
+        """"""
+        self.update_document_time()
+        return self
+
     def set_url_home(self, url):
         """"""
         home_url = PyfficeURL({"url": url})
@@ -185,22 +190,9 @@ class PyfficeWebBrowser(PyfficeDocument):
         doc = super().to_dict()
         doc["document"]["profile_manager"] = self.profile_manager.to_dict()
         doc["document"]["library"] = self.library.to_dict()
+        doc["document"]["active_url"] = self.active_url.to_dict()
         doc["document"]["home_url"] = self.home_url.to_dict()
         doc["document"]["pages"] = [x.to_dict() for x in self.pages]
-        return doc
-
-
-class PyfficeWebBrowserManager(PyfficeDocumentManager):
-    """"""
-
-    def __init__(self, cfg=None):
-        """"""
-        super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeWebBrowserManager")).override(cfg)
-
-    def to_dict(self):
-        """"""
-        doc = super().to_dict()
         return doc
 
 
@@ -404,6 +396,10 @@ class PyfficeWebProfileManager(PyfficeRolodex):
         self.del_contact(name)
         return self
 
+    def get_count(self):
+        """"""
+        return len(self.profiles)
+
     def get_profile(self, name):
         """"""
         self.active_profile = self.get_contact(name)
@@ -440,6 +436,8 @@ class PyfficeWebProfileManager(PyfficeRolodex):
     def to_dict(self):
         """"""
         doc = super().to_dict()
+        doc["document"]["profiles"] = [x.to_dict() for x in self.profiles]
+        doc["document"]["active_profile"] = self.active_profile.to_dict()
         return doc
 
 
