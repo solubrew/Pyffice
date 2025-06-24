@@ -10,22 +10,19 @@
 	security: seclvl2
 	<(WT)>: -32
 """
-from collections import deque
-from copy import deepcopy
-
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
 import datetime as dt
 import json as j
+from collections import deque
+from copy import deepcopy
 
 # ======================================3rd Party Library Modules=====================================================||
 
 # ======================================Solutions Brewer Library Modules==============================================||
 from condor import condor
 from ogma.logma import Logma
-from rsa.cli import encrypt
-from sqlalchemy.orm.attributes import set_attribute
 from squirl.orgnql import conql, yonql
 from subtrix.subtrix import uuid
 from pycurity.pytime import PyTime

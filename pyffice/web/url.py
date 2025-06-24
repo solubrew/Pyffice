@@ -429,19 +429,58 @@ class PyfficeURL(PyfficeUnit):
             domain, sub = self.get_domain_and_subdomain(self.netloc)
         except Exception as e:
             return self
-        self.set_domain(domain)
-        self.set_sub_domain(sub)
-        self.set_scheme(parsed.scheme)
-        self.set_hostname(parsed.hostname)
-        self.set_given_url(url)
-        self.set_port(parsed.port)
-        self.set_path(parsed.path)
-        self.set_query(parsed.query)
-        self.set_parameters(parsed.params)
-        self.set_fragment(parsed.fragment)
-        self.set_username(parsed.username)
-        self.set_password(parsed.password)
-        self.set_parsed(True)
+        try:
+            self.set_domain(domain)
+        except Exception as e:
+            logma.warning(e)
+        try:
+            self.set_sub_domain(sub)
+        except Exception as e:
+            logma.warning(e)
+        try:
+            self.set_scheme(parsed.scheme)
+        except Exception as e:
+            logma.warning(e)
+        try:
+            self.set_hostname(parsed.hostname)
+        except Exception as e:
+            logma.warning(e)
+        try:
+            self.set_given_url(url)
+        except Exception as e:
+            logma.warning(e)
+        try:
+            self.set_port(parsed.port)
+        except Exception as e:
+            logma.warning(e)
+        try:
+            self.set_path(parsed.path)
+        except Exception as e:
+            logma.warning(e)
+        try:
+            self.set_query(parsed.query)
+        except Exception as e:
+            logma.warning(e)
+        try:
+            self.set_parameters(parsed.params)
+        except Exception as e:
+            logma.warning(e)
+        try:
+            self.set_fragment(parsed.fragment)
+        except Exception as e:
+            logma.warning(e)
+        try:
+            self.set_username(parsed.username)
+        except Exception as e:
+            logma.warning(e)
+        try:
+            self.set_password(parsed.password)
+        except Exception as e:
+            logma.warning(e)
+        try:
+            self.set_parsed(True)
+        except Exception as e:
+            logma.warning(e)
         # furled = furl.furl(url) TODO not sure if this is needed urlparse may handle it all
         return self
 

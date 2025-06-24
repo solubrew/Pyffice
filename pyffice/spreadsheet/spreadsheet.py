@@ -478,7 +478,7 @@ def calcArabicNumerals(input_):
     prev_value = 0
     # Loop through the Roman numerals in reverse order
     for char in reversed(input_):
-        current_value = numerals[char]
+        current_value = int(numerals[char])
         if current_value < prev_value:
             arabic_value -= current_value
         else:

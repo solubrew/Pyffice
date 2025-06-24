@@ -27,6 +27,7 @@ from pycurity.pyvalid import validate_email_address, validate_phone_number, vali
 here = join(dirname(__file__), "")  # ||
 log = True
 logma = Logma(__name__)
+logma.off()
 
 # ====================================================================================================================||
 pxcfg = join(here, "_data_", "contacts.yaml")
@@ -249,7 +250,9 @@ class PyfficeContact(PyfficeDocument):
             self.suffix = names.get("suffix", "")
             self.salutation = names.get("salutation", "")
             self.nicknames = names.get("nicknames", [])
-            self.full_name = names.get("full", self.first_name +" "+ self.middle_name + " " + self.last_name + " " + self.surname)
+            self.full_name = names.get(
+                "full", self.first_name + " " + self.middle_name + " " + self.last_name + " " + self.surname
+            )
         return self
 
     def set_preferred_channel(self, channel):

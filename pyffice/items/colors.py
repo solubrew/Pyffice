@@ -85,7 +85,7 @@ class PyfficeColor(PyfficeUnit):
         self.lch = None
         self.xyz = None
         self.lms = None
-        self.color_name = None  # Optional name for the color
+        self.color_name = self.config.dikt.get("color_name", None)  # Optional name for the color
 
     def calculate_complementary_color(self):
         """
@@ -196,7 +196,7 @@ class PyfficeColor(PyfficeUnit):
         elif style == "hex":
             self.set_hex(color)
         elif style == "name":
-            self.set_name(color)
+            self.set_color_name(color)
         elif style == "rgba":
             self.set_rgba(color)
         elif style == "hsv":
@@ -278,7 +278,7 @@ class PyfficeColor(PyfficeUnit):
     def set_color_name(self, value):
         """"""
         self.color_name = value
-        if self.name in CSS4_COLORS:
+        if self.color_name in CSS4_COLORS:
             self.set_hex(CSS4_COLORS[self.color_name])
         return self
 
