@@ -73,6 +73,7 @@ class PyfficeUnit(object):
         self.tags = None
         self.time = PyTime()  # TODO build override to allow for time object to be common across application
         self.unit = None
+        self.version = 0
 
     def add_change(self, label, value, new_value, action="set", params=None):
         """"""
@@ -128,6 +129,11 @@ class PyfficeUnit(object):
     def get_tags(self):
         """"""
         return self.tags
+
+    def increment_version(self):
+        """"""
+        self.version += 1
+        return self
 
     def load_unit(self, unit=None):
         """"""
@@ -383,7 +389,7 @@ class PyfficeUnit(object):
         }
         if self.tags is not None:
             doc["meta_data"]["tags"] = [x.to_dict() for x in self.tags]
-        doc["unit"] = {}
+        doc["unit"] = {"content": self.content, "changes": self.changes[:30]}
         # doc["changes"] = self.changes[:30]
         return doc
 
@@ -419,7 +425,6 @@ class PyfficeDocument(PyfficeUnit):
         self.hash = None
         self.porter = None
         self.policy = None
-        self.version = None
         # self.lang = utils.invert_dict(self.config.dikt.get("imageLIST", None))
         # self.img = utils.invert_dict(self.config.dikt.get("textLIST", None))
 
@@ -548,9 +553,9 @@ class PyfficeDocument(PyfficeUnit):
     def to_dict(self):
         """"""
         doc = super().to_dict()
-        doc["uuid"] = self.did
         doc["file_path"] = self.file_path
-        doc["document"] = {}
+        doc["document"] = doc["unit"]
+        del doc["unit"]
         return doc
 
 

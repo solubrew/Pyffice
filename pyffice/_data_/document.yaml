@@ -1,24 +1,26 @@
 PyfficeDocument:
   document:
   template:
-    uuid:
+    did:
     name:
     description:
+    path:
+    location:
+    syntax:
+    encoding:
+    tags:
+    context:
+    hash:
     metadata:
-        author:
-        editors:
-        path:
-        location:
-        syntax:
-        encoding:
-        tags:
-        context:
-        hash:
-        policy_fk:
-        rating:
-        creon_dttm:
-        modon_dttm:
+      author:
+      editors:
+      document_type:
+      creon_dttm:
+      modon_dttm:
     document:
+      content:
+      changes:
+      compatibility:
 PyfficeDocumentManager:
   template:
     uuid:
@@ -45,16 +47,16 @@ PyfficeUnit:
     did:
     name:
     description:
-    meta_data:
+    path:
+    location:
+    syntax:
+    encoding:
+    tags:
+    context:
+    hash:
+    metadata:
         author:
-        context:
         editors:
-        encoding:
-        hash:
-        location:
-        path:
-        syntax:
-        tags:
-        creon:
-        modon:
+        creon_dttm:
+        modon_dttm:
     unit:

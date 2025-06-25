@@ -365,6 +365,7 @@ class PyfficeScript(PyfficeDocument):
     def to_dict(self):
         """"""
         doc = super().to_dict()
+        doc["document"]["document_type"] = "script"
         doc["document"]["pages"] = {i: text.to_dict for i, text in self.pages.items()}
         doc["document"]["context"] = self.text.to_dict()["unit"]["value"]
         logma.info(f"Document {doc} to dict")

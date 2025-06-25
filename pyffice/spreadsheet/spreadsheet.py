@@ -466,6 +466,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         doc = super().to_dict()
         doc["document"]["compatibility"] = self.compatibility
         doc["document"]["documents"] = self.sheets
+        doc["document"]["document_type"] = "pyffice_matrix"
         return doc
 
 
