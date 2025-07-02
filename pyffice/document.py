@@ -77,7 +77,7 @@ class PyfficeUnit(object):
 
     def add_change(self, label, value, new_value, action="set", params=None):
         """"""
-        logma.info(f"Add Change {label} {action}")
+        # logma.info(f"Add Change {label} {action}")
         change_limit = CHANGE_LIMIT if self.change_limit is None else self.change_limit
         if self.changes is None:
             self.changes = []
@@ -145,20 +145,22 @@ class PyfficeUnit(object):
         self.time = PyTime()
         self.set_changes(unit.get("changes", None))
         self.set_author(unit.get("meta_data", {}).get("author", None))
-        self.set_context(unit.get("meta_data", {}).get("context", None))
+        self.set_context(unit.get("context", None))
         self.set_creon(unit.get("meta_data", {}).get("creon", None))
         self.set_description(unit.get("description", None))
         self.set_did(unit.get("did", None))
         self.set_editors(unit.get("meta_data", {}).get("editors", None))
-        self.set_encoding(unit.get("meta_data", {}).get("encoding", None))
-        self.set_hash(unit.get("meta_data", {}).get("hash", None))
+        self.set_encoding(unit.get("encoding", None))
+        self.set_hash(unit.get("hash", None))
         self.set_saved(True)
-        self.set_syntax(unit.get("meta_data", {}).get("syntax", None))
-        self.set_location(unit.get("meta_data", {}).get("location", None))
+        self.set_syntax(unit.get("syntax", None))
+        self.set_location(unit.get("location", None))
         self.set_modon(unit.get("meta_data", {}).get("modon", None))
         self.set_name(unit.get("name", None))
-        self.set_path(unit.get("meta_data", {}).get("path", None))
-        self.set_tags(unit.get("meta_data", {}).get("tags", None))
+        self.set_path(unit.get("path", None))
+        self.set_tags(unit.get("tags", None))
+        logma.info(f"Version {unit.get('version', None)}")
+        self.set_version(unit.get("version", None))
         logma.info(f"Load Unit {unit}")
         self.redos = []
         return self
@@ -364,6 +366,15 @@ class PyfficeUnit(object):
             self.tags = tags
         return self
 
+    def set_version(self, version):
+        """"""
+        if version is None:
+            version = 0
+        if version != self.version:
+            self.add_change("version", self.version, version)
+            self.version = version
+        return self
+
     def to_dict(self):
         """Each Docuement Subclass will need to implement this method
         add creation and mod dates
@@ -454,7 +465,8 @@ class PyfficeDocument(PyfficeUnit):
                 document = {}
         if isinstance(document, str):
             document = j.loads(document)
-        super().load_unit(document)
+        logma.info(f"Load Unit {document}")
+        self.load_unit(document)
         # self.set_cache(document.get("cache", None))
         self.set_compatibility(document.get("compatibility", "pyffice"))
         self.set_document(document.get("document", {}))
@@ -474,6 +486,7 @@ class PyfficeDocument(PyfficeUnit):
             path = self.file_path
         if syntax is None:
             syntax = self.syntax
+        self.increment_version()
         if syntax is None:
             self.save_pyffice(path, syntax, encrypt_key)
             self.is_saved = True

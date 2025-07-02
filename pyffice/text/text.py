@@ -328,7 +328,7 @@ class PyfficeScript(PyfficeDocument):
             elif self.file_path.endswith((".yaml", ".yml")):
                 format_ = "yaml"
             else:
-                format_ = "plaintext"
+                format_ = "plain-text"
         if format_ != self.file_format:
             self.add_change("file_format", self.file_format, format_)
             self.file_format = format_
@@ -366,7 +366,11 @@ class PyfficeScript(PyfficeDocument):
         """"""
         doc = super().to_dict()
         doc["document"]["document_type"] = "script"
-        doc["document"]["pages"] = {i: text.to_dict for i, text in self.pages.items()}
+        doc["document"]["pages"] = {}
+        for i, text in self.pages.items():
+            if isinstance(text, PyfficeText):
+                doc["document"]["pages"][i] = text.to_dict
+        #doc["document"]["pages"] = {i: text.to_dict for i, text in self.pages.items() if isinstance(text, PyfficeText) }
         doc["document"]["context"] = self.text.to_dict()["unit"]["value"]
         logma.info(f"Document {doc} to dict")
         return doc

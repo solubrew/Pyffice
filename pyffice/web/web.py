@@ -438,7 +438,8 @@ class PyfficeWebProfileManager(PyfficeRolodex):
         """"""
         doc = super().to_dict()
         doc["document"]["profiles"] = [x.to_dict() for x in self.profiles]
-        doc["document"]["active_profile"] = self.active_profile.to_dict()
+        if self.active_profile is not None:
+            doc["document"]["active_profile"] = self.active_profile.to_dict()
         return doc
 
 
