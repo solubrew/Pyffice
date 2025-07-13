@@ -247,11 +247,17 @@ class PyfficeScript(PyfficeDocument):
             document = self.config.dikt.get("document", {})
             if document is None:
                 document = {}
+        logma.info(f"Document {document}")
+        logma.info(f"Document {document.get("data", {})}")
+        logma.info(f"Document {type(document.get("data", {}))}")
         super().load_document(document)
+        logma.info(f"Content {self.content}")
+        logma.info(f"Data {document.get("data", {})}")
+        logma.info(f"Content {document.get("data", {}).get('content', None)}")
         self.set_file_format_options()
-        self.set_pages(document.get("pages", {}))
-        self.parse_content(document.get("content", ""))
-        self.set_text(document.get("content", ""))
+        self.set_pages(document.get("data", {}).get("pages", {}))
+        self.parse_content(document.get("data", {}).get("content", ""))
+        self.set_text(document.get("data", {}).get("content", {}))
         self.set_file_format(document.get("file_format", None))
         return self
 
@@ -266,6 +272,7 @@ class PyfficeScript(PyfficeDocument):
             if file_.endswith(file_format):
                 self.syntax = self.file_formats[file_format]
                 if file_format in (".docx", ".docm", ".dotx"):
+                    self.set_compatibility("word")
                     self.open_file_doc()
                     return self
                 else:
@@ -365,13 +372,11 @@ class PyfficeScript(PyfficeDocument):
     def to_dict(self):
         """"""
         doc = super().to_dict()
-        doc["document"]["document_type"] = "script"
-        doc["document"]["pages"] = {}
+        doc["data"]["document_type"] = "script"
+        doc["data"]["pages"] = {}
         for i, text in self.pages.items():
             if isinstance(text, PyfficeText):
-                doc["document"]["pages"][i] = text.to_dict
-        #doc["document"]["pages"] = {i: text.to_dict for i, text in self.pages.items() if isinstance(text, PyfficeText) }
-        doc["document"]["context"] = self.text.to_dict()["unit"]["value"]
+                doc["data"]["pages"][i] = text.to_dict()
         logma.info(f"Document {doc} to dict")
         return doc
 

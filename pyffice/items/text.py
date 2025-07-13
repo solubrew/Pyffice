@@ -57,13 +57,16 @@ class PyfficeText(PyfficeUnit):
         logma.info(f"Load Unit {unit}")
         if unit is None:
             unit = self.config.dikt.get("unit", {})
-        logma.info("Load PyfficeText")
+        logma.info(f"Load PyfficeText {unit}")
         super().load_unit(unit)
         self.set_alignment(unit.get("alignment", self.config.dikt.get("alignment", {})))
         self.set_data_format(unit.get("data_format", self.config.dikt.get("data_format", {})))
         self.set_font(unit.get("font", self.config.dikt.get("font", {})))
         self.set_html(unit.get("html", self.config.dikt.get("html", {})))
-        self.set_text(unit.get("value", self.config.dikt.get("value", "")))
+        text = unit.get("unit", {}).get("value", None)
+        if text is None:
+            text = unit.get("value", "")
+        self.set_text(text)
         return self
 
     def set_alignment(self, horizontal=None, vertical=None):
@@ -101,7 +104,7 @@ class PyfficeText(PyfficeUnit):
             "superscript": font.get("superscript", self.config.dikt["font"].get("superscript", None)),
         }
         if font != self.font:
-            logma.info(f"Set Font: {font}")
+            # logma.info(f"Set Font: {font}")
             self.add_change("font", self.font, font)
             self.font = font if font is not None else self.config.dikt.get("font", {})
         return self

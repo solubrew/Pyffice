@@ -234,7 +234,7 @@ class PyfficePromptsManager(PyfficeDocumentManager):
     def to_dict(self):
         """"""
         doc = super().to_dict()
-        doc["documents"] = {"services": self.services, "prompts": self.prompts}
+        doc["documents"] = {"services": self.services, "prompts": [x.to_dict() for x in self.prompts]}
         return doc
 
 

@@ -12,7 +12,7 @@
 """
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-from os.path import abspath, dirname, join
+from os.path import abspath, dirname, join, exists
 import datetime as dt
 import io
 import base64
@@ -55,6 +55,7 @@ class PyfficePDF(PyfficeDocument):
         self.doc_type = "pdf"
         self.content = None
         self.reader = None
+        self.storage = "external"
         self.writer = None
 
     def add_page(self, new_page=None):
@@ -138,6 +139,9 @@ class PyfficePDF(PyfficeDocument):
         self.writer.encrypt(user_password=user_password, owner_password=owner_password)
         return self
 
+    def get_binary(self):
+        """"""
+
     def get_page_size(self, page_n=0):
         """
         Get the size (width and height) of a specific page.
@@ -173,11 +177,7 @@ class PyfficePDF(PyfficeDocument):
             if document is None:
                 document = {}
         super().load_document(document)
-        # self.set_file_path(self.config.dikt.get("file_path", None))
-        self.set_content(document.get("content", None))
-        if self.content is not None:
-            stream = io.BytesIO(self.content)
-            self.open_file(stream)
+        self.set_file_path(document.get("data", {}).get("path", None))
         return self
 
     def load_pdf_pages(self):
@@ -185,22 +185,18 @@ class PyfficePDF(PyfficeDocument):
         for page_num in range(len(self.reader)):
             page = self.reader.load_page(page_num)  # Load page securely
             pix = page.get_pixmap()  # Render the page into a pixmap
-            # # Convert the pixmap to a QImage and display
-            # image = pyqt.QImage(pix.samples, pix.width, pix.height, pix.stride, QImage.Format_RGB888)
-            # label = pyqt.QLabel(self)
-            # label.setPixmap(pyqt.QPixmap.fromImage(image))
-            # self.layout.addWidget(label)
         return self
 
     def open_file(self, file_=None):
         """"""
         if file_ is None:
             file_ = self.file_path
-        self.set_file_path(file_)
-        if self.is_safest:
-            self.open_file_no_javascript(file_)
-        else:  # this ensures that PDF is opened without running any javascript
-            self.open_file_full_feature(file_)
+        if exists(file_):
+            self.set_file_path(file_)
+            if self.is_safest:
+                self.open_file_no_javascript(file_)
+            else:  # this ensures that PDF is opened without running any javascript
+                self.open_file_full_feature(file_)
         return self
 
     def open_file_full_feature(self, file_):
@@ -214,16 +210,6 @@ class PyfficePDF(PyfficeDocument):
         self.load_pdf_pages()
         return self
 
-    def read(self):
-        """
-        Read all pages of the PDF and print their text content.
-
-        :return: self
-        """
-        for page_n, page in enumerate(self.reader.pages):
-            print(f"Page {page_n + 1}:")
-            print(page.extract_text())
-        return self
 
     def remove_page(self, page_n):
         """
@@ -238,20 +224,28 @@ class PyfficePDF(PyfficeDocument):
                 self.writer.add_page(page)
         return self
 
-    def save(self, output_path):
+    def save(self, path=None, syntax=None, encrypt_key=None):
         """
         Save changes to a new file.
 
         :param output_path: Path to save the modified PDF.
         :return: self
         """
-        self.initialize_writer()
-        with open(output_path, "wb") as f:
-            self.writer.write(f)
+        super().save(path, syntax, encrypt_key)
         return self
 
     def set_content(self, content):
         """"""
+        logma.info(f"Content {content}")
+        if self.location is None:
+            self.set_location(None)
+        if self.location == "internal":
+            content = self._get_bytes()
+        elif self.location == "external":
+            self.set_file_path(content.get("file_path", None))
+            content = {"file_path": self.file_path}
+        else:
+            raise Exception(f"Unknown Location {self.location}")
         if content != self.content:
             self.add_change("content", self.content, content)
             self.content = content
@@ -260,26 +254,17 @@ class PyfficePDF(PyfficeDocument):
     def to_dict(self):
         """"""
         doc = super().to_dict()
-        doc["document"]["path"] = self.file_path
-        doc["document"]["content"] = self._get_bytes()
+        doc["data"]["path"] = self.file_path
+        doc["data"]["content"] = self.content
         return doc
 
     def _get_bytes(self):
         """"""
-        with open(self.file_path, "rb") as pdf_file:
-            pdf_bytes = pdf_file.read()
-        return pdf_bytes
-
-    # def _get_bytes(self):
-    #     """"""
-    #     self.initialize_writer()
-    #     for page in self.reader.pages():
-    #         self.writer.add_page(page)
-    #     bytes_stream = io.BytesIO()
-    #     # self.writer.write(bytes_stream)
-    #     logma.info(f"PDF bytes saved to {bytes_stream.getvalue()}")
-    #     return bytes_stream.getvalue()
-
+        if self.file_path is not None and self.file_path != "":
+            with open(self.file_path, "rb") as pdf_file:
+                pdf_bytes = pdf_file.read()
+            return pdf_bytes
+        return None
 
 # ====================================================================================================================||
 

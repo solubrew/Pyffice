@@ -12,7 +12,7 @@
 """
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-from os.path import abspath, dirname, join
+from os.path import abspath, dirname, join, exists
 import datetime as dt
 import json as j
 from collections import deque
@@ -28,7 +28,6 @@ from subtrix.subtrix import uuid
 from pycurity.pytime import PyTime
 from pyffice.tags.tags import PyfficeTag
 from pycurity.pyhash import text_hashing_function
-from pycurity.pyhash import decode64
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -83,6 +82,10 @@ class PyfficeUnit(object):
             self.changes = []
         if isinstance(value, dict):
             value = deepcopy(value)
+        elif isinstance(value, PyfficeUnit):
+            value = value.to_dict()
+        if isinstance(new_value, PyfficeUnit):
+            new_value = new_value.to_dict()
         if action == "add":
             self.changes.append({"action": action, "label": label, "value": deepcopy(value), "new_value": new_value})
         elif action == "set":
@@ -159,8 +162,7 @@ class PyfficeUnit(object):
         self.set_name(unit.get("name", None))
         self.set_path(unit.get("path", None))
         self.set_tags(unit.get("tags", None))
-        logma.info(f"Version {unit.get('version', None)}")
-        self.set_version(unit.get("version", None))
+
         logma.info(f"Load Unit {unit}")
         self.redos = []
         return self
@@ -285,7 +287,7 @@ class PyfficeUnit(object):
     def set_location(self, location):
         """"""
         if location is None:
-            location = ""
+            location = "external"
         if location != self.location:
             self.add_change("location", self.location, location)
             self.location = location
@@ -400,8 +402,7 @@ class PyfficeUnit(object):
         }
         if self.tags is not None:
             doc["meta_data"]["tags"] = [x.to_dict() for x in self.tags]
-        doc["unit"] = {"content": self.content, "changes": self.changes[:30]}
-        # doc["changes"] = self.changes[:30]
+        doc["unit"] = {"content": self.content}
         return doc
 
     def to_html(self):
@@ -429,7 +430,7 @@ class PyfficeDocument(PyfficeUnit):
         self.config.override(condor.Instruct(pxcfg).select("PyfficeDocument")).override(cfg)
         self.cache = None
         self.compatibility = None
-        self.document = None
+        self.data = None
         self.doc_types = None
         self.file_path = None
         self.file_type = None
@@ -465,14 +466,15 @@ class PyfficeDocument(PyfficeUnit):
                 document = {}
         if isinstance(document, str):
             document = j.loads(document)
-        logma.info(f"Load Unit {document}")
         self.load_unit(document)
         # self.set_cache(document.get("cache", None))
+        logma.info(f"Load Document {document.get("data", None)}")
+        self.set_content(document.get("data", {}).get("content", {}))
         self.set_compatibility(document.get("compatibility", "pyffice"))
-        self.set_document(document.get("document", {}))
-        logma.info(f"File Path {document.get('file_path', None)}")
+        self.set_data(document.get("data", {}))
         self.set_file_path(document.get("file_path", None))
         self.set_file_type(document.get("file_type", None))
+        self.set_version(document.get("version", None))
         return self
 
     def update_document_time(self):
@@ -487,9 +489,9 @@ class PyfficeDocument(PyfficeUnit):
         if syntax is None:
             syntax = self.syntax
         self.increment_version()
-        if syntax is None:
-            self.save_pyffice(path, syntax, encrypt_key)
-            self.is_saved = True
+        # if syntax is None:
+        #     self.save_pyffice(path, syntax, encrypt_key)
+        #     self.is_saved = True
         return self
 
     def save_copy(self, path, syntax=None, encrypt_key=None):
@@ -538,22 +540,25 @@ class PyfficeDocument(PyfficeUnit):
             self.compatibility = compatibility
         return self
 
-    def set_document(self, document):
+    def set_data(self, data):
         """"""
-        if document is None:
-            document = {}
-        if isinstance(document, str):
-            document = j.loads(document)
-        self.document = document
+        if data is None:
+            data = {}
+        if isinstance(data, str):
+            data = j.loads(data)
+        self.data = data
         return self
 
     def set_file_path(self, file_path):
         """"""
         if file_path is None:
             file_path = self.config.dikt.get("file_path", "")
-        if file_path != self.file_path:
-            self.add_change("file_path", self.file_path, file_path)
-            self.file_path = file_path
+        file_path = str(file_path)
+        if exists(file_path):
+            if file_path != self.file_path:
+                self.add_change("file_path", self.file_path, file_path)
+                self.file_path = file_path
+                self.set_location("external")
         return self
 
     def set_file_type(self, file_type):
@@ -567,7 +572,7 @@ class PyfficeDocument(PyfficeUnit):
         """"""
         doc = super().to_dict()
         doc["file_path"] = self.file_path
-        doc["document"] = doc["unit"]
+        doc["data"] = deepcopy(doc["unit"])
         del doc["unit"]
         return doc
 
@@ -643,11 +648,11 @@ class PyfficeDocumentManager(PyfficeDocument):
     def to_dict(self):
         """"""
         doc = super().to_dict()
-        doc["document"]["documents"] = []
+        doc["data"]["documents"] = []
         if self.documents is None:
             return doc
         for name, document in self.documents.items():
-            doc["document"]["documents"].append({name: document.to_dict()})
+            doc["data"]["documents"].append({name: document.to_dict()})
         return doc
 
 

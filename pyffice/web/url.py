@@ -31,6 +31,7 @@ from pycurity.pyhash import text_hashing_function
 here = join(dirname(__file__), "")  # ||
 log = True
 logma = Logma(__name__)
+# logma.off()
 
 # ====================================================================================================================||
 pxcfg = join(here, "_data_", "url.yaml")
@@ -147,13 +148,24 @@ class PyfficeURL(PyfficeUnit):
         """"""
         return self.found_url != self.given_url
 
+    def is_valid(self):
+        """"""
+        if self.active_url is not None:
+            if self.get_domain():
+                return True
+        return False
+
     def load_unit(self, unit=None):
         """"""
         if unit is None:
             unit = self.config.dikt.get("unit", {})
+        logma.info(f"Unit {unit}")
         super().load_unit(unit)
-        self.set_given_url(unit.get("given_url", unit.get("url", None)))
-        self.set_active_url(unit.get("active_url", unit.get("url", None)))
+        self.set_given_url(unit.get("original_path", unit.get("url", self.default_url)))
+        self.set_active_url(self.given_url)
+        active_url = unit.get("active_url", unit.get("url", None))
+        if active_url is not None:
+            self.set_active_url(active_url)
         self.set_block_ads(unit.get("block_ads", False))
         self.set_block_adult(unit.get("block_adult", True))
         self.set_default_url(unit.get("default_url", "https://www.duckduckgo.com/search?q="))
@@ -192,8 +204,8 @@ class PyfficeURL(PyfficeUnit):
         if url != self.active_url:
             self.add_change("active_url", self.active_url, url)
             self.active_url = url
-
             self.set_secure()
+        logma.info(f"Active Url {self.active_url}")
         return self
 
     def set_block_ads(self, block_ads):
@@ -246,9 +258,11 @@ class PyfficeURL(PyfficeUnit):
 
     def set_given_url(self, url=None):
         """"""
+        logma.inspect_caller()
         if url != self.given_url:
             self.add_change("given_url", self.given_url, url)
             self.given_url = url
+        logma.info(f"Given URL {self.given_url}")
         return self
 
     def set_hostname(self, hostname):
@@ -391,6 +405,7 @@ class PyfficeURL(PyfficeUnit):
         doc = super().to_dict()
         doc["unit"] = {
             "original_path": self.given_url,
+            "active_url": self.active_url,
             "trust_level": self.level_of_trust,
             "qualified_path": self.found_url,
             "domain": self.domain,
@@ -445,10 +460,10 @@ class PyfficeURL(PyfficeUnit):
             self.set_hostname(parsed.hostname)
         except Exception as e:
             logma.warning(e)
-        try:
-            self.set_given_url(url)
-        except Exception as e:
-            logma.warning(e)
+        # try:
+        #     self.set_given_url(url)
+        # except Exception as e:
+        #     logma.warning(e)
         try:
             self.set_port(parsed.port)
         except Exception as e:

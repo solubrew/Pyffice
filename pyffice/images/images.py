@@ -19,6 +19,8 @@ import os
 import re
 from copy import deepcopy
 from io import BytesIO
+import json as j
+import base64
 
 # ======================================3rd Party Library Modules=====================================================||
 from PIL import Image, ImageDraw, ImageFont, ImageOps, ImageFilter
@@ -200,8 +202,8 @@ class PyfficeImage(PyfficeDocument):
         if self.palette is None:
             cfg = {}
             self.palette = PyfficeColorPalette(cfg)
-        if self.image is None:
-            self.load_image(self.path)
+        # if self.image is None:
+        # self.load_image(self.path)
         # if self.image.mode == "P":  # Check if the image contains a palette
         #     return self.image.getpalette()
         return None
@@ -218,46 +220,16 @@ class PyfficeImage(PyfficeDocument):
             document = self.config.dikt.get("document", {})
             if document is None:
                 document = {}
+        logma.info(f"Load Document {document}")
         super().load_document(document)
-        # self.set_file_path()
-        self.set_layers(document.get("layers", None))
         self.get_image_palette()
         return self
 
-    def load_image(self, file_path, how="file"):
-        """"""
-        if how == "file":
-            image = self.load_image_file(file_path)
-        elif how == "bytes":
-            image = self.load_image_encoded(file_path)
-        else:
-            image = None
-        if image != self.image:
-            self.add_change("image", self.image, image)
-            self.image = image
-        return self
-
-    def load_image_file(self, file_path):
-        """"""
-        if not exists(file_path):
-            file_path = self.file_path
-        image = None
-        if isinstance(file_path, (str, os.PathLike)):
-            if exists(file_path):
-                image = Image.open(file_path)
-        return image
-
-    def load_image_encoded(self, text):
-        """"""
-        image = decode64(text)
-        image_bytes = BytesIO(image)
-        image = Image.open(image_bytes)
-        return image
-
     def open_file(self, file=None, if_text_only=True):
         """"""
-        self.set_file_path(file)
-        self.set_image(file)
+        self.set_syntax("file")
+        if exists(file):
+            self.set_file_path(file)
         return self
 
     def remove_background(self):
@@ -270,6 +242,16 @@ class PyfficeImage(PyfficeDocument):
 
     def set_content(self, content):
         """"""
+        logma.info(f"Content {content}")
+        if self.location is None:
+            self.set_location(None)
+        if self.location == "internal":
+            content = None
+        elif self.location == "external":
+            self.set_file_path(content.get("file_path", None))
+            content = {"file_path": self.file_path}
+        else:
+            raise Exception(f"Unknown Location {self.location}")
         if content != self.content:
             self.add_change("content", self.content, content)
             self.content = content
@@ -285,41 +267,6 @@ class PyfficeImage(PyfficeDocument):
         if self.image is None:
             return self
         self.image = self.image.crop(box)
-        return self
-
-    def set_image(self, file_path):
-        """"""
-        if file_path is None:
-            file_path = self.file_path
-        image = None
-        if exists(file_path):
-            if isinstance(file_path, (str, os.PathLike)):
-                if exists(file_path):
-                    image = Image.open(file_path)
-            if image != self.image:
-                self.add_change("image", self.image, image)
-                self.image = image
-                self.content = encode64(image.tobytes())
-        return self
-
-    def set_layers(self, layers=None, method="assign"):
-        """
-        Merge all layers with the base image.
-        :return: self
-        """
-        if layers is None:
-            layers = []
-        if layers != self.layers:
-            self.add_change("layers", self.layers, layers)
-            self.layers = layers
-        for layer in self.layers:
-            self.set_objects(layers[layer].get("objects", None))
-        if layers is None or method == "flatten":
-            layers = deepcopy(self.layers)
-            if method == "flatten":
-                self.layers = {"L0": {"objects": []}}
-                for layer in layers:
-                    self.layers["L0"]["objects"].append(layer)
         return self
 
     def set_objects(self, objects):
@@ -354,22 +301,8 @@ class PyfficeImage(PyfficeDocument):
     def to_dict(self):
         """"""
         doc = super().to_dict()
-        doc["document"] = {}
-        cfg = {"columns": ["Name", "Hex", "Usage"]}
-        if self.layers is None:
-            doc["document"] = {
-                "L0": {"file_path": self.file_path, "content": self.content, "color_palette": self.palette.to_table()}
-            }
-        for layer in self.layers:
-            doc["document"][layer]["file_path"] = self.file_path
-            doc["document"][layer]["content"] = self.content
-            doc["document"][layer]["color_palette"] = self.palette.to_table(cfg)
-            doc["document"][layer]["objects"] = {
-                "images": self.images,
-                "shapes": self.shapes,
-                "texts": [x.to_dict() for x in self.texts],
-            }
-
+        doc["data"]["document_type"] = "image"
+        doc["data"]["path"] = self.file_path
         return doc
 
 

@@ -25,6 +25,7 @@ from squirl.orgnql import conql, yonql
 from pyffice.analytics.sources import PyfficeDataSet, PyfficeDataView, PyfficeSources
 from pyffice.calendars.calendars import PyfficeCalendar
 from pyffice.charts.charts import PyfficeChart
+from pyffice.config.config import PyfficeApplicationConfig
 from pyffice.config.ports import PyfficePortCherryTree
 from pyffice.contacts.contacts import PyfficeRolodex
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
@@ -102,7 +103,6 @@ class PyfficeCodex(PyfficeDocumentManager):
         if cfg is None:
             cfg = {}
         cfg["codex"] = self
-        cfg["document"] = {}
         browser = PyfficeWebBrowser(cfg)
         # browser.profile_manager.add_profiles(self.contacts.get_group_by_name("profiles"))
         self.documents[browser.did] = browser
@@ -182,12 +182,18 @@ class PyfficeCodex(PyfficeDocumentManager):
 
     def init_note(self, cfg=None):
         """"""
+        if cfg is None:
+            cfg = {}
+        cfg["codex"] = self
         note = PyfficeScript(cfg)
         self.documents[note.did] = note
         return note
 
     def init_notebook(self):
         """"""
+        if cfg is None:
+            cfg = {}
+        cfg["codex"] = self
         notebook = PyfficeNotebook()
         self.documents[notebook.did] = notebook
         return notebook
@@ -218,6 +224,14 @@ class PyfficeCodex(PyfficeDocumentManager):
         script = PyfficeScript(cfg)
         self.documents[script.did] = script
         return script
+
+    def init_settings(self, cfg):
+        """"""
+        if cfg is None:
+            cfg = {}
+        settings = PyfficeApplicationConfig(cfg)
+        self.documents[settings.did] = settings
+        return settings
 
     def init_sketch(self, cfg=None):
         """"""

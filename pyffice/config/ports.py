@@ -21,8 +21,9 @@ import json as j
 import xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
 import nbformat
-
+import html
 from pyffice.items.items import PyfficeTable
+from pyffice.web.web import PyfficeWebBrowser
 
 try:
     import dia
@@ -41,13 +42,14 @@ from pyffice.images.images import PyfficeImage
 from pyffice.web.url import PyfficeURL
 from pyffice.items.text import PyfficeText
 from pycurity.pymatch import extract_urls
+from pycurity.pyhash import decode64
 from squirl.objnql import tblonql
 from squirl.orgnql import yonql
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 logma = Logma(__name__)
-logma.off()
+# logma.off()
 
 # ====================================================================================================================||
 pxcfg = join(here, "_data_", ".yaml")
@@ -131,8 +133,14 @@ class PyfficePortCherryTree(PyfficePort):
         for image in images:
             if image.attrib.get("filename", "") == "__ct_special.tex":
                 continue
-            cfg = {"document": {"LAY0": {"OBJ0": {"content": image.text}}}}
-            image_ = PyfficeImage(cfg)
+            logma.info(f"Image {image.text}")
+            cfg = {
+                "data": {
+                    "content": {"L0": {"bytes": image.text}},
+                },
+                "location": "internal",
+            }
+            image_ = PyfficeImage({"document": cfg})
             image_.load_document()
             self.images.append(image_)
         return self
@@ -166,8 +174,10 @@ class PyfficePortCherryTree(PyfficePort):
         script = None
         if node.text is not None:
             full_text, pages = self.parse_text(node)
-            cfg = {"pages": pages}
-            script = PyfficeScript(cfg)
+            logma.info(f"Full Text {full_text}")
+            logma.info(f"Pages {pages}")
+            cfg = {"data": {"pages": pages, "content": full_text}}
+            script = PyfficeScript({"document": cfg})
             script.load_document()
         logma.info(f"Full Text {full_text}")
         return full_text, script
@@ -216,17 +226,25 @@ class PyfficePortCherryTree(PyfficePort):
                 link = link.replace("}", "").replace("{", "").strip()
                 if not link.startswith("http"):
                     continue
+                DOWNLOAD_EXTENSIONS = [".zip", ".exe", ".pdf", ".jpg", ".png", ".mp4"]
+                url_string = link  # If this is a QUrl object
+                for ext in DOWNLOAD_EXTENSIONS:
+                    if url_string.endswith(ext):
+                        continue
                 # try:
                 # browser = PyfficeWebBrowser({"url": link}) Not sure how this should be organized at this level
                 # due to the PyfficeWebBrowser-PyfficeWebPage-PyfficeURL hiearchy
-                link = PyfficeURL({"unit": {"url": link}})
-                link.load_unit()
+                cfg = {"document": {"data": {"original_path": link}}}
+                link = PyfficeWebBrowser(cfg)
+                link.load_document()
                 # except Exception as e:
                 #     logma.info(f"Link: {link}")
                 #     continue
-                if link.domain is None:
+                logma.info(f"Link {link.to_dict()}")
+                logma.info(f"Active URL {link.active_url.to_dict()}")
+                if link.active_url.domain is None:
                     continue
-                logma.info(f"Active Link {link.active_url} {link.domain}")
+                logma.info(f"Active Link {link.active_url} {link.active_url.domain}")
                 self.links.append(link)
         return self
 
@@ -244,17 +262,21 @@ class PyfficePortCherryTree(PyfficePort):
         text, script = self.extract_text(node)
         if text is None:
             text = ""
+        if script is None:
+            cfg = {}
+            script = PyfficeScript(cfg)
+            script.load_document()
         logma.info(f"text {text}")
-        script_text = ""
-        script_dict = "{}"
+        logma.info(f"Content {script.content}")
+        # script_text = ""
+        script_dict = {}
         if script is not None:
-            script_text = script.to_dict()["document"]["context"]
             script_dict = script.to_dict()
+            # script_text = script_dict["data"]["context"]
         self.parse_links(text)
         self.extract_images(node)
         # self.codeboxes = self.extract_codeboxes(node)
         # self.tables = self.extract_tables(node)
-
         # is this needed?
         node_ = {
             "name": name,
@@ -273,8 +295,7 @@ class PyfficePortCherryTree(PyfficePort):
                     "prog_lang": node.attrib.get("prog_lang", ""),
                     "name": name,
                     "unique_id": tab_id,
-                    "rich_text": text,
-                    "script": script_dict,
+                    "rich_text": script_dict,
                     "type": "script",
                     "creation_dttm": node.attrib.get("ts_creation", self.time.store_now()),
                     "last_save_dttm": node.attrib.get("ts_lastsave", self.time.store_now()),
@@ -284,8 +305,8 @@ class PyfficePortCherryTree(PyfficePort):
         logma.info(f"Links: {self.links}")
         if self.links is not None:
             for i, link in enumerate(self.links):
-                logma.info(f"Link: {link.active_url} {link.domain}")
-                name = link.domain[:30]
+                logma.info(f"Link: {link.active_url} {link.active_url.domain}")
+                name = link.active_url.domain[:30]
                 if name is None or name == "":
                     name = tab_id[len(tab_id) - 5 :] + f"_{i}"
                 node_["tabs"].append(
@@ -293,7 +314,7 @@ class PyfficePortCherryTree(PyfficePort):
                         "tags": "",
                         "readonly": "",
                         "prog_lang": "",
-                        "name": link.domain[:30],
+                        "name": link.active_url.domain[:30],
                         "unique_id": link.did,
                         "type": "browser",
                         "rich_text": link.to_dict(),
@@ -307,10 +328,10 @@ class PyfficePortCherryTree(PyfficePort):
                 node_["tabs"].append(
                     {
                         "tags": "",
-                        "widget": "widgets.documents.media.images.NchantdOfficeImage",
+                        # "widget": "widgets.documents.media.images.NchantdOfficeImage",
                         "readonly": "",
                         "prog_lang": "",
-                        "name": image.name[:30],
+                        "name": image.did[-8:],
                         "unique_id": image.did,
                         "type": "image",
                         "rich_text": image.to_dict(),
@@ -318,12 +339,13 @@ class PyfficePortCherryTree(PyfficePort):
                         "last_save_timestamp": self.time.store_now(),
                     }
                 )
+                logma.info(f"Image: {image.to_dict()}")
         if self.tables is not None:
             for table in self.tables:
                 node_["tabs"].append(
                     {
                         "tags": "",
-                        "widget": "widgets.documents.workbooks.matricies.NchantdOfficeMatrix",
+                        # "widget": "widgets.documents.workbooks.matricies.NchantdOfficeMatrix",
                         "readonly": "",
                         "prog_lang": "",
                         "name": table.name[:30],
@@ -340,7 +362,7 @@ class PyfficePortCherryTree(PyfficePort):
                 node_["tabs"].append(
                     {
                         "tags": "",
-                        "widget": "widgets.documents.media.scripts.NchantdOfficeScript",
+                        # "widget": "widgets.documents.media.scripts.NchantdOfficeScript",
                         "readonly": "",
                         "prog_lang": codebox.syntax,
                         "name": codebox.name[:30],
@@ -371,18 +393,23 @@ class PyfficePortCherryTree(PyfficePort):
         pages = {0: {"paragraphs": {}, "full_text": ""}}
         if len(text) > 0:
             for i, tag in enumerate(text):
-                logma.info(f"Tag {tag.text}")
-                cfg = {"text": tag.text}  # , "color": tag.attrib.get("foreground", "")}
+                tag_text = tag.text
+                if tag_text is None:
+                    tag_text = ""
+                tag_text = html.escape(tag_text).replace("\n", "<br>")
+                logma.info(f"Tag {tag_text}")
+                cfg = {"unit": {"value": tag_text}}  # , "color": tag.attrib.get("foreground", "")}
                 pages[0]["paragraphs"][i] = PyfficeText(cfg)
-                all_combined_text.append(tag.text)
+                all_combined_text.append(tag_text)
         combined_text = " ".join(filter(None, all_combined_text))
+        pages[0]["full_text"] = combined_text
         return combined_text, pages
 
     def to_dict(self):
         """"""
         doc = super().to_dict()
         for node in self.nodes:
-            doc["document"]["documents"].append(node)
+            doc["data"]["documents"].append(node)
         return doc
 
 

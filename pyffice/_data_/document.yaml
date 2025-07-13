@@ -17,10 +17,11 @@ PyfficeDocument:
       document_type:
       creon_dttm:
       modon_dttm:
-    document:
+    data:
       content:
       changes:
       compatibility:
+
 PyfficeDocumentManager:
   template:
     uuid:

@@ -265,7 +265,7 @@ class PyfficeContact(PyfficeDocument):
     def to_dict(self):
         """"""
         doc = super().to_dict()
-        doc["document"]["name_details"] = {
+        doc["data"]["name_details"] = {
             "full": self.full_name,
             "first": self.first_name,
             "middle": self.middle_name,
@@ -275,9 +275,9 @@ class PyfficeContact(PyfficeDocument):
             "suffix": self.suffix,
             "salutation": self.salutation,
         }
-        doc["document"]["nicknames"] = self.nicknames
-        doc["document"]["channels"] = self.channels
-        doc["document"]["groups"] = self.groups
+        doc["data"]["nicknames"] = self.nicknames
+        doc["data"]["channels"] = self.channels
+        doc["data"]["groups"] = self.groups
         return doc
 
     def verify_phone_number(self, phone):
@@ -381,7 +381,9 @@ class PyfficeRolodex(PyfficeDocumentManager):
             self.add_change("contacts", self.contacts, contacts)
             self.contacts = contacts
         for contact in contacts:
-            self.add_contact(PyfficeContact(contact))
+            contact = PyfficeContact(contact)
+            contact.load_document()
+            self.add_contact(contact)
         return self
 
     def set_group_default(self, group=None):
@@ -405,7 +407,11 @@ class PyfficeRolodex(PyfficeDocumentManager):
     def to_dict(self):
         """"""
         doc = super().to_dict()
-        doc["document"] = {"contacts": self.contacts, "groups": self.groups, "default_group": self.default_group}
+        doc["document"] = {
+            "contacts": {name: x.to_dict() for name, x in self.contacts.items()},
+            "groups": self.groups,
+            "default_group": self.default_group,
+        }
         return doc
 
 
