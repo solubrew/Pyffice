@@ -125,11 +125,11 @@ class PyfficeScript(PyfficeDocument):
 
     def add_page(self):
         """"""
-        page_size = self.document["document"]["page_size"]
-        top = self.document["document"]["margins"]["top"]
-        left = self.document["document"]["margins"]["left"]
-        right = self.document["document"]["margins"]["right"]
-        bottom = self.document["document"]["margins"]["bottom"]
+        page_size = self.document["data"]["page_size"]
+        top = self.document["data"]["margins"]["top"]
+        left = self.document["data"]["margins"]["left"]
+        right = self.document["data"]["margins"]["right"]
+        bottom = self.document["data"]["margins"]["bottom"]
         self.active_page = {
             "page_size": page_size,
             "margins": {"top": top, "left": left, "right": right, "bottom": bottom},
@@ -328,6 +328,8 @@ class PyfficeScript(PyfficeDocument):
     def set_file_format(self, format_=None):
         """"""
         if format_ is None:
+            if self.file_path is None:
+                return self
             if self.file_path.endswith(".py"):
                 format_ = "python"
             elif self.file_path.endswith(".js"):
@@ -374,9 +376,10 @@ class PyfficeScript(PyfficeDocument):
         doc = super().to_dict()
         doc["data"]["document_type"] = "script"
         doc["data"]["pages"] = {}
-        for i, text in self.pages.items():
-            if isinstance(text, PyfficeText):
-                doc["data"]["pages"][i] = text.to_dict()
+        if self.pages is not None:
+            for i, text in self.pages.items():
+                if isinstance(text, PyfficeText):
+                    doc["data"]["pages"][i] = text.to_dict()
         logma.info(f"Document {doc} to dict")
         return doc
 

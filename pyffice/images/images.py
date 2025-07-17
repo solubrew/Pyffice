@@ -246,7 +246,7 @@ class PyfficeImage(PyfficeDocument):
         if self.location is None:
             self.set_location(None)
         if self.location == "internal":
-            content = None
+            pass
         elif self.location == "external":
             self.set_file_path(content.get("file_path", None))
             content = {"file_path": self.file_path}
