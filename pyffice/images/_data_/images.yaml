@@ -1,25 +1,24 @@
 ---
 PyfficeImage:
-    template:
+    document:
         did:
         name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
           author:
           editors:
-          path:
-          location:
-          syntax:
-          encoding:
-          tags:
-          context:
-          hash:
-          policy_fk:
-          rating:
+          document_type:
           creon_dttm:
           modon_dttm:
-        document:
-          LAY0:
+        data:
+          L0:
               path:
               OBJ0:
                   path:
@@ -28,65 +27,62 @@ PyfficeImage:
                   size:
                   location:
 PyfficeImageManager:
-    template:
+    document:
         did:
         name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
           author:
           editors:
-          path:
-          location:
-          syntax:
-          encoding:
-          tags:
-          context:
-          hash:
-          policy_fk:
-          rating:
+          document_type:
           creon_dttm:
           modon_dttm:
-        documents:
+        data:
 PyfficePalette:
-    template:
+    document:
         did:
         name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
           author:
           editors:
-          path:
-          location:
-          syntax:
-          encoding:
-          tags:
-          context:
-          hash:
-          policy_fk:
-          rating:
+          document_type:
           creon_dttm:
           modon_dttm:
-        document:
+        data:
 PyfficeScreenShot:
-    template:
+    document:
         did:
         name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
           author:
           editors:
-          path:
-          location:
-          syntax:
-          encoding:
-          tags:
-          context:
-          hash:
-          policy_fk:
-          rating:
+          document_type:
           creon_dttm:
           modon_dttm:
-        document:
+        data:
             position:
                 x:
                 y:
@@ -95,25 +91,24 @@ PyfficeScreenShot:
                 height:
             content:
 PyfficeSketch:
-    template:
+    document:
         did:
         name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
           author:
           editors:
-          path:
-          location:
-          syntax:
-          encoding:
-          tags:
-          context:
-          hash:
-          policy_fk:
-          rating:
+          document_type:
           creon_dttm:
           modon_dttm:
-        document:
+        data:
             layers:
             nodes:
             edges:

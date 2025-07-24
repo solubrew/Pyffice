@@ -1,22 +1,21 @@
 ---
 PyfficePDF:
-    template:
+    document:
         did:
         name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
           author:
           editors:
-          path:
-          location:
-          syntax:
-          encoding:
-          tags:
-          context:
-          hash:
-          policy_fk:
-          rating:
+          document_type:
           creon_dttm:
           modon_dttm:
-        document:
+        data:
             content:

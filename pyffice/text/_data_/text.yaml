@@ -1,34 +1,43 @@
 PyfficeScript:
     document:
-        file_path:
-        text:
-    template:
-        name:
         did:
+        name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
           author:
           editors:
-          path:
-          location:
-          syntax:
-          encoding:
-          tags:
-          context:
-          hash:
-          policy_fk:
-          rating:
+          document_type:
           creon_dttm:
           modon_dttm:
-        document:
-            page0:
-                paragraphs:
-                    0:
-                    1:
-                objects:
-                    headers:
-                    body:
-                    footers:
+        data:
+          content:
+              file_path:
+              bytes:
+              full_text:
+          pages:
+            0:
+              entries:
+                0:
+                    text:
+                        did:
+                        unit:
+                            value:
+                1:
+                    text:
+                        did:
+                        unit:
+                            value:
+              objects:
+                headers:
+                body:
+                footers:
     file_formats:
         "word": [".docx", ".dotx"]
         "css": [".css", ".qss"]
@@ -44,42 +53,40 @@ PyfficeScript:
         "bash": [".sh"]
         "html": [".html"]
 PyfficeParagraph:
-    template:
-        name:
+    document:
         did:
+        name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
           author:
           editors:
-          path:
-          location:
-          syntax:
-          encoding:
-          tags:
-          context:
-          hash:
-          policy_fk:
-          rating:
+          document_type:
           creon_dttm:
           modon_dttm:
-        document:
+        data:
 PyfficeObject:
-    template:
-        name:
+    document:
         did:
+        name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
           author:
           editors:
-          path:
-          location:
-          syntax:
-          encoding:
-          tags:
-          context:
-          hash:
-          policy_fk:
-          rating:
+          document_type:
           creon_dttm:
           modon_dttm:
-        document:
+        data:

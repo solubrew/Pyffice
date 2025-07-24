@@ -102,7 +102,7 @@ class PyfficeWebBrowser(PyfficeDocument):
         logma.info(f"Load Document {document}")
         super().load_document(document)
         self.set_url_home(document.get("home_url", None))
-        url = document.get("data", {}).get("original_path", self.home_url.active_url)
+        url = document.get("data", {}).get("unit", {}).get("original_path", self.home_url.active_url)
         logma.info(f"Active {url}")
         self.set_url_active(url)
         logma.info(f"URL Home")
@@ -209,7 +209,7 @@ class PyfficeWebBrowser(PyfficeDocument):
         doc = super().to_dict()
         doc["data"]["profile_manager"] = self.profile_manager.to_dict()
         doc["data"]["library"] = self.library.to_dict()
-        doc["data"]["original_path"] = self.active_url.to_dict()["unit"]["active_url"]
+        doc["data"]["unit"] = self.active_url.to_dict()["unit"]
         doc["data"]["home_url"] = self.home_url.to_dict()
         # doc["data"]["pages"] = [x.to_dict() for x in self.pages]
         return doc

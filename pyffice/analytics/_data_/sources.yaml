@@ -1,11 +1,8 @@
 PyfficeDataSet:
-  template:
-    did:
-    name:
-    description:
-    metadata:
-        author:
-        editors:
+    document:
+        did:
+        name:
+        description:
         path:
         location:
         syntax:
@@ -13,19 +10,18 @@ PyfficeDataSet:
         tags:
         context:
         hash:
-        policy_fk:
-        rating:
-        creon_dttm:
-        modon_dttm:
-    document:
+        metadata:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:
 PyfficeDataView:
-  template:
-    did:
-    name:
-    description:
-    metadata:
-        author:
-        editors:
+    document:
+        did:
+        name:
+        description:
         path:
         location:
         syntax:
@@ -33,19 +29,18 @@ PyfficeDataView:
         tags:
         context:
         hash:
-        policy_fk:
-        rating:
-        creon_dttm:
-        modon_dttm:
-    document:
+        metadata:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:
 PyfficeSourcesManager:
-  template:
-    did:
-    name:
-    description:
-    metadata:
-        author:
-        editors:
+    document:
+        did:
+        name:
+        description:
         path:
         location:
         syntax:
@@ -53,11 +48,13 @@ PyfficeSourcesManager:
         tags:
         context:
         hash:
-        policy_fk:
-        rating:
-        creon_dttm:
-        modon_dttm:
-    document:
+        metadata:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:
   sources:
     PyfficeBrowser:
       tables:

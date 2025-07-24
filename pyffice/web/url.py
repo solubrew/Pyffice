@@ -31,7 +31,7 @@ from pycurity.pyhash import text_hashing_function
 here = join(dirname(__file__), "")  # ||
 log = True
 logma = Logma(__name__)
-# logma.off()
+logma.off()
 
 # ====================================================================================================================||
 pxcfg = join(here, "_data_", "url.yaml")
@@ -204,7 +204,8 @@ class PyfficeURL(PyfficeUnit):
         if url != self.active_url:
             self.add_change("active_url", self.active_url, url)
             self.active_url = url
-            self.set_secure()
+            if not "127.0.0.1" in self.active_url:  # TODO complete local host
+                self.set_secure()
         logma.info(f"Active Url {self.active_url}")
         return self
 
@@ -258,7 +259,7 @@ class PyfficeURL(PyfficeUnit):
 
     def set_given_url(self, url=None):
         """"""
-        logma.inspect_caller()
+        # logma.inspect_caller()
         if url != self.given_url:
             self.add_change("given_url", self.given_url, url)
             self.given_url = url

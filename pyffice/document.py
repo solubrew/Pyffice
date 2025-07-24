@@ -140,6 +140,7 @@ class PyfficeUnit(object):
 
     def load_unit(self, unit=None):
         """"""
+        logma.inspect_caller()
         logma.info(f"Load Unit {unit}")
         if unit is None:
             unit = self.config.dikt.get("unit", {})
@@ -162,7 +163,6 @@ class PyfficeUnit(object):
         self.set_name(unit.get("name", None))
         self.set_path(unit.get("path", None))
         self.set_tags(unit.get("tags", None))
-
         logma.info(f"Load Unit {unit}")
         self.redos = []
         return self
@@ -464,6 +464,7 @@ class PyfficeDocument(PyfficeUnit):
             document = self.config.dikt.get("document", {})
             if document is None:
                 document = {}
+        logma.info(f"Load Document {document}")
         if isinstance(document, str):
             document = j.loads(document)
         self.load_unit(document)

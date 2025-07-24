@@ -1,22 +1,23 @@
 ---
 PyfficeForm:
-    template:
+    document:
         did:
         name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
           author:
           editors:
-          path:
-          location:
-          syntax:
-          encoding:
-          tags:
-          context:
-          hash:
+          document_type:
           creon_dttm:
           modon_dttm:
-        document:
+        data:
             form_id:
             header_image_path:
             footer_image_path:

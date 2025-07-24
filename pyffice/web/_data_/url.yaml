@@ -1,24 +1,23 @@
 ---
 PyfficeURL:
-    template:
+    document:
         did:
-        title:
+        name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
-            author:
-            editors:
-            path:
-            location:
-            syntax:
-            encoding:
-            tags:
-            context:
-            hash:
-            policy_fk:
-            rating:
-            creon_dttm:
-            modon_dttm:
-        document:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        unit:
             original_path:
             trust_level:
             qualified_path:
@@ -28,28 +27,27 @@ PyfficeURL:
             scheme:
             query:
             redirect_path:
-            metadata:
+            dns:
                 twofdns:
 PyfficeURLLibrary:
-    template:
+    document:
         did:
-        title:
+        name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
-            author:
-            editors:
-            path:
-            location:
-            syntax:
-            encoding:
-            tags:
-            context:
-            hash:
-            policy_fk:
-            rating:
-            creon_dttm:
-            modon_dttm:
-        document:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:
     url_listing:
         services:
             - google_safe_browsing:

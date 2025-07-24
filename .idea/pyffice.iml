@@ -3,8 +3,8 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/cmds/_data_" />
-      <excludeFolder url="file://$MODULE_DIR$/test_pyffice/fixtures/notes/cherrytree/cmds/_data_" />
-      <excludeFolder url="file://$MODULE_DIR$/test_pyffice/fixtures/notes/cherrytree/zz-tomb_" />
+      <excludeFolder url="file://$MODULE_DIR$/zz-work_/notes/cherrytree/cmds/_data_" />
+      <excludeFolder url="file://$MODULE_DIR$/zz-work_/notes/cherrytree/zz-tomb_" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.12 (uh)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

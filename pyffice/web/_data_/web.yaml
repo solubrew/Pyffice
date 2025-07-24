@@ -1,93 +1,90 @@
 ---
 PyfficeWebBrowser:
     document:
-    template:
         did:
         name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
-            author:
-            editors:
-            path:
-            location:
-            syntax:
-            encoding:
-            tags:
-            context:
-            hash:
-            policy_fk:
-            rating:
-            creon_dttm:
-            modon_dttm:
-        document:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:
             home_url:
-            documents:
-                -
+            active_url:
             profile_manager:
             library:
+            content:
+            changes:
+            compatibility:
 PyfficeWebPage:
-    template:
+    document:
         did:
         name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
             author:
             editors:
-            path:
-            location:
-            syntax:
-            encoding:
-            tags:
-            context:
-            hash:
-            policy_fk:
-            rating:
+            document_type:
             creon_dttm:
             modon_dttm:
-        document:
+        data:
             url:
             source:
             profile:
 PyfficeWebSource:
-    template:
+    document:
         did:
         name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
             author:
             editors:
-            path:
-            location:
-            syntax:
-            encoding:
-            tags:
-            context:
-            hash:
-            policy_fk:
-            rating:
+            document_type:
             creon_dttm:
             modon_dttm:
-        document:
+        data:
 PyfficeWebProfile:
-    template:
+    document:
         did:
         name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
             author:
             editors:
-            path:
-            location:
-            syntax:
-            encoding:
-            tags:
-            context:
-            hash:
-            policy_fk:
-            rating:
+            document_type:
             creon_dttm:
             modon_dttm:
-        document:
+        data:
             user_name:
             group:
             name_details:
@@ -104,26 +101,24 @@ PyfficeWebProfile:
                 -
 PyfficeWebProfileManager:
     document:
-        home_url:
-        library:
-        pages:
-        profile_manager:
-    template:
         did:
         name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
             author:
             editors:
-            path:
-            location:
-            syntax:
-            encoding:
-            tags:
-            context:
-            hash:
-            policy_fk:
-            rating:
+            document_type:
             creon_dttm:
             modon_dttm:
-        document:
+        data:
+            home_url:
+            library:
+            pages:
+            profile_manager:

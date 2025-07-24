@@ -1,25 +1,23 @@
 ---
 PyfficeContact:
-    template:
+    document:
         did:
         name:
         description:
-        type:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
           author:
           editors:
-          path:
-          location:
-          syntax:
-          encoding:
-          tags:
-          context:
-          hash:
-          policy_fk:
-          rating:
+          document_type:
           creon_dttm:
           modon_dttm:
-        document:
+        data:
             group:
             name_details:
                 full:
@@ -37,22 +35,21 @@ PyfficeContact:
                     "address": "555-555-5555"
                     "label": "mobile"
 PyfficeRolodex:
-    template:
+    document:
         did:
         name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
           author:
           editors:
-          path:
-          location:
-          syntax:
-          encoding:
-          tags:
-          context:
-          hash:
-          policy_fk:
-          rating:
+          document_type:
           creon_dttm:
           modon_dttm:
-        document:
+        data:

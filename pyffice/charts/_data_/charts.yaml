@@ -34,25 +34,24 @@ PyfficeChart:
         shape: "circle"
         color: "blue"
         size: 10
-    template:
+    document:
         did:
         name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
           author:
           editors:
-          path:
-          location:
-          syntax:
-          encoding:
-          tags:
-          context:
-          hash:
-          policy_fk:
-          rating:
+          document_type:
           creon_dttm:
           modon_dttm:
-        document:
+        data:
             position:
             size:
             origin:
@@ -123,46 +122,44 @@ PyfficeChart:
                             color:
                             font:
 PyfficeChartAxis:
-    template:
+    document:
         did:
         name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
           author:
           editors:
-          path:
-          location:
-          syntax:
-          encoding:
-          tags:
-          context:
-          hash:
-          policy_fk:
-          rating:
+          document_type:
           creon_dttm:
           modon_dttm:
-        document:
+        data:
 PyfficeChartDataSeries:
-    template:
+    document:
         did:
         name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
           author:
           editors:
-          path:
-          location:
-          syntax:
-          encoding:
-          tags:
-          context:
-          hash:
-          policy_fk:
-          rating:
+          document_type:
           creon_dttm:
           modon_dttm:
-        document:
-          data:
+        data:
+          series:
             - name:
               values:
               label:
@@ -174,25 +171,24 @@ PyfficeChartDataSeries:
                   color:
                   font:
 PyfficeChartLegend:
-    template:
+    document:
         did:
         name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
           author:
           editors:
-          path:
-          location:
-          syntax:
-          encoding:
-          tags:
-          context:
-          hash:
-          policy_fk:
-          rating:
+          document_type:
           creon_dttm:
           modon_dttm:
-        document:
+        data:
 PyfficeChartBuilder:
     standard_charts: ["scatter", "line", "bar", "pie", "area", "radar", "doughnut", "polararea", "bubble", "scatter3d",
                       "surface"]
@@ -202,4 +198,21 @@ PyfficeChartBuilder:
     special_charts:
         sankey: sankey
         gantt: gantt
-
+    document:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        metadata:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:

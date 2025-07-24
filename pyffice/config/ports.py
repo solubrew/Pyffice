@@ -390,7 +390,7 @@ class PyfficePortCherryTree(PyfficePort):
         """"""
         text = node.findall("rich_text")
         all_combined_text = []
-        pages = {0: {"paragraphs": {}, "full_text": ""}}
+        pages = {0: {"entries": {}, "full_text": ""}}
         if len(text) > 0:
             for i, tag in enumerate(text):
                 tag_text = tag.text
@@ -399,7 +399,9 @@ class PyfficePortCherryTree(PyfficePort):
                 tag_text = html.escape(tag_text).replace("\n", "<br>")
                 logma.info(f"Tag {tag_text}")
                 cfg = {"unit": {"value": tag_text}}  # , "color": tag.attrib.get("foreground", "")}
-                pages[0]["paragraphs"][i] = PyfficeText(cfg)
+                logma.info(f"Config {cfg}")
+                pages[0]["entries"][i] = PyfficeText(cfg).load_unit().to_dict()
+                logma.info(f"Page {pages[0]["entries"][i]}")
                 all_combined_text.append(tag_text)
         combined_text = " ".join(filter(None, all_combined_text))
         pages[0]["full_text"] = combined_text

@@ -31,7 +31,7 @@ from pycurity.pysan import Sanitized
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 logma = Logma(__name__)
-logma.off()
+#logma.off()
 
 # ====================================================================================================================||
 pxcfg = join(here, "_data_", "text.yaml")
@@ -361,8 +361,11 @@ class PyfficeScript(PyfficeDocument):
         if text is None:
             text = ""
             for page in self.pages:
-                for paragraph in self.pages[page]["paragraphs"]:
-                    text += self.pages[page]["paragraphs"][paragraph] + "\n"
+                for entry in self.pages[page]["entries"]:
+                    logma.info(f"Entry {self.pages[page]["entries"][entry]}")
+                    entry_text = self.pages[page]["entries"][entry]["unit"]["value"]
+                    if isinstance(entry_text, str):
+                        text += entry_text + "\n"
         cfg = {"unit": {"value": text}}
         text = PyfficeText(cfg)
         text.load_unit()

@@ -1,6 +1,5 @@
 PyfficeDocument:
   document:
-  template:
     did:
     name:
     description:
@@ -21,30 +20,8 @@ PyfficeDocument:
       content:
       changes:
       compatibility:
-
 PyfficeDocumentManager:
-  template:
-    uuid:
-    name:
-    description:
-    metadata:
-        author:
-        context:
-        editors:
-        encoding:
-        hash:
-        location:
-        path:
-        syntax:
-        tags:
-        creon_dttm:
-        modon_dttm:
-    document:
-      documents:
-        name:
-          document
-PyfficeUnit:
-  template:
+  document:
     did:
     name:
     description:
@@ -56,8 +33,29 @@ PyfficeUnit:
     context:
     hash:
     metadata:
-        author:
-        editors:
-        creon_dttm:
-        modon_dttm:
+      author:
+      editors:
+      document_type:
+      creon_dttm:
+      modon_dttm:
+    data:
+      documents:
+PyfficeUnit:
+  document:
+    did:
+    name:
+    description:
+    path:
+    location:
+    syntax:
+    encoding:
+    tags:
+    context:
+    hash:
+    metadata:
+      author:
+      editors:
+      document_type:
+      creon_dttm:
+      modon_dttm:
     unit:

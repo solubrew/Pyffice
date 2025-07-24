@@ -1,50 +1,60 @@
 PyfficePrompt:
-    template:
+    document:
         did:
         name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
-            author:
-            editors:
-            path:
-            location:
-            syntax:
-            encoding:
-            tags:
-            context:
-            hash:
-            creon_dttm:
-            modon_dttm:
-        document:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:
             datetime:
             context:
                 text:
+                    did:
+                    unit:
+                        value:
                 metrics:
             tags: ""
             input:
                 text:
+                    did:
+                    unit:
+                        value:
                 metrics:
             responses:
                 - text:
-                  did:
+                    did:
+                    unit:
+                        value:
                   response_dttm:
                   service:
                   metrics:
 PyfficePromptManager:
-    template:
+    document:
         did:
         name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
         metadata:
-            author:
-            editors:
-            path:
-            location:
-            syntax:
-            encoding:
-            tags:
-            context:
-            hash:
-            creon_dttm:
-            modon_dttm:
-        document:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:
