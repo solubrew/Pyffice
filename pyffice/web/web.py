@@ -92,6 +92,10 @@ class PyfficeWebBrowser(PyfficeDocument):
         """"""
         return self.pages.get_active_page()
 
+    def is_pinned(self):
+        """"""
+        return self.active_page.is_pinned()
+
     def load_document(self, document=None):
         """"""
         logma.info(f"Load Document {document}")
@@ -112,6 +116,11 @@ class PyfficeWebBrowser(PyfficeDocument):
         self.set_profile_active(document.get("active_profile", None))
         # self.set_pages(document.get("pages", None))
         # self.set_page_active(document.get("active_page", None))
+        return self
+
+    def load_url(self, url):
+        """"""
+        self.set_url_active(url)
         return self
 
     def set_library(self, library):
@@ -150,6 +159,11 @@ class PyfficeWebBrowser(PyfficeDocument):
         if page_objs != self.pages:
             self.add_change("pages", self.pages, page_objs)
             self.pages = page_objs
+        return self
+
+    def set_pinned(self, pin):
+        """"""
+        self.pinned = pin
         return self
 
     def set_profile_active(self, profile):
@@ -227,6 +241,7 @@ class PyfficeWebPage(PyfficeDocument):
         self.history = None
         self.snapshots = None
         self.versions = None
+        self.is_pinned = None
         self.pinned_on_dttm = None
         self.last_refresh = None
         self.trust = None
