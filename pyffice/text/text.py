@@ -31,7 +31,7 @@ from pycurity.pysan import Sanitized
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 logma = Logma(__name__)
-logma.off()
+# logma.off()
 
 # ====================================================================================================================||
 pxcfg = join(here, "_data_", "text.yaml")
@@ -60,6 +60,11 @@ class PyfficeScript(PyfficeDocument):
         :param text: The comment text.
         """
         self.rules.append(f"/* {text} */\n\n")
+        return self
+
+    def add_entry(self, text):
+        """"""
+        return self
 
     def add_footer(self, text, to_document=False):
         """
@@ -108,6 +113,7 @@ class PyfficeScript(PyfficeDocument):
                 self.rules.append(f"        {prop}: {value};\n")
             self.rules.append("    }\n")
         self.rules.append("}\n\n")
+        return self
 
     def add_media_query(self, query: str, rules: list):
         """
@@ -122,14 +128,16 @@ class PyfficeScript(PyfficeDocument):
                 self.rules.append(f"        {prop}: {value};\n")
             self.rules.append("    }\n")
         self.rules.append("}\n\n")
+        return self
 
     def add_page(self):
         """"""
-        page_size = self.document["data"]["page_size"]
-        top = self.document["data"]["margins"]["top"]
-        left = self.document["data"]["margins"]["left"]
-        right = self.document["data"]["margins"]["right"]
-        bottom = self.document["data"]["margins"]["bottom"]
+        page = len(self.pages.keys())
+        page_size = self.pages[page]["page_size"]
+        top = self.pages[page]["margins"]["top"]
+        left = self.pages[page]["margins"]["left"]
+        right = self.pages[page]["margins"]["right"]
+        bottom = self.pages[page]["margins"]["bottom"]
         self.active_page = {
             "page_size": page_size,
             "margins": {"top": top, "left": left, "right": right, "bottom": bottom},
@@ -216,7 +224,7 @@ class PyfficeScript(PyfficeDocument):
         """"""
         return self
 
-    def get_paragraph(self, index=0):
+    def get_entry(self, index=0):
         """
         Gets a specific paragraph by index.
 
@@ -226,9 +234,9 @@ class PyfficeScript(PyfficeDocument):
         Returns:
             Paragraph object.
         """
-        return self.doc.paragraphs[index]
+        return self.active_page[str(index)]
 
-    def get_paragraph_text(self, index=0):
+    def get_entry_text(self, index=0):
         """
         Gets the text of a specific paragraph by index.
 
@@ -238,7 +246,7 @@ class PyfficeScript(PyfficeDocument):
         Returns:
             str: Text of the paragraph.
         """
-        return self.doc.paragraphs[index].text
+        return self.self.active_page[str(index)].value
 
     def load_document(self, document=None):
         """"""
@@ -252,12 +260,10 @@ class PyfficeScript(PyfficeDocument):
         logma.info(f"Document {type(document.get("data", {}))}")
         super().load_document(document)
         logma.info(f"Content {self.content}")
-        logma.info(f"Data {document.get("data", {})}")
-        logma.info(f"Content {document.get("data", {}).get('content', None)}")
+        logma.info(f"Pages {self.pages}")
         self.set_file_format_options()
         self.set_pages(document.get("data", {}).get("pages", {}))
-        self.parse_content(document.get("data", {}).get("content", ""))
-        self.set_text(document.get("data", {}).get("content", {}))
+        self.set_text(None)
         self.set_file_format(document.get("file_format", None))
         return self
 
@@ -302,14 +308,23 @@ class PyfficeScript(PyfficeDocument):
         # TODO need to get document objects, tables, footers, shapes
         return self
 
-    def parse_content(self, content, page_size=1000):
+    def parse_content(self, content=None, page_size=100000, entry_size=1000):
         """"""
-        logma.info(f"Parsing content {content}")
+        logma.json(f"Parsing content {content}")
         if content is None:
             content = ""
-        pages = int(len(content) / page_size)
+        pages = int(len(content) / page_size) + 1
+        logma.info(f"Pages {pages}")
         for page in range(0, pages):
-            self.pages[f"page{page}"] = {"paragraphs": {i: x for i, x in enumerate(content.split("\n"))}}
+            logma.info(f"Page {page}")
+            entries = int(len(content[page * page_size : (page + 1) * page_size]) / entry_size) + 1
+            logma.info(f"Entries {entries}")
+            for entry in range(0, entries):
+                logma.info(f"Entry {entry}")
+                text = content[page * page_size + entry * entry_size : page * page_size + (entry + 1) * entry_size]
+                cfg = {"unit": {"value": text}}
+                logma.info(f"Text {text}")
+                self.pages[f"{page}"]["entries"][str(entry)] = PyfficeText(cfg).load_unit()
         return self
 
     def parse_document(self):
@@ -349,8 +364,17 @@ class PyfficeScript(PyfficeDocument):
         self.file_formats = {ext: key for key, extensions in formats.items() for ext in extensions}
         return self
 
+    def set_full_text(self, text):
+        """"""
+        self.full_text = text
+        return self
+
     def set_pages(self, pages):
         """"""
+        if len(pages) == "0":
+            pages["0"] = {}
+        if "entries" not in pages["0"]:
+            pages["0"]["entries"] = {}
         if pages != self.pages:
             self.add_change("pages", self.pages, pages)
             self.pages = pages
@@ -358,6 +382,7 @@ class PyfficeScript(PyfficeDocument):
 
     def set_text(self, text=None):
         """"""
+        logma.info(f"Text {text}")
         if text is None:
             text = ""
             for page in self.pages:
@@ -366,12 +391,16 @@ class PyfficeScript(PyfficeDocument):
                     entry_text = self.pages[page]["entries"][entry]["unit"]["value"]
                     if isinstance(entry_text, str):
                         text += entry_text + "\n"
+        if isinstance(text, dict):
+            text = text.get("full_text", "")
+        logma.info(f"Text {text}")
         cfg = {"unit": {"value": text}}
         text = PyfficeText(cfg)
         text.load_unit()
         if text != self.text:
             self.add_change("text", self.text, text)
             self.text = text
+        self.set_full_text(self.text.value)
         return self
 
     def to_dict(self):
@@ -379,11 +408,24 @@ class PyfficeScript(PyfficeDocument):
         doc = super().to_dict()
         doc["data"]["document_type"] = "script"
         doc["data"]["pages"] = {}
+        logma.info(f"Pages {self.pages}")
         if self.pages is not None:
-            for i, text in self.pages.items():
-                if isinstance(text, PyfficeText):
-                    doc["data"]["pages"][i] = text.to_dict()
-        logma.info(f"Document {doc} to dict")
+            for i, page in self.pages.items():
+                if i not in doc["data"]["pages"]:
+                    doc["data"]["pages"][str(i)] = {"entries": {}}
+                logma.info(f"Page {page}")
+                for entry in page["entries"]:
+                    if "entries" not in doc["data"]["pages"][str(i)]:
+                        doc["data"]["pages"][str(i)]["entries"] = {}
+                    text = page["entries"][entry]
+                    logma.info(f"Page {i} {text}")
+                    if isinstance(text, str):
+                        text = {"unit": {"value": text}}
+                    if isinstance(text, dict):
+                        text = PyfficeText(text)
+                        text.load_unit()
+                    doc["data"]["pages"][str(i)]["entries"][str(entry)] = text.to_dict()
+        logma.json(doc)
         return doc
 
     def to_html(self):

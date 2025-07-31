@@ -200,18 +200,6 @@ class PyfficeUnit(object):
             self.changes = changes
         return self
 
-    def set_content(self, content):
-        """"""
-        if content is None:
-            content = ""
-        if self.content_original is None:
-            self.add_change("content_original", self.content_original, content, "set")
-            self.content_original = content
-        if content != self.content:
-            self.add_change("content", self.content, content)
-            self.content = content
-        return self
-
     def set_context(self, context):
         """"""
         if context is None:
@@ -485,10 +473,10 @@ class PyfficeDocument(PyfficeUnit):
 
     def save(self, path=None, syntax=None, encrypt_key=None):
         """"""
-        if path is None:
-            path = self.file_path
-        if syntax is None:
-            syntax = self.syntax
+        # if path is None:
+        #     path = self.file_path
+        # if syntax is None:
+        #     syntax = self.syntax
         self.increment_version()
         # if syntax is None:
         #     self.save_pyffice(path, syntax, encrypt_key)
@@ -539,6 +527,18 @@ class PyfficeDocument(PyfficeUnit):
         if compatibility != self.compatibility:
             self.add_change("compatibility", self.compatibility, compatibility)
             self.compatibility = compatibility
+        return self
+
+    def set_content(self, content):
+        """"""
+        if content is None:
+            content = ""
+        if self.content_original is None:
+            self.add_change("content_original", self.content_original, content, "set")
+            self.content_original = content
+        if content != self.content:
+            self.add_change("content", self.content, content)
+            self.content = content
         return self
 
     def set_data(self, data):

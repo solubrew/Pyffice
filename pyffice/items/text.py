@@ -178,6 +178,15 @@ class PyfficeText(PyfficeUnit):
         return self.html
 
 
+class PyfficeHTML(PyfficeText):
+    """"""
+
+    def __init__(self, cfg=None):
+        """"""
+        super().__init__(cfg)
+        self.config.override(condor.Instruct(pxcfg).select("")).override(cfg)
+
+
 # ====================================================================================================================||
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||

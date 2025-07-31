@@ -22,18 +22,12 @@ PyfficeScript:
               bytes:
               full_text:
           pages:
-            0:
+            "0":
               entries:
-                0:
-                    text:
-                        did:
-                        unit:
-                            value:
-                1:
-                    text:
-                        did:
-                        unit:
-                            value:
+                "0":
+                  did:
+                  unit:
+                   value:
               objects:
                 headers:
                 body:
