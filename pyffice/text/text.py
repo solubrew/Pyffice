@@ -31,7 +31,7 @@ from pycurity.pysan import Sanitized
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 logma = Logma(__name__)
-# logma.off()
+logma.off()
 
 # ====================================================================================================================||
 pxcfg = join(here, "_data_", "text.yaml")
@@ -318,13 +318,20 @@ class PyfficeScript(PyfficeDocument):
         for page in range(0, pages):
             logma.info(f"Page {page}")
             entries = int(len(content[page * page_size : (page + 1) * page_size]) / entry_size) + 1
+            if str(page) not in self.pages:
+                self.pages[str(page)] = {
+                    "page_size": page_size,
+                    "margins": {"top": 0, "left": 0, "right": 0, "bottom": 0},
+                    "entries": {},
+                }
             logma.info(f"Entries {entries}")
             for entry in range(0, entries):
                 logma.info(f"Entry {entry}")
                 text = content[page * page_size + entry * entry_size : page * page_size + (entry + 1) * entry_size]
                 cfg = {"unit": {"value": text}}
                 logma.info(f"Text {text}")
-                self.pages[f"{page}"]["entries"][str(entry)] = PyfficeText(cfg).load_unit()
+                self.pages[str(page)]["entries"][str(entry)] = PyfficeText(cfg).load_unit()
+        self.set_text()
         return self
 
     def parse_document(self):
@@ -364,7 +371,7 @@ class PyfficeScript(PyfficeDocument):
         self.file_formats = {ext: key for key, extensions in formats.items() for ext in extensions}
         return self
 
-    def set_full_text(self, text):
+    def set_full_text(self, text=None):
         """"""
         self.full_text = text
         return self
@@ -388,7 +395,12 @@ class PyfficeScript(PyfficeDocument):
             for page in self.pages:
                 for entry in self.pages[page]["entries"]:
                     logma.info(f"Entry {self.pages[page]["entries"][entry]}")
-                    entry_text = self.pages[page]["entries"][entry]["unit"]["value"]
+                    entry_text = self.pages[page]["entries"][entry]
+                    logma.info(f"Entry Text {entry_text}")
+                    if isinstance(entry_text, dict):
+                        entry_text = entry_text["unit"]["value"]
+                    elif isinstance(entry_text, PyfficeText):
+                        entry_text = entry_text.value
                     if isinstance(entry_text, str):
                         text += entry_text + "\n"
         if isinstance(text, dict):

@@ -173,14 +173,13 @@ class PyfficePortCherryTree(PyfficePort):
         full_text = ""
         script = None
         if node.text is not None:
-            full_text, pages = self.parse_text(node)
+            full_text = self.parse_text(node)
             logma.info(f"Full Text {full_text}")
-            logma.info(f"Pages {pages}")
-            cfg = {"data": {"pages": pages, "content": full_text}}
-            script = PyfficeScript({"document": cfg})
+            script = PyfficeScript({})
             script.load_document()
+            script.parse_content(full_text)
         logma.info(f"Full Text {full_text}")
-        return full_text, script
+        return script
 
     def file_import(self, file_path=None):
         """"""
@@ -235,17 +234,18 @@ class PyfficePortCherryTree(PyfficePort):
                 # browser = PyfficeWebBrowser({"url": link}) Not sure how this should be organized at this level
                 # due to the PyfficeWebBrowser-PyfficeWebPage-PyfficeURL hiearchy
                 cfg = {"document": {"data": {"original_path": link}}}
-                link = PyfficeWebBrowser(cfg)
-                link.load_document()
+                browser = PyfficeWebBrowser(cfg)
+                browser.load_document()
+                browser.set_url_active(link)
                 # except Exception as e:
                 #     logma.info(f"Link: {link}")
                 #     continue
-                logma.info(f"Link {link.to_dict()}")
-                logma.info(f"Active URL {link.active_url.to_dict()}")
-                if link.active_url.domain is None:
+                logma.info(f"Link {browser.to_dict()}")
+                logma.info(f"Active URL {browser.active_url.to_dict()}")
+                if browser.active_url.domain is None:
                     continue
-                logma.info(f"Active Link {link.active_url} {link.active_url.domain}")
-                self.links.append(link)
+                logma.info(f"Active Link {browser.active_url} {browser.active_url.domain}")
+                self.links.append(browser)
         return self
 
     def parse_node(self, node):
@@ -259,21 +259,11 @@ class PyfficePortCherryTree(PyfficePort):
         name = node.attrib.get("name", None)
         if name is None or name == "":
             name = tab_id[len(tab_id) - 5 :]
-        text, script = self.extract_text(node)
-        if text is None:
-            text = ""
-        if script is None:
-            cfg = {}
-            script = PyfficeScript(cfg)
-            script.load_document()
-        logma.info(f"text {text}")
-        logma.info(f"Content {script.content}")
-        # script_text = ""
+        script = self.extract_text(node)
         script_dict = {}
         if script is not None:
             script_dict = script.to_dict()
-            # script_text = script_dict["data"]["context"]
-        self.parse_links(text)
+            self.parse_links(script.full_text)
         self.extract_images(node)
         # self.codeboxes = self.extract_codeboxes(node)
         # self.tables = self.extract_tables(node)
@@ -390,22 +380,15 @@ class PyfficePortCherryTree(PyfficePort):
         """"""
         text = node.findall("rich_text")
         all_combined_text = []
-        pages = {0: {"entries": {}, "full_text": ""}}
         if len(text) > 0:
             for i, tag in enumerate(text):
                 tag_text = tag.text
                 if tag_text is None:
                     tag_text = ""
                 tag_text = html.escape(tag_text).replace("\n", "<br>")
-                logma.info(f"Tag {tag_text}")
-                cfg = {"unit": {"value": tag_text}}  # , "color": tag.attrib.get("foreground", "")}
-                logma.info(f"Config {cfg}")
-                pages[0]["entries"][i] = PyfficeText(cfg).load_unit().to_dict()
-                logma.info(f"Page {pages[0]["entries"][i]}")
                 all_combined_text.append(tag_text)
         combined_text = " ".join(filter(None, all_combined_text))
-        pages[0]["full_text"] = combined_text
-        return combined_text, pages
+        return combined_text
 
     def to_dict(self):
         """"""

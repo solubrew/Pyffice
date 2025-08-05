@@ -140,7 +140,7 @@ class PyfficeUnit(object):
 
     def load_unit(self, unit=None):
         """"""
-        logma.inspect_caller()
+        # logma.inspect_caller()
         logma.info(f"Load Unit {unit}")
         if unit is None:
             unit = self.config.dikt.get("unit", {})
