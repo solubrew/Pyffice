@@ -204,7 +204,7 @@ class PyfficeURL(PyfficeUnit):
         if url != self.active_url:
             self.add_change("active_url", self.active_url, url)
             self.active_url = url
-            if not "127.0.0.1" in self.active_url:  # TODO complete local host
+            if not "127.0.0.1" in self.active_url or "chrome://version" in self.active_url:  # TODO complete local host
                 self.set_secure()
         logma.info(f"Active Url {self.active_url}")
         return self

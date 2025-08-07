@@ -242,6 +242,8 @@ class PyfficeImage(PyfficeDocument):
 
     def set_content(self, content):
         """"""
+        if content is None:
+            return self
         logma.info(f"Content {content}")
         if self.location is None:
             self.set_location(None)
