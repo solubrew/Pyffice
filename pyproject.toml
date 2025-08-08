@@ -42,7 +42,7 @@ Changelog = "CHANGELOG.rst"
 include-package-data = true
 
 [tool.setuptools.dynamic]
-dependencies = { file = ["requirements"] }
+dependencies = { file = ["requirements.txt"] }
 
 # Flat layout: project root contains "pyffice" and a sibling "test_pyffice".
 # Limit discovery to only the actual package.
