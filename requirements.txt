@@ -22,3 +22,4 @@ colormath
 cairosvg
 furl
 nbformat
+bs4

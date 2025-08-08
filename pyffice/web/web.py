@@ -23,7 +23,6 @@ from collections import deque
 # ======================================Solutions Brewer Library Modules==============================================||
 from condor import condor
 from ogma.logma import Logma
-from sympy.sets.sets import set_function
 
 from pyffice.contacts.contacts import PyfficeContact, PyfficeRolodex
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager, PyfficeDeque
