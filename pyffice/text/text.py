@@ -31,7 +31,7 @@ from pycurity.pysan import Sanitized
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 logma = Logma(__name__)
-logma.off()
+# logma.off()
 
 # ====================================================================================================================||
 pxcfg = join(here, "_data_", "text.yaml")
@@ -255,9 +255,9 @@ class PyfficeScript(PyfficeDocument):
             document = self.config.dikt.get("document", {})
             if document is None:
                 document = {}
-        logma.info(f"Document {document}")
-        logma.info(f"Document {document.get("data", {})}")
-        logma.info(f"Document {type(document.get("data", {}))}")
+        # logma.info(f"Document {document}")
+        # logma.info(f"Document {document.get("data", {})}")
+        # logma.info(f"Document {type(document.get("data", {}))}")
         super().load_document(document)
         logma.info(f"Content {self.content}")
         logma.info(f"Pages {self.pages}")
@@ -308,11 +308,12 @@ class PyfficeScript(PyfficeDocument):
         # TODO need to get document objects, tables, footers, shapes
         return self
 
-    def parse_content(self, content=None, page_size=100000, entry_size=1000):
+    def parse_content(self, content=None, page_size=100000, entry_size=10000):
         """"""
         logma.json(f"Parsing content {content}")
         if content is None:
             content = ""
+        self.pages = {}
         pages = int(len(content) / page_size) + 1
         logma.info(f"Pages {pages}")
         for page in range(0, pages):
@@ -325,9 +326,15 @@ class PyfficeScript(PyfficeDocument):
                     "entries": {},
                 }
             logma.info(f"Entries {entries}")
+            self.pages[str(page)]["entries"] = {}
             for entry in range(0, entries):
                 logma.info(f"Entry {entry}")
-                text = content[page * page_size + entry * entry_size : page * page_size + (entry + 1) * entry_size]
+                start = page * page_size + entry * entry_size
+                end = page * page_size + (entry + 1) * entry_size
+                logma.info(f"Start {start} End {end}")
+                text = content[start:end]
+                if text is None or text == "":
+                    continue
                 cfg = {"unit": {"value": text}}
                 logma.info(f"Text {text}")
                 self.pages[str(page)]["entries"][str(entry)] = PyfficeText(cfg).load_unit()
@@ -393,19 +400,22 @@ class PyfficeScript(PyfficeDocument):
         if text is None:
             text = ""
             for page in self.pages:
-                for entry in self.pages[page]["entries"]:
-                    logma.info(f"Entry {self.pages[page]["entries"][entry]}")
+                logma.info(f"Page {page}")
+                for j, entry in enumerate(self.pages[page]["entries"]):
+                    logma.info(f"Entry {j}")
+                    # logma.info(f"Entry {self.pages[page]["entries"][entry]}")
                     entry_text = self.pages[page]["entries"][entry]
-                    logma.info(f"Entry Text {entry_text}")
                     if isinstance(entry_text, dict):
                         entry_text = entry_text["unit"]["value"]
                     elif isinstance(entry_text, PyfficeText):
                         entry_text = entry_text.value
+                    # logma.info(f"Entry Text {entry_text}")
                     if isinstance(entry_text, str):
-                        text += entry_text + "\n"
+                        text += entry_text
+        logma.info(f"Text {text}")
         if isinstance(text, dict):
             text = text.get("full_text", "")
-        logma.info(f"Text {text}")
+        # logma.info(f"Text {text}")
         cfg = {"unit": {"value": text}}
         text = PyfficeText(cfg)
         text.load_unit()
@@ -417,20 +427,22 @@ class PyfficeScript(PyfficeDocument):
 
     def to_dict(self):
         """"""
+        logma.inspect_caller()
         doc = super().to_dict()
         doc["data"]["document_type"] = "script"
         doc["data"]["pages"] = {}
-        logma.info(f"Pages {self.pages}")
+        # logma.info(f"Pages {self.pages}")
+        self.parse_content(self.full_text)
         if self.pages is not None:
             for i, page in self.pages.items():
                 if i not in doc["data"]["pages"]:
                     doc["data"]["pages"][str(i)] = {"entries": {}}
-                logma.info(f"Page {page}")
+                logma.info(f"Entries {len(page["entries"])}")
                 for entry in page["entries"]:
                     if "entries" not in doc["data"]["pages"][str(i)]:
                         doc["data"]["pages"][str(i)]["entries"] = {}
                     text = page["entries"][entry]
-                    logma.info(f"Page {i} {text}")
+                    logma.info(f"Entry {i}")  # {text}")
                     if isinstance(text, str):
                         text = {"unit": {"value": text}}
                     if isinstance(text, dict):

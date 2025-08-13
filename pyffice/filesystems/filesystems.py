@@ -136,7 +136,8 @@ class PyfficeFileSystem(PyfficeDocumentManager):
     def set_root(self, root=None):
         """"""
         if root is None:
-            root = join(expanduser("~"), "Documents")
+            # root = join(expanduser("~"), "Documents")
+            root = expanduser("~")
         root = str(root)
         if root != self.root:
             self.add_change("root", self.root, root)
