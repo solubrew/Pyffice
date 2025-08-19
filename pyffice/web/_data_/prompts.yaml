@@ -18,14 +18,50 @@ PyfficePrompt:
           modon_dttm:
         data:
             datetime:
-            context:
-                text:
-                    did:
-                    unit:
-                        value:
-                metrics:
             tags: ""
             input:
+                structured:
+                  context:
+                      data:
+                        text:
+                            did:
+                            unit:
+                                value:
+                        metrics:
+                      document:
+                        text:
+                            did:
+                            unit:
+                                value:
+                        metrics:
+                      application:
+                        text:
+                            did:
+                            unit:
+                                value:
+                        metrics:
+                  persona:
+                    text:
+                      did:
+                      unit:
+                        value:
+                    metrics:
+                  topic:
+                    text:
+                      did:
+                      unit:
+                        value:
+                    metrics:
+                  scope_response:
+                    agreeableness:
+                    groundedness:
+                    inventiveness:
+                    overview:
+                      text:
+                        did:
+                        unit:
+                          value:
+                      metrics:
                 text:
                     did:
                     unit:
@@ -38,6 +74,8 @@ PyfficePrompt:
                         value:
                   response_dttm:
                   service:
+                  sources:
+                    - source:
                   metrics:
 PyfficePromptManager:
     document:

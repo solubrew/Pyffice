@@ -20,7 +20,7 @@ import datetime as dt
 # ======================================Solutions Brewer Library Modules==============================================||
 from condor import condor
 from ogma.logma import Logma
-from pyffice.document import PyfficeUnit, PyfficeDocumentManager
+from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 from subtrix.subtrix import uuid
 from pyffice.web.web import PyfficeWebBrowser
 from pyffice.items.text import PyfficeText
@@ -34,7 +34,16 @@ logma = Logma(__name__)
 pxcfg = join(here, "_data_", "prompts.yaml")
 
 
-class PyfficePrompt(PyfficeUnit):
+class PyfficeContext(PyfficeDocument):
+    """"""
+
+    def __init__(self, cfg=None):
+        """"""
+        super().__init__(cfg)
+        self.config.override(condor.Instruct(pxcfg).select("PyfficeContext")).override(cfg)
+
+
+class PyfficePrompt(PyfficeDocument):
     """"""
 
     def __init__(self, cfg=None):
@@ -50,22 +59,26 @@ class PyfficePrompt(PyfficeUnit):
         self.prompt_metrics = None
         self.response = None
         self.response_metrics = None
+        self.response_scope = None
+        self.persona = None
+        self.scope = None
+        self.topic = None
 
     def get_metrics(self):
         """"""
         metrics = {}
         return metrics
 
-    def load_unit(self, unit=None):
+    def load_document(self, document=None):
         """"""
-        logma.info(f"Load Document {unit}")
-        if unit is None:
-            unit = self.config.dikt.get("unit", {})
-        super().load_unit(unit)
-        self.set_context(unit.get("context", ""))
-        self.set_input(unit.get("input", ""))
-        self.set_prompt(unit.get("prompt", ""))
-        self.set_response(unit.get("responses", []))
+        logma.info(f"Load Document {document}")
+        if document is None:
+            document = self.config.dikt.get("document", {})
+        super().load_document(document)
+        self.set_context(document.get("context", ""))
+        self.set_input(document.get("input", ""))
+        self.set_prompt(document.get("prompt", ""))
+        self.set_response(document.get("responses", []))
         return self
 
     def set_context(self, context):
@@ -88,6 +101,46 @@ class PyfficePrompt(PyfficeUnit):
             self.input_metrics = {"tokens": len(input.to_string().split()), "characters": len(input.to_string())}
         return self
 
+    def set_persona(self, persona=0):
+        """How to define and organize personas: https://www.personality-is-graph.com/"""
+        personas = [
+            "teacher",
+            "plumber",
+            "electrician",
+            "doctor",
+            "lawyer",
+            "psychologist",
+            "engineer",
+            "mathematician",
+            "historian",
+            "empath",
+            "psychopath",
+            "socialite",
+            "sociopath",
+            "marketer",
+            "nurse",
+            "narcissist",
+            "pessimist",
+            "optimist",
+            "realist",
+            "opportunist",
+            "friend",
+            "enemy",
+            "stranger",
+            "acquaintance",
+            "frenemy",
+            "philosopher",
+            "researcher",
+            "intern",
+            "student",
+            "industrialist",
+        ]
+        persona = personas[self.config.dikt.get("persona", persona)]
+        if persona != self.persona:
+            self.add_change("persona", self.persona, persona)
+            self.persona = persona
+        return self
+
     def set_prompt(self, prompt):
         """"""
         cfg = {"text": prompt}
@@ -106,18 +159,89 @@ class PyfficePrompt(PyfficeUnit):
             self.response = response
         return self
 
+    def set_response_scope(self, scope):
+        """"""
+        if scope != self.scope:
+            self.scope = scope
+            self.add_change("scope", self.scope, scope)
+        else:
+            return self
+        if scope == "conversational":
+            response_scope = "Respond to the given input in a conversational manner."
+            if "teacher" in self.persona:
+                response_scope += " As a teacher, explain concepts brought up in the conversation."
+        elif scope == "diagnostic":
+            response_scope = "Provide a diagnostic of the given input."
+            if "mechanic" in self.persona:
+                response_scope += " Provide a diagnostic of the given input."
+            elif "engineer" in self.persona:
+                response_scope += " Provide a diagnostic of the given input."
+        elif scope == "analytic":
+            match self.persona:
+                case _:
+                    response_scope = "Provide an analytic of the given input."
+        elif scope == "explanation":
+            match self.persona:
+                case _:
+                    response_scope = "Provide an explanation of the given input. Detailing the main points in bullet points summaries"
+        elif scope == "question":
+            match self.persona:
+                case _:
+                    response_scope = (
+                        "Provide the best possible answer to the given input exploring counter points briefly"
+                    )
+        elif scope == "recommendation":
+            match self.persona:
+                case _:
+                    response_scope = "Provide a recommendation for the given input."
+        else:
+            match self.persona:
+                case _:
+                    response_scope = "Respond to the given input."
+        self.response_scope = response_scope
+        return self
+
+    def set_topic(self, topic):
+        """"""
+        if topic != self.topic:
+            self.add_change("topic", self.topic, topic)
+            self.topic = topic
+        return self
+
     def to_dict(self):
         """"""
         doc = super().to_dict()
-        doc["unit"] = {
-            "context": self.context.to_dict(),
-            "prompt": self.prompt.to_dict(),
-            "response": self.response.to_dict(),
+        doc["data"] = {
+            "context": {},
+            "input": {},
+            "response": {},
         }
-        doc["unit"]["context"]["metrics"] = self.context.get_metrics()
-        doc["unit"]["prompt"]["metrics"] = self.prompt.get_metrics()
-        doc["unit"]["response"]["metrics"] = self.response.get_metrics()
+        doc["data"]["context"]["metrics"] = self.context.get_metrics()
+        doc["data"]["prompt"]["metrics"] = self.prompt.get_metrics()
+        doc["data"]["response"]["metrics"] = self.response.get_metrics()
         return doc
+
+
+class PyfficeResponse(PyfficeDocument):
+    """"""
+
+    def __init__(self, cfg=None):
+        """"""
+        super().__init__(cfg)
+        self.config.override(condor.Instruct(pxcfg).select("PyfficeResponse")).override(cfg)
+
+    def add_source(self):
+        """"""
+
+    def load_document(self, document=None):
+        """"""
+
+    def set_sources(self, sources):
+        """"""
+        if sources != self.sources:
+            self.add_change("sources", self.sources, sources)
+            self.sources = sources
+        return self
 
 
 class PyfficePromptsManager(PyfficeDocumentManager):

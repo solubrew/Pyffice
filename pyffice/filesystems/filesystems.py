@@ -61,6 +61,12 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.files.append(file_)
         return self
 
+    def add_root(self, root):
+        """"""
+        self.add_change("root", self.root, root)
+        self.roots.append(root)
+        return self
+
     def del_directory(self, index):
         """"""
         self.add_change("directories", self.directories, index, "del")
@@ -85,6 +91,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
                 document = {}
         document["location"] = "external"
         super().load_document(document)
+        self.set_root(document.get("root", None))
         self.set_directories(document.get("directories", []))
         self.set_files(document.get("files", []))
         return self
@@ -144,10 +151,23 @@ class PyfficeFileSystem(PyfficeDocumentManager):
             self.root = root
         return self
 
+    def set_roots(self, roots=None):
+        """"""
+        if roots is None:
+            roots = []
+        if roots != self.roots:
+            self.add_change("roots", self.roots, roots)
+            self.roots = roots
+        return self
+
     def to_dict(self):
         """"""
         doc = super().to_dict()
-        doc["data"]["content"] = {"directories": self.directories, "files": self.files, "file_path": self.file_path}
+        doc["data"] = {
+            "root": self.root,
+            "directories": self.directories,
+            "files": self.files,
+        }
         return doc
 
 
