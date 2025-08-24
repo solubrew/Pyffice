@@ -10,12 +10,11 @@
 	security: seclvl2
 	<(WT)>: -32
 """
-from copy import deepcopy
-
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
 import datetime as dt
+from copy import deepcopy
 
 # ======================================3rd Party Library Modules=====================================================||
 from collections import deque
@@ -23,7 +22,6 @@ from collections import deque
 # ======================================Solutions Brewer Library Modules==============================================||
 from condor import condor
 from ogma.logma import Logma
-
 from pyffice.contacts.contacts import PyfficeContact, PyfficeRolodex
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager, PyfficeDeque
 from pyffice.web.url import PyfficeURL, PyfficeURLLibrary
@@ -117,10 +115,10 @@ class PyfficeWebBrowser(PyfficeDocument):
         # self.set_page_active(document.get("active_page", None))
         return self
 
-    def load_url(self, url):
-        """"""
-        self.set_url_active(url)
-        return self
+    # def load_url(self, url):
+    #     """"""
+    #     self.set_url_active(url)
+    #     return self
 
     def set_library(self, library):
         """"""

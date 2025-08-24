@@ -398,6 +398,26 @@ class PyfficePortCherryTree(PyfficePort):
         return doc
 
 
+class PyfficePortNchantdOffice(PyfficePort):
+    """"""
+
+    def __init__(self, cfg=None):
+        """"""
+        super().__init__(cfg)
+        self.config.override(condor.Instruct(pxcfg).select("PyfficePortNchantdOffice")).override(cfg)
+
+    def load_document(self, document=None):
+        """"""
+        super().load_document(document)
+        return self
+
+    def parse_file(self):
+        """"""
+
+    def parse_table(self):
+        """"""
+
+
 class PyfficePortCSV(PyfficePort):
     """"""
 

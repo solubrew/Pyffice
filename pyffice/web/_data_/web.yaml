@@ -21,6 +21,7 @@ PyfficeWebBrowser:
             home_url:
             active_url:
             profile_manager:
+            pages:
             library:
             content:
             changes:

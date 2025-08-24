@@ -88,6 +88,12 @@ class PyfficeURL(PyfficeUnit):
             return True
         return False
 
+    def expand_url(self, url):
+        """"""
+        if "http://" != url[:7] and "https://" != url[:8]:
+            url = f"http://{url}"
+        return url
+
     def filter(self, url):
         """"""
         for filter_ in self.filters:
@@ -203,10 +209,10 @@ class PyfficeURL(PyfficeUnit):
             url = self.default_url
         if url != self.active_url:
             self.add_change("active_url", self.active_url, url)
-            self.active_url = url
-            #if not "127.0.0.1" in self.active_url or "chrome://version" not in self.active_url:
-                # TODO complete local host
-                #self.set_secure()
+            self.active_url = self.expand_url(url)
+            # if not "127.0.0.1" in self.active_url or "chrome://version" not in self.active_url:
+            # TODO complete local host
+            self.set_secure()
         logma.info(f"Active Url {self.active_url}")
         return self
 
