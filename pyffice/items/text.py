@@ -111,7 +111,7 @@ class PyfficeText(PyfficeUnit):
 
     def set_font_color(self, font=None):
         """"""
-        cfg = {"color": font.get("color", self.config.dikt["font"].get("color", None))}
+        cfg = {"color": font.get("color", self.config.dikt.get("font", {}).get("color", None))}
         color = PyfficeColor(cfg)
         color.load_unit()
         if color != self.color:

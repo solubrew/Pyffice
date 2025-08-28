@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyffice"
-version = "0.0.0.0.0.2"
+version = "0.0.0.0.0.3"
 description = "Your project description"
 readme = { file = "README.rst", content-type = "text/x-rst" }
 license = { file = "LICENSE" }
@@ -59,7 +59,7 @@ exclude = [
 ]
 [tool.setuptools.package-data]
 # keys are package names; globs are relative to the package dirs
-nchantdoffice = [
+pyffice = [
   "**/*.yaml",
 ]
 [tool.black]
