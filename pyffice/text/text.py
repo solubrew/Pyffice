@@ -385,7 +385,7 @@ class PyfficeScript(PyfficeDocument):
 
     def set_pages(self, pages):
         """"""
-        if len(pages) == "0":
+        if len(pages) == 0:
             pages["0"] = {}
         if "entries" not in pages["0"]:
             pages["0"]["entries"] = {}
