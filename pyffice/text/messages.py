@@ -40,7 +40,27 @@ class PyfficeMessage(PyfficeDocument):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("")).override(cfg)
+        self.config.override(condor.Instruct(pxcfg).select("PyfficeMessage")).override(cfg)
+
+    def set_body(self):
+        """"""
+        return self
+
+    def set_from(self, from_):
+        """"""
+        return self
+
+    def set_subject(self, subject):
+        """"""
+        return self
+
+    def set_to(self, to):
+        """"""
+        return self
+
+    def to_dict(self):
+        """"""
+        return self
 
 
 # ====================================================================================================================||
