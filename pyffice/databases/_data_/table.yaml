@@ -1,0 +1,21 @@
+---
+PyfficeTable:
+    template:
+        uuid:
+        name:
+        description:
+        metadata:
+            author:
+            path:
+            location:
+            encoding:
+            tags:
+            context:
+            hash:
+            policy_fk:
+        document:
+            name:
+            cmd:
+            columns: []
+            records:
+                - []

@@ -45,6 +45,12 @@ PyfficeWebPage:
             creon_dttm:
             modon_dttm:
         data:
+            pinned_on:
+            last_refresh:
+            history:
+            snapshots:
+            versions:
+            level_of_trust:
             url:
             source:
             profile:

@@ -82,10 +82,13 @@ class PyfficeUnit(object):
             self.changes = []
         if isinstance(value, dict):
             value = deepcopy(value)
-        elif isinstance(value, PyfficeUnit):
-            value = value.to_dict()
-        if isinstance(new_value, PyfficeUnit):
-            new_value = new_value.to_dict()
+        if isinstance(new_value, dict):
+            new_value = deepcopy(new_value)
+        # elif isinstance(value, PyfficeUnit):
+        #     value = value.to_dict()
+        # if isinstance(new_value, PyfficeUnit):
+        #     new_value = new_value.to_dict()
+
         if action == "add":
             self.changes.append({"action": action, "label": label, "value": deepcopy(value), "new_value": new_value})
         elif action == "set":
@@ -686,6 +689,13 @@ class PyfficeDeque(PyfficeDocument, deque):
             max_items = self.config.dikt.get("max_items", 10)
         self.max_items = max_items
         return self
+
+    def to_dict(self):
+        """"""
+        doc = super().to_dict()
+        doc["data"]["history"] = self.history
+        doc["data"]["max_items"] = self.max_items
+        return doc
 
 
 # ====================================================================================================================||

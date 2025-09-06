@@ -19,7 +19,14 @@ PyfficeFileSystem:
           modon_dttm:
         data:
             path:
-            files:
-                -
-            directories:
-                -
+            tree:
+              root_path0:
+                children:
+                  - name:
+                  - name:
+                  - name:
+            table:
+              files:
+                - [name, size, access]
+              directories:
+                - [name, size, access]

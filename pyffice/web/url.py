@@ -509,8 +509,8 @@ class PyfficeURL(PyfficeUnit):
 
 
 class PyfficeURLLibrary(PyfficeDocumentManager):
-    """URL Library is a data object for integrating affilate links into the web apps and browsing features provided
-    within Pyffice"""
+    """URL Library is a data object for integrating metadata about known links into the web apps and browsing features
+    provided within Pyffice"""
 
     def __init__(self, cfg=None):
         """"""

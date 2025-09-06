@@ -48,6 +48,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.location = None
         self.file_path = None
         self.content = None
+        self.tree = None
 
     def add_directory(self, directory):
         """"""
@@ -91,9 +92,20 @@ class PyfficeFileSystem(PyfficeDocumentManager):
                 document = {}
         document["location"] = "external"
         super().load_document(document)
-        self.set_root(document.get("root", None))
-        self.set_directories(document.get("directories", []))
-        self.set_files(document.get("files", []))
+        self.set_tree(document.get("tree", {}))
+        self.set_table(document.get("table", {}))
+        return self
+
+    def set_tree(self, tree):
+        """"""
+        self.set_root(tree.get("root", None))
+        self.tree = tree.get("children", None)
+        return self
+
+    def set_table(self, table):
+        """"""
+        self.set_directories(table.get("directories", []))
+        self.set_files(table.get("files", []))
         return self
 
     def open_file(self, file=None):
@@ -151,22 +163,16 @@ class PyfficeFileSystem(PyfficeDocumentManager):
             self.root = root
         return self
 
-    def set_roots(self, roots=None):
-        """"""
-        if roots is None:
-            roots = []
-        if roots != self.roots:
-            self.add_change("roots", self.roots, roots)
-            self.roots = roots
-        return self
-
     def to_dict(self):
         """"""
         doc = super().to_dict()
         doc["data"] = {
-            "root": self.root,
-            "directories": self.directories,
-            "files": self.files,
+            "path": self.path,
+            "tree": self.tree,
+            "table": {
+                "directories": self.directories,
+                "files": self.files,
+            },
         }
         return doc
 

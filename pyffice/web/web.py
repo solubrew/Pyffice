@@ -25,12 +25,13 @@ from ogma.logma import Logma
 from pyffice.contacts.contacts import PyfficeContact, PyfficeRolodex
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager, PyfficeDeque
 from pyffice.web.url import PyfficeURL, PyfficeURLLibrary
+from pycurity.pyhash import text_hashing_function, encode64, decode64
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True
 logma = Logma(__name__)
-logma.off()
+# logma.off()
 
 # ====================================================================================================================||
 pxcfg = join(here, "_data_", "web.yaml")
@@ -45,9 +46,8 @@ class PyfficeWebBrowser(PyfficeDocument):
         self.config.override(condor.Instruct(pxcfg).select("PyfficeWebBrowser")).override(cfg)
         self.active_page = None
         self.active_profile = None
-        self.active_url = None
+        self.home_page = None
         self.library = None
-        self.home_url = None
         self.pages = None
         self.profile_manager = None
         self.doc_type = "browser"
@@ -59,6 +59,8 @@ class PyfficeWebBrowser(PyfficeDocument):
         else:
             page = PyfficeWebPage(page)
             page.load_document()
+        if self.pages is None:
+            self.pages = []
         self.pages.append(page)
         return self
 
@@ -102,17 +104,17 @@ class PyfficeWebBrowser(PyfficeDocument):
                 document = {}
         logma.info(f"Load Document {document}")
         super().load_document(document)
-        self.set_url_home(document.get("home_url", None))
-        url = document.get("data", {}).get("unit", {}).get("original_path", self.home_url.active_url)
+        # self.set_url_home(document.get("home_url", None))
+        self.set_page_home(document.get("home_url", None))
+        url = document.get("data", {}).get("unit", {}).get("original_path", self.home_page.active_url)
         logma.info(f"Active {url}")
-        self.set_url_active(url)
+        # self.set_url_active(url)
         logma.info(f"URL Home")
-
         self.set_library(document.get("library", None))
         self.set_profile_manager(document.get("profile_manager", None))
         self.set_profile_active(document.get("active_profile", None))
-        # self.set_pages(document.get("pages", None))
-        # self.set_page_active(document.get("active_page", None))
+        self.set_pages(document.get("pages", None))
+        self.set_page_active(document.get("active_page", None))
         return self
 
     # def load_url(self, url):
@@ -144,10 +146,20 @@ class PyfficeWebBrowser(PyfficeDocument):
             self.active_profile = page.active_profile
         return self
 
+    def set_page_home(self, page):
+        """"""
+        if not isinstance(page, PyfficeWebPage):
+            page = PyfficeWebPage(page)
+            page.load_document()
+        if page != self.home_page:
+            self.add_change("home_page", self.home_page, page)
+            self.home_page = page
+        return self
+
     def set_pages(self, pages):
         """"""
         if pages is None:
-            pages = [{"page": self.home_url.active_url}]  # , "profile": self.active_profile.did}]
+            pages = [{"page": self.home_page}]  # , "profile": self.active_profile.did}]
         page_objs = []
         for page in pages:
             page = PyfficeWebPage(page)
@@ -194,26 +206,26 @@ class PyfficeWebBrowser(PyfficeDocument):
         self.update_document_time()
         return self
 
-    def set_url_active(self, url):
-        """"""
-        logma.info(f"set_url_active: {url}")
-        active_url = PyfficeURL({"unit": {"original_path": url, "given_url": url}})
-        active_url.load_unit()
-        logma.info(f"set_url_active: {active_url.to_dict()}")
-        if active_url != self.active_url:
-            self.add_change("active_url", self.active_url, active_url)
-            self.active_url = active_url
-        logma.info(f"set_url_active: {self.active_url.to_dict()}")
-        return self
-
-    def set_url_home(self, url):
-        """"""
-        home_url = PyfficeURL({"unit": {"original_path": url, "given_url": url}})
-        home_url.load_unit()
-        if home_url != self.home_url:
-            self.add_change("home_url", self.home_url, home_url)
-            self.home_url = home_url
-        return self
+    # def set_url_active(self, url):
+    #     """"""
+    #     logma.info(f"set_url_active: {url}")
+    #     active_url = PyfficeURL({"unit": {"original_path": url, "given_url": url}})
+    #     active_url.load_unit()
+    #     logma.info(f"set_url_active: {active_url.to_dict()}")
+    #     if active_url != self.active_url:
+    #         self.add_change("active_url", self.active_url, active_url)
+    #         self.active_url = active_url
+    #     logma.info(f"set_url_active: {self.active_url.to_dict()}")
+    #     return self
+    #
+    # def set_url_home(self, url):
+    #     """"""
+    #     home_url = PyfficeURL({"unit": {"original_path": url, "given_url": url}})
+    #     home_url.load_unit()
+    #     if home_url != self.home_url:
+    #         self.add_change("home_url", self.home_url, home_url)
+    #         self.home_url = home_url
+    #     return self
 
     def to_dict(self):
         """"""
@@ -222,7 +234,9 @@ class PyfficeWebBrowser(PyfficeDocument):
         doc["data"]["library"] = self.library.to_dict()
         doc["data"]["unit"] = self.active_url.to_dict()["unit"]
         doc["data"]["home_url"] = self.home_url.to_dict()
-        # doc["data"]["pages"] = [x.to_dict() for x in self.pages]
+        doc["data"]["active_profile"] = self.active_profile.to_dict()
+        doc["data"]["active_page"] = self.active_page.to_dict()
+        doc["data"]["pages"] = [x.to_dict() for x in self.pages]
         return doc
 
 
@@ -252,15 +266,15 @@ class PyfficeWebPage(PyfficeDocument):
     def add_snapshot(self, snapshot):
         """"""
         hash_ = self.get_finger_print(snapshot)
-        snapshot = {"path": None, "hash": hash_, "content_enc64": self.encode64(snapshot)}
+        snapshot = {"path": None, "hash": hash_, "content_enc64": encode64(snapshot)}
         self.add_change("snapshots", self.snapshots, snapshot, "add")
         self.snapshots.append(snapshot)
         return self
 
-    def add_version(self, version):
+    def add_version(self, content):
         """"""
-        hash_ = self.get_finger_print(version)
-        version = {"path": None, "hash": hash_, "content_enc64": self.encode64(version)}
+        hash_ = self.get_finger_print(content)
+        version = {"path": None, "hash": hash_, "content_enc64": encode64(content)}
         self.add_change("versions", deepcopy(self.versions), version, "add")
         self.versions.append(version)
         return self
@@ -272,11 +286,15 @@ class PyfficeWebPage(PyfficeDocument):
         super().load_document(document)
         self.set_history(document.get("history", None), document.get("max_items", 10))
         self.set_url(document.get("url", None))
-        self.set_snapshots(document.get("snapshots", None))
-        self.set_versions(document.get("versions", None))
+        self.set_snapshots(document.get("snapshots", []))
+        self.set_versions(document.get("versions", []))
         self.set_page_pinned(document.get("pinned", None))
         self.set_level_of_trust(document.get("level_of_trust", 0))
         return self
+
+    def get_finger_print(self, content):
+        """"""
+        return text_hashing_function(content)
 
     def set_history(self, history, max_items):
         """"""
@@ -359,15 +377,17 @@ class PyfficeWebPage(PyfficeDocument):
     def to_dict(self):
         """"""
         doc = super().to_dict()
-        doc["document"] = {
+        doc["data"] = {
             "pinned_on": self.pinned_on_dttm,
             "last_refresh": self.last_refresh,
-            "history": self.history,
+            "history": self.history.to_dict(),
             "snapshots": self.snapshots,
             "versions": self.versions,
             "level_of_trust": self.trust,
         }
-        doc["document"]["url"] = self.active_url.to_dict()
+        doc["data"]["url"] = self.active_url.to_dict()
+        doc["data"]["profile"] = self.active_profile.to_dict()
+        doc["data"]["source"] = None
         return doc
 
 
