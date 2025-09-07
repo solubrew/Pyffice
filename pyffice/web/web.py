@@ -107,7 +107,6 @@ class PyfficeWebBrowser(PyfficeDocument):
         logma.info(f"Active {url}")
         self.set_url_active(url)
         logma.info(f"URL Home")
-
         self.set_library(document.get("library", None))
         self.set_profile_manager(document.get("profile_manager", None))
         self.set_profile_active(document.get("active_profile", None))

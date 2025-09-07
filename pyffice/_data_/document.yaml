@@ -10,6 +10,7 @@ PyfficeDocument:
     tags:
     context:
     hash:
+    version: 0.0.1.0.1.0
     metadata:
       author:
       editors:
@@ -20,6 +21,12 @@ PyfficeDocument:
       content:
       changes:
       compatibility:
+  versions:
+    0.0.1.0.1.0:
+      0.0.1.0.1.1:
+    0.0.1.0.1.2:
+    0.0.1.0.1.3:
+    0.0.1.0.1.4:
 PyfficeDocumentManager:
   document:
     did:
@@ -32,6 +39,7 @@ PyfficeDocumentManager:
     tags:
     context:
     hash:
+    version: 0.0.1.0.1.0
     metadata:
       author:
       editors:
@@ -40,6 +48,24 @@ PyfficeDocumentManager:
       modon_dttm:
     data:
       documents:
+  versions:
+    0.0.1.0.1.0:
+      0.0.1.0.1.1:
+        document:
+          add:
+          update:
+          delete:
+        meta_data:
+          add:
+          update:
+          delete:
+        data:
+          add:
+          update:
+          delete:
+    0.0.1.0.1.2:
+    0.0.1.0.1.3:
+    0.0.1.0.1.4:
 PyfficeUnit:
   document:
     did:
@@ -52,6 +78,7 @@ PyfficeUnit:
     tags:
     context:
     hash:
+    version: 0.0.1.0.1.0
     metadata:
       author:
       editors:
@@ -59,3 +86,9 @@ PyfficeUnit:
       creon_dttm:
       modon_dttm:
     unit:
+  versions:
+    0.0.1.0.1.0:
+      0.0.1.0.1.1:
+    0.0.1.0.1.2:
+    0.0.1.0.1.3:
+    0.0.1.0.1.4:

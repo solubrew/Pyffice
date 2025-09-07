@@ -27,6 +27,7 @@ from squirl.orgnql import conql, yonql
 from subtrix.subtrix import uuid
 from pycurity.pytime import PyTime
 from pyffice.tags.tags import PyfficeTag
+from pyffice.config.updates import PyfficeUnitUpdate, PyfficeDocumentUpdate
 from pycurity.pyhash import text_hashing_function
 
 # ====================================================================================================================||
@@ -73,6 +74,7 @@ class PyfficeUnit(object):
         self.time = PyTime()  # TODO build override to allow for time object to be common across application
         self.unit = None
         self.version = 0
+        self.versions = None
 
     def add_change(self, label, value, new_value, action="set", params=None):
         """"""
@@ -146,6 +148,8 @@ class PyfficeUnit(object):
             unit = self.config.dikt.get("unit", {})
         if isinstance(unit, str):
             unit = j.loads(unit)
+        self.versions = self.config.dikt.get("versions", {})
+        unit = self.update_unit_structure(unit)
         self.time = PyTime()
         self.set_changes(unit.get("changes", None))
         self.set_author(unit.get("meta_data", {}).get("author", None))
@@ -408,6 +412,11 @@ class PyfficeUnit(object):
         setattr(self, last_change["label"], last_change["value"])
         return self
 
+    def update_unit_structure(self, unit):
+        """"""
+        unit = PyfficeUnitUpdate(unit).process()
+        return unit
+
 
 class PyfficeDocument(PyfficeUnit):
     """"""
@@ -455,6 +464,7 @@ class PyfficeDocument(PyfficeUnit):
         logma.info(f"Load Document {document}")
         if isinstance(document, str):
             document = j.loads(document)
+        document = self.update_document_structure(document)
         self.load_unit(document)
         # self.set_cache(document.get("cache", None))
         logma.info(f"Load Document {document.get("data", None)}")
@@ -576,6 +586,12 @@ class PyfficeDocument(PyfficeUnit):
         doc["data"] = deepcopy(doc["unit"])
         del doc["unit"]
         return doc
+
+    def update_document_structure(self, document):
+        """"""
+        update = PyfficeDocumentUpdate(document)
+        document = update.process()
+        return document
 
 
 class PyfficeDocumentManager(PyfficeDocument):
