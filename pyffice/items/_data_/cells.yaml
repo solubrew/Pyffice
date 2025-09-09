@@ -1,6 +1,6 @@
 ---
 PyfficeCell:
-    unit:
+    template:
         author:
         changes:
         context:
@@ -46,7 +46,7 @@ PyfficeCell:
             "horizontal": "left"
             "vertical": "top"
         "data_format": "text"
-    document:
+    template:
         did:
         name:
         description:

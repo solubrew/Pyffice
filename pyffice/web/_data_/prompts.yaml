@@ -1,5 +1,5 @@
 PyfficePrompt:
-    document:
+    template:
         did:
         name:
         description:
@@ -141,7 +141,7 @@ PyfficePrompt:
 
 
 PyfficePromptManager:
-    document:
+    template:
         did:
         name:
         description:

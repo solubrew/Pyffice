@@ -1,6 +1,6 @@
 ---
 PyfficeWorkflow:
-    document:
+    template:
         did:
         name:
         description:

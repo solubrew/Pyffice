@@ -1,6 +1,6 @@
 ---
 PyfficeURL:
-    document:
+    template:
         did:
         name:
         description:
@@ -30,7 +30,7 @@ PyfficeURL:
             dns:
                 twofdns:
 PyfficeURLLibrary:
-    document:
+    template:
         did:
         name:
         description:

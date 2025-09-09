@@ -14,7 +14,7 @@ PyfficeText:
       underline: False
       subscript: False
       superscript: False
-    document:
+    template:
         did:
         name:
         description:

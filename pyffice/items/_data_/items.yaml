@@ -1,5 +1,5 @@
 PyfficeItem:
-    document:
+    template:
         did:
         name:
         description:

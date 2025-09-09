@@ -1,6 +1,6 @@
 ---
 PyfficeNotebook:
-    document:
+    template:
         did:
         name:
         description:
