@@ -1,6 +1,6 @@
 ---
 PyfficeWebBrowser:
-    document:
+    template:
         did:
         name:
         description:
@@ -27,7 +27,7 @@ PyfficeWebBrowser:
             changes:
             compatibility:
 PyfficeWebPage:
-    document:
+    template:
         did:
         name:
         description:
@@ -55,7 +55,7 @@ PyfficeWebPage:
             source:
             profile:
 PyfficeWebSource:
-    document:
+    template:
         did:
         name:
         description:
@@ -74,7 +74,7 @@ PyfficeWebSource:
             modon_dttm:
         data:
 PyfficeWebProfile:
-    document:
+    template:
         did:
         name:
         description:
@@ -107,7 +107,7 @@ PyfficeWebProfile:
             channels:
                 -
 PyfficeWebProfileManager:
-    document:
+    template:
         did:
         name:
         description:

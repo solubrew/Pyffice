@@ -1,6 +1,6 @@
 ---
 PyfficeContact:
-    document:
+    template:
         did:
         name:
         description:
@@ -35,7 +35,7 @@ PyfficeContact:
                     "address": "555-555-5555"
                     "label": "mobile"
 PyfficeRolodex:
-    document:
+    template:
         did:
         name:
         description:

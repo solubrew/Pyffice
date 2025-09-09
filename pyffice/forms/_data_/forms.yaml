@@ -1,6 +1,6 @@
 ---
 PyfficeForm:
-    document:
+    template:
         did:
         name:
         description:

@@ -1,6 +1,6 @@
 ---
 PyfficeEdge:
-    document:
+    template:
         did:
         name:
         description:
@@ -41,7 +41,7 @@ PyfficeEdge:
           padding:
           text:
 PyfficeLayer:
-    document:
+    template:
         did:
         name:
         description:
@@ -60,7 +60,7 @@ PyfficeLayer:
           modon_dttm:
         data:
 PyfficeNode:
-    document:
+    template:
         did:
         name:
         description:
@@ -104,7 +104,7 @@ PyfficeNode:
                 horizontal:
                 vertical:
 PyfficeSketch:
-    document:
+    template:
         did:
         name:
         description:
@@ -123,7 +123,7 @@ PyfficeSketch:
           modon_dttm:
         data:
 PyfficeSketchConnection:
-    document:
+    template:
         did:
         name:
         description:

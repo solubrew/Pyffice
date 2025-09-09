@@ -1,6 +1,6 @@
 ---
 PyfficeImage:
-    document:
+    template:
         did:
         name:
         description:
@@ -27,7 +27,7 @@ PyfficeImage:
                   size:
                   location:
 PyfficeImageManager:
-    document:
+    template:
         did:
         name:
         description:
@@ -46,7 +46,7 @@ PyfficeImageManager:
           modon_dttm:
         data:
 PyfficePalette:
-    document:
+    template:
         did:
         name:
         description:
@@ -65,7 +65,7 @@ PyfficePalette:
           modon_dttm:
         data:
 PyfficeScreenShot:
-    document:
+    template:
         did:
         name:
         description:
@@ -91,7 +91,7 @@ PyfficeScreenShot:
                 height:
             content:
 PyfficeSketch:
-    document:
+    template:
         did:
         name:
         description:

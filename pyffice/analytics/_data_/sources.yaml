@@ -1,5 +1,5 @@
 PyfficeDataSet:
-    document:
+    template:
         did:
         name:
         description:
@@ -18,7 +18,7 @@ PyfficeDataSet:
           modon_dttm:
         data:
 PyfficeDataView:
-    document:
+    template:
         did:
         name:
         description:
@@ -37,7 +37,7 @@ PyfficeDataView:
           modon_dttm:
         data:
 PyfficeSourcesManager:
-    document:
+    template:
         did:
         name:
         description:

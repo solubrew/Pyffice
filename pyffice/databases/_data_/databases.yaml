@@ -13,7 +13,7 @@ PyfficeDatabase:
             context:
             hash:
             policy_fk:
-        document:
+        data:
             host:
             port:
             user:
@@ -33,7 +33,7 @@ PyfficeIndex:
             context:
             hash:
             policy_fk:
-        document:
+        data:
             cmd:
 PyfficeServer:
     template:
@@ -49,7 +49,7 @@ PyfficeServer:
             context:
             hash:
             policy_fk:
-        document:
+        data:
             host:
             port:
 PyfficeView:
@@ -66,5 +66,5 @@ PyfficeView:
             context:
             hash:
             policy_fk:
-        document:
+        data:
             cmd:

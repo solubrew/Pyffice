@@ -1,6 +1,6 @@
 ---
 PyfficeCalendar:
-    document:
+    template:
         did:
         name:
         description:
@@ -27,7 +27,7 @@ PyfficeCalendar:
                 entries:
                 info:
 PyfficeEvent:
-    document:
+    template:
         did:
         name:
         description:
@@ -56,7 +56,7 @@ PyfficeEvent:
             tasks:
                 -
 PyfficeRecurrence:
-    document:
+    template:
         did:
         name:
         description:

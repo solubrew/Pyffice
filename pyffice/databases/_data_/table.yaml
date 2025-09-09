@@ -13,7 +13,7 @@ PyfficeTable:
             context:
             hash:
             policy_fk:
-        document:
+        data:
             name:
             cmd:
             columns: []

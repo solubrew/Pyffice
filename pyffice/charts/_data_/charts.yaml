@@ -34,7 +34,7 @@ PyfficeChart:
         shape: "circle"
         color: "blue"
         size: 10
-    document:
+    template:
         did:
         name:
         description:
@@ -122,7 +122,7 @@ PyfficeChart:
                             color:
                             font:
 PyfficeChartAxis:
-    document:
+    template:
         did:
         name:
         description:
@@ -141,7 +141,7 @@ PyfficeChartAxis:
           modon_dttm:
         data:
 PyfficeChartDataSeries:
-    document:
+    template:
         did:
         name:
         description:
@@ -171,7 +171,7 @@ PyfficeChartDataSeries:
                   color:
                   font:
 PyfficeChartLegend:
-    document:
+    template:
         did:
         name:
         description:
@@ -198,7 +198,7 @@ PyfficeChartBuilder:
     special_charts:
         sankey: sankey
         gantt: gantt
-    document:
+    template:
         did:
         name:
         description:

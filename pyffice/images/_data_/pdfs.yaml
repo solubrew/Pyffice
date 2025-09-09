@@ -1,6 +1,6 @@
 ---
 PyfficePDF:
-    document:
+    template:
         did:
         name:
         description:
