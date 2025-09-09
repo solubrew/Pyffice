@@ -693,7 +693,7 @@ class PyfficeDeque(PyfficeDocument, deque):
     def to_dict(self):
         """"""
         doc = super().to_dict()
-        doc["data"]["history"] = self.history
+        doc["data"]["history"] = [x for x in self.history]
         doc["data"]["max_items"] = self.max_items
         return doc
 

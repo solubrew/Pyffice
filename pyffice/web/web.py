@@ -57,7 +57,7 @@ class PyfficeWebBrowser(PyfficeDocument):
         if isinstance(page, PyfficeWebPage):
             page = page
         else:
-            page = PyfficeWebPage(page)
+            page = PyfficeWebPage({"page": page})
             page.load_document()
         if self.pages is None:
             self.pages = []
@@ -233,8 +233,9 @@ class PyfficeWebBrowser(PyfficeDocument):
         doc["data"]["profile_manager"] = self.profile_manager.to_dict()
         doc["data"]["library"] = self.library.to_dict()
         doc["data"]["unit"] = self.active_url.to_dict()["unit"]
-        doc["data"]["home_url"] = self.home_url.to_dict()
-        doc["data"]["active_profile"] = self.active_profile.to_dict()
+        doc["data"]["home_page"] = self.home_page.to_dict()
+        if self. active_profile is not None:
+            doc["data"]["active_profile"] = self.active_profile.to_dict()
         doc["data"]["active_page"] = self.active_page.to_dict()
         doc["data"]["pages"] = [x.to_dict() for x in self.pages]
         return doc
@@ -386,7 +387,8 @@ class PyfficeWebPage(PyfficeDocument):
             "level_of_trust": self.trust,
         }
         doc["data"]["url"] = self.active_url.to_dict()
-        doc["data"]["profile"] = self.active_profile.to_dict()
+
+        #doc["data"]["profile"] = self.active_profile.to_dict()
         doc["data"]["source"] = None
         return doc
 
