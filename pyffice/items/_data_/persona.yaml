@@ -1,5 +1,8 @@
 PyfficePersona:
   myersbriggs:
+    types:
+    description: >
+      assign MB to each contact using social media data and personal interactions contained within the pyffice database.
     ISTJ:
       name: The Duty Fulfiller
       description: >
@@ -27,11 +30,17 @@ PyfficePersona:
     INTJ:
       name: The Scientist
       description: >
-        Independent, original, analytical, and determined. Have an exceptional ability to turn theories into solid plans of action. Highly value knowledge, competence, and structure. Driven to derive meaning from their visions. Long-range thinkers. Have very high standards for their performance, and the performance of others. Natural leaders, but will follow if they trust existing leaders.
+        Independent, original, analytical, and determined. Have an exceptional ability to turn theories into solid 
+        plans of action. Highly value knowledge, competence, and structure. Driven to derive meaning from their visions. 
+        Long-range thinkers. Have very high standards for their performance, and the performance of others. 
+        Natural leaders, but will follow if they trust existing leaders.
     INTP:
       name: The Thinker
       description: >
-        Logical, original, creative thinkers. Can become very excited about theories and ideas. Exceptionally capable and driven to turn theories into clear understandings. Highly value knowledge, competence and logic. Quiet and reserved, hard to get to know well. Individualistic, having no interest in leading or following others.
+        Logical, original, creative thinkers. Can become very excited about theories and ideas. Exceptionally capable 
+        and driven to turn theories into clear understandings. Highly value knowledge, competence and logic. 
+        Quiet and reserved, hard to get to know well. 
+        Individualistic, having no interest in leading or following others.
     ESTP:
       name: The Doer
       description: >
@@ -51,7 +60,9 @@ PyfficePersona:
     ENFP:
       name: The Inspirer
       description: >
-        Enthusiastic, idealistic, and creative. Able to do almost anything that interests them. Great people skills. Need to live life in accordance with their inner values. Excited by new ideas, but bored with details. Open-minded and flexible, with a broad range of interests and abilities.
+        Enthusiastic, idealistic, and creative. Able to do almost anything that interests them. Great people skills. 
+        Need to live life in accordance with their inner values. Excited by new ideas, but bored with details. 
+        Open-minded and flexible, with a broad range of interests and abilities.
     ENFJ:
       name: The Giver
       description: >

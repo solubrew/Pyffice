@@ -1,0 +1,148 @@
+new_version:
+  0.0.1.0.1.1:
+    document:
+      add:
+        - version: 0.0.1.0.1.1
+      update:
+      delete:
+    meta_data:
+      add:
+      update:
+      delete:
+    data:
+      add:
+      update:
+      delete:
+PyfficeDocumentUpdate:
+  pyffice_filesystem:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              version: 0.0.1.0.1.1
+            update:
+            delete:
+  pyffice_image:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              version: 0.0.1.0.1.1
+            update:
+            delete:
+  pyffice_pdf:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              version: 0.0.1.0.1.1
+            update:
+            delete:
+  pyffice_script:
+      versions:
+        0.0.1.0.1.0:
+          0.0.1.0.1.1:
+            document:
+              add:
+                version: 0.0.1.0.1.1
+              update:
+              delete:
+            meta_data:
+              add:
+              update:
+              delete:
+            data:
+              add:
+              update:
+              delete:
+  pyffice_web_browser:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              - version: 0.0.1.0.1.1
+          meta_data:
+            add:
+            update:
+            delete:
+          data:
+            add:
+              active_page:
+                data:
+                  history:
+                description:
+
+              home_page:
+            update:
+              home_url: home_page
+              data:
+                unit:
+                  original_path: active_page
+            delete:
+              home_url:
+              changes:
+              unit:
+  pyffice_web_page:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              - version: 0.0.1.0.1.1
+            update:
+            delete:
+          meta_data:
+            add:
+            update:
+            delete:
+          data:
+            add:
+            update:
+            delete:
+  pyffice_web_profile_manager:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              version: 0.0.1.0.1.1
+            update:
+            delete:
+          meta_data:
+            add:
+            update:
+            delete:
+          data:
+            add:
+            update:
+            delete:
+  pyffice_web_prompt:
+    versions:
+      0.0.1.0.1.0:
+          0.0.1.0.1.1:
+            document:
+              add:
+                version: 0.0.1.0.1.1
+              update:
+              delete:
+  pyffice_web_source:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              version: 0.0.1.0.1.1
+            update:
+            delete:
+          meta_data:
+            add:
+            update:
+            delete:
+          data:
+            add:
+            update:
+            delete:

@@ -48,6 +48,7 @@ class PyfficeWebBrowser(PyfficeDocument):
         self.active_profile = None
         self.home_page = None
         self.library = None
+        #self.page = None
         self.pages = None
         self.profile_manager = None
         self.doc_type = "browser"
@@ -106,8 +107,8 @@ class PyfficeWebBrowser(PyfficeDocument):
         super().load_document(document)
         # self.set_url_home(document.get("home_url", None))
         self.set_page_home(document.get("home_url", None))
-        url = document.get("data", {}).get("unit", {}).get("original_path", self.home_page.active_url)
-        logma.info(f"Active {url}")
+        # url = document.get("data", {}).get("unit", {}).get("original_path", self.home_page.active_url)
+        # logma.info(f"Active {url}")
         # self.set_url_active(url)
         logma.info(f"URL Home")
         self.set_library(document.get("library", None))
@@ -116,11 +117,6 @@ class PyfficeWebBrowser(PyfficeDocument):
         self.set_pages(document.get("pages", None))
         self.set_page_active(document.get("active_page", None))
         return self
-
-    # def load_url(self, url):
-    #     """"""
-    #     self.set_url_active(url)
-    #     return self
 
     def set_library(self, library):
         """"""
@@ -134,16 +130,24 @@ class PyfficeWebBrowser(PyfficeDocument):
 
     def set_page_active(self, page):
         """"""
+        if isinstance(page, str):
+            url = PyfficeURL(page)
+            url.load_unit()
+            page = {"active_url": url, "home_url": self.home_page.active_url}
         if page is None:
             page = self.pages[0]
         if isinstance(page, dict):
-            self.add_page(page)
-            page = self.pages[-1]
-        if page != self.active_page:
-            self.add_change("active_page", self.active_page, page)
-            self.active_page = page
-            self.active_url = page.active_url
-            self.active_profile = page.active_profile
+            page = PyfficeWebPage(page)
+            page.load_document()
+            if page != self.active_page:
+                self.add_change("active_page", self.active_page, page)
+                self.active_page = page
+        elif isinstance(page, PyfficeWebPage):
+            if page != self.active_page:
+                self.add_change("active_page", self.active_page, page)
+                self.active_page = page
+        else:
+            raise ValueError(f"page: {page}")
         return self
 
     def set_page_home(self, page):
@@ -232,12 +236,12 @@ class PyfficeWebBrowser(PyfficeDocument):
         doc = super().to_dict()
         doc["data"]["profile_manager"] = self.profile_manager.to_dict()
         doc["data"]["library"] = self.library.to_dict()
-        doc["data"]["unit"] = self.active_url.to_dict()["unit"]
-        doc["data"]["home_page"] = self.home_page.to_dict()
-        if self. active_profile is not None:
+        # doc["data"]["unit"] = self.active_url.to_dict()["unit"]
+        # doc["data"]["home_page"] = self.home_page.to_dict()
+        if self.active_profile is not None:
             doc["data"]["active_profile"] = self.active_profile.to_dict()
-        doc["data"]["active_page"] = self.active_page.to_dict()
-        doc["data"]["pages"] = [x.to_dict() for x in self.pages]
+        doc["data"]["page"] = self.active_page.to_dict()
+        # doc["data"]["pages"] = [x.to_dict() for x in self.pages]
         return doc
 
 
@@ -388,7 +392,7 @@ class PyfficeWebPage(PyfficeDocument):
         }
         doc["data"]["url"] = self.active_url.to_dict()
 
-        #doc["data"]["profile"] = self.active_profile.to_dict()
+        # doc["data"]["profile"] = self.active_profile.to_dict()
         doc["data"]["source"] = None
         return doc
 
