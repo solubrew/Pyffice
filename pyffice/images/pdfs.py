@@ -54,6 +54,7 @@ class PyfficePDF(PyfficeDocument):
         self.is_safest = False
         self.doc_type = "pdf"
         self.content = None
+        self.pdf_fitz = None
         self.reader = None
         self.storage = "external"
         self.writer = None
@@ -139,6 +140,11 @@ class PyfficePDF(PyfficeDocument):
         self.writer.encrypt(user_password=user_password, owner_password=owner_password)
         return self
 
+    def extract_text(self, page_n=0):
+        """Extract the text from a specific page."""
+        mat = fitz.Matrix(self.scale, self.scale)
+        pix = page.get_pixmap(matrix=mat)
+
     def get_binary(self):
         """"""
 
@@ -197,6 +203,7 @@ class PyfficePDF(PyfficeDocument):
                 self.open_file_no_javascript(file_)
             else:  # this ensures that PDF is opened without running any javascript
                 self.open_file_full_feature(file_)
+        self.pdf_fitz = fitz.open(file_)
         return self
 
     def open_file_full_feature(self, file_):
