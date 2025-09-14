@@ -177,7 +177,7 @@ class PyfficePDF(PyfficeDocument):
             if document is None:
                 document = {}
         super().load_document(document)
-        self.set_file_path(document.get("data", {}).get("path", None))
+        self.set_file_path(document.get("data", {}).get("file_path", None))
         return self
 
     def load_pdf_pages(self):
@@ -209,7 +209,6 @@ class PyfficePDF(PyfficeDocument):
         self.reader = fitz.open(file_)
         self.load_pdf_pages()
         return self
-
 
     def remove_page(self, page_n):
         """
@@ -265,6 +264,7 @@ class PyfficePDF(PyfficeDocument):
                 pdf_bytes = pdf_file.read()
             return pdf_bytes
         return None
+
 
 # ====================================================================================================================||
 
