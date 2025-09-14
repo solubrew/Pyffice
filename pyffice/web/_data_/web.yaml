@@ -11,6 +11,7 @@ PyfficeWebBrowser:
         tags:
         context:
         hash:
+        version: 0.0.1.0.1.1
         metadata:
           author:
           editors:
@@ -26,6 +27,26 @@ PyfficeWebBrowser:
             content:
             changes:
             compatibility:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              - version: 0.0.1.0.1.1
+          meta_data:
+            add:
+            update:
+            delete:
+          data:
+            add:
+            update:
+              - home_url: home_page
+              - active_url: active_page
+            delete:
+              - changes
+      0.0.1.0.1.2:
+      0.0.1.0.1.3:
+      0.0.1.0.1.4:
 PyfficeWebPage:
     template:
         did:
@@ -54,6 +75,25 @@ PyfficeWebPage:
             url:
             source:
             profile:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              - version: 0.0.1.0.1.1
+            update:
+            delete:
+          meta_data:
+            add:
+            update:
+            delete:
+          data:
+            add:
+            update:
+            delete:
+      0.0.1.0.1.2:
+      0.0.1.0.1.3:
+      0.0.1.0.1.4:
 PyfficeWebSource:
     template:
         did:
@@ -73,6 +113,25 @@ PyfficeWebSource:
             creon_dttm:
             modon_dttm:
         data:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              - version: 0.0.1.0.1.1
+            update:
+            delete:
+          meta_data:
+            add:
+            update:
+            delete:
+          data:
+            add:
+            update:
+            delete:
+      0.0.1.0.1.2:
+      0.0.1.0.1.3:
+      0.0.1.0.1.4:
 PyfficeWebProfile:
     template:
         did:
@@ -106,6 +165,25 @@ PyfficeWebProfile:
                 1:
             channels:
                 -
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              - version: 0.0.1.0.1.1
+            update:
+            delete:
+          meta_data:
+            add:
+            update:
+            delete:
+          data:
+            add:
+            update:
+            delete:
+      0.0.1.0.1.2:
+      0.0.1.0.1.3:
+      0.0.1.0.1.4:
 PyfficeWebProfileManager:
     template:
         did:
@@ -129,3 +207,22 @@ PyfficeWebProfileManager:
             library:
             pages:
             profile_manager:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              - version: 0.0.1.0.1.1
+            update:
+            delete:
+          meta_data:
+            add:
+            update:
+            delete:
+          data:
+            add:
+            update:
+            delete:
+      0.0.1.0.1.2:
+      0.0.1.0.1.3:
+      0.0.1.0.1.4:
