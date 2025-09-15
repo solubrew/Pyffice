@@ -310,7 +310,7 @@ class PyfficeScript(PyfficeDocument):
 
     def parse_content(self, content=None, page_size=100000, entry_size=10000):
         """"""
-        logma.json(f"Parsing content {content}")
+        logma.json(content)
         if content is None:
             content = ""
         self.pages = {}
