@@ -34,7 +34,7 @@ from pycurity.pyhash import text_hashing_function
 here = join(dirname(__file__), "")  # ||
 log = True
 logma = Logma(__name__)
-logma.off()
+# logma.off()
 CHANGE_LIMIT = 100
 # ====================================================================================================================||
 pxcfg = join(here, "_data_", "document.yaml")
@@ -152,7 +152,7 @@ class PyfficeUnit(object):
         if isinstance(unit, str):
             unit = j.loads(unit)
         self.versions = self.config.dikt.get("versions", {})
-        unit = self.update_unit_structure(unit)
+        # unit = self.update_unit_structure(unit)
         self.time = PyTime()
         self.set_changes(unit.get("changes", None))
         self.set_author(unit.get("meta_data", {}).get("author", None))
@@ -467,7 +467,8 @@ class PyfficeDocument(PyfficeUnit):
         logma.info(f"Load Document {document}")
         if isinstance(document, str):
             document = j.loads(document)
-        document = self.update_document_structure(document)
+        # document = self.update_document_structure(document)
+        logma.info(f"Load Document {document}")
         self.load_unit(document)
         # self.set_cache(document.get("cache", None))
         logma.info(f"Load Document {document.get("data", None)}")
