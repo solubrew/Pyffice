@@ -80,7 +80,10 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
         """"""
         if document is None:
             document = self.config.dikt.get("document", {})
+        if document == {}:
+            return document
         self.document = document
+        logma.info(f"Update Document {document}")
         self.data = deepcopy(document["data"])
         self.meta_data = deepcopy(document["meta_data"])
         document = self.rebuild()
