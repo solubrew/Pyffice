@@ -180,10 +180,14 @@ class PyfficePDF(PyfficeDocument):
         logma.info(f"Load Document {document}")
         if document is None:
             document = self.config.dikt.get("document", {})
-            if document is None:
-                document = {}
+        if document is None:
+            document = {}
         super().load_document(document)
-        self.set_file_path(document.get("data", {}).get("file_path", None))
+        content = document.get("data", {}).get("content", {})
+        if content is None:
+            content = {}
+            self.set_content(content)
+        self.set_file_path(content.get("file_path", None))
         return self
 
     def load_pdf_pages(self):
@@ -248,10 +252,13 @@ class PyfficePDF(PyfficeDocument):
         if self.location == "internal":
             content = self._get_bytes()
         elif self.location == "external":
-            self.set_file_path(content.get("file_path", None))
-            content = {"file_path": self.file_path}
-        else:
-            raise Exception(f"Unknown Location {self.location}")
+            if content is not None:
+                self.set_file_path(content.get("file_path", None))
+                content = {"file_path": self.file_path}
+            else:
+                raise Exception(f"Unknown Location {self.location}")
+        if content is None:
+            content = {}
         if content != self.content:
             self.add_change("content", self.content, content)
             self.content = content

@@ -282,7 +282,7 @@ class PyfficeUnit(object):
     def set_location(self, location):
         """"""
         if location is None:
-            location = "external"
+            location = "internal"
         if location != self.location:
             self.add_change("location", self.location, location)
             self.location = location
