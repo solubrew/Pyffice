@@ -33,25 +33,6 @@ PyfficeScript:
                 headers:
                 body:
                 footers:
-    versions:
-      0.0.1.0.1.0:
-        0.0.1.0.1.1:
-          document:
-            add:
-              - version: 0.0.1.0.1.1
-            update:
-            delete:
-          meta_data:
-            add:
-            update:
-            delete:
-          data:
-            add:
-            update:
-            delete:
-      0.0.1.0.1.2:
-      0.0.1.0.1.3:
-      0.0.1.0.1.4:
     file_formats:
         "word": [".docx", ".dotx"]
         "css": [".css", ".qss"]

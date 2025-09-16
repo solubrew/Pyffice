@@ -1,18 +1,23 @@
 ---
 PyfficeDatabase:
     template:
-        uuid:
+        did:
         name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        version: 0.0.1.0.1.1
         metadata:
-            author:
-            path:
-            location:
-            encoding:
-            tags:
-            context:
-            hash:
-            policy_fk:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
         data:
             host:
             port:
@@ -21,50 +26,65 @@ PyfficeDatabase:
             db_name:
 PyfficeIndex:
     template:
-        uuid:
+        did:
         name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        version: 0.0.1.0.1.1
         metadata:
-            author:
-            path:
-            location:
-            encoding:
-            tags:
-            context:
-            hash:
-            policy_fk:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
         data:
             cmd:
 PyfficeServer:
     template:
-        uuid:
+        did:
         name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        version: 0.0.1.0.1.1
         metadata:
-            author:
-            path:
-            location:
-            encoding:
-            tags:
-            context:
-            hash:
-            policy_fk:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
         data:
             host:
             port:
 PyfficeView:
     template:
-        uuid:
+        did:
         name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        version: 0.0.1.0.1.1
         metadata:
-            author:
-            path:
-            location:
-            encoding:
-            tags:
-            context:
-            hash:
-            policy_fk:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
         data:
             cmd:

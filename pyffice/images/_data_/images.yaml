@@ -11,6 +11,7 @@ PyfficeImage:
         tags:
         context:
         hash:
+        version: 0.0.1.0.1.1
         metadata:
           author:
           editors:
@@ -38,6 +39,7 @@ PyfficeImageManager:
         tags:
         context:
         hash:
+        version: 0.0.1.0.1.1
         metadata:
           author:
           editors:
@@ -57,6 +59,7 @@ PyfficePalette:
         tags:
         context:
         hash:
+        version: 0.0.1.0.1.1
         metadata:
           author:
           editors:
@@ -76,6 +79,7 @@ PyfficeScreenShot:
         tags:
         context:
         hash:
+        version: 0.0.1.0.1.1
         metadata:
           author:
           editors:
@@ -102,6 +106,7 @@ PyfficeSketch:
         tags:
         context:
         hash:
+        version: 0.0.1.0.1.1
         metadata:
           author:
           editors:

@@ -11,6 +11,7 @@ PyfficeMatrix:
         tags:
         context:
         hash:
+        version: 0.0.1.0.1.1
         metadata:
           author:
           editors:
@@ -25,18 +26,18 @@ PyfficeSpreadSheet:
         did:
         name:
         description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        version: 0.0.1.0.1.1
         metadata:
           author:
           editors:
-          path:
-          location:
-          syntax:
-          encoding:
-          tags:
-          context:
-          hash:
-          policy_fk:
-          rating:
+          document_type:
           creon_dttm:
           modon_dttm:
         document:

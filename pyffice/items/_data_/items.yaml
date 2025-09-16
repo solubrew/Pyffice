@@ -10,6 +10,7 @@ PyfficeItem:
         tags:
         context:
         hash:
+        version: 0.0.1.0.1.1
         metadata:
           author:
           editors:
