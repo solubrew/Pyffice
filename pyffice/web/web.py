@@ -15,6 +15,7 @@
 from os.path import abspath, dirname, join
 import datetime as dt
 from copy import deepcopy
+import json as j
 
 # ======================================3rd Party Library Modules=====================================================||
 from collections import deque
@@ -48,7 +49,7 @@ class PyfficeWebBrowser(PyfficeDocument):
         self.active_profile = None
         self.home_page = None
         self.library = None
-        #self.page = None
+        # self.page = None
         self.pages = None
         self.profile_manager = None
         self.doc_type = "browser"
@@ -99,10 +100,9 @@ class PyfficeWebBrowser(PyfficeDocument):
     def load_document(self, document=None):
         """"""
         logma.info(f"Load Document {document}")
-        if document is None:
-            document = self.config.dikt.get("document", {})
-            if document is None:
-                document = {}
+        if isinstance(document, str):
+            document = j.loads(document)
+        document = self.document.override(document).dikt
         logma.info(f"Load Document {document}")
         super().load_document(document)
         # self.set_url_home(document.get("home_url", None))

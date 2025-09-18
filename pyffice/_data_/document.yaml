@@ -1,5 +1,5 @@
 PyfficeDocument:
-  document:
+  template:
     did:
     name:
     description:
@@ -15,20 +15,15 @@ PyfficeDocument:
       author:
       editors:
       document_type:
+      compatibility:
       creon_dttm:
       modon_dttm:
+      policy:
     data:
       content:
       changes:
-      compatibility:
-  versions:
-    0.0.1.0.1.0:
-      0.0.1.0.1.1:
-    0.0.1.0.1.2:
-    0.0.1.0.1.3:
-    0.0.1.0.1.4:
 PyfficeDocumentManager:
-  document:
+  template:
     did:
     name:
     description:
@@ -48,26 +43,8 @@ PyfficeDocumentManager:
       modon_dttm:
     data:
       documents:
-  versions:
-    0.0.1.0.1.0:
-      0.0.1.0.1.1:
-        document:
-          add:
-          update:
-          delete:
-        meta_data:
-          add:
-          update:
-          delete:
-        data:
-          add:
-          update:
-          delete:
-    0.0.1.0.1.2:
-    0.0.1.0.1.3:
-    0.0.1.0.1.4:
 PyfficeUnit:
-  document:
+  template:
     did:
     name:
     description:
@@ -82,13 +59,7 @@ PyfficeUnit:
     metadata:
       author:
       editors:
-      document_type:
+      unit_type:
       creon_dttm:
       modon_dttm:
     unit:
-  versions:
-    0.0.1.0.1.0:
-      0.0.1.0.1.1:
-    0.0.1.0.1.2:
-    0.0.1.0.1.3:
-    0.0.1.0.1.4:

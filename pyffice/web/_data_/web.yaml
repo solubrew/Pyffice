@@ -16,17 +16,16 @@ PyfficeWebBrowser:
           author:
           editors:
           document_type:
+          compatability:
           creon_dttm:
           modon_dttm:
         data:
-            home_url:
-            active_url:
+            home_page:
+            active_page:
             profile_manager:
             pages:
             library:
             content:
-            changes:
-            compatibility:
 PyfficeWebPage:
     template:
         did:
@@ -44,6 +43,7 @@ PyfficeWebPage:
             author:
             editors:
             document_type:
+            compatability:
             creon_dttm:
             modon_dttm:
         data:
@@ -73,6 +73,7 @@ PyfficeWebSource:
             author:
             editors:
             document_type:
+            compatability:
             creon_dttm:
             modon_dttm:
         data:
@@ -93,23 +94,10 @@ PyfficeWebProfile:
             author:
             editors:
             document_type:
+            compatability:
             creon_dttm:
             modon_dttm:
         data:
-            user_name:
-            group:
-            name_details:
-                full:
-                first:
-                middle:
-                last:
-                sur:
-                suffix:
-            nicknames:
-                0:
-                1:
-            channels:
-                -
 PyfficeWebProfileManager:
     template:
         did:
@@ -127,10 +115,8 @@ PyfficeWebProfileManager:
             author:
             editors:
             document_type:
+            compatability:
             creon_dttm:
             modon_dttm:
         data:
-            home_url:
-            library:
-            pages:
             profile_manager:

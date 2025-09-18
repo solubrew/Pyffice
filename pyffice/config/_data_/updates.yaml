@@ -64,18 +64,30 @@ PyfficeDocumentUpdate:
         0.0.1.0.1.1:
           document:
             add:
-              - version: 0.0.1.0.1.1
+              version: 0.0.1.0.1.1
+            delete:
+              document_type:
+              editable:
+              moveable:
+              tab_type:
+              readonly:
+              visible:
+              position:
+              tid:
+              widget:
           meta_data:
             add:
+              author:
+              editors:
+              document_type:
+              compatability:
             update:
-            delete:
           data:
             add:
               active_page:
                 data:
                   history:
                 description:
-
               home_page:
             update:
               home_url: home_page

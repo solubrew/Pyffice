@@ -46,6 +46,7 @@ class PyfficeUnit(object):
     def __init__(self, cfg=None):
         """"""
         self.config = condor.Instruct(pxcfg).select("PyfficeUnit").override(cfg)
+        self.unit = self.config.select("template").override(self.config.select("unit").dikt)
         self.author = None
         self.change_limit = None
         self.changes = None
@@ -147,10 +148,9 @@ class PyfficeUnit(object):
         """"""
         # logma.inspect_caller()
         logma.info(f"Load Unit {unit}")
-        if unit is None:
-            unit = self.config.dikt.get("unit", {})
         if isinstance(unit, str):
             unit = j.loads(unit)
+        unit = self.unit.override(unit).dikt
         self.versions = self.config.dikt.get("versions", {})
         # unit = self.update_unit_structure(unit)
         self.time = PyTime()
@@ -428,10 +428,12 @@ class PyfficeDocument(PyfficeUnit):
         """"""
         super().__init__(cfg)
         self.config.override(condor.Instruct(pxcfg).select("PyfficeDocument")).override(cfg)
+        self.document = self.config.select("template").override(self.config.select("document").dikt)
         self.cache = None
         self.compatibility = None
         self.data = None
         self.doc_types = None
+        self.document_type = None
         self.file_path = None
         self.file_type = None
         self.hash = None
@@ -460,23 +462,17 @@ class PyfficeDocument(PyfficeUnit):
     def load_document(self, document=None):
         """"""
         logma.info(f"Load Document {document}")
-        if document is None:
-            document = self.config.dikt.get("document", {})
-            if document is None:
-                document = {}
-        logma.info(f"Load Document {document}")
         if isinstance(document, str):
             document = j.loads(document)
+        document = self.document.override(document).dikt
         # document = self.update_document_structure(document)
-        logma.info(f"Load Document {document}")
         self.load_unit(document)
-        # self.set_cache(document.get("cache", None))
-        logma.info(f"Load Document {document.get("data", None)}")
         self.set_content(document.get("data", {}).get("content", {}))
-        self.set_compatibility(document.get("compatibility", "pyffice"))
+        self.set_compatibility(document.get("meta_data", {}).get("compatibility", "pyffice"))
+        self.set_document_type(document.get("meta_data", {}).get("document_type", "text"))
         self.set_data(document.get("data", {}))
-        self.set_file_path(document.get("file_path", None))
-        self.set_file_type(document.get("file_type", None))
+        self.set_file_path(document.get("path", None))
+        # self.set_file_type(document.get("file_type", None))
         self.set_version(document.get("version", None))
         return self
 
@@ -562,6 +558,13 @@ class PyfficeDocument(PyfficeUnit):
         if isinstance(data, str):
             data = j.loads(data)
         self.data = data
+        return self
+
+    def set_document_type(self, document_type):
+        """"""
+        if document_type != self.document_type:
+            self.add_change("document_type", self.document_type, document_type)
+            self.document_type = document_type
         return self
 
     def set_file_path(self, file_path):

@@ -130,17 +130,19 @@ class Test_PyfficeUnit(unittest.TestCase):
             assert tree["name"] == self.test_PyfficeUnit_000.name, tree["name"]
             assert tree["did"] == self.test_PyfficeUnit_000.did, tree["did"]
             assert tree["description"] == self.test_PyfficeUnit_000.description, tree["description"]
+            assert tree["encoding"] == self.test_PyfficeUnit_000.encoding, tree["encoding"]
+            assert tree["hash"] == self.test_PyfficeUnit_000.hash, tree["hash"]
+            assert tree["location"] == self.test_PyfficeUnit_000.location, tree["location"]
+            assert tree["path"] == self.test_PyfficeUnit_000.path, tree["path"]
+            assert tree["syntax"] == self.test_PyfficeUnit_000.syntax, tree["syntax"]
+            assert tree["tags"] == self.test_PyfficeUnit_000.tags, tree["tags"]
+            assert tree["version"] == self.test_PyfficeUnit_000.version, tree["version"]
             assert tree["meta_data"]["author"] == self.test_PyfficeUnit_000.author, tree["meta_data"]["author"]
             assert tree["meta_data"]["context"] == self.test_PyfficeUnit_000.context, tree["meta_data"]["context"]
             assert tree["meta_data"]["editors"] == self.test_PyfficeUnit_000.editors, tree["meta_data"]["editors"]
-            assert tree["meta_data"]["encoding"] == self.test_PyfficeUnit_000.encoding, tree["meta_data"]["encoding"]
-            assert tree["meta_data"]["hash"] == self.test_PyfficeUnit_000.hash, tree["meta_data"]["hash"]
-            assert tree["meta_data"]["location"] == self.test_PyfficeUnit_000.location, tree["meta_data"]["location"]
-            assert tree["meta_data"]["path"] == self.test_PyfficeUnit_000.path, tree["meta_data"]["path"]
-            assert tree["meta_data"]["syntax"] == self.test_PyfficeUnit_000.syntax, tree["meta_data"]["syntax"]
-            assert tree["meta_data"]["tags"] == self.test_PyfficeUnit_000.tags, tree["meta_data"]["tags"]
-            assert tree["meta_data"]["creon"] == self.test_PyfficeUnit_000.creon, tree["meta_data"]["creon"]
-            assert tree["meta_data"]["modon"] == self.test_PyfficeUnit_000.modon, tree["meta_data"]["modon"]
+            assert tree["meta_data"]["unit_type"] == self.test_PyfficeUnit_000.encoding, tree["meta_data"]["unit_type"]
+            assert tree["meta_data"]["creon_dttm"] == self.test_PyfficeUnit_000.creon, tree["meta_data"]["creon_dttm"]
+            assert tree["meta_data"]["modon_dttm"] == self.test_PyfficeUnit_000.modon, tree["meta_data"]["modon_dttm"]
             logma.info(f"Test 000 Complete")
 
 
@@ -181,7 +183,6 @@ class Test_PyfficeDocument(unittest.TestCase):
         """"""
         if test_002:
             self.test_PyfficeDocument_002.load_document()
-            assert
         return self
 
     def to_dict(self):

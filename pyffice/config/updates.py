@@ -56,7 +56,7 @@ class PyfficeUnitUpdate(PyfficeUpdate):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("")).override(cfg)
+        self.config.override(condor.Instruct(pxcfg).select("PyfficeUnitUpdate")).override(cfg)
 
     def create_temp_unit(self):
         """"""
@@ -68,7 +68,6 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("")).override(cfg)
         self.config.override(condor.Instruct(pxcfg).select("PyfficeDocumentUpdate")).override(cfg)
         self.data = None
         self.meta_data = None
@@ -96,20 +95,70 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
         document["meta_data"] = self.meta_data
         return document
 
-    def run_adds(self, data):
+    def run_adds(self, data, type_):
         """"""
+        if type_ == "data":
+            for add in data:
+                if isinstance(data[add], dict):
+                    self.run_adds(data[add], type_)
+                elif isinstance(data[add], str):
+                    self.data[add] = self.data[data[add]]
+        elif type_ == "meta_data":
+            for add in data:
+                if isinstance(data[add], dict):
+                    self.run_adds(data[add], type_)
+        elif type_ == "document":
+            for add in data:
+                if isinstance(data[add], dict):
+                    self.run_adds(data[add], type_)
+                elif isinstance(data[add], str):
+                    self.data[add] = self.data[data[add]]
+        else:
+            raise Exception(f"Unknown type: {type_}")
 
-    def run_deletes(self, data):
+    def run_deletes(self, data, type_):
         """"""
+        if type_ == "data":
+            for delete in data:
+                if isinstance(data[delete], dict):
+                    self.run_deletes(data[delete], type_)
+                elif isinstance(data[delete], str):
+                    del self.data[delete]
+        elif type_ == "meta_data":
+            for delete in data:
+                if isinstance(data[delete], dict):
+                    self.run_deletes(data[delete], type_)
+        elif type_ == "document":
+            for delete in data:
+                if isinstance(data[delete], dict):
+                    self.run_deletes(data[delete], type_)
+                elif isinstance(data[delete], str):
+                    del self.data[delete]
+        else:
+            raise Exception(f"Unknown type: {type_}")
 
-    def run_updates(self, data, chain=[]):
+    def run_updates(self, data, type_, chain=[]):
         """"""
-        for update in data:
-            if isinstance(data[update], dict):
-                chain.append(update)
-                self.run_updates(data[update], chain)
-            elif isinstance(data[update], str):
-                self.reset_item(data, update, chain)
+        if type_ == "data":
+            for update in data:
+                if isinstance(data[update], dict):
+                    chain.append(update)
+                    self.run_updates(data[update], chain)
+                elif isinstance(data[update], str):
+                    self.reset_item(data, update, chain)
+        elif type_ == "meta_data":
+            for update in data:
+                if isinstance(data[update], dict):
+                    chain.append(update)
+        elif type_ == "document":
+            for update in data:
+                if isinstance(data[update], dict):
+                    chain.append(update)
+                    self.run_updates(data[update], chain)
+                elif isinstance(data[update], str):
+                    self.reset_item(data, update, chain)
+        else:
+            raise Exception(f"Unknown type: {type_}")
 
     def reset_item(self, data, update, chain):
         if chain == []:
@@ -118,25 +167,34 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
             for item in chain:
                 self.reset_item(data[item], update, chain[1:])
 
-    def update_data(self):
+    def update_data(self, update):
         """"""
-        self.run_adds()
-        self.run_deletes()
-        self.run_updates()
+        if update.get("add", None) is not None:
+            self.run_adds(self.data, "data", update["add"])
+        if update.get("delete", None) is not None:
+            self.run_deletes(self.data, "data", update["delete"])
+        if update.get("update", None) is not None:
+            self.run_updates(self.data, "data", update["update"])
         return self
 
-    def update_document(self):
+    def update_document(self, update):
         """"""
-        self.run_adds()
-        self.run_deletes()
-        self.run_updates()
+        if update.get("add", None) is not None:
+            self.run_adds(self.data, "document", update["add"])
+        if update.get("delete", None) is not None:
+            self.run_deletes(self.data, "document", update["delete"])
+        if update.get("update", None) is not None:
+            self.run_updates(self.data, "document", update["update"])
         return self
 
-    def update_meta_data(self):
+    def update_meta_data(self, update):
         """"""
-        self.run_adds()
-        self.run_deletes()
-        self.run_updates()
+        if update.get("add", None) is not None:
+            self.run_adds(self.data, "meta_data", update["add"])
+        if update.get("delete", None) is not None:
+            self.run_deletes(self.data, "meta_data", update["delete"])
+        if update.get("update", None) is not None:
+            self.run_updates(self.data, "meta_data", update["update"])
         return self
 
     def update_versions(self, version, document_type):
@@ -147,20 +205,47 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
     def update_version_0_0_1_0_1_1(self, version, document_type):
         """"""
         if version == "0.0.1.0.1.0":
-            self.update_document()
-            self.update_meta_data()
-            self.update_data()
             if document_type == "browser":
-                self.update_version_0_0_1_0_1_1_browser()
-            elif document_type == "filesytem":
+                updates = self.config.select("pyffice_browser").dikt[version]
+                for update in updates:
+                    self.update_document(updates[update]["document"])
+                    self.update_meta_data(updates[update]["meta_data"])
+                    self.update_data(updates[update]["data"])
+                    self.update_version_0_0_1_0_1_1_browser()
+            elif document_type == "filesystem":
+                updates = self.config.select("pyffice_browser").dikt[version]
+                for update in updates:
+                    self.update_document(updates[update]["document"])
+                    self.update_meta_data(updates[update]["meta_data"])
+                    self.update_data(updates[update]["data"])
                 self.update_version_0_0_1_0_1_1_filesystem()
             elif document_type == "image":
+                updates = self.config.select("pyffice_browser").dikt[version]
+                for update in updates:
+                    self.update_document(updates[update]["document"])
+                    self.update_meta_data(updates[update]["meta_data"])
+                    self.update_data(updates[update]["data"])
                 self.update_version_0_0_1_0_1_1_image()
             elif document_type == "pdf":
+                updates = self.config.select("pyffice_browser").dikt[version]
+                for update in updates:
+                    self.update_document(updates[update]["document"])
+                    self.update_meta_data(updates[update]["meta_data"])
+                    self.update_data(updates[update]["data"])
                 self.update_version_0_0_1_0_1_1_pdf()
             elif document_type == "prompt":
+                updates = self.config.select("pyffice_browser").dikt[version]
+                for update in updates:
+                    self.update_document(updates[update]["document"])
+                    self.update_meta_data(updates[update]["meta_data"])
+                    self.update_data(updates[update]["data"])
                 self.update_version_0_0_1_0_1_1_prompt()
             elif document_type == "script":
+                updates = self.config.select("pyffice_browser").dikt[version]
+                for update in updates:
+                    self.update_document(updates[update]["document"])
+                    self.update_meta_data(updates[update]["meta_data"])
+                    self.update_data(updates[update]["data"])
                 self.update_version_0_0_1_0_1_1_script()
             version = "0.0.1.0.1.1"
         return version
