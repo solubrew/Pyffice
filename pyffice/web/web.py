@@ -45,6 +45,7 @@ class PyfficeWebBrowser(PyfficeDocument):
         """"""
         super().__init__(cfg)
         self.config.override(condor.Instruct(pxcfg).select("PyfficeWebBrowser")).override(cfg)
+        self.document = self.config.select("template").override(self.config.select("document").dikt)
         self.active_page = None
         self.active_profile = None
         self.home_page = None
