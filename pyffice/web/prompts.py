@@ -21,7 +21,7 @@ import datetime as dt
 from condor import condor
 from ogma.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
-from subtrix.subtrix import uuid
+from subtrix.utilities import uuid
 from pyffice.web.web import PyfficeWebBrowser
 from pyffice.items.text import PyfficeText
 

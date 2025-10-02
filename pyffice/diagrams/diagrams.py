@@ -22,7 +22,7 @@ from click import style
 # ======================================Solutions Brewer Library Modules==============================================||
 from condor import condor
 from ogma.logma import Logma
-from subtrix.subtrix import uuid
+from subtrix.utilities import uuid
 from pyffice.items.cells import PyfficeCell
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager, PyfficeUnit
 from pyffice.items.colors import PyfficeColor

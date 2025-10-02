@@ -16,28 +16,10 @@ from os.path import abspath, dirname, join
 import datetime as dt
 
 # ======================================3rd Party Library Modules=====================================================||
-import xml.etree.ElementTree as ET
-from bs4 import BeautifulSoup
 
-try:
-    import dia
-
-    HAS_DIA = True
-except ImportError:
-    HAS_DIA = False
-    pass
 # ======================================Solutions Brewer Library Modules==============================================||
 from condor import condor
-from subtrix.utilities import uuid
 from ogma.logma import Logma
-from pyffice.document import PyfficeDocument, PyfficeDocumentManager
-from pyffice.images.images import PyfficeImage
-from pyffice.text.text import PyfficeScript
-from pyffice.web.url import PyfficeURL
-from pycurity.pymatch import extract_urls
-
-from pyffice.web.web import PyfficeWebBrowser
-from pyffice.config.ports import PyfficePort
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -45,52 +27,61 @@ log = True
 logma = Logma(__name__)
 
 # ====================================================================================================================||
-pxcfg = join(here, "_data_", "imports.yaml")
+pxcfg = join(here, "_data_", ".yaml")
 
 
-class PyfficePortGoogleDocs(PyfficePort):
-    """"""
-
-    def __init__(self, cfg=None):
-        """"""
-        super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficePortGoogleDocs")).override(cfg)
-
-    def to_native(self):
-        """"""
-
-    def to_xml(self):
-        """"""
-
-
-class PyfficePortGoogleForms(PyfficePort):
-    """"""
+class PyfficePlaylist(PyfficeDocument):
+    """Pyffice Playlist is a workflow for processing content in a playlist. The playlist can consist of multiple
+    content types and multiple addressing methods"""
 
     def __init__(self, cfg=None):
         """"""
-        super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("")).override(cfg)
+        self.config = condor.Instruct(pxcfg).override("")
+        super().__init__(self)
+        self.config.override(cfg)
 
-    def to_native(self):
+    def add_content_service(self):
+        """
+        Allow content services like Netflix, Youtube etc as well as local videos, music, photoshows, etc
+
+
+        :return:
+        """
+
+    def add_content(self):
+        """
+        could be a name of a show or a music artist or a youtube clip
+
+        :return:
+        """
+
+    def random_schedule(self):
+        """
+        randomly swap in various content sources
+        :return:
+        """
+
+    def ebbnflow_schedule(self):
         """"""
 
-    def to_xml(self):
+    def schedule(self):
         """"""
 
-
-class PyfficePortGoogleSheets(PyfficePort):
-    """"""
-
-    def __init__(self, cfg=None):
-        """"""
-        super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficePortGoogleSheets")).override(cfg)
-
-    def to_native(self):
+    def import_schedule(self):
         """"""
 
-    def to_xml(self):
+    def load_document(self, document):
         """"""
+        super().load_document(document)
+        return self
+
+    def open_file(self, document):
+        """"""
+
+    def to_dict(self):
+        """"""
+        doc = super().to_dict()
+        return doc
 
 
 # ====================================================================================================================||

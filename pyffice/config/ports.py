@@ -34,7 +34,7 @@ except ImportError:
     pass
 # ======================================Solutions Brewer Library Modules==============================================||
 from condor import condor
-from subtrix.subtrix import uuid
+from subtrix.utilities import uuid
 from ogma.logma import Logma
 from pyffice.document import PyfficeDocumentManager
 from pyffice.text.text import PyfficeScript

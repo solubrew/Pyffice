@@ -19,12 +19,13 @@ from collections import deque
 from copy import deepcopy
 
 # ======================================3rd Party Library Modules=====================================================||
+#from sentence_transformers import SentenceTransformer
 
 # ======================================Solutions Brewer Library Modules==============================================||
 from condor import condor
 from ogma.logma import Logma
 from squirl.orgnql import conql, yonql
-from subtrix.subtrix import uuid
+from subtrix.utilities import uuid
 from pycurity.pytime import PyTime
 from pyffice.tags.tags import PyfficeTag
 from pyffice.config.updates import PyfficeUnitUpdate, PyfficeDocumentUpdate
@@ -46,7 +47,7 @@ class PyfficeUnit(object):
     def __init__(self, cfg=None):
         """"""
         self.config = condor.Instruct(pxcfg).select("PyfficeUnit").override(cfg)
-        self.unit = self.config.select("template").override(self.config.select("unit").dikt)
+        self.unit = self.config.select("template").override(self.config.select("unit"))
         self.author = None
         self.change_limit = None
         self.changes = None
@@ -73,7 +74,6 @@ class PyfficeUnit(object):
         self.syntax = None
         self.tags = None
         self.time = PyTime()  # TODO build override to allow for time object to be common across application
-        self.unit = None
         self.version = 0
         self.versions = None
 
@@ -141,7 +141,9 @@ class PyfficeUnit(object):
 
     def increment_version(self):
         """"""
-        self.version += 1
+        logma.info(f"Increment Version {self.version}")
+        #self.version = int(self.version)
+        #self.version += 1
         return self
 
     def load_unit(self, unit=None):
@@ -439,6 +441,7 @@ class PyfficeDocument(PyfficeUnit):
         self.hash = None
         self.porter = None
         self.policy = None
+        self.vectors = {}
         # self.lang = utils.invert_dict(self.config.dikt.get("imageLIST", None))
         # self.img = utils.invert_dict(self.config.dikt.get("textLIST", None))
 
@@ -516,15 +519,18 @@ class PyfficeDocument(PyfficeUnit):
         self.save(path, syntax, encrypt_key)
         return self
 
-    def search(self, term):
-        """"""
-        return self.search_document(term)
-
     def search_document(self, term):
         """"""
         if term in self.get_context():
             return True
         return False
+
+    def search_vector(self):
+        """"""
+
+    def search_word(self, term):
+        """"""
+        return self.search_document(term)
 
     def set_cache(self, cache):
         """"""
@@ -549,6 +555,16 @@ class PyfficeDocument(PyfficeUnit):
         if content != self.content:
             self.add_change("content", self.content, content)
             self.content = content
+        return self
+
+    def set_context(self, content):
+        """"""
+        if content is None:
+            content = ""
+        if content != self.context:
+            self.add_change("context", self.context, content)
+            #self.vectorize(content)
+            self.context = content
         return self
 
     def set_data(self, data):
@@ -599,6 +615,14 @@ class PyfficeDocument(PyfficeUnit):
         update = PyfficeDocumentUpdate(document)
         document = update.process()
         return document
+
+    def vectorize(self, content):
+        """create context and vectors for the document"""
+        model = SentenceTransformer("all-MiniLM-L6-v2")
+        embeddings = model.encode(content.split("\n"))
+        for i, (text, emb) in enumerate(zip(content.split("\n"), embeddings)):
+            self.vectors[i] = {"embeddings": emb, "text": text}
+        return self
 
 
 class PyfficeDocumentManager(PyfficeDocument):

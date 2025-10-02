@@ -23,7 +23,7 @@ import furl
 from condor import condor
 from ogma.logma import Logma
 from twof.twofdns import TwoFDNS
-from subtrix.subtrix import uuid
+from subtrix.utilities import uuid
 from pyffice.document import PyfficeUnit, PyfficeDocumentManager
 from pycurity.pyhash import text_hashing_function
 
