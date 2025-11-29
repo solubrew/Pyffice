@@ -35,6 +35,8 @@ pxcfg = join(here, "_data_", ".yaml")
 class PyfficeDatabaseConnection(sonql.Doc):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, path=None, cfg=None):
         """"""
         self.config = condor.Instruct(pxcfg).select("PyfficeDatabaseConnection")
@@ -52,6 +54,8 @@ class PyfficeDatabaseConnection(sonql.Doc):
 
 class PyfficeDatabaseManager(PyfficeDocumentManager):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

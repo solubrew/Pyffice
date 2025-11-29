@@ -35,6 +35,8 @@ pxcfg = join(here, "_data_", "email.yaml")
 class PyfficeEmailMessage(PyfficeMessage):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         self.config = condor.Instruct(pxcfg).select("PyfficeEmailDocument")
@@ -104,6 +106,8 @@ class PyfficeEmailMessage(PyfficeMessage):
 
 class PyfficeMailBox(PyfficeDocumentManager):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

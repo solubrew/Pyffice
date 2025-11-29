@@ -58,6 +58,8 @@ pxcfg = join(here, "_data_", ".yaml")
 class PyfficePort(PyfficeDocumentManager):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -100,6 +102,8 @@ class PyfficePort(PyfficeDocumentManager):
 
 class PyfficePortCherryTree(PyfficePort):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""
@@ -401,6 +405,8 @@ class PyfficePortCherryTree(PyfficePort):
 class PyfficePortNchantdOffice(PyfficePort):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -421,6 +427,8 @@ class PyfficePortNchantdOffice(PyfficePort):
 class PyfficePortCSV(PyfficePort):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -440,6 +448,8 @@ class PyfficePortCSV(PyfficePort):
 
 class PyfficePortDia(PyfficePort):
     """Port Dia File and convert to Nchantd Sketch Document"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""
@@ -533,6 +543,8 @@ class PyfficePortDia(PyfficePort):
 class PyfficePortFileSystem(PyfficePort):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -546,6 +558,8 @@ class PyfficePortFileSystem(PyfficePort):
 
 class PyfficePortImage(PyfficePort):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""
@@ -674,6 +688,8 @@ class PyfficePortImage(PyfficePort):
 class PyfficePortJupyter(PyfficePort):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -714,6 +730,8 @@ class PyfficePortJupyter(PyfficePort):
 class PyfficePortText(PyfficePort):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -727,6 +745,8 @@ class PyfficePortText(PyfficePort):
 
 class PyfficePortWebSession(PyfficePort):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

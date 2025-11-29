@@ -40,6 +40,8 @@ pxcfg = join(here, "_data_", "diagrams.yaml")
 class PyfficeEdge(PyfficeUnit):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -202,6 +204,8 @@ class PyfficeEdge(PyfficeUnit):
 class PyfficeLayer(PyfficeUnit):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -234,6 +238,8 @@ class PyfficeLayer(PyfficeUnit):
 
 class PyfficeNode(PyfficeUnit):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""
@@ -307,6 +313,8 @@ class PyfficeNode(PyfficeUnit):
 
 class PyfficeSketch(PyfficeDocumentManager):
     """A Sketch overlay custom components ontop of a standard image"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""
@@ -456,6 +464,8 @@ class PyfficeSketch(PyfficeDocumentManager):
 
 class PyfficeSketchConnection(PyfficeUnit):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

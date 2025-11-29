@@ -36,6 +36,8 @@ pxcfg = join(here, "_data_", "alarms.yaml")
 class PyfficeAlarm(PyfficeEvent):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)

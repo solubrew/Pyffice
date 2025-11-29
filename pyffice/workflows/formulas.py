@@ -36,6 +36,8 @@ pxcfg = join(here, "_data_", "formulas.yaml")
 class PyfficeFormulasLibrary(PyfficeDocumentManager):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -74,6 +76,8 @@ class PyfficeFormulasLibrary(PyfficeDocumentManager):
 
 class PyfficeFormula(PyfficeUnit, ExcelFormula):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

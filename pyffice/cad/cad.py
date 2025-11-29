@@ -37,6 +37,8 @@ pxcfg = join(here, "_data_", "cad.yaml")
 class PyfficeCADAssembly(PyfficeDocumentManager):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         self.config = condor.Instruct(pxcfg).select("PyfficeCADAssembly")
@@ -73,6 +75,8 @@ class PyfficeCADAssembly(PyfficeDocumentManager):
 class PyfficeCADManager(PyfficeDocumentManager):
     """Manage all cad related items inlcuding assmeblys, objects, libraries, etc"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         self.config = condor.Instruct(pxcfg).select("PyfficeCADManager")
@@ -98,6 +102,8 @@ class PyfficeCADManager(PyfficeDocumentManager):
 
 class PyfficeCADPart(PyfficePart):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

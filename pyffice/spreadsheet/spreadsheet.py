@@ -44,6 +44,8 @@ pxcfg = join(here, "_data_", "spreadsheet.yaml")
 class PyfficeSpreadSheet(PyfficeDocument):
     """Pyffice SpreadSheet is a single page spreadsheet that can be included in a Pyffice Matrix to create a workbook"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -246,6 +248,8 @@ class PyfficeSpreadSheet(PyfficeDocument):
 
 class PyfficeMatrix(PyfficeDocumentManager):
     """A Pyffice Matrix is a top level pyffice document type that can be included in a Pyffice Book"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

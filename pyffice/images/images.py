@@ -49,6 +49,8 @@ class PyfficeImage(PyfficeDocument):
     layers, shapes, tags, and other image operations.
     """
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """
         Initialize the image object.
@@ -311,6 +313,8 @@ class PyfficeImage(PyfficeDocument):
 class PyfficeImageManager(PyfficeDocumentManager):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -366,6 +370,8 @@ class PyfficeImageManager(PyfficeDocumentManager):
 
 class PyfficeScreenShot(PyfficeDocument):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

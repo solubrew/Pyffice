@@ -35,6 +35,8 @@ pxcfg = join(here, "_data_", "text.yaml")
 class PyfficeText(PyfficeUnit):
     """Pyffice Text object consists of one string of text that can be formated in various ways by setting the selections"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)

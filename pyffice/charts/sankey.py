@@ -41,6 +41,8 @@ class SankeyChart:
     A class to create Sankey charts using Plotly.
     """
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, sources, targets, values, labels=None):
         """
         Initialize the Sankey chart data.

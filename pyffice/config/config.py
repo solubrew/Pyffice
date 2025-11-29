@@ -34,6 +34,8 @@ pxcfg = join(here, "_data_", "config.yaml")
 class PyfficeConfig(PyfficeDocument):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -52,6 +54,8 @@ class PyfficeConfig(PyfficeDocument):
 class PyfficeTOML(PyfficeConfig):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -60,6 +64,8 @@ class PyfficeTOML(PyfficeConfig):
 
 class PyfficeHelp(PyfficeConfig):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

@@ -2,19 +2,18 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
+    docid:
+    name:
+    description: >
+    version: 0.0.0.0.0.0
+    authority: filesystem
+    security: seclvl2
+    <(WT)>: -32
 """
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
 import datetime as dt
-from copy import deepcopy
 
 # ======================================3rd Party Library Modules=====================================================||
 
@@ -28,7 +27,7 @@ log = True
 logma = Logma(__name__)
 
 # ====================================================================================================================||
-pxcfg = join(here, "_data_", "updates.yaml")
+pxcfg = join(here, "_data_", ".yaml")
 
 
 class PyfficeUpdate(object):

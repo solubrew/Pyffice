@@ -34,6 +34,8 @@ class PyfficePlaylist(PyfficeDocument):
     """Pyffice Playlist is a workflow for processing content in a playlist. The playlist can consist of multiple
     content types and multiple addressing methods"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         self.config = condor.Instruct(pxcfg).override("")

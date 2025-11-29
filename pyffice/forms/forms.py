@@ -40,6 +40,8 @@ class PyfficeForm(PyfficeDocument):
     removing elements within the form dynamically.
     """
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -178,6 +180,8 @@ class PyfficeForm(PyfficeDocument):
 class PyfficeFormsManager(PyfficeDocumentManager):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -218,6 +222,8 @@ class PyfficeSurvey(PyfficeDocument):
     additionally allow for creating surveys on sites like X and incorporating results into survey
 
     """
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

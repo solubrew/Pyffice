@@ -42,6 +42,8 @@ pxcfg = join(here, "_data_", "audio.yaml")
 class PyfficeAudio(PyfficeDocument):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, path, cfg=None):
         """"""
         self.config = condor.Instruct(pxcfg).select("PyfficeAudio")
@@ -107,6 +109,8 @@ class PyfficeAudio(PyfficeDocument):
 
 class PyfficePlayList(PyfficeDocumentManager):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

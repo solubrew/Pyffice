@@ -40,6 +40,8 @@ pxcfg = join(here, "_data_", "text.yaml")
 class PyfficeScript(PyfficeDocument):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         if cfg is None:

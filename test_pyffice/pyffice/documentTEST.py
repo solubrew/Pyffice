@@ -1,34 +1,46 @@
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
 """
----
-<(META)>:
-  docid:
-  name:
-  description: >
-  version: 0.0.0.0.0.0
-  authority: filesystem
-  security: seclvl2
-  <(WT)>: -32
+-(META)-:
+    docid: <[uuid]>
+    name: <[file name]>
+    description: >
+      <[description]>
+    expiry: <[expiration]>
+    version: <[version]>
+    authority: <[authority]>
+    security: <[security]>
+    -(WT)-: -32  # 2025-11-29 11:58:17
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
 import datetime as dt
 import unittest
 
-# ======================================3rd Party Library Modules=====================================================||
 
-# ======================================Solutions Brewer Library Modules==============================================||
+import json  # 2025-11-29 11:58:17
+import tempfile  # 2025-11-29 11:58:17
+import os  # 2025-11-29 11:58:17
+
+# ======================================3rd Party Library Modules=====================================================||
+from pyffice.document import PyfficeUnit, PyfficeDocument, PyfficeDocumentManager
+
+import join  # 2025-11-29 11:58:17
+import dirname  # 2025-11-29 11:58:17
+import Logma  # 2025-11-29 11:58:17
+from pyffice.document import PyfficeDeque  # 2025-11-29 11:58:17
+
+# =========================================Local Library Modules======================================================||
 from condor import condor
 from ogma.logma import Logma
-from pyffice.document import PyfficeUnit, PyfficeDocument, PyfficeDocumentManager
+import condor  # 2025-11-29 11:58:17
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True
 logma = Logma(__name__)
 
-# ====================================================================================================================||
 pxcfg = join(here, "_data_", "documentTEST.yaml")
 cfg = condor.Instruct(pxcfg).select("Test_PyfficeUnit").dikt
 test_000 = True
@@ -44,8 +56,17 @@ fixture003 = fixtures["fixture_003"]
 fixture005 = fixtures["fixture_005"]
 
 
-class Test_PyfficeUnit(unittest.TestCase):
-    """ """
+HERE = join(dirname(__file__))  # 2025-11-29 11:58:17
+LOGMA = Logma(__name__)  # 2025-11-29 11:58:17
+PXCFG = join(HERE, "_data_", "documentTEST.yaml")  # 2025-11-29 11:58:17
+CFG = condor.Instruct(PXCFG).load().dikt  # 2025-11-29 11:58:17
+FIXTURES = condor.Instruct(join(HERE, "..", "fixtures", "fixtures.yaml")).load().dikt  # 2025-11-29 11:58:17
+
+# ====================================================================================================================||
+
+
+class Test_PyfficeUnit(unittest.TestCase):  # 2025-11-29 11:58:17
+    """"""
 
     @classmethod
     def setup_class(cls, cfg=None):
@@ -71,6 +92,56 @@ class Test_PyfficeUnit(unittest.TestCase):
         """"""
         self.test_load_unit()
         return self
+
+    def test_add_change(self):  # 2025-11-29 11:58:17
+        """"""
+        if TEST_000:
+            pass
+
+    def test_add_editor(self):  # 2025-11-29 11:58:17
+        """"""
+        if TEST_000:
+            pass
+
+    def test_add_tag(self):  # 2025-11-29 11:58:17
+        """"""
+        if TEST_000:
+            pass
+
+    def test_del_editor(self):  # 2025-11-29 11:58:17
+        """"""
+        if TEST_000:
+            pass
+
+    def test_del_reference(self):  # 2025-11-29 11:58:17
+        """"""
+        if TEST_000:
+            pass
+
+    def test_del_tag(self):  # 2025-11-29 11:58:17
+        """"""
+        if TEST_000:
+            pass
+
+    def test_get_context(self):  # 2025-11-29 11:58:17
+        """"""
+        if TEST_000:
+            pass
+
+    def test_get_hash(self):  # 2025-11-29 11:58:17
+        """"""
+        if TEST_000:
+            pass
+
+    def test_get_tags(self):  # 2025-11-29 11:58:17
+        """"""
+        if TEST_000:
+            pass
+
+    def test_increment_version(self):  # 2025-11-29 11:58:17
+        """"""
+        if TEST_000:
+            pass
 
     def test_init(self):
         """
@@ -122,6 +193,121 @@ class Test_PyfficeUnit(unittest.TestCase):
             assert self.test_PyfficeUnit_001.modon == "2025-05-08 16:43:50", self.test_PyfficeUnit_001.modon
             logma.info(f"Test 001 Complete")
 
+    def test_redo_change(self):  # 2025-11-29 11:58:17
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_author(self):  # 2025-11-29 11:58:17
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_change_limit(self):  # 2025-11-29 11:58:17
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_changes(self):  # 2025-11-29 11:58:17
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_context(self):  # 2025-11-29 11:58:17
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_creon(self):  # 2025-11-29 11:58:17
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_data(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_description(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_did(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_editors(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_encoding(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_hash(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_location(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_meta_data(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_modon(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_name(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_path(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_redos(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_references(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_saved(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_syntax(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_tags(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_version(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
     def test_to_dict(self):
         """"""
         logma.info(f"Test to_dict")
@@ -145,9 +331,34 @@ class Test_PyfficeUnit(unittest.TestCase):
             assert tree["meta_data"]["modon_dttm"] == self.test_PyfficeUnit_000.modon, tree["meta_data"]["modon_dttm"]
             logma.info(f"Test 000 Complete")
 
+    def test_to_html(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
 
-class Test_PyfficeDocument(unittest.TestCase):
-    """ """
+    def test_to_string(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_undo_change(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_update_unit_structure(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test___init__(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+
+class Test_PyfficeDocument(unittest.TestCase):  # 2025-11-29 11:58:18
+    """"""
 
     @classmethod
     def setup_class(cls, cfg=None):
@@ -173,6 +384,21 @@ class Test_PyfficeDocument(unittest.TestCase):
         """"""
         return self
 
+    def test_file_export(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_file_import(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_file_open(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
     def test_init(self):
         """
         :return:
@@ -185,13 +411,113 @@ class Test_PyfficeDocument(unittest.TestCase):
             self.test_PyfficeDocument_002.load_document()
         return self
 
+    def test_save(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_save_as(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_save_copy(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_save_pyffice(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_search_document(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_search_vector(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_search_word(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_cache(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_compatibility(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_content(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_context(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_data(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_document_type(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_file_path(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_file_type(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_to_dict(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_update_document_structure(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_update_document_time(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_vectorize(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
     def to_dict(self):
         """"""
         return self
 
+    def test___init__(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
 
-class Test_PyfficeDocumentManager(unittest.TestCase):
-    """ """
+
+class Test_PyfficeDocumentManager(unittest.TestCase):  # 2025-11-29 11:58:18
+    """"""
 
     @classmethod
     def setup_class(cls, cfg=None):
@@ -217,6 +543,26 @@ class Test_PyfficeDocumentManager(unittest.TestCase):
         """"""
         return self
 
+    def test_add_document(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_del_document(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_get_context(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_get_document(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
     def test_init(self):
         """
         :return:
@@ -227,11 +573,123 @@ class Test_PyfficeDocumentManager(unittest.TestCase):
         """"""
         return self
 
+    def test_search(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_search_documents(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_doc_types(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_documents(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+    def test_to_dict(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
     def to_dict(self):
         """"""
         return self
 
+    def test___init__(self):  # 2025-11-29 11:58:18
+        """"""
+        if TEST_000:
+            pass
+
+
+class Test_PyfficeDeque:  # 2025-11-29 11:58:19
+    """"""
+
+    @classmethod
+    def setup_class(cls):  # 2025-11-29 11:58:19
+        """"""
+
+        return cls()
+
+    @classmethod
+    def teardown_class(cls):  # 2025-11-29 11:58:19
+        """"""
+
+        return
+
+    def reset(self):  # 2025-11-29 11:58:19
+        """"""
+        self.setup_class()
+        return self
+
+    def test_all(self):  # 2025-11-29 11:58:19
+        """Executes a series of test functions in a sequential logic."""
+
+        return self
+
+    def test_append(self):  # 2025-11-29 11:58:19
+        """"""
+        if TEST_000:
+            pass
+
+    def test_appendleft(self):  # 2025-11-29 11:58:19
+        """"""
+        if TEST_000:
+            pass
+
+    def test_set_max_items(self):  # 2025-11-29 11:58:19
+        """"""
+        if TEST_000:
+            pass
+
+    def test_to_dict(self):  # 2025-11-29 11:58:19
+        """"""
+        if TEST_000:
+            pass
+
+    def test___init__(self):  # 2025-11-29 11:58:19
+        """"""
+        if TEST_000:
+            pass
+
+
+class Test_Functions:  # 2025-11-29 11:58:19
+    """"""
+
+    @classmethod
+    def setup_class(cls):  # 2025-11-29 11:58:19
+        """"""
+
+        return cls()
+
+    @classmethod
+    def teardown_class(cls):  # 2025-11-29 11:58:19
+        """"""
+
+        return
+
+    def reset(self):  # 2025-11-29 11:58:19
+        """"""
+        self.setup_class()
+        return self
+
+    def test_all(self):  # 2025-11-29 11:58:19
+        """Executes a series of test functions in a sequential logic."""
+
+        return self
+
 
 # ====================================================================================================================||
+"""
 
+  # 2025-11-29 11:58:17
+
+
+"""
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||

@@ -34,6 +34,8 @@ pxcfg = join(here, "_data_", ".yaml")
 class PyfficeSMS(PyfficeMessage):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -43,6 +45,8 @@ class PyfficeSMS(PyfficeMessage):
 class PyfficeMMS(PyfficeMessage):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -51,6 +55,8 @@ class PyfficeMMS(PyfficeMessage):
 
 class PyfficePostalMail(PyfficeMessage):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

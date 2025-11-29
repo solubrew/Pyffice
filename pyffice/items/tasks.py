@@ -34,6 +34,8 @@ pxcfg = join(here, "_data_", "tasks.yaml")
 class PyfficeRecurrenceManager(PyfficeDocumentManager):
     """Extract recurrence information from tasks and then store them in a structure for later retrevial and reprocessing"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         self.config = condor.Instruct(pxcfg).override("")
@@ -57,6 +59,8 @@ class PyfficeRecurrenceManager(PyfficeDocumentManager):
 class PyfficeTasksManager(PyfficeDocumentManager):
     """A Tasks Manager manages projects"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         self.config = condor.Instruct(pxcfg).select("PyfficeTaskManager")
@@ -71,6 +75,8 @@ class PyfficeTasksManager(PyfficeDocumentManager):
 
 class PyfficeProject(PyfficeTasksManager):
     """A Project Manages Tasks"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""
@@ -106,6 +112,8 @@ class PyfficeProject(PyfficeTasksManager):
 class PyfficeProjectsManager(PyfficeTasksManager):
     """A Project Manages Tasks"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         self.config = condor.Instruct(pxcfg).select("PyfficeProject")
@@ -138,6 +146,8 @@ class PyfficeProjectsManager(PyfficeTasksManager):
 
 class PyfficeTaskFrame(PyfficeTask):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""
@@ -222,6 +232,8 @@ class PyfficeTaskFrame(PyfficeTask):
 
 class PyfficeWork(PyfficeDocument):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

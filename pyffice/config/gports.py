@@ -51,6 +51,8 @@ pxcfg = join(here, "_data_", "imports.yaml")
 class PyfficePortGoogleDocs(PyfficePort):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -66,6 +68,8 @@ class PyfficePortGoogleDocs(PyfficePort):
 class PyfficePortGoogleForms(PyfficePort):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -80,6 +84,8 @@ class PyfficePortGoogleForms(PyfficePort):
 
 class PyfficePortGoogleSheets(PyfficePort):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

@@ -34,6 +34,8 @@ pxcfg = join(here, "_data_", "tasks.yaml")
 class PyfficeTimeUnit(PyfficeUnit):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -213,6 +215,8 @@ class PyfficeTimeUnit(PyfficeUnit):
 class PyfficeEvent(PyfficeUnit):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -275,6 +279,8 @@ class PyfficeEvent(PyfficeUnit):
 
 class PyfficeTask(PyfficeUnit):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

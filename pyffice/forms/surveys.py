@@ -43,6 +43,8 @@ class PyfficeResponse(PyfficeDocument):
             Adds an answer to the form response by associating it with a specific question ID.
     """
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, form_id, cfg=None):
         """"""
         self.config = condor.Instruct(pxcfg).override("")
@@ -69,6 +71,8 @@ class PyfficeResponse(PyfficeDocument):
 class PyfficeSurvey(PyfficeDocument):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         self.config = condor.Instruct(pxcfg).override("PyfficeSurvey")
@@ -78,6 +82,8 @@ class PyfficeSurvey(PyfficeDocument):
 
 class PyfficeSurveyManager(PyfficeDocumentManager):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""
@@ -120,6 +126,8 @@ class PyfficeSurveyManager(PyfficeDocumentManager):
     additionally allow for creating surveys on sites like X and incorporating results into survey
 
     """
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

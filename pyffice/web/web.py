@@ -41,6 +41,8 @@ pxcfg = join(here, "_data_", "web.yaml")
 class PyfficeWebBrowser(PyfficeDocument):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -249,6 +251,8 @@ class PyfficeWebBrowser(PyfficeDocument):
 class PyfficeWebPage(PyfficeDocument):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -401,6 +405,8 @@ class PyfficeWebPage(PyfficeDocument):
 class PyfficeWebProfile(PyfficeContact):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -422,6 +428,8 @@ class PyfficeWebProfile(PyfficeContact):
 
 class PyfficeWebProfileManager(PyfficeRolodex):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

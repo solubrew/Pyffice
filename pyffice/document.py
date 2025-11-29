@@ -19,7 +19,7 @@ from collections import deque
 from copy import deepcopy
 
 # ======================================3rd Party Library Modules=====================================================||
-#from sentence_transformers import SentenceTransformer
+# from sentence_transformers import SentenceTransformer
 
 # ======================================Solutions Brewer Library Modules==============================================||
 from condor import condor
@@ -43,6 +43,8 @@ pxcfg = join(here, "_data_", "document.yaml")
 
 class PyfficeUnit(object):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""
@@ -142,8 +144,8 @@ class PyfficeUnit(object):
     def increment_version(self):
         """"""
         logma.info(f"Increment Version {self.version}")
-        #self.version = int(self.version)
-        #self.version += 1
+        # self.version = int(self.version)
+        # self.version += 1
         return self
 
     def load_unit(self, unit=None):
@@ -426,6 +428,8 @@ class PyfficeUnit(object):
 class PyfficeDocument(PyfficeUnit):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -563,7 +567,7 @@ class PyfficeDocument(PyfficeUnit):
             content = ""
         if content != self.context:
             self.add_change("context", self.context, content)
-            #self.vectorize(content)
+            # self.vectorize(content)
             self.context = content
         return self
 
@@ -627,6 +631,8 @@ class PyfficeDocument(PyfficeUnit):
 
 class PyfficeDocumentManager(PyfficeDocument):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""
@@ -706,6 +712,8 @@ class PyfficeDocumentManager(PyfficeDocument):
 
 class PyfficeDeque(PyfficeDocument, deque):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

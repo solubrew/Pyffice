@@ -47,6 +47,8 @@ class PyfficeGanttChart(object):
         resource_col (str, optional): Column name for task categories or resources (default=None).
     """
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, data, task_col, start_col, end_col, resource_col=None, cfg=None):
         """"""
         self.config = condor.Instruct(pxcfg).select("").override(cfg)

@@ -62,6 +62,8 @@ class PyfficeColor(PyfficeUnit):
     - LMS (Long-Medium-Short cone response)
     """
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """
         Initialize the PyfficeColor object.
@@ -438,6 +440,8 @@ class PyfficeColorPalette(PyfficeDocument):
     It supports adding colors manually, retrieving colors, and extracting colors
     from various content types like images, SVG files, and videos.
     """
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """

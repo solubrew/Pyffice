@@ -37,6 +37,8 @@ pxcfg = join(here, "_data_", "prompts.yaml")
 class PyfficeContext(PyfficeDocument):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -45,6 +47,8 @@ class PyfficeContext(PyfficeDocument):
 
 class PyfficePrompt(PyfficeDocument):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""
@@ -225,6 +229,8 @@ class PyfficePrompt(PyfficeDocument):
 class PyfficeResponse(PyfficeDocument):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -246,6 +252,8 @@ class PyfficeResponse(PyfficeDocument):
 
 class PyfficePromptsManager(PyfficeDocumentManager):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

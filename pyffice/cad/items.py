@@ -39,6 +39,8 @@ pxcfg = join(here, "_data_", ".yaml")
 class PyfficeShape(PyfficeDocument):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, center=(0, 0, 0), dimensions=2, cfg=None):
         """"""
         self.config = condor.Instruct(pxcfg).override("")

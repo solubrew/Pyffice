@@ -52,6 +52,8 @@ pxcfg = join(here, "_data_", "pyffice.yaml")
 class PyfficeCodex(PyfficeDocumentManager):
     """A Pyffice Book is a container that can hold multiple instances and types of Pyffice Top Level Documents"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)

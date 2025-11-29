@@ -40,6 +40,8 @@ class PyfficeChart(PyfficeDocument):
     A flexible general-purpose charting class for creating various charts using Seaborn and Matplotlib.
     """
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """
         Initialize the chart with default configurations.

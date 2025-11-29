@@ -41,6 +41,8 @@ class PyfficePDF(PyfficeDocument):
     annotations, embedded media, and encryption.
     """
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """
         Initialize with a given PDF file path and optional configuration.

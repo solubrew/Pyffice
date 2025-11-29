@@ -34,6 +34,8 @@ pxcfg = join(here, "_data_", "cam.yaml")
 class PyfficeCAM(PyfficeDocument):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -52,6 +54,8 @@ class PyfficeCAM(PyfficeDocument):
 
 class PyfficeCAMManager(PyfficeDocumentManager):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

@@ -45,6 +45,8 @@ pxcfg = join(here, "_data_", "exports.yaml")
 class PyfficePortExcel(PyfficePort):
     """Port Matrix to Excel"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -308,6 +310,8 @@ class PyfficePortExcel(PyfficePort):
 
 class PyfficePortWord(PyfficePort):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

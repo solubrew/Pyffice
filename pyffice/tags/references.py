@@ -34,6 +34,8 @@ pxcfg = join(here, "_data_", ".yaml")
 class PyfficeReference(PyfficeTag):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)

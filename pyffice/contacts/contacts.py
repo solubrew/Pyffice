@@ -36,6 +36,8 @@ pxcfg = join(here, "_data_", "contacts.yaml")
 class PyfficeContact(PyfficeDocument):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -308,6 +310,8 @@ class PyfficeContact(PyfficeDocument):
 
 class PyfficeRolodex(PyfficeDocumentManager):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

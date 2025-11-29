@@ -35,6 +35,8 @@ pxcfg = join(here, "_data_", "bom.yaml")
 class PyfficeBOM(PyfficeDocumentManager):
     """"""
 
+    VERSION = "0.0.1.0.1.0"
+
     def __init__(self, cfg=None):
         """"""
         self.config = condor.Instruct(pxcfg).override("PyfficeBOM")
@@ -61,6 +63,8 @@ class PyfficeBOM(PyfficeDocumentManager):
 
 class PyfficeSoftwareBOM(PyfficeBOM):
     """"""
+
+    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""
