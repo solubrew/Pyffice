@@ -21,6 +21,7 @@ import datetime as dt
 from condor import condor
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 from ogma.logma import Logma
+from pyffice.calendars.calendars import PyfficeTask
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||

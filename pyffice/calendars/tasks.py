@@ -21,6 +21,7 @@ import datetime as dt
 from condor import condor
 from ogma.logma import Logma
 from pyffice.document import PyfficeDocumentManager, PyfficeUnit
+from axn.action import Action
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -291,6 +292,10 @@ class PyfficeTask(PyfficeUnit):
         self.due_dttm = None
         self.start_dttm = None
         self.work = None
+        name = None
+        details = None
+        cfg = None
+        self.action = Action(name, details, cfg)
 
     def load_unit(self, unit):
         """"""

@@ -28,7 +28,7 @@ from squirl.orgnql import conql, yonql
 from subtrix.utilities import uuid
 from pycurity.pytime import PyTime
 from pyffice.tags.tags import PyfficeTag
-from pyffice.config.updates import PyfficeUnitUpdate, PyfficeDocumentUpdate
+from pyffice.updates.updates import PyfficeUnitUpdate, PyfficeDocumentUpdate
 from pycurity.pyhash import text_hashing_function
 
 # ====================================================================================================================||

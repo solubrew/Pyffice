@@ -38,7 +38,7 @@ pxcfg = join(here, "_data_", "text.yaml")
 
 
 class PyfficeScript(PyfficeDocument):
-    """"""
+    """Pyffice Script is a Document type that handles text-based versions of documents within the pyffice framework."""
 
     VERSION = "0.0.1.0.1.0"
 
