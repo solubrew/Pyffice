@@ -23,7 +23,10 @@ try:
     has_ffmpeg = True
 except:
     print("FFMPEG not Available.")
-import pydub
+# try:
+#     import pydub
+# except:
+#     print("Pydub not Available.")
 
 # ======================================Solutions Brewer Library Modules==============================================||
 from condor import condor
@@ -50,7 +53,7 @@ class PyfficeAudio(PyfficeDocument):
         super().__init__()
         self.config.override(cfg)
         self.path = path
-        self.audio = pydub.AudioSegment.from_file(path)
+        # self.audio = pydub.AudioSegment.from_file(path)
 
     def add_fade(self, inn=False, out=False, in_duration=None, out_duration=None):
         """"""

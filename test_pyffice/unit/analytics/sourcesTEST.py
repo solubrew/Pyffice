@@ -9,349 +9,258 @@
     version: <[version]>
     authority: <[authority]>
     security: <[security]>
-    -(WT)-: -32  # 2025-11-29 11:58:22
+    -(WT)-: -32  # 2026-01-15 20:29:07
 """
 
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-from os.path import abspath, dirname, join
-import datetime as dt
-import unittest
-
-
-import json  # 2025-11-29 11:58:22
-import tempfile  # 2025-11-29 11:58:22
-import os  # 2025-11-29 11:58:22
+import unittest  # 2026-01-15 20:29:06
+import tempfile  # 2026-01-15 20:29:06
+import json  # 2026-01-15 20:29:06
+import os  # 2026-01-15 20:29:06
+from pathlib import Path  # 2026-01-15 20:19:28
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:19:28
+from os.path import join  # 2026-01-15 20:19:28
+from os.path import dirname  # 2026-01-15 20:19:28
 
 # ======================================3rd Party Library Modules=====================================================||
-from pyffice.analytics.sources import PyfficeSources, PyfficeDataSet, PyfficeDataView
+from pyffice.analytics.sources import PyfficeSources  # 2026-01-15 20:19:28
+from pyffice.analytics.sources import PyfficeDataSet  # 2026-01-15 20:19:28
+from pyffice.analytics.sources import PyfficeDataView  # 2026-01-15 20:19:28
 
-import join  # 2025-11-29 11:58:22
-import dirname  # 2025-11-29 11:58:22
-import Logma  # 2025-11-29 11:58:22
+from pathlib import Path  # 2026-01-15 20:29:06
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:29:06
+from os.path import join  # 2026-01-15 20:29:06
+from os.path import dirname  # 2026-01-15 20:29:06
+from ogma.logma import Logma  # 2026-01-15 20:29:06
+from pyffice.analytics.sources import PyfficeSources  # 2026-01-15 20:29:06
+from pyffice.analytics.sources import PyfficeDataSet  # 2026-01-15 20:29:06
+from pyffice.analytics.sources import PyfficeDataView  # 2026-01-15 20:29:06
 
 # =========================================Local Library Modules======================================================||
-from condor import condor
-from ogma.logma import Logma
-import condor  # 2025-11-29 11:58:22
+from ogma.logma import Logma  # 2026-01-15 15:12:35
+from condor import condor  # 2026-01-15 20:19:28
+
+import pytest  # 2026-01-15 20:29:06
+import hypothesis  # 2026-01-15 20:29:06
+from condor import condor  # 2026-01-15 20:29:06
 
 # ====================================================================================================================||
-here = join(dirname(__file__), "")  # ||
-log = True
-logma = Logma(__name__)
+HERE = join(dirname(__file__))  # 2026-01-15 20:29:06
+LOGMA = Logma(__name__)  # 2026-01-15 20:29:06
+PXCFG = join(HERE, "_data_", "sourcesTEST.yaml")  # 2026-01-15 20:29:06
+CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:06
 
-pxcfg = join(here, "_data_", "sourcesTEST.yaml")
-test_000 = True
-test_001 = True
-
-
-HERE = join(dirname(__file__))  # 2025-11-29 11:58:22
-LOGMA = Logma(__name__)  # 2025-11-29 11:58:22
-PXCFG = join(HERE, "_data_", "sourcesTEST.yaml")  # 2025-11-29 11:58:23
-CFG = condor.Instruct(PXCFG).load().dikt  # 2025-11-29 11:58:23
-FIXTURES = condor.Instruct(join(HERE, "..", "fixtures", "fixtures.yaml")).load().dikt  # 2025-11-29 11:58:23
 
 # ====================================================================================================================||
 
 
-class Test_PyfficeSources(unittest.TestCase):  # 2025-11-29 11:58:23
+class Test_PyfficeSources:  # 2026-01-15 15:12:37
     """"""
 
     @classmethod
-    def setup_class(cls, cfg=None):
-        """
-        :param cfg:
-        :return:
-        """
-        cls.config = condor.Instruct(pxcfg).select("Test_PyfficeSources")
-        if test_000:
-            cls.test_PyfficeSources_000 = PyfficeSources()
-        if test_001:
-            cfg = {"document": cls.config.dikt["fixture_001"]["document"]}
-            cls.test_PyfficeSources_001 = PyfficeSources(cfg)
-        return cls()
-
-    @classmethod
-    def teardown_class(cls):
-        """
-        :return:
-        """
-
-    def test_all(self):
-        """"""
-        return self
-
-    def test_add_source(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def test_init(self):
-        """
-        :return:
-        """
-        return self
-
-    def test_load_document(self):
-        """"""
-        return self
-
-    def test_set_sources(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def test_to_dict(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def to_dict(self):
-        """"""
-        return self
-
-    def test___init__(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-
-class Test_PyfficeDataSet(unittest.TestCase):  # 2025-11-29 11:58:23
-    """"""
-
-    @classmethod
-    def setup_class(cls, cfg=None):
-        """
-
-        :param cfg:
-        :return:
-        """
-        cls.config = condor.Instruct(pxcfg).select("Test_PyfficeDataSet")
-        if test_000:
-            cls.test_PyfficeDataSet_000 = PyfficeDataSet()
-        if test_001:
-            cfg = {"document": cls.config.dikt["fixture_001"]["document"]}
-            cls.test_PyfficeDataSet_001 = PyfficeDataSet(cfg)
-        return cls()
-
-    @classmethod
-    def teardown_class(cls):
-        """
-        :return:
-        """
-
-    def test_all(self):
-        """"""
-        return self
-
-    def test_add_relationship(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def test_add_source(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def test_add_view(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def test_del_relationship(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def test_del_source(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def test_del_view(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def test_init(self):
-        """
-        :return:
-        """
-        return self
-
-    def test_load_document(self):
-        """"""
-        return self
-
-    def test_set_relationships(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def test_set_sources(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def test_set_views(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def test_to_dict(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def to_dict(self):
-        """"""
-        return self
-
-    def test___init__(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-
-class Test_PyfficeDataView(unittest.TestCase):  # 2025-11-29 11:58:23
-    """"""
-
-    @classmethod
-    def setup_class(cls, cfg=None):
-        """
-
-        :param cfg:
-        :return:
-        """
-        cls.config = condor.Instruct(pxcfg).select("Test_PyfficeDataView")
-        if test_000:
-            cls.test_PyfficeDataView_000 = PyfficeDataView()
-        if test_001:
-            cfg = {"document": cls.config.dikt["fixture_001"]["document"]}
-            cls.test_PyfficeDataView_001 = PyfficeDataView(cfg)
-        return cls()
-
-    @classmethod
-    def teardown_class(cls):
-        """
-        :return:
-        """
-
-    def test_all(self):
-        """"""
-        return self
-
-    def test_add_filter(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def test_add_summarization(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def test_apply_filters(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def test_apply_summarizations(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def test_del_filter(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def test_del_summarization(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def test_get_data(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def test_init(self):
-        """
-        :return:
-        """
-        return self
-
-    def test_load_document(self):
-        """"""
-        return self
-
-    def test_set_columns(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def test_set_data(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def test_set_filters(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def test_set_summarizations(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def test_to_dict(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-    def to_dict(self):
-        """"""
-        return self
-
-    def test___init__(self):  # 2025-11-29 11:58:23
-        """"""
-        if TEST_000:
-            pass
-
-
-class Test_Functions:  # 2025-11-29 11:58:23
-    """"""
-
-    @classmethod
-    def setup_class(cls):  # 2025-11-29 11:58:23
+    def setup_class(cls):  # 2026-01-15 15:12:37
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:58:23
+    def teardown_class(cls):  # 2026-01-15 15:12:37
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 11:58:23
+    def reset(self):  # 2026-01-15 15:12:37
         """"""
         self.setup_class()
-        return self
+        
 
-    def test_all(self):  # 2025-11-29 11:58:23
+    def test_all(self):  # 2026-01-15 15:12:37
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
+
+    def test_add_source(self):  # 2026-01-15 15:12:35
+        """"""
+        pass
+
+    def test_load_document(self):  # 2026-01-15 15:12:35
+        """"""
+        pass
+
+    def test_set_sources(self):  # 2026-01-15 15:12:36
+        """"""
+        pass
+
+    def test_to_dict(self):  # 2026-01-15 15:12:36
+        """"""
+        pass
+
+    def test___init__(self):  # 2026-01-15 15:12:35
+        """"""
+        pass
+
+
+class Test_PyfficeDataSet:  # 2026-01-15 15:12:37
+    """"""
+
+    @classmethod
+    def setup_class(cls):  # 2026-01-15 15:12:37
+        """"""
+
+        return cls()
+
+    @classmethod
+    def teardown_class(cls):  # 2026-01-15 15:12:37
+        """"""
+
+        return
+
+    def reset(self):  # 2026-01-15 15:12:37
+        """"""
+        self.setup_class()
+        
+
+    def test_all(self):  # 2026-01-15 15:12:37
+        """Executes a series of test functions in a sequential logic."""
+
+        
+
+    def test_add_relationship(self):  # 2026-01-15 15:12:36
+        """"""
+        pass
+
+    def test_add_source(self):  # 2026-01-15 15:12:36
+        """"""
+        pass
+
+    def test_add_view(self):  # 2026-01-15 15:12:36
+        """"""
+        pass
+
+    def test_del_relationship(self):  # 2026-01-15 15:12:36
+        """"""
+        pass
+
+    def test_del_source(self):  # 2026-01-15 15:12:36
+        """"""
+        pass
+
+    def test_del_view(self):  # 2026-01-15 15:12:36
+        """"""
+        pass
+
+    def test_load_document(self):  # 2026-01-15 15:12:36
+        """"""
+        pass
+
+    def test_set_relationships(self):  # 2026-01-15 15:12:36
+        """"""
+        pass
+
+    def test_set_sources(self):  # 2026-01-15 15:12:36
+        """"""
+        pass
+
+    def test_set_views(self):  # 2026-01-15 15:12:36
+        """"""
+        pass
+
+    def test_to_dict(self):  # 2026-01-15 15:12:36
+        """"""
+        pass
+
+    def test___init__(self):  # 2026-01-15 15:12:36
+        """"""
+        pass
+
+
+class Test_PyfficeDataView:  # 2026-01-15 15:12:37
+    """"""
+
+    @classmethod
+    def setup_class(cls):  # 2026-01-15 15:12:37
+        """"""
+
+        return cls()
+
+    @classmethod
+    def teardown_class(cls):  # 2026-01-15 15:12:37
+        """"""
+
+        return
+
+    def reset(self):  # 2026-01-15 15:12:37
+        """"""
+        self.setup_class()
+        
+
+    def test_all(self):  # 2026-01-15 15:12:37
+        """Executes a series of test functions in a sequential logic."""
+
+        
+
+    def test_add_filter(self):  # 2026-01-15 15:12:36
+        """"""
+        pass
+
+    def test_add_summarization(self):  # 2026-01-15 15:12:36
+        """"""
+        pass
+
+    def test_apply_filters(self):  # 2026-01-15 15:12:36
+        """"""
+        pass
+
+    def test_apply_summarizations(self):  # 2026-01-15 15:12:36
+        """"""
+        pass
+
+    def test_del_filter(self):  # 2026-01-15 15:12:36
+        """"""
+        pass
+
+    def test_del_summarization(self):  # 2026-01-15 15:12:36
+        """"""
+        pass
+
+    def test_get_data(self):  # 2026-01-15 15:12:36
+        """"""
+        pass
+
+    def test_load_document(self):  # 2026-01-15 15:12:36
+        """"""
+        pass
+
+    def test_set_columns(self):  # 2026-01-15 15:12:37
+        """"""
+        pass
+
+    def test_set_data(self):  # 2026-01-15 15:12:37
+        """"""
+        pass
+
+    def test_set_filters(self):  # 2026-01-15 15:12:37
+        """"""
+        pass
+
+    def test_set_summarizations(self):  # 2026-01-15 15:12:37
+        """"""
+        pass
+
+    def test_to_dict(self):  # 2026-01-15 15:12:37
+        """"""
+        pass
+
+    def test___init__(self):  # 2026-01-15 15:12:36
+        """"""
+        pass
 
 
 # ====================================================================================================================||
 """
 
-  # 2025-11-29 11:58:22
+  # 2026-01-15 20:29:07
 
 
 """

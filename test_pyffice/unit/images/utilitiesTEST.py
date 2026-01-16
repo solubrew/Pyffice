@@ -9,136 +9,125 @@
     version: <[version]>
     authority: <[authority]>
     security: <[security]>
-    -(WT)-: -32  # 2025-11-29 11:59:42
+    -(WT)-: -32  # 2026-01-15 20:30:10
 """
 
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-from os.path import abspath, dirname, join
-import datetime as dt
-
-import json  # 2025-11-29 11:59:42
-import tempfile  # 2025-11-29 11:59:43
-import os  # 2025-11-29 11:59:43
+import unittest  # 2026-01-15 20:30:09
+import tempfile  # 2026-01-15 20:30:09
+import json  # 2026-01-15 20:30:09
+import os  # 2026-01-15 20:30:09
+from pathlib import Path  # 2026-01-15 20:20:27
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:20:27
+from os.path import join  # 2026-01-15 20:20:27
+from os.path import dirname  # 2026-01-15 20:20:27
 
 # ======================================3rd Party Library Modules=====================================================||
-import join  # 2025-11-29 11:59:43
-import dirname  # 2025-11-29 11:59:43
-import Logma  # 2025-11-29 11:59:43
-from pyffice.images.utilities import hex_to_rgb  # 2025-11-29 11:59:43
-from pyffice.images.utilities import rgb_to_hex  # 2025-11-29 11:59:43
-from pyffice.images.utilities import rgb_to_hsl  # 2025-11-29 11:59:43
-from pyffice.images.utilities import hsl_to_rgb  # 2025-11-29 11:59:43
-from pyffice.images.utilities import is_similar_hue  # 2025-11-29 11:59:43
-from pyffice.images.utilities import convert_shades_of_color  # 2025-11-29 11:59:43
-from pyffice.images.utilities import convert_shades_of_color_in_svg  # 2025-11-29 11:59:43
-from pyffice.images.utilities import convert_shades_of_color_in_jpg  # 2025-11-29 11:59:43
-from pyffice.images.utilities import convert_shades_of_color_in_png  # 2025-11-29 11:59:43
-from pyffice.images.utilities import check_image_type  # 2025-11-29 11:59:43
+from pyffice.images.utilities import hex_to_rgb  # 2026-01-15 20:30:09
+from pyffice.images.utilities import rgb_to_hex  # 2026-01-15 20:30:09
+from pyffice.images.utilities import rgb_to_hsl  # 2026-01-15 20:30:09
+from pyffice.images.utilities import hsl_to_rgb  # 2026-01-15 20:30:09
+from pyffice.images.utilities import is_similar_hue  # 2026-01-15 20:30:09
+from pyffice.images.utilities import convert_shades_of_color  # 2026-01-15 20:30:09
+from pyffice.images.utilities import convert_shades_of_color_in_svg  # 2026-01-15 20:30:09
+from pyffice.images.utilities import convert_shades_of_color_in_jpg  # 2026-01-15 20:30:09
+from pyffice.images.utilities import convert_shades_of_color_in_png  # 2026-01-15 20:30:09
+from pyffice.images.utilities import check_image_type  # 2026-01-15 20:30:09
+from pathlib import Path  # 2026-01-15 20:30:09
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:30:09
+from os.path import join  # 2026-01-15 20:30:09
+from os.path import dirname  # 2026-01-15 20:30:09
+from ogma.logma import Logma  # 2026-01-15 20:30:09
 
 # =========================================Local Library Modules======================================================||
-from condor import condor
-from ogma.logma import Logma
+from ogma.logma import Logma  # 2026-01-15 15:13:45
+from condor import condor  # 2026-01-15 20:20:27
 
-import condor  # 2025-11-29 11:59:43
+import pytest  # 2026-01-15 20:30:09
+import hypothesis  # 2026-01-15 20:30:09
+from condor import condor  # 2026-01-15 20:30:09
 
 # ====================================================================================================================||
-here = join(dirname(__file__), "")  # ||
-log = True
-logma = Logma(__name__)
+HERE = join(dirname(__file__))  # 2026-01-15 20:30:09
+LOGMA = Logma(__name__)  # 2026-01-15 20:30:09
+PXCFG = join(HERE, "_data_", "utilitiesTEST.yaml")  # 2026-01-15 20:30:09
+CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:09
 
-pxcfg = join(here, "_data_", ".yaml")
-
-
-HERE = join(dirname(__file__))  # 2025-11-29 11:59:43
-LOGMA = Logma(__name__)  # 2025-11-29 11:59:43
-PXCFG = join(HERE, "_data_", "utilitiesTEST.yaml")  # 2025-11-29 11:59:43
-CFG = condor.Instruct(PXCFG).load().dikt  # 2025-11-29 11:59:43
-FIXTURES = condor.Instruct(join(HERE, "..", "fixtures", "fixtures.yaml")).load().dikt  # 2025-11-29 11:59:43
 
 # ====================================================================================================================||
 
 
-class Test_Functions:  # 2025-11-29 11:59:43
+class Test_Functions:  # 2026-01-15 20:30:10
     """"""
 
     @classmethod
-    def setup_class(cls):  # 2025-11-29 11:59:43
+    def setup_class(cls):  # 2026-01-15 15:13:47
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:59:43
+    def teardown_class(cls):  # 2026-01-15 15:13:47
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 11:59:43
-        """"""
-        self.setup_class()
-        return self
-
-    def test_all(self):  # 2025-11-29 11:59:43
+    def test_all(self):  # 2026-01-15 15:13:47
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
 
-    def test_check_image_type(self):  # 2025-11-29 11:59:43
+    def reset(self):  # 2026-01-15 15:13:47
         """"""
-        if TEST_000:
-            pass
+        self.setup_class()
+        
 
-    def test_convert_shades_of_color(self):  # 2025-11-29 11:59:43
+    def test_check_image_type(self):  # 2026-01-15 20:30:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_convert_shades_of_color_in_jpg(self):  # 2025-11-29 11:59:43
+    def test_convert_shades_of_color(self):  # 2026-01-15 20:30:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_convert_shades_of_color_in_png(self):  # 2025-11-29 11:59:43
+    def test_convert_shades_of_color_in_jpg(self):  # 2026-01-15 20:30:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_convert_shades_of_color_in_svg(self):  # 2025-11-29 11:59:43
+    def test_convert_shades_of_color_in_png(self):  # 2026-01-15 20:30:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_hex_to_rgb(self):  # 2025-11-29 11:59:43
+    def test_convert_shades_of_color_in_svg(self):  # 2026-01-15 20:30:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_hsl_to_rgb(self):  # 2025-11-29 11:59:43
+    def test_hex_to_rgb(self):  # 2026-01-15 20:30:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_is_similar_hue(self):  # 2025-11-29 11:59:43
+    def test_hsl_to_rgb(self):  # 2026-01-15 20:30:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_rgb_to_hex(self):  # 2025-11-29 11:59:43
+    def test_is_similar_hue(self):  # 2026-01-15 20:30:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_rgb_to_hsl(self):  # 2025-11-29 11:59:43
+    def test_rgb_to_hex(self):  # 2026-01-15 20:30:10
         """"""
-        if TEST_000:
-            pass
+        pass
+
+    def test_rgb_to_hsl(self):  # 2026-01-15 20:30:10
+        """"""
+        pass
 
 
 # ====================================================================================================================||
 """
 
-  # 2025-11-29 11:59:42
+  # 2026-01-15 20:30:10
 
 
 """

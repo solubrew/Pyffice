@@ -9,170 +9,111 @@
     version: <[version]>
     authority: <[authority]>
     security: <[security]>
-    -(WT)-: -32  # 2025-11-29 12:01:24
+    -(WT)-: -32  # 2026-01-15 20:31:32
 """
 
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-from os.path import abspath, dirname, join
-import datetime as dt
-import unittest
-
-
-import json  # 2025-11-29 12:01:24
-import tempfile  # 2025-11-29 12:01:24
-import os  # 2025-11-29 12:01:24
+import unittest  # 2026-01-15 20:31:31
+import tempfile  # 2026-01-15 20:31:31
+import json  # 2026-01-15 20:31:31
+import os  # 2026-01-15 20:31:31
+from pathlib import Path  # 2026-01-15 20:21:46
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:21:46
+from os.path import join  # 2026-01-15 20:21:46
+from os.path import dirname  # 2026-01-15 20:21:46
 
 # ======================================3rd Party Library Modules=====================================================||
-from pyffice.workflows.alarms import PyfficeAlarm
+from pyffice.workflows.alarms import PyfficeAlarm  # 2026-01-15 20:21:46
 
-import join  # 2025-11-29 12:01:24
-import dirname  # 2025-11-29 12:01:24
-import Logma  # 2025-11-29 12:01:24
+from pathlib import Path  # 2026-01-15 20:31:31
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:31:31
+from os.path import join  # 2026-01-15 20:31:31
+from os.path import dirname  # 2026-01-15 20:31:31
+from ogma.logma import Logma  # 2026-01-15 20:31:31
+from pyffice.workflows.alarms import PyfficeAlarm  # 2026-01-15 20:31:31
 
 # =========================================Local Library Modules======================================================||
-from condor import condor
-from ogma.logma import Logma
+from ogma.logma import Logma  # 2026-01-15 15:15:16
+from condor import condor  # 2026-01-15 20:21:46
 
-import condor  # 2025-11-29 12:01:24
+import pytest  # 2026-01-15 20:31:31
+import hypothesis  # 2026-01-15 20:31:31
+from condor import condor  # 2026-01-15 20:31:31
 
 # ====================================================================================================================||
-here = join(dirname(__file__), "")  # ||
-log = True
-logma = Logma(__name__)
+HERE = join(dirname(__file__))  # 2026-01-15 20:31:31
+LOGMA = Logma(__name__)  # 2026-01-15 20:31:31
+PXCFG = join(HERE, "_data_", "alarmsTEST.yaml")  # 2026-01-15 20:31:31
+CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:31:31
 
-pxcfg = join(here, "_data_", "alarmsTEST.yaml")
-test_000 = True
-test_001 = True
-
-
-HERE = join(dirname(__file__))  # 2025-11-29 12:01:24
-LOGMA = Logma(__name__)  # 2025-11-29 12:01:24
-PXCFG = join(HERE, "_data_", "alarmsTEST.yaml")  # 2025-11-29 12:01:24
-CFG = condor.Instruct(PXCFG).load().dikt  # 2025-11-29 12:01:24
-FIXTURES = condor.Instruct(join(HERE, "..", "fixtures", "fixtures.yaml")).load().dikt  # 2025-11-29 12:01:24
 
 # ====================================================================================================================||
 
 
-class Test_PyfficeAlarm(unittest.TestCase):  # 2025-11-29 12:01:25
+class Test_PyfficeAlarm:  # 2026-01-15 15:15:17
     """"""
 
     @classmethod
-    def setup_class(cls, cfg=None):
-        """
-
-        :param cfg:
-        :return:
-        """
-        cls.config = condor.Instruct(pxcfg).select("Test_PyfficeWebProfileManager")
-        if test_000:
-            cls.test_PyfficeAlarm_000 = PyfficeAlarm()
-        if test_001:
-            cfg = {"document": cls.config.dikt["fixture_001"]["document"]}
-            cls.test_PyfficeAlarm_001 = PyfficeAlarm(cfg)
-        return cls()
-
-    @classmethod
-    def teardown_class(cls):
-        """
-        :return:
-        """
-
-    def test_all(self):
-        """"""
-        return self
-
-    def test_add_postpone(self):  # 2025-11-29 12:01:25
-        """"""
-        if TEST_000:
-            pass
-
-    def test_init(self):
-        """
-        :return:
-        """
-        return self
-
-    def test_load_document(self):
-        """"""
-        return self
-
-    def test_load_unit(self):  # 2025-11-29 12:01:25
-        """"""
-        if TEST_000:
-            pass
-
-    def test_set_acknowledge(self):  # 2025-11-29 12:01:25
-        """"""
-        if TEST_000:
-            pass
-
-    def test_set_limit(self):  # 2025-11-29 12:01:25
-        """"""
-        if TEST_000:
-            pass
-
-    def test_set_notify(self):  # 2025-11-29 12:01:25
-        """"""
-        if TEST_000:
-            pass
-
-    def test_set_postpone(self):  # 2025-11-29 12:01:25
-        """"""
-        if TEST_000:
-            pass
-
-    def test_set_tasks(self):  # 2025-11-29 12:01:25
-        """"""
-        if TEST_000:
-            pass
-
-    def test_to_dict(self):  # 2025-11-29 12:01:25
-        """"""
-        if TEST_000:
-            pass
-
-    def to_dict(self):
-        """"""
-        return self
-
-    def test___init__(self):  # 2025-11-29 12:01:25
-        """"""
-        if TEST_000:
-            pass
-
-
-class Test_Functions:  # 2025-11-29 12:01:25
-    """"""
-
-    @classmethod
-    def setup_class(cls):  # 2025-11-29 12:01:25
+    def setup_class(cls):  # 2026-01-15 15:15:17
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 12:01:25
+    def teardown_class(cls):  # 2026-01-15 15:15:17
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 12:01:25
+    def reset(self):  # 2026-01-15 15:15:17
         """"""
         self.setup_class()
-        return self
 
-    def test_all(self):  # 2025-11-29 12:01:25
+    def test_all(self):  # 2026-01-15 15:15:17
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+    def test_add_postpone(self):  # 2026-01-15 15:15:17
+        """"""
+        pass
+
+    def test_load_unit(self):  # 2026-01-15 15:15:17
+        """"""
+        pass
+
+    def test_set_acknowledge(self):  # 2026-01-15 15:15:17
+        """"""
+        pass
+
+    def test_set_limit(self):  # 2026-01-15 15:15:17
+        """"""
+        pass
+
+    def test_set_notify(self):  # 2026-01-15 15:15:17
+        """"""
+        pass
+
+    def test_set_postpone(self):  # 2026-01-15 15:15:17
+        """"""
+        pass
+
+    def test_set_tasks(self):  # 2026-01-15 15:15:17
+        """"""
+        pass
+
+    def test_to_dict(self):  # 2026-01-15 15:15:17
+        """"""
+        pass
+
+    def test___init__(self):  # 2026-01-15 15:15:17
+        """"""
+        pass
 
 
 # ====================================================================================================================||
 """
 
-  # 2025-11-29 12:01:24
+  # 2026-01-15 20:31:32
 
 
 """

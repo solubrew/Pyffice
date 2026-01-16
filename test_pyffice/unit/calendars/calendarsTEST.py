@@ -9,185 +9,130 @@
     version: <[version]>
     authority: <[authority]>
     security: <[security]>
-    -(WT)-: -32  # 2025-11-29 11:58:33
+    -(WT)-: -32  # 2026-01-15 20:29:15
 """
 
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-from os.path import abspath, dirname, join
-import datetime as dt
-import unittest
-
-
-import json  # 2025-11-29 11:58:33
-import tempfile  # 2025-11-29 11:58:33
-import os  # 2025-11-29 11:58:33
+import unittest  # 2026-01-15 20:29:15
+import tempfile  # 2026-01-15 20:29:15
+import json  # 2026-01-15 20:29:15
+import os  # 2026-01-15 20:29:15
+from pathlib import Path  # 2026-01-15 20:19:36
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:19:36
+from os.path import join  # 2026-01-15 20:19:36
+from os.path import dirname  # 2026-01-15 20:19:36
 
 # ======================================3rd Party Library Modules=====================================================||
-from pyffice.calendars.calendars import PyfficeCalendar
+from pyffice.calendars.calendars import PyfficeCalendar  # 2026-01-15 20:19:36
 
-import join  # 2025-11-29 11:58:33
-import dirname  # 2025-11-29 11:58:33
-import Logma  # 2025-11-29 11:58:33
+from pathlib import Path  # 2026-01-15 20:29:15
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:29:15
+from os.path import join  # 2026-01-15 20:29:15
+from os.path import dirname  # 2026-01-15 20:29:15
+from ogma.logma import Logma  # 2026-01-15 20:29:15
+from pyffice.calendars.calendars import PyfficeCalendar  # 2026-01-15 20:29:15
 
 # =========================================Local Library Modules======================================================||
-from condor import condor
-from ogma.logma import Logma
+from ogma.logma import Logma  # 2026-01-15 15:12:44
+from condor import condor  # 2026-01-15 20:19:36
 
-import condor  # 2025-11-29 11:58:33
+import pytest  # 2026-01-15 20:29:15
+import hypothesis  # 2026-01-15 20:29:15
+from condor import condor  # 2026-01-15 20:29:15
 
 # ====================================================================================================================||
-here = join(dirname(__file__), "")  # ||
-log = True
-logma = Logma(__name__)
+HERE = join(dirname(__file__))  # 2026-01-15 20:29:15
+LOGMA = Logma(__name__)  # 2026-01-15 20:29:15
+PXCFG = join(HERE, "_data_", "calendarsTEST.yaml")  # 2026-01-15 20:29:15
+CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:15
 
-pxcfg = join(here, "_data_", "calendarTEST.yaml")
-test_000 = True
-test_001 = True
-
-
-HERE = join(dirname(__file__))  # 2025-11-29 11:58:33
-LOGMA = Logma(__name__)  # 2025-11-29 11:58:33
-PXCFG = join(HERE, "_data_", "calendarsTEST.yaml")  # 2025-11-29 11:58:33
-CFG = condor.Instruct(PXCFG).load().dikt  # 2025-11-29 11:58:33
-FIXTURES = condor.Instruct(join(HERE, "..", "fixtures", "fixtures.yaml")).load().dikt  # 2025-11-29 11:58:33
 
 # ====================================================================================================================||
 
 
-class Test_PyfficeCalendar(unittest.TestCase):  # 2025-11-29 11:58:33
+class Test_PyfficeCalendar:  # 2026-01-15 15:12:44
     """"""
 
     @classmethod
-    def setup_class(cls, cfg=None):
-        """
-
-        :param cfg:
-        :return:
-        """
-        cls.config = condor.Instruct(pxcfg).select("Test_PyfficeCalendar")
-        if test_000:
-            cls.test_PyfficeCalendar_000 = PyfficeCalendar()
-        if test_001:
-            cfg = {"document": cls.config.dikt["fixture_001"]["document"]}
-            cls.test_PyfficeCalendar_001 = PyfficeCalendar(cfg)
-        return cls()
-
-    @classmethod
-    def teardown_class(cls):
-        """
-        :return:
-        """
-
-    def test_all(self):
-        """"""
-        return self
-
-    def test_add_event(self):  # 2025-11-29 11:58:33
-        """"""
-        if TEST_000:
-            pass
-
-    def test_add_task(self):  # 2025-11-29 11:58:33
-        """"""
-        if TEST_000:
-            pass
-
-    def test_del_event(self):  # 2025-11-29 11:58:33
-        """"""
-        if TEST_000:
-            pass
-
-    def test_del_task(self):  # 2025-11-29 11:58:33
-        """"""
-        if TEST_000:
-            pass
-
-    def test_init(self):
-        """
-        :return:
-        """
-        return self
-
-    def test_load_document(self):
-        """"""
-        return self
-
-    def test_set_date_end(self):  # 2025-11-29 11:58:33
-        """"""
-        if TEST_000:
-            pass
-
-    def test_set_date_start(self):  # 2025-11-29 11:58:34
-        """"""
-        if TEST_000:
-            pass
-
-    def test_set_events(self):  # 2025-11-29 11:58:34
-        """"""
-        if TEST_000:
-            pass
-
-    def test_set_tasks(self):  # 2025-11-29 11:58:34
-        """"""
-        if TEST_000:
-            pass
-
-    def test_set_time_scale(self):  # 2025-11-29 11:58:34
-        """"""
-        if TEST_000:
-            pass
-
-    def test_set_time_unit(self):  # 2025-11-29 11:58:34
-        """"""
-        if TEST_000:
-            pass
-
-    def test_to_dict(self):  # 2025-11-29 11:58:34
-        """"""
-        if TEST_000:
-            pass
-
-    def to_dict(self):
-        """"""
-        return self
-
-    def test___init__(self):  # 2025-11-29 11:58:34
-        """"""
-        if TEST_000:
-            pass
-
-
-class Test_Functions:  # 2025-11-29 11:58:34
-    """"""
-
-    @classmethod
-    def setup_class(cls):  # 2025-11-29 11:58:34
+    def setup_class(cls):  # 2026-01-15 15:12:44
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:58:34
+    def teardown_class(cls):  # 2026-01-15 15:12:44
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 11:58:34
+    def reset(self):  # 2026-01-15 15:12:44
         """"""
         self.setup_class()
-        return self
+        
 
-    def test_all(self):  # 2025-11-29 11:58:34
+    def test_all(self):  # 2026-01-15 15:12:44
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
+
+    def test_add_event(self):  # 2026-01-15 15:12:44
+        """"""
+        pass
+
+    def test_add_task(self):  # 2026-01-15 15:12:44
+        """"""
+        pass
+
+    def test_del_event(self):  # 2026-01-15 15:12:44
+        """"""
+        pass
+
+    def test_del_task(self):  # 2026-01-15 15:12:44
+        """"""
+        pass
+
+    def test_load_document(self):  # 2026-01-15 15:12:44
+        """"""
+        pass
+
+    def test_set_date_end(self):  # 2026-01-15 15:12:44
+        """"""
+        pass
+
+    def test_set_date_start(self):  # 2026-01-15 15:12:44
+        """"""
+        pass
+
+    def test_set_events(self):  # 2026-01-15 15:12:44
+        """"""
+        pass
+
+    def test_set_tasks(self):  # 2026-01-15 15:12:44
+        """"""
+        pass
+
+    def test_set_time_scale(self):  # 2026-01-15 15:12:44
+        """"""
+        pass
+
+    def test_set_time_unit(self):  # 2026-01-15 15:12:44
+        """"""
+        pass
+
+    def test_to_dict(self):  # 2026-01-15 15:12:44
+        """"""
+        pass
+
+    def test___init__(self):  # 2026-01-15 15:12:44
+        """"""
+        pass
 
 
 # ====================================================================================================================||
 """
 
-  # 2025-11-29 11:58:33
+  # 2026-01-15 20:29:15
 
 
 """

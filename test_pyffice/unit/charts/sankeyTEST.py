@@ -9,115 +9,98 @@
     version: <[version]>
     authority: <[authority]>
     security: <[security]>
-    -(WT)-: -32  # 2025-11-29 11:58:44
+    -(WT)-: -32  # 2026-01-15 20:29:27
 """
 
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-import json  # 2025-11-29 11:58:44
-import tempfile  # 2025-11-29 11:58:44
-import os  # 2025-11-29 11:58:44
+import unittest  # 2026-01-15 20:29:27
+import tempfile  # 2026-01-15 20:29:27
+import json  # 2026-01-15 20:29:27
+import os  # 2026-01-15 20:29:27
+from pathlib import Path  # 2026-01-15 20:19:48
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:19:48
+from os.path import join  # 2026-01-15 20:19:48
+from os.path import dirname  # 2026-01-15 20:19:48
 
 # ======================================3rd Party Library Modules=====================================================||
-import join  # 2025-11-29 11:58:44
-import dirname  # 2025-11-29 11:58:44
-import Logma  # 2025-11-29 11:58:44
-from pyffice.charts.sankey import SankeyChart  # 2025-11-29 11:58:44
+from pyffice.charts.sankey import SankeyChart  # 2026-01-15 20:19:48
+
+from pathlib import Path  # 2026-01-15 20:29:27
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:29:27
+from os.path import join  # 2026-01-15 20:29:27
+from os.path import dirname  # 2026-01-15 20:29:27
+from ogma.logma import Logma  # 2026-01-15 20:29:27
+from pyffice.charts.sankey import SankeyChart  # 2026-01-15 20:29:27
 
 # =========================================Local Library Modules======================================================||
-import condor  # 2025-11-29 11:58:44
+from ogma.logma import Logma  # 2026-01-15 15:12:57
+from condor import condor  # 2026-01-15 20:19:48
+
+import pytest  # 2026-01-15 20:29:27
+import hypothesis  # 2026-01-15 20:29:27
+from condor import condor  # 2026-01-15 20:29:27
 
 # ====================================================================================================================||
-HERE = join(dirname(__file__))  # 2025-11-29 11:58:44
-LOGMA = Logma(__name__)  # 2025-11-29 11:58:44
-PXCFG = join(HERE, "_data_", "sankeyTEST.yaml")  # 2025-11-29 11:58:44
-CFG = condor.Instruct(PXCFG).load().dikt  # 2025-11-29 11:58:44
-FIXTURES = condor.Instruct(join(HERE, "..", "fixtures", "fixtures.yaml")).load().dikt  # 2025-11-29 11:58:44
+HERE = join(dirname(__file__))  # 2026-01-15 20:29:27
+LOGMA = Logma(__name__)  # 2026-01-15 20:29:27
+PXCFG = join(HERE, "_data_", "sankeyTEST.yaml")  # 2026-01-15 20:29:27
+CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:27
+
 
 # ====================================================================================================================||
 
 
-class Test_SankeyChart:  # 2025-11-29 11:58:44
+class Test_SankeyChart:  # 2026-01-15 15:12:57
     """"""
 
     @classmethod
-    def setup_class(cls):  # 2025-11-29 11:58:44
+    def setup_class(cls):  # 2026-01-15 15:12:57
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:58:44
+    def teardown_class(cls):  # 2026-01-15 15:12:57
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 11:58:44
+    def reset(self):  # 2026-01-15 15:12:57
         """"""
         self.setup_class()
-        return self
+        
 
-    def test_all(self):  # 2025-11-29 11:58:44
+    def test_all(self):  # 2026-01-15 15:12:57
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
 
-    def test_create_sankey_chart(self):  # 2025-11-29 11:58:44
+    def test_create_sankey_chart(self):  # 2026-01-15 15:12:57
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_load_document(self):  # 2025-11-29 11:58:44
+    def test_load_document(self):  # 2026-01-15 15:12:57
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_open_file(self):  # 2025-11-29 11:58:44
+    def test_open_file(self):  # 2026-01-15 15:12:57
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_save_sankey_chart(self):  # 2025-11-29 11:58:44
+    def test_save_sankey_chart(self):  # 2026-01-15 15:12:57
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test___init__(self):  # 2025-11-29 11:58:44
+    def test___init__(self):  # 2026-01-15 15:12:57
         """"""
-        if TEST_000:
-            pass
-
-
-class Test_Functions:  # 2025-11-29 11:58:44
-    """"""
-
-    @classmethod
-    def setup_class(cls):  # 2025-11-29 11:58:44
-        """"""
-
-        return cls()
-
-    @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:58:44
-        """"""
-
-        return
-
-    def reset(self):  # 2025-11-29 11:58:44
-        """"""
-        self.setup_class()
-        return self
-
-    def test_all(self):  # 2025-11-29 11:58:44
-        """Executes a series of test functions in a sequential logic."""
-
-        return self
+        pass
 
 
 # ====================================================================================================================||
 """
 
-  # 2025-11-29 11:58:44
+  # 2026-01-15 20:29:27
 
 
 """

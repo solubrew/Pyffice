@@ -9,63 +9,50 @@
     version: <[version]>
     authority: <[authority]>
     security: <[security]>
-    -(WT)-: -32  # 2025-11-29 12:01:34
+    -(WT)-: -32  # 2026-01-15 20:31:37
 """
 
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-import json  # 2025-11-29 12:01:34
-import tempfile  # 2025-11-29 12:01:34
-import os  # 2025-11-29 12:01:34
+import unittest  # 2026-01-15 20:31:36
+import tempfile  # 2026-01-15 20:31:36
+import json  # 2026-01-15 20:31:36
+import os  # 2026-01-15 20:31:36
+from pathlib import Path  # 2026-01-15 20:21:51
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:21:51
+from os.path import join  # 2026-01-15 20:21:51
+from os.path import dirname  # 2026-01-15 20:21:51
 
 # ======================================3rd Party Library Modules=====================================================||
-import join  # 2025-11-29 12:01:34
-import dirname  # 2025-11-29 12:01:34
-import Logma  # 2025-11-29 12:01:34
+from pathlib import Path  # 2026-01-15 20:31:36
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:31:36
+from os.path import join  # 2026-01-15 20:31:36
+from os.path import dirname  # 2026-01-15 20:31:36
+from ogma.logma import Logma  # 2026-01-15 20:31:36
 
 # =========================================Local Library Modules======================================================||
-import condor  # 2025-11-29 12:01:34
+from ogma.logma import Logma  # 2026-01-15 15:15:22
+
+from condor import condor  # 2026-01-15 20:21:51
+
+import pytest  # 2026-01-15 20:31:36
+import hypothesis  # 2026-01-15 20:31:36
+from condor import condor  # 2026-01-15 20:31:36
 
 # ====================================================================================================================||
-HERE = join(dirname(__file__))  # 2025-11-29 12:01:34
-LOGMA = Logma(__name__)  # 2025-11-29 12:01:34
-PXCFG = join(HERE, "_data_", "source_controlTEST.yaml")  # 2025-11-29 12:01:34
-CFG = condor.Instruct(PXCFG).load().dikt  # 2025-11-29 12:01:34
-FIXTURES = condor.Instruct(join(HERE, "..", "fixtures", "fixtures.yaml")).load().dikt  # 2025-11-29 12:01:34
+HERE = join(dirname(__file__))  # 2026-01-15 20:31:36
+LOGMA = Logma(__name__)  # 2026-01-15 20:31:36
+PXCFG = join(HERE, "_data_", "source_controlTEST.yaml")  # 2026-01-15 20:31:36
+CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:31:36
+
 
 # ====================================================================================================================||
-
-
-class Test_Functions:  # 2025-11-29 12:01:34
-    """"""
-
-    @classmethod
-    def setup_class(cls):  # 2025-11-29 12:01:34
-        """"""
-
-        return cls()
-
-    @classmethod
-    def teardown_class(cls):  # 2025-11-29 12:01:34
-        """"""
-
-        return
-
-    def reset(self):  # 2025-11-29 12:01:34
-        """"""
-        self.setup_class()
-        return self
-
-    def test_all(self):  # 2025-11-29 12:01:34
-        """Executes a series of test functions in a sequential logic."""
-
-        return self
 
 
 # ====================================================================================================================||
 """
 
-  # 2025-11-29 12:01:34
+  # 2026-01-15 20:31:37
 
 
 """

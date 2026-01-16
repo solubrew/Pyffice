@@ -9,115 +9,98 @@
     version: <[version]>
     authority: <[authority]>
     security: <[security]>
-    -(WT)-: -32  # 2025-11-29 11:58:31
+    -(WT)-: -32  # 2026-01-15 20:29:16
 """
 
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-import json  # 2025-11-29 11:58:31
-import tempfile  # 2025-11-29 11:58:31
-import os  # 2025-11-29 11:58:31
+import unittest  # 2026-01-15 20:29:16
+import tempfile  # 2026-01-15 20:29:16
+import json  # 2026-01-15 20:29:16
+import os  # 2026-01-15 20:29:16
+from pathlib import Path  # 2026-01-15 20:19:37
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:19:37
+from os.path import join  # 2026-01-15 20:19:37
+from os.path import dirname  # 2026-01-15 20:19:37
 
 # ======================================3rd Party Library Modules=====================================================||
-import join  # 2025-11-29 11:58:31
-import dirname  # 2025-11-29 11:58:31
-import Logma  # 2025-11-29 11:58:31
-from pyffice.calendars.gantt import PyfficeGanttChart  # 2025-11-29 11:58:31
+from pyffice.calendars.gantt import PyfficeGanttChart  # 2026-01-15 20:19:37
+
+from pathlib import Path  # 2026-01-15 20:29:16
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:29:16
+from os.path import join  # 2026-01-15 20:29:16
+from os.path import dirname  # 2026-01-15 20:29:16
+from ogma.logma import Logma  # 2026-01-15 20:29:16
+from pyffice.calendars.gantt import PyfficeGanttChart  # 2026-01-15 20:29:16
 
 # =========================================Local Library Modules======================================================||
-import condor  # 2025-11-29 11:58:31
+from ogma.logma import Logma  # 2026-01-15 15:12:45
+from condor import condor  # 2026-01-15 20:19:37
+
+import pytest  # 2026-01-15 20:29:16
+import hypothesis  # 2026-01-15 20:29:16
+from condor import condor  # 2026-01-15 20:29:16
 
 # ====================================================================================================================||
-HERE = join(dirname(__file__))  # 2025-11-29 11:58:31
-LOGMA = Logma(__name__)  # 2025-11-29 11:58:31
-PXCFG = join(HERE, "_data_", "ganttTEST.yaml")  # 2025-11-29 11:58:31
-CFG = condor.Instruct(PXCFG).load().dikt  # 2025-11-29 11:58:31
-FIXTURES = condor.Instruct(join(HERE, "..", "fixtures", "fixtures.yaml")).load().dikt  # 2025-11-29 11:58:31
+HERE = join(dirname(__file__))  # 2026-01-15 20:29:16
+LOGMA = Logma(__name__)  # 2026-01-15 20:29:16
+PXCFG = join(HERE, "_data_", "ganttTEST.yaml")  # 2026-01-15 20:29:16
+CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:16
+
 
 # ====================================================================================================================||
 
 
-class Test_PyfficeGanttChart:  # 2025-11-29 11:58:31
+class Test_PyfficeGanttChart:  # 2026-01-15 15:12:46
     """"""
 
     @classmethod
-    def setup_class(cls):  # 2025-11-29 11:58:31
+    def setup_class(cls):  # 2026-01-15 15:12:46
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:58:31
+    def teardown_class(cls):  # 2026-01-15 15:12:46
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 11:58:31
+    def reset(self):  # 2026-01-15 15:12:46
         """"""
         self.setup_class()
-        return self
+        
 
-    def test_all(self):  # 2025-11-29 11:58:31
+    def test_all(self):  # 2026-01-15 15:12:46
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
 
-    def test_create_gantt_chart(self):  # 2025-11-29 11:58:31
+    def test_create_gantt_chart(self):  # 2026-01-15 15:12:46
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_load_document(self):  # 2025-11-29 11:58:31
+    def test_load_document(self):  # 2026-01-15 15:12:46
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_open_file(self):  # 2025-11-29 11:58:31
+    def test_open_file(self):  # 2026-01-15 15:12:46
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_save_gantt_chart(self):  # 2025-11-29 11:58:31
+    def test_save_gantt_chart(self):  # 2026-01-15 15:12:46
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test___init__(self):  # 2025-11-29 11:58:31
+    def test___init__(self):  # 2026-01-15 15:12:45
         """"""
-        if TEST_000:
-            pass
-
-
-class Test_Functions:  # 2025-11-29 11:58:31
-    """"""
-
-    @classmethod
-    def setup_class(cls):  # 2025-11-29 11:58:31
-        """"""
-
-        return cls()
-
-    @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:58:31
-        """"""
-
-        return
-
-    def reset(self):  # 2025-11-29 11:58:31
-        """"""
-        self.setup_class()
-        return self
-
-    def test_all(self):  # 2025-11-29 11:58:31
-        """Executes a series of test functions in a sequential logic."""
-
-        return self
+        pass
 
 
 # ====================================================================================================================||
 """
 
-  # 2025-11-29 11:58:31
+  # 2026-01-15 20:29:16
 
 
 """

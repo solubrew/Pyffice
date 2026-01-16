@@ -9,225 +9,162 @@
     version: <[version]>
     authority: <[authority]>
     security: <[security]>
-    -(WT)-: -32  # 2025-11-29 11:59:40
+    -(WT)-: -32  # 2026-01-15 20:30:08
 """
 
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-from os.path import abspath, dirname, join
-import datetime as dt
-import unittest
-
-
-import json  # 2025-11-29 11:59:40
-import tempfile  # 2025-11-29 11:59:40
-import os  # 2025-11-29 11:59:40
+import unittest  # 2026-01-15 20:30:07
+import tempfile  # 2026-01-15 20:30:07
+import json  # 2026-01-15 20:30:07
+import os  # 2026-01-15 20:30:07
+from pathlib import Path  # 2026-01-15 20:20:26
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:20:26
+from os.path import join  # 2026-01-15 20:20:26
+from os.path import dirname  # 2026-01-15 20:20:26
 
 # ======================================3rd Party Library Modules=====================================================||
-from pyffice.images.pdfs import PyfficePDF
+from pyffice.images.pdfs import PyfficePDF  # 2026-01-15 20:20:26
 
-import join  # 2025-11-29 11:59:40
-import dirname  # 2025-11-29 11:59:40
-import Logma  # 2025-11-29 11:59:40
+from pathlib import Path  # 2026-01-15 20:30:07
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:30:07
+from os.path import join  # 2026-01-15 20:30:07
+from os.path import dirname  # 2026-01-15 20:30:07
+from ogma.logma import Logma  # 2026-01-15 20:30:07
+from pyffice.images.pdfs import PyfficePDF  # 2026-01-15 20:30:07
 
 # =========================================Local Library Modules======================================================||
-from condor import condor
-from ogma.logma import Logma
+from ogma.logma import Logma  # 2026-01-15 15:13:43
+from condor import condor  # 2026-01-15 20:20:26
 
-import condor  # 2025-11-29 11:59:40
+import pytest  # 2026-01-15 20:30:07
+import hypothesis  # 2026-01-15 20:30:07
+from condor import condor  # 2026-01-15 20:30:07
 
 # ====================================================================================================================||
-here = join(dirname(__file__), "")  # ||
-log = True
-logma = Logma(__name__)
+HERE = join(dirname(__file__))  # 2026-01-15 20:30:07
+LOGMA = Logma(__name__)  # 2026-01-15 20:30:07
+PXCFG = join(HERE, "_data_", "pdfsTEST.yaml")  # 2026-01-15 20:30:07
+CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:07
 
-pxcfg = join(here, "_data_", "pdfsTEST.yaml")
-test_000 = True
-test_001 = True
-
-
-HERE = join(dirname(__file__))  # 2025-11-29 11:59:40
-LOGMA = Logma(__name__)  # 2025-11-29 11:59:40
-PXCFG = join(HERE, "_data_", "pdfsTEST.yaml")  # 2025-11-29 11:59:40
-CFG = condor.Instruct(PXCFG).load().dikt  # 2025-11-29 11:59:40
-FIXTURES = condor.Instruct(join(HERE, "..", "fixtures", "fixtures.yaml")).load().dikt  # 2025-11-29 11:59:40
 
 # ====================================================================================================================||
 
 
-class Test_PyfficePDF(unittest.TestCase):  # 2025-11-29 11:59:40
+class Test_PyfficePDF:  # 2026-01-15 15:13:44
     """"""
 
     @classmethod
-    def setup_class(cls, cfg=None):
-        """
-
-        :param cfg:
-        :return:
-        """
-        cls.config = condor.Instruct(pxcfg).select("Test_PyfficePDF")
-        if test_000:
-            cls.test_PyfficePDF_000 = PyfficePDF()
-        if test_001:
-            cfg = {"document": cls.config.dikt["fixture_001"]["document"]}
-            cls.test_PyfficePDF_001 = PyfficePDF(cfg)
-        return cls()
-
-    @classmethod
-    def teardown_class(cls):
-        """
-        :return:
-        """
-
-    def test_all(self):
-        """"""
-        return self
-
-    def test_add_annotation(self):  # 2025-11-29 11:59:40
-        """"""
-        if TEST_000:
-            pass
-
-    def test_add_page(self):  # 2025-11-29 11:59:40
-        """"""
-        if TEST_000:
-            pass
-
-    def test_edit(self):  # 2025-11-29 11:59:40
-        """"""
-        if TEST_000:
-            pass
-
-    def test_embed_media(self):  # 2025-11-29 11:59:40
-        """"""
-        if TEST_000:
-            pass
-
-    def test_encrypt(self):  # 2025-11-29 11:59:40
-        """"""
-        if TEST_000:
-            pass
-
-    def test_extract_text(self):  # 2025-11-29 11:59:40
-        """"""
-        if TEST_000:
-            pass
-
-    def test_get_binary(self):  # 2025-11-29 11:59:40
-        """"""
-        if TEST_000:
-            pass
-
-    def test_get_page_size(self):  # 2025-11-29 11:59:40
-        """"""
-        if TEST_000:
-            pass
-
-    def test_get_page_text(self):  # 2025-11-29 11:59:40
-        """"""
-        if TEST_000:
-            pass
-
-    def test_init(self):
-        """
-        :return:
-        """
-        return self
-
-    def test_initialize_writer(self):  # 2025-11-29 11:59:40
-        """"""
-        if TEST_000:
-            pass
-
-    def test_load_document(self):
-        """"""
-        return self
-
-    def test_load_pdf_pages(self):  # 2025-11-29 11:59:40
-        """"""
-        if TEST_000:
-            pass
-
-    def test_open_file(self):  # 2025-11-29 11:59:40
-        """"""
-        if TEST_000:
-            pass
-
-    def test_open_file_full_feature(self):  # 2025-11-29 11:59:40
-        """"""
-        if TEST_000:
-            pass
-
-    def test_open_file_no_javascript(self):  # 2025-11-29 11:59:40
-        """"""
-        if TEST_000:
-            pass
-
-    def test_remove_page(self):  # 2025-11-29 11:59:40
-        """"""
-        if TEST_000:
-            pass
-
-    def test_save(self):  # 2025-11-29 11:59:40
-        """"""
-        if TEST_000:
-            pass
-
-    def test_set_content(self):  # 2025-11-29 11:59:40
-        """"""
-        if TEST_000:
-            pass
-
-    def test_to_dict(self):  # 2025-11-29 11:59:40
-        """"""
-        if TEST_000:
-            pass
-
-    def to_dict(self):
-        """"""
-        return self
-
-    def test___init__(self):  # 2025-11-29 11:59:40
-        """"""
-        if TEST_000:
-            pass
-
-    def test__get_bytes(self):  # 2025-11-29 11:59:40
-        """"""
-        if TEST_000:
-            pass
-
-
-class Test_Functions:  # 2025-11-29 11:59:40
-    """"""
-
-    @classmethod
-    def setup_class(cls):  # 2025-11-29 11:59:40
+    def setup_class(cls):  # 2026-01-15 15:13:44
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:59:40
+    def teardown_class(cls):  # 2026-01-15 15:13:44
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 11:59:40
+    def reset(self):  # 2026-01-15 15:13:44
         """"""
         self.setup_class()
-        return self
+        
 
-    def test_all(self):  # 2025-11-29 11:59:40
+    def test_all(self):  # 2026-01-15 15:13:44
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
+
+    def test_add_annotation(self):  # 2026-01-15 15:13:43
+        """"""
+        pass
+
+    def test_add_page(self):  # 2026-01-15 15:13:43
+        """"""
+        pass
+
+    def test_edit(self):  # 2026-01-15 15:13:44
+        """"""
+        pass
+
+    def test_embed_media(self):  # 2026-01-15 15:13:44
+        """"""
+        pass
+
+    def test_encrypt(self):  # 2026-01-15 15:13:44
+        """"""
+        pass
+
+    def test_extract_text(self):  # 2026-01-15 15:13:44
+        """"""
+        pass
+
+    def test_get_binary(self):  # 2026-01-15 15:13:44
+        """"""
+        pass
+
+    def test_get_page_size(self):  # 2026-01-15 15:13:44
+        """"""
+        pass
+
+    def test_get_page_text(self):  # 2026-01-15 15:13:44
+        """"""
+        pass
+
+    def test_initialize_writer(self):  # 2026-01-15 15:13:44
+        """"""
+        pass
+
+    def test_load_document(self):  # 2026-01-15 15:13:44
+        """"""
+        pass
+
+    def test_load_pdf_pages(self):  # 2026-01-15 15:13:44
+        """"""
+        pass
+
+    def test_open_file(self):  # 2026-01-15 15:13:44
+        """"""
+        pass
+
+    def test_open_file_full_feature(self):  # 2026-01-15 15:13:44
+        """"""
+        pass
+
+    def test_open_file_no_javascript(self):  # 2026-01-15 15:13:44
+        """"""
+        pass
+
+    def test_remove_page(self):  # 2026-01-15 15:13:44
+        """"""
+        pass
+
+    def test_save(self):  # 2026-01-15 15:13:44
+        """"""
+        pass
+
+    def test_set_content(self):  # 2026-01-15 15:13:44
+        """"""
+        pass
+
+    def test_to_dict(self):  # 2026-01-15 15:13:44
+        """"""
+        pass
+
+    def test___init__(self):  # 2026-01-15 15:13:43
+        """"""
+        pass
+
+    def test__get_bytes(self):  # 2026-01-15 15:13:44
+        """"""
+        pass
 
 
 # ====================================================================================================================||
 """
 
-  # 2025-11-29 11:59:40
+  # 2026-01-15 20:30:08
 
 
 """

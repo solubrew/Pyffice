@@ -9,140 +9,115 @@
     version: <[version]>
     authority: <[authority]>
     security: <[security]>
-    -(WT)-: -32  # 2025-11-29 12:01:33
+    -(WT)-: -32  # 2026-01-15 20:31:36
 """
 
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-import json  # 2025-11-29 12:01:33
-import tempfile  # 2025-11-29 12:01:33
-import os  # 2025-11-29 12:01:33
+import unittest  # 2026-01-15 20:31:35
+import tempfile  # 2026-01-15 20:31:35
+import json  # 2026-01-15 20:31:35
+import os  # 2026-01-15 20:31:35
+from pathlib import Path  # 2026-01-15 20:21:50
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:21:50
+from os.path import join  # 2026-01-15 20:21:50
+from os.path import dirname  # 2026-01-15 20:21:50
 
 # ======================================3rd Party Library Modules=====================================================||
-import join  # 2025-11-29 12:01:33
-import dirname  # 2025-11-29 12:01:33
-import Logma  # 2025-11-29 12:01:33
-from pyffice.workflows.playlists import PyfficePlaylist  # 2025-11-29 12:01:33
+from pyffice.workflows.playlists import PyfficePlaylist  # 2026-01-15 20:21:50
+
+from pathlib import Path  # 2026-01-15 20:31:35
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:31:35
+from os.path import join  # 2026-01-15 20:31:35
+from os.path import dirname  # 2026-01-15 20:31:35
+from ogma.logma import Logma  # 2026-01-15 20:31:35
+from pyffice.workflows.playlists import PyfficePlaylist  # 2026-01-15 20:31:35
 
 # =========================================Local Library Modules======================================================||
-import condor  # 2025-11-29 12:01:33
+from ogma.logma import Logma  # 2026-01-15 15:15:21
+from condor import condor  # 2026-01-15 20:21:50
+
+import pytest  # 2026-01-15 20:31:35
+import hypothesis  # 2026-01-15 20:31:35
+from condor import condor  # 2026-01-15 20:31:35
 
 # ====================================================================================================================||
-HERE = join(dirname(__file__))  # 2025-11-29 12:01:33
-LOGMA = Logma(__name__)  # 2025-11-29 12:01:33
-PXCFG = join(HERE, "_data_", "playlistsTEST.yaml")  # 2025-11-29 12:01:33
-CFG = condor.Instruct(PXCFG).load().dikt  # 2025-11-29 12:01:33
-FIXTURES = condor.Instruct(join(HERE, "..", "fixtures", "fixtures.yaml")).load().dikt  # 2025-11-29 12:01:33
+HERE = join(dirname(__file__))  # 2026-01-15 20:31:35
+LOGMA = Logma(__name__)  # 2026-01-15 20:31:35
+PXCFG = join(HERE, "_data_", "playlistsTEST.yaml")  # 2026-01-15 20:31:35
+CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:31:36
+
 
 # ====================================================================================================================||
 
 
-class Test_PyfficePlaylist:  # 2025-11-29 12:01:33
+class Test_PyfficePlaylist:  # 2026-01-15 15:15:21
     """"""
 
     @classmethod
-    def setup_class(cls):  # 2025-11-29 12:01:33
+    def setup_class(cls):  # 2026-01-15 15:15:21
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 12:01:33
+    def teardown_class(cls):  # 2026-01-15 15:15:21
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 12:01:33
+    def reset(self):  # 2026-01-15 15:15:21
         """"""
         self.setup_class()
-        return self
 
-    def test_all(self):  # 2025-11-29 12:01:33
+    def test_all(self):  # 2026-01-15 15:15:21
         """Executes a series of test functions in a sequential logic."""
 
-        return self
-
-    def test_add_content(self):  # 2025-11-29 12:01:33
+    def test_add_content(self):  # 2026-01-15 15:15:21
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_add_content_service(self):  # 2025-11-29 12:01:33
+    def test_add_content_service(self):  # 2026-01-15 15:15:21
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_ebbnflow_schedule(self):  # 2025-11-29 12:01:33
+    def test_ebbnflow_schedule(self):  # 2026-01-15 15:15:21
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_import_schedule(self):  # 2025-11-29 12:01:33
+    def test_import_schedule(self):  # 2026-01-15 15:15:21
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_load_document(self):  # 2025-11-29 12:01:33
+    def test_load_document(self):  # 2026-01-15 15:15:21
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_open_file(self):  # 2025-11-29 12:01:33
+    def test_open_file(self):  # 2026-01-15 15:15:21
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_random_schedule(self):  # 2025-11-29 12:01:33
+    def test_random_schedule(self):  # 2026-01-15 15:15:21
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_schedule(self):  # 2025-11-29 12:01:33
+    def test_schedule(self):  # 2026-01-15 15:15:21
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_to_dict(self):  # 2025-11-29 12:01:33
+    def test_to_dict(self):  # 2026-01-15 15:15:21
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test___init__(self):  # 2025-11-29 12:01:33
+    def test___init__(self):  # 2026-01-15 15:15:21
         """"""
-        if TEST_000:
-            pass
-
-
-class Test_Functions:  # 2025-11-29 12:01:33
-    """"""
-
-    @classmethod
-    def setup_class(cls):  # 2025-11-29 12:01:33
-        """"""
-
-        return cls()
-
-    @classmethod
-    def teardown_class(cls):  # 2025-11-29 12:01:33
-        """"""
-
-        return
-
-    def reset(self):  # 2025-11-29 12:01:33
-        """"""
-        self.setup_class()
-        return self
-
-    def test_all(self):  # 2025-11-29 12:01:33
-        """Executes a series of test functions in a sequential logic."""
-
-        return self
+        pass
 
 
 # ====================================================================================================================||
 """
 
-  # 2025-11-29 12:01:33
+  # 2026-01-15 20:31:36
 
 
 """

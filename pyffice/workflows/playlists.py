@@ -20,6 +20,7 @@ import datetime as dt
 # ======================================Solutions Brewer Library Modules==============================================||
 from condor import condor
 from ogma.logma import Logma
+from pyffice.document import PyfficeDocument
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -27,7 +28,7 @@ log = True
 logma = Logma(__name__)
 
 # ====================================================================================================================||
-pxcfg = join(here, "_data_", ".yaml")
+pxcfg = join(here, "_data_", "playlists.yaml")
 
 
 class PyfficePlaylist(PyfficeDocument):

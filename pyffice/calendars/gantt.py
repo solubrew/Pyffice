@@ -16,8 +16,8 @@ from os.path import abspath, dirname, join
 import datetime as dt
 
 # ======================================3rd Party Library Modules=====================================================||
-from ganttlab import GanttChart
-import gantt
+# from ganttlab import GanttChart
+# import gantt
 
 import pandas as pd
 import plotly.express as px

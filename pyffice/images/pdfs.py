@@ -19,6 +19,8 @@ import base64
 
 # ======================================3rd Party Library Modules=====================================================||
 from PyPDF2 import PdfReader, PdfWriter, PageObject
+
+# import pypdf
 import fitz
 
 # ======================================Solutions Brewer Library Modules==============================================||

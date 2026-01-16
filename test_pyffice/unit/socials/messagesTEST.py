@@ -9,159 +9,146 @@
     version: <[version]>
     authority: <[authority]>
     security: <[security]>
-    -(WT)-: -32  # 2025-11-29 12:00:16
+    -(WT)-: -32  # 2026-01-15 20:30:35
 """
 
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-import json  # 2025-11-29 12:00:16
-import tempfile  # 2025-11-29 12:00:16
-import os  # 2025-11-29 12:00:16
+import unittest  # 2026-01-15 20:30:35
+import tempfile  # 2026-01-15 20:30:35
+import json  # 2026-01-15 20:30:35
+import os  # 2026-01-15 20:30:35
+from pathlib import Path  # 2026-01-15 20:20:51
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:20:51
+from os.path import join  # 2026-01-15 20:20:51
+from os.path import dirname  # 2026-01-15 20:20:51
 
 # ======================================3rd Party Library Modules=====================================================||
-import join  # 2025-11-29 12:00:16
-import dirname  # 2025-11-29 12:00:16
-import Logma  # 2025-11-29 12:00:16
-from pyffice.socials.messages import PyfficeSMS  # 2025-11-29 12:00:16
-from pyffice.socials.messages import PyfficeMMS  # 2025-11-29 12:00:16
-from pyffice.socials.messages import PyfficePostalMail  # 2025-11-29 12:00:16
+from pyffice.socials.messages import PyfficeSMS  # 2026-01-15 20:20:52
+from pyffice.socials.messages import PyfficeMMS  # 2026-01-15 20:20:52
+from pyffice.socials.messages import PyfficePostalMail  # 2026-01-15 20:20:52
+
+from pathlib import Path  # 2026-01-15 20:30:35
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:30:35
+from os.path import join  # 2026-01-15 20:30:35
+from os.path import dirname  # 2026-01-15 20:30:35
+from ogma.logma import Logma  # 2026-01-15 20:30:35
+from pyffice.socials.messages import PyfficeSMS  # 2026-01-15 20:30:35
+from pyffice.socials.messages import PyfficeMMS  # 2026-01-15 20:30:35
+from pyffice.socials.messages import PyfficePostalMail  # 2026-01-15 20:30:35
 
 # =========================================Local Library Modules======================================================||
-import condor  # 2025-11-29 12:00:16
+from ogma.logma import Logma  # 2026-01-15 15:14:13
+from condor import condor  # 2026-01-15 20:20:51
+
+import pytest  # 2026-01-15 20:30:35
+import hypothesis  # 2026-01-15 20:30:35
+from condor import condor  # 2026-01-15 20:30:35
 
 # ====================================================================================================================||
-HERE = join(dirname(__file__))  # 2025-11-29 12:00:16
-LOGMA = Logma(__name__)  # 2025-11-29 12:00:16
-PXCFG = join(HERE, "_data_", "messagesTEST.yaml")  # 2025-11-29 12:00:16
-CFG = condor.Instruct(PXCFG).load().dikt  # 2025-11-29 12:00:17
-FIXTURES = condor.Instruct(join(HERE, "..", "fixtures", "fixtures.yaml")).load().dikt  # 2025-11-29 12:00:17
+HERE = join(dirname(__file__))  # 2026-01-15 20:30:35
+LOGMA = Logma(__name__)  # 2026-01-15 20:30:35
+PXCFG = join(HERE, "_data_", "messagesTEST.yaml")  # 2026-01-15 20:30:35
+CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:35
+
 
 # ====================================================================================================================||
 
 
-class Test_PyfficeSMS:  # 2025-11-29 12:00:17
+class Test_PyfficeSMS:  # 2026-01-15 15:14:13
     """"""
 
     @classmethod
-    def setup_class(cls):  # 2025-11-29 12:00:17
+    def setup_class(cls):  # 2026-01-15 15:14:13
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 12:00:17
+    def teardown_class(cls):  # 2026-01-15 15:14:13
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 12:00:17
+    def reset(self):  # 2026-01-15 15:14:13
         """"""
         self.setup_class()
-        return self
+        
 
-    def test_all(self):  # 2025-11-29 12:00:17
+    def test_all(self):  # 2026-01-15 15:14:13
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
 
-    def test___init__(self):  # 2025-11-29 12:00:17
+    def test___init__(self):  # 2026-01-15 15:14:13
         """"""
-        if TEST_000:
-            pass
+        pass
 
 
-class Test_PyfficeMMS:  # 2025-11-29 12:00:17
+class Test_PyfficeMMS:  # 2026-01-15 15:14:13
     """"""
 
     @classmethod
-    def setup_class(cls):  # 2025-11-29 12:00:17
+    def setup_class(cls):  # 2026-01-15 15:14:13
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 12:00:17
+    def teardown_class(cls):  # 2026-01-15 15:14:13
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 12:00:17
+    def reset(self):  # 2026-01-15 15:14:13
         """"""
         self.setup_class()
-        return self
+        
 
-    def test_all(self):  # 2025-11-29 12:00:17
+    def test_all(self):  # 2026-01-15 15:14:13
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
 
-    def test___init__(self):  # 2025-11-29 12:00:17
+    def test___init__(self):  # 2026-01-15 15:14:13
         """"""
-        if TEST_000:
-            pass
+        pass
 
 
-class Test_PyfficePostalMail:  # 2025-11-29 12:00:17
+class Test_PyfficePostalMail:  # 2026-01-15 15:14:13
     """"""
 
     @classmethod
-    def setup_class(cls):  # 2025-11-29 12:00:17
+    def setup_class(cls):  # 2026-01-15 15:14:13
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 12:00:17
+    def teardown_class(cls):  # 2026-01-15 15:14:13
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 12:00:17
+    def reset(self):  # 2026-01-15 15:14:13
         """"""
         self.setup_class()
-        return self
+        
 
-    def test_all(self):  # 2025-11-29 12:00:17
+    def test_all(self):  # 2026-01-15 15:14:13
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
 
-    def test___init__(self):  # 2025-11-29 12:00:17
+    def test___init__(self):  # 2026-01-15 15:14:13
         """"""
-        if TEST_000:
-            pass
-
-
-class Test_Functions:  # 2025-11-29 12:00:17
-    """"""
-
-    @classmethod
-    def setup_class(cls):  # 2025-11-29 12:00:17
-        """"""
-
-        return cls()
-
-    @classmethod
-    def teardown_class(cls):  # 2025-11-29 12:00:17
-        """"""
-
-        return
-
-    def reset(self):  # 2025-11-29 12:00:17
-        """"""
-        self.setup_class()
-        return self
-
-    def test_all(self):  # 2025-11-29 12:00:17
-        """Executes a series of test functions in a sequential logic."""
-
-        return self
+        pass
 
 
 # ====================================================================================================================||
 """
 
-  # 2025-11-29 12:00:16
+  # 2026-01-15 20:30:35
 
 
 """

@@ -9,297 +9,250 @@
     version: <[version]>
     authority: <[authority]>
     security: <[security]>
-    -(WT)-: -32  # 2025-11-29 11:59:26
+    -(WT)-: -32  # 2026-01-15 20:29:56
 """
 
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-import json  # 2025-11-29 11:59:26
-import tempfile  # 2025-11-29 11:59:26
-import os  # 2025-11-29 11:59:26
+import unittest  # 2026-01-15 20:29:55
+import tempfile  # 2026-01-15 20:29:55
+import json  # 2026-01-15 20:29:55
+import os  # 2026-01-15 20:29:55
+from pathlib import Path  # 2026-01-15 20:20:14
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:20:14
+from os.path import join  # 2026-01-15 20:20:14
+from os.path import dirname  # 2026-01-15 20:20:14
 
 # ======================================3rd Party Library Modules=====================================================||
-import join  # 2025-11-29 11:59:26
-import dirname  # 2025-11-29 11:59:26
-import Logma  # 2025-11-29 11:59:26
-from pyffice.email.email import PyfficeEmailMessage  # 2025-11-29 11:59:26
-from pyffice.email.email import PyfficeMailBox  # 2025-11-29 11:59:26
+from pyffice.email.email import PyfficeEmailMessage  # 2026-01-15 20:20:15
+from pyffice.email.email import PyfficeMailBox  # 2026-01-15 20:20:15
+
+from pathlib import Path  # 2026-01-15 20:29:55
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:29:55
+from os.path import join  # 2026-01-15 20:29:55
+from os.path import dirname  # 2026-01-15 20:29:55
+from ogma.logma import Logma  # 2026-01-15 20:29:55
+from pyffice.email.email import PyfficeEmailMessage  # 2026-01-15 20:29:55
+from pyffice.email.email import PyfficeMailBox  # 2026-01-15 20:29:55
 
 # =========================================Local Library Modules======================================================||
-import condor  # 2025-11-29 11:59:26
+from ogma.logma import Logma  # 2026-01-15 15:13:29
+from condor import condor  # 2026-01-15 20:20:14
+
+import pytest  # 2026-01-15 20:29:55
+import hypothesis  # 2026-01-15 20:29:55
+from condor import condor  # 2026-01-15 20:29:55
 
 # ====================================================================================================================||
-HERE = join(dirname(__file__))  # 2025-11-29 11:59:26
-LOGMA = Logma(__name__)  # 2025-11-29 11:59:26
-PXCFG = join(HERE, "_data_", "emailTEST.yaml")  # 2025-11-29 11:59:26
-CFG = condor.Instruct(PXCFG).load().dikt  # 2025-11-29 11:59:26
-FIXTURES = condor.Instruct(join(HERE, "..", "fixtures", "fixtures.yaml")).load().dikt  # 2025-11-29 11:59:26
+HERE = join(dirname(__file__))  # 2026-01-15 20:29:55
+LOGMA = Logma(__name__)  # 2026-01-15 20:29:55
+PXCFG = join(HERE, "_data_", "emailTEST.yaml")  # 2026-01-15 20:29:55
+CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:55
+
 
 # ====================================================================================================================||
 
 
-class Test_PyfficeEmailMessage:  # 2025-11-29 11:59:26
+class Test_PyfficeEmailMessage:  # 2026-01-15 15:13:31
     """"""
 
     @classmethod
-    def setup_class(cls):  # 2025-11-29 11:59:26
+    def setup_class(cls):  # 2026-01-15 15:13:31
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:59:26
+    def teardown_class(cls):  # 2026-01-15 15:13:31
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 11:59:26
+    def reset(self):  # 2026-01-15 15:13:31
         """"""
         self.setup_class()
-        return self
+        
 
-    def test_all(self):  # 2025-11-29 11:59:26
+    def test_all(self):  # 2026-01-15 15:13:31
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
 
-    def test_add_bcc(self):  # 2025-11-29 11:59:26
+    def test_add_bcc(self):  # 2026-01-15 15:13:29
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_add_cc(self):  # 2025-11-29 11:59:26
+    def test_add_cc(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_add_label(self):  # 2025-11-29 11:59:26
+    def test_add_label(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_add_recipient(self):  # 2025-11-29 11:59:26
+    def test_add_recipient(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_create_new_document(self):  # 2025-11-29 11:59:26
+    def test_create_new_document(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_get_body(self):  # 2025-11-29 11:59:26
+    def test_get_body(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_get_footer(self):  # 2025-11-29 11:59:26
+    def test_get_footer(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_get_header(self):  # 2025-11-29 11:59:26
+    def test_get_header(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_get_recipient(self):  # 2025-11-29 11:59:26
+    def test_get_recipient(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_get_sender(self):  # 2025-11-29 11:59:26
+    def test_get_sender(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_load_document(self):  # 2025-11-29 11:59:26
+    def test_load_document(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_open_file(self):  # 2025-11-29 11:59:26
+    def test_open_file(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_remove_label(self):  # 2025-11-29 11:59:27
+    def test_remove_label(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_save_message(self):  # 2025-11-29 11:59:27
+    def test_save_message(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test___init__(self):  # 2025-11-29 11:59:27
+    def test___init__(self):  # 2026-01-15 15:13:29
         """"""
-        if TEST_000:
-            pass
+        pass
 
 
-class Test_PyfficeMailBox:  # 2025-11-29 11:59:27
+class Test_PyfficeMailBox:  # 2026-01-15 15:13:31
     """"""
 
     @classmethod
-    def setup_class(cls):  # 2025-11-29 11:59:27
+    def setup_class(cls):  # 2026-01-15 15:13:31
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:59:27
+    def teardown_class(cls):  # 2026-01-15 15:13:31
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 11:59:27
+    def reset(self):  # 2026-01-15 15:13:31
         """"""
         self.setup_class()
-        return self
+        
 
-    def test_all(self):  # 2025-11-29 11:59:27
+    def test_all(self):  # 2026-01-15 15:13:31
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
 
-    def test_connect_service(self):  # 2025-11-29 11:59:27
+    def test_connect_service(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_create_label(self):  # 2025-11-29 11:59:27
+    def test_create_label(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_create_message(self):  # 2025-11-29 11:59:27
+    def test_create_message(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_create_new_document(self):  # 2025-11-29 11:59:27
+    def test_create_new_document(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_create_rule(self):  # 2025-11-29 11:59:27
+    def test_create_rule(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_delete_mail(self):  # 2025-11-29 11:59:27
+    def test_delete_mail(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_delete_rule(self):  # 2025-11-29 11:59:27
+    def test_delete_rule(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_destroy_label(self):  # 2025-11-29 11:59:27
+    def test_destroy_label(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_disconnect_service(self):  # 2025-11-29 11:59:27
+    def test_disconnect_service(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_get_labels(self):  # 2025-11-29 11:59:27
+    def test_get_labels(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_get_mail(self):  # 2025-11-29 11:59:27
+    def test_get_mail(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_get_message(self):  # 2025-11-29 11:59:27
+    def test_get_message(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_get_messages(self):  # 2025-11-29 11:59:27
+    def test_get_messages(self):  # 2026-01-15 15:13:31
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_get_rule(self):  # 2025-11-29 11:59:27
+    def test_get_rule(self):  # 2026-01-15 15:13:31
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_get_rules(self):  # 2025-11-29 11:59:27
+    def test_get_rules(self):  # 2026-01-15 15:13:31
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_process_rules(self):  # 2025-11-29 11:59:27
+    def test_process_rules(self):  # 2026-01-15 15:13:31
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_send_mail(self):  # 2025-11-29 11:59:27
+    def test_send_mail(self):  # 2026-01-15 15:13:31
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_send_message(self):  # 2025-11-29 11:59:27
+    def test_send_message(self):  # 2026-01-15 15:13:31
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_store_mail(self):  # 2025-11-29 11:59:27
+    def test_store_mail(self):  # 2026-01-15 15:13:31
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_write_message(self):  # 2025-11-29 11:59:27
+    def test_write_message(self):  # 2026-01-15 15:13:31
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test___init__(self):  # 2025-11-29 11:59:27
+    def test___init__(self):  # 2026-01-15 15:13:30
         """"""
-        if TEST_000:
-            pass
-
-
-class Test_Functions:  # 2025-11-29 11:59:27
-    """"""
-
-    @classmethod
-    def setup_class(cls):  # 2025-11-29 11:59:27
-        """"""
-
-        return cls()
-
-    @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:59:27
-        """"""
-
-        return
-
-    def reset(self):  # 2025-11-29 11:59:27
-        """"""
-        self.setup_class()
-        return self
-
-    def test_all(self):  # 2025-11-29 11:59:27
-        """Executes a series of test functions in a sequential logic."""
-
-        return self
+        pass
 
 
 # ====================================================================================================================||
 """
 
-  # 2025-11-29 11:59:26
+  # 2026-01-15 20:29:56
 
 
 """

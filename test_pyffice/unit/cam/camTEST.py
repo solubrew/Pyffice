@@ -9,152 +9,134 @@
     version: <[version]>
     authority: <[authority]>
     security: <[security]>
-    -(WT)-: -32  # 2025-11-29 11:58:39
+    -(WT)-: -32  # 2026-01-15 20:29:22
 """
 
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-import json  # 2025-11-29 11:58:39
-import tempfile  # 2025-11-29 11:58:39
-import os  # 2025-11-29 11:58:39
+import unittest  # 2026-01-15 20:29:22
+import tempfile  # 2026-01-15 20:29:22
+import json  # 2026-01-15 20:29:22
+import os  # 2026-01-15 20:29:22
+from pathlib import Path  # 2026-01-15 20:19:43
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:19:43
+from os.path import join  # 2026-01-15 20:19:43
+from os.path import dirname  # 2026-01-15 20:19:43
 
 # ======================================3rd Party Library Modules=====================================================||
-import join  # 2025-11-29 11:58:39
-import dirname  # 2025-11-29 11:58:39
-import Logma  # 2025-11-29 11:58:39
-from pyffice.cam.cam import PyfficeCAM  # 2025-11-29 11:58:39
-from pyffice.cam.cam import PyfficeCAMManager  # 2025-11-29 11:58:39
+from pyffice.cam.cam import PyfficeCAM  # 2026-01-15 20:19:43
+from pyffice.cam.cam import PyfficeCAMManager  # 2026-01-15 20:19:43
+
+from pathlib import Path  # 2026-01-15 20:29:22
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:29:22
+from os.path import join  # 2026-01-15 20:29:22
+from os.path import dirname  # 2026-01-15 20:29:22
+from ogma.logma import Logma  # 2026-01-15 20:29:22
+from pyffice.cam.cam import PyfficeCAM  # 2026-01-15 20:29:22
+from pyffice.cam.cam import PyfficeCAMManager  # 2026-01-15 20:29:22
 
 # =========================================Local Library Modules======================================================||
-import condor  # 2025-11-29 11:58:39
+from ogma.logma import Logma  # 2026-01-15 15:12:51
+from condor import condor  # 2026-01-15 20:19:43
+
+import pytest  # 2026-01-15 20:29:22
+import hypothesis  # 2026-01-15 20:29:22
+from condor import condor  # 2026-01-15 20:29:22
 
 # ====================================================================================================================||
-HERE = join(dirname(__file__))  # 2025-11-29 11:58:39
-LOGMA = Logma(__name__)  # 2025-11-29 11:58:39
-PXCFG = join(HERE, "_data_", "camTEST.yaml")  # 2025-11-29 11:58:39
-CFG = condor.Instruct(PXCFG).load().dikt  # 2025-11-29 11:58:39
-FIXTURES = condor.Instruct(join(HERE, "..", "fixtures", "fixtures.yaml")).load().dikt  # 2025-11-29 11:58:39
+HERE = join(dirname(__file__))  # 2026-01-15 20:29:22
+LOGMA = Logma(__name__)  # 2026-01-15 20:29:22
+PXCFG = join(HERE, "_data_", "camTEST.yaml")  # 2026-01-15 20:29:22
+CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:22
+
 
 # ====================================================================================================================||
 
 
-class Test_PyfficeCAM:  # 2025-11-29 11:58:39
+class Test_PyfficeCAM:  # 2026-01-15 15:12:52
     """"""
 
     @classmethod
-    def setup_class(cls):  # 2025-11-29 11:58:39
+    def setup_class(cls):  # 2026-01-15 15:12:52
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:58:39
+    def teardown_class(cls):  # 2026-01-15 15:12:52
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 11:58:39
+    def reset(self):  # 2026-01-15 15:12:52
         """"""
         self.setup_class()
-        return self
+        
 
-    def test_all(self):  # 2025-11-29 11:58:39
+    def test_all(self):  # 2026-01-15 15:12:52
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
 
-    def test_load_document(self):  # 2025-11-29 11:58:39
+    def test_load_document(self):  # 2026-01-15 15:12:51
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_to_dict(self):  # 2025-11-29 11:58:39
+    def test_to_dict(self):  # 2026-01-15 15:12:51
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test___init__(self):  # 2025-11-29 11:58:39
+    def test___init__(self):  # 2026-01-15 15:12:51
         """"""
-        if TEST_000:
-            pass
+        pass
 
 
-class Test_PyfficeCAMManager:  # 2025-11-29 11:58:39
+class Test_PyfficeCAMManager:  # 2026-01-15 15:12:52
     """"""
 
     @classmethod
-    def setup_class(cls):  # 2025-11-29 11:58:39
+    def setup_class(cls):  # 2026-01-15 15:12:52
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:58:39
+    def teardown_class(cls):  # 2026-01-15 15:12:52
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 11:58:39
+    def reset(self):  # 2026-01-15 15:12:52
         """"""
         self.setup_class()
-        return self
+        
 
-    def test_all(self):  # 2025-11-29 11:58:39
+    def test_all(self):  # 2026-01-15 15:12:52
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
 
-    def test_load_document(self):  # 2025-11-29 11:58:39
+    def test_load_document(self):  # 2026-01-15 15:12:52
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_open_file(self):  # 2025-11-29 11:58:39
+    def test_open_file(self):  # 2026-01-15 15:12:52
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_to_dict(self):  # 2025-11-29 11:58:39
+    def test_to_dict(self):  # 2026-01-15 15:12:52
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test___init__(self):  # 2025-11-29 11:58:39
+    def test___init__(self):  # 2026-01-15 15:12:52
         """"""
-        if TEST_000:
-            pass
-
-
-class Test_Functions:  # 2025-11-29 11:58:39
-    """"""
-
-    @classmethod
-    def setup_class(cls):  # 2025-11-29 11:58:39
-        """"""
-
-        return cls()
-
-    @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:58:39
-        """"""
-
-        return
-
-    def reset(self):  # 2025-11-29 11:58:39
-        """"""
-        self.setup_class()
-        return self
-
-    def test_all(self):  # 2025-11-29 11:58:39
-        """Executes a series of test functions in a sequential logic."""
-
-        return self
+        pass
 
 
 # ====================================================================================================================||
 """
 
-  # 2025-11-29 11:58:39
+  # 2026-01-15 20:29:22
 
 
 """

@@ -41,7 +41,7 @@ class PyfficeContact(PyfficeDocument):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeContact")).override(cfg)
+        self.config.override(pxcfg).select("PyfficeContact").override(cfg)
         self.address = None
         self.emails = None
         self.full_name = None

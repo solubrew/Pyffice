@@ -9,740 +9,610 @@
     version: <[version]>
     authority: <[authority]>
     security: <[security]>
-    -(WT)-: -32  # 2025-11-29 11:59:02
+    -(WT)-: -32  # 2026-01-15 20:29:39
 """
 
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-from os.path import abspath, dirname, join
-import datetime as dt
-import unittest
-
-
-import json  # 2025-11-29 11:59:02
-import tempfile  # 2025-11-29 11:59:02
-import os  # 2025-11-29 11:59:02
+import unittest  # 2026-01-15 20:29:38
+import tempfile  # 2026-01-15 20:29:38
+import json  # 2026-01-15 20:29:38
+import os  # 2026-01-15 20:29:38
+from pathlib import Path  # 2026-01-15 20:19:58
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:19:58
+from os.path import join  # 2026-01-15 20:19:58
+from os.path import dirname  # 2026-01-15 20:19:59
 
 # ======================================3rd Party Library Modules=====================================================||
-import join  # 2025-11-29 11:59:02
-import dirname  # 2025-11-29 11:59:02
-import Logma  # 2025-11-29 11:59:02
-from pyffice.config.ports import PyfficePort  # 2025-11-29 11:59:02
-from pyffice.config.ports import PyfficePortCherryTree  # 2025-11-29 11:59:02
-from pyffice.config.ports import PyfficePortNchantdOffice  # 2025-11-29 11:59:02
-from pyffice.config.ports import PyfficePortCSV  # 2025-11-29 11:59:02
-from pyffice.config.ports import PyfficePortDia  # 2025-11-29 11:59:02
-from pyffice.config.ports import PyfficePortFileSystem  # 2025-11-29 11:59:02
-from pyffice.config.ports import PyfficePortImage  # 2025-11-29 11:59:02
-from pyffice.config.ports import PyfficePortJupyter  # 2025-11-29 11:59:02
-from pyffice.config.ports import PyfficePortText  # 2025-11-29 11:59:02
-from pyffice.config.ports import PyfficePortWebSession  # 2025-11-29 11:59:02
+from pyffice.config.ports import PyfficePort  # 2026-01-15 20:19:59
+from pyffice.config.ports import PyfficePortCherryTree  # 2026-01-15 20:19:59
+from pyffice.config.ports import PyfficePortNchantdOffice  # 2026-01-15 20:19:59
+from pyffice.config.ports import PyfficePortCSV  # 2026-01-15 20:19:59
+from pyffice.config.ports import PyfficePortDia  # 2026-01-15 20:19:59
+from pyffice.config.ports import PyfficePortFileSystem  # 2026-01-15 20:19:59
+from pyffice.config.ports import PyfficePortImage  # 2026-01-15 20:19:59
+from pyffice.config.ports import PyfficePortJupyter  # 2026-01-15 20:19:59
+from pyffice.config.ports import PyfficePortText  # 2026-01-15 20:19:59
+from pyffice.config.ports import PyfficePortWebSession  # 2026-01-15 20:19:59
+
+from pathlib import Path  # 2026-01-15 20:29:38
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:29:38
+from os.path import join  # 2026-01-15 20:29:38
+from os.path import dirname  # 2026-01-15 20:29:38
+from ogma.logma import Logma  # 2026-01-15 20:29:38
+from pyffice.config.ports import PyfficePort  # 2026-01-15 20:29:38
+from pyffice.config.ports import PyfficePortCherryTree  # 2026-01-15 20:29:38
+from pyffice.config.ports import PyfficePortNchantdOffice  # 2026-01-15 20:29:38
+from pyffice.config.ports import PyfficePortCSV  # 2026-01-15 20:29:38
+from pyffice.config.ports import PyfficePortDia  # 2026-01-15 20:29:38
+from pyffice.config.ports import PyfficePortFileSystem  # 2026-01-15 20:29:39
+from pyffice.config.ports import PyfficePortImage  # 2026-01-15 20:29:39
+from pyffice.config.ports import PyfficePortJupyter  # 2026-01-15 20:29:39
+from pyffice.config.ports import PyfficePortText  # 2026-01-15 20:29:39
+from pyffice.config.ports import PyfficePortWebSession  # 2026-01-15 20:29:39
 
 # =========================================Local Library Modules======================================================||
-from condor import condor
-from ogma.logma import Logma
+from ogma.logma import Logma  # 2026-01-15 15:13:07
+from condor import condor  # 2026-01-15 20:19:59
 
-import condor  # 2025-11-29 11:59:02
+import pytest  # 2026-01-15 20:29:38
+import hypothesis  # 2026-01-15 20:29:38
+from condor import condor  # 2026-01-15 20:29:38
 
 # ====================================================================================================================||
-here = join(dirname(__file__), "")  # ||
-log = True
-logma = Logma(__name__)
+HERE = join(dirname(__file__))  # 2026-01-15 20:29:39
+LOGMA = Logma(__name__)  # 2026-01-15 20:29:39
+PXCFG = join(HERE, "_data_", "portsTEST.yaml")  # 2026-01-15 20:29:39
+CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:39
 
-pxcfg = join(here, "_data_", ".yaml")
-
-
-HERE = join(dirname(__file__))  # 2025-11-29 11:59:02
-LOGMA = Logma(__name__)  # 2025-11-29 11:59:02
-PXCFG = join(HERE, "_data_", "portsTEST.yaml")  # 2025-11-29 11:59:02
-CFG = condor.Instruct(PXCFG).load().dikt  # 2025-11-29 11:59:02
-FIXTURES = condor.Instruct(join(HERE, "..", "fixtures", "fixtures.yaml")).load().dikt  # 2025-11-29 11:59:02
 
 # ====================================================================================================================||
 
 
-class Test_PyfficeDocument(unittest.TestCase):
-    """ """
-
-    @classmethod
-    def setup_class(cls, cfg=None):
-        """
-
-        :param cfg:
-        :return:
-        """
-        if test_002:
-            cls.test_PyfficeDocument_000 = PyfficeUnit()
-        if test_003:
-            cfg = {"unit": fixture001["document"]}
-            cls.test_PyfficeDocument_001 = PyfficeUnit(cfg)
-        return cls()
-
-    @classmethod
-    def teardown_class(cls):
-        """
-        :return:
-        """
-
-    def test_all(self):
-        """"""
-        return self
-
-    def test_init(self):
-        """
-        :return:
-        """
-        return self
-
-    def test_load_document(self):
-        """"""
-        return self
-
-    def to_dict(self):
-        """"""
-        return self
-
-
-class Test_PyfficePort:  # 2025-11-29 11:59:02
+class Test_PyfficePort:  # 2026-01-15 15:13:11
     """"""
 
     @classmethod
-    def setup_class(cls):  # 2025-11-29 11:59:02
+    def setup_class(cls):  # 2026-01-15 15:13:11
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:59:02
+    def teardown_class(cls):  # 2026-01-15 15:13:11
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 11:59:02
+    def reset(self):  # 2026-01-15 15:13:11
         """"""
         self.setup_class()
-        return self
+        
 
-    def test_all(self):  # 2025-11-29 11:59:02
+    def test_all(self):  # 2026-01-15 15:13:11
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
 
-    def test_file_export(self):  # 2025-11-29 11:59:02
+    def test_file_export(self):  # 2026-01-15 15:13:08
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_file_import(self):  # 2025-11-29 11:59:02
+    def test_file_import(self):  # 2026-01-15 15:13:08
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_file_open(self):  # 2025-11-29 11:59:02
+    def test_file_open(self):  # 2026-01-15 15:13:08
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_file_write(self):  # 2025-11-29 11:59:02
+    def test_file_write(self):  # 2026-01-15 15:13:08
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_to_dict(self):  # 2025-11-29 11:59:02
+    def test_to_dict(self):  # 2026-01-15 15:13:08
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_to_native(self):  # 2025-11-29 11:59:02
+    def test_to_native(self):  # 2026-01-15 15:13:08
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_to_xml(self):  # 2025-11-29 11:59:02
+    def test_to_xml(self):  # 2026-01-15 15:13:08
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test___init__(self):  # 2025-11-29 11:59:02
+    def test___init__(self):  # 2026-01-15 15:13:08
         """"""
-        if TEST_000:
-            pass
+        pass
 
 
-class Test_PyfficePortCherryTree:  # 2025-11-29 11:59:02
+class Test_PyfficePortCherryTree:  # 2026-01-15 15:13:11
     """"""
 
     @classmethod
-    def setup_class(cls):  # 2025-11-29 11:59:02
+    def setup_class(cls):  # 2026-01-15 15:13:11
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:59:02
+    def teardown_class(cls):  # 2026-01-15 15:13:11
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 11:59:02
+    def reset(self):  # 2026-01-15 15:13:11
         """"""
         self.setup_class()
-        return self
+        
 
-    def test_all(self):  # 2025-11-29 11:59:02
+    def test_all(self):  # 2026-01-15 15:13:11
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
 
-    def test_extract_codeboxes(self):  # 2025-11-29 11:59:02
+    def test_extract_codeboxes(self):  # 2026-01-15 15:13:08
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_extract_images(self):  # 2025-11-29 11:59:02
+    def test_extract_images(self):  # 2026-01-15 15:13:08
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_extract_tables(self):  # 2025-11-29 11:59:02
+    def test_extract_tables(self):  # 2026-01-15 15:13:08
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_extract_text(self):  # 2025-11-29 11:59:02
+    def test_extract_text(self):  # 2026-01-15 15:13:08
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_file_import(self):  # 2025-11-29 11:59:02
+    def test_file_import(self):  # 2026-01-15 15:13:08
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_file_open(self):  # 2025-11-29 11:59:02
+    def test_file_open(self):  # 2026-01-15 15:13:08
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_load_document(self):  # 2025-11-29 11:59:02
+    def test_load_document(self):  # 2026-01-15 15:13:08
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_parse(self):  # 2025-11-29 11:59:02
+    def test_parse(self):  # 2026-01-15 15:13:08
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_parse_links(self):  # 2025-11-29 11:59:02
+    def test_parse_links(self):  # 2026-01-15 15:13:08
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_parse_node(self):  # 2025-11-29 11:59:02
+    def test_parse_node(self):  # 2026-01-15 15:13:08
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_parse_tables(self):  # 2025-11-29 11:59:03
+    def test_parse_tables(self):  # 2026-01-15 15:13:08
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_parse_text(self):  # 2025-11-29 11:59:03
+    def test_parse_text(self):  # 2026-01-15 15:13:08
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_to_dict(self):  # 2025-11-29 11:59:03
+    def test_to_dict(self):  # 2026-01-15 15:13:08
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test___init__(self):  # 2025-11-29 11:59:03
+    def test___init__(self):  # 2026-01-15 15:13:08
         """"""
-        if TEST_000:
-            pass
+        pass
 
 
-class Test_PyfficePortNchantdOffice:  # 2025-11-29 11:59:03
+class Test_PyfficePortNchantdOffice:  # 2026-01-15 15:13:11
     """"""
 
     @classmethod
-    def setup_class(cls):  # 2025-11-29 11:59:03
+    def setup_class(cls):  # 2026-01-15 15:13:11
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:59:03
+    def teardown_class(cls):  # 2026-01-15 15:13:11
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 11:59:03
+    def reset(self):  # 2026-01-15 15:13:11
         """"""
         self.setup_class()
-        return self
+        
 
-    def test_all(self):  # 2025-11-29 11:59:03
+    def test_all(self):  # 2026-01-15 15:13:11
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
 
-    def test_load_document(self):  # 2025-11-29 11:59:03
+    def test_load_document(self):  # 2026-01-15 15:13:09
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_parse_file(self):  # 2025-11-29 11:59:03
+    def test_parse_file(self):  # 2026-01-15 15:13:09
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_parse_table(self):  # 2025-11-29 11:59:03
+    def test_parse_table(self):  # 2026-01-15 15:13:09
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test___init__(self):  # 2025-11-29 11:59:03
+    def test___init__(self):  # 2026-01-15 15:13:09
         """"""
-        if TEST_000:
-            pass
+        pass
 
 
-class Test_PyfficePortCSV:  # 2025-11-29 11:59:03
+class Test_PyfficePortCSV:  # 2026-01-15 15:13:11
     """"""
 
     @classmethod
-    def setup_class(cls):  # 2025-11-29 11:59:03
+    def setup_class(cls):  # 2026-01-15 15:13:11
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:59:03
+    def teardown_class(cls):  # 2026-01-15 15:13:11
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 11:59:03
+    def reset(self):  # 2026-01-15 15:13:11
         """"""
         self.setup_class()
-        return self
+        
 
-    def test_all(self):  # 2025-11-29 11:59:03
+    def test_all(self):  # 2026-01-15 15:13:11
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
 
-    def test_open_file(self):  # 2025-11-29 11:59:03
+    def test_open_file(self):  # 2026-01-15 15:13:09
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_to_dict(self):  # 2025-11-29 11:59:03
+    def test_to_dict(self):  # 2026-01-15 15:13:09
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test___init__(self):  # 2025-11-29 11:59:03
+    def test___init__(self):  # 2026-01-15 15:13:09
         """"""
-        if TEST_000:
-            pass
+        pass
 
 
-class Test_PyfficePortDia:  # 2025-11-29 11:59:03
+class Test_PyfficePortDia:  # 2026-01-15 15:13:11
     """"""
 
     @classmethod
-    def setup_class(cls):  # 2025-11-29 11:59:03
+    def setup_class(cls):  # 2026-01-15 15:13:11
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:59:03
+    def teardown_class(cls):  # 2026-01-15 15:13:11
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 11:59:03
+    def reset(self):  # 2026-01-15 15:13:11
         """"""
         self.setup_class()
-        return self
+        
 
-    def test_all(self):  # 2025-11-29 11:59:03
+    def test_all(self):  # 2026-01-15 15:13:11
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
 
-    def test_import_file(self):  # 2025-11-29 11:59:03
+    def test_import_file(self):  # 2026-01-15 15:13:09
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_open_file(self):  # 2025-11-29 11:59:03
+    def test_open_file(self):  # 2026-01-15 15:13:09
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_parse(self):  # 2025-11-29 11:59:03
+    def test_parse(self):  # 2026-01-15 15:13:09
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_parse_dia(self):  # 2025-11-29 11:59:03
+    def test_parse_dia(self):  # 2026-01-15 15:13:09
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_parse_xml(self):  # 2025-11-29 11:59:03
+    def test_parse_xml(self):  # 2026-01-15 15:13:09
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_to_dict(self):  # 2025-11-29 11:59:03
+    def test_to_dict(self):  # 2026-01-15 15:13:09
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_to_native(self):  # 2025-11-29 11:59:03
+    def test_to_native(self):  # 2026-01-15 15:13:09
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_to_xml(self):  # 2025-11-29 11:59:03
+    def test_to_xml(self):  # 2026-01-15 15:13:09
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test___init__(self):  # 2025-11-29 11:59:03
+    def test___init__(self):  # 2026-01-15 15:13:09
         """"""
-        if TEST_000:
-            pass
+        pass
 
 
-class Test_PyfficePortFileSystem:  # 2025-11-29 11:59:03
+class Test_PyfficePortFileSystem:  # 2026-01-15 15:13:11
     """"""
 
     @classmethod
-    def setup_class(cls):  # 2025-11-29 11:59:03
+    def setup_class(cls):  # 2026-01-15 15:13:11
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:59:03
+    def teardown_class(cls):  # 2026-01-15 15:13:11
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 11:59:03
+    def reset(self):  # 2026-01-15 15:13:11
         """"""
         self.setup_class()
-        return self
+        
 
-    def test_all(self):  # 2025-11-29 11:59:03
+    def test_all(self):  # 2026-01-15 15:13:11
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
 
-    def test_to_dict(self):  # 2025-11-29 11:59:03
+    def test_to_dict(self):  # 2026-01-15 15:13:09
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test___init__(self):  # 2025-11-29 11:59:03
+    def test___init__(self):  # 2026-01-15 15:13:09
         """"""
-        if TEST_000:
-            pass
+        pass
 
 
-class Test_PyfficePortImage:  # 2025-11-29 11:59:03
+class Test_PyfficePortImage:  # 2026-01-15 15:13:11
     """"""
 
     @classmethod
-    def setup_class(cls):  # 2025-11-29 11:59:03
+    def setup_class(cls):  # 2026-01-15 15:13:11
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:59:03
+    def teardown_class(cls):  # 2026-01-15 15:13:11
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 11:59:03
+    def reset(self):  # 2026-01-15 15:13:11
         """"""
         self.setup_class()
-        return self
+        
 
-    def test_all(self):  # 2025-11-29 11:59:03
+    def test_all(self):  # 2026-01-15 15:13:11
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
 
-    def test_convert_svg_color(self):  # 2025-11-29 11:59:03
+    def test_convert_svg_color(self):  # 2026-01-15 15:13:09
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_encode(self):  # 2025-11-29 11:59:03
+    def test_encode(self):  # 2026-01-15 15:13:09
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_load_document(self):  # 2025-11-29 11:59:03
+    def test_load_document(self):  # 2026-01-15 15:13:09
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_open_file(self):  # 2025-11-29 11:59:03
+    def test_open_file(self):  # 2026-01-15 15:13:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_open_file_bmp(self):  # 2025-11-29 11:59:03
+    def test_open_file_bmp(self):  # 2026-01-15 15:13:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_open_file_gif(self):  # 2025-11-29 11:59:03
+    def test_open_file_gif(self):  # 2026-01-15 15:13:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_open_file_jpeg(self):  # 2025-11-29 11:59:03
+    def test_open_file_jpeg(self):  # 2026-01-15 15:13:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_open_file_png(self):  # 2025-11-29 11:59:03
+    def test_open_file_png(self):  # 2026-01-15 15:13:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_open_file_svg(self):  # 2025-11-29 11:59:03
+    def test_open_file_svg(self):  # 2026-01-15 15:13:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_save(self):  # 2025-11-29 11:59:03
+    def test_save(self):  # 2026-01-15 15:13:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_set_layers(self):  # 2025-11-29 11:59:03
+    def test_set_layers(self):  # 2026-01-15 15:13:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_set_size(self):  # 2025-11-29 11:59:03
+    def test_set_size(self):  # 2026-01-15 15:13:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_to_dict(self):  # 2025-11-29 11:59:03
+    def test_to_dict(self):  # 2026-01-15 15:13:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test___init__(self):  # 2025-11-29 11:59:03
+    def test___init__(self):  # 2026-01-15 15:13:09
         """"""
-        if TEST_000:
-            pass
+        pass
 
 
-class Test_PyfficePortJupyter:  # 2025-11-29 11:59:03
+class Test_PyfficePortJupyter:  # 2026-01-15 15:13:11
     """"""
 
     @classmethod
-    def setup_class(cls):  # 2025-11-29 11:59:03
+    def setup_class(cls):  # 2026-01-15 15:13:11
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:59:03
+    def teardown_class(cls):  # 2026-01-15 15:13:11
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 11:59:03
+    def reset(self):  # 2026-01-15 15:13:11
         """"""
         self.setup_class()
-        return self
+        
 
-    def test_all(self):  # 2025-11-29 11:59:03
+    def test_all(self):  # 2026-01-15 15:13:11
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
 
-    def test_file_export(self):  # 2025-11-29 11:59:03
+    def test_file_export(self):  # 2026-01-15 15:13:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_file_import(self):  # 2025-11-29 11:59:03
+    def test_file_import(self):  # 2026-01-15 15:13:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_file_open(self):  # 2025-11-29 11:59:03
+    def test_file_open(self):  # 2026-01-15 15:13:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_load_document(self):  # 2025-11-29 11:59:03
+    def test_load_document(self):  # 2026-01-15 15:13:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_to_dict(self):  # 2025-11-29 11:59:03
+    def test_to_dict(self):  # 2026-01-15 15:13:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test___init__(self):  # 2025-11-29 11:59:03
+    def test___init__(self):  # 2026-01-15 15:13:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
 
-class Test_PyfficePortText:  # 2025-11-29 11:59:03
+class Test_PyfficePortText:  # 2026-01-15 15:13:11
     """"""
 
     @classmethod
-    def setup_class(cls):  # 2025-11-29 11:59:03
+    def setup_class(cls):  # 2026-01-15 15:13:11
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:59:03
+    def teardown_class(cls):  # 2026-01-15 15:13:11
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 11:59:03
+    def reset(self):  # 2026-01-15 15:13:11
         """"""
         self.setup_class()
-        return self
+        
 
-    def test_all(self):  # 2025-11-29 11:59:03
+    def test_all(self):  # 2026-01-15 15:13:11
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
 
-    def test_to_dict(self):  # 2025-11-29 11:59:03
+    def test_to_dict(self):  # 2026-01-15 15:13:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test___init__(self):  # 2025-11-29 11:59:03
+    def test___init__(self):  # 2026-01-15 15:13:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
 
-class Test_PyfficePortWebSession:  # 2025-11-29 11:59:03
+class Test_PyfficePortWebSession:  # 2026-01-15 15:13:11
     """"""
 
     @classmethod
-    def setup_class(cls):  # 2025-11-29 11:59:03
+    def setup_class(cls):  # 2026-01-15 15:13:11
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:59:03
+    def teardown_class(cls):  # 2026-01-15 15:13:11
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 11:59:03
+    def reset(self):  # 2026-01-15 15:13:11
         """"""
         self.setup_class()
-        return self
+        
 
-    def test_all(self):  # 2025-11-29 11:59:03
+    def test_all(self):  # 2026-01-15 15:13:11
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
 
-    def test_file_import(self):  # 2025-11-29 11:59:03
+    def test_file_import(self):  # 2026-01-15 15:13:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_file_open(self):  # 2025-11-29 11:59:03
+    def test_file_open(self):  # 2026-01-15 15:13:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_load_document(self):  # 2025-11-29 11:59:03
+    def test_load_document(self):  # 2026-01-15 15:13:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_parse_session(self):  # 2025-11-29 11:59:03
+    def test_parse_session(self):  # 2026-01-15 15:13:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_parse_tab(self):  # 2025-11-29 11:59:03
+    def test_parse_tab(self):  # 2026-01-15 15:13:11
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_parse_window(self):  # 2025-11-29 11:59:03
+    def test_parse_window(self):  # 2026-01-15 15:13:10
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_to_dict(self):  # 2025-11-29 11:59:04
+    def test_to_dict(self):  # 2026-01-15 15:13:11
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test___init__(self):  # 2025-11-29 11:59:04
+    def test___init__(self):  # 2026-01-15 15:13:10
         """"""
-        if TEST_000:
-            pass
-
-
-class Test_Functions:  # 2025-11-29 11:59:04
-    """"""
-
-    @classmethod
-    def setup_class(cls):  # 2025-11-29 11:59:04
-        """"""
-
-        return cls()
-
-    @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:59:04
-        """"""
-
-        return
-
-    def reset(self):  # 2025-11-29 11:59:04
-        """"""
-        self.setup_class()
-        return self
-
-    def test_all(self):  # 2025-11-29 11:59:04
-        """Executes a series of test functions in a sequential logic."""
-
-        return self
+        pass
 
 
 # ====================================================================================================================||
 """
 
-  # 2025-11-29 11:59:02
+  # 2026-01-15 20:29:39
 
 
 """

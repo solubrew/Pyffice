@@ -74,6 +74,15 @@ class PyfficeTable(PyfficeUnit):
         return self.html
 
 
+class PyfficePart(PyfficeUnit):
+    """"""
+
+    def __init__(self, cfg=None):
+        """"""
+        super().__init__(cfg)
+        self.config.override(pxcfg).select("PyfficePart").override(cfg)
+
+
 # ====================================================================================================================||
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||

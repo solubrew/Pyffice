@@ -9,202 +9,174 @@
     version: <[version]>
     authority: <[authority]>
     security: <[security]>
-    -(WT)-: -32  # 2025-11-29 11:59:15
+    -(WT)-: -32  # 2026-01-15 20:29:45
 """
 
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-import json  # 2025-11-29 11:59:15
-import tempfile  # 2025-11-29 11:59:15
-import os  # 2025-11-29 11:59:15
+import unittest  # 2026-01-15 20:29:44
+import tempfile  # 2026-01-15 20:29:44
+import json  # 2026-01-15 20:29:44
+import os  # 2026-01-15 20:29:44
+from pathlib import Path  # 2026-01-15 20:20:04
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:20:04
+from os.path import join  # 2026-01-15 20:20:04
+from os.path import dirname  # 2026-01-15 20:20:04
 
 # ======================================3rd Party Library Modules=====================================================||
-import join  # 2025-11-29 11:59:16
-import dirname  # 2025-11-29 11:59:16
-import Logma  # 2025-11-29 11:59:16
-from pyffice.databases.databases import PyfficeDatabaseConnection  # 2025-11-29 11:59:16
-from pyffice.databases.databases import PyfficeDatabaseManager  # 2025-11-29 11:59:16
+from pyffice.databases.databases import PyfficeDatabaseConnection  # 2026-01-15 20:20:04
+from pyffice.databases.databases import PyfficeDatabaseManager  # 2026-01-15 20:20:04
+
+from pathlib import Path  # 2026-01-15 20:29:44
+from typing import Any, Dict, List, Optional  # 2026-01-15 20:29:44
+from os.path import join  # 2026-01-15 20:29:44
+from os.path import dirname  # 2026-01-15 20:29:44
+from ogma.logma import Logma  # 2026-01-15 20:29:44
+from pyffice.databases.databases import PyfficeDatabaseConnection  # 2026-01-15 20:29:44
+from pyffice.databases.databases import PyfficeDatabaseManager  # 2026-01-15 20:29:44
 
 # =========================================Local Library Modules======================================================||
-import condor  # 2025-11-29 11:59:16
+from ogma.logma import Logma  # 2026-01-15 15:13:16
+from condor import condor  # 2026-01-15 20:20:04
+
+import pytest  # 2026-01-15 20:29:44
+import hypothesis  # 2026-01-15 20:29:44
+from condor import condor  # 2026-01-15 20:29:44
 
 # ====================================================================================================================||
-HERE = join(dirname(__file__))  # 2025-11-29 11:59:16
-LOGMA = Logma(__name__)  # 2025-11-29 11:59:16
-PXCFG = join(HERE, "_data_", "databasesTEST.yaml")  # 2025-11-29 11:59:16
-CFG = condor.Instruct(PXCFG).load().dikt  # 2025-11-29 11:59:16
-FIXTURES = condor.Instruct(join(HERE, "..", "fixtures", "fixtures.yaml")).load().dikt  # 2025-11-29 11:59:16
+HERE = join(dirname(__file__))  # 2026-01-15 20:29:44
+LOGMA = Logma(__name__)  # 2026-01-15 20:29:44
+PXCFG = join(HERE, "_data_", "databasesTEST.yaml")  # 2026-01-15 20:29:44
+CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:44
+
 
 # ====================================================================================================================||
 
 
-class Test_PyfficeDatabaseConnection:  # 2025-11-29 11:59:16
+class Test_PyfficeDatabaseConnection:  # 2026-01-15 15:13:17
     """"""
 
     @classmethod
-    def setup_class(cls):  # 2025-11-29 11:59:16
+    def setup_class(cls):  # 2026-01-15 15:13:17
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:59:16
+    def teardown_class(cls):  # 2026-01-15 15:13:17
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 11:59:16
+    def reset(self):  # 2026-01-15 15:13:17
         """"""
         self.setup_class()
-        return self
+        
 
-    def test_all(self):  # 2025-11-29 11:59:16
+    def test_all(self):  # 2026-01-15 15:13:17
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
 
-    def test_load_document(self):  # 2025-11-29 11:59:16
+    def test_load_document(self):  # 2026-01-15 15:13:16
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_open_file(self):  # 2025-11-29 11:59:16
+    def test_open_file(self):  # 2026-01-15 15:13:16
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test___init__(self):  # 2025-11-29 11:59:16
+    def test___init__(self):  # 2026-01-15 15:13:16
         """"""
-        if TEST_000:
-            pass
+        pass
 
 
-class Test_PyfficeDatabaseManager:  # 2025-11-29 11:59:16
+class Test_PyfficeDatabaseManager:  # 2026-01-15 15:13:17
     """"""
 
     @classmethod
-    def setup_class(cls):  # 2025-11-29 11:59:16
+    def setup_class(cls):  # 2026-01-15 15:13:17
         """"""
 
         return cls()
 
     @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:59:16
+    def teardown_class(cls):  # 2026-01-15 15:13:17
         """"""
 
         return
 
-    def reset(self):  # 2025-11-29 11:59:16
+    def reset(self):  # 2026-01-15 15:13:17
         """"""
         self.setup_class()
-        return self
+        
 
-    def test_all(self):  # 2025-11-29 11:59:16
+    def test_all(self):  # 2026-01-15 15:13:17
         """Executes a series of test functions in a sequential logic."""
 
-        return self
+        
 
-    def test_add_connection(self):  # 2025-11-29 11:59:16
+    def test_add_connection(self):  # 2026-01-15 15:13:16
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_add_database(self):  # 2025-11-29 11:59:16
+    def test_add_database(self):  # 2026-01-15 15:13:16
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_add_server(self):  # 2025-11-29 11:59:16
+    def test_add_server(self):  # 2026-01-15 15:13:16
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_create_database(self):  # 2025-11-29 11:59:16
+    def test_create_database(self):  # 2026-01-15 15:13:16
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_get_index(self):  # 2025-11-29 11:59:16
+    def test_get_index(self):  # 2026-01-15 15:13:16
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_get_indexes(self):  # 2025-11-29 11:59:16
+    def test_get_indexes(self):  # 2026-01-15 15:13:16
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_get_table(self):  # 2025-11-29 11:59:16
+    def test_get_table(self):  # 2026-01-15 15:13:16
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_get_tables(self):  # 2025-11-29 11:59:16
+    def test_get_tables(self):  # 2026-01-15 15:13:16
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_get_view(self):  # 2025-11-29 11:59:16
+    def test_get_view(self):  # 2026-01-15 15:13:16
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_get_views(self):  # 2025-11-29 11:59:16
+    def test_get_views(self):  # 2026-01-15 15:13:16
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_load_database(self):  # 2025-11-29 11:59:16
+    def test_load_database(self):  # 2026-01-15 15:13:16
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_load_document(self):  # 2025-11-29 11:59:16
+    def test_load_document(self):  # 2026-01-15 15:13:17
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test_open_file(self):  # 2025-11-29 11:59:16
+    def test_open_file(self):  # 2026-01-15 15:13:17
         """"""
-        if TEST_000:
-            pass
+        pass
 
-    def test___init__(self):  # 2025-11-29 11:59:16
+    def test___init__(self):  # 2026-01-15 15:13:16
         """"""
-        if TEST_000:
-            pass
-
-
-class Test_Functions:  # 2025-11-29 11:59:16
-    """"""
-
-    @classmethod
-    def setup_class(cls):  # 2025-11-29 11:59:16
-        """"""
-
-        return cls()
-
-    @classmethod
-    def teardown_class(cls):  # 2025-11-29 11:59:16
-        """"""
-
-        return
-
-    def reset(self):  # 2025-11-29 11:59:16
-        """"""
-        self.setup_class()
-        return self
-
-    def test_all(self):  # 2025-11-29 11:59:16
-        """Executes a series of test functions in a sequential logic."""
-
-        return self
+        pass
 
 
 # ====================================================================================================================||
 """
 
-  # 2025-11-29 11:59:15
+  # 2026-01-15 20:29:45
 
 
 """
