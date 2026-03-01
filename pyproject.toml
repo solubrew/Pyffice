@@ -26,13 +26,58 @@ classifiers = [
     "Topic :: Utilities"]
 # Dependencies with environment markers preserved from the original config
 dependencies = [
+    # Core
     "backoff",
     "click",
+    "condor",
+    "pyyaml",
+    "ruamel.yaml",
+    
+    # Document formats
+    "openpyxl",
+    "python-docx",
+    "python-pptx",
+    "PyPDF2",
+    "PyMuPDF",
+    "nbformat",
+    
+    # Data & visualization
+    "networkx",
+    "pydot",
+    "matplotlib",
+    "seaborn",
+    "graphviz",
+    "colormath",
+    "cairosvg",
+    "pycel",
+    "solidpython",
+    
+    # Web & utilities
+    "furl",
+    "bs4",
+    "ffmpeg-python",
+    "pydub",
+    "schedule",
+    
+    # External services
+    "ultimate-notion",
+    "notion-client",
+    
+    # Hardware/IoT (optional)
+    "pyserial",
+    "adafruit-ampy",
+    "esptool",
+    
+    # Special formats
+    "floweaver",
+    
+    # Python 2 compatibility (legacy)
     'defusedxml; platform_system == "Windows"',
     'futures; python_version < "3"',
     'six; platform_system == "Linux" and python_version > "3.3"',
     'pypiwin32; platform_system == "Windows"',
-    'wheel<=0.29.0; python_version < "2.7"']
+    'wheel<=0.29.0; python_version < "2.7"',
+]
 
 [project.urls]
 Homepage = "https://www.solutionsbrewer.com/"
