@@ -42,3 +42,6 @@ Thumbs.db
 .pytest_cache/
 .coverage
 htmlcov/
+/dev/
+/zz-tomb_/
+/zz-work_/
