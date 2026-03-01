@@ -346,6 +346,74 @@ class PyfficeCodex(PyfficeDocumentManager):
             "required": ["version"],
         }
 
+    def to_chunks(
+        self,
+        chunk_size: int = 1000,
+        overlap: int = 100
+    ) -> list[dict[str, Any]]:
+        """Split codex into embedding-ready chunks.
+        
+        Args:
+            chunk_size: Target size per chunk in characters
+            overlap: Overlap between chunks in characters
+            
+        Returns:
+            List of chunk dictionaries with 'content' and 'metadata'
+        """
+        chunks = []
+        
+        # Chunk each document
+        for doc_id, doc in self.documents.items():
+            doc_content = str(doc)
+            doc_chunks = self._chunk_text(doc_content, chunk_size, overlap)
+            for i, chunk in enumerate(doc_chunks):
+                chunks.append({
+                    "content": chunk,
+                    "metadata": {
+                        "doc_id": doc_id,
+                        "doc_type": type(doc).__name__,
+                        "chunk_index": i,
+                        "total_chunks": len(doc_chunks),
+                    }
+                })
+        
+        # Chunk imports
+        if self.imports:
+            imports_content = str(self.imports)
+            import_chunks = self._chunk_text(imports_content, chunk_size, overlap)
+            for i, chunk in enumerate(import_chunks):
+                chunks.append({
+                    "content": chunk,
+                    "metadata": {
+                        "source": "imports",
+                        "chunk_index": i,
+                        "total_chunks": len(import_chunks),
+                    }
+                })
+        
+        return chunks
+
+    def _chunk_text(
+        self,
+        text: str,
+        chunk_size: int,
+        overlap: int
+    ) -> list[str]:
+        """Split text into overlapping chunks."""
+        if len(text) <= chunk_size:
+            return [text] if text else []
+        
+        chunks = []
+        start = 0
+        
+        while start < len(text):
+            end = start + chunk_size
+            chunk = text[start:end]
+            chunks.append(chunk)
+            start += chunk_size - overlap
+        
+        return chunks
+
 
 # ====================================================================================================================||
 
