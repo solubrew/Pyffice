@@ -305,12 +305,33 @@ class PyfficeCodex(PyfficeDocumentManager):
     def to_yaml(self) -> str:
         """Convert the entire codex to a YAML string for serialization."""
         import yaml
+        
+        # Build serializable dict
         data = {
             "version": self.VERSION,
-            "documents": self.documents,
+            "documents": {},
             "imports": self.imports,
-            "contacts": self.contacts,
+            "contacts": None,
         }
+        
+        # Serialize each document - skip ones that fail
+        for doc_id, doc in self.documents.items():
+            try:
+                if hasattr(doc, 'to_dict'):
+                    data["documents"][doc_id] = doc.to_dict()
+                else:
+                    data["documents"][doc_id] = {"type": type(doc).__name__}
+            except Exception as e:
+                # Skip documents that can't be serialized
+                data["documents"][doc_id] = {"type": type(doc).__name__, "_error": str(e)}
+        
+        if self.contacts:
+            try:
+                if hasattr(self.contacts, 'to_dict'):
+                    data["contacts"] = self.contacts.to_dict()
+            except Exception as e:
+                data["contacts"] = {"type": "PyfficeRolodex", "_error": str(e)}
+        
         return yaml.dump(data, default_flow_style=False)
 
     @classmethod
@@ -325,10 +346,14 @@ class PyfficeCodex(PyfficeDocumentManager):
 
     def to_summary(self) -> dict[str, Any]:
         """Get a token-efficient summary of the codex for AI agents."""
+        doc_types = []
+        for doc_id, doc in self.documents.items():
+            doc_types.append(type(doc).__name__)
+        
         return {
             "version": self.VERSION,
             "document_count": len(self.documents),
-            "document_types": list(self.documents.keys()),
+            "document_types": doc_types,
             "has_contacts": self.contacts is not None,
             "has_forms_manager": self.forms_manager is not None,
             "import_count": len(self.imports),
@@ -339,11 +364,23 @@ class PyfficeCodex(PyfficeDocumentManager):
         return {
             "type": "object",
             "properties": {
-                "version": {"type": "string"},
-                "documents": {"type": "object"},
-                "imports": {"type": "object"},
+                "version": {"type": "string", "description": "Pyffice version"},
+                "documents": {
+                    "type": "object",
+                    "description": "Dictionary of documents by ID",
+                    "additionalProperties": {
+                        "type": "object",
+                        "description": "Document properties"
+                    }
+                },
+                "document_types": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "List of document type names"
+                },
+                "import_count": {"type": "integer", "description": "Number of imports"},
             },
-            "required": ["version"],
+            "required": ["version", "document_count"],
         }
 
     def to_chunks(
