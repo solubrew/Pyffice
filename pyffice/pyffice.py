@@ -305,12 +305,33 @@ class PyfficeCodex(PyfficeDocumentManager):
     def to_yaml(self) -> str:
         """Convert the entire codex to a YAML string for serialization."""
         import yaml
+        
+        # Build serializable dict
         data = {
             "version": self.VERSION,
-            "documents": self.documents,
+            "documents": {},
             "imports": self.imports,
-            "contacts": self.contacts,
+            "contacts": None,
         }
+        
+        # Serialize each document - skip ones that fail
+        for doc_id, doc in self.documents.items():
+            try:
+                if hasattr(doc, 'to_dict'):
+                    data["documents"][doc_id] = doc.to_dict()
+                else:
+                    data["documents"][doc_id] = {"type": type(doc).__name__}
+            except Exception as e:
+                # Skip documents that can't be serialized
+                data["documents"][doc_id] = {"type": type(doc).__name__, "_error": str(e)}
+        
+        if self.contacts:
+            try:
+                if hasattr(self.contacts, 'to_dict'):
+                    data["contacts"] = self.contacts.to_dict()
+            except Exception as e:
+                data["contacts"] = {"type": "PyfficeRolodex", "_error": str(e)}
+        
         return yaml.dump(data, default_flow_style=False)
 
     @classmethod
@@ -325,10 +346,14 @@ class PyfficeCodex(PyfficeDocumentManager):
 
     def to_summary(self) -> dict[str, Any]:
         """Get a token-efficient summary of the codex for AI agents."""
+        doc_types = []
+        for doc_id, doc in self.documents.items():
+            doc_types.append(type(doc).__name__)
+        
         return {
             "version": self.VERSION,
             "document_count": len(self.documents),
-            "document_types": list(self.documents.keys()),
+            "document_types": doc_types,
             "has_contacts": self.contacts is not None,
             "has_forms_manager": self.forms_manager is not None,
             "import_count": len(self.imports),
@@ -339,12 +364,92 @@ class PyfficeCodex(PyfficeDocumentManager):
         return {
             "type": "object",
             "properties": {
-                "version": {"type": "string"},
-                "documents": {"type": "object"},
-                "imports": {"type": "object"},
+                "version": {"type": "string", "description": "Pyffice version"},
+                "documents": {
+                    "type": "object",
+                    "description": "Dictionary of documents by ID",
+                    "additionalProperties": {
+                        "type": "object",
+                        "description": "Document properties"
+                    }
+                },
+                "document_types": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "List of document type names"
+                },
+                "import_count": {"type": "integer", "description": "Number of imports"},
             },
-            "required": ["version"],
+            "required": ["version", "document_count"],
         }
+
+    def to_chunks(
+        self,
+        chunk_size: int = 1000,
+        overlap: int = 100
+    ) -> list[dict[str, Any]]:
+        """Split codex into embedding-ready chunks.
+        
+        Args:
+            chunk_size: Target size per chunk in characters
+            overlap: Overlap between chunks in characters
+            
+        Returns:
+            List of chunk dictionaries with 'content' and 'metadata'
+        """
+        chunks = []
+        
+        # Chunk each document
+        for doc_id, doc in self.documents.items():
+            doc_content = str(doc)
+            doc_chunks = self._chunk_text(doc_content, chunk_size, overlap)
+            for i, chunk in enumerate(doc_chunks):
+                chunks.append({
+                    "content": chunk,
+                    "metadata": {
+                        "doc_id": doc_id,
+                        "doc_type": type(doc).__name__,
+                        "chunk_index": i,
+                        "total_chunks": len(doc_chunks),
+                    }
+                })
+        
+        # Chunk imports
+        if self.imports:
+            imports_content = str(self.imports)
+            import_chunks = self._chunk_text(imports_content, chunk_size, overlap)
+            for i, chunk in enumerate(import_chunks):
+                chunks.append({
+                    "content": chunk,
+                    "metadata": {
+                        "source": "imports",
+                        "chunk_index": i,
+                        "total_chunks": len(import_chunks),
+                    }
+                })
+        
+        return chunks
+
+    def _chunk_text(
+        self,
+        text: str,
+        chunk_size: int,
+        overlap: int
+    ) -> list[str]:
+        """Split text into overlapping chunks."""
+        if len(text) <= chunk_size:
+            return [text] if text else []
+        
+        chunks = []
+        start = 0
+        
+        while start < len(text):
+            end = start + chunk_size
+            chunk = text[start:end]
+            chunks.append(chunk)
+            start += chunk_size - overlap
+        
+        return chunks
 
 
 # ====================================================================================================================||
