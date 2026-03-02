@@ -42,26 +42,26 @@ dependencies = [
     
      #Data & visualization
     #"networkx==2.7",
-    "pydot",
-    "matplotlib",
-    "seaborn",
-    "graphviz",
-    "colormath",
-    "cairosvg",
-    #"pycel",
-    "solidpython",
+#    "pydot",
+#    "matplotlib",
+#    "seaborn",
+#    "graphviz",
+#    "colormath",
+#    "cairosvg",
+#    #"pycel",
+#    "solidpython",
 
     # Web & utilities
     #"twof",
-    "furl",
-    "bs4",
-    "ffmpeg-python",
-    "pydub",
-    "schedule",
+#    "furl",
+#    "bs4",
+#    "ffmpeg-python",
+#    "pydub",
+#    "schedule",
 
     # External services
-    "ultimate-notion",
-    "notion-client",
+#    "ultimate-notion",
+#    "notion-client",
 
     # Hardware/IoT (optional)
 #    "pyserial",
