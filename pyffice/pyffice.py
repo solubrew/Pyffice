@@ -23,10 +23,10 @@ from typing import Any, Optional
 import datetime as dt
 
 # ======================================3rd Party Library Modules=====================================================||
-# (Add imports as needed)
-
-# ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor, utils
+try:
+    from condor import Instruct
+except ImportError:
+    Instruct = None
 from ogma.logma import Logma
 from squirl.objnql import txtonql
 from squirl.orgnql import conql, yonql
@@ -73,7 +73,11 @@ class PyfficeCodex(PyfficeDocumentManager):
     def __init__(self, cfg: Optional[dict[str, Any]] = None) -> None:
         """Initialize PyfficeCodex with optional configuration."""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeCodex")).override(cfg)
+        if Instruct:
+            self.config.override(Instruct(pxcfg).select("PyfficeCodex")).override(cfg)
+        else:
+            from collections import defaultdict
+            self.config = defaultdict(dict)
         
         cfg = cfg or {}
         self.url_library = PyfficeURLLibrary(cfg)

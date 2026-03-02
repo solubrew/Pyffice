@@ -24,6 +24,8 @@ def write(filepath: str, data: Dict[str, Dict[str, str]], encoding: str = "utf-8
     """Write dictionary to INI file."""
     config = configparser.ConfigParser()
     for section, values in data.items():
+        if section.upper() == 'DEFAULT':
+            continue
         config.add_section(section)
         for key, value in values.items():
             config.set(section, key, value)
