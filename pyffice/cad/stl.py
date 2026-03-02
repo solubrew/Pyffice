@@ -1,120 +1,135 @@
 """
-Pyffice STL Module - Handle STL 3D model files
+Pyffice STL 3D Model Handler - Read/Write STL files (ASCII and Binary)
 """
-
-from typing import Dict, Any, List
 from pathlib import Path
+from typing import List, Dict, Any, Tuple
 import struct
-import numpy as np
+import re
 
 
 class PyfficeSTL:
-    """Handle STL 3D model files (ASCII and Binary)"""
-    
-    SUPPORTED_EXTENSIONS = ['.stl']
-    MAX_SIZE = 256 * 1024 * 1024  # 256MB
+    EXTENSIONS = {'.stl'}
+    DEFAULT_LIMIT = 256 * 1024 * 1024  # 256MB
     
     def __init__(self, file_path: str):
         self.file_path = Path(file_path)
-        self._validate()
-    
-    def _validate(self):
-        if self.file_path.stat().st_size > self.MAX_SIZE:
-            raise ValueError(f"File exceeds {self.MAX_SIZE}MB limit")
+        self.faces: List[Dict[str, Any]] = []
     
     def read(self) -> Dict[str, Any]:
-        """Read STL file and return structured data"""
-        with open(self.file_path, 'rb') as f:
-            header = f.read(80)
+        """Read STL file (ASCII or binary)"""
+        content = self.file_path.read_text(errors='ignore')
         
-        if b'solid' in header[:6].lower():
-            return self._read_ascii()
+        if content.strip().startswith('solid'):
+            # Try ASCII first
+            self.faces = self._read_ascii(content)
+            if not self.faces:
+                # Might be binary with "solid" at start
+                self.faces = self._read_binary()
         else:
-            return self._read_binary()
-    
-    def _read_ascii(self) -> Dict[str, Any]:
-        """Read ASCII STL"""
-        vertices = []
-        normals = []
+            self.faces = self._read_binary()
         
-        with open(self.file_path, 'r') as f:
-            current_normal = None
-            current_facet = []
-            
-            for line in f:
-                line = line.strip()
-                if line.startswith('facet normal'):
-                    parts = line.split()[2:]
-                    current_normal = [float(x) for x in parts]
-                elif line.startswith('vertex'):
-                    parts = line.split()[1:]
-                    current_facet.append([float(x) for x in parts])
-                elif line.startswith('endfacet'):
-                    if current_normal and len(current_facet) == 3:
-                        normals.append(current_normal)
-                        vertices.extend(current_facet)
-                    current_normal = None
-                    current_facet = []
-        
-        return self._build_result(vertices, normals)
-    
-    def _read_binary(self) -> Dict[str, Any]:
-        """Read binary STL"""
-        vertices = []
-        normals = []
-        
-        with open(self.file_path, 'rb') as f:
-            f.read(80)  # skip header
-            triangle_count = struct.unpack('<I', f.read(4))[0]
-            
-            for _ in range(triangle_count):
-                normal = struct.unpack('<3f', f.read(12))
-                for _ in range(3):
-                    vertex = struct.unpack('<3f', f.read(12))
-                    vertices.append(list(vertex))
-                normals.append(list(normal))
-                f.read(2)  # attribute byte count
-        
-        return self._build_result(vertices, normals)
-    
-    def _build_result(self, vertices: List, normals: List) -> Dict[str, Any]:
-        """Build result dict from vertices and normals"""
         return {
-            'vertices': vertices,
-            'normals': normals,
-            'vertex_count': len(vertices),
-            'face_count': len(normals),
+            'faces': self.faces,
+            'face_count': len(self.faces)
         }
     
-    def write_binary(self, data: Dict[str, Any], output_path: str = None):
-        """Write data as binary STL"""
-        output = Path(output_path) if output_path else self.file_path
+    def _read_ascii(self, content: str) -> List[Dict[str, Any]]:
+        """Parse ASCII STL"""
+        faces = []
+        # Match facet normal and vertex lines
+        pattern = r'facet\s+normal\s+([\d.e+-]+)\s+([\d.e+-]+)\s+([\d.e+-]+)[\s\S]*?vertex\s+([\d.e+-]+)\s+([\d.e+-]+)\s+([\d.e+-]+)[\s\S]*?vertex\s+([\d.e+-]+)\s+([\d.e+-]+)\s+([\d.e+-]+)[\s\S]*?vertex\s+([\d.e+-]+)\s+([\d.e+-]+)\s+([\d.e+-]+)'
         
-        with open(output, 'wb') as f:
-            f.write(b' ' * 80)  # header
+        for match in re.finditer(pattern, content):
+            nx, ny, nz = float(match.group(1)), float(match.group(2)), float(match.group(3))
+            v1 = (float(match.group(4)), float(match.group(5)), float(match.group(6)))
+            v2 = (float(match.group(7)), float(match.group(8)), float(match.group(9)))
+            v3 = (float(match.group(10)), float(match.group(11)), float(match.group(12)))
+            faces.append({
+                'normal': (nx, ny, nz),
+                'vertices': [v1, v2, v3]
+            })
+        return faces
+    
+    def _read_binary(self) -> List[Dict[str, Any]]:
+        """Parse binary STL"""
+        faces = []
+        with open(self.file_path, 'rb') as f:
+            # Skip 80-byte header
+            f.read(80)
+            # Read face count
+            num_faces = struct.unpack('<I', f.read(4))[0]
             
-            faces = data.get('faces', [])
-            normals = data.get('normals', [])
-            vertices = data.get('vertices', [])
-            
+            for _ in range(num_faces):
+                data = f.read(50)  # 12 floats + 2 bytes
+                normal = struct.unpack('<3f', data[:12])
+                v1 = struct.unpack('<3f', data[12:24])
+                v2 = struct.unpack('<3f', data[24:36])
+                v3 = struct.unpack('<3f', data[36:48])
+                faces.append({
+                    'normal': normal,
+                    'vertices': [v1, v2, v3]
+                })
+        return faces
+    
+    def write(self, data: Dict[str, Any], binary: bool = True) -> None:
+        """Write STL file"""
+        faces = data.get('faces', [])
+        
+        if binary:
+            self._write_binary(faces)
+        else:
+            self._write_ascii(faces)
+    
+    def _write_binary(self, faces: List[Dict[str, Any]]) -> None:
+        """Write binary STL"""
+        with open(self.file_path, 'wb') as f:
+            # 80-byte header
+            f.write(b'Generated by pyffice' + b'\0' * (80 - 20))
+            # Face count
             f.write(struct.pack('<I', len(faces)))
-            
-            for i, face in enumerate(faces):
-                normal = normals[i] if i < len(normals) else [0, 0, 1]
+            # Faces
+            for face in faces:
+                normal = face.get('normal', (0, 0, 1))
+                vertices = face.get('vertices', [(0,0,0), (0,0,0), (0,0,0)])
                 f.write(struct.pack('<3f', *normal))
-                
-                for vi in face:
-                    v = vertices[vi] if vi < len(vertices) else [0, 0, 0]
+                for v in vertices:
                     f.write(struct.pack('<3f', *v))
-                
-                f.write(struct.pack('<H', 0))
+                f.write(struct.pack('<H', 0))  # Attribute byte count
+    
+    def _write_ascii(self, faces: List[Dict[str, Any]]) -> None:
+        """Write ASCII STL"""
+        with open(self.file_path, 'w') as f:
+            f.write("solid\n")
+            for face in faces:
+                normal = face.get('normal', (0, 0, 1))
+                vertices = face.get('vertices', [])
+                f.write(f"  facet normal {normal[0]} {normal[1]} {normal[2]}\n")
+                f.write("    outer loop\n")
+                for v in vertices:
+                    f.write(f"      vertex {v[0]} {v[1]} {v[2]}\n")
+                f.write("    endloop\n")
+                f.write("  endfacet\n")
+            f.write("endsolid\n")
+    
+    def load(self) -> Dict[str, Any]:
+        """Alias for read()"""
+        return self.read()
 
 
-def read_stl(file_path: str) -> Dict[str, Any]:
-    """Convenience function to read STL"""
-    return PyfficeSTL(file_path).read()
+# Module-level convenience functions
+def read(stl_path: str) -> Dict[str, Any]:
+    """Read STL file"""
+    return PyfficeSTL(stl_path).read()
 
 
-def write_stl(file_path: str, data: Dict[str, Any]):
-    """Convenience function to write STL"""
-    PyfficeSTL(file_path).write_binary(data)
+def load(stl_path: str) -> Dict[str, Any]:
+    """Read STL file"""
+    return read(stl_path)
+
+
+def write(stl_path: str, data: Dict[str, Any], binary: bool = True) -> None:
+    """Write STL file"""
+    PyfficeSTL(stl_path).write(data, binary)
+
+
+__all__ = ['PyfficeSTL', 'read', 'write', 'load']

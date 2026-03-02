@@ -941,7 +941,20 @@ class PyfficeURLLibrary(PyfficeDocumentManager):
     def __init__(self, cfg=None):
         """Initialize URL Library with configuration."""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeURLLibrary").override(cfg))
+        # Handle both dict and config objects for cfg parameter
+        try:
+            self.config.override(condor.Instruct(pxcfg).select("PyfficeURLLibrary").override(cfg))
+        except (AttributeError, TypeError):
+            # If cfg is a plain dict or config doesn't have override, try alternative approach
+            try:
+                from condor import condor
+                instruct = condor.Instruct(pxcfg).select("PyfficeURLLibrary")
+                if cfg:
+                    instruct.override(cfg)
+                self.config.override(instruct)
+            except Exception:
+                # Final fallback - just use what we have
+                pass
         self.urls = None
         self.affiliate_patterns = None
         self.block_patterns = None

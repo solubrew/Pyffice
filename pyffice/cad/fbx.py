@@ -1,16 +1,25 @@
-"""
-Pyffice FBX Handler
-"""
-from pathlib import Path
+"""FBX 3D model format support (Filmbox)."""
+from typing import Any, Optional
+import io
 
-class PyfficeFbx:
-    EXTENSIONS = {'.fbx'}
-    DEFAULT_LIMIT = 256 * 1024 * 1024
-    
-    @staticmethod
-    def size_limit(path: str) -> int:
-        return PyfficeFbx.DEFAULT_LIMIT
-    
-    @staticmethod
-    def inline(path: str) -> bool:
-        return Path(path).stat().st_size < PyfficeFbx.DEFAULT_LIMIT
+
+def load(path: str) -> bytes:
+    """Load FBX file contents."""
+    with open(path, 'rb') as f:
+        return f.read()
+
+
+def read(path: str) -> bytes:
+    """Read FBX file contents."""
+    return load(path)
+
+
+def write(data: bytes, path: str) -> None:
+    """Write data to FBX file."""
+    with open(path, 'wb') as f:
+        f.write(data)
+
+
+def dump(data: bytes, path: str) -> None:
+    """Dump data to FBX file."""
+    write(data, path)

@@ -12,6 +12,8 @@
 """
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
+__all__ = ["PyfficeScript", "PyfficeBibliography", "PyfficeMessage"]
+
 from os.path import abspath, dirname, join
 import datetime as dt
 
@@ -43,18 +45,34 @@ class PyfficeScript(PyfficeDocument):
     VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
-        """"""
+        """Initialize a PyfficeScript document.
+        
+        Args:
+            cfg: Configuration dictionary with document settings.
+        """
         if cfg is None:
-            cfg["document"] = None
+            cfg = {}
+        # Ensure config is initialized properly for Instruct chain
+        if not isinstance(cfg, dict):
+            cfg = {}
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeScript")).override(cfg)
+        # Now config should be properly set up
+        try:
+            self.config = condor.Instruct(pxcfg).select("PyfficeScript")
+            if isinstance(cfg, dict):
+                self.config = self.config.override(cfg)
+        except Exception as e:
+            logma.warn(f"Config override failed: {e}, using default")
+            self.config = condor.Instruct({})
         self.active_page = None
         self.file_format = None
+        self.full_text = ""
         self.html = None
-        self.pages = None
+        self.pages = {}
         self.paragraphs = None
         self.text = None
         self.doc_type = "script"
+        self.rules = []
 
     def add_comment(self, text: str):
         """
@@ -65,7 +83,14 @@ class PyfficeScript(PyfficeDocument):
         return self
 
     def add_entry(self, text):
-        """"""
+        """Add an entry to the document.
+        
+        Args:
+            text: The text content to add.
+            
+        Returns:
+            self: For method chaining.
+        """
         return self
 
     def add_footer(self, text, to_document=False):
@@ -133,7 +158,11 @@ class PyfficeScript(PyfficeDocument):
         return self
 
     def add_page(self):
-        """"""
+        """Add a new page to the document.
+        
+        Returns:
+            self: For method chaining.
+        """
         page = len(self.pages.keys())
         page_size = self.pages[page]["page_size"]
         top = self.pages[page]["margins"]["top"]
@@ -248,7 +277,7 @@ class PyfficeScript(PyfficeDocument):
         Returns:
             str: Text of the paragraph.
         """
-        return self.self.active_page[str(index)].value
+        return self.active_page[str(index)].value
 
     def load_document(self, document=None):
         """"""
@@ -439,7 +468,7 @@ class PyfficeScript(PyfficeDocument):
             for i, page in self.pages.items():
                 if i not in doc["data"]["pages"]:
                     doc["data"]["pages"][str(i)] = {"entries": {}}
-                logma.info(f"Entries {len(page["entries"])}")
+                logma.info(f"Entries {len(page['entries'])}")
                 for entry in page["entries"]:
                     if "entries" not in doc["data"]["pages"][str(i)]:
                         doc["data"]["pages"][str(i)]["entries"] = {}
@@ -453,6 +482,24 @@ class PyfficeScript(PyfficeDocument):
                     doc["data"]["pages"][str(i)]["entries"][str(entry)] = text.to_dict()
         # logma.json(doc)
         return doc
+
+    def to_json_schema(self) -> dict:
+        """Convert the script document to JSON Schema format.
+        
+        Returns:
+            dict: JSON Schema representation of the script document.
+        """
+        schema = super().to_json_schema()
+        schema["title"] = self.name or "PyfficeScript"
+        schema["properties"].update({
+            "pages": {
+                "type": "object",
+                "description": "Dictionary of pages in the document",
+            },
+            "file_format": {"type": "string", "default": self.file_format},
+            "text": {"type": "string", "description": "Full text content"},
+        })
+        return schema
 
     def to_html(self):
         """"""

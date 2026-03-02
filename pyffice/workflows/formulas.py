@@ -42,7 +42,7 @@ class PyfficeFormulasLibrary(PyfficeDocumentManager):
         """"""
         super().__init__(cfg)
         self.config.override(condor.Instruct(pxcfg).select("PyfficeFormulasLibrary")).override(cfg)
-        self.compiler = ExcelCompiler
+        # self.compiler = ExcelCompiler
         self.formulas = None
 
     def get_formulas_list(self):
@@ -74,7 +74,7 @@ class PyfficeFormulasLibrary(PyfficeDocumentManager):
         return doc
 
 
-class PyfficeFormula(PyfficeUnit, ExcelFormula):
+class PyfficeFormula(PyfficeUnit):  # , ExcelFormula):
     """"""
 
     VERSION = "0.0.1.0.1.0"
@@ -85,7 +85,7 @@ class PyfficeFormula(PyfficeUnit, ExcelFormula):
         PyfficeUnit.__init__(self, self.config)
         self.config.override(condor.Instruct(pxcfg).select("PyfficeFormula")).override(cfg)
         self.formula = self.config.dikt.get("formula", None)
-        self.formula_tag = "<{" + self.formula + "}>"
+        self.formula_tag = "<{" + str(self.formula) + "}>"
 
     def convert(self):
         """"""

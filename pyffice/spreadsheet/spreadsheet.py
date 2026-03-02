@@ -12,6 +12,8 @@
 """
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
+__all__ = ["PyfficeSpreadSheet", "PyfficeMatrix", "calcArabicNumerals", "calcExtendedRomanNumerals"]
+
 from os.path import dirname, join
 
 # ======================================3rd Party Library Modules=====================================================||
@@ -235,6 +237,26 @@ class PyfficeSpreadSheet(PyfficeDocument):
         }
         self.load_document(self.document["document"])
         return doc
+
+    def to_json_schema(self) -> dict:
+        """Convert the spreadsheet to JSON Schema format.
+        
+        Returns:
+            dict: JSON Schema representation of the spreadsheet.
+        """
+        schema = super().to_json_schema()
+        schema["title"] = self.name or "PyfficeSpreadSheet"
+        schema["properties"].update({
+            "cells": {
+                "type": "object",
+                "description": "Dictionary of cell addresses to cell values",
+            },
+            "num_rows": {"type": "integer", "default": self.num_rows},
+            "num_cols": {"type": "integer", "default": self.num_cols},
+            "column_labels": {"type": "object", "description": "Column width settings"},
+            "data": {"type": "object", "description": "Pandas DataFrame representation"},
+        })
+        return schema
 
     def _sanitize_sheet_name(self, name):
         """"""
@@ -471,6 +493,26 @@ class PyfficeMatrix(PyfficeDocumentManager):
         doc["document"]["documents"] = self.sheets
         doc["document"]["document_type"] = "pyffice_matrix"
         return doc
+
+    def to_json_schema(self) -> dict:
+        """Convert the matrix (workbook) to JSON Schema format.
+        
+        Returns:
+            dict: JSON Schema representation of the matrix.
+        """
+        schema = super().to_json_schema()
+        schema["title"] = self.name or "PyfficeMatrix"
+        schema["properties"].update({
+            "sheets": {
+                "type": "object",
+                "description": "Dictionary of sheet names to PyfficeSpreadSheet objects",
+            },
+            "active_worksheet": {"type": "string", "description": "Name of active worksheet"},
+            "compatibility": {"type": "string", "default": self.compatibility},
+            "charts": {"type": "array", "description": "List of charts in the workbook"},
+            "objects": {"type": "array", "description": "List of objects (shapes, tables, images)"},
+        })
+        return schema
 
 
 def calcArabicNumerals(input_):

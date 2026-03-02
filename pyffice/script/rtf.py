@@ -1,16 +1,25 @@
-"""
-Pyffice RTF Handler
-"""
-from pathlib import Path
+"""RTF (Rich Text Format) support."""
+from typing import Any, Optional
+import io
 
-class PyfficeRtf:
-    EXTENSIONS = {'.rtf'}
-    DEFAULT_LIMIT = 256 * 1024 * 1024
-    
-    @staticmethod
-    def size_limit(path: str) -> int:
-        return PyfficeRtf.DEFAULT_LIMIT
-    
-    @staticmethod
-    def inline(path: str) -> bool:
-        return Path(path).stat().st_size < PyfficeRtf.DEFAULT_LIMIT
+
+def load(path: str) -> str:
+    """Load RTF file contents."""
+    with open(path, 'r', encoding='utf-8', errors='ignore') as f:
+        return f.read()
+
+
+def read(path: str) -> str:
+    """Read RTF file contents."""
+    return load(path)
+
+
+def write(data: str, path: str) -> None:
+    """Write data to RTF file."""
+    with open(path, 'w', encoding='utf-8') as f:
+        f.write(data)
+
+
+def dump(data: str, path: str) -> None:
+    """Dump data to RTF file."""
+    write(data, path)

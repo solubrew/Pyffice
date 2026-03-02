@@ -28,6 +28,19 @@ try:
 except ImportError:
     Instruct = None
 
+try:
+    from ogma import Logma
+except ImportError:
+    class Logma:
+        def __init__(self, name):
+            self.logger = logging.getLogger(name)
+        def info(self, msg):
+            print(f"[INFO] {msg}")
+        def debug(self, msg):
+            print(f"[DEBUG] {msg}")
+        def error(self, msg):
+            print(f"[ERROR] {msg}")
+
 # Commented out - broken dependency chain from squirl->condor
 # from squirl.objnql import txtonql
 # from squirl.orgnql import conql, yonql
@@ -59,6 +72,21 @@ logma = Logma(__name__)
 pxcfg = join(here, "_data_", "pyffice.yaml")
 
 
+class PyfficeCodexError(Exception):
+    """Base exception for PyfficeCodex errors."""
+    pass
+
+
+class DocumentNotFoundError(PyfficeCodexError):
+    """Raised when a requested document is not found."""
+    pass
+
+
+class InitializationError(PyfficeCodexError):
+    """Raised when PyfficeCodex initialization fails."""
+    pass
+
+
 class PyfficeCodex(PyfficeDocumentManager):
     """A Pyffice Book is a container that can hold multiple instances and types of Pyffice Top Level Documents
 
@@ -73,35 +101,44 @@ class PyfficeCodex(PyfficeDocumentManager):
 
     def __init__(self, cfg: Optional[dict[str, Any]] = None) -> None:
         """Initialize PyfficeCodex with optional configuration."""
-        super().__init__(cfg)
-        if Instruct:
-            self.config.override(Instruct(pxcfg).select("PyfficeCodex")).override(cfg)
-        else:
-            from collections import defaultdict
-            self.config = defaultdict(dict)
-        
-        cfg = cfg or {}
-        self.url_library = PyfficeURLLibrary(cfg)
-        
-        self.contacts: Optional[PyfficeRolodex] = None
-        self.documents: dict = {}
-        self.forms_manager: Optional[PyfficeFormsManager] = None
-        self.imports: dict = {}
-        self.source_manager: Optional[PyfficeSources] = None
-        self.source: Any = None
+        try:
+            super().__init__(cfg)
+            if Instruct:
+                self.config.override(Instruct(pxcfg).select("PyfficeCodex")).override(cfg)
+            else:
+                from collections import defaultdict
+                self.config = defaultdict(dict)
+            
+            cfg = cfg or {}
+            self.url_library = PyfficeURLLibrary(cfg)
+            
+            self.contacts: Optional[PyfficeRolodex] = None
+            self.documents: dict = {}
+            self.forms_manager: Optional[PyfficeFormsManager] = None
+            self.imports: dict = {}
+            self.source_manager: Optional[PyfficeSources] = None
+            self.source: Any = None
+        except Exception as e:
+            raise InitializationError(f"Failed to initialize PyfficeCodex: {e}") from e
 
     def add_pydocument(self, pydoc: Any) -> Any:
         """Add a Pyffice document to the codex."""
-        if isinstance(pydoc, str):
-            pydoc = self.load_pydocument(pydoc)
-        self.documents.append(pydoc)
-        return pydoc
+        try:
+            if isinstance(pydoc, str):
+                pydoc = self.load_pydocument(pydoc)
+            self.documents.append(pydoc)
+            return pydoc
+        except Exception as e:
+            raise PyfficeCodexError(f"Failed to add document: {e}") from e
 
     def add_url(self, url: str) -> Optional[str]:
         """Add a URL to the library."""
         if self.url_library is None:
-            raise ValueError("URL library not initialized")
-        return self.url_library.add_url(url)
+            raise PyfficeCodexError("URL library not initialized")
+        try:
+            return self.url_library.add_url(url)
+        except Exception as e:
+            raise PyfficeCodexError(f"Failed to add URL: {e}") from e
 
     def get_url(self, url_id: Optional[str] = None) -> Optional[Any]:
         """Get URL by ID."""

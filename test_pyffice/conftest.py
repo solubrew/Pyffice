@@ -12,9 +12,8 @@
 """
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-import crow
-
-crow.crowLoad("Subtrix", "DELTA")
+# import crow
+# crow.crowLoad("Subtrix", "DELTA")
 from os.path import dirname, join
 
 # ======================================3rd Party Library Modules=====================================================||
@@ -37,7 +36,7 @@ pxcfg = join(here, "_data_", ".yaml")
 def pytest_sessionstart(session):
     """"""
     print("\n[BOOT] Initializing Crow environment for recursive imports...")
-    crow.crowLoad("Subtrix", "DELTA")
+    # crow.crowLoad("Subtrix", "DELTA")
 
 
 def pytest_configure(config):

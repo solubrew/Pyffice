@@ -20,7 +20,7 @@ class PyfficeINI:
         self._parser = configparser.ConfigParser()
     
     def _validate(self):
-        if self.file_path.stat().st_size > self.MAX_SIZE:
+        if self.file_path.exists() and self.file_path.stat().st_size > self.MAX_SIZE:
             raise ValueError(f"File exceeds {self.MAX_SIZE}MB limit")
     
     def read(self) -> Dict[str, Dict[str, str]]:
@@ -68,3 +68,10 @@ def read_ini(file_path: str) -> Dict[str, Dict[str, str]]:
 def write_ini(file_path: str, data: Dict[str, Dict[str, str]]):
     """Convenience function to write INI"""
     PyfficeINI(file_path).write(data)
+
+
+# Alias for compatibility
+load = read_ini
+read = read_ini
+write = write_ini
+__all__ = ['PyfficeINI', 'read_ini', 'write_ini', 'load', 'read', 'write']

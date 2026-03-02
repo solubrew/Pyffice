@@ -90,8 +90,14 @@ def _toc_ncx(title: str) -> str:
 
 
 def _xhtml(content: str) -> str:
+    newline = "\n"
     return f'''<?xml version="1.0" encoding="utf-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head><title>Chapter 1</title><link href="../Styles/style.css" type="text/css" rel="stylesheet"/></head>
-<body><p>{"</p><p>".join(content.split("\\n"))}</p></body>
+<body><p>{newline.join(content.split(newline))}</p></body>
 </html>'''
+
+# Alias for compatibility
+load = read
+write = create
+__all__ = ['create', 'read', 'list_chapters', 'load', 'write']

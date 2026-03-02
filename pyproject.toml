@@ -42,6 +42,7 @@ dependencies = [
     
      #Data & visualization
     #"networkx==2.7",
+    "plotly",
     "pydot",
     "matplotlib",
     "seaborn",
@@ -50,6 +51,9 @@ dependencies = [
     "cairosvg",
     #"pycel",
     "solidpython",
+
+    # Database
+    "sqlalchemy",
 
     # Web & utilities
     #"twof",

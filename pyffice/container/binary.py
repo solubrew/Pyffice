@@ -51,6 +51,21 @@ DEFAULT_LIMITS = {
     'default': 256 * 1024 * 1024,
 }
 
+# Module-level limits storage
+_limits_storage = dict(DEFAULT_LIMITS)
+
+
+def get_limit_for_type(ext: str) -> int:
+    """Get size limit for a file extension."""
+    ext = ext.lower().lstrip('.')
+    return _limits_storage.get(ext, _limits_storage['default'])
+
+
+def set_limit_for_type(ext: str, limit: int) -> None:
+    """Set size limit for a file extension."""
+    ext = ext.lower().lstrip('.')
+    _limits_storage[ext] = limit
+
 
 class PyfficeBinaryContainer:
     """Container that stores documents either as inline base64 or as file paths."""

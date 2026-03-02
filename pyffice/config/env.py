@@ -69,3 +69,10 @@ def read_env(file_path: str) -> Dict[str, str]:
 def write_env(file_path: str, data: Dict[str, str], **kwargs):
     """Convenience function to write ENV"""
     PyfficeENV(file_path).write(data, **kwargs)
+
+
+# Alias for compatibility
+load = read_env
+read = read_env
+write = write_env
+__all__ = ['PyfficeENV', 'read_env', 'write_env', 'load', 'read', 'write']
