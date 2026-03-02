@@ -27,10 +27,10 @@ classifiers = [
 # Dependencies with environment markers preserved from the original config
 dependencies = [
     # Core
-    "backoff",
-    "click",
-    "pyyaml",
-    "ruamel.yaml",
+#    "backoff",
+#    "click",
+#    "pyyaml",
+#    "ruamel.yaml",
     
     # Document formats
 #    "openpyxl",
