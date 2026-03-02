@@ -10,8 +10,10 @@ import xml.etree.ElementTree as ET
 
 def create(title: str, author: str, content: str, output: str) -> None:
     """Create EPUB file from content."""
+    import io
     with zipfile.ZipFile(output, "w", zipfile.ZIP_DEFLATED) as zf:
-        zf.writestr("mimetype", "application/epub+zip", compress_type=zipfile.ZIP_STORED)
+        # mimetype must be first and uncompressed
+        zf.writestr("mimetype", b"application/epub+zip", compress_type=zipfile.ZIP_STORED)
         zf.writestr("META-INF/container.xml", _container_xml())
         zf.writestr("OEBPS/content.opf", _opf(title, author))
         zf.writestr("OEBPS/toc.ncx", _toc_ncx(title))
