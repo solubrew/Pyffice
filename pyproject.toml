@@ -53,23 +53,23 @@ dependencies = [
 
     # Web & utilities
     #"twof",
-#    "furl",
-#    "bs4",
-#    "ffmpeg-python",
-#    "pydub",
-#    "schedule",
+    "furl",
+    "bs4",
+    "ffmpeg-python",
+    "pydub",
+    "schedule",
 
     # External services
-#    "ultimate-notion",
-#    "notion-client",
+    "ultimate-notion",
+    "notion-client",
 
     # Hardware/IoT (optional)
-#    "pyserial",
-#    "adafruit-ampy",
-#    "esptool",
+    "pyserial",
+    "adafruit-ampy",
+    "esptool",
 
     # Special formats
-    #"floweaver",
+    "floweaver",
 
     # Python 2 compatibility (legacy)
     'defusedxml; platform_system == "Windows"',
