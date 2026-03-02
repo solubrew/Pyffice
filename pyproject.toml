@@ -27,18 +27,18 @@ classifiers = [
 # Dependencies with environment markers preserved from the original config
 dependencies = [
     # Core
-#    "backoff",
-#    "click",
-#    "pyyaml",
-#    "ruamel.yaml",
+    "backoff",
+    "click",
+    "pyyaml",
+    "ruamel.yaml",
     
      #Document formats
-    #"openpyxl",
-#    "python-docx",
-#    "python-pptx",
-    #"PyPDF2",
-    #"PyMuPDF",
-    #"nbformat",
+    "openpyxl",
+    "python-docx",
+    "python-pptx",
+    "PyPDF2",
+    "PyMuPDF",
+    "nbformat",
     
      #Data & visualization
     #"networkx==2.7",
@@ -72,11 +72,11 @@ dependencies = [
     #"floweaver",
 
     # Python 2 compatibility (legacy)
-#    'defusedxml; platform_system == "Windows"',
-#    'futures; python_version < "3"',
-#    'six; platform_system == "Linux" and python_version > "3.3"',
-#    'pypiwin32; platform_system == "Windows"',
-#    'wheel<=0.29.0; python_version < "2.7"',
+    'defusedxml; platform_system == "Windows"',
+    'futures; python_version < "3"',
+    'six; platform_system == "Linux" and python_version > "3.3"',
+    'pypiwin32; platform_system == "Windows"',
+    'wheel<=0.29.0; python_version < "2.7"',
 ]
 
 [project.urls]
