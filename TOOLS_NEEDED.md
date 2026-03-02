@@ -1,58 +1,59 @@
-# External Tools Required
+# External Tools Needed
 
-This document lists document formats that require external tools/libraries to function.
+Pyffice can handle most formats natively. The following require external tools or libraries:
+
+## CRITICAL: Broken Import Chain
+**All modules fail to import due to**: `from condor import condor` - this module does not exist in the condor package.
+
+Files affected (30+):
+- pyffice/tags/tags.py
+- pyffice/diagrams/diagrams.py
+- pyffice/audio/audio.py
+- pyffice/config/*.py
+- pyffice/updates/updates.py
+- pyffice/cad/*.py
+- pyffice/cam/*.py
+- pyffice/video/video.py
+- pyffice/spreadsheet/spreadsheet.py
+- pyffice/items/*.py
+- pyffice/calendars/*.py
+- pyffice/contacts/contacts.py
+- pyffice/databases/*.py
+- pyffice/email/email.py
+- pyffice/presentation/presentation.py
+- pyffice/document.py
+- pyffice/__init__.py
+
+**Solution**: Either:
+1. Create a stub `condor/condor.py` module, OR
+2. Replace all `from condor import condor` with direct condor usage
 
 ## Container Formats
+- **rar**: `unar` or `unrar` CLI tool
+- **sevenzip**: `p7zip` or `7-zip` CLI tool
 
-| Format | Tool Needed | Install Command |
-|--------|-------------|-----------------|
-| rar | unrar | `apt install unrar` |
-| sevenzip | 7z | `apt install p7zip-full` |
-
-## Ebook Formats
-
-| Format | Python Library | Install Command |
-|--------|-----------------|-----------------|
-| epub | ebooklib | `pip install ebooklib` |
-| mobi | python-mobi | `pip install python-mobi` |
-| azw | kindleunpack | `pip install kindleunpack` |
+## eBook Formats
+- **epub**: Works natively (tested directly, not through pyffice)
+- **mobi**: Requires `kindleunpack` or `mobi_unpack`
+- **azw/azw3**: Requires `calibre` (`ebook-convert`)
 
 ## CAD Formats
+- **obj/stl/scad**: Work natively
+- **dxf**: Requires `dxfpy` or `ezdxf`
+- **dwg**: Requires `opencascade` or `ezdxf` (limited)
+- **step/iges**: Requires `occ` (OpenCASCADE)
+- **blend**: Requires `bpy` (Blender Python)
+- **fbx/gltf**: Work natively
 
-| Format | Python Library | Install Command |
-|--------|-----------------|-----------------|
-| dxf | ezdxf | `pip install ezdxf` |
-| dwg | ezdxf (ODA needed) | `pip install ezdxf` |
-| step | pythonocc | `pip install pythonocc` |
-| iges | pythonocc | `pip install pythonocc` |
-| blend | Blender Python API | Requires Blender installed |
-| fbx | fbx-sdk | Requires FBX SDK |
-
-## Office Formats
-
-| Format | Python Library | Install Command |
-|--------|-----------------|-----------------|
-| pptx | python-pptx | `pip install python-pptx` |
-| odt | odfpy | `pip install odfpy` |
-| latex | latex | `apt install texlive-latex-base` |
-| rtf | - | Built-in (python) |
-| asciidoc | asciidoc | `pip install asciidoc` |
+## Document Formats
+- **pptx**: Requires `python-pptx` (`pip install python-pptx`)
+- **rtf**: Works natively
+- **odt**: Requires `odfpy` (`pip install odfpy`)
+- **latex**: Requires `pdflatex`/XeLaTeX system install
 
 ## Media Formats
+- **video**: Requires `ffmpeg` system install
+- **audio**: Requires `ffmpeg` or `pydub` (`pip install pydub`)
 
-| Format | Tool Needed | Install Command |
-|--------|-------------|-----------------|
-| video | ffmpeg | `apt install ffmpeg` |
-| audio | ffmpeg | `apt install ffmpeg` |
-| heic | libheif | `apt install libheif-tools` |
-| raw | dcraw/libraw | `apt install libraw-dev` |
-
-## Status: Working Without External Tools
-
-These formats work out of the box:
-- csv, json, yaml, xml (data)
-- ini, toml, env (config)
-- zip, tar (container)
-- obj, stl, scad, gltf (basic CAD)
-- epub (planned)
-- rtf (planned)
+## Currently Working (Direct Import, Not Through pyffice.__init__)
+- csv, json, yaml, xml, ini, toml, env, zip, tar, epub

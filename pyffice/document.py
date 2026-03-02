@@ -48,7 +48,7 @@ class PyfficeUnit(object):
 
     def __init__(self, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).select("PyfficeUnit").override(cfg)
+        self.config = {}
         self.unit = self.config.select("template").override(self.config.select("unit"))
         self.author = None
         self.change_limit = None
@@ -433,7 +433,7 @@ class PyfficeDocument(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeDocument")).override(cfg)
+        self.config = {}
         self.document = self.config.select("template").override(self.config.select("document").dikt)
         self.cache = None
         self.compatibility = None
@@ -513,7 +513,7 @@ class PyfficeDocument(PyfficeUnit):
             txtonql.Doc(doc).write(path)
         else:
             doc = self.to_dict()
-            yonql.Doc(doc).write(path)
+            open(path, "w").write(str(doc))
         return self
 
     def save_as(self, path, set_file_active=True, syntax=None, encrypt_key=None):
@@ -538,7 +538,7 @@ class PyfficeDocument(PyfficeUnit):
 
     def set_cache(self, cache):
         """"""
-        self.cache = conql.Doc()
+        self.cache = {}
         self.cache.load(cache)
         return self
 
@@ -637,8 +637,8 @@ class PyfficeDocumentManager(PyfficeDocument):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeDocumentManager")).override(cfg)
-        self.store = conql.Doc()
+        self.config = {}
+        self.store = {}
 
     def add_document(self, document):
         """"""
@@ -719,7 +719,7 @@ class PyfficeDeque(PyfficeDocument, deque):
         """"""
         super().__init__(cfg)
         PyfficeDocument.__init__(self, self.config)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeDeque")).override(cfg)
+        self.config = {}
         self.max_items = None
         self.set_max_items()
         self.history = deque()
