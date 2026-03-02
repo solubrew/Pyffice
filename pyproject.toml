@@ -41,7 +41,7 @@ dependencies = [
     "nbformat",
     
      #Data & visualization
-    "networkx==2.7",
+    #"networkx==2.7",
     "pydot",
     "matplotlib",
     "seaborn",
@@ -69,7 +69,7 @@ dependencies = [
 #    "esptool",
 
     # Special formats
-    "floweaver",
+    #"floweaver",
 
     # Python 2 compatibility (legacy)
     'defusedxml; platform_system == "Windows"',
