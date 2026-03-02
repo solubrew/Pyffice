@@ -1,65 +1,58 @@
 # External Tools Required
 
-Some Pyffice document formats require external tools or libraries that are not bundled.
+This document lists document formats that require external tools/libraries to function.
 
 ## Container Formats
 
-| Format | Tool | Install |
-|--------|------|---------|
+| Format | Tool Needed | Install Command |
+|--------|-------------|-----------------|
 | rar | unrar | `apt install unrar` |
 | sevenzip | 7z | `apt install p7zip-full` |
 
 ## Ebook Formats
 
-| Format | Library | Install |
-|--------|---------|---------|
+| Format | Python Library | Install Command |
+|--------|-----------------|-----------------|
 | epub | ebooklib | `pip install ebooklib` |
-| mobi | calibre | `pip install calibre` |
-| azw | calibre | `pip install calibre` |
+| mobi | python-mobi | `pip install python-mobi` |
+| azw | kindleunpack | `pip install kindleunpack` |
 
 ## CAD Formats
 
-| Format | Library | Install |
-|--------|---------|---------|
-| obj | trimesh | `pip install trimesh` |
-| stl | trimesh | `pip install trimesh` |
+| Format | Python Library | Install Command |
+|--------|-----------------|-----------------|
 | dxf | ezdxf | `pip install ezdxf` |
-| dwg | ODA File Converter | External tool |
-| step | pythonocc | `pip install pythonocc-core` |
-| iges | pythonocc | `pip install pythonocc-core` |
-| blend | urllib (read mesh) | Built-in |
-| fbx | fbx-sdk | External |
-| gltf | trimesh | `pip install trimesh` |
+| dwg | ezdxf (ODA needed) | `pip install ezdxf` |
+| step | pythonocc | `pip install pythonocc` |
+| iges | pythonocc | `pip install pythonocc` |
+| blend | Blender Python API | Requires Blender installed |
+| fbx | fbx-sdk | Requires FBX SDK |
 
-## Presentation
+## Office Formats
 
-| Format | Library | Install |
-|--------|---------|---------|
+| Format | Python Library | Install Command |
+|--------|-----------------|-----------------|
 | pptx | python-pptx | `pip install python-pptx` |
+| odt | odfpy | `pip install odfpy` |
+| latex | latex | `apt install texlive-latex-base` |
+| rtf | - | Built-in (python) |
+| asciidoc | asciidoc | `pip install asciidoc` |
 
-## Media
+## Media Formats
 
-| Format | Tool | Install |
-|--------|------|---------|
+| Format | Tool Needed | Install Command |
+|--------|-------------|-----------------|
 | video | ffmpeg | `apt install ffmpeg` |
 | audio | ffmpeg | `apt install ffmpeg` |
+| heic | libheif | `apt install libheif-tools` |
+| raw | dcraw/libraw | `apt install libraw-dev` |
 
-## Document Formats
+## Status: Working Without External Tools
 
-| Format | Library | Install |
-|--------|---------|---------|
-| rtf | python-docx | `pip install python-docx` |
-| odt | odfpy | `pip install odfpy` |
-| latex | subprocess | Requires LaTeX |
-| rst | docutils | `pip install docutils` |
-| asciidoc | asciidoc | `apt install asciidoc` |
-
-## Installation Script
-
-```bash
-# Core dependencies
-pip install ebooklib trimesh ezdxf python-pptx python-docx odfpy docutils
-
-# System tools
-apt install unrar p7zip-full ffmpeg asciidoc
-```
+These formats work out of the box:
+- csv, json, yaml, xml (data)
+- ini, toml, env (config)
+- zip, tar (container)
+- obj, stl, scad, gltf (basic CAD)
+- epub (planned)
+- rtf (planned)
