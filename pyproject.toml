@@ -52,7 +52,7 @@ dependencies = [
     "solidpython",
 
     # Web & utilities
-    "twof",
+    #"twof",
     "furl",
     "bs4",
     "ffmpeg-python",
