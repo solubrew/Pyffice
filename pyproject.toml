@@ -42,14 +42,14 @@ dependencies = [
     
      #Data & visualization
     #"networkx==2.7",
-#    "pydot",
-#    "matplotlib",
-#    "seaborn",
-#    "graphviz",
-#    "colormath",
-#    "cairosvg",
-#    #"pycel",
-#    "solidpython",
+    "pydot",
+    "matplotlib",
+    "seaborn",
+    "graphviz",
+    "colormath",
+    "cairosvg",
+    #"pycel",
+    "solidpython",
 
     # Web & utilities
     #"twof",
