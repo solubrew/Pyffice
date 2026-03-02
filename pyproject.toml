@@ -29,17 +29,16 @@ dependencies = [
     # Core
     "backoff",
     "click",
-    "condor",
     "pyyaml",
     "ruamel.yaml",
     
     # Document formats
-    "openpyxl",
-    "python-docx",
-    "python-pptx",
-    "PyPDF2",
-    "PyMuPDF",
-    "nbformat",
+#    "openpyxl",
+#    "python-docx",
+#    "python-pptx",
+#    "PyPDF2",
+#    "PyMuPDF",
+#    "nbformat",
     
     # Data & visualization
 #    "networkx==2.7",
