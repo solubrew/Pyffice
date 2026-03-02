@@ -1,53 +1,48 @@
 """
-Pyffice TOML Module - Read/Write TOML files
+Pyffice TOML Config Handler
 """
 
-import toml
-from typing import Any, Dict
+try:
+    import tomllib
+except ImportError:
+    import tomli as tomllib
+try:
+    import tomli_w
+except ImportError:
+    import tomlkit as tomli_w
+
 from pathlib import Path
+from typing import Any, Dict
 
 
-class PyfficeTOML:
-    """Handle TOML file operations"""
-    
-    SUPPORTED_EXTENSIONS = ['.toml']
-    MAX_SIZE = 256 * 1024 * 1024  # 256MB
-    
-    def __init__(self, file_path: str, encoding: str = 'utf-8'):
-        self.file_path = Path(file_path)
-        self.encoding = encoding
-        self._validate()
-    
-    def _validate(self):
-        if self.file_path.stat().st_size > self.MAX_SIZE:
-            raise ValueError(f"File exceeds {self.MAX_SIZE}MB limit")
-    
-    def read(self) -> Dict[str, Any]:
-        """Read TOML file"""
-        with open(self.file_path, 'r', encoding=self.encoding) as f:
-            return toml.load(f)
-    
-    def read_raw(self) -> str:
-        """Read raw TOML string"""
-        with open(self.file_path, 'r', encoding=self.encoding) as f:
-            return f.read()
-    
-    def write(self, data: Dict[str, Any]):
-        """Write data to TOML file"""
-        with open(self.file_path, 'w', encoding=self.encoding) as f:
-            toml.dump(data, f)
-    
-    def write_raw(self, data: str):
-        """Write raw TOML string"""
-        with open(self.file_path, 'w', encoding=self.encoding) as f:
-            f.write(data)
+def load(filepath: str) -> Dict[str, Any]:
+    """Load TOML file and return dictionary."""
+    with open(filepath, "rb") as f:
+        return tomllib.load(f)
 
 
-def read_toml(file_path: str) -> Dict[str, Any]:
-    """Convenience function to read TOML"""
-    return PyfficeTOML(file_path).read()
+def read(filepath: str) -> Dict[str, Any]:
+    """Alias for load."""
+    return load(filepath)
 
 
-def write_toml(file_path: str, data: Dict[str, Any]):
-    """Convenience function to write TOML"""
-    PyfficeTOML(file_path).write(data)
+def dump(filepath: str, data: Dict[str, Any]) -> None:
+    """Dump dictionary to TOML file."""
+    with open(filepath, "wb") as f:
+        tomli_w.dump(data, f)
+
+
+def write(filepath: str, data: Dict[str, Any]) -> None:
+    """Alias for dump."""
+    dump(filepath, data)
+
+
+def merge(filepath: str, data: Dict[str, Any]) -> None:
+    """Merge data into existing TOML file."""
+    existing = {}
+    path = Path(filepath)
+    if path.exists() and path.stat().st_size > 0:
+        existing = load(filepath)
+    
+    existing.update(data)
+    dump(filepath, existing)

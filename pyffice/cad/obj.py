@@ -1,93 +1,64 @@
 """
-Pyffice OBJ Module - Handle Wavefront OBJ files
+Pyffice OBJ 3D Model Handler
 """
 
-from typing import Dict, Any, List, Tuple
 from pathlib import Path
+from typing import List, Tuple, Optional
+import struct
 
 
-class PyfficeOBJ:
-    """Handle OBJ 3D model files"""
+def read(obj_path: str) -> dict:
+    """Read OBJ file and return vertices, normals, textures, faces."""
+    vertices = []
+    normals = []
+    textures = []
+    faces = []
     
-    SUPPORTED_EXTENSIONS = ['.obj']
-    MAX_SIZE = 256 * 1024 * 1024  # 256MB
+    with open(obj_path, "r") as f:
+        for line in f:
+            parts = line.strip().split()
+            if not parts:
+                continue
+            cmd = parts[0]
+            if cmd == "v":
+                vertices.append(tuple(map(float, parts[1:4])))
+            elif cmd == "vn":
+                normals.append(tuple(map(float, parts[1:4])))
+            elif cmd == "vt":
+                textures.append(tuple(map(float, parts[1:3])))
+            elif cmd == "f":
+                face = []
+                for pt in parts[1:]:
+                    indices = pt.split("/")
+                    face.append(tuple(int(i) if i else 0 for i in indices))
+                faces.append(face)
     
-    def __init__(self, file_path: str):
-        self.file_path = Path(file_path)
-        self._validate()
-    
-    def _validate(self):
-        if self.file_path.stat().st_size > self.MAX_SIZE:
-            raise ValueError(f"File exceeds {self.MAX_SIZE}MB limit")
-    
-    def read(self) -> Dict[str, Any]:
-        """Read OBJ file and return structured data"""
-        vertices = []
-        normals = []
-        texcoords = []
-        faces = []
-        
-        with open(self.file_path, 'r') as f:
-            for line in f:
-                line = line.strip()
-                if not line or line.startswith('#'):
-                    continue
-                
-                parts = line.split()
-                if not parts:
-                    continue
-                
-                if parts[0] == 'v':
-                    vertices.append([float(x) for x in parts[1:4]])
-                elif parts[0] == 'vn':
-                    normals.append([float(x) for x in parts[1:4]])
-                elif parts[0] == 'vt':
-                    texcoords.append([float(x) for x in parts[1:3]])
-                elif parts[0] == 'f':
-                    face = []
-                    for vertex in parts[1:]:
-                        indices = vertex.split('/')
-                        face.append({
-                            'v': int(indices[0]) - 1 if len(indices) > 0 else 0,
-                            'vt': int(indices[1]) - 1 if len(indices) > 1 and indices[1] else None,
-                            'vn': int(indices[2]) - 1 if len(indices) > 2 and indices[2] else None,
-                        })
-                    faces.append(face)
-        
-        return {
-            'vertices': vertices,
-            'normals': normals,
-            'texcoords': texcoords,
-            'faces': faces,
-            'vertex_count': len(vertices),
-            'face_count': len(faces),
-        }
-    
-    def write(self, data: Dict[str, Any], output_path: str = None):
-        """Write data to OBJ file"""
-        output = Path(output_path) if output_path else self.file_path
-        
-        with open(output, 'w') as f:
-            f.write(f"# Pyffice OBJ Export\n")
-            
-            for v in data.get('vertices', []):
-                f.write(f"v {v[0]} {v[1]} {v[2]}\n")
-            
-            for vn in data.get('normals', []):
-                f.write(f"vn {vn[0]} {vn[1]} {vn[2]}\n")
-            
-            for vt in data.get('texcoords', []):
-                f.write(f"vt {vt[0]} {vt[1]}\n")
-            
-            for face in data.get('faces', []):
-                f.write("f " + " ".join(f"{v['v']+1}//{v['vn']+1}" for v in face) + "\n")
+    return {"vertices": vertices, "normals": normals, "textures": textures, "faces": faces}
 
 
-def read_obj(file_path: str) -> Dict[str, Any]:
-    """Convenience function to read OBJ"""
-    return PyfficeOBJ(file_path).read()
+def write(obj_path: str, data: dict) -> None:
+    """Write OBJ file from data dictionary."""
+    with open(obj_path, "w") as f:
+        for v in data.get("vertices", []):
+            f.write(f"v {v[0]} {v[1]} {v[2]}\n")
+        for vt in data.get("textures", []):
+            f.write(f"vt {vt[0]} {vt[1]}\n")
+        for vn in data.get("normals", []):
+            f.write(f"vn {vn[0]} {vn[1]} {vn[2]}\n")
+        for face in data.get("faces", []):
+            face_str = " ".join("/".join(str(i) for i in pt) for pt in face)
+            f.write(f"f {face_str}\n")
 
 
-def write_obj(file_path: str, data: Dict[str, Any]):
-    """Convenience function to write OBJ"""
-    PyfficeOBJ(file_path).write(data)
+def create_box(width: float, height: float, depth: float) -> dict:
+    """Create simple box OBJ data."""
+    w, h, d = width/2, height/2, depth/2
+    vertices = [
+        (-w, -h, d), (w, -h, d), (w, h, d), (-w, h, d),
+        (-w, -h, -d), (w, -h, -d), (w, h, -d), (-w, h, -d)
+    ]
+    faces = [
+        (1, 2, 3, 4), (5, 8, 7, 6), (1, 5, 6, 2),
+        (2, 6, 7, 3), (3, 7, 8, 4), (1, 4, 8, 5)
+    ]
+    return {"vertices": vertices, "faces": faces}

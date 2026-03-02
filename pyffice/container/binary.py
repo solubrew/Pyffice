@@ -127,3 +127,19 @@ class PyfficeBinaryContainer:
     
     def __len__(self) -> int:
         return len(self._documents)
+
+
+# Module-level functions for container type limits
+_type_limits = {}
+
+
+def get_limit_for_type(ext: str) -> int:
+    """Get the size limit for a specific file type."""
+    ext = ext.lower().lstrip('.')
+    return _type_limits.get(ext, DEFAULT_LIMITS.get(ext, DEFAULT_LIMITS['default']))
+
+
+def set_limit_for_type(ext: str, limit: int) -> None:
+    """Set the size limit for a specific file type."""
+    ext = ext.lower().lstrip('.')
+    _type_limits[ext] = limit

@@ -72,8 +72,116 @@ class Matrix:
         return cls(data)
     
     def formula(self, cell_ref: str, formula: str):
-        """Evaluate formula (basic support)"""
-        pass  # Placeholder for formula engine
+        """Evaluate formula (basic support for common formulas)
+        
+        Supported formulas:
+        - SUM(A1:B2) - sum range
+        - AVERAGE(A1:B2) - average range  
+        - MAX(A1:B2) - max of range
+        - MIN(A1:B2) - min of range
+        - COUNT(A1:B2) - count numeric cells
+        - Basic arithmetic: =A1+B2, =A1*2, etc.
+        
+        Args:
+            cell_ref: The cell to store result (e.g., 'A1')
+            formula: Formula string (e.g., '=SUM(A1:A10)')
+        """
+        import re
+        
+        def parse_cell(ref: str) -> tuple:
+            """Parse cell reference to row, col"""
+            match = re.match(r'([A-Z]+)(\d+)', ref.upper())
+            if not match:
+                raise ValueError(f"Invalid cell reference: {ref}")
+            col = ord(match.group(1)) - ord('A')
+            row = int(match.group(2)) - 1
+            return row, col
+        
+        def get_range(ref: str) -> list:
+            """Parse range like A1:B10"""
+            start, end = ref.split(':')
+            r1, c1 = parse_cell(start)
+            r2, c2 = parse_cell(end)
+            values = []
+            for r in range(r1, r2 + 1):
+                for c in range(c1, c2 + 1):
+                    if r < self.rows and c < self.cols:
+                        val = self.data[r][c]
+                        if val is not None:
+                            try:
+                                values.append(float(val))
+                            except (ValueError, TypeError):
+                                pass
+            return values
+        
+        # Remove = prefix if present
+        formula = formula.lstrip('=')
+        
+        # SUM
+        match = re.match(r'SUM\(([A-Z]+\d+):([A-Z]+\d+)\)', formula, re.IGNORECASE)
+        if match:
+            values = get_range(f"{match.group(1)}:{match.group(2)}")
+            row, col = parse_cell(cell_ref)
+            self.data[row][col] = sum(values)
+            return
+        
+        # AVERAGE
+        match = re.match(r'AVERAGE\(([A-Z]+\d+):([A-Z]+\d+)\)', formula, re.IGNORECASE)
+        if match:
+            values = get_range(f"{match.group(1)}:{match.group(2)}")
+            row, col = parse_cell(cell_ref)
+            self.data[row][col] = sum(values) / len(values) if values else 0
+            return
+        
+        # MAX
+        match = re.match(r'MAX\(([A-Z]+\d+):([A-Z]+\d+)\)', formula, re.IGNORECASE)
+        if match:
+            values = get_range(f"{match.group(1)}:{match.group(2)}")
+            row, col = parse_cell(cell_ref)
+            self.data[row][col] = max(values) if values else 0
+            return
+        
+        # MIN
+        match = re.match(r'MIN\(([A-Z]+\d+):([A-Z]+\d+)\)', formula, re.IGNORECASE)
+        if match:
+            values = get_range(f"{match.group(1)}:{match.group(2)}")
+            row, col = parse_cell(cell_ref)
+            self.data[row][col] = min(values) if values else 0
+            return
+        
+        # COUNT
+        match = re.match(r'COUNT\(([A-Z]+\d+):([A-Z]+\d+)\)', formula, re.IGNORECASE)
+        if match:
+            values = get_range(f"{match.group(1)}:{match.group(2)}")
+            row, col = parse_cell(cell_ref)
+            self.data[row][col] = len(values)
+            return
+        
+        # Basic arithmetic: A1+B2, A1*2, etc.
+        match = re.match(r'([A-Z]+\d+)\s*([+\-*/])\s*([A-Z]+\d+|\d+\.?\d*)', formula, re.IGNORECASE)
+        if match:
+            ref1, op, ref2 = match.groups()
+            r1, c1 = parse_cell(ref1)
+            val1 = float(self.data[r1][c1]) if self.data[r1][c1] else 0
+            
+            try:
+                val2 = float(ref2)
+            except ValueError:
+                r2, c2 = parse_cell(ref2)
+                val2 = float(self.data[r2][c2]) if self.data[r2][c2] else 0
+            
+            row, col = parse_cell(cell_ref)
+            if op == '+':
+                self.data[row][col] = val1 + val2
+            elif op == '-':
+                self.data[row][col] = val1 - val2
+            elif op == '*':
+                self.data[row][col] = val1 * val2
+            elif op == '/':
+                self.data[row][col] = val1 / val2 if val2 != 0 else 0
+            return
+        
+        raise ValueError(f"Unsupported formula: {formula}")
 
 
 def create_matrix(rows: int, cols: int, fill: Any = None) -> Matrix:

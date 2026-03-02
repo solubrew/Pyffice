@@ -1,53 +1,62 @@
 """
-Pyffice YAML Module - Read/Write YAML files
+Pyffice YAML Data Handler
 """
 
 import yaml
-from typing import Any, Dict, List, Optional, Union
 from pathlib import Path
+from typing import Any, Dict, List
 
 
-class PyfficeYAML:
-    """Handle YAML file operations"""
-    
-    SUPPORTED_EXTENSIONS = ['.yaml', '.yml']
-    MAX_SIZE = 256 * 1024 * 1024  # 256MB
-    
-    def __init__(self, file_path: str, encoding: str = 'utf-8'):
-        self.file_path = Path(file_path)
-        self.encoding = encoding
-        self._validate()
-    
-    def _validate(self):
-        if self.file_path.stat().st_size > self.MAX_SIZE:
-            raise ValueError(f"File exceeds {self.MAX_SIZE}MB limit")
-    
-    def read(self) -> Any:
-        """Read YAML file"""
-        with open(self.file_path, 'r', encoding=self.encoding) as f:
-            return yaml.safe_load(f)
-    
-    def read_raw(self) -> str:
-        """Read raw YAML string"""
-        with open(self.file_path, 'r', encoding=self.encoding) as f:
-            return f.read()
-    
-    def write(self, data: Any, default_flow_style: bool = False):
-        """Write data to YAML file"""
-        with open(self.file_path, 'w', encoding=self.encoding) as f:
-            yaml.safe_dump(data, f, default_flow_style=default_flow_style, sort_keys=False)
-    
-    def write_raw(self, data: str):
-        """Write raw YAML string"""
-        with open(self.file_path, 'w', encoding=self.encoding) as f:
-            f.write(data)
+def load(filepath: str) -> Any:
+    """Load YAML file and return data."""
+    with open(filepath, "r") as f:
+        return yaml.safe_load(f)
 
 
-def read_yaml(file_path: str) -> Any:
-    """Convenience function to read YAML"""
-    return PyfficeYAML(file_path).read()
+def read(filepath: str) -> Any:
+    """Alias for load."""
+    return load(filepath)
 
 
-def write_yaml(file_path: str, data: Any, **kwargs):
-    """Convenience function to write YAML"""
-    PyfficeYAML(file_path).write(data, **kwargs)
+def dump(filepath: str, data: Any, default_flow_style: bool = False) -> None:
+    """Dump data to YAML file."""
+    with open(filepath, "w") as f:
+        yaml.safe_dump(data, f, default_flow_style=default_flow_style, sort_keys=False)
+
+
+def write(filepath: str, data: Any) -> None:
+    """Alias for dump."""
+    dump(filepath, data)
+
+
+def append(filepath: str, data: Any) -> None:
+    """Append data to YAML file (appends to list or merges dict)."""
+    existing = []
+    path = Path(filepath)
+    if path.exists() and path.stat().st_size > 0:
+        existing = load(filepath)
+        if not isinstance(existing, list):
+            existing = [existing]
+    
+    if isinstance(existing, list):
+        if isinstance(data, list):
+            existing.extend(data)
+        else:
+            existing.append(data)
+    else:
+        existing = [existing, data] if existing else data
+    
+    dump(filepath, existing)
+
+
+def merge(filepath: str, data: Dict) -> None:
+    """Merge data into existing YAML file."""
+    existing = {}
+    path = Path(filepath)
+    if path.exists() and path.stat().st_size > 0:
+        existing = load(filepath)
+        if not isinstance(existing, dict):
+            existing = {"data": existing}
+    
+    existing.update(data)
+    dump(filepath, existing)

@@ -1,91 +1,78 @@
 """
-Pyffice XML Module - Read/Write XML files
+Pyffice XML Data Handler
 """
 
 import xml.etree.ElementTree as ET
-from typing import Any, Dict, List, Optional, Union
 from pathlib import Path
+from typing import Dict, List, Optional, Any
 
 
-class PyfficeXML:
-    """Handle XML file operations"""
-    
-    SUPPORTED_EXTENSIONS = ['.xml', '.xhtml', '.svg']
-    MAX_SIZE = 256 * 1024 * 1024  # 256MB
-    
-    def __init__(self, file_path: str, encoding: str = 'utf-8'):
-        self.file_path = Path(file_path)
-        self.encoding = encoding
-        self._validate()
-    
-    def _validate(self):
-        if self.file_path.stat().st_size > self.MAX_SIZE:
-            raise ValueError(f"File exceeds {self.MAX_SIZE}MB limit")
-    
-    def read(self) -> ET.Element:
-        """Read and parse XML file"""
-        return ET.parse(self.file_path).getroot()
-    
-    def read_string(self) -> str:
-        """Read raw XML string"""
-        with open(self.file_path, 'r', encoding=self.encoding) as f:
-            return f.read()
-    
-    def write(self, root: ET.Element, indent: bool = True):
-        """Write Element to XML file"""
-        if indent:
-            self._indent(root)
-        tree = ET.ElementTree(root)
-        tree.write(self.file_path, encoding=self.encoding, xml_declaration=True)
-    
-    def write_string(self, root: ET.Element) -> str:
-        """Convert Element to XML string"""
-        if hasattr(root, 'tag'):
-            return ET.tostring(root, encoding=self.encoding)
-        return str(root)
-    
-    def _indent(self, elem: ET.Element, level: int = 0):
-        """Add indentation to XML tree"""
-        i = "\n" + level * "  "
-        if len(elem):
-            if not elem.text or not elem.text.strip():
-                elem.text = i + "  "
-            if not elem.tail or not elem.tail.strip():
-                elem.tail = i
-            for child in elem:
-                self._indent(child, level + 1)
-            if not child.tail or not child.tail.strip():
-                child.tail = i
-        else:
-            if level and (not elem.tail or not elem.tail.strip()):
-                elem.tail = i
+def parse(filepath: str) -> ET.Element:
+    """Parse XML file and return root element."""
+    tree = ET.parse(filepath)
+    return tree.getroot()
 
 
-def read_xml(file_path: str) -> ET.Element:
-    """Convenience function to read XML"""
-    return PyfficeXML(file_path).read()
+def read(filepath: str) -> Dict[str, Any]:
+    """Read XML file and convert to dictionary."""
+    root = parse(filepath)
+    return _element_to_dict(root)
 
 
-def write_xml(file_path: str, root: ET.Element, **kwargs):
-    """Convenience function to write XML"""
-    PyfficeXML(file_path).write(root, **kwargs)
+def write(filepath: str, data: Dict[str, Any], root_tag: str = "root") -> None:
+    """Write dictionary to XML file."""
+    root = _dict_to_element(root_tag, data)
+    tree = ET.ElementTree(root)
+    ET.indent(tree, space="  ")
+    tree.write(filepath, encoding="utf-8", xml_declaration=True)
 
 
-def element_to_dict(element: ET.Element) -> Dict:
-    """Convert XML Element to dictionary"""
+def create(root_tag: str = "root") -> ET.Element:
+    """Create new XML root element."""
+    return ET.Element(root_tag)
+
+
+def add_child(parent: ET.Element, tag: str, text: str = "", attrib: Dict = None) -> ET.Element:
+    """Add child element to parent."""
+    child = ET.SubElement(parent, tag, attrib or {})
+    child.text = text
+    return child
+
+
+def _element_to_dict(element: ET.Element) -> Dict:
+    """Convert XML element to dictionary."""
     result = {}
     if element.attrib:
-        result['@attributes'] = element.attrib
+        result["@attributes"] = element.attrib
     if element.text and element.text.strip():
-        if len(element) == 0:
-            return element.text.strip()
-        result['#text'] = element.text.strip()
+        result["#text"] = element.text.strip()
     for child in element:
-        child_data = element_to_dict(child)
+        child_data = _element_to_dict(child)
         if child.tag in result:
             if not isinstance(result[child.tag], list):
                 result[child.tag] = [result[child.tag]]
             result[child.tag].append(child_data)
         else:
             result[child.tag] = child_data
-    return result
+    return result if result else (element.text.strip() if element.text else "")
+
+
+def _dict_to_element(tag: str, data: Any) -> ET.Element:
+    """Convert dictionary to XML element."""
+    element = ET.Element(tag)
+    if isinstance(data, dict):
+        if "@attributes" in data:
+            element.attrib.update(data["@attributes"])
+        for key, value in data.items():
+            if key == "@attributes":
+                continue
+            if isinstance(value, list):
+                for item in value:
+                    child = _dict_to_element(key, item)
+                    element.append(child)
+            else:
+                child = _dict_to_element(key, value)
+                element.append(child)
+    else:
+        element.text = str(data)
+    return element
