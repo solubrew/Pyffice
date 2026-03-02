@@ -42,7 +42,7 @@ dependencies = [
     "nbformat",
     
     # Data & visualization
-    "networkx<2.7",
+    #"networkx<2.7",
     "pydot",
     "matplotlib",
     "seaborn",
