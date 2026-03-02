@@ -64,9 +64,9 @@ dependencies = [
     "notion-client",
 
     # Hardware/IoT (optional)
-    "pyserial",
-    "adafruit-ampy",
-    "esptool",
+#    "pyserial",
+#    "adafruit-ampy",
+#    "esptool",
 
     # Special formats
     "floweaver",
