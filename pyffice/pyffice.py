@@ -27,9 +27,10 @@ try:
     from condor import Instruct
 except ImportError:
     Instruct = None
-from ogma.logma import Logma
-from squirl.objnql import txtonql
-from squirl.orgnql import conql, yonql
+
+# Commented out - broken dependency chain from squirl->condor
+# from squirl.objnql import txtonql
+# from squirl.orgnql import conql, yonql
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 from pyffice.analytics.sources import PyfficeDataSet, PyfficeDataView, PyfficeSources
 from pyffice.calendars.calendars import PyfficeCalendar

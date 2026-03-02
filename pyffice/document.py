@@ -22,9 +22,9 @@ from copy import deepcopy
 # from sentence_transformers import SentenceTransformer
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
+#from condor import condor
 from ogma.logma import Logma
-from squirl.orgnql import conql, yonql
+#from squirl.orgnql import conql, yonql
 from subtrix.utilities import uuid
 from pycurity.pytime import PyTime
 from pyffice.tags.tags import PyfficeTag

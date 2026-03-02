@@ -16,7 +16,7 @@ def compress(source: str, output: str, compression: int = zipfile.ZIP_DEFLATED) 
         else:
             for file in source_path.rglob("*"):
                 if file.is_file():
-                    zf.write(file, file.relative_to(source_path.parent))
+                    zf.write(file, file.relative_to(source_path))
 
 
 def extract(zip_path: str, output_dir: str) -> None:

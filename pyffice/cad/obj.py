@@ -46,7 +46,11 @@ def write(obj_path: str, data: dict) -> None:
         for vn in data.get("normals", []):
             f.write(f"vn {vn[0]} {vn[1]} {vn[2]}\n")
         for face in data.get("faces", []):
-            face_str = " ".join("/".join(str(i) for i in pt) for pt in face)
+            # Handle both tuple faces and simple int lists
+            if face and isinstance(face[0], int):
+                face_str = " ".join(str(i) for i in face)
+            else:
+                face_str = " ".join("/".join(str(i) for i in pt) for pt in face)
             f.write(f"f {face_str}\n")
 
 

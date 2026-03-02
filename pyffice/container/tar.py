@@ -15,7 +15,9 @@ def compress(source: str, output: str, compression: str = "gz") -> None:
         if source_path.is_file():
             tf.add(source, arcname=source_path.name)
         else:
-            tf.add(source, arcname=source_path.name)
+            for file in source_path.rglob("*"):
+                if file.is_file():
+                    tf.add(file, arcname=file.relative_to(source_path))
 
 
 def extract(tar_path: str, output_dir: str) -> None:
