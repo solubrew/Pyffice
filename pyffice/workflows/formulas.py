@@ -16,8 +16,8 @@ from os.path import abspath, dirname, join
 import datetime as dt
 
 # ======================================3rd Party Library Modules=====================================================||
-from pycel import ExcelCompiler
-from pycel.excelformula import ExcelFormula
+# from pycel import ExcelCompiler
+# from pycel.excelformula import ExcelFormula
 
 # ======================================Solutions Brewer Library Modules==============================================||
 from condor import condor

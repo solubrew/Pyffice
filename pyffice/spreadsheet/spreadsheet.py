@@ -15,7 +15,6 @@
 from os.path import dirname, join
 
 # ======================================3rd Party Library Modules=====================================================||
-from pycel.excelcompiler import ExcelCompiler
 from pandas import read_csv, read_excel, DataFrame
 
 # ======================================Solutions Brewer Library Modules==============================================||
