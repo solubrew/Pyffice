@@ -39,4 +39,9 @@ __all__ = [
     "save",
     "TOOL_DEFINITIONS",
     "agent",
+    # CLI
+    "cli",
 ]
+
+# CLI entry point
+from pyffice import cli
