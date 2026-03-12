@@ -2,24 +2,32 @@
 from typing import Any, Optional
 import io
 
-
-def load(path: str) -> str:
-    """Load OpenSCAD script contents."""
-    with open(path, 'r', encoding='utf-8', errors='ignore') as f:
-        return f.read()
+from pyffice.document import PyfficeDocument
 
 
-def read(path: str) -> str:
-    """Read OpenSCAD script contents."""
-    return load(path)
-
-
-def write(data: str, path: str) -> None:
-    """Write data to OpenSCAD file."""
-    with open(path, 'w', encoding='utf-8') as f:
-        f.write(data)
-
-
-def dump(data: str, path: str) -> None:
-    """Dump data to OpenSCAD file."""
-    write(data, path)
+class PyfficeSCAD(PyfficeDocument):
+    """OpenSCAD script document."""
+    
+    def __init__(self, path: Optional[str] = None, content: Optional[str] = None):
+        super().__init__(path=path, content=content)
+        self.doc_type = "scad"
+    
+    def load(self, path: str) -> str:
+        """Load OpenSCAD script contents."""
+        with open(path, 'r', encoding='utf-8', errors='ignore') as f:
+            content = f.read()
+        self.content = content
+        return content
+    
+    def read(self, path: str) -> str:
+        """Read OpenSCAD script contents."""
+        return self.load(path)
+    
+    def write(self, data: str, path: str) -> None:
+        """Write data to OpenSCAD file."""
+        with open(path, 'w', encoding='utf-8') as f:
+            f.write(data)
+    
+    def dump(self, data: str, path: str) -> None:
+        """Dump data to OpenSCAD file."""
+        self.write(data, path)
