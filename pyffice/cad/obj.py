@@ -3,9 +3,10 @@ Pyffice OBJ 3D Model Handler - Read/Write OBJ files
 """
 from pathlib import Path
 from typing import List, Dict, Any, Tuple, Optional
+from pyffice.document import PyfficeDocument
 
 
-class PyfficeOBJ:
+class PyfficeOBJ(PyfficeDocument):
     EXTENSIONS = {'.obj'}
     DEFAULT_LIMIT = 256 * 1024 * 1024  # 256MB
     
