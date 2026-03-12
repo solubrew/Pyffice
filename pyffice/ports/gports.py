@@ -2,22 +2,20 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-from os.path import abspath, dirname, join
-import datetime as dt
+from os.path import dirname, join
 
 # ======================================3rd Party Library Modules=====================================================||
-import xml.etree.ElementTree as ET
-from bs4 import BeautifulSoup
 
 try:
     import dia
@@ -28,16 +26,9 @@ except ImportError:
     pass
 # ======================================Solutions Brewer Library Modules==============================================||
 from condor import condor
-from subtrix.utilities import uuid
 from ogma.logma import Logma
-from pyffice.document import PyfficeDocument, PyfficeDocumentManager
-from pyffice.images.images import PyfficeImage
-from pyffice.text.text import PyfficeScript
-from pyffice.web.url import PyfficeURL
-from pycurity.pymatch import extract_urls
 
-from pyffice.web.web import PyfficeWebBrowser
-from pyffice.config.ports import PyfficePort
+from pyffice.ports.ports import PyfficePort
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -45,7 +36,7 @@ log = True
 logma = Logma(__name__)
 
 # ====================================================================================================================||
-pxcfg = join(here, "_data_", "imports.yaml")
+pxcfg = join(here, "../config/_data_", "imports.yaml")
 
 
 class PyfficePortGoogleDocs(PyfficePort):

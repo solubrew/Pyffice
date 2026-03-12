@@ -14,35 +14,15 @@
 
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-import unittest  # 2026-01-15 20:29:31
-import tempfile  # 2026-01-15 20:29:31
-import json  # 2026-01-15 20:29:31
-import os  # 2026-01-15 20:29:31
-from pathlib import Path  # 2026-01-15 20:19:51
-from typing import Any, Dict, List, Optional  # 2026-01-15 20:19:51
-from os.path import join  # 2026-01-15 20:19:51
-from os.path import dirname  # 2026-01-15 20:19:51
 
 # ======================================3rd Party Library Modules=====================================================||
-from pyffice.config.gports import PyfficePortGoogleDocs  # 2026-01-15 20:19:52
-from pyffice.config.gports import PyfficePortGoogleForms  # 2026-01-15 20:19:52
-from pyffice.config.gports import PyfficePortGoogleSheets  # 2026-01-15 20:19:52
 
-from pathlib import Path  # 2026-01-15 20:29:31
-from typing import Any, Dict, List, Optional  # 2026-01-15 20:29:31
 from os.path import join  # 2026-01-15 20:29:31
 from os.path import dirname  # 2026-01-15 20:29:31
-from ogma.logma import Logma  # 2026-01-15 20:29:31
-from pyffice.config.gports import PyfficePortGoogleDocs  # 2026-01-15 20:29:31
-from pyffice.config.gports import PyfficePortGoogleForms  # 2026-01-15 20:29:31
-from pyffice.config.gports import PyfficePortGoogleSheets  # 2026-01-15 20:29:31
 
 # =========================================Local Library Modules======================================================||
 from ogma.logma import Logma  # 2026-01-15 15:13:00
-from condor import condor  # 2026-01-15 20:19:52
 
-import pytest  # 2026-01-15 20:29:31
-import hypothesis  # 2026-01-15 20:29:31
 from condor import condor  # 2026-01-15 20:29:31
 
 # ====================================================================================================================||
@@ -73,12 +53,9 @@ class Test_PyfficePortGoogleDocs:  # 2026-01-15 15:13:01
     def reset(self):  # 2026-01-15 15:13:01
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:01
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_to_native(self):  # 2026-01-15 15:13:00
         """"""
@@ -111,12 +88,9 @@ class Test_PyfficePortGoogleForms:  # 2026-01-15 15:13:01
     def reset(self):  # 2026-01-15 15:13:01
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:01
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_to_native(self):  # 2026-01-15 15:13:00
         """"""
@@ -149,12 +123,9 @@ class Test_PyfficePortGoogleSheets:  # 2026-01-15 15:13:01
     def reset(self):  # 2026-01-15 15:13:01
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:01
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_to_native(self):  # 2026-01-15 15:13:00
         """"""

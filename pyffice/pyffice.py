@@ -2,25 +2,25 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-		Pyffice - Polygot Office Document Package
-		Creates YAML versions of office files with bidirectional conversion.
-		AI Agent enhanced with tool-ready functions.
-	version: 0.0.1.0.1.0
-	authority: filesystem
-	security2
-	<(: seclvlWT)>: -32
+        docid:
+        name:
+        description: >
+                Pyffice - Polygot Office Document Package
+                Creates YAML versions of office files with bidirectional conversion.
+                AI Agent enhanced with tool-ready functions.
+        version: 0.0.1.0.1.0
+        authority: filesystem
+        security2
+        <(: seclvlWT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from __future__ import annotations
 
 import logging
-from os.path import abspath, dirname, join, expanduser
+from os.path import dirname, join, expanduser
 from typing import Any, Optional
-import datetime as dt
 
 # ======================================3rd Party Library Modules=====================================================||
 try:
@@ -31,26 +31,31 @@ except ImportError:
 try:
     from ogma import Logma
 except ImportError:
+
     class Logma:
         def __init__(self, name):
             self.logger = logging.getLogger(name)
+
         def info(self, msg):
             print(f"[INFO] {msg}")
+
         def debug(self, msg):
             print(f"[DEBUG] {msg}")
+
         def error(self, msg):
             print(f"[ERROR] {msg}")
+
 
 # Commented out - broken dependency chain from squirl->condor
 # from squirl.objnql import txtonql
 # from squirl.orgnql import conql, yonql
-from pyffice.document import PyfficeDocument, PyfficeDocumentManager
-from pyffice.analytics.sources import PyfficeDataSet, PyfficeDataView, PyfficeSources
+from pyffice.document import PyfficeDocumentManager
+from pyffice.analytics.sources import PyfficeSources
 from pyffice.calendars.calendars import PyfficeCalendar
 from pyffice.charts.charts import PyfficeChart
-from pyffice.config.ports import PyfficePortCherryTree
+from pyffice.ports.ports import PyfficePortCherryTree
 from pyffice.contacts.contacts import PyfficeRolodex
-from pyffice.forms.forms import PyfficeForm, PyfficeFormsManager
+from pyffice.forms.forms import PyfficeFormsManager
 from pyffice.images.images import PyfficeImage
 from pyffice.diagrams.diagrams import PyfficeSketch
 from pyffice.images.pdfs import PyfficePDF
@@ -59,7 +64,7 @@ from pyffice.spreadsheet.spreadsheet import PyfficeMatrix
 from pyffice.text.text import PyfficeScript
 from pyffice.web.prompts import PyfficePromptsManager
 from pyffice.web.url import PyfficeURLLibrary
-from pyffice.web.web import PyfficeWebBrowser, PyfficeWebPage
+from pyffice.web.web import PyfficeWebBrowser
 from pyffice.filesystems.filesystems import PyfficeFileSystem
 
 # ====================================================================================================================||
@@ -74,16 +79,19 @@ pxcfg = join(here, "_data_", "pyffice.yaml")
 
 class PyfficeCodexError(Exception):
     """Base exception for PyfficeCodex errors."""
+
     pass
 
 
 class DocumentNotFoundError(PyfficeCodexError):
     """Raised when a requested document is not found."""
+
     pass
 
 
 class InitializationError(PyfficeCodexError):
     """Raised when PyfficeCodex initialization fails."""
+
     pass
 
 
@@ -107,11 +115,12 @@ class PyfficeCodex(PyfficeDocumentManager):
                 self.config.override(Instruct(pxcfg).select("PyfficeCodex")).override(cfg)
             else:
                 from collections import defaultdict
+
                 self.config = defaultdict(dict)
-            
+
             cfg = cfg or {}
             self.url_library = PyfficeURLLibrary(cfg)
-            
+
             self.contacts: Optional[PyfficeRolodex] = None
             self.documents: dict = {}
             self.forms_manager: Optional[PyfficeFormsManager] = None
@@ -320,8 +329,9 @@ class PyfficeCodex(PyfficeDocumentManager):
         self.set_imports(document.get("imports", {}))
         return document
 
-    def save(self, path: Optional[str] = None, syntax: Optional[str] = None, 
-             encrypt_key: Optional[str] = None) -> "PyfficeCodex":
+    def save(
+        self, path: Optional[str] = None, syntax: Optional[str] = None, encrypt_key: Optional[str] = None
+    ) -> "PyfficeCodex":
         """Save the codex to a file."""
         # TODO: Implement actual save logic
         logger.info(f"Saving to {path}")
@@ -343,11 +353,11 @@ class PyfficeCodex(PyfficeDocumentManager):
     # ============================================================================
     # AI Agent Enhancement Methods
     # ============================================================================
-    
+
     def to_yaml(self) -> str:
         """Convert the entire codex to a YAML string for serialization."""
         import yaml
-        
+
         # Build serializable dict
         data = {
             "version": self.VERSION,
@@ -355,31 +365,32 @@ class PyfficeCodex(PyfficeDocumentManager):
             "imports": self.imports,
             "contacts": None,
         }
-        
+
         # Serialize each document - skip ones that fail
         for doc_id, doc in self.documents.items():
             try:
-                if hasattr(doc, 'to_dict'):
+                if hasattr(doc, "to_dict"):
                     data["documents"][doc_id] = doc.to_dict()
                 else:
                     data["documents"][doc_id] = {"type": type(doc).__name__}
             except Exception as e:
                 # Skip documents that can't be serialized
                 data["documents"][doc_id] = {"type": type(doc).__name__, "_error": str(e)}
-        
+
         if self.contacts:
             try:
-                if hasattr(self.contacts, 'to_dict'):
+                if hasattr(self.contacts, "to_dict"):
                     data["contacts"] = self.contacts.to_dict()
             except Exception as e:
                 data["contacts"] = {"type": "PyfficeRolodex", "_error": str(e)}
-        
+
         return yaml.dump(data, default_flow_style=False)
 
     @classmethod
     def from_yaml(cls, yaml_str: str, cfg: Optional[dict[str, Any]] = None) -> "PyfficeCodex":
         """Load a codex from a YAML string."""
         import yaml
+
         data = yaml.safe_load(yaml_str)
         codex = cls(cfg)
         codex.documents = data.get("documents", {})
@@ -391,7 +402,7 @@ class PyfficeCodex(PyfficeDocumentManager):
         doc_types = []
         for doc_id, doc in self.documents.items():
             doc_types.append(type(doc).__name__)
-        
+
         return {
             "version": self.VERSION,
             "document_count": len(self.documents),
@@ -410,87 +421,79 @@ class PyfficeCodex(PyfficeDocumentManager):
                 "documents": {
                     "type": "object",
                     "description": "Dictionary of documents by ID",
-                    "additionalProperties": {
-                        "type": "object",
-                        "description": "Document properties"
-                    }
+                    "additionalProperties": {"type": "object", "description": "Document properties"},
                 },
                 "document_types": {
                     "type": "array",
                     "items": {"type": "string"},
-                    "description": "List of document type names"
+                    "description": "List of document type names",
                 },
                 "import_count": {"type": "integer", "description": "Number of imports"},
             },
             "required": ["version", "document_count"],
         }
 
-    def to_chunks(
-        self,
-        chunk_size: int = 1000,
-        overlap: int = 100
-    ) -> list[dict[str, Any]]:
+    def to_chunks(self, chunk_size: int = 1000, overlap: int = 100) -> list[dict[str, Any]]:
         """Split codex into embedding-ready chunks.
-        
+
         Args:
             chunk_size: Target size per chunk in characters
             overlap: Overlap between chunks in characters
-            
+
         Returns:
             List of chunk dictionaries with 'content' and 'metadata'
         """
         chunks = []
-        
+
         # Chunk each document
         for doc_id, doc in self.documents.items():
             doc_content = str(doc)
             doc_chunks = self._chunk_text(doc_content, chunk_size, overlap)
             for i, chunk in enumerate(doc_chunks):
-                chunks.append({
-                    "content": chunk,
-                    "metadata": {
-                        "doc_id": doc_id,
-                        "doc_type": type(doc).__name__,
-                        "chunk_index": i,
-                        "total_chunks": len(doc_chunks),
+                chunks.append(
+                    {
+                        "content": chunk,
+                        "metadata": {
+                            "doc_id": doc_id,
+                            "doc_type": type(doc).__name__,
+                            "chunk_index": i,
+                            "total_chunks": len(doc_chunks),
+                        },
                     }
-                })
-        
+                )
+
         # Chunk imports
         if self.imports:
             imports_content = str(self.imports)
             import_chunks = self._chunk_text(imports_content, chunk_size, overlap)
             for i, chunk in enumerate(import_chunks):
-                chunks.append({
-                    "content": chunk,
-                    "metadata": {
-                        "source": "imports",
-                        "chunk_index": i,
-                        "total_chunks": len(import_chunks),
+                chunks.append(
+                    {
+                        "content": chunk,
+                        "metadata": {
+                            "source": "imports",
+                            "chunk_index": i,
+                            "total_chunks": len(import_chunks),
+                        },
                     }
-                })
-        
+                )
+
         return chunks
 
-    def _chunk_text(
-        self,
-        text: str,
-        chunk_size: int,
-        overlap: int
-    ) -> list[str]:
+    def _chunk_text(self, text: str, chunk_size: int, overlap: int) -> list[str]:
         """Split text into overlapping chunks."""
         if len(text) <= chunk_size:
             return [text] if text else []
-        
+
         chunks = []
         start = 0
-        
+
         while start < len(text):
             end = start + chunk_size
             chunk = text[start:end]
             chunks.append(chunk)
             start += chunk_size - overlap
-        
+
         return chunks
 
 

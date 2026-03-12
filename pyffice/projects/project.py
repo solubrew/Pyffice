@@ -2,55 +2,38 @@
 """
 ---
 <(META)>:
-    docid:
-    name:
-    description: >
-    version: 0.0.0.0.0.0
-    authority: filesystem
-    security: seclvl2
-    <(WT)>: -32
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
 """
 
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-from os.path import dirname, join
-from sys import argv
+from os.path import abspath, dirname, join
 import datetime as dt
 
 # ======================================3rd Party Library Modules=====================================================||
 
 # ======================================Solutions Brewer Library Modules==============================================||
-import crow
-
-crow.crowLoad("", "DELTA")
-
+from condor import condor
 from ogma.logma import Logma
-from pyffice.ports.gports import PyfficeImportCherryTree
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
-logma = Logma(__name__)
 log = True
+logma = Logma(__name__)
 
 # ====================================================================================================================||
-pxcfg = join(here, "_data_", "runMain.yaml")
+pxcfg = join(here, "_data_", ".yaml")
 
-
-def run(args):
-    """Run individual tabs with mock data for development purposes"""
-    file_path = "/home/solubrew/_work/MicroMole.ctd"
-    if args[1] == "cherry_tree":
-        doc = PyfficeImportCherryTree({"file_path": file_path})
-        logma.info(doc.import_file())
-
-
-if __name__ == "__main__":
-    start = dt.datetime.now()
-    logma.info("Start")
-    run(argv)
-    end = dt.datetime.now()
-    logma.info(f"End Duration {end - start}")
-
+# TODO: rewrite to pull all Project management class here
+# TODO: need to include all OpenSource Project Management project file format bidirection conversion
+# TODO: implement bidirection Microsoft Project conversion format
+# TODO: the fromat in the interla project ProjectAXN as the base model and extend to support all needs for conversion activity
 
 # ====================================================================================================================||
 
