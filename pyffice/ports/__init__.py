@@ -17,7 +17,7 @@
 # ======================================3rd Party Library Modules=====================================================||
 # ======================================Solutions Brewer Library Modules==============================================||
 
-# Export CAD ports
+# Export CAD ports (canonical format)
 from pyffice.ports.cad import (
     NchantdCADPart,
     CADPort,
@@ -31,8 +31,21 @@ from pyffice.ports.cad import (
     convert_cad
 )
 
+# Export CAD ports (all external formats)
+from pyffice.ports.cadports import (
+    DWGPort,
+    DXFPort,
+    FBXPort,
+    GLTFPort,
+    IGESPort,
+    BLENDPort,
+    SCADPort,
+    CADPortsManager,
+    get_ports_manager,
+)
+
 __all__ = [
-    # CAD
+    # CAD canonical
     'NchantdCADPart',
     'CADPort',
     'STLPort',
@@ -43,6 +56,16 @@ __all__ = [
     'import_cad',
     'export_cad',
     'convert_cad',
+    # CAD external formats
+    'DWGPort',
+    'DXFPort',
+    'FBXPort',
+    'GLTFPort',
+    'IGESPort',
+    'BLENDPort',
+    'SCADPort',
+    'CADPortsManager',
+    'get_ports_manager',
 ]
 
 # ====================================================================================================================||
