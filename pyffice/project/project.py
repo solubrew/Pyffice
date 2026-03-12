@@ -31,6 +31,9 @@ logma = Logma(__name__)
 pxcfg = join(here, "_data_", ".yaml")
 
 # TODO: rewrite to pull all Project management class here
+# TODO: need to include all OpenSource Project Management project file format bidirection conversion
+# TODO: implement bidirection Microsoft Project conversion format
+# TODO: the fromat in the interla project ProjectAXN as the base model and extend to support all needs for conversion activity
 
 # ====================================================================================================================||
 
