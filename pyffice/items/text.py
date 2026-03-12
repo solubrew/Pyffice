@@ -20,7 +20,7 @@ import datetime as dt
 # ======================================Solutions Brewer Library Modules==============================================||
 from condor import condor
 from ogma.logma import Logma
-from pyffice.document import PyfficeUnit
+from pyffice.document import PyfficeUnit, PyfficeDocument
 from pyffice.items.colors import PyfficeColor
 
 # ====================================================================================================================||
@@ -195,8 +195,8 @@ class PyfficeText(PyfficeUnit):
         return self.html
 
 
-class PyfficeHTML(PyfficeText):
-    """PyfficeHTML extends PyfficeText for HTML content."""
+class PyfficeHTML(PyfficeDocument):
+    """PyfficeHTML extends PyfficeDocument for HTML content."""
 
     VERSION = "0.0.1.0.1.0"
 

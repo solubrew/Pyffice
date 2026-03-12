@@ -24,7 +24,7 @@ from condor import condor
 from ogma.logma import Logma
 from twof.twofdns import TwoFDNS
 from subtrix.utilities import uuid
-from pyffice.document import PyfficeUnit, PyfficeDocumentManager
+from pyffice.document import PyfficeUnit, PyfficeDocument, PyfficeDocumentManager
 from pycurity.pyhash import text_hashing_function
 
 # ====================================================================================================================||
@@ -37,7 +37,7 @@ logma.off()
 pxcfg = join(here, "_data_", "url.yaml")
 
 
-class PyfficeURL(PyfficeUnit):
+class PyfficeURL(PyfficeDocument):
     """URL handling and parsing functionality for Pyffice system."""
 
     VERSION = "0.0.1.0.1.0"

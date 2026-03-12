@@ -22,7 +22,8 @@ import datetime as dt
 # ======================================Solutions Brewer Library Modules==============================================||
 from condor import condor
 from ogma.logma import Logma
-from pyffice.calendars.tasks import PyfficeEvent, PyfficeTask
+from pyffice.document import PyfficeDocument
+from pyffice.calendars.tasks import PyfficeTask
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -33,7 +34,7 @@ logma = Logma(__name__)
 pxcfg = join(here, "_data_", "alarms.yaml")
 
 
-class PyfficeAlarm(PyfficeEvent):
+class PyfficeAlarm(PyfficeDocument):
     """"""
 
     VERSION = "0.0.1.0.1.0"
