@@ -6,8 +6,10 @@ from typing import List, Dict, Any, Tuple
 import struct
 import re
 
+from pyffice.document import PyfficeDocument
 
-class PyfficeSTL:
+
+class PyfficeSTL(PyfficeDocument):
     EXTENSIONS = {'.stl'}
     DEFAULT_LIMIT = 256 * 1024 * 1024  # 256MB
     
