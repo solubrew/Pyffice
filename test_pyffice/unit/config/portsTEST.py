@@ -14,49 +14,15 @@
 
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-import unittest  # 2026-01-15 20:29:38
-import tempfile  # 2026-01-15 20:29:38
-import json  # 2026-01-15 20:29:38
-import os  # 2026-01-15 20:29:38
-from pathlib import Path  # 2026-01-15 20:19:58
-from typing import Any, Dict, List, Optional  # 2026-01-15 20:19:58
-from os.path import join  # 2026-01-15 20:19:58
-from os.path import dirname  # 2026-01-15 20:19:59
 
 # ======================================3rd Party Library Modules=====================================================||
-from pyffice.config.ports import PyfficePort  # 2026-01-15 20:19:59
-from pyffice.config.ports import PyfficePortCherryTree  # 2026-01-15 20:19:59
-from pyffice.config.ports import PyfficePortNchantdOffice  # 2026-01-15 20:19:59
-from pyffice.config.ports import PyfficePortCSV  # 2026-01-15 20:19:59
-from pyffice.config.ports import PyfficePortDia  # 2026-01-15 20:19:59
-from pyffice.config.ports import PyfficePortFileSystem  # 2026-01-15 20:19:59
-from pyffice.config.ports import PyfficePortImage  # 2026-01-15 20:19:59
-from pyffice.config.ports import PyfficePortJupyter  # 2026-01-15 20:19:59
-from pyffice.config.ports import PyfficePortText  # 2026-01-15 20:19:59
-from pyffice.config.ports import PyfficePortWebSession  # 2026-01-15 20:19:59
 
-from pathlib import Path  # 2026-01-15 20:29:38
-from typing import Any, Dict, List, Optional  # 2026-01-15 20:29:38
 from os.path import join  # 2026-01-15 20:29:38
 from os.path import dirname  # 2026-01-15 20:29:38
-from ogma.logma import Logma  # 2026-01-15 20:29:38
-from pyffice.config.ports import PyfficePort  # 2026-01-15 20:29:38
-from pyffice.config.ports import PyfficePortCherryTree  # 2026-01-15 20:29:38
-from pyffice.config.ports import PyfficePortNchantdOffice  # 2026-01-15 20:29:38
-from pyffice.config.ports import PyfficePortCSV  # 2026-01-15 20:29:38
-from pyffice.config.ports import PyfficePortDia  # 2026-01-15 20:29:38
-from pyffice.config.ports import PyfficePortFileSystem  # 2026-01-15 20:29:39
-from pyffice.config.ports import PyfficePortImage  # 2026-01-15 20:29:39
-from pyffice.config.ports import PyfficePortJupyter  # 2026-01-15 20:29:39
-from pyffice.config.ports import PyfficePortText  # 2026-01-15 20:29:39
-from pyffice.config.ports import PyfficePortWebSession  # 2026-01-15 20:29:39
 
 # =========================================Local Library Modules======================================================||
 from ogma.logma import Logma  # 2026-01-15 15:13:07
-from condor import condor  # 2026-01-15 20:19:59
 
-import pytest  # 2026-01-15 20:29:38
-import hypothesis  # 2026-01-15 20:29:38
 from condor import condor  # 2026-01-15 20:29:38
 
 # ====================================================================================================================||
@@ -87,12 +53,9 @@ class Test_PyfficePort:  # 2026-01-15 15:13:11
     def reset(self):  # 2026-01-15 15:13:11
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:11
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_file_export(self):  # 2026-01-15 15:13:08
         """"""
@@ -145,12 +108,9 @@ class Test_PyfficePortCherryTree:  # 2026-01-15 15:13:11
     def reset(self):  # 2026-01-15 15:13:11
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:11
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_extract_codeboxes(self):  # 2026-01-15 15:13:08
         """"""
@@ -227,12 +187,9 @@ class Test_PyfficePortNchantdOffice:  # 2026-01-15 15:13:11
     def reset(self):  # 2026-01-15 15:13:11
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:11
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_load_document(self):  # 2026-01-15 15:13:09
         """"""
@@ -269,12 +226,9 @@ class Test_PyfficePortCSV:  # 2026-01-15 15:13:11
     def reset(self):  # 2026-01-15 15:13:11
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:11
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_open_file(self):  # 2026-01-15 15:13:09
         """"""
@@ -307,12 +261,9 @@ class Test_PyfficePortDia:  # 2026-01-15 15:13:11
     def reset(self):  # 2026-01-15 15:13:11
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:11
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_import_file(self):  # 2026-01-15 15:13:09
         """"""
@@ -369,12 +320,9 @@ class Test_PyfficePortFileSystem:  # 2026-01-15 15:13:11
     def reset(self):  # 2026-01-15 15:13:11
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:11
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_to_dict(self):  # 2026-01-15 15:13:09
         """"""
@@ -403,12 +351,9 @@ class Test_PyfficePortImage:  # 2026-01-15 15:13:11
     def reset(self):  # 2026-01-15 15:13:11
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:11
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_convert_svg_color(self):  # 2026-01-15 15:13:09
         """"""
@@ -485,12 +430,9 @@ class Test_PyfficePortJupyter:  # 2026-01-15 15:13:11
     def reset(self):  # 2026-01-15 15:13:11
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:11
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_file_export(self):  # 2026-01-15 15:13:10
         """"""
@@ -535,12 +477,9 @@ class Test_PyfficePortText:  # 2026-01-15 15:13:11
     def reset(self):  # 2026-01-15 15:13:11
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:11
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_to_dict(self):  # 2026-01-15 15:13:10
         """"""
@@ -569,12 +508,9 @@ class Test_PyfficePortWebSession:  # 2026-01-15 15:13:11
     def reset(self):  # 2026-01-15 15:13:11
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:11
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_file_import(self):  # 2026-01-15 15:13:10
         """"""

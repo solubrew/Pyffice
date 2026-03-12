@@ -14,36 +14,14 @@
 
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-import unittest  # 2026-01-15 20:29:33
-import tempfile  # 2026-01-15 20:29:33
-import json  # 2026-01-15 20:29:33
-import os  # 2026-01-15 20:29:33
-from pathlib import Path  # 2026-01-15 20:19:53
-from typing import Any, Dict, List, Optional  # 2026-01-15 20:19:53
-from os.path import join  # 2026-01-15 20:19:53
-from os.path import dirname  # 2026-01-15 20:19:53
 
 # ======================================3rd Party Library Modules=====================================================||
-from pyffice.config.msports import PyfficePortExcel  # 2026-01-15 20:19:54
-from pyffice.config.msports import PyfficePortWord  # 2026-01-15 20:19:54
-from pyffice.config.msports import read_docx_tables  # 2026-01-15 20:29:33
-from pyffice.config.msports import _write_dataframe  # 2026-01-15 20:29:33
-from pyffice.config.msports import _write_dictionary  # 2026-01-15 20:29:33
-from pyffice.config.msports import _write_table  # 2026-01-15 20:29:33
-from pathlib import Path  # 2026-01-15 20:29:33
-from typing import Any, Dict, List, Optional  # 2026-01-15 20:29:33
 from os.path import join  # 2026-01-15 20:29:33
 from os.path import dirname  # 2026-01-15 20:29:33
-from ogma.logma import Logma  # 2026-01-15 20:29:33
-from pyffice.config.msports import PyfficePortExcel  # 2026-01-15 20:29:33
-from pyffice.config.msports import PyfficePortWord  # 2026-01-15 20:29:33
 
 # =========================================Local Library Modules======================================================||
 from ogma.logma import Logma  # 2026-01-15 15:13:02
-from condor import condor  # 2026-01-15 20:19:54
 
-import pytest  # 2026-01-15 20:29:33
-import hypothesis  # 2026-01-15 20:29:33
 from condor import condor  # 2026-01-15 20:29:33
 
 # ====================================================================================================================||
@@ -74,12 +52,9 @@ class Test_PyfficePortExcel:  # 2026-01-15 15:13:04
     def reset(self):  # 2026-01-15 15:13:04
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:04
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_add_object(self):  # 2026-01-15 15:13:02
         """"""
@@ -180,12 +155,9 @@ class Test_PyfficePortWord:  # 2026-01-15 15:13:04
     def reset(self):  # 2026-01-15 15:13:04
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:04
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_set_paragraph_alignment(self):  # 2026-01-15 15:13:03
         """"""
@@ -214,12 +186,9 @@ class Test_Functions:  # 2026-01-15 20:29:34
     def test_all(self):  # 2026-01-15 15:13:04
         """Executes a series of test functions in a sequential logic."""
 
-        
-
     def reset(self):  # 2026-01-15 15:13:04
         """"""
         self.setup_class()
-        
 
     def test_read_docx_tables(self):  # 2026-01-15 20:29:34
         """"""

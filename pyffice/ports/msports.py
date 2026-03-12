@@ -2,18 +2,18 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-from os.path import abspath, dirname, join
-import datetime as dt
+from os.path import dirname, join
 
 # ======================================3rd Party Library Modules=====================================================||
 from openpyxl.reader.excel import load_workbook
@@ -25,7 +25,7 @@ from openpyxl.worksheet.table import Table, TableStyleInfo
 # ======================================Solutions Brewer Library Modules==============================================||
 from condor import condor
 from ogma.logma import Logma
-from pyffice.config.ports import PyfficePort
+from pyffice.ports.ports import PyfficePort
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -33,7 +33,7 @@ log = True
 logma = Logma(__name__)
 
 # ====================================================================================================================||
-pxcfg = join(here, "_data_", "exports.yaml")
+pxcfg = join(here, "../config/_data_", "exports.yaml")
 
 
 class PyfficePortExcel(PyfficePort):
