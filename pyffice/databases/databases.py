@@ -21,7 +21,6 @@ import datetime as dt
 from condor import condor
 from ogma.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
-from squirl.orgnql import sonql
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -32,7 +31,7 @@ logma = Logma(__name__)
 pxcfg = join(here, "_data_", ".yaml")
 
 
-class PyfficeDatabaseConnection(sonql.Doc):
+class PyfficeDatabaseConnection(PyfficeDocument):
     """"""
 
     VERSION = "0.0.1.0.1.0"

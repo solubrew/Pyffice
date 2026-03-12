@@ -403,7 +403,7 @@ class PyfficePortCherryTree(PyfficePort):
         return doc
 
 
-class PyfficePortNchantdOffice(PyfficePort):
+class PyfficePortOffice(PyfficePort):
     """"""
 
     VERSION = "0.0.1.0.1.0"
@@ -411,7 +411,7 @@ class PyfficePortNchantdOffice(PyfficePort):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficePortNchantdOffice")).override(cfg)
+        self.config.override(condor.Instruct(pxcfg).select("PyfficePortOffice")).override(cfg)
 
     def load_document(self, document=None):
         """"""
@@ -448,7 +448,7 @@ class PyfficePortCSV(PyfficePort):
 
 
 class PyfficePortDia(PyfficePort):
-    """Port Dia File and convert to Nchantd Sketch Document"""
+    """Port Dia File and convert to Pyffice Sketch Document"""
 
     VERSION = "0.0.1.0.1.0"
 

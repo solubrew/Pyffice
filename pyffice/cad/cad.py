@@ -23,7 +23,7 @@ from abc import ABC, abstractmethod
 from condor import condor
 from ogma.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
-from pyffice.ports.cad import NchantdCADPart, get_port_manager
+from pyffice.ports.cadports import get_ports_manager, import_cad, export_cad, convert_cad
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||

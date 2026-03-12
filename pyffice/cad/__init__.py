@@ -1,39 +1,55 @@
 """
 CAD file format support (OBJ, STL, DWG, DXF, STEP, IGES, etc.).
-Uses pyffice.ports.cad for format conversion.
+Uses pyffice.ports.cadports for format conversion.
 """
 
 from pyffice.cad.obj import PyfficeOBJ
 from pyffice.cad.stl import PyfficeSTL
 from pyffice.cad.scad import PyfficeSCAD
+from pyffice.cad.cad import PyfficeCADPart, PyfficeCADManager, PyfficeCADAssembly
 
 # Import ports for format conversion
-from pyffice.ports.cad import (
-    NchantdCADPart,
+from pyffice.ports.cadports import (
     CADPort,
     STLPort,
     OBJPort,
     STEPPort,
-    CADPortManager,
-    get_port_manager,
+    DWGPort,
+    DXFPort,
+    FBXPort,
+    GLTFPort,
+    IGESPort,
+    BLENDPort,
+    SCADPort,
+    CADPortsManager,
+    get_ports_manager,
     import_cad,
     export_cad,
-    convert_cad
+    convert_cad,
 )
 
 __all__ = [
-    # Direct CAD handlers
+    # Pyffice CAD classes
     "PyfficeOBJ",
     "PyfficeSTL",
     "PyfficeSCAD",
-    # Ports - universal CAD format
-    "NchantdCADPart",
+    "PyfficeCADPart",
+    "PyfficeCADManager",
+    "PyfficeCADAssembly",
+    # Ports - external CAD format converters
     "CADPort",
     "STLPort",
     "OBJPort",
     "STEPPort",
-    "CADPortManager",
-    "get_port_manager",
+    "DWGPort",
+    "DXFPort",
+    "FBXPort",
+    "GLTFPort",
+    "IGESPort",
+    "BLENDPort",
+    "SCADPort",
+    "CADPortsManager",
+    "get_ports_manager",
     "import_cad",
     "export_cad",
     "convert_cad",
