@@ -40,7 +40,7 @@ logma = Logma(__name__)
 pxcfg = join(here, "_data_", "presentation.yaml")
 
 
-class PyfficeSlideShow:
+class PyfficeSlideShow(PyfficeDocument):
     """Container for multiple presentations (slideshow)."""
     
     VERSION = "0.0.1.0.1.0"
@@ -51,6 +51,7 @@ class PyfficeSlideShow:
         Args:
             cfg: Optional configuration dictionary.
         """
+        super().__init__(cfg)
         self.cfg = cfg or {}
         self.presentations = {}
         self.active_presentation = None
