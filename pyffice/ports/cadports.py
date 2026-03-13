@@ -15,15 +15,18 @@
 """
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-from typing import List, Dict, Any, Optional, Tuple, Union
+from __future__ import annotations
+from typing import List, Dict, Any, Optional, Tuple, Union, TYPE_CHECKING
 from dataclasses import dataclass, field
 from abc import ABC, abstractmethod
 from pathlib import Path
 
 # ======================================3rd Party Library Modules=====================================================||
 # ======================================Solutions Brewer Library Modules==============================================||
-from pyffice.cad.cad import PyfficeCADPart
-from pyffice.document import PyfficeDocument
+# Use TYPE_CHECKING to avoid circular import at runtime
+if TYPE_CHECKING:
+    from pyffice.cad.cad import PyfficeCADPart
+    from pyffice.document import PyfficeDocument
 
 
 # ====================================================================================================================||
@@ -52,6 +55,7 @@ class STLPort(CADPort):
     
     def import_file(self, file_path: str) -> PyfficeCADPart:
         """Import STL to PyfficeCADPart"""
+        from pyffice.cad.cad import PyfficeCADPart  # Lazy import to avoid circular dependency
         from pyffice.cad.stl import PyfficeSTL
         path = Path(file_path)
         stl = PyfficeSTL(str(path))
@@ -107,6 +111,7 @@ class OBJPort(CADPort):
     
     def import_file(self, file_path: str) -> PyfficeCADPart:
         """Import OBJ to PyfficeCADPart"""
+        from pyffice.cad.cad import PyfficeCADPart  # Lazy import to avoid circular dependency
         from pyffice.cad.obj import PyfficeOBJ
         path = Path(file_path)
         obj = PyfficeOBJ(str(path))
@@ -143,6 +148,7 @@ class STEPPort(CADPort):
     
     def import_file(self, file_path: str) -> PyfficeCADPart:
         """Import STEP to PyfficeCADPart"""
+        from pyffice.cad.cad import PyfficeCADPart  # Lazy import to avoid circular dependency
         from pyffice.cad.step import PyfficeSTEP
         path = Path(file_path)
         step = PyfficeSTEP(str(path))
@@ -172,6 +178,7 @@ class DWGPort(CADPort):
     
     def import_file(self, file_path: str) -> PyfficeCADPart:
         """Import DWG to PyfficeCADPart"""
+        from pyffice.cad.cad import PyfficeCADPart  # Lazy import to avoid circular dependency
         path = Path(file_path)
         part = PyfficeCADPart()
         part.create_new_document(path.stem)
@@ -221,6 +228,7 @@ class DXFPort(CADPort):
     
     def import_file(self, file_path: str) -> PyfficeCADPart:
         """Import DXF to PyfficeCADPart"""
+        from pyffice.cad.cad import PyfficeCADPart  # Lazy import to avoid circular dependency
         path = Path(file_path)
         part = PyfficeCADPart()
         part.create_new_document(path.stem)
@@ -302,6 +310,7 @@ class FBXPort(CADPort):
     
     def import_file(self, file_path: str) -> PyfficeCADPart:
         """Import FBX to PyfficeCADPart"""
+        from pyffice.cad.cad import PyfficeCADPart  # Lazy import to avoid circular dependency
         path = Path(file_path)
         part = PyfficeCADPart()
         part.create_new_document(path.stem)
@@ -353,6 +362,7 @@ class GLTFPort(CADPort):
     
     def import_file(self, file_path: str) -> PyfficeCADPart:
         """Import GLTF/GLB to PyfficeCADPart"""
+        from pyffice.cad.cad import PyfficeCADPart  # Lazy import to avoid circular dependency
         import json
         path = Path(file_path)
         part = PyfficeCADPart()
@@ -410,6 +420,7 @@ class IGESPort(CADPort):
     
     def import_file(self, file_path: str) -> PyfficeCADPart:
         """Import IGES to PyfficeCADPart"""
+        from pyffice.cad.cad import PyfficeCADPart  # Lazy import to avoid circular dependency
         path = Path(file_path)
         part = PyfficeCADPart()
         part.create_new_document(path.stem)
@@ -437,6 +448,7 @@ class BLENDPort(CADPort):
     
     def import_file(self, file_path: str) -> PyfficeCADPart:
         """Import BLEND to PyfficeCADPart"""
+        from pyffice.cad.cad import PyfficeCADPart  # Lazy import to avoid circular dependency
         path = Path(file_path)
         part = PyfficeCADPart()
         part.create_new_document(path.stem)
@@ -467,6 +479,7 @@ class SCADPort(CADPort):
     
     def import_file(self, file_path: str) -> PyfficeCADPart:
         """Import SCAD to PyfficeCADPart"""
+        from pyffice.cad.cad import PyfficeCADPart  # Lazy import to avoid circular dependency
         import re
         path = Path(file_path)
         part = PyfficeCADPart()
