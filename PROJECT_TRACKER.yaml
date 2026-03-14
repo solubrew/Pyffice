@@ -1574,7 +1574,7 @@ analysis:
       workflows/playlists.py: 200
       workflows/source_control.py: 80
       workflows/workflows.py: 143
-audit_date: '1773453146.4864757'
+audit_date: '1773453427.757828'
 dimensions:
   agent_awareness:
     details:
@@ -1664,9 +1664,9 @@ dimensions:
         project: condor
       internal_imports: 929
       internal_projects_used:
+      - condor
       - pyffice
       - ogma
-      - condor
       leverage_score: 28.83
       score: 100
       status: pass
