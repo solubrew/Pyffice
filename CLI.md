@@ -57,6 +57,38 @@ pyffice image thumbnail <file>
 | `--version` | Show version |
 | `--help` | Show help |
 
+## Arguments
+
+### Global Arguments
+
+| Argument | Type | Required | Description |
+|----------|------|----------|-------------|
+| `-v, --verbose` | flag | No | Enable verbose output |
+| `-q, --quiet` | flag | No | Suppress output |
+| `--version` | flag | No | Show version |
+| `--help` | flag | No | Show help |
+
+### Command Arguments
+
+#### document
+
+| Argument | Type | Required | Description |
+|----------|------|----------|-------------|
+| `open` | subcommand | No | Open a document |
+| `convert` | subcommand | No | Convert document format |
+| `info` | subcommand | No | Show document information |
+| `<file>` | string | Yes | Input file path |
+
+#### spreadsheet
+
+| Argument | Type | Required | Description |
+|----------|------|----------|-------------|
+| `open` | subcommand | No | Open a spreadsheet |
+| `create` | subcommand | No | Create new spreadsheet |
+| `export` | subcommand | No | Export spreadsheet |
+| `--format` | string | No | Output format (csv, xlsx, ods) |
+| `<file>` | string | Yes | Input file path |
+
 ## Examples
 
 ```bash
