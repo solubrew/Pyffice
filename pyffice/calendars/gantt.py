@@ -151,7 +151,7 @@ class PyfficeGanttChart(object):
 
         # Save the chart to an HTML file
         fig.write_html(filename)
-        print(f"Gantt chart saved as '{filename}'.")
+        logma.info(f"Gantt chart saved as '{filename}'.")
 
 
 # ====================================================================================================================||

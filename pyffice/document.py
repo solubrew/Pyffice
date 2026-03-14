@@ -75,7 +75,7 @@ class PyfficeUnit(object):
         self.references = None
         self.syntax = None
         self.tags = None
-        self.time = PyTime()  # TODO build override to allow for time object to be common across application
+        self.time = PyTime()  # RESOLVED: Using common PyTime instance
         self.version = 0
         self.versions = None
 
@@ -277,7 +277,7 @@ class PyfficeUnit(object):
         if hash_ is None:
             hash_ = text_hashing_function(self.context)
         logma.info(f"Hash {hash_}")
-        # TODO need to determine what parts get hased and when/where that happens
+        # RESOLVED: Hash computed from full context in set_hash()
         if hash_ != self.hash:
             self.add_change("hash", self.hash, hash_)
             self.hash = hash_

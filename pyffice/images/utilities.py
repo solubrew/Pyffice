@@ -123,7 +123,7 @@ def convert_shades_of_color_in_svg(input_path, output_path, source_color, target
 
     # Save the modified SVG
     tree.write(output_path)
-    print(f"SVG shades updated and saved to '{output_path}'.")
+    logma.info(f"SVG shades updated and saved to '{output_path}'.")
 
 
 def convert_shades_of_color_in_jpg(image_path, output_path, source_color, target_color, tolerance=40):

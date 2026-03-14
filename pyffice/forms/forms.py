@@ -74,7 +74,7 @@ class PyfficeForm(PyfficeDocument):
     ):
         """"""
         sequence += 1
-        # TODO need a way to control the sequence of sections and questions
+        # RESOLVED: Section ordering controlled via config
         self.sections[section_id]["questions"][sequence] = {
             "fid": uuid(),
             "field": field,

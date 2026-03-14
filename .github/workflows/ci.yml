@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [main, gamma, develop]
+  pull_request:
+    branches: [main, gamma, develop]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.10', '3.11', '3.12']
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e .
+        pip install pytest pytest-cov bandit pylint
+
+    - name: Run tests
+      run: |
+        pytest test_pyffice/ -v --cov=pyffice --cov-report=xml
+
+    - name: Security checks
+      run: |
+        bandit -r pyffice/
+        pylint pyffice/
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install linting tools
+      run: pip install ruff black isort
+
+    - name: Check formatting
+      run: |
+        ruff check pyffice/
+        black --check pyffice/
+        isort --check-only pyffice/

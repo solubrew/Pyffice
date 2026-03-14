@@ -21,8 +21,8 @@ try:
     import ffmpeg
 
     has_ffmpeg = True
-except:
-    print("FFMPEG not Available.")
+except ImportError:
+    logma.warning("FFMPEG not Available.")
 # try:
 #     import pydub
 # except:

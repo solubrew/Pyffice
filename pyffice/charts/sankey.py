@@ -119,7 +119,7 @@ class SankeyChart:
 
         fig = go.Figure(data=[sankey_data])
         fig.write_html(filename)
-        print(f"Sankey chart saved as '{filename}'.")
+        logma.info(f"Sankey chart saved as '{filename}'.")
 
 
 # ====================================================================================================================||

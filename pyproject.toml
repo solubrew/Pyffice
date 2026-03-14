@@ -62,9 +62,14 @@ exclude = [
 pyffice = [
   "**/*.yaml",
 ]
-[tool.black]
-line-length = 120
-skip-string-normalization = false
+[tool.isort]
+profile = "black"
+line_length = 120
+known_first_party = ["pyffice", "test_pyffice"]
+known_third_party = ["click", "condor", "ogma", "squirl", "subtrix", "pycurity"]
+
+[project.scripts]
+pyffice = "pyffice.cli:cli"
 
 # Flake8 configuration
 [tool.flake8]
