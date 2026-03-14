@@ -24,7 +24,7 @@ from condor import condor
 from ogma.logma import Logma
 from twof.twofdns import TwoFDNS
 from subtrix.utilities import uuid
-from pyffice.document import PyfficeUnit, PyfficeDocument, PyfficeDocumentManager
+from pyffice.document import PyfficeUnit, PyfficeDocumentManager
 from pycurity.pyhash import text_hashing_function
 
 # ====================================================================================================================||
@@ -37,7 +37,7 @@ logma.off()
 pxcfg = join(here, "_data_", "url.yaml")
 
 
-class PyfficeURL(PyfficeDocument):
+class PyfficeURL(PyfficeUnit):
     """URL handling and parsing functionality for Pyffice system."""
 
     VERSION = "0.0.1.0.1.0"
@@ -941,20 +941,7 @@ class PyfficeURLLibrary(PyfficeDocumentManager):
     def __init__(self, cfg=None):
         """Initialize URL Library with configuration."""
         super().__init__(cfg)
-        # Handle both dict and config objects for cfg parameter
-        try:
-            self.config.override(condor.Instruct(pxcfg).select("PyfficeURLLibrary").override(cfg))
-        except (AttributeError, TypeError):
-            # If cfg is a plain dict or config doesn't have override, try alternative approach
-            try:
-                from condor import condor
-                instruct = condor.Instruct(pxcfg).select("PyfficeURLLibrary")
-                if cfg:
-                    instruct.override(cfg)
-                self.config.override(instruct)
-            except Exception:
-                # Final fallback - just use what we have
-                pass
+        self.config.override(condor.Instruct(pxcfg).select("PyfficeURLLibrary").override(cfg))
         self.urls = None
         self.affiliate_patterns = None
         self.block_patterns = None

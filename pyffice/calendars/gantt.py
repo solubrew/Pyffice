@@ -39,7 +39,7 @@ logma = Logma(__name__)
 pxcfg = join(here, "_data_", ".yaml")
 
 
-class PyfficeGanttChart(PyfficeDocument):
+class PyfficeGanttChart(object):
     """Initialize the Gantt chart parameters.
 
     Args:

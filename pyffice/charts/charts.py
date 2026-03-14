@@ -10,20 +10,20 @@
     security: seclvl2
     <(WT)>: -32
 """
-
 from copy import deepcopy
 
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-from os.path import dirname, join
+from os.path import abspath, dirname, join
+import datetime as dt
 
 # ======================================3rd Party Library Modules=====================================================||
 
 # ======================================Solutions Brewer Library Modules==============================================||
 from condor import condor
 from ogma.logma import Logma
-from pyffice.ports.msports import PyfficePortExcel
-from pyffice.document import PyfficeDocument
+from pyffice.config.msports import PyfficePortExcel
+from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 from pyffice.items.text import PyfficeText
 
 # ====================================================================================================================||

@@ -20,7 +20,7 @@ import datetime as dt
 # ======================================Solutions Brewer Library Modules==============================================||
 from condor import condor
 from ogma.logma import Logma
-from pyffice.document import PyfficeUnit, PyfficeDocument
+from pyffice.document import PyfficeUnit
 from pyffice.items.colors import PyfficeColor
 
 # ====================================================================================================================||
@@ -38,24 +38,9 @@ class PyfficeText(PyfficeUnit):
     VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
-        """Initialize PyfficeText object.
-        
-        Args:
-            cfg: Configuration dictionary.
-        """
-        if cfg is None:
-            cfg = {}
-        if not isinstance(cfg, dict):
-            cfg = {}
+        """"""
         super().__init__(cfg)
-        # Properly initialize config as Instruct for chain
-        try:
-            self.config = condor.Instruct(pxcfg).select("PyfficeText")
-            if isinstance(cfg, dict):
-                self.config = self.config.override(cfg)
-        except Exception as e:
-            logma.warn(f"Config override failed: {e}, using default")
-            self.config = condor.Instruct({})
+        self.config.override(condor.Instruct(pxcfg).select("PyfficeText")).override(cfg)
         self.alignment = None
         self.color = None
         self.color_background = None
@@ -195,79 +180,37 @@ class PyfficeText(PyfficeUnit):
         return self.html
 
 
-class PyfficeHTML(PyfficeDocument):
-    """PyfficeHTML extends PyfficeDocument for HTML content."""
+class PyfficeHTML(PyfficeText):
+    """"""
 
     VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
-        """Initialize PyfficeHTML object.
-        
-        Args:
-            cfg: Configuration dictionary.
-        """
-        if cfg is None:
-            cfg = {}
-        if not isinstance(cfg, dict):
-            cfg = {}
+        """"""
         super().__init__(cfg)
-        try:
-            self.config = condor.Instruct(pxcfg).select("")
-            if isinstance(cfg, dict):
-                self.config = self.config.override(cfg)
-        except Exception as e:
-            logma.warn(f"Config override failed: {e}, using default")
-            self.config = condor.Instruct({})
+        self.config.override(condor.Instruct(pxcfg).select("")).override(cfg)
 
 
 class PyfficePage(PyfficeUnit):
-    """PyfficePage represents a page in a document."""
+    """"""
 
     VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
-        """Initialize PyfficePage object.
-        
-        Args:
-            cfg: Configuration dictionary.
-        """
-        if cfg is None:
-            cfg = {}
-        if not isinstance(cfg, dict):
-            cfg = {}
+        """"""
         super().__init__(cfg)
-        try:
-            self.config = condor.Instruct(pxcfg).select("PyfficePage")
-            if isinstance(cfg, dict):
-                self.config = self.config.override(cfg)
-        except Exception as e:
-            logma.warn(f"Config override failed: {e}, using default")
-            self.config = condor.Instruct({})
+        self.config.override(pxcfg).select("PyfficePage").override(cfg)
 
 
 class PyfficeParagraph(PyfficeUnit):
-    """PyfficeParagraph represents a paragraph in a document."""
+    """"""
 
     VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
-        """Initialize PyfficeParagraph object.
-        
-        Args:
-            cfg: Configuration dictionary.
-        """
-        if cfg is None:
-            cfg = {}
-        if not isinstance(cfg, dict):
-            cfg = {}
+        """"""
         super().__init__(cfg)
-        try:
-            self.config = condor.Instruct(pxcfg).select("PyfficeParagraph")
-            if isinstance(cfg, dict):
-                self.config = self.config.override(cfg)
-        except Exception as e:
-            logma.warn(f"Config override failed: {e}, using default")
-            self.config = condor.Instruct({})
+        self.config.override(pxcfg).select("PyfficeParagraph").override(cfg)
 
 
 # ====================================================================================================================||

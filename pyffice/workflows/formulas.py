@@ -16,8 +16,8 @@ from os.path import abspath, dirname, join
 import datetime as dt
 
 # ======================================3rd Party Library Modules=====================================================||
-# from pycel import ExcelCompiler
-# from pycel.excelformula import ExcelFormula
+from pycel import ExcelCompiler
+from pycel.excelformula import ExcelFormula
 
 # ======================================Solutions Brewer Library Modules==============================================||
 from condor import condor
@@ -42,7 +42,7 @@ class PyfficeFormulasLibrary(PyfficeDocumentManager):
         """"""
         super().__init__(cfg)
         self.config.override(condor.Instruct(pxcfg).select("PyfficeFormulasLibrary")).override(cfg)
-        # self.compiler = ExcelCompiler
+        self.compiler = ExcelCompiler
         self.formulas = None
 
     def get_formulas_list(self):
@@ -74,7 +74,7 @@ class PyfficeFormulasLibrary(PyfficeDocumentManager):
         return doc
 
 
-class PyfficeFormula(PyfficeUnit):  # , ExcelFormula):
+class PyfficeFormula(PyfficeUnit, ExcelFormula):
     """"""
 
     VERSION = "0.0.1.0.1.0"
@@ -85,7 +85,7 @@ class PyfficeFormula(PyfficeUnit):  # , ExcelFormula):
         PyfficeUnit.__init__(self, self.config)
         self.config.override(condor.Instruct(pxcfg).select("PyfficeFormula")).override(cfg)
         self.formula = self.config.dikt.get("formula", None)
-        self.formula_tag = "<{" + str(self.formula) + "}>"
+        self.formula_tag = "<{" + self.formula + "}>"
 
     def convert(self):
         """"""

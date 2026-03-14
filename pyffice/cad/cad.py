@@ -23,7 +23,7 @@ from abc import ABC, abstractmethod
 from condor import condor
 from ogma.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
-from pyffice.ports.cadports import get_ports_manager, import_cad, export_cad, convert_cad
+from pyffice.items.items import PyfficePart
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -100,7 +100,7 @@ class PyfficeCADManager(PyfficeDocumentManager):
         return doc
 
 
-class PyfficeCADPart(PyfficeDocument):
+class PyfficeCADPart(PyfficePart):
     """"""
 
     VERSION = "0.0.1.0.1.0"
@@ -108,7 +108,7 @@ class PyfficeCADPart(PyfficeDocument):
     def __init__(self, cfg=None):
         """"""
         self.config = condor.Instruct(pxcfg).override("PyfficeCADPart")
-        super().__init__(cfg)
+        super().__init__(self)
         self.config.override(cfg)
 
     def create_new_document(self, name):
