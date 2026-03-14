@@ -37,13 +37,13 @@ except ImportError:
             self.logger = logging.getLogger(name)
 
         def info(self, msg):
-            print(f"[INFO] {msg}")
+            self.logger.info(msg)
 
         def debug(self, msg):
-            print(f"[DEBUG] {msg}")
+            self.logger.debug(msg)
 
         def error(self, msg):
-            print(f"[ERROR] {msg}")
+            self.logger.error(msg)
 
 
 # Commented out - broken dependency chain from squirl->condor

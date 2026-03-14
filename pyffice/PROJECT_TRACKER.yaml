@@ -1136,7 +1136,7 @@ analysis:
         function_count: 0
         import_count: 5
         word_count: 143
-audit_date: '1773508179.2352676'
+audit_date: '1773510201.220091'
 dimensions:
   agent_awareness:
     details:
@@ -1203,7 +1203,7 @@ dimensions:
   dependency_strategy:
     details:
       external_imports: 415
-      info: 'Hint: 67 GitVein projects available but not used: PyQt5Pandas, apig,
+      info: 'Hint: 68 GitVein projects available but not used: PyQt5Pandas, apig,
         asolutionfor, axn, basicbot...'
       internal_import_details:
       - file: cli.py
@@ -1238,8 +1238,8 @@ dimensions:
         project: pyffice
       internal_imports: 190
       internal_projects_used:
-      - condor
       - pyffice
+      - condor
       leverage_score: 31.4
       score: 100
       status: pass
@@ -1412,17 +1412,19 @@ dimensions:
   security_bandit:
     details:
       details:
-        coverage_pct: 0.0
-        files_checked: 0
-        total_python_files: 161
+        files_scanned: 162
+        high: 2
+        low: 26
+        medium: 32
+        total: 60
       issues:
-      - fix: Ensure Bandit scans at least 35% of Python files
-        rule: 'Bandit coverage too low: 0/161 files (0.0%)'
+      - fix: Fix high severity security issues
+        rule: 'Bandit HIGH severity issues: 2'
         severity: critical
-      score: 0
-      status: fail
-    score: 0
-    status: fail
+      score: 30
+      status: partial
+    score: 30
+    status: partial
   security_ruff:
     details:
       issues: []
@@ -1517,6 +1519,14 @@ dimensions:
       todo_count: 3
     score: 80
     status: pass
+  try_except_imports:
+    details:
+      issues: []
+      score: 100
+      status: pass
+      violation_count: 0
+    score: 100
+    status: pass
   type_annotations:
     details:
       annotated_functions: 625
@@ -1546,10 +1556,10 @@ dimensions:
       wrapper_count: 10
     score: 100
     status: pass
-overall_score: 43.25
+overall_score: 47.11
 project: pyffice
 summary:
-  failing: 16
-  gitvein_projects_available: 69
-  passing: 9
-  total_dimensions: 30
+  failing: 15
+  gitvein_projects_available: 70
+  passing: 10
+  total_dimensions: 31

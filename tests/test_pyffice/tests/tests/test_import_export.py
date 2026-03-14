@@ -1,8 +1,13 @@
 """Import/Export Test Runner for Pyffice."""
+import logging
 import os
 import sys
 import tempfile
 import shutil
+
+# Set up logging
+logging.basicConfig(level=logging.INFO, format='%(message)s')
+logger = logging.getLogger(__name__)
 
 DOCUMENT_TYPES = {
     "data": ["csv", "json", "xml", "yaml"],
@@ -68,7 +73,7 @@ def create_sample_file(doc_type, filepath):
 
 
 def test_import_export(doc_type, category):
-    print(f"\n=== Testing {category}/{doc_type} ===")
+    logger.info(f"\n=== Testing {category}/{doc_type} ===")
     
     with tempfile.TemporaryDirectory() as tmpdir:
         src_file = os.path.join(tmpdir, f"test.{doc_type}")
@@ -141,21 +146,21 @@ def test_import_export(doc_type, category):
             
             if os.path.exists(dst_file):
                 size = os.path.getsize(dst_file)
-                print(f"  ✅ {doc_type}: Exported ({size} bytes)")
+                logger.info(f"  ✅ {doc_type}: Exported ({size} bytes)")
                 return True
             else:
-                print(f"  ❌ {doc_type}: Export failed")
+                logger.info(f"  ❌ {doc_type}: Export failed")
                 return False
                 
         except Exception as e:
-            print(f"  ❌ {doc_type}: Error - {str(e)}")
+            logger.info(f"  ❌ {doc_type}: Error - {str(e)}")
             return False
 
 
 def run_all_tests():
-    print("=" * 60)
-    print("Pyffice Import/Export Test Runner")
-    print("=" * 60)
+    logger.info("=" * 60)
+    logger.info("Pyffice Import/Export Test Runner")
+    logger.info("=" * 60)
     
     results = {"passed": 0, "failed": 0}
     
@@ -167,9 +172,9 @@ def run_all_tests():
             else:
                 results["failed"] += 1
     
-    print("\n" + "=" * 60)
-    print(f"Results: {results['passed']} passed, {results['failed']} failed")
-    print("=" * 60)
+    logger.info("\n" + "=" * 60)
+    logger.info(f"Results: {results['passed']} passed, {results['failed']} failed")
+    logger.info("=" * 60)
     
     return results
 
