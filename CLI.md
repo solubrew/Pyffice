@@ -56,6 +56,29 @@ pyffice config validate
 - `--quiet`, `-q` - Suppress output
 - `--config CONFIG` - Specify config file
 
+## Arguments
+
+### convert
+- `input` (required) - Input file path
+- `output` (required) - Output file path
+
+### create
+- `--type`, `-t` (required) - Document type: document, spreadsheet, presentation
+- `--template`, `-m` (optional) - Template file to use
+
+### diagram convert
+- `input` (required) - Input diagram file path
+- `output` (required) - Output diagram file path
+
+### diagram formats
+- `--verbose`, `-v` (optional) - Show detailed format information
+
+### config show
+- `--key` (optional) - Show specific config key only
+
+### config validate
+- `--strict` (optional) - Exit with error if config is invalid
+
 ## Examples
 
 Convert a Dia diagram to SVG:

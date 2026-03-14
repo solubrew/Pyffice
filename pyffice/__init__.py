@@ -1,7 +1,8 @@
 """
 Pyffice - Python wrapper for office suite tools
 
-CLI module providing command-line interface for pyffice operations.
+Comprehensive document and media framework supporting documents, spreadsheets,
+presentations, diagrams, images, video, audio, CAD, and more.
 """
 import logging
 import sys
@@ -9,11 +10,73 @@ from typing import Optional
 
 __version__ = "0.1.0"
 
+# Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(levelname)s: %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+# Import all modules for CLI coverage
+# Core modules
+from pyffice import document, pyffice
+
+# Media modules
+from pyffice import audio, cam, images, video
+
+# Document modules
+from pyffice import calendars, charts, contacts, databases, diagrams, email
+from pyffice import filesystems, forms, notebooks, presentation, projects
+from pyffice import reports, socials, spreadsheet, tags, text, updates
+from pyffice import web, workflows
+
+# Analytics
+from pyffice import analytics
+
+# CAD
+from pyffice import cad
+
+# Export all for convenience
+__all__ = [
+    # Version
+    "__version__",
+    # Core
+    "document",
+    "pyffice",
+    # Media
+    "audio",
+    "cam",
+    "images",
+    "video",
+    # Documents
+    "calendars",
+    "charts",
+    "contacts",
+    "databases",
+    "diagrams",
+    "email",
+    "filesystems",
+    "forms",
+    "notebooks",
+    "presentation",
+    "projects",
+    "reports",
+    "socials",
+    "spreadsheet",
+    "tags",
+    "text",
+    "updates",
+    "web",
+    "workflows",
+    # Analytics
+    "analytics",
+    # CAD
+    "cad",
+    # Functions
+    "validate_config",
+    "convert_document",
+    "main",
+]
 
 
 def validate_config(config_path: str) -> bool:
