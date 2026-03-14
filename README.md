@@ -18,6 +18,40 @@ Pyffice provides a consistent API for working with various file formats and offi
 pip install pyffice
 ```
 
+## Usage
+
+### Command Line
+
+```bash
+# Convert a document
+pyffice document convert input.docx output.pdf
+
+# Convert a spreadsheet
+pyffice spreadsheet convert data.xlsx output.csv
+
+# Convert an image
+pyffice image convert photo.png output.jpg
+
+# List supported formats
+pyffice formats
+```
+
+### Python API
+
+```python
+from pyffice import document, spreadsheet, presentation
+
+# Open a document
+doc = document.open("report.docx")
+
+# Work with spreadsheets
+sheet = spreadsheet.open("data.xlsx")
+sheet.save("output.xlsx")
+
+# Process CAD files
+cad = pyffice.cad.load("model.stl")
+```
+
 ## Quick Start
 
 ```python

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.1] - 2026-03-14
+
+### Fixed
+- Replace print() with logging in Logma fallback (pyffice.py)
+- Add Arguments section to CLI.md
+- Fix pylint errors in various modules
+
 ## [0.1.0] - 2026-03-14
 
 ### Added
