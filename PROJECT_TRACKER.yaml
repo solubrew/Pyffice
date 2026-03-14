@@ -1574,7 +1574,7 @@ analysis:
       workflows/playlists.py: 200
       workflows/source_control.py: 80
       workflows/workflows.py: 143
-audit_date: '1773453427.757828'
+audit_date: '1773453830.3272836'
 dimensions:
   agent_awareness:
     details:
@@ -1665,8 +1665,8 @@ dimensions:
       internal_imports: 929
       internal_projects_used:
       - condor
-      - pyffice
       - ogma
+      - pyffice
       leverage_score: 28.83
       score: 100
       status: pass
@@ -1715,8 +1715,8 @@ dimensions:
     status: partial
   git_workflow:
     details:
-      branch: unknown
-      has_commits: false
+      branch: orin-ws
+      has_commits: true
       is_git_repo: true
       score: 100
       status: pass
@@ -1901,17 +1901,15 @@ dimensions:
     status: partial
   type_check_pyright:
     details:
-      issues:
-      - rule: 'Pyright execution error: name ''json'' is not defined'
-        severity: medium
-      score: 25
-      status: partial
-    score: 25
-    status: partial
+      issues: []
+      score: 100
+      status: pass
+    score: 100
+    status: pass
 overall_score: 86.82
 project: pyffice
 summary:
   failing: 3
   gitvein_projects_available: 66
-  passing: 19
+  passing: 20
   total_dimensions: 26
