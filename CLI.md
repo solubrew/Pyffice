@@ -1,92 +1,76 @@
 # Pyffice CLI
 
-Command-line interface for Pyffice.
-
-## Installation
-
-```bash
-pip install pyffice
-```
-
 ## Usage
 
-### Convert Documents
-
 ```bash
-pyffice convert input.docx output.pdf
+pyffice [COMMAND] [OPTIONS]
 ```
 
-### Create New Document
+## Commands
+
+### document
+
+Work with documents (Word, PDF, etc.)
 
 ```bash
-pyffice create --type spreadsheet output.xlsx
-pyffice create --type presentation output.pptx
-pyffice create --type document output.docx
+pyffice document open <file>
+pyffice document convert <input> <output>
+pyffice document info <file>
 ```
 
-### List Supported Formats
+### spreadsheet
+
+Work with spreadsheets (Excel, CSV)
 
 ```bash
-pyffice formats
+pyffice spreadsheet open <file>
+pyffice spreadsheet create <name>
+pyffice spreadsheet export <file> --format csv
 ```
 
-### Diagram Operations
+### cad
+
+Process CAD files
 
 ```bash
-# Convert diagram formats
-pyffice diagram convert input.dia output.svg
-
-# List supported diagram formats
-pyffice diagram formats
+pyffice cad convert <input> <output>
+pyffice cad info <file>
+pyffice cad validate <file>
 ```
 
-### Configuration
+### image
+
+Process images
 
 ```bash
-# Show configuration
-pyffice config show
-
-# Validate configuration
-pyffice config validate
+pyffice image convert <input> <output>
+pyffice image resize <file> --width 800 --height 600
+pyffice image thumbnail <file>
 ```
 
 ## Options
 
-- `--verbose`, `-v` - Enable verbose output
-- `--quiet`, `-q` - Suppress output
-- `--config CONFIG` - Specify config file
-
-## Arguments
-
-### convert
-- `input` (required) - Input file path
-- `output` (required) - Output file path
-
-### create
-- `--type`, `-t` (required) - Document type: document, spreadsheet, presentation
-- `--template`, `-m` (optional) - Template file to use
-
-### diagram convert
-- `input` (required) - Input diagram file path
-- `output` (required) - Output diagram file path
-
-### diagram formats
-- `--verbose`, `-v` (optional) - Show detailed format information
-
-### config show
-- `--key` (optional) - Show specific config key only
-
-### config validate
-- `--strict` (optional) - Exit with error if config is invalid
+| Option | Description |
+|--------|-------------|
+| `-v, --verbose` | Enable verbose output |
+| `-q, --quiet` | Suppress output |
+| `--version` | Show version |
+| `--help` | Show help |
 
 ## Examples
 
-Convert a Dia diagram to SVG:
 ```bash
-pyffice diagram convert my_diagram.dia output.svg
+# Open and convert a document
+pyffice document convert input.docx output.pdf
+
+# Create a spreadsheet
+pyffice spreadsheet create report.xlsx
+
+# Convert CAD file
+pyffice cad convert model.stl model.obj
 ```
 
-Create a new spreadsheet:
-```bash
-pyffice create --type spreadsheet --template monthly_budget.xlsx
-```
+## Exit Codes
+
+- `0` - Success
+- `1` - Error

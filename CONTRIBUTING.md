@@ -1,55 +1,36 @@
 # Contributing to Pyffice
 
-## Welcome
-
-Thank you for considering contributing to Pyffice!
+Thank you for your interest in contributing!
 
 ## Development Setup
 
 ```bash
-# Clone the repository
-git clone git@github.com:pyffice/pyffice.git
+git clone <repo>
 cd pyffice
-
-# Create and activate development environment
-python -m venv venv
-source venv/bin/activate
-
-# Install dependencies
-pip install -e ".[dev]"
+pip install -e .
 ```
 
-## Code Standards
+## Code Style
 
 - Follow PEP 8
-- Use type hints where possible
-- Add docstrings to all public functions
-- Run `ruff check` and `ruff format` before committing
-- Ensure tests pass: `pytest`
+- Use type hints
+- Run `ruff check` before committing
+- Run `pyright` for type checking
 
 ## Testing
 
 ```bash
-# Run all tests
-pytest
-
-# Run specific test module
-pytest test_pyffice/unit/diagrams/
-
-# Run with coverage
-pytest --cov=pyffice
+pytest tests/
 ```
 
 ## Submitting Changes
 
 1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/my-feature`
+2. Create a feature branch
 3. Make your changes
-4. Run tests and linting
-5. Commit with clear messages
-6. Push to your fork
-7. Open a Pull Request
+4. Run the test suite
+5. Submit a pull request
 
-## License
+## CI/CD
 
-By contributing, you agree that your contributions will be licensed under the project's license.
+This project uses GitHub Actions. See `.github/workflows/` for details.

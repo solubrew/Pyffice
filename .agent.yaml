@@ -1,27 +1,28 @@
-# Agent Configuration
-
 name: pyffice
-description: Universal Office Suite Converter
+agent: orin
+description: Unified Python interface for document processing, CAD, media, and office automation.
+version: 0.1.0
+tags:
+  - document
+  - automation
+  - office
+  - productivity
+  - office-automation
+  - file-conversion
+  - cad
+  - media
 capabilities:
-  - document_conversion
-  - diagram_conversion
-  - image_conversion
-  - video_conversion
-  - audio_conversion
-  - cad_conversion
-  - spreadsheet_conversion
-  - presentation_conversion
-  - calendar_management
-  - email_processing
-  - database_operations
-  - web_services
-  - workflow_automation
-
+  - Read/write documents (PDF, Word, Excel, PowerPoint)
+  - CAD file processing (STL, OBJ, DWG, DXF, STEP)
+  - Image manipulation and conversion
+  - Audio/video processing
+  - Calendar and task management
+  - Email processing
+  - Database operations
 workspace:
-  type: hybrid
-  auto_sync: true
-
-preferences:
-  default_format: odt
-  parallel_processing: true
-  cache_enabled: true
+  root: /home/solubrew/.orin/workspace/projects/pyffice
+  structure:
+    - pyffice/
+    - tests/
+    - docs/
+    - examples/
