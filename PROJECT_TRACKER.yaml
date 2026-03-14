@@ -94,8 +94,8 @@ dimensions:
       score: 100
       internal_projects_used:
       - ogma
-      - pyffice
       - condor
+      - pyffice
       internal_import_details:
       - module: pyffice.document
         project: pyffice
