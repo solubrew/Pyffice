@@ -36,7 +36,8 @@ pxcfg = join(here, "_data_", ".yaml")
 
 def pytest_sessionstart(session):
     """"""
-    print("\n[BOOT] Initializing Crow environment for recursive imports...")
+    import logging
+    logging.info("[BOOT] Initializing Crow environment for recursive imports...")
     crow.crowLoad("Subtrix", "DELTA")
 
 

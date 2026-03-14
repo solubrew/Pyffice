@@ -26,8 +26,13 @@ def validate_config(config_path: str) -> bool:
         True if valid, False otherwise.
     """
     logger.info(f"Validating config: {config_path}")
-    # Stub implementation - actual validation logic would go here
-    return True
+    import yaml
+    try:
+        with open(config_path, 'r') as f:
+            yaml.safe_load(f)
+        return True
+    except Exception:
+        return False
 
 
 def convert_document(input_path: str, output_path: str, output_format: str) -> bool:
@@ -41,7 +46,11 @@ def convert_document(input_path: str, output_path: str, output_format: str) -> b
     Returns:
         True if conversion succeeded, False otherwise.
     """
+    import os
     logger.info(f"Converting {input_path} to {output_format}")
+    if not os.path.exists(input_path):
+        logger.error(f"Input file not found: {input_path}")
+        return False
     # Stub implementation - actual conversion logic would go here
     return True
 

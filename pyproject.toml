@@ -50,6 +50,7 @@ requires-python = ">=3.12"
 dependencies = [
     "click>=8.1.0",
     "rich>=13.0.0",
+    "pyyaml>=6.0",
 ]
 
 [project.optional-dependencies]
@@ -58,4 +59,5 @@ dev = [
     "pytest-cov>=4.0.0",
     "ruff>=0.1.0",
     "pyright>=1.1.0",
+    "pyyaml>=6.0",
 ]

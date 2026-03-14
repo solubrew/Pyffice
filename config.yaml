@@ -1,0 +1,38 @@
+# Pyffice Configuration
+# Main configuration file for pyffice project
+
+project:
+  name: pyffice
+  version: "0.1.0"
+  description: Unified Office Automation Suite
+  author: Pyffice Team
+
+features:
+  documents: true
+  spreadsheets: true
+  presentations: true
+  diagrams: true
+  cad: true
+  calendars: true
+  contacts: true
+  media: true
+
+conversion:
+  enabled_formats:
+    - dia
+    - dot
+    - graphml
+    - svg
+    - vsdx
+    - drawio
+    - freemind
+    - xmind
+    - bpmn
+
+logging:
+  level: INFO
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+testing:
+  framework: pytest
+  coverage_min: 80
