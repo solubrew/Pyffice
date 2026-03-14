@@ -1,357 +1,6 @@
 agent: orin
 analysis:
   counts:
-    class_counts:
-      __init__.py: 0
-      __main__.py: 0
-      cli.py: 0
-      document.py: 4
-      pyffice.py: 1
-      pyffice/__init__.py: 0
-      pyffice/__main__.py: 0
-      pyffice/agent.py: 0
-      pyffice/analytics/__init__.py: 0
-      pyffice/analytics/sources.py: 3
-      pyffice/audio/__init__.py: 0
-      pyffice/audio/audio.py: 2
-      pyffice/cad/__init__.py: 0
-      pyffice/cad/blend.py: 1
-      pyffice/cad/cad.py: 3
-      pyffice/cad/dwg.py: 1
-      pyffice/cad/dxf.py: 1
-      pyffice/cad/fbx.py: 1
-      pyffice/cad/gltf.py: 1
-      pyffice/cad/iges.py: 1
-      pyffice/cad/items.py: 1
-      pyffice/cad/obj.py: 1
-      pyffice/cad/scad.py: 1
-      pyffice/cad/step.py: 1
-      pyffice/cad/stl.py: 1
-      pyffice/calendars/__init__.py: 0
-      pyffice/calendars/calendars.py: 1
-      pyffice/calendars/gantt.py: 1
-      pyffice/calendars/tasks.py: 3
-      pyffice/cam/__init__.py: 0
-      pyffice/cam/bom.py: 2
-      pyffice/cam/cam.py: 2
-      pyffice/cam/gcode.py: 1
-      pyffice/charts/__init__.py: 0
-      pyffice/charts/charts.py: 1
-      pyffice/charts/sankey.py: 1
-      pyffice/cli.py: 0
-      pyffice/config/__init__.py: 0
-      pyffice/config/config.py: 3
-      pyffice/config/env.py: 1
-      pyffice/config/gports.py: 3
-      pyffice/config/ini.py: 1
-      pyffice/config/msports.py: 2
-      pyffice/config/policies.py: 1
-      pyffice/config/ports.py: 10
-      pyffice/config/toml.py: 1
-      pyffice/contacts/__init__.py: 0
-      pyffice/contacts/contacts.py: 2
-      pyffice/container/__init__.py: 0
-      pyffice/container/binary.py: 1
-      pyffice/container/rar.py: 1
-      pyffice/container/sevenzip.py: 1
-      pyffice/container/tar.py: 1
-      pyffice/container/zip.py: 1
-      pyffice/data/csv.py: 0
-      pyffice/data/json.py: 0
-      pyffice/data/xml.py: 0
-      pyffice/data/yaml.py: 0
-      pyffice/databases/__init__.py: 0
-      pyffice/databases/databases.py: 2
-      pyffice/databases/table.py: 1
-      pyffice/diagrams/__init__.py: 0
-      pyffice/diagrams/diagrams.py: 5
-      pyffice/diagrams/formats.py: 11
-      pyffice/document.py: 4
-      pyffice/ebook/__init__.py: 0
-      pyffice/ebook/azw.py: 0
-      pyffice/ebook/epub.py: 0
-      pyffice/ebook/mobi.py: 0
-      pyffice/email/__init__.py: 0
-      pyffice/email/email.py: 2
-      pyffice/filesystems/__init__.py: 0
-      pyffice/filesystems/filesystems.py: 1
-      pyffice/forms/__init__.py: 0
-      pyffice/forms/forms.py: 3
-      pyffice/forms/surveys.py: 4
-      pyffice/images/__init__.py: 0
-      pyffice/images/images.py: 3
-      pyffice/images/pdfs.py: 1
-      pyffice/images/utilities.py: 0
-      pyffice/items/__init__.py: 0
-      pyffice/items/cells.py: 2
-      pyffice/items/colors.py: 2
-      pyffice/items/items.py: 2
-      pyffice/items/persona.py: 1
-      pyffice/items/shapes.py: 1
-      pyffice/items/tasks.py: 6
-      pyffice/items/text.py: 4
-      pyffice/matrix/__init__.py: 1
-      pyffice/matrix/matrix.py: 1
-      pyffice/media/__init__.py: 0
-      pyffice/media/audio.py: 0
-      pyffice/media/heic.py: 1
-      pyffice/media/raw.py: 1
-      pyffice/media/video.py: 0
-      pyffice/notebooks/__init__.py: 0
-      pyffice/notebooks/notebooks.py: 1
-      pyffice/ports/__init__.py: 0
-      pyffice/ports/analyticsports.py: 5
-      pyffice/ports/audioports.py: 7
-      pyffice/ports/cadports.py: 12
-      pyffice/ports/calendarsports.py: 3
-      pyffice/ports/camports.py: 3
-      pyffice/ports/chartsports.py: 3
-      pyffice/ports/configports.py: 4
-      pyffice/ports/contactsports.py: 3
-      pyffice/ports/databasesports.py: 6
-      pyffice/ports/diagramsports.py: 6
-      pyffice/ports/documentports.py: 5
-      pyffice/ports/gports.py: 3
-      pyffice/ports/imageports.py: 9
-      pyffice/ports/imagesports.py: 7
-      pyffice/ports/matrixports.py: 4
-      pyffice/ports/msports.py: 2
-      pyffice/ports/ports.py: 10
-      pyffice/ports/presentationports.py: 6
-      pyffice/ports/projectsports.py: 4
-      pyffice/ports/spreadsheetports.py: 7
-      pyffice/ports/textports.py: 5
-      pyffice/ports/videoports.py: 8
-      pyffice/ports/workflowsports.py: 4
-      pyffice/presentation/__init__.py: 0
-      pyffice/presentation/pptx.py: 0
-      pyffice/presentation/presentation.py: 1
-      pyffice/projects/__init__.py: 0
-      pyffice/projects/paxn.py: 3
-      pyffice/projects/project.py: 0
-      pyffice/pyffice.py: 4
-      pyffice/reports/__init__.py: 0
-      pyffice/reports/reports.py: 1
-      pyffice/script/__init__.py: 0
-      pyffice/script/asciidoc.py: 0
-      pyffice/script/latex.py: 0
-      pyffice/script/odt.py: 0
-      pyffice/script/rst.py: 0
-      pyffice/script/rtf.py: 0
-      pyffice/socials/__init__.py: 0
-      pyffice/socials/messages.py: 3
-      pyffice/socials/socials.py: 0
-      pyffice/spreadsheet/__init__.py: 0
-      pyffice/spreadsheet/spreadsheet.py: 2
-      pyffice/tags/__init__.py: 0
-      pyffice/tags/manager.py: 1
-      pyffice/tags/ratings.py: 1
-      pyffice/tags/references.py: 1
-      pyffice/tags/tags.py: 1
-      pyffice/text/__init__.py: 0
-      pyffice/text/bibliographies.py: 1
-      pyffice/text/messages.py: 1
-      pyffice/text/text.py: 1
-      pyffice/updates/__init__.py: 0
-      pyffice/updates/updates.py: 3
-      pyffice/video/__init__.py: 0
-      pyffice/video/video.py: 1
-      pyffice/web/__init__.py: 0
-      pyffice/web/prompts.py: 4
-      pyffice/web/services.py: 1
-      pyffice/web/url.py: 2
-      pyffice/web/web.py: 4
-      pyffice/workflows/__init__.py: 0
-      pyffice/workflows/alarms.py: 1
-      pyffice/workflows/automations.py: 1
-      pyffice/workflows/formulas.py: 2
-      pyffice/workflows/playlists.py: 1
-      pyffice/workflows/source_control.py: 0
-      pyffice/workflows/workflows.py: 1
-      pyffice_cli.py: 0
-      tests/__init__.py: 0
-      tests/integration/test_integration.py: 1
-      tests/test_pyffice.py: 0
-      tests/test_pyffice/__init__.py: 0
-      tests/test_pyffice/conftest.py: 0
-      tests/test_pyffice/tests/__init__.py: 0
-      tests/test_pyffice/tests/test_asciidoc.py: 0
-      tests/test_pyffice/tests/test_audio.py: 0
-      tests/test_pyffice/tests/test_azw.py: 0
-      tests/test_pyffice/tests/test_blend.py: 0
-      tests/test_pyffice/tests/test_csv.py: 0
-      tests/test_pyffice/tests/test_dwg.py: 0
-      tests/test_pyffice/tests/test_dxf.py: 0
-      tests/test_pyffice/tests/test_env.py: 0
-      tests/test_pyffice/tests/test_epub.py: 0
-      tests/test_pyffice/tests/test_fbx.py: 0
-      tests/test_pyffice/tests/test_gltf.py: 0
-      tests/test_pyffice/tests/test_iges.py: 0
-      tests/test_pyffice/tests/test_ini.py: 0
-      tests/test_pyffice/tests/test_json.py: 0
-      tests/test_pyffice/tests/test_latex.py: 0
-      tests/test_pyffice/tests/test_mobi.py: 0
-      tests/test_pyffice/tests/test_obj.py: 0
-      tests/test_pyffice/tests/test_odt.py: 0
-      tests/test_pyffice/tests/test_pptx.py: 0
-      tests/test_pyffice/tests/test_rar.py: 0
-      tests/test_pyffice/tests/test_rst.py: 0
-      tests/test_pyffice/tests/test_rtf.py: 0
-      tests/test_pyffice/tests/test_scad.py: 0
-      tests/test_pyffice/tests/test_sevenzip.py: 0
-      tests/test_pyffice/tests/test_step.py: 0
-      tests/test_pyffice/tests/test_stl.py: 0
-      tests/test_pyffice/tests/test_tar.py: 0
-      tests/test_pyffice/tests/test_toml.py: 0
-      tests/test_pyffice/tests/test_video.py: 0
-      tests/test_pyffice/tests/test_xml.py: 0
-      tests/test_pyffice/tests/test_yaml.py: 0
-      tests/test_pyffice/tests/test_zip.py: 0
-      tests/test_pyffice/tests/tests/__init__.py: 0
-      tests/test_pyffice/tests/tests/test_audio.py: 0
-      tests/test_pyffice/tests/tests/test_azw.py: 0
-      tests/test_pyffice/tests/tests/test_binary.py: 0
-      tests/test_pyffice/tests/tests/test_cad.py: 0
-      tests/test_pyffice/tests/tests/test_config.py: 0
-      tests/test_pyffice/tests/tests/test_csv.py: 0
-      tests/test_pyffice/tests/tests/test_env.py: 0
-      tests/test_pyffice/tests/tests/test_epub.py: 0
-      tests/test_pyffice/tests/tests/test_heic.py: 0
-      tests/test_pyffice/tests/tests/test_import_export.py: 0
-      tests/test_pyffice/tests/tests/test_ini.py: 0
-      tests/test_pyffice/tests/tests/test_json.py: 0
-      tests/test_pyffice/tests/tests/test_mobi.py: 0
-      tests/test_pyffice/tests/tests/test_obj.py: 0
-      tests/test_pyffice/tests/tests/test_pptx.py: 0
-      tests/test_pyffice/tests/tests/test_presentation.py: 0
-      tests/test_pyffice/tests/tests/test_rar.py: 0
-      tests/test_pyffice/tests/tests/test_raw.py: 0
-      tests/test_pyffice/tests/tests/test_sevenzip.py: 0
-      tests/test_pyffice/tests/tests/test_tar.py: 0
-      tests/test_pyffice/tests/tests/test_toml.py: 0
-      tests/test_pyffice/tests/tests/test_video.py: 0
-      tests/test_pyffice/tests/tests/test_xml.py: 0
-      tests/test_pyffice/tests/tests/test_yaml.py: 0
-      tests/test_pyffice/tests/tests/test_zip.py: 0
-      tests/test_pyffice/unit/__init__.py: 0
-      tests/test_pyffice/unit/__init__TEST.py: 0
-      tests/test_pyffice/unit/analytics/__init__.py: 0
-      tests/test_pyffice/unit/analytics/__init__TEST.py: 0
-      tests/test_pyffice/unit/analytics/sourcesTEST.py: 3
-      tests/test_pyffice/unit/audio/__init__.py: 0
-      tests/test_pyffice/unit/audio/__init__TEST.py: 0
-      tests/test_pyffice/unit/audio/audioTEST.py: 2
-      tests/test_pyffice/unit/cad/__init__.py: 0
-      tests/test_pyffice/unit/cad/__init__TEST.py: 0
-      tests/test_pyffice/unit/cad/cadTEST.py: 3
-      tests/test_pyffice/unit/cad/itemsTEST.py: 1
-      tests/test_pyffice/unit/calendars/__init__.py: 0
-      tests/test_pyffice/unit/calendars/__init__TEST.py: 0
-      tests/test_pyffice/unit/calendars/calendarsTEST.py: 1
-      tests/test_pyffice/unit/calendars/ganttTEST.py: 1
-      tests/test_pyffice/unit/calendars/tasksTEST.py: 3
-      tests/test_pyffice/unit/cam/__init__.py: 0
-      tests/test_pyffice/unit/cam/__init__TEST.py: 0
-      tests/test_pyffice/unit/cam/bomTEST.py: 2
-      tests/test_pyffice/unit/cam/camTEST.py: 2
-      tests/test_pyffice/unit/cam/gcodeTEST.py: 1
-      tests/test_pyffice/unit/charts/__init__.py: 0
-      tests/test_pyffice/unit/charts/__init__TEST.py: 0
-      tests/test_pyffice/unit/charts/chartsTEST.py: 1
-      tests/test_pyffice/unit/charts/sankeyTEST.py: 1
-      tests/test_pyffice/unit/config/__init__.py: 0
-      tests/test_pyffice/unit/config/__init__TEST.py: 0
-      tests/test_pyffice/unit/config/configTEST.py: 3
-      tests/test_pyffice/unit/config/gportsTEST.py: 3
-      tests/test_pyffice/unit/config/msportsTEST.py: 3
-      tests/test_pyffice/unit/config/policiesTEST.py: 1
-      tests/test_pyffice/unit/config/portsTEST.py: 10
-      tests/test_pyffice/unit/contacts/__init__.py: 0
-      tests/test_pyffice/unit/contacts/__init__TEST.py: 0
-      tests/test_pyffice/unit/contacts/contactsTEST.py: 2
-      tests/test_pyffice/unit/databases/__init__.py: 0
-      tests/test_pyffice/unit/databases/__init__TEST.py: 0
-      tests/test_pyffice/unit/databases/databasesTEST.py: 2
-      tests/test_pyffice/unit/databases/tableTEST.py: 1
-      tests/test_pyffice/unit/diagrams/__init__.py: 0
-      tests/test_pyffice/unit/diagrams/__init__TEST.py: 0
-      tests/test_pyffice/unit/diagrams/diagramsTEST.py: 5
-      tests/test_pyffice/unit/documentTEST.py: 4
-      tests/test_pyffice/unit/email/__init__.py: 0
-      tests/test_pyffice/unit/email/__init__TEST.py: 0
-      tests/test_pyffice/unit/email/emailTEST.py: 2
-      tests/test_pyffice/unit/filesystems/__init__.py: 0
-      tests/test_pyffice/unit/filesystems/__init__TEST.py: 0
-      tests/test_pyffice/unit/filesystems/filesystemsTEST.py: 1
-      tests/test_pyffice/unit/forms/__init__.py: 0
-      tests/test_pyffice/unit/forms/__init__TEST.py: 0
-      tests/test_pyffice/unit/forms/formsTEST.py: 3
-      tests/test_pyffice/unit/forms/surveysTEST.py: 3
-      tests/test_pyffice/unit/images/__init__.py: 0
-      tests/test_pyffice/unit/images/__init__TEST.py: 0
-      tests/test_pyffice/unit/images/imagesTEST.py: 3
-      tests/test_pyffice/unit/images/pdfsTEST.py: 1
-      tests/test_pyffice/unit/images/utilitiesTEST.py: 1
-      tests/test_pyffice/unit/items/__init__.py: 0
-      tests/test_pyffice/unit/items/__init__TEST.py: 0
-      tests/test_pyffice/unit/items/cellsTEST.py: 2
-      tests/test_pyffice/unit/items/colorsTEST.py: 3
-      tests/test_pyffice/unit/items/itemsTEST.py: 1
-      tests/test_pyffice/unit/items/personaTEST.py: 1
-      tests/test_pyffice/unit/items/shapesTEST.py: 1
-      tests/test_pyffice/unit/items/tasksTEST.py: 6
-      tests/test_pyffice/unit/items/textTEST.py: 4
-      tests/test_pyffice/unit/notebooks/__init__.py: 0
-      tests/test_pyffice/unit/notebooks/__init__TEST.py: 0
-      tests/test_pyffice/unit/notebooks/notebooksTEST.py: 1
-      tests/test_pyffice/unit/presentation/__init__.py: 0
-      tests/test_pyffice/unit/presentation/__init__TEST.py: 0
-      tests/test_pyffice/unit/presentation/presentationTEST.py: 1
-      tests/test_pyffice/unit/pyfficeTEST.py: 1
-      tests/test_pyffice/unit/reports/__init__.py: 0
-      tests/test_pyffice/unit/reports/__init__TEST.py: 0
-      tests/test_pyffice/unit/reports/reportsTEST.py: 1
-      tests/test_pyffice/unit/socials/__init__.py: 0
-      tests/test_pyffice/unit/socials/__init__TEST.py: 0
-      tests/test_pyffice/unit/socials/messagesTEST.py: 3
-      tests/test_pyffice/unit/socials/socialsTEST.py: 0
-      tests/test_pyffice/unit/spreadsheet/__init__.py: 0
-      tests/test_pyffice/unit/spreadsheet/__init__TEST.py: 0
-      tests/test_pyffice/unit/spreadsheet/spreadsheetTEST.py: 3
-      tests/test_pyffice/unit/tags/__init__.py: 0
-      tests/test_pyffice/unit/tags/__init__TEST.py: 0
-      tests/test_pyffice/unit/tags/managerTEST.py: 1
-      tests/test_pyffice/unit/tags/ratingsTEST.py: 1
-      tests/test_pyffice/unit/tags/referencesTEST.py: 1
-      tests/test_pyffice/unit/tags/tagsTEST.py: 1
-      tests/test_pyffice/unit/text/__init__.py: 0
-      tests/test_pyffice/unit/text/__init__TEST.py: 0
-      tests/test_pyffice/unit/text/bibliographiesTEST.py: 1
-      tests/test_pyffice/unit/text/messagesTEST.py: 1
-      tests/test_pyffice/unit/text/textTEST.py: 2
-      tests/test_pyffice/unit/updates/__init__.py: 0
-      tests/test_pyffice/unit/updates/__init__TEST.py: 0
-      tests/test_pyffice/unit/updates/updatesTEST.py: 3
-      tests/test_pyffice/unit/video/__init__.py: 0
-      tests/test_pyffice/unit/video/__init__TEST.py: 0
-      tests/test_pyffice/unit/video/videoTEST.py: 1
-      tests/test_pyffice/unit/web/__init__.py: 0
-      tests/test_pyffice/unit/web/__init__TEST.py: 0
-      tests/test_pyffice/unit/web/promptsTEST.py: 4
-      tests/test_pyffice/unit/web/servicesTEST.py: 1
-      tests/test_pyffice/unit/web/urlTEST.py: 2
-      tests/test_pyffice/unit/web/webTEST.py: 4
-      tests/test_pyffice/unit/workflows/__init__.py: 0
-      tests/test_pyffice/unit/workflows/__init__TEST.py: 0
-      tests/test_pyffice/unit/workflows/alarmsTEST.py: 1
-      tests/test_pyffice/unit/workflows/automationsTEST.py: 1
-      tests/test_pyffice/unit/workflows/formulasTEST.py: 2
-      tests/test_pyffice/unit/workflows/playlistsTEST.py: 1
-      tests/test_pyffice/unit/workflows/source_controlTEST.py: 0
-      tests/test_pyffice/unit/workflows/workflowsTEST.py: 1
-      tests/unit/__init__.py: 1
-      tests/unit/test_document.py: 2
-      tests/unit/test_pyffice.py: 1
     directories: 130
     file_sizes:
       __init__.py: 3713
@@ -455,7 +104,7 @@ analysis:
       pyffice/ports/analyticsports.py: 2488
       pyffice/ports/audioports.py: 8655
       pyffice/ports/cadports.py: 22078
-      pyffice/ports/calendarsports.py: 1253
+      pyffice/ports/calendarsports.py: 3216
       pyffice/ports/camports.py: 1081
       pyffice/ports/chartsports.py: 1156
       pyffice/ports/configports.py: 1548
@@ -480,8 +129,8 @@ analysis:
       pyffice/presentation/presentation.py: 1980
       pyffice/projects/__init__.py: 1671
       pyffice/projects/paxn.py: 11094
-      pyffice/projects/project.py: 1764
-      pyffice/pyffice.py: 18456
+      pyffice/projects/project.py: 11790
+      pyffice/pyffice.py: 18923
       pyffice/reports/__init__.py: 0
       pyffice/reports/reports.py: 2474
       pyffice/script/__init__.py: 0
@@ -530,10 +179,10 @@ analysis:
       tests/test_pyffice/tests/test_asciidoc.py: 165
       tests/test_pyffice/tests/test_audio.py: 430
       tests/test_pyffice/tests/test_azw.py: 361
-      tests/test_pyffice/tests/test_blend.py: 284
+      tests/test_pyffice/tests/test_blend.py: 517
       tests/test_pyffice/tests/test_csv.py: 448
       tests/test_pyffice/tests/test_dwg.py: 141
-      tests/test_pyffice/tests/test_dxf.py: 248
+      tests/test_pyffice/tests/test_dxf.py: 1211
       tests/test_pyffice/tests/test_env.py: 394
       tests/test_pyffice/tests/test_epub.py: 524
       tests/test_pyffice/tests/test_fbx.py: 107
@@ -705,7 +354,7 @@ analysis:
       tests/unit/test_document.py: 1945
       tests/unit/test_pyffice.py: 706
     files_by_type:
-      (no extension): 5
+      (no extension): 8
       .TAG: 1
       .adoc: 1
       .csv: 1
@@ -740,1060 +389,2108 @@ analysis:
       .xml: 6
       .yaml: 144
       .zip: 1
-    function_counts:
-      __init__.py: 3
-      __main__.py: 0
-      cli.py: 72
-      document.py: 0
-      pyffice.py: 0
-      pyffice/__init__.py: 3
-      pyffice/__main__.py: 0
-      pyffice/agent.py: 7
-      pyffice/analytics/__init__.py: 0
-      pyffice/analytics/sources.py: 0
-      pyffice/audio/__init__.py: 0
-      pyffice/audio/audio.py: 0
-      pyffice/cad/__init__.py: 0
-      pyffice/cad/blend.py: 4
-      pyffice/cad/cad.py: 0
-      pyffice/cad/dwg.py: 4
-      pyffice/cad/dxf.py: 4
-      pyffice/cad/fbx.py: 4
-      pyffice/cad/gltf.py: 4
-      pyffice/cad/iges.py: 4
-      pyffice/cad/items.py: 0
-      pyffice/cad/obj.py: 3
-      pyffice/cad/scad.py: 0
-      pyffice/cad/step.py: 4
-      pyffice/cad/stl.py: 3
-      pyffice/calendars/__init__.py: 0
-      pyffice/calendars/calendars.py: 0
-      pyffice/calendars/gantt.py: 0
-      pyffice/calendars/tasks.py: 0
-      pyffice/cam/__init__.py: 0
-      pyffice/cam/bom.py: 0
-      pyffice/cam/cam.py: 0
-      pyffice/cam/gcode.py: 0
-      pyffice/charts/__init__.py: 0
-      pyffice/charts/charts.py: 0
-      pyffice/charts/sankey.py: 0
-      pyffice/cli.py: 72
-      pyffice/config/__init__.py: 0
-      pyffice/config/config.py: 0
-      pyffice/config/env.py: 2
-      pyffice/config/gports.py: 0
-      pyffice/config/ini.py: 2
-      pyffice/config/msports.py: 4
-      pyffice/config/policies.py: 0
-      pyffice/config/ports.py: 0
-      pyffice/config/toml.py: 2
-      pyffice/contacts/__init__.py: 0
-      pyffice/contacts/contacts.py: 0
-      pyffice/container/__init__.py: 0
-      pyffice/container/binary.py: 2
-      pyffice/container/rar.py: 6
-      pyffice/container/sevenzip.py: 6
-      pyffice/container/tar.py: 5
-      pyffice/container/zip.py: 7
-      pyffice/data/csv.py: 6
-      pyffice/data/json.py: 4
-      pyffice/data/xml.py: 7
-      pyffice/data/yaml.py: 6
-      pyffice/databases/__init__.py: 0
-      pyffice/databases/databases.py: 0
-      pyffice/databases/table.py: 0
-      pyffice/diagrams/__init__.py: 0
-      pyffice/diagrams/diagrams.py: 0
-      pyffice/diagrams/formats.py: 3
-      pyffice/document.py: 0
-      pyffice/ebook/__init__.py: 0
-      pyffice/ebook/azw.py: 4
-      pyffice/ebook/epub.py: 7
-      pyffice/ebook/mobi.py: 4
-      pyffice/email/__init__.py: 0
-      pyffice/email/email.py: 0
-      pyffice/filesystems/__init__.py: 0
-      pyffice/filesystems/filesystems.py: 0
-      pyffice/forms/__init__.py: 0
-      pyffice/forms/forms.py: 0
-      pyffice/forms/surveys.py: 0
-      pyffice/images/__init__.py: 0
-      pyffice/images/images.py: 0
-      pyffice/images/pdfs.py: 0
-      pyffice/images/utilities.py: 10
-      pyffice/items/__init__.py: 0
-      pyffice/items/cells.py: 0
-      pyffice/items/colors.py: 6
-      pyffice/items/items.py: 0
-      pyffice/items/persona.py: 0
-      pyffice/items/shapes.py: 0
-      pyffice/items/tasks.py: 0
-      pyffice/items/text.py: 0
-      pyffice/matrix/__init__.py: 1
-      pyffice/matrix/matrix.py: 0
-      pyffice/media/__init__.py: 0
-      pyffice/media/audio.py: 4
-      pyffice/media/heic.py: 0
-      pyffice/media/raw.py: 0
-      pyffice/media/video.py: 4
-      pyffice/notebooks/__init__.py: 0
-      pyffice/notebooks/notebooks.py: 0
-      pyffice/ports/__init__.py: 0
-      pyffice/ports/analyticsports.py: 0
-      pyffice/ports/audioports.py: 4
-      pyffice/ports/cadports.py: 4
-      pyffice/ports/calendarsports.py: 0
-      pyffice/ports/camports.py: 0
-      pyffice/ports/chartsports.py: 0
-      pyffice/ports/configports.py: 0
-      pyffice/ports/contactsports.py: 0
-      pyffice/ports/databasesports.py: 4
-      pyffice/ports/diagramsports.py: 0
-      pyffice/ports/documentports.py: 0
-      pyffice/ports/gports.py: 0
-      pyffice/ports/imageports.py: 4
-      pyffice/ports/imagesports.py: 0
-      pyffice/ports/matrixports.py: 0
-      pyffice/ports/msports.py: 4
-      pyffice/ports/ports.py: 0
-      pyffice/ports/presentationports.py: 4
-      pyffice/ports/projectsports.py: 0
-      pyffice/ports/spreadsheetports.py: 4
-      pyffice/ports/textports.py: 0
-      pyffice/ports/videoports.py: 4
-      pyffice/ports/workflowsports.py: 0
-      pyffice/presentation/__init__.py: 0
-      pyffice/presentation/pptx.py: 4
-      pyffice/presentation/presentation.py: 0
-      pyffice/projects/__init__.py: 0
-      pyffice/projects/paxn.py: 4
-      pyffice/projects/project.py: 0
-      pyffice/pyffice.py: 0
-      pyffice/reports/__init__.py: 0
-      pyffice/reports/reports.py: 0
-      pyffice/script/__init__.py: 0
-      pyffice/script/asciidoc.py: 4
-      pyffice/script/latex.py: 4
-      pyffice/script/odt.py: 4
-      pyffice/script/rst.py: 4
-      pyffice/script/rtf.py: 4
-      pyffice/socials/__init__.py: 0
-      pyffice/socials/messages.py: 0
-      pyffice/socials/socials.py: 0
-      pyffice/spreadsheet/__init__.py: 0
-      pyffice/spreadsheet/spreadsheet.py: 2
-      pyffice/tags/__init__.py: 0
-      pyffice/tags/manager.py: 0
-      pyffice/tags/ratings.py: 0
-      pyffice/tags/references.py: 0
-      pyffice/tags/tags.py: 0
-      pyffice/text/__init__.py: 0
-      pyffice/text/bibliographies.py: 0
-      pyffice/text/messages.py: 0
-      pyffice/text/text.py: 1
-      pyffice/updates/__init__.py: 0
-      pyffice/updates/updates.py: 0
-      pyffice/video/__init__.py: 0
-      pyffice/video/video.py: 0
-      pyffice/web/__init__.py: 0
-      pyffice/web/prompts.py: 0
-      pyffice/web/services.py: 0
-      pyffice/web/url.py: 0
-      pyffice/web/web.py: 0
-      pyffice/workflows/__init__.py: 0
-      pyffice/workflows/alarms.py: 0
-      pyffice/workflows/automations.py: 0
-      pyffice/workflows/formulas.py: 0
-      pyffice/workflows/playlists.py: 0
-      pyffice/workflows/source_control.py: 0
-      pyffice/workflows/workflows.py: 0
-      pyffice_cli.py: 9
-      tests/__init__.py: 0
-      tests/integration/test_integration.py: 0
-      tests/test_pyffice.py: 4
-      tests/test_pyffice/__init__.py: 0
-      tests/test_pyffice/conftest.py: 2
-      tests/test_pyffice/tests/__init__.py: 0
-      tests/test_pyffice/tests/test_asciidoc.py: 2
-      tests/test_pyffice/tests/test_audio.py: 2
-      tests/test_pyffice/tests/test_azw.py: 2
-      tests/test_pyffice/tests/test_blend.py: 2
-      tests/test_pyffice/tests/test_csv.py: 2
-      tests/test_pyffice/tests/test_dwg.py: 1
-      tests/test_pyffice/tests/test_dxf.py: 2
-      tests/test_pyffice/tests/test_env.py: 2
-      tests/test_pyffice/tests/test_epub.py: 3
-      tests/test_pyffice/tests/test_fbx.py: 1
-      tests/test_pyffice/tests/test_gltf.py: 2
-      tests/test_pyffice/tests/test_iges.py: 2
-      tests/test_pyffice/tests/test_ini.py: 2
-      tests/test_pyffice/tests/test_json.py: 2
-      tests/test_pyffice/tests/test_latex.py: 2
-      tests/test_pyffice/tests/test_mobi.py: 2
-      tests/test_pyffice/tests/test_obj.py: 2
-      tests/test_pyffice/tests/test_odt.py: 2
-      tests/test_pyffice/tests/test_pptx.py: 2
-      tests/test_pyffice/tests/test_rar.py: 2
-      tests/test_pyffice/tests/test_rst.py: 2
-      tests/test_pyffice/tests/test_rtf.py: 2
-      tests/test_pyffice/tests/test_scad.py: 2
-      tests/test_pyffice/tests/test_sevenzip.py: 2
-      tests/test_pyffice/tests/test_step.py: 2
-      tests/test_pyffice/tests/test_stl.py: 2
-      tests/test_pyffice/tests/test_tar.py: 2
-      tests/test_pyffice/tests/test_toml.py: 2
-      tests/test_pyffice/tests/test_video.py: 2
-      tests/test_pyffice/tests/test_xml.py: 2
-      tests/test_pyffice/tests/test_yaml.py: 2
-      tests/test_pyffice/tests/test_zip.py: 2
-      tests/test_pyffice/tests/tests/__init__.py: 0
-      tests/test_pyffice/tests/tests/test_audio.py: 3
-      tests/test_pyffice/tests/tests/test_azw.py: 2
-      tests/test_pyffice/tests/tests/test_binary.py: 2
-      tests/test_pyffice/tests/tests/test_cad.py: 2
-      tests/test_pyffice/tests/tests/test_config.py: 1
-      tests/test_pyffice/tests/tests/test_csv.py: 3
-      tests/test_pyffice/tests/tests/test_env.py: 2
-      tests/test_pyffice/tests/tests/test_epub.py: 3
-      tests/test_pyffice/tests/tests/test_heic.py: 2
-      tests/test_pyffice/tests/tests/test_import_export.py: 3
-      tests/test_pyffice/tests/tests/test_ini.py: 2
-      tests/test_pyffice/tests/tests/test_json.py: 3
-      tests/test_pyffice/tests/tests/test_mobi.py: 2
-      tests/test_pyffice/tests/tests/test_obj.py: 2
-      tests/test_pyffice/tests/tests/test_pptx.py: 3
-      tests/test_pyffice/tests/tests/test_presentation.py: 3
-      tests/test_pyffice/tests/tests/test_rar.py: 2
-      tests/test_pyffice/tests/tests/test_raw.py: 2
-      tests/test_pyffice/tests/tests/test_sevenzip.py: 2
-      tests/test_pyffice/tests/tests/test_tar.py: 3
-      tests/test_pyffice/tests/tests/test_toml.py: 2
-      tests/test_pyffice/tests/tests/test_video.py: 3
-      tests/test_pyffice/tests/tests/test_xml.py: 2
-      tests/test_pyffice/tests/tests/test_yaml.py: 2
-      tests/test_pyffice/tests/tests/test_zip.py: 3
-      tests/test_pyffice/unit/__init__.py: 0
-      tests/test_pyffice/unit/__init__TEST.py: 0
-      tests/test_pyffice/unit/analytics/__init__.py: 0
-      tests/test_pyffice/unit/analytics/__init__TEST.py: 0
-      tests/test_pyffice/unit/analytics/sourcesTEST.py: 0
-      tests/test_pyffice/unit/audio/__init__.py: 0
-      tests/test_pyffice/unit/audio/__init__TEST.py: 0
-      tests/test_pyffice/unit/audio/audioTEST.py: 0
-      tests/test_pyffice/unit/cad/__init__.py: 0
-      tests/test_pyffice/unit/cad/__init__TEST.py: 0
-      tests/test_pyffice/unit/cad/cadTEST.py: 0
-      tests/test_pyffice/unit/cad/itemsTEST.py: 0
-      tests/test_pyffice/unit/calendars/__init__.py: 0
-      tests/test_pyffice/unit/calendars/__init__TEST.py: 0
-      tests/test_pyffice/unit/calendars/calendarsTEST.py: 0
-      tests/test_pyffice/unit/calendars/ganttTEST.py: 0
-      tests/test_pyffice/unit/calendars/tasksTEST.py: 0
-      tests/test_pyffice/unit/cam/__init__.py: 0
-      tests/test_pyffice/unit/cam/__init__TEST.py: 0
-      tests/test_pyffice/unit/cam/bomTEST.py: 0
-      tests/test_pyffice/unit/cam/camTEST.py: 0
-      tests/test_pyffice/unit/cam/gcodeTEST.py: 0
-      tests/test_pyffice/unit/charts/__init__.py: 0
-      tests/test_pyffice/unit/charts/__init__TEST.py: 0
-      tests/test_pyffice/unit/charts/chartsTEST.py: 0
-      tests/test_pyffice/unit/charts/sankeyTEST.py: 0
-      tests/test_pyffice/unit/config/__init__.py: 0
-      tests/test_pyffice/unit/config/__init__TEST.py: 0
-      tests/test_pyffice/unit/config/configTEST.py: 0
-      tests/test_pyffice/unit/config/gportsTEST.py: 0
-      tests/test_pyffice/unit/config/msportsTEST.py: 0
-      tests/test_pyffice/unit/config/policiesTEST.py: 0
-      tests/test_pyffice/unit/config/portsTEST.py: 0
-      tests/test_pyffice/unit/contacts/__init__.py: 0
-      tests/test_pyffice/unit/contacts/__init__TEST.py: 0
-      tests/test_pyffice/unit/contacts/contactsTEST.py: 0
-      tests/test_pyffice/unit/databases/__init__.py: 0
-      tests/test_pyffice/unit/databases/__init__TEST.py: 0
-      tests/test_pyffice/unit/databases/databasesTEST.py: 0
-      tests/test_pyffice/unit/databases/tableTEST.py: 0
-      tests/test_pyffice/unit/diagrams/__init__.py: 0
-      tests/test_pyffice/unit/diagrams/__init__TEST.py: 0
-      tests/test_pyffice/unit/diagrams/diagramsTEST.py: 0
-      tests/test_pyffice/unit/documentTEST.py: 0
-      tests/test_pyffice/unit/email/__init__.py: 0
-      tests/test_pyffice/unit/email/__init__TEST.py: 0
-      tests/test_pyffice/unit/email/emailTEST.py: 0
-      tests/test_pyffice/unit/filesystems/__init__.py: 0
-      tests/test_pyffice/unit/filesystems/__init__TEST.py: 0
-      tests/test_pyffice/unit/filesystems/filesystemsTEST.py: 0
-      tests/test_pyffice/unit/forms/__init__.py: 0
-      tests/test_pyffice/unit/forms/__init__TEST.py: 0
-      tests/test_pyffice/unit/forms/formsTEST.py: 0
-      tests/test_pyffice/unit/forms/surveysTEST.py: 0
-      tests/test_pyffice/unit/images/__init__.py: 0
-      tests/test_pyffice/unit/images/__init__TEST.py: 0
-      tests/test_pyffice/unit/images/imagesTEST.py: 0
-      tests/test_pyffice/unit/images/pdfsTEST.py: 0
-      tests/test_pyffice/unit/images/utilitiesTEST.py: 0
-      tests/test_pyffice/unit/items/__init__.py: 0
-      tests/test_pyffice/unit/items/__init__TEST.py: 0
-      tests/test_pyffice/unit/items/cellsTEST.py: 0
-      tests/test_pyffice/unit/items/colorsTEST.py: 0
-      tests/test_pyffice/unit/items/itemsTEST.py: 0
-      tests/test_pyffice/unit/items/personaTEST.py: 0
-      tests/test_pyffice/unit/items/shapesTEST.py: 0
-      tests/test_pyffice/unit/items/tasksTEST.py: 0
-      tests/test_pyffice/unit/items/textTEST.py: 0
-      tests/test_pyffice/unit/notebooks/__init__.py: 0
-      tests/test_pyffice/unit/notebooks/__init__TEST.py: 0
-      tests/test_pyffice/unit/notebooks/notebooksTEST.py: 0
-      tests/test_pyffice/unit/presentation/__init__.py: 0
-      tests/test_pyffice/unit/presentation/__init__TEST.py: 0
-      tests/test_pyffice/unit/presentation/presentationTEST.py: 0
-      tests/test_pyffice/unit/pyfficeTEST.py: 0
-      tests/test_pyffice/unit/reports/__init__.py: 0
-      tests/test_pyffice/unit/reports/__init__TEST.py: 0
-      tests/test_pyffice/unit/reports/reportsTEST.py: 0
-      tests/test_pyffice/unit/socials/__init__.py: 0
-      tests/test_pyffice/unit/socials/__init__TEST.py: 0
-      tests/test_pyffice/unit/socials/messagesTEST.py: 0
-      tests/test_pyffice/unit/socials/socialsTEST.py: 0
-      tests/test_pyffice/unit/spreadsheet/__init__.py: 0
-      tests/test_pyffice/unit/spreadsheet/__init__TEST.py: 0
-      tests/test_pyffice/unit/spreadsheet/spreadsheetTEST.py: 0
-      tests/test_pyffice/unit/tags/__init__.py: 0
-      tests/test_pyffice/unit/tags/__init__TEST.py: 0
-      tests/test_pyffice/unit/tags/managerTEST.py: 0
-      tests/test_pyffice/unit/tags/ratingsTEST.py: 0
-      tests/test_pyffice/unit/tags/referencesTEST.py: 0
-      tests/test_pyffice/unit/tags/tagsTEST.py: 0
-      tests/test_pyffice/unit/text/__init__.py: 0
-      tests/test_pyffice/unit/text/__init__TEST.py: 0
-      tests/test_pyffice/unit/text/bibliographiesTEST.py: 0
-      tests/test_pyffice/unit/text/messagesTEST.py: 0
-      tests/test_pyffice/unit/text/textTEST.py: 0
-      tests/test_pyffice/unit/updates/__init__.py: 0
-      tests/test_pyffice/unit/updates/__init__TEST.py: 0
-      tests/test_pyffice/unit/updates/updatesTEST.py: 0
-      tests/test_pyffice/unit/video/__init__.py: 0
-      tests/test_pyffice/unit/video/__init__TEST.py: 0
-      tests/test_pyffice/unit/video/videoTEST.py: 0
-      tests/test_pyffice/unit/web/__init__.py: 0
-      tests/test_pyffice/unit/web/__init__TEST.py: 0
-      tests/test_pyffice/unit/web/promptsTEST.py: 0
-      tests/test_pyffice/unit/web/servicesTEST.py: 0
-      tests/test_pyffice/unit/web/urlTEST.py: 0
-      tests/test_pyffice/unit/web/webTEST.py: 0
-      tests/test_pyffice/unit/workflows/__init__.py: 0
-      tests/test_pyffice/unit/workflows/__init__TEST.py: 0
-      tests/test_pyffice/unit/workflows/alarmsTEST.py: 0
-      tests/test_pyffice/unit/workflows/automationsTEST.py: 0
-      tests/test_pyffice/unit/workflows/formulasTEST.py: 0
-      tests/test_pyffice/unit/workflows/playlistsTEST.py: 0
-      tests/test_pyffice/unit/workflows/source_controlTEST.py: 0
-      tests/test_pyffice/unit/workflows/workflowsTEST.py: 0
-      tests/unit/__init__.py: 0
-      tests/unit/test_document.py: 0
-      tests/unit/test_pyffice.py: 0
-    import_counts:
-      __init__.py: 11
-      __main__.py: 1
-      cli.py: 8
-      document.py: 13
-      pyffice.py: 23
-      pyffice/__init__.py: 11
-      pyffice/__main__.py: 1
-      pyffice/agent.py: 2
-      pyffice/analytics/__init__.py: 0
-      pyffice/analytics/sources.py: 6
-      pyffice/audio/__init__.py: 0
-      pyffice/audio/audio.py: 5
-      pyffice/cad/__init__.py: 0
-      pyffice/cad/blend.py: 3
-      pyffice/cad/cad.py: 8
-      pyffice/cad/dwg.py: 3
-      pyffice/cad/dxf.py: 3
-      pyffice/cad/fbx.py: 3
-      pyffice/cad/gltf.py: 3
-      pyffice/cad/iges.py: 3
-      pyffice/cad/items.py: 5
-      pyffice/cad/obj.py: 3
-      pyffice/cad/scad.py: 3
-      pyffice/cad/step.py: 3
-      pyffice/cad/stl.py: 5
-      pyffice/calendars/__init__.py: 0
-      pyffice/calendars/calendars.py: 7
-      pyffice/calendars/gantt.py: 8
-      pyffice/calendars/tasks.py: 6
-      pyffice/cam/__init__.py: 0
-      pyffice/cam/bom.py: 5
-      pyffice/cam/cam.py: 5
-      pyffice/cam/gcode.py: 5
-      pyffice/charts/__init__.py: 0
-      pyffice/charts/charts.py: 8
-      pyffice/charts/sankey.py: 7
-      pyffice/cli.py: 8
-      pyffice/config/__init__.py: 0
-      pyffice/config/config.py: 5
-      pyffice/config/env.py: 3
-      pyffice/config/gports.py: 14
-      pyffice/config/ini.py: 3
-      pyffice/config/msports.py: 16
-      pyffice/config/policies.py: 5
-      pyffice/config/ports.py: 22
-      pyffice/config/toml.py: 3
-      pyffice/contacts/__init__.py: 0
-      pyffice/contacts/contacts.py: 6
-      pyffice/container/__init__.py: 5
-      pyffice/container/binary.py: 3
-      pyffice/container/rar.py: 3
-      pyffice/container/sevenzip.py: 2
-      pyffice/container/tar.py: 3
-      pyffice/container/zip.py: 3
-      pyffice/data/csv.py: 3
-      pyffice/data/json.py: 3
-      pyffice/data/xml.py: 3
-      pyffice/data/yaml.py: 3
-      pyffice/databases/__init__.py: 0
-      pyffice/databases/databases.py: 6
-      pyffice/databases/table.py: 5
-      pyffice/diagrams/__init__.py: 2
-      pyffice/diagrams/diagrams.py: 10
-      pyffice/diagrams/formats.py: 12
-      pyffice/document.py: 13
-      pyffice/ebook/__init__.py: 0
-      pyffice/ebook/azw.py: 2
-      pyffice/ebook/epub.py: 4
-      pyffice/ebook/mobi.py: 2
-      pyffice/email/__init__.py: 0
-      pyffice/email/email.py: 6
-      pyffice/filesystems/__init__.py: 0
-      pyffice/filesystems/filesystems.py: 8
-      pyffice/forms/__init__.py: 0
-      pyffice/forms/forms.py: 7
-      pyffice/forms/surveys.py: 5
-      pyffice/images/__init__.py: 0
-      pyffice/images/images.py: 16
-      pyffice/images/pdfs.py: 9
-      pyffice/images/utilities.py: 10
-      pyffice/items/__init__.py: 0
-      pyffice/items/cells.py: 8
-      pyffice/items/colors.py: 16
-      pyffice/items/items.py: 6
-      pyffice/items/persona.py: 5
-      pyffice/items/shapes.py: 7
-      pyffice/items/tasks.py: 6
-      pyffice/items/text.py: 6
-      pyffice/matrix/__init__.py: 3
-      pyffice/matrix/matrix.py: 13
-      pyffice/media/__init__.py: 0
-      pyffice/media/audio.py: 2
-      pyffice/media/heic.py: 1
-      pyffice/media/raw.py: 1
-      pyffice/media/video.py: 2
-      pyffice/notebooks/__init__.py: 0
-      pyffice/notebooks/notebooks.py: 6
-      pyffice/ports/__init__.py: 7
-      pyffice/ports/analyticsports.py: 2
-      pyffice/ports/audioports.py: 5
-      pyffice/ports/cadports.py: 5
-      pyffice/ports/calendarsports.py: 2
-      pyffice/ports/camports.py: 2
-      pyffice/ports/chartsports.py: 2
-      pyffice/ports/configports.py: 2
-      pyffice/ports/contactsports.py: 2
-      pyffice/ports/databasesports.py: 6
-      pyffice/ports/diagramsports.py: 1
-      pyffice/ports/documentports.py: 2
-      pyffice/ports/gports.py: 4
-      pyffice/ports/imageports.py: 6
-      pyffice/ports/imagesports.py: 2
-      pyffice/ports/matrixports.py: 2
-      pyffice/ports/msports.py: 9
-      pyffice/ports/ports.py: 22
-      pyffice/ports/presentationports.py: 7
-      pyffice/ports/projectsports.py: 2
-      pyffice/ports/spreadsheetports.py: 6
-      pyffice/ports/textports.py: 2
-      pyffice/ports/videoports.py: 5
-      pyffice/ports/workflowsports.py: 2
-      pyffice/presentation/__init__.py: 0
-      pyffice/presentation/pptx.py: 3
-      pyffice/presentation/presentation.py: 7
-      pyffice/projects/__init__.py: 2
-      pyffice/projects/paxn.py: 5
-      pyffice/projects/project.py: 4
-      pyffice/pyffice.py: 21
-      pyffice/reports/__init__.py: 0
-      pyffice/reports/reports.py: 5
-      pyffice/script/__init__.py: 0
-      pyffice/script/asciidoc.py: 2
-      pyffice/script/latex.py: 2
-      pyffice/script/odt.py: 3
-      pyffice/script/rst.py: 2
-      pyffice/script/rtf.py: 2
-      pyffice/socials/__init__.py: 0
-      pyffice/socials/messages.py: 5
-      pyffice/socials/socials.py: 4
-      pyffice/spreadsheet/__init__.py: 0
-      pyffice/spreadsheet/spreadsheet.py: 15
-      pyffice/tags/__init__.py: 0
-      pyffice/tags/manager.py: 6
-      pyffice/tags/ratings.py: 5
-      pyffice/tags/references.py: 5
-      pyffice/tags/tags.py: 4
-      pyffice/text/__init__.py: 0
-      pyffice/text/bibliographies.py: 6
-      pyffice/text/messages.py: 5
-      pyffice/text/text.py: 11
-      pyffice/updates/__init__.py: 0
-      pyffice/updates/updates.py: 5
-      pyffice/video/__init__.py: 0
-      pyffice/video/video.py: 7
-      pyffice/web/__init__.py: 0
-      pyffice/web/prompts.py: 8
-      pyffice/web/services.py: 5
-      pyffice/web/url.py: 10
-      pyffice/web/web.py: 11
-      pyffice/workflows/__init__.py: 0
-      pyffice/workflows/alarms.py: 6
-      pyffice/workflows/automations.py: 5
-      pyffice/workflows/formulas.py: 7
-      pyffice/workflows/playlists.py: 5
-      pyffice/workflows/source_control.py: 4
-      pyffice/workflows/workflows.py: 5
-      pyffice_cli.py: 7
-      tests/__init__.py: 2
-      tests/integration/test_integration.py: 1
-      tests/test_pyffice.py: 1
-      tests/test_pyffice/__init__.py: 0
-      tests/test_pyffice/conftest.py: 2
-      tests/test_pyffice/tests/__init__.py: 0
-      tests/test_pyffice/tests/test_asciidoc.py: 2
-      tests/test_pyffice/tests/test_audio.py: 2
-      tests/test_pyffice/tests/test_azw.py: 2
-      tests/test_pyffice/tests/test_blend.py: 2
-      tests/test_pyffice/tests/test_csv.py: 2
-      tests/test_pyffice/tests/test_dwg.py: 2
-      tests/test_pyffice/tests/test_dxf.py: 2
-      tests/test_pyffice/tests/test_env.py: 2
-      tests/test_pyffice/tests/test_epub.py: 2
-      tests/test_pyffice/tests/test_fbx.py: 2
-      tests/test_pyffice/tests/test_gltf.py: 2
-      tests/test_pyffice/tests/test_iges.py: 2
-      tests/test_pyffice/tests/test_ini.py: 2
-      tests/test_pyffice/tests/test_json.py: 2
-      tests/test_pyffice/tests/test_latex.py: 2
-      tests/test_pyffice/tests/test_mobi.py: 2
-      tests/test_pyffice/tests/test_obj.py: 2
-      tests/test_pyffice/tests/test_odt.py: 2
-      tests/test_pyffice/tests/test_pptx.py: 2
-      tests/test_pyffice/tests/test_rar.py: 2
-      tests/test_pyffice/tests/test_rst.py: 2
-      tests/test_pyffice/tests/test_rtf.py: 2
-      tests/test_pyffice/tests/test_scad.py: 2
-      tests/test_pyffice/tests/test_sevenzip.py: 2
-      tests/test_pyffice/tests/test_step.py: 2
-      tests/test_pyffice/tests/test_stl.py: 2
-      tests/test_pyffice/tests/test_tar.py: 2
-      tests/test_pyffice/tests/test_toml.py: 2
-      tests/test_pyffice/tests/test_video.py: 2
-      tests/test_pyffice/tests/test_xml.py: 2
-      tests/test_pyffice/tests/test_yaml.py: 2
-      tests/test_pyffice/tests/test_zip.py: 2
-      tests/test_pyffice/tests/tests/__init__.py: 0
-      tests/test_pyffice/tests/tests/test_audio.py: 1
-      tests/test_pyffice/tests/tests/test_azw.py: 1
-      tests/test_pyffice/tests/tests/test_binary.py: 2
-      tests/test_pyffice/tests/tests/test_cad.py: 2
-      tests/test_pyffice/tests/tests/test_config.py: 2
-      tests/test_pyffice/tests/tests/test_csv.py: 2
-      tests/test_pyffice/tests/tests/test_env.py: 1
-      tests/test_pyffice/tests/tests/test_epub.py: 1
-      tests/test_pyffice/tests/tests/test_heic.py: 2
-      tests/test_pyffice/tests/tests/test_import_export.py: 4
-      tests/test_pyffice/tests/tests/test_ini.py: 1
-      tests/test_pyffice/tests/tests/test_json.py: 2
-      tests/test_pyffice/tests/tests/test_mobi.py: 1
-      tests/test_pyffice/tests/tests/test_obj.py: 1
-      tests/test_pyffice/tests/tests/test_pptx.py: 1
-      tests/test_pyffice/tests/tests/test_presentation.py: 2
-      tests/test_pyffice/tests/tests/test_rar.py: 1
-      tests/test_pyffice/tests/tests/test_raw.py: 2
-      tests/test_pyffice/tests/tests/test_sevenzip.py: 1
-      tests/test_pyffice/tests/tests/test_tar.py: 1
-      tests/test_pyffice/tests/tests/test_toml.py: 1
-      tests/test_pyffice/tests/tests/test_video.py: 1
-      tests/test_pyffice/tests/tests/test_xml.py: 1
-      tests/test_pyffice/tests/tests/test_yaml.py: 1
-      tests/test_pyffice/tests/tests/test_zip.py: 1
-      tests/test_pyffice/unit/__init__.py: 0
-      tests/test_pyffice/unit/__init__TEST.py: 18
-      tests/test_pyffice/unit/analytics/__init__.py: 0
-      tests/test_pyffice/unit/analytics/__init__TEST.py: 18
-      tests/test_pyffice/unit/analytics/sourcesTEST.py: 24
-      tests/test_pyffice/unit/audio/__init__.py: 0
-      tests/test_pyffice/unit/audio/__init__TEST.py: 18
-      tests/test_pyffice/unit/audio/audioTEST.py: 22
-      tests/test_pyffice/unit/cad/__init__.py: 0
-      tests/test_pyffice/unit/cad/__init__TEST.py: 18
-      tests/test_pyffice/unit/cad/cadTEST.py: 24
-      tests/test_pyffice/unit/cad/itemsTEST.py: 20
-      tests/test_pyffice/unit/calendars/__init__.py: 0
-      tests/test_pyffice/unit/calendars/__init__TEST.py: 18
-      tests/test_pyffice/unit/calendars/calendarsTEST.py: 20
-      tests/test_pyffice/unit/calendars/ganttTEST.py: 20
-      tests/test_pyffice/unit/calendars/tasksTEST.py: 24
-      tests/test_pyffice/unit/cam/__init__.py: 0
-      tests/test_pyffice/unit/cam/__init__TEST.py: 18
-      tests/test_pyffice/unit/cam/bomTEST.py: 22
-      tests/test_pyffice/unit/cam/camTEST.py: 22
-      tests/test_pyffice/unit/cam/gcodeTEST.py: 20
-      tests/test_pyffice/unit/charts/__init__.py: 0
-      tests/test_pyffice/unit/charts/__init__TEST.py: 18
-      tests/test_pyffice/unit/charts/chartsTEST.py: 20
-      tests/test_pyffice/unit/charts/sankeyTEST.py: 20
-      tests/test_pyffice/unit/config/__init__.py: 0
-      tests/test_pyffice/unit/config/__init__TEST.py: 18
-      tests/test_pyffice/unit/config/configTEST.py: 24
-      tests/test_pyffice/unit/config/gportsTEST.py: 4
-      tests/test_pyffice/unit/config/msportsTEST.py: 4
-      tests/test_pyffice/unit/config/policiesTEST.py: 20
-      tests/test_pyffice/unit/config/portsTEST.py: 4
-      tests/test_pyffice/unit/contacts/__init__.py: 0
-      tests/test_pyffice/unit/contacts/__init__TEST.py: 18
-      tests/test_pyffice/unit/contacts/contactsTEST.py: 22
-      tests/test_pyffice/unit/databases/__init__.py: 0
-      tests/test_pyffice/unit/databases/__init__TEST.py: 18
-      tests/test_pyffice/unit/databases/databasesTEST.py: 22
-      tests/test_pyffice/unit/databases/tableTEST.py: 20
-      tests/test_pyffice/unit/diagrams/__init__.py: 0
-      tests/test_pyffice/unit/diagrams/__init__TEST.py: 18
-      tests/test_pyffice/unit/diagrams/diagramsTEST.py: 28
-      tests/test_pyffice/unit/documentTEST.py: 26
-      tests/test_pyffice/unit/email/__init__.py: 0
-      tests/test_pyffice/unit/email/__init__TEST.py: 18
-      tests/test_pyffice/unit/email/emailTEST.py: 22
-      tests/test_pyffice/unit/filesystems/__init__.py: 0
-      tests/test_pyffice/unit/filesystems/__init__TEST.py: 18
-      tests/test_pyffice/unit/filesystems/filesystemsTEST.py: 20
-      tests/test_pyffice/unit/forms/__init__.py: 0
-      tests/test_pyffice/unit/forms/__init__TEST.py: 18
-      tests/test_pyffice/unit/forms/formsTEST.py: 24
-      tests/test_pyffice/unit/forms/surveysTEST.py: 24
-      tests/test_pyffice/unit/images/__init__.py: 0
-      tests/test_pyffice/unit/images/__init__TEST.py: 18
-      tests/test_pyffice/unit/images/imagesTEST.py: 24
-      tests/test_pyffice/unit/images/pdfsTEST.py: 20
-      tests/test_pyffice/unit/images/utilitiesTEST.py: 28
-      tests/test_pyffice/unit/items/__init__.py: 0
-      tests/test_pyffice/unit/items/__init__TEST.py: 18
-      tests/test_pyffice/unit/items/cellsTEST.py: 22
-      tests/test_pyffice/unit/items/colorsTEST.py: 28
-      tests/test_pyffice/unit/items/itemsTEST.py: 20
-      tests/test_pyffice/unit/items/personaTEST.py: 20
-      tests/test_pyffice/unit/items/shapesTEST.py: 20
-      tests/test_pyffice/unit/items/tasksTEST.py: 30
-      tests/test_pyffice/unit/items/textTEST.py: 26
-      tests/test_pyffice/unit/notebooks/__init__.py: 0
-      tests/test_pyffice/unit/notebooks/__init__TEST.py: 18
-      tests/test_pyffice/unit/notebooks/notebooksTEST.py: 20
-      tests/test_pyffice/unit/presentation/__init__.py: 0
-      tests/test_pyffice/unit/presentation/__init__TEST.py: 18
-      tests/test_pyffice/unit/presentation/presentationTEST.py: 20
-      tests/test_pyffice/unit/pyfficeTEST.py: 20
-      tests/test_pyffice/unit/reports/__init__.py: 0
-      tests/test_pyffice/unit/reports/__init__TEST.py: 18
-      tests/test_pyffice/unit/reports/reportsTEST.py: 20
-      tests/test_pyffice/unit/socials/__init__.py: 0
-      tests/test_pyffice/unit/socials/__init__TEST.py: 18
-      tests/test_pyffice/unit/socials/messagesTEST.py: 24
-      tests/test_pyffice/unit/socials/socialsTEST.py: 18
-      tests/test_pyffice/unit/spreadsheet/__init__.py: 0
-      tests/test_pyffice/unit/spreadsheet/__init__TEST.py: 18
-      tests/test_pyffice/unit/spreadsheet/spreadsheetTEST.py: 24
-      tests/test_pyffice/unit/tags/__init__.py: 0
-      tests/test_pyffice/unit/tags/__init__TEST.py: 18
-      tests/test_pyffice/unit/tags/managerTEST.py: 20
-      tests/test_pyffice/unit/tags/ratingsTEST.py: 20
-      tests/test_pyffice/unit/tags/referencesTEST.py: 20
-      tests/test_pyffice/unit/tags/tagsTEST.py: 20
-      tests/test_pyffice/unit/text/__init__.py: 0
-      tests/test_pyffice/unit/text/__init__TEST.py: 18
-      tests/test_pyffice/unit/text/bibliographiesTEST.py: 20
-      tests/test_pyffice/unit/text/messagesTEST.py: 20
-      tests/test_pyffice/unit/text/textTEST.py: 21
-      tests/test_pyffice/unit/updates/__init__.py: 0
-      tests/test_pyffice/unit/updates/__init__TEST.py: 18
-      tests/test_pyffice/unit/updates/updatesTEST.py: 24
-      tests/test_pyffice/unit/video/__init__.py: 0
-      tests/test_pyffice/unit/video/__init__TEST.py: 18
-      tests/test_pyffice/unit/video/videoTEST.py: 20
-      tests/test_pyffice/unit/web/__init__.py: 0
-      tests/test_pyffice/unit/web/__init__TEST.py: 18
-      tests/test_pyffice/unit/web/promptsTEST.py: 26
-      tests/test_pyffice/unit/web/servicesTEST.py: 20
-      tests/test_pyffice/unit/web/urlTEST.py: 22
-      tests/test_pyffice/unit/web/webTEST.py: 26
-      tests/test_pyffice/unit/workflows/__init__.py: 0
-      tests/test_pyffice/unit/workflows/__init__TEST.py: 18
-      tests/test_pyffice/unit/workflows/alarmsTEST.py: 20
-      tests/test_pyffice/unit/workflows/automationsTEST.py: 20
-      tests/test_pyffice/unit/workflows/formulasTEST.py: 22
-      tests/test_pyffice/unit/workflows/playlistsTEST.py: 20
-      tests/test_pyffice/unit/workflows/source_controlTEST.py: 18
-      tests/test_pyffice/unit/workflows/workflowsTEST.py: 20
-      tests/unit/__init__.py: 2
-      tests/unit/test_document.py: 1
-      tests/unit/test_pyffice.py: 2
-    word_counts:
-      __init__.py: 394
-      __main__.py: 18
-      cli.py: 2793
-      document.py: 1821
-      pyffice.py: 769
-      pyffice/__init__.py: 394
-      pyffice/__main__.py: 18
-      pyffice/agent.py: 481
-      pyffice/analytics/__init__.py: 0
-      pyffice/analytics/sources.py: 839
-      pyffice/audio/__init__.py: 0
-      pyffice/audio/audio.py: 263
-      pyffice/cad/__init__.py: 0
-      pyffice/cad/blend.py: 151
-      pyffice/cad/cad.py: 244
-      pyffice/cad/dwg.py: 148
-      pyffice/cad/dxf.py: 153
-      pyffice/cad/fbx.py: 149
-      pyffice/cad/gltf.py: 151
-      pyffice/cad/iges.py: 142
-      pyffice/cad/items.py: 239
-      pyffice/cad/obj.py: 374
-      pyffice/cad/scad.py: 107
-      pyffice/cad/step.py: 146
-      pyffice/cad/stl.py: 436
-      pyffice/calendars/__init__.py: 0
-      pyffice/calendars/calendars.py: 364
-      pyffice/calendars/gantt.py: 403
-      pyffice/calendars/tasks.py: 851
-      pyffice/cam/__init__.py: 0
-      pyffice/cam/bom.py: 185
-      pyffice/cam/cam.py: 143
-      pyffice/cam/gcode.py: 116
-      pyffice/charts/__init__.py: 0
-      pyffice/charts/charts.py: 976
-      pyffice/charts/sankey.py: 330
-      pyffice/cli.py: 2774
-      pyffice/config/__init__.py: 0
-      pyffice/config/config.py: 142
-      pyffice/config/env.py: 239
-      pyffice/config/gports.py: 187
-      pyffice/config/ini.py: 245
-      pyffice/config/msports.py: 1238
-      pyffice/config/policies.py: 97
-      pyffice/config/ports.py: 1902
-      pyffice/config/toml.py: 277
-      pyffice/contacts/__init__.py: 0
-      pyffice/contacts/contacts.py: 977
-      pyffice/container/__init__.py: 127
-      pyffice/container/binary.py: 564
-      pyffice/container/rar.py: 199
-      pyffice/container/sevenzip.py: 148
-      pyffice/container/tar.py: 372
-      pyffice/container/zip.py: 379
-      pyffice/data/csv.py: 249
-      pyffice/data/json.py: 180
-      pyffice/data/xml.py: 247
-      pyffice/data/yaml.py: 182
-      pyffice/databases/__init__.py: 0
-      pyffice/databases/databases.py: 237
-      pyffice/databases/table.py: 115
-      pyffice/diagrams/__init__.py: 129
-      pyffice/diagrams/diagrams.py: 1211
-      pyffice/diagrams/formats.py: 2363
-      pyffice/document.py: 1821
-      pyffice/ebook/__init__.py: 0
-      pyffice/ebook/azw.py: 72
-      pyffice/ebook/epub.py: 262
-      pyffice/ebook/mobi.py: 70
-      pyffice/email/__init__.py: 0
-      pyffice/email/email.py: 301
-      pyffice/filesystems/__init__.py: 0
-      pyffice/filesystems/filesystems.py: 412
-      pyffice/forms/__init__.py: 0
-      pyffice/forms/forms.py: 938
-      pyffice/forms/surveys.py: 390
-      pyffice/images/__init__.py: 0
-      pyffice/images/images.py: 1096
-      pyffice/images/pdfs.py: 876
-      pyffice/images/utilities.py: 760
-      pyffice/items/__init__.py: 0
-      pyffice/items/cells.py: 695
-      pyffice/items/colors.py: 2539
-      pyffice/items/items.py: 188
-      pyffice/items/persona.py: 149
-      pyffice/items/shapes.py: 554
-      pyffice/items/tasks.py: 507
-      pyffice/items/text.py: 530
-      pyffice/matrix/__init__.py: 678
-      pyffice/matrix/matrix.py: 783
-      pyffice/media/__init__.py: 0
-      pyffice/media/audio.py: 70
-      pyffice/media/heic.py: 43
-      pyffice/media/raw.py: 51
-      pyffice/media/video.py: 70
-      pyffice/notebooks/__init__.py: 0
-      pyffice/notebooks/notebooks.py: 254
-      pyffice/ports/__init__.py: 336
-      pyffice/ports/analyticsports.py: 210
-      pyffice/ports/audioports.py: 712
-      pyffice/ports/cadports.py: 1841
-      pyffice/ports/calendarsports.py: 132
-      pyffice/ports/camports.py: 125
-      pyffice/ports/chartsports.py: 129
-      pyffice/ports/configports.py: 164
-      pyffice/ports/contactsports.py: 125
-      pyffice/ports/databasesports.py: 762
-      pyffice/ports/diagramsports.py: 168
-      pyffice/ports/documentports.py: 200
-      pyffice/ports/gports.py: 145
-      pyffice/ports/imageports.py: 896
-      pyffice/ports/imagesports.py: 267
-      pyffice/ports/matrixports.py: 161
-      pyffice/ports/msports.py: 1202
-      pyffice/ports/ports.py: 1902
-      pyffice/ports/presentationports.py: 762
-      pyffice/ports/projectsports.py: 163
-      pyffice/ports/spreadsheetports.py: 1188
-      pyffice/ports/textports.py: 201
-      pyffice/ports/videoports.py: 778
-      pyffice/ports/workflowsports.py: 163
-      pyffice/presentation/__init__.py: 0
-      pyffice/presentation/pptx.py: 73
-      pyffice/presentation/presentation.py: 125
-      pyffice/projects/__init__.py: 101
-      pyffice/projects/paxn.py: 796
-      pyffice/projects/project.py: 134
-      pyffice/pyffice.py: 1617
-      pyffice/reports/__init__.py: 0
-      pyffice/reports/reports.py: 186
-      pyffice/script/__init__.py: 0
-      pyffice/script/asciidoc.py: 72
-      pyffice/script/latex.py: 73
-      pyffice/script/odt.py: 73
-      pyffice/script/rst.py: 73
-      pyffice/script/rtf.py: 74
-      pyffice/socials/__init__.py: 0
-      pyffice/socials/messages.py: 120
-      pyffice/socials/socials.py: 80
-      pyffice/spreadsheet/__init__.py: 0
-      pyffice/spreadsheet/spreadsheet.py: 1445
-      pyffice/tags/__init__.py: 0
-      pyffice/tags/manager.py: 157
-      pyffice/tags/ratings.py: 111
-      pyffice/tags/references.py: 320
-      pyffice/tags/tags.py: 165
-      pyffice/text/__init__.py: 0
-      pyffice/text/bibliographies.py: 254
-      pyffice/text/messages.py: 155
-      pyffice/text/text.py: 1422
-      pyffice/updates/__init__.py: 0
-      pyffice/updates/updates.py: 634
-      pyffice/video/__init__.py: 0
-      pyffice/video/video.py: 185
-      pyffice/web/__init__.py: 0
-      pyffice/web/prompts.py: 909
-      pyffice/web/services.py: 174
-      pyffice/web/url.py: 3545
-      pyffice/web/web.py: 1193
-      pyffice/workflows/__init__.py: 0
-      pyffice/workflows/alarms.py: 240
-      pyffice/workflows/automations.py: 152
-      pyffice/workflows/formulas.py: 253
-      pyffice/workflows/playlists.py: 200
-      pyffice/workflows/source_control.py: 80
-      pyffice/workflows/workflows.py: 143
-      pyffice_cli.py: 1094
-      tests/__init__.py: 12
-      tests/integration/test_integration.py: 43
-      tests/test_pyffice.py: 69
-      tests/test_pyffice/__init__.py: 0
-      tests/test_pyffice/conftest.py: 112
-      tests/test_pyffice/tests/__init__.py: 0
-      tests/test_pyffice/tests/test_asciidoc.py: 17
-      tests/test_pyffice/tests/test_audio.py: 38
-      tests/test_pyffice/tests/test_azw.py: 36
-      tests/test_pyffice/tests/test_blend.py: 34
-      tests/test_pyffice/tests/test_csv.py: 46
-      tests/test_pyffice/tests/test_dwg.py: 18
-      tests/test_pyffice/tests/test_dxf.py: 32
-      tests/test_pyffice/tests/test_env.py: 47
-      tests/test_pyffice/tests/test_epub.py: 48
-      tests/test_pyffice/tests/test_fbx.py: 14
-      tests/test_pyffice/tests/test_gltf.py: 17
-      tests/test_pyffice/tests/test_iges.py: 17
-      tests/test_pyffice/tests/test_ini.py: 44
-      tests/test_pyffice/tests/test_json.py: 47
-      tests/test_pyffice/tests/test_latex.py: 17
-      tests/test_pyffice/tests/test_mobi.py: 36
-      tests/test_pyffice/tests/test_obj.py: 38
-      tests/test_pyffice/tests/test_odt.py: 17
-      tests/test_pyffice/tests/test_pptx.py: 37
-      tests/test_pyffice/tests/test_rar.py: 38
-      tests/test_pyffice/tests/test_rst.py: 17
-      tests/test_pyffice/tests/test_rtf.py: 17
-      tests/test_pyffice/tests/test_scad.py: 17
-      tests/test_pyffice/tests/test_sevenzip.py: 38
-      tests/test_pyffice/tests/test_step.py: 25
-      tests/test_pyffice/tests/test_stl.py: 17
-      tests/test_pyffice/tests/test_tar.py: 38
-      tests/test_pyffice/tests/test_toml.py: 45
-      tests/test_pyffice/tests/test_video.py: 42
-      tests/test_pyffice/tests/test_xml.py: 44
-      tests/test_pyffice/tests/test_yaml.py: 49
-      tests/test_pyffice/tests/test_zip.py: 39
-      tests/test_pyffice/tests/tests/__init__.py: 0
-      tests/test_pyffice/tests/tests/test_audio.py: 14
-      tests/test_pyffice/tests/tests/test_azw.py: 11
-      tests/test_pyffice/tests/tests/test_binary.py: 43
-      tests/test_pyffice/tests/tests/test_cad.py: 45
-      tests/test_pyffice/tests/tests/test_config.py: 22
-      tests/test_pyffice/tests/tests/test_csv.py: 33
-      tests/test_pyffice/tests/tests/test_env.py: 11
-      tests/test_pyffice/tests/tests/test_epub.py: 14
-      tests/test_pyffice/tests/tests/test_heic.py: 44
-      tests/test_pyffice/tests/tests/test_import_export.py: 551
-      tests/test_pyffice/tests/tests/test_ini.py: 11
-      tests/test_pyffice/tests/tests/test_json.py: 20
-      tests/test_pyffice/tests/tests/test_mobi.py: 11
-      tests/test_pyffice/tests/tests/test_obj.py: 11
-      tests/test_pyffice/tests/tests/test_pptx.py: 14
-      tests/test_pyffice/tests/tests/test_presentation.py: 56
-      tests/test_pyffice/tests/tests/test_rar.py: 11
-      tests/test_pyffice/tests/tests/test_raw.py: 45
-      tests/test_pyffice/tests/tests/test_sevenzip.py: 11
-      tests/test_pyffice/tests/tests/test_tar.py: 14
-      tests/test_pyffice/tests/tests/test_toml.py: 11
-      tests/test_pyffice/tests/tests/test_video.py: 14
-      tests/test_pyffice/tests/tests/test_xml.py: 11
-      tests/test_pyffice/tests/tests/test_yaml.py: 11
-      tests/test_pyffice/tests/tests/test_zip.py: 14
-      tests/test_pyffice/unit/__init__.py: 0
-      tests/test_pyffice/unit/__init__TEST.py: 203
-      tests/test_pyffice/unit/analytics/__init__.py: 0
-      tests/test_pyffice/unit/analytics/__init__TEST.py: 203
-      tests/test_pyffice/unit/analytics/sourcesTEST.py: 597
-      tests/test_pyffice/unit/audio/__init__.py: 0
-      tests/test_pyffice/unit/audio/__init__TEST.py: 203
-      tests/test_pyffice/unit/audio/audioTEST.py: 412
-      tests/test_pyffice/unit/cad/__init__.py: 0
-      tests/test_pyffice/unit/cad/__init__TEST.py: 203
-      tests/test_pyffice/unit/cad/cadTEST.py: 471
-      tests/test_pyffice/unit/cad/itemsTEST.py: 360
-      tests/test_pyffice/unit/calendars/__init__.py: 0
-      tests/test_pyffice/unit/calendars/__init__TEST.py: 203
-      tests/test_pyffice/unit/calendars/calendarsTEST.py: 353
-      tests/test_pyffice/unit/calendars/ganttTEST.py: 297
-      tests/test_pyffice/unit/calendars/tasksTEST.py: 590
-      tests/test_pyffice/unit/cam/__init__.py: 0
-      tests/test_pyffice/unit/cam/__init__TEST.py: 203
-      tests/test_pyffice/unit/cam/bomTEST.py: 391
-      tests/test_pyffice/unit/cam/camTEST.py: 370
-      tests/test_pyffice/unit/cam/gcodeTEST.py: 290
-      tests/test_pyffice/unit/charts/__init__.py: 0
-      tests/test_pyffice/unit/charts/__init__TEST.py: 203
-      tests/test_pyffice/unit/charts/chartsTEST.py: 514
-      tests/test_pyffice/unit/charts/sankeyTEST.py: 297
-      tests/test_pyffice/unit/config/__init__.py: 0
-      tests/test_pyffice/unit/config/__init__TEST.py: 203
-      tests/test_pyffice/unit/config/configTEST.py: 408
-      tests/test_pyffice/unit/config/gportsTEST.py: 309
-      tests/test_pyffice/unit/config/msportsTEST.py: 428
-      tests/test_pyffice/unit/config/policiesTEST.py: 269
-      tests/test_pyffice/unit/config/portsTEST.py: 1051
-      tests/test_pyffice/unit/contacts/__init__.py: 0
-      tests/test_pyffice/unit/contacts/__init__TEST.py: 203
-      tests/test_pyffice/unit/contacts/contactsTEST.py: 664
-      tests/test_pyffice/unit/databases/__init__.py: 0
-      tests/test_pyffice/unit/databases/__init__TEST.py: 203
-      tests/test_pyffice/unit/databases/databasesTEST.py: 440
-      tests/test_pyffice/unit/databases/tableTEST.py: 297
-      tests/test_pyffice/unit/diagrams/__init__.py: 0
-      tests/test_pyffice/unit/diagrams/__init__TEST.py: 203
-      tests/test_pyffice/unit/diagrams/diagramsTEST.py: 876
-      tests/test_pyffice/unit/documentTEST.py: 999
-      tests/test_pyffice/unit/email/__init__.py: 0
-      tests/test_pyffice/unit/email/__init__TEST.py: 203
-      tests/test_pyffice/unit/email/emailTEST.py: 573
-      tests/test_pyffice/unit/filesystems/__init__.py: 0
-      tests/test_pyffice/unit/filesystems/__init__TEST.py: 203
-      tests/test_pyffice/unit/filesystems/filesystemsTEST.py: 374
-      tests/test_pyffice/unit/forms/__init__.py: 0
-      tests/test_pyffice/unit/forms/__init__TEST.py: 203
-      tests/test_pyffice/unit/forms/formsTEST.py: 632
-      tests/test_pyffice/unit/forms/surveysTEST.py: 506
-      tests/test_pyffice/unit/images/__init__.py: 0
-      tests/test_pyffice/unit/images/__init__TEST.py: 203
-      tests/test_pyffice/unit/images/imagesTEST.py: 653
-      tests/test_pyffice/unit/images/pdfsTEST.py: 409
-      tests/test_pyffice/unit/images/utilitiesTEST.py: 388
-      tests/test_pyffice/unit/items/__init__.py: 0
-      tests/test_pyffice/unit/items/__init__TEST.py: 203
-      tests/test_pyffice/unit/items/cellsTEST.py: 496
-      tests/test_pyffice/unit/items/colorsTEST.py: 877
-      tests/test_pyffice/unit/items/itemsTEST.py: 297
-      tests/test_pyffice/unit/items/personaTEST.py: 276
-      tests/test_pyffice/unit/items/shapesTEST.py: 388
-      tests/test_pyffice/unit/items/tasksTEST.py: 865
-      tests/test_pyffice/unit/items/textTEST.py: 544
-      tests/test_pyffice/unit/notebooks/__init__.py: 0
-      tests/test_pyffice/unit/notebooks/__init__TEST.py: 203
-      tests/test_pyffice/unit/notebooks/notebooksTEST.py: 339
-      tests/test_pyffice/unit/presentation/__init__.py: 0
-      tests/test_pyffice/unit/presentation/__init__TEST.py: 203
-      tests/test_pyffice/unit/presentation/presentationTEST.py: 290
-      tests/test_pyffice/unit/pyfficeTEST.py: 465
-      tests/test_pyffice/unit/reports/__init__.py: 0
-      tests/test_pyffice/unit/reports/__init__TEST.py: 203
-      tests/test_pyffice/unit/reports/reportsTEST.py: 304
-      tests/test_pyffice/unit/socials/__init__.py: 0
-      tests/test_pyffice/unit/socials/__init__TEST.py: 203
-      tests/test_pyffice/unit/socials/messagesTEST.py: 401
-      tests/test_pyffice/unit/socials/socialsTEST.py: 203
-      tests/test_pyffice/unit/spreadsheet/__init__.py: 0
-      tests/test_pyffice/unit/spreadsheet/__init__TEST.py: 203
-      tests/test_pyffice/unit/spreadsheet/spreadsheetTEST.py: 716
-      tests/test_pyffice/unit/tags/__init__.py: 0
-      tests/test_pyffice/unit/tags/__init__TEST.py: 203
-      tests/test_pyffice/unit/tags/managerTEST.py: 290
-      tests/test_pyffice/unit/tags/ratingsTEST.py: 278
-      tests/test_pyffice/unit/tags/referencesTEST.py: 367
-      tests/test_pyffice/unit/tags/tagsTEST.py: 304
-      tests/test_pyffice/unit/text/__init__.py: 0
-      tests/test_pyffice/unit/text/__init__TEST.py: 203
-      tests/test_pyffice/unit/text/bibliographiesTEST.py: 325
-      tests/test_pyffice/unit/text/messagesTEST.py: 304
-      tests/test_pyffice/unit/text/textTEST.py: 538
-      tests/test_pyffice/unit/updates/__init__.py: 0
-      tests/test_pyffice/unit/updates/__init__TEST.py: 203
-      tests/test_pyffice/unit/updates/updatesTEST.py: 548
-      tests/test_pyffice/unit/video/__init__.py: 0
-      tests/test_pyffice/unit/video/__init__TEST.py: 203
-      tests/test_pyffice/unit/video/videoTEST.py: 332
-      tests/test_pyffice/unit/web/__init__.py: 0
-      tests/test_pyffice/unit/web/__init__TEST.py: 203
-      tests/test_pyffice/unit/web/promptsTEST.py: 628
-      tests/test_pyffice/unit/web/servicesTEST.py: 297
-      tests/test_pyffice/unit/web/urlTEST.py: 795
-      tests/test_pyffice/unit/web/webTEST.py: 761
-      tests/test_pyffice/unit/workflows/__init__.py: 0
-      tests/test_pyffice/unit/workflows/__init__TEST.py: 203
-      tests/test_pyffice/unit/workflows/alarmsTEST.py: 325
-      tests/test_pyffice/unit/workflows/automationsTEST.py: 297
-      tests/test_pyffice/unit/workflows/formulasTEST.py: 398
-      tests/test_pyffice/unit/workflows/playlistsTEST.py: 332
-      tests/test_pyffice/unit/workflows/source_controlTEST.py: 203
-      tests/test_pyffice/unit/workflows/workflowsTEST.py: 311
-      tests/unit/__init__.py: 45
-      tests/unit/test_document.py: 146
-      tests/unit/test_pyffice.py: 58
-audit_date: '1773459399.5426939'
+    per_file:
+      __init__.py:
+        class_count: 0
+        file_size: 3713
+        function_count: 3
+        import_count: 11
+        word_count: 394
+      __main__.py:
+        class_count: 0
+        file_size: 126
+        function_count: 0
+        import_count: 1
+        word_count: 18
+      cli.py:
+        class_count: 0
+        file_size: 44518
+        function_count: 72
+        import_count: 8
+        word_count: 2793
+      document.py:
+        class_count: 4
+        file_size: 23382
+        function_count: 0
+        import_count: 13
+        word_count: 1821
+      pyffice.py:
+        class_count: 1
+        file_size: 9311
+        function_count: 0
+        import_count: 23
+        word_count: 769
+      pyffice/__init__.py:
+        class_count: 0
+        file_size: 3713
+        function_count: 3
+        import_count: 11
+        word_count: 394
+      pyffice/__main__.py:
+        class_count: 0
+        file_size: 126
+        function_count: 0
+        import_count: 1
+        word_count: 18
+      pyffice/agent.py:
+        class_count: 0
+        file_size: 5290
+        function_count: 7
+        import_count: 2
+        word_count: 481
+      pyffice/analytics/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/analytics/sources.py:
+        class_count: 3
+        file_size: 12606
+        function_count: 0
+        import_count: 6
+        word_count: 839
+      pyffice/audio/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/audio/audio.py:
+        class_count: 2
+        file_size: 3718
+        function_count: 0
+        import_count: 5
+        word_count: 263
+      pyffice/cad/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/cad/blend.py:
+        class_count: 1
+        file_size: 1371
+        function_count: 4
+        import_count: 3
+        word_count: 151
+      pyffice/cad/cad.py:
+        class_count: 3
+        file_size: 3727
+        function_count: 0
+        import_count: 8
+        word_count: 244
+      pyffice/cad/dwg.py:
+        class_count: 1
+        file_size: 1297
+        function_count: 4
+        import_count: 3
+        word_count: 148
+      pyffice/cad/dxf.py:
+        class_count: 1
+        file_size: 1346
+        function_count: 4
+        import_count: 3
+        word_count: 153
+      pyffice/cad/fbx.py:
+        class_count: 1
+        file_size: 1301
+        function_count: 4
+        import_count: 3
+        word_count: 149
+      pyffice/cad/gltf.py:
+        class_count: 1
+        file_size: 1361
+        function_count: 4
+        import_count: 3
+        word_count: 151
+      pyffice/cad/iges.py:
+        class_count: 1
+        file_size: 1286
+        function_count: 4
+        import_count: 3
+        word_count: 142
+      pyffice/cad/items.py:
+        class_count: 1
+        file_size: 3347
+        function_count: 0
+        import_count: 5
+        word_count: 239
+      pyffice/cad/obj.py:
+        class_count: 1
+        file_size: 3773
+        function_count: 3
+        import_count: 3
+        word_count: 374
+      pyffice/cad/scad.py:
+        class_count: 1
+        file_size: 1041
+        function_count: 0
+        import_count: 3
+        word_count: 107
+      pyffice/cad/step.py:
+        class_count: 1
+        file_size: 1294
+        function_count: 4
+        import_count: 3
+        word_count: 146
+      pyffice/cad/stl.py:
+        class_count: 1
+        file_size: 4978
+        function_count: 3
+        import_count: 5
+        word_count: 436
+      pyffice/calendars/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/calendars/calendars.py:
+        class_count: 1
+        file_size: 5353
+        function_count: 0
+        import_count: 7
+        word_count: 364
+      pyffice/calendars/gantt.py:
+        class_count: 1
+        file_size: 5445
+        function_count: 0
+        import_count: 8
+        word_count: 403
+      pyffice/calendars/tasks.py:
+        class_count: 3
+        file_size: 11492
+        function_count: 0
+        import_count: 6
+        word_count: 851
+      pyffice/cam/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/cam/bom.py:
+        class_count: 2
+        file_size: 2754
+        function_count: 0
+        import_count: 5
+        word_count: 185
+      pyffice/cam/cam.py:
+        class_count: 2
+        file_size: 2406
+        function_count: 0
+        import_count: 5
+        word_count: 143
+      pyffice/cam/gcode.py:
+        class_count: 1
+        file_size: 1958
+        function_count: 0
+        import_count: 5
+        word_count: 116
+      pyffice/charts/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/charts/charts.py:
+        class_count: 1
+        file_size: 13676
+        function_count: 0
+        import_count: 8
+        word_count: 976
+      pyffice/charts/sankey.py:
+        class_count: 1
+        file_size: 4156
+        function_count: 0
+        import_count: 7
+        word_count: 330
+      pyffice/cli.py:
+        class_count: 0
+        file_size: 44326
+        function_count: 72
+        import_count: 8
+        word_count: 2774
+      pyffice/config/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/config/config.py:
+        class_count: 3
+        file_size: 2428
+        function_count: 0
+        import_count: 5
+        word_count: 142
+      pyffice/config/env.py:
+        class_count: 1
+        file_size: 2457
+        function_count: 2
+        import_count: 3
+        word_count: 239
+      pyffice/config/gports.py:
+        class_count: 3
+        file_size: 2901
+        function_count: 0
+        import_count: 14
+        word_count: 187
+      pyffice/config/ini.py:
+        class_count: 1
+        file_size: 2756
+        function_count: 2
+        import_count: 3
+        word_count: 245
+      pyffice/config/msports.py:
+        class_count: 2
+        file_size: 14140
+        function_count: 4
+        import_count: 16
+        word_count: 1238
+      pyffice/config/policies.py:
+        class_count: 1
+        file_size: 1667
+        function_count: 0
+        import_count: 5
+        word_count: 97
+      pyffice/config/ports.py:
+        class_count: 10
+        file_size: 25793
+        function_count: 0
+        import_count: 22
+        word_count: 1902
+      pyffice/config/toml.py:
+        class_count: 1
+        file_size: 2861
+        function_count: 2
+        import_count: 3
+        word_count: 277
+      pyffice/contacts/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/contacts/contacts.py:
+        class_count: 2
+        file_size: 13457
+        function_count: 0
+        import_count: 6
+        word_count: 977
+      pyffice/container/__init__.py:
+        class_count: 0
+        file_size: 1910
+        function_count: 0
+        import_count: 5
+        word_count: 127
+      pyffice/container/binary.py:
+        class_count: 1
+        file_size: 4528
+        function_count: 2
+        import_count: 3
+        word_count: 564
+      pyffice/container/rar.py:
+        class_count: 1
+        file_size: 1644
+        function_count: 6
+        import_count: 3
+        word_count: 199
+      pyffice/container/sevenzip.py:
+        class_count: 1
+        file_size: 1244
+        function_count: 6
+        import_count: 2
+        word_count: 148
+      pyffice/container/tar.py:
+        class_count: 1
+        file_size: 3370
+        function_count: 5
+        import_count: 3
+        word_count: 372
+      pyffice/container/zip.py:
+        class_count: 1
+        file_size: 3544
+        function_count: 7
+        import_count: 3
+        word_count: 379
+      pyffice/data/csv.py:
+        class_count: 0
+        file_size: 2239
+        function_count: 6
+        import_count: 3
+        word_count: 249
+      pyffice/data/json.py:
+        class_count: 0
+        file_size: 1592
+        function_count: 4
+        import_count: 3
+        word_count: 180
+      pyffice/data/xml.py:
+        class_count: 0
+        file_size: 2469
+        function_count: 7
+        import_count: 3
+        word_count: 247
+      pyffice/data/yaml.py:
+        class_count: 0
+        file_size: 1620
+        function_count: 6
+        import_count: 3
+        word_count: 182
+      pyffice/databases/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/databases/databases.py:
+        class_count: 2
+        file_size: 3479
+        function_count: 0
+        import_count: 6
+        word_count: 237
+      pyffice/databases/table.py:
+        class_count: 1
+        file_size: 1923
+        function_count: 0
+        import_count: 5
+        word_count: 115
+      pyffice/diagrams/__init__.py:
+        class_count: 0
+        file_size: 2226
+        function_count: 0
+        import_count: 2
+        word_count: 129
+      pyffice/diagrams/diagrams.py:
+        class_count: 5
+        file_size: 16076
+        function_count: 0
+        import_count: 10
+        word_count: 1211
+      pyffice/diagrams/formats.py:
+        class_count: 11
+        file_size: 28252
+        function_count: 3
+        import_count: 12
+        word_count: 2363
+      pyffice/document.py:
+        class_count: 4
+        file_size: 23382
+        function_count: 0
+        import_count: 13
+        word_count: 1821
+      pyffice/ebook/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/ebook/azw.py:
+        class_count: 0
+        file_size: 535
+        function_count: 4
+        import_count: 2
+        word_count: 72
+      pyffice/ebook/epub.py:
+        class_count: 0
+        file_size: 3430
+        function_count: 7
+        import_count: 4
+        word_count: 262
+      pyffice/ebook/mobi.py:
+        class_count: 0
+        file_size: 524
+        function_count: 4
+        import_count: 2
+        word_count: 70
+      pyffice/email/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/email/email.py:
+        class_count: 2
+        file_size: 4643
+        function_count: 0
+        import_count: 6
+        word_count: 301
+      pyffice/filesystems/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/filesystems/filesystems.py:
+        class_count: 1
+        file_size: 5766
+        function_count: 0
+        import_count: 8
+        word_count: 412
+      pyffice/forms/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/forms/forms.py:
+        class_count: 3
+        file_size: 12693
+        function_count: 0
+        import_count: 7
+        word_count: 938
+      pyffice/forms/surveys.py:
+        class_count: 4
+        file_size: 5141
+        function_count: 0
+        import_count: 5
+        word_count: 390
+      pyffice/images/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/images/images.py:
+        class_count: 3
+        file_size: 12277
+        function_count: 0
+        import_count: 16
+        word_count: 1096
+      pyffice/images/pdfs.py:
+        class_count: 1
+        file_size: 9706
+        function_count: 0
+        import_count: 9
+        word_count: 876
+      pyffice/images/utilities.py:
+        class_count: 0
+        file_size: 7630
+        function_count: 10
+        import_count: 10
+        word_count: 760
+      pyffice/items/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/items/cells.py:
+        class_count: 2
+        file_size: 10210
+        function_count: 0
+        import_count: 8
+        word_count: 695
+      pyffice/items/colors.py:
+        class_count: 2
+        file_size: 24205
+        function_count: 6
+        import_count: 16
+        word_count: 2539
+      pyffice/items/items.py:
+        class_count: 2
+        file_size: 2832
+        function_count: 0
+        import_count: 6
+        word_count: 188
+      pyffice/items/persona.py:
+        class_count: 1
+        file_size: 2149
+        function_count: 0
+        import_count: 5
+        word_count: 149
+      pyffice/items/shapes.py:
+        class_count: 1
+        file_size: 7445
+        function_count: 0
+        import_count: 7
+        word_count: 554
+      pyffice/items/tasks.py:
+        class_count: 6
+        file_size: 7821
+        function_count: 0
+        import_count: 6
+        word_count: 507
+      pyffice/items/text.py:
+        class_count: 4
+        file_size: 7702
+        function_count: 0
+        import_count: 6
+        word_count: 530
+      pyffice/matrix/__init__.py:
+        class_count: 1
+        file_size: 6989
+        function_count: 1
+        import_count: 3
+        word_count: 678
+      pyffice/matrix/matrix.py:
+        class_count: 1
+        file_size: 10220
+        function_count: 0
+        import_count: 13
+        word_count: 783
+      pyffice/media/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/media/audio.py:
+        class_count: 0
+        file_size: 526
+        function_count: 4
+        import_count: 2
+        word_count: 70
+      pyffice/media/heic.py:
+        class_count: 1
+        file_size: 407
+        function_count: 0
+        import_count: 1
+        word_count: 43
+      pyffice/media/raw.py:
+        class_count: 1
+        file_size: 457
+        function_count: 0
+        import_count: 1
+        word_count: 51
+      pyffice/media/video.py:
+        class_count: 0
+        file_size: 526
+        function_count: 4
+        import_count: 2
+        word_count: 70
+      pyffice/notebooks/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/notebooks/notebooks.py:
+        class_count: 1
+        file_size: 3642
+        function_count: 0
+        import_count: 6
+        word_count: 254
+      pyffice/ports/__init__.py:
+        class_count: 0
+        file_size: 5163
+        function_count: 0
+        import_count: 7
+        word_count: 336
+      pyffice/ports/analyticsports.py:
+        class_count: 5
+        file_size: 2488
+        function_count: 0
+        import_count: 2
+        word_count: 210
+      pyffice/ports/audioports.py:
+        class_count: 7
+        file_size: 8655
+        function_count: 4
+        import_count: 5
+        word_count: 712
+      pyffice/ports/cadports.py:
+        class_count: 12
+        file_size: 22078
+        function_count: 4
+        import_count: 5
+        word_count: 1841
+      pyffice/ports/calendarsports.py:
+        class_count: 3
+        file_size: 3216
+        function_count: 0
+        import_count: 5
+        word_count: 261
+      pyffice/ports/camports.py:
+        class_count: 3
+        file_size: 1081
+        function_count: 0
+        import_count: 2
+        word_count: 125
+      pyffice/ports/chartsports.py:
+        class_count: 3
+        file_size: 1156
+        function_count: 0
+        import_count: 2
+        word_count: 129
+      pyffice/ports/configports.py:
+        class_count: 4
+        file_size: 1548
+        function_count: 0
+        import_count: 2
+        word_count: 164
+      pyffice/ports/contactsports.py:
+        class_count: 3
+        file_size: 1176
+        function_count: 0
+        import_count: 2
+        word_count: 125
+      pyffice/ports/databasesports.py:
+        class_count: 6
+        file_size: 9797
+        function_count: 4
+        import_count: 6
+        word_count: 762
+      pyffice/ports/diagramsports.py:
+        class_count: 6
+        file_size: 2131
+        function_count: 0
+        import_count: 1
+        word_count: 168
+      pyffice/ports/documentports.py:
+        class_count: 5
+        file_size: 1859
+        function_count: 0
+        import_count: 2
+        word_count: 200
+      pyffice/ports/gports.py:
+        class_count: 3
+        file_size: 2542
+        function_count: 0
+        import_count: 4
+        word_count: 145
+      pyffice/ports/imageports.py:
+        class_count: 9
+        file_size: 11070
+        function_count: 4
+        import_count: 6
+        word_count: 896
+      pyffice/ports/imagesports.py:
+        class_count: 7
+        file_size: 2412
+        function_count: 0
+        import_count: 2
+        word_count: 267
+      pyffice/ports/matrixports.py:
+        class_count: 4
+        file_size: 1484
+        function_count: 0
+        import_count: 2
+        word_count: 161
+      pyffice/ports/msports.py:
+        class_count: 2
+        file_size: 13891
+        function_count: 4
+        import_count: 9
+        word_count: 1202
+      pyffice/ports/ports.py:
+        class_count: 10
+        file_size: 25839
+        function_count: 0
+        import_count: 22
+        word_count: 1902
+      pyffice/ports/presentationports.py:
+        class_count: 6
+        file_size: 9572
+        function_count: 4
+        import_count: 7
+        word_count: 762
+      pyffice/ports/projectsports.py:
+        class_count: 4
+        file_size: 1552
+        function_count: 0
+        import_count: 2
+        word_count: 163
+      pyffice/ports/spreadsheetports.py:
+        class_count: 7
+        file_size: 14453
+        function_count: 4
+        import_count: 6
+        word_count: 1188
+      pyffice/ports/textports.py:
+        class_count: 5
+        file_size: 1800
+        function_count: 0
+        import_count: 2
+        word_count: 201
+      pyffice/ports/videoports.py:
+        class_count: 8
+        file_size: 9563
+        function_count: 4
+        import_count: 5
+        word_count: 778
+      pyffice/ports/workflowsports.py:
+        class_count: 4
+        file_size: 1566
+        function_count: 0
+        import_count: 2
+        word_count: 163
+      pyffice/presentation/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/presentation/pptx.py:
+        class_count: 0
+        file_size: 557
+        function_count: 4
+        import_count: 3
+        word_count: 73
+      pyffice/presentation/presentation.py:
+        class_count: 1
+        file_size: 1980
+        function_count: 0
+        import_count: 7
+        word_count: 125
+      pyffice/projects/__init__.py:
+        class_count: 0
+        file_size: 1671
+        function_count: 0
+        import_count: 2
+        word_count: 101
+      pyffice/projects/paxn.py:
+        class_count: 3
+        file_size: 11094
+        function_count: 4
+        import_count: 5
+        word_count: 796
+      pyffice/projects/project.py:
+        class_count: 5
+        file_size: 11790
+        function_count: 1
+        import_count: 7
+        word_count: 1002
+      pyffice/pyffice.py:
+        class_count: 4
+        file_size: 18923
+        function_count: 0
+        import_count: 21
+        word_count: 1662
+      pyffice/reports/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/reports/reports.py:
+        class_count: 1
+        file_size: 2474
+        function_count: 0
+        import_count: 5
+        word_count: 186
+      pyffice/script/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/script/asciidoc.py:
+        class_count: 0
+        file_size: 587
+        function_count: 4
+        import_count: 2
+        word_count: 72
+      pyffice/script/latex.py:
+        class_count: 0
+        file_size: 581
+        function_count: 4
+        import_count: 2
+        word_count: 73
+      pyffice/script/odt.py:
+        class_count: 0
+        file_size: 546
+        function_count: 4
+        import_count: 3
+        word_count: 73
+      pyffice/script/rst.py:
+        class_count: 0
+        file_size: 581
+        function_count: 4
+        import_count: 2
+        word_count: 73
+      pyffice/script/rtf.py:
+        class_count: 0
+        file_size: 566
+        function_count: 4
+        import_count: 2
+        word_count: 74
+      pyffice/socials/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/socials/messages.py:
+        class_count: 3
+        file_size: 2120
+        function_count: 0
+        import_count: 5
+        word_count: 120
+      pyffice/socials/socials.py:
+        class_count: 0
+        file_size: 1362
+        function_count: 0
+        import_count: 4
+        word_count: 80
+      pyffice/spreadsheet/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/spreadsheet/spreadsheet.py:
+        class_count: 2
+        file_size: 17763
+        function_count: 2
+        import_count: 15
+        word_count: 1445
+      pyffice/tags/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/tags/manager.py:
+        class_count: 1
+        file_size: 2452
+        function_count: 0
+        import_count: 6
+        word_count: 157
+      pyffice/tags/ratings.py:
+        class_count: 1
+        file_size: 1818
+        function_count: 0
+        import_count: 5
+        word_count: 111
+      pyffice/tags/references.py:
+        class_count: 1
+        file_size: 4662
+        function_count: 0
+        import_count: 5
+        word_count: 320
+      pyffice/tags/tags.py:
+        class_count: 1
+        file_size: 2429
+        function_count: 0
+        import_count: 4
+        word_count: 165
+      pyffice/text/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/text/bibliographies.py:
+        class_count: 1
+        file_size: 3678
+        function_count: 0
+        import_count: 6
+        word_count: 254
+      pyffice/text/messages.py:
+        class_count: 1
+        file_size: 2186
+        function_count: 0
+        import_count: 5
+        word_count: 155
+      pyffice/text/text.py:
+        class_count: 1
+        file_size: 17263
+        function_count: 1
+        import_count: 11
+        word_count: 1422
+      pyffice/updates/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/updates/updates.py:
+        class_count: 3
+        file_size: 10467
+        function_count: 0
+        import_count: 5
+        word_count: 634
+      pyffice/video/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/video/video.py:
+        class_count: 1
+        file_size: 2685
+        function_count: 0
+        import_count: 7
+        word_count: 185
+      pyffice/web/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/web/prompts.py:
+        class_count: 4
+        file_size: 12206
+        function_count: 0
+        import_count: 8
+        word_count: 909
+      pyffice/web/services.py:
+        class_count: 1
+        file_size: 2646
+        function_count: 0
+        import_count: 5
+        word_count: 174
+      pyffice/web/url.py:
+        class_count: 2
+        file_size: 40555
+        function_count: 0
+        import_count: 10
+        word_count: 3545
+      pyffice/web/web.py:
+        class_count: 4
+        file_size: 17193
+        function_count: 0
+        import_count: 11
+        word_count: 1193
+      pyffice/workflows/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      pyffice/workflows/alarms.py:
+        class_count: 1
+        file_size: 3571
+        function_count: 0
+        import_count: 6
+        word_count: 240
+      pyffice/workflows/automations.py:
+        class_count: 1
+        file_size: 2438
+        function_count: 0
+        import_count: 5
+        word_count: 152
+      pyffice/workflows/formulas.py:
+        class_count: 2
+        file_size: 3692
+        function_count: 0
+        import_count: 7
+        word_count: 253
+      pyffice/workflows/playlists.py:
+        class_count: 1
+        file_size: 2664
+        function_count: 0
+        import_count: 5
+        word_count: 200
+      pyffice/workflows/source_control.py:
+        class_count: 0
+        file_size: 1362
+        function_count: 0
+        import_count: 4
+        word_count: 80
+      pyffice/workflows/workflows.py:
+        class_count: 1
+        file_size: 2215
+        function_count: 0
+        import_count: 5
+        word_count: 143
+      pyffice_cli.py:
+        class_count: 0
+        file_size: 10473
+        function_count: 9
+        import_count: 7
+        word_count: 1094
+      tests/__init__.py:
+        class_count: 0
+        file_size: 109
+        function_count: 0
+        import_count: 2
+        word_count: 12
+      tests/integration/test_integration.py:
+        class_count: 1
+        file_size: 444
+        function_count: 0
+        import_count: 1
+        word_count: 43
+      tests/test_pyffice.py:
+        class_count: 0
+        file_size: 678
+        function_count: 4
+        import_count: 1
+        word_count: 69
+      tests/test_pyffice/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/conftest.py:
+        class_count: 0
+        file_size: 1736
+        function_count: 2
+        import_count: 2
+        word_count: 112
+      tests/test_pyffice/tests/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/tests/test_asciidoc.py:
+        class_count: 0
+        file_size: 165
+        function_count: 2
+        import_count: 2
+        word_count: 17
+      tests/test_pyffice/tests/test_audio.py:
+        class_count: 0
+        file_size: 430
+        function_count: 2
+        import_count: 2
+        word_count: 38
+      tests/test_pyffice/tests/test_azw.py:
+        class_count: 0
+        file_size: 361
+        function_count: 2
+        import_count: 2
+        word_count: 36
+      tests/test_pyffice/tests/test_blend.py:
+        class_count: 0
+        file_size: 517
+        function_count: 3
+        import_count: 3
+        word_count: 65
+      tests/test_pyffice/tests/test_csv.py:
+        class_count: 0
+        file_size: 448
+        function_count: 2
+        import_count: 2
+        word_count: 46
+      tests/test_pyffice/tests/test_dwg.py:
+        class_count: 0
+        file_size: 141
+        function_count: 1
+        import_count: 2
+        word_count: 18
+      tests/test_pyffice/tests/test_dxf.py:
+        class_count: 0
+        file_size: 1211
+        function_count: 2
+        import_count: 4
+        word_count: 135
+      tests/test_pyffice/tests/test_env.py:
+        class_count: 0
+        file_size: 394
+        function_count: 2
+        import_count: 2
+        word_count: 47
+      tests/test_pyffice/tests/test_epub.py:
+        class_count: 0
+        file_size: 524
+        function_count: 3
+        import_count: 2
+        word_count: 48
+      tests/test_pyffice/tests/test_fbx.py:
+        class_count: 0
+        file_size: 107
+        function_count: 1
+        import_count: 2
+        word_count: 14
+      tests/test_pyffice/tests/test_gltf.py:
+        class_count: 0
+        file_size: 143
+        function_count: 2
+        import_count: 2
+        word_count: 17
+      tests/test_pyffice/tests/test_iges.py:
+        class_count: 0
+        file_size: 143
+        function_count: 2
+        import_count: 2
+        word_count: 17
+      tests/test_pyffice/tests/test_ini.py:
+        class_count: 0
+        file_size: 419
+        function_count: 2
+        import_count: 2
+        word_count: 44
+      tests/test_pyffice/tests/test_json.py:
+        class_count: 0
+        file_size: 433
+        function_count: 2
+        import_count: 2
+        word_count: 47
+      tests/test_pyffice/tests/test_latex.py:
+        class_count: 0
+        file_size: 153
+        function_count: 2
+        import_count: 2
+        word_count: 17
+      tests/test_pyffice/tests/test_mobi.py:
+        class_count: 0
+        file_size: 376
+        function_count: 2
+        import_count: 2
+        word_count: 36
+      tests/test_pyffice/tests/test_obj.py:
+        class_count: 0
+        file_size: 363
+        function_count: 2
+        import_count: 2
+        word_count: 38
+      tests/test_pyffice/tests/test_odt.py:
+        class_count: 0
+        file_size: 145
+        function_count: 2
+        import_count: 2
+        word_count: 17
+      tests/test_pyffice/tests/test_pptx.py:
+        class_count: 0
+        file_size: 388
+        function_count: 2
+        import_count: 2
+        word_count: 37
+      tests/test_pyffice/tests/test_rar.py:
+        class_count: 0
+        file_size: 396
+        function_count: 2
+        import_count: 2
+        word_count: 38
+      tests/test_pyffice/tests/test_rst.py:
+        class_count: 0
+        file_size: 145
+        function_count: 2
+        import_count: 2
+        word_count: 17
+      tests/test_pyffice/tests/test_rtf.py:
+        class_count: 0
+        file_size: 145
+        function_count: 2
+        import_count: 2
+        word_count: 17
+      tests/test_pyffice/tests/test_scad.py:
+        class_count: 0
+        file_size: 143
+        function_count: 2
+        import_count: 2
+        word_count: 17
+      tests/test_pyffice/tests/test_sevenzip.py:
+        class_count: 0
+        file_size: 409
+        function_count: 2
+        import_count: 2
+        word_count: 38
+      tests/test_pyffice/tests/test_step.py:
+        class_count: 0
+        file_size: 213
+        function_count: 2
+        import_count: 2
+        word_count: 25
+      tests/test_pyffice/tests/test_stl.py:
+        class_count: 0
+        file_size: 139
+        function_count: 2
+        import_count: 2
+        word_count: 17
+      tests/test_pyffice/tests/test_tar.py:
+        class_count: 0
+        file_size: 396
+        function_count: 2
+        import_count: 2
+        word_count: 38
+      tests/test_pyffice/tests/test_toml.py:
+        class_count: 0
+        file_size: 422
+        function_count: 2
+        import_count: 2
+        word_count: 45
+      tests/test_pyffice/tests/test_video.py:
+        class_count: 0
+        file_size: 440
+        function_count: 2
+        import_count: 2
+        word_count: 42
+      tests/test_pyffice/tests/test_xml.py:
+        class_count: 0
+        file_size: 428
+        function_count: 2
+        import_count: 2
+        word_count: 44
+      tests/test_pyffice/tests/test_yaml.py:
+        class_count: 0
+        file_size: 438
+        function_count: 2
+        import_count: 2
+        word_count: 49
+      tests/test_pyffice/tests/test_zip.py:
+        class_count: 0
+        file_size: 409
+        function_count: 2
+        import_count: 2
+        word_count: 39
+      tests/test_pyffice/tests/tests/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/tests/tests/test_audio.py:
+        class_count: 0
+        file_size: 155
+        function_count: 3
+        import_count: 1
+        word_count: 14
+      tests/test_pyffice/tests/tests/test_azw.py:
+        class_count: 0
+        file_size: 110
+        function_count: 2
+        import_count: 1
+        word_count: 11
+      tests/test_pyffice/tests/tests/test_binary.py:
+        class_count: 0
+        file_size: 423
+        function_count: 2
+        import_count: 2
+        word_count: 43
+      tests/test_pyffice/tests/tests/test_cad.py:
+        class_count: 0
+        file_size: 371
+        function_count: 2
+        import_count: 2
+        word_count: 45
+      tests/test_pyffice/tests/tests/test_config.py:
+        class_count: 0
+        file_size: 197
+        function_count: 1
+        import_count: 2
+        word_count: 22
+      tests/test_pyffice/tests/tests/test_csv.py:
+        class_count: 0
+        file_size: 293
+        function_count: 3
+        import_count: 2
+        word_count: 33
+      tests/test_pyffice/tests/tests/test_env.py:
+        class_count: 0
+        file_size: 107
+        function_count: 2
+        import_count: 1
+        word_count: 11
+      tests/test_pyffice/tests/tests/test_epub.py:
+        class_count: 0
+        file_size: 148
+        function_count: 3
+        import_count: 1
+        word_count: 14
+      tests/test_pyffice/tests/tests/test_heic.py:
+        class_count: 0
+        file_size: 377
+        function_count: 2
+        import_count: 2
+        word_count: 44
+      tests/test_pyffice/tests/tests/test_import_export.py:
+        class_count: 0
+        file_size: 6533
+        function_count: 3
+        import_count: 4
+        word_count: 551
+      tests/test_pyffice/tests/tests/test_ini.py:
+        class_count: 0
+        file_size: 109
+        function_count: 2
+        import_count: 1
+        word_count: 11
+      tests/test_pyffice/tests/tests/test_json.py:
+        class_count: 0
+        file_size: 192
+        function_count: 3
+        import_count: 2
+        word_count: 20
+      tests/test_pyffice/tests/tests/test_mobi.py:
+        class_count: 0
+        file_size: 113
+        function_count: 2
+        import_count: 1
+        word_count: 11
+      tests/test_pyffice/tests/tests/test_obj.py:
+        class_count: 0
+        file_size: 109
+        function_count: 2
+        import_count: 1
+        word_count: 11
+      tests/test_pyffice/tests/tests/test_pptx.py:
+        class_count: 0
+        file_size: 154
+        function_count: 3
+        import_count: 1
+        word_count: 14
+      tests/test_pyffice/tests/tests/test_presentation.py:
+        class_count: 0
+        file_size: 528
+        function_count: 3
+        import_count: 2
+        word_count: 56
+      tests/test_pyffice/tests/tests/test_rar.py:
+        class_count: 0
+        file_size: 115
+        function_count: 2
+        import_count: 1
+        word_count: 11
+      tests/test_pyffice/tests/tests/test_raw.py:
+        class_count: 0
+        file_size: 369
+        function_count: 2
+        import_count: 2
+        word_count: 45
+      tests/test_pyffice/tests/tests/test_sevenzip.py:
+        class_count: 0
+        file_size: 112
+        function_count: 2
+        import_count: 1
+        word_count: 11
+      tests/test_pyffice/tests/tests/test_tar.py:
+        class_count: 0
+        file_size: 147
+        function_count: 3
+        import_count: 1
+        word_count: 14
+      tests/test_pyffice/tests/tests/test_toml.py:
+        class_count: 0
+        file_size: 112
+        function_count: 2
+        import_count: 1
+        word_count: 11
+      tests/test_pyffice/tests/tests/test_video.py:
+        class_count: 0
+        file_size: 154
+        function_count: 3
+        import_count: 1
+        word_count: 14
+      tests/test_pyffice/tests/tests/test_xml.py:
+        class_count: 0
+        file_size: 110
+        function_count: 2
+        import_count: 1
+        word_count: 11
+      tests/test_pyffice/tests/tests/test_yaml.py:
+        class_count: 0
+        file_size: 111
+        function_count: 2
+        import_count: 1
+        word_count: 11
+      tests/test_pyffice/tests/tests/test_zip.py:
+        class_count: 0
+        file_size: 147
+        function_count: 3
+        import_count: 1
+        word_count: 14
+      tests/test_pyffice/unit/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/analytics/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/analytics/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/analytics/sourcesTEST.py:
+        class_count: 3
+        file_size: 6939
+        function_count: 0
+        import_count: 24
+        word_count: 597
+      tests/test_pyffice/unit/audio/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/audio/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/audio/audioTEST.py:
+        class_count: 2
+        file_size: 4743
+        function_count: 0
+        import_count: 22
+        word_count: 412
+      tests/test_pyffice/unit/cad/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/cad/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/cad/cadTEST.py:
+        class_count: 3
+        file_size: 5368
+        function_count: 0
+        import_count: 24
+        word_count: 471
+      tests/test_pyffice/unit/cad/itemsTEST.py:
+        class_count: 1
+        file_size: 4237
+        function_count: 0
+        import_count: 20
+        word_count: 360
+      tests/test_pyffice/unit/calendars/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/calendars/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/calendars/calendarsTEST.py:
+        class_count: 1
+        file_size: 4118
+        function_count: 0
+        import_count: 20
+        word_count: 353
+      tests/test_pyffice/unit/calendars/ganttTEST.py:
+        class_count: 1
+        file_size: 3458
+        function_count: 0
+        import_count: 20
+        word_count: 297
+      tests/test_pyffice/unit/calendars/tasksTEST.py:
+        class_count: 3
+        file_size: 6816
+        function_count: 0
+        import_count: 24
+        word_count: 590
+      tests/test_pyffice/unit/cam/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/cam/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/cam/bomTEST.py:
+        class_count: 2
+        file_size: 4449
+        function_count: 0
+        import_count: 22
+        word_count: 391
+      tests/test_pyffice/unit/cam/camTEST.py:
+        class_count: 2
+        file_size: 4202
+        function_count: 0
+        import_count: 22
+        word_count: 370
+      tests/test_pyffice/unit/cam/gcodeTEST.py:
+        class_count: 1
+        file_size: 3331
+        function_count: 0
+        import_count: 20
+        word_count: 290
+      tests/test_pyffice/unit/charts/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/charts/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/charts/chartsTEST.py:
+        class_count: 1
+        file_size: 6051
+        function_count: 0
+        import_count: 20
+        word_count: 514
+      tests/test_pyffice/unit/charts/sankeyTEST.py:
+        class_count: 1
+        file_size: 3439
+        function_count: 0
+        import_count: 20
+        word_count: 297
+      tests/test_pyffice/unit/config/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/config/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/config/configTEST.py:
+        class_count: 3
+        file_size: 4603
+        function_count: 0
+        import_count: 24
+        word_count: 408
+      tests/test_pyffice/unit/config/gportsTEST.py:
+        class_count: 3
+        file_size: 3900
+        function_count: 0
+        import_count: 4
+        word_count: 309
+      tests/test_pyffice/unit/config/msportsTEST.py:
+        class_count: 3
+        file_size: 5374
+        function_count: 0
+        import_count: 4
+        word_count: 428
+      tests/test_pyffice/unit/config/policiesTEST.py:
+        class_count: 1
+        file_size: 3101
+        function_count: 0
+        import_count: 20
+        word_count: 269
+      tests/test_pyffice/unit/config/portsTEST.py:
+        class_count: 10
+        file_size: 12308
+        function_count: 0
+        import_count: 4
+        word_count: 1051
+      tests/test_pyffice/unit/contacts/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/contacts/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/contacts/contactsTEST.py:
+        class_count: 2
+        file_size: 7937
+        function_count: 0
+        import_count: 22
+        word_count: 664
+      tests/test_pyffice/unit/databases/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/databases/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/databases/databasesTEST.py:
+        class_count: 2
+        file_size: 5161
+        function_count: 0
+        import_count: 22
+        word_count: 440
+      tests/test_pyffice/unit/databases/tableTEST.py:
+        class_count: 1
+        file_size: 3426
+        function_count: 0
+        import_count: 20
+        word_count: 297
+      tests/test_pyffice/unit/diagrams/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/diagrams/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/diagrams/diagramsTEST.py:
+        class_count: 5
+        file_size: 10118
+        function_count: 0
+        import_count: 28
+        word_count: 876
+      tests/test_pyffice/unit/documentTEST.py:
+        class_count: 4
+        file_size: 11611
+        function_count: 0
+        import_count: 26
+        word_count: 999
+      tests/test_pyffice/unit/email/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/email/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/email/emailTEST.py:
+        class_count: 2
+        file_size: 6696
+        function_count: 0
+        import_count: 22
+        word_count: 573
+      tests/test_pyffice/unit/filesystems/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/filesystems/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/filesystems/filesystemsTEST.py:
+        class_count: 1
+        file_size: 4375
+        function_count: 0
+        import_count: 20
+        word_count: 374
+      tests/test_pyffice/unit/forms/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/forms/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/forms/formsTEST.py:
+        class_count: 3
+        file_size: 7346
+        function_count: 0
+        import_count: 24
+        word_count: 632
+      tests/test_pyffice/unit/forms/surveysTEST.py:
+        class_count: 3
+        file_size: 5828
+        function_count: 0
+        import_count: 24
+        word_count: 506
+      tests/test_pyffice/unit/images/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/images/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/images/imagesTEST.py:
+        class_count: 3
+        file_size: 7556
+        function_count: 0
+        import_count: 24
+        word_count: 653
+      tests/test_pyffice/unit/images/pdfsTEST.py:
+        class_count: 1
+        file_size: 4773
+        function_count: 0
+        import_count: 20
+        word_count: 409
+      tests/test_pyffice/unit/images/utilitiesTEST.py:
+        class_count: 1
+        file_size: 4576
+        function_count: 0
+        import_count: 28
+        word_count: 388
+      tests/test_pyffice/unit/items/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/items/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/items/cellsTEST.py:
+        class_count: 2
+        file_size: 5741
+        function_count: 0
+        import_count: 22
+        word_count: 496
+      tests/test_pyffice/unit/items/colorsTEST.py:
+        class_count: 3
+        file_size: 10379
+        function_count: 0
+        import_count: 28
+        word_count: 877
+      tests/test_pyffice/unit/items/itemsTEST.py:
+        class_count: 1
+        file_size: 3415
+        function_count: 0
+        import_count: 20
+        word_count: 297
+      tests/test_pyffice/unit/items/personaTEST.py:
+        class_count: 1
+        file_size: 3194
+        function_count: 0
+        import_count: 20
+        word_count: 276
+      tests/test_pyffice/unit/items/shapesTEST.py:
+        class_count: 1
+        file_size: 4510
+        function_count: 0
+        import_count: 20
+        word_count: 388
+      tests/test_pyffice/unit/items/tasksTEST.py:
+        class_count: 6
+        file_size: 9960
+        function_count: 0
+        import_count: 30
+        word_count: 865
+      tests/test_pyffice/unit/items/textTEST.py:
+        class_count: 4
+        file_size: 6143
+        function_count: 0
+        import_count: 26
+        word_count: 544
+      tests/test_pyffice/unit/notebooks/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/notebooks/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/notebooks/notebooksTEST.py:
+        class_count: 1
+        file_size: 3946
+        function_count: 0
+        import_count: 20
+        word_count: 339
+      tests/test_pyffice/unit/presentation/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/presentation/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/presentation/presentationTEST.py:
+        class_count: 1
+        file_size: 3391
+        function_count: 0
+        import_count: 20
+        word_count: 290
+      tests/test_pyffice/unit/pyfficeTEST.py:
+        class_count: 1
+        file_size: 5443
+        function_count: 0
+        import_count: 20
+        word_count: 465
+      tests/test_pyffice/unit/reports/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/reports/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/reports/reportsTEST.py:
+        class_count: 1
+        file_size: 3530
+        function_count: 0
+        import_count: 20
+        word_count: 304
+      tests/test_pyffice/unit/socials/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/socials/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/socials/messagesTEST.py:
+        class_count: 3
+        file_size: 4543
+        function_count: 0
+        import_count: 24
+        word_count: 401
+      tests/test_pyffice/unit/socials/socialsTEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/spreadsheet/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/spreadsheet/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/spreadsheet/spreadsheetTEST.py:
+        class_count: 3
+        file_size: 8452
+        function_count: 0
+        import_count: 24
+        word_count: 716
+      tests/test_pyffice/unit/tags/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/tags/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/tags/managerTEST.py:
+        class_count: 1
+        file_size: 3355
+        function_count: 0
+        import_count: 20
+        word_count: 290
+      tests/test_pyffice/unit/tags/ratingsTEST.py:
+        class_count: 1
+        file_size: 3296
+        function_count: 0
+        import_count: 20
+        word_count: 278
+      tests/test_pyffice/unit/tags/referencesTEST.py:
+        class_count: 1
+        file_size: 4270
+        function_count: 0
+        import_count: 20
+        word_count: 367
+      tests/test_pyffice/unit/tags/tagsTEST.py:
+        class_count: 1
+        file_size: 3489
+        function_count: 0
+        import_count: 20
+        word_count: 304
+      tests/test_pyffice/unit/text/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/text/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/text/bibliographiesTEST.py:
+        class_count: 1
+        file_size: 3813
+        function_count: 0
+        import_count: 20
+        word_count: 325
+      tests/test_pyffice/unit/text/messagesTEST.py:
+        class_count: 1
+        file_size: 3505
+        function_count: 0
+        import_count: 20
+        word_count: 304
+      tests/test_pyffice/unit/text/textTEST.py:
+        class_count: 2
+        file_size: 6264
+        function_count: 0
+        import_count: 21
+        word_count: 538
+      tests/test_pyffice/unit/updates/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/updates/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/updates/updatesTEST.py:
+        class_count: 3
+        file_size: 6506
+        function_count: 0
+        import_count: 24
+        word_count: 548
+      tests/test_pyffice/unit/video/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/video/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/video/videoTEST.py:
+        class_count: 1
+        file_size: 3840
+        function_count: 0
+        import_count: 20
+        word_count: 332
+      tests/test_pyffice/unit/web/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/web/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/web/promptsTEST.py:
+        class_count: 4
+        file_size: 7222
+        function_count: 0
+        import_count: 26
+        word_count: 628
+      tests/test_pyffice/unit/web/servicesTEST.py:
+        class_count: 1
+        file_size: 3428
+        function_count: 0
+        import_count: 20
+        word_count: 297
+      tests/test_pyffice/unit/web/urlTEST.py:
+        class_count: 2
+        file_size: 9360
+        function_count: 0
+        import_count: 22
+        word_count: 795
+      tests/test_pyffice/unit/web/webTEST.py:
+        class_count: 4
+        file_size: 8759
+        function_count: 0
+        import_count: 26
+        word_count: 761
+      tests/test_pyffice/unit/workflows/__init__.py:
+        class_count: 0
+        file_size: 0
+        function_count: 0
+        import_count: 0
+        word_count: 0
+      tests/test_pyffice/unit/workflows/__init__TEST.py:
+        class_count: 0
+        file_size: 2379
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/workflows/alarmsTEST.py:
+        class_count: 1
+        file_size: 3746
+        function_count: 0
+        import_count: 20
+        word_count: 325
+      tests/test_pyffice/unit/workflows/automationsTEST.py:
+        class_count: 1
+        file_size: 3460
+        function_count: 0
+        import_count: 20
+        word_count: 297
+      tests/test_pyffice/unit/workflows/formulasTEST.py:
+        class_count: 2
+        file_size: 4567
+        function_count: 0
+        import_count: 22
+        word_count: 398
+      tests/test_pyffice/unit/workflows/playlistsTEST.py:
+        class_count: 1
+        file_size: 3868
+        function_count: 0
+        import_count: 20
+        word_count: 332
+      tests/test_pyffice/unit/workflows/source_controlTEST.py:
+        class_count: 0
+        file_size: 2386
+        function_count: 0
+        import_count: 18
+        word_count: 203
+      tests/test_pyffice/unit/workflows/workflowsTEST.py:
+        class_count: 1
+        file_size: 3591
+        function_count: 0
+        import_count: 20
+        word_count: 311
+      tests/unit/__init__.py:
+        class_count: 1
+        file_size: 496
+        function_count: 0
+        import_count: 2
+        word_count: 45
+      tests/unit/test_document.py:
+        class_count: 2
+        file_size: 1945
+        function_count: 0
+        import_count: 1
+        word_count: 146
+      tests/unit/test_pyffice.py:
+        class_count: 1
+        file_size: 706
+        function_count: 0
+        import_count: 2
+        word_count: 58
+audit_date: '1773510862.8491971'
 dimensions:
   agent_awareness:
     details:
@@ -1803,12 +2500,20 @@ dimensions:
     status: pass
   changelog_tracking:
     details:
-      found:
-      - CHANGES.md
-      score: 100
-      status: pass
-    score: 100
-    status: pass
+      issues:
+      - fix: Add entries to CHANGES.md for recent changes
+        rule: 'Low changelog coverage: 2%'
+        severity: high
+        unmatched_commits:
+        - 'f29ecdc Initial commit: Add compliance files (README, CHANGE'
+        - 4314570 Update:LICENSE, tracker, epub, calendarsports, proje
+        - d2eb420 clean up structure
+        - 8a911ef Resolve merge conflict by removing __pycache__ files
+        - '4115a7d Fix: pip-licenses path and CLI coverage'
+      score: 20
+      status: partial
+    score: 20
+    status: partial
   ci_cd_config:
     details:
       ci_cd_found:
@@ -1818,23 +2523,32 @@ dimensions:
       status: pass
     score: 100
     status: pass
-  cli_documentation:
+  ci_cd_documentation:
     details:
-      exists: true
+      ci_cd_docs_found:
+      - CONTRIBUTING.md
+      issues: []
       score: 100
-      sections_found:
-      - Usage
-      - Arguments
-      - Examples
-      sections_missing: []
       status: pass
     score: 100
     status: pass
+  cli_documentation:
+    details:
+      exists: true
+      score: 66
+      sections_found:
+      - Usage
+      - Examples
+      sections_missing:
+      - Arguments
+      status: partial
+    score: 66
+    status: partial
   code_quality_pylint:
     details:
       issues:
       - fix: Fix pylint errors
-        rule: 'Pylint errors: 1662'
+        rule: 'Pylint errors: 1664'
         severity: critical
       score: 0
       status: fail
@@ -1849,8 +2563,8 @@ dimensions:
     status: pass
   dependency_strategy:
     details:
-      external_imports: 2220
-      info: 'Hint: 63 GitVein projects available but not used: PyQt5Pandas, apig,
+      external_imports: 2223
+      info: 'Hint: 67 GitVein projects available but not used: PyQt5Pandas, apig,
         asolutionfor, axn, basicbot...'
       internal_import_details:
       - file: cli.py
@@ -1885,13 +2599,13 @@ dimensions:
         project: condor
       internal_imports: 809
       internal_projects_used:
-      - pyffice
-      - condor
       - ogma
-      leverage_score: 26.71
+      - condor
+      - pyffice
+      leverage_score: 26.68
       score: 100
       status: pass
-      total_imports: 3029
+      total_imports: 3032
     score: 100
     status: pass
   documentation:
@@ -1921,7 +2635,7 @@ dimensions:
       - fix: Use specific exception types instead of Exception
         rule: 'Generic Exception excepts found: 3'
         severity: medium
-      proper_try_except: 129
+      proper_try_except: 135
       score: 85
       status: pass
     score: 85
@@ -1930,7 +2644,7 @@ dimensions:
     details:
       large_file_count: 0
       score: 75
-      small_file_count: 71
+      small_file_count: 70
       status: partial
     score: 75
     status: partial
@@ -1960,15 +2674,48 @@ dimensions:
       status: pass
     score: 100
     status: pass
+  lambda_antipattern:
+    details:
+      antipattern_count: 0
+      issues: []
+      score: 100
+      status: pass
+      total_lambdas: 2
+    score: 100
+    status: pass
   license_dependencies:
     details:
-      issues: []
-      mit_pct: 48.44290657439446
+      issues:
+      - fix: Replace with MIT-licensed alternatives
+        packages:
+        - Babel (BSD License)
+        - Flask (BSD-3-Clause)
+        - ImageIO (BSD-2-Clause)
+        - Jinja2 (BSD License)
+        - Jinja2 (BSD License)
+        rule: 'Non-MIT licenses: 312/592'
+        severity: high
+      - fix: Verify license manually or remove dependency
+        packages:
+        - PyAudio
+        - apturl
+        - command-not-found
+        - cupshelpers
+        - distro-info
+        rule: 'Unknown licenses: 16/592'
+        severity: high
+      mit_percentage: 44.6
       score: 25
-      status: fail
-      total_deps: 289
+      status: partial
+      tools_available:
+      - pip-licenses
+      tools_checked:
+      - fossa
+      - safety
+      - pip-licenses
+      - dependency-check
     score: 25
-    status: fail
+    status: partial
   licenses:
     details:
       issues: []
@@ -1987,44 +2734,183 @@ dimensions:
       uses_logma: true
     score: 100
     status: pass
+  mkdocs_mkdocstrings:
+    details:
+      docs_directory: true
+      has_index_md: false
+      has_mkdocstrings: false
+      issues:
+      - fix: Create mkdocs.yml with mkdocstrings plugin for API documentation
+        rule: docs/ directory exists but no MkDocs configuration
+        severity: high
+      mkdocs_config: null
+      score: 50
+      status: partial
+    score: 50
+    status: partial
   module_cli_coverage:
     details:
-      covered_modules: 3
-      score: 8
-      status: fail
+      cli_commands:
+      - cli
+      - document_convert
+      - document_info
+      - presentation_convert
+      - spreadsheet_convert
+      - spreadsheet_info
+      context:
+        actual: 4/37 modules have CLI commands (10%)
+        description: Ensures every module has a corresponding CLI command for accessibility
+        dimension: module_cli_coverage
+        expected: All modules should have CLI commands (100% coverage at 80% threshold)
+        fix_guidance: 'Add CLI commands for: agent, analytics, audio, cad, calendars,
+          cam, charts, config, contacts, container, databases, diagrams, ebook, email,
+          filesystems, forms, images, items, matrix, media, notebooks, ports, projects,
+          pyffice, reports, script, socials, tags, text, updates, video, web, workflows.
+          Map each module to a CLI command in cli.py using subparsers.add_parser(''contacts'').'
+        what_it_tests: Whether each Python module in the package has a matching CLI
+          command entry point
+        why_partial_or_fail: 'Modules missing CLI commands: agent, analytics, audio,
+          cad, calendars, cam, charts, config, contacts, container, databases, diagrams,
+          ebook, email, filesystems, forms, images, items, matrix, media, notebooks,
+          ports, projects, pyffice, reports, script, socials, tags, text, updates,
+          video, web, workflows. Available CLI commands found: cli, document_convert,
+          document_info, presentation_convert, spreadsheet_convert, spreadsheet_info.
+          Each module should have either: (1) a matching @cli.command()/@app.command()
+          decorator, (2) a subparsers.add_parser() call matching the module name,
+          or (3) a cmd_XXX function in cli.py that maps to the module.'
+      covered_modules: 4
+      issues:
+      - available_cli_commands:
+        - document_info
+        - spreadsheet_info
+        - spreadsheet_convert
+        - presentation_convert
+        - document_convert
+        - cli
+        covered_modules:
+        - cli
+        - presentation
+        - spreadsheet
+        - document
+        fix: 'Add CLI commands for: contacts, databases, email, text, tags, config,
+          web, diagrams, images, ebook, filesystems, forms, socials, cad, script,
+          cam, projects, matrix, media, ports, notebooks, items, workflows, audio,
+          charts, calendars, reports, video, agent, container, pyffice, analytics,
+          updates'
+        rule: 'CLI coverage: 4/37 modules'
+        severity: medium
+        uncovered_modules:
+        - contacts
+        - databases
+        - email
+        - text
+        - tags
+        - config
+        - web
+        - diagrams
+        - images
+        - ebook
+        - filesystems
+        - forms
+        - socials
+        - cad
+        - script
+        - cam
+        - projects
+        - matrix
+        - media
+        - ports
+        - notebooks
+        - items
+        - workflows
+        - audio
+        - charts
+        - calendars
+        - reports
+        - video
+        - agent
+        - container
+        - pyffice
+        - analytics
+        - updates
+      module_list:
+      - agent
+      - analytics
+      - audio
+      - cad
+      - calendars
+      - cam
+      - charts
+      - cli
+      - config
+      - contacts
+      - container
+      - databases
+      - diagrams
+      - document
+      - ebook
+      - email
+      - filesystems
+      - forms
+      - images
+      - items
+      - matrix
+      - media
+      - notebooks
+      - ports
+      - presentation
+      - projects
+      - pyffice
+      - reports
+      - script
+      - socials
+      - spreadsheet
+      - tags
+      - text
+      - updates
+      - video
+      - web
+      - workflows
+      score: 10
+      status: partial
       total_modules: 37
-      uncovered_modules: 34
-    score: 8
-    status: fail
+      uncovered_modules: 33
+    score: 10
+    status: partial
   readme_quality:
     details:
-      issues: []
-      score: 100
+      issues:
+      - fix: 'Add sections: usage'
+        rule: 'Missing sections: usage'
+        severity: medium
+      score: 60
       sections_found:
       - installation
-      - usage
       - features
       sections_required:
       - installation
       - usage
       - features
-      status: pass
-      word_count: 530
-    score: 100
-    status: pass
+      status: partial
+      word_count: 136
+    score: 60
+    status: partial
   security_bandit:
     details:
       details:
-        files_scanned: 0
-        high: 0
-        low: 0
-        medium: 0
-        total: 0
-      issues: []
-      score: 100
-      status: pass
-    score: 100
-    status: pass
+        files_scanned: 162
+        high: 2
+        low: 26
+        medium: 32
+        total: 60
+      issues:
+      - fix: Fix high severity security issues
+        rule: 'Bandit HIGH severity issues: 2'
+        severity: critical
+      score: 30
+      status: partial
+    score: 30
+    status: partial
   security_ruff:
     details:
       issues: []
@@ -2079,57 +2965,42 @@ dimensions:
     details:
       issues:
       - fix: Resolve all TODO comments or create tracking issue
-        rule: 'TODO/FIXME comments found: 13'
+        rule: 'TODO/FIXME comments found: 3'
         severity: critical
         todos:
-        - content: '# TODO: Implement actual save logic'
-          file: pyffice/pyffice.py
-          line: 336
-        - content: '# TODO: Add test file and assertions'
-          file: tests/test_pyffice/tests/test_dxf.py
-          line: 7
-        - content: '# TODO: Add test implementation'
-          file: tests/test_pyffice/tests/test_blend.py
-          line: 7
-        - content: '# TODO: Add test implementation'
-          file: tests/test_pyffice/tests/test_blend.py
-          line: 12
-        - content: '# TODO: rewrite to pull all Project management class here'
-          file: pyffice/projects/project.py
-          line: 33
-        - content: '# TODO: need to include all OpenSource Project Management project
-            file format bidirection conversion'
-          file: pyffice/projects/project.py
-          line: 34
-        - content: '# TODO: implement bidirection Microsoft Project conversion format'
-          file: pyffice/projects/project.py
-          line: 35
-        - content: '# TODO: the fromat in the interla project ProjectAXN as the base
-            model and extend to support all nee'
-          file: pyffice/projects/project.py
-          line: 36
-        - content: '# TODO: Implement ICS parsing'
-          file: pyffice/ports/calendarsports.py
-          line: 13
-        - content: '# TODO: Implement ICS writing'
-          file: pyffice/ports/calendarsports.py
-          line: 18
-      score: 40
-      status: partial
-      todo_count: 13
-    score: 40
-    status: partial
+        - content: '# Note: python-pptx only supports .pptx, not legacy .ppt'
+          file: pyffice/ports/presentationports.py
+          line: 86
+        - content: '# Note: Full RAR compression requires external ''rar'' command'
+          file: pyffice/container/rar.py
+          line: 48
+        - content: '# Note: Full RAR extraction requires external ''unrar'' command'
+          file: pyffice/container/rar.py
+          line: 56
+      score: 80
+      status: pass
+      todo_count: 3
+    score: 80
+    status: pass
+  try_except_imports:
+    details:
+      issues: []
+      score: 100
+      status: pass
+      violation_count: 0
+    score: 100
+    status: pass
   type_annotations:
     details:
-      annotated_functions: 696
-      annotation_percentage: 16.4
+      annotated_functions: 709
+      annotation_percentage: 16.6
       issues:
       - fix: Add type hints to function signatures and return types
-        rule: 'Type annotation coverage: 16.4%'
+        rule: 'Type annotation coverage: 16.6%'
         severity: medium
       score: 16
       status: partial
-      total_functions: 4238
+      total_functions: 4264
     score: 16
     status: partial
   type_check_pyright:
@@ -2139,10 +3010,19 @@ dimensions:
       status: pass
     score: 100
     status: pass
-overall_score: 91.27
+  wrapper_antipattern:
+    details:
+      issues: []
+      score: 100
+      status: pass
+      total_functions: 4197
+      wrapper_count: 10
+    score: 100
+    status: pass
+overall_score: 75.15
 project: pyffice
 summary:
-  failing: 3
-  gitvein_projects_available: 66
-  passing: 19
-  total_dimensions: 26
+  failing: 1
+  gitvein_projects_available: 70
+  passing: 20
+  total_dimensions: 31

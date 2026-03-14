@@ -17,10 +17,13 @@
 from __future__ import annotations
 
 import argparse
+import logging
 import json
 import sys
 from os.path import abspath, dirname, join
 from typing import Any, Optional
+# Configure logging
+logger = logging.getLogger(__name__)
 
 # Add project to path
 sys.path.insert(0, join(dirname(__file__), ""))
@@ -38,8 +41,8 @@ except ImportError as e:
 def cmd_create(args: argparse.Namespace) -> int:
     """Create a new Pyffice document."""
     if not PYFFICE_AVAILABLE:
-        print(f"Error: PyfficeCodex not available - {_import_error}")
-        print("Run 'pyffice skill' to see skill documentation anyway")
+        logger.error( PyfficeCodex not available - {_import_error}")
+        logger.info("Run 'pyffice skill' to see skill documentation anyway")
         return 1
     
     codex = PyfficeCodex()
@@ -77,11 +80,11 @@ def cmd_create(args: argparse.Namespace) -> int:
     elif doc_type == "browser":
         doc = codex.init_browser({"name": name})
     else:
-        print(f"Error: Unknown document type '{doc_type}'")
+        logger.error( Unknown document type '{doc_type}'")
         return 1
     
     if doc:
-        print(f"Created {doc_type} document: {doc.did}")
+        logger.info(f"Created {doc_type} document: {doc.did}")
         return 0
     return 1
 
@@ -89,7 +92,7 @@ def cmd_create(args: argparse.Namespace) -> int:
 def cmd_list(args: argparse.Namespace) -> int:
     """List documents in the codex."""
     if not PYFFICE_AVAILABLE:
-        print(f"Error: PyfficeCodex not available - {_import_error}")
+        logger.error( PyfficeCodex not available - {_import_error}")
         return 1
     
     codex = PyfficeCodex()
@@ -97,13 +100,13 @@ def cmd_list(args: argparse.Namespace) -> int:
     
     docs = codex.documents
     if not docs:
-        print("No documents in codex")
+        logger.info("No documents in codex")
         return 0
     
-    print(f"Documents in codex ({len(docs)}):")
+    logger.info(f"Documents in codex ({len(docs)}):")
     for doc_id, doc in docs.items():
         doc_type = type(doc).__name__
-        print(f"  - {doc_id}: {doc_type}")
+        logger.info(f"  - {doc_id}: {doc_type}")
     
     return 0
 
@@ -111,7 +114,7 @@ def cmd_list(args: argparse.Namespace) -> int:
 def cmd_info(args: argparse.Namespace) -> int:
     """Get info about a specific document."""
     if not PYFFICE_AVAILABLE:
-        print(f"Error: PyfficeCodex not available - {_import_error}")
+        logger.error( PyfficeCodex not available - {_import_error}")
         return 1
     
     codex = PyfficeCodex()
@@ -121,16 +124,16 @@ def cmd_info(args: argparse.Namespace) -> int:
     doc = codex.documents.get(doc_id)
     
     if not doc:
-        print(f"Document '{doc_id}' not found")
+        logger.info(f"Document '{doc_id}' not found")
         return 1
     
-    print(f"Document: {doc_id}")
-    print(f"  Type: {type(doc).__name__}")
+    logger.info(f"Document: {doc_id}")
+    logger.info(f"  Type: {type(doc).__name__}")
     
     if hasattr(doc, 'name'):
-        print(f"  Name: {doc.name}")
+        logger.info(f"  Name: {doc.name}")
     if hasattr(doc, 'created'):
-        print(f"  Created: {doc.created}")
+        logger.info(f"  Created: {doc.created}")
     
     return 0
 
@@ -138,7 +141,7 @@ def cmd_info(args: argparse.Namespace) -> int:
 def cmd_export(args: argparse.Namespace) -> int:
     """Export codex to YAML or JSON."""
     if not PYFFICE_AVAILABLE:
-        print(f"Error: PyfficeCodex not available - {_import_error}")
+        logger.error( PyfficeCodex not available - {_import_error}")
         return 1
     
     codex = PyfficeCodex()
@@ -152,15 +155,15 @@ def cmd_export(args: argparse.Namespace) -> int:
     elif syntax == "json":
         result = json.dumps(codex.to_summary(), indent=2)
     else:
-        print(f"Error: Unknown format '{syntax}'")
+        logger.error( Unknown format '{syntax}'")
         return 1
     
     if output == "-":
-        print(result)
+        logger.info(result)
     else:
         with open(output, 'w') as f:
             f.write(result)
-        print(f"Exported to {output}")
+        logger.info(f"Exported to {output}")
     
     return 0
 
@@ -168,34 +171,34 @@ def cmd_export(args: argparse.Namespace) -> int:
 def cmd_summary(args: argparse.Namespace) -> int:
     """Get token-efficient summary of the codex."""
     if not PYFFICE_AVAILABLE:
-        print(f"Error: PyfficeCodex not available - {_import_error}")
+        logger.error( PyfficeCodex not available - {_import_error}")
         return 1
     
     codex = PyfficeCodex()
     codex.load_document()
     
     summary = codex.to_summary()
-    print(json.dumps(summary, indent=2))
+    logger.info(json.dumps(summary, indent=2))
     return 0
 
 
 def cmd_schema(args: argparse.Namespace) -> int:
     """Get JSON schema for LLM validation."""
     if not PYFFICE_AVAILABLE:
-        print(f"Error: PyfficeCodex not available - {_import_error}")
+        logger.error( PyfficeCodex not available - {_import_error}")
         return 1
     
     codex = PyfficeCodex()
     
     schema = codex.to_json_schema()
-    print(json.dumps(schema, indent=2))
+    logger.info(json.dumps(schema, indent=2))
     return 0
 
 
 def cmd_import(args: argparse.Namespace) -> int:
     """Import documents into the codex."""
     if not PYFFICE_AVAILABLE:
-        print(f"Error: PyfficeCodex not available - {_import_error}")
+        logger.error( PyfficeCodex not available - {_import_error}")
         return 1
     
     codex = PyfficeCodex()
@@ -205,9 +208,9 @@ def cmd_import(args: argparse.Namespace) -> int:
         with open(source, 'r') as f:
             yaml_str = f.read()
         codex = PyfficeCodex.from_yaml(yaml_str)
-        print(f"Imported from {source}")
+        logger.info(f"Imported from {source}")
     else:
-        print(f"Error: Unsupported file format. Use .yaml or .yml")
+        logger.error( Unsupported file format. Use .yaml or .yml")
         return 1
     
     return 0
@@ -316,7 +319,7 @@ pyffice skill
 ## Configuration
 Pyffice uses `_data_/pyffice.yaml` for configuration.
 '''
-    print(skill_doc)
+    logger.info(skill_doc)
     return 0
 
 
