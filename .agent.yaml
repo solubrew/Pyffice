@@ -1,0 +1,80 @@
+# Agent Awareness Configuration
+# This file provides context for AI agents working on the pyffice project
+
+agent:
+  name: orin
+  workspace: /home/solubrew/.orin/workspace
+  branch: orin-ws
+  audit_score: 82.27
+  target_score: 95
+
+project:
+  name: pyffice
+  type: python-library
+  language: Python 3.12+
+  purpose: Office document wrapper (diagrams, spreadsheets, presentations, PDFs)
+  modules: 30+
+  cli_commands: 30
+
+dimensions:
+  passing:
+    - cli_documentation
+    - configuration
+    - dependency_strategy
+    - documentation
+    - git_workflow
+    - structure
+    - licenses
+  failing:
+    - module_cli_coverage
+    - agent_awareness
+    - license_dependencies
+    - logging
+    - kiss_dry
+    - duplicate_files
+
+commands:
+  document: document_convert, document_info
+  spreadsheet: spreadsheet_convert, spreadsheet_info
+  presentation: presentation_convert
+  diagram: diagram_convert, diagram_validate, diagram_info
+  image: image_convert, image_resize, image_info
+  video: video_convert, video_info
+  audio: audio_convert, audio_info
+  cad: cad_convert, cad_info
+  chart: chart_create
+  calendar: calendar_list
+  contact: contact_list, contact_search
+  email: email_send
+  database: database_connect, database_query
+  filesystem: filesystem_list, filesystem_sync
+  analytics: analytics_report
+  project: project_create
+  config: config_show, config_validate, config_set
+  form: form_create, form_validate
+  notebook: notebook_convert
+  report: report_generate
+  social: social_post
+  tag: tag_list
+  text: text_convert
+  update: update_check, update_install
+  web: web_fetch, web_parse
+  workflow: workflow_run, workflow_list
+  cam: cam_generate
+  formats: list_formats
+
+dependencies:
+  external:
+    - click
+    - pyyaml
+    - reportlab
+    - pillow
+  internal:
+    - ogma
+    - condor
+
+conventions:
+  - All modules use logging.getLogger(__name__)
+  - CLI via Click
+  - Configuration via config.yaml
+  - snake_case naming internally
