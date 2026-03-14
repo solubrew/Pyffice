@@ -15,9 +15,10 @@
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join, exists
 import datetime as dt
-import json as j
+import json
 import re
 import xml.etree.ElementTree as ET
+import zipfile
 from base64 import b64decode, b64encode
 from io import BytesIO
 from zipfile import ZipFile
@@ -664,7 +665,7 @@ class XMindConverter(DiagramConverter):
                 # XMind files are ZIP with content.json inside
                 if "content.json" in zf.namelist():
                     content = zf.read("content.json").decode("utf-8")
-                    data = j.loads(content)
+                    data = json.loads(content)
                     self._parse_xmind(data, sketch)
         except Exception as e:
             logma.error(f"Failed to load XMind: {e}")
