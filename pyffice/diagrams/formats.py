@@ -108,8 +108,8 @@ class DiaConverter(DiagramConverter):
         try:
             xml_str = data.decode("utf-8")
             root = ET.fromstring(xml_str)
-        except Exception:
-            logma.error(f"Failed to parse Dia XML: {file_path}")
+        except (UnicodeDecodeError, ET.ParseError) as e:
+            logma.error(f"Failed to parse Dia XML: {file_path} - {e}")
             return sketch
 
         # Parse Dia XML structure
@@ -488,7 +488,7 @@ class DrawIOConverter(DiagramConverter):
                         xml_content = zf.read("diagram.xml").decode("utf-8")
                         self._parse_drawio_xml(xml_content, sketch)
                         return sketch
-            except Exception:
+            except (KeyError, zipfile.BadZipFile) as e:
                 pass
 
             # Try as XML directly
@@ -639,7 +639,7 @@ class VSDXConverter(DiagramConverter):
                     # Extract pages and shapes
                     pass
 
-        except Exception as e:
+        except (OSError, zipfile.BadZipFile) as e:
             logma.error(f"Failed to load VSDX: {e}")
 
         return sketch

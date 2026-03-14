@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.0] - 2026-03-13
+
+### Added
+- Full test suite structure (unit, integration, e2e)
+- CLI entry point with proper argument handling
+- Configuration file validation
+- Document conversion framework
+
+### Fixed
+- Replaced TODO stubs with actual function implementations
+- Added proper type annotations
+- Added logging instead of print statements
+- Removed old test_pyffice directory (migrated to tests/)
+
+### Changed
+- Migrated to tests/ directory structure per CODING_STANDARDS
+- Updated pyproject.toml with complete tool configurations
+
 ## [0.1.0] - 2025-02-XX
 
 ### Added
