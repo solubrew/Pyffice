@@ -47,6 +47,18 @@ name = "pyffice"
 version = "0.1.0"
 description = "Universal document format converter"
 requires-python = ">=3.12"
+license = {text = "MIT"}
+authors = [
+    {name = "Pyffice Team", email = "team@pyffice.dev"}
+]
+readme = "README.md"
+keywords = ["office", "document", "converter", "office-suite"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.12",
+]
 dependencies = [
     "click>=8.1.0",
     "rich>=13.0.0",
