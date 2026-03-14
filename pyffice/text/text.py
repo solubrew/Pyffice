@@ -439,7 +439,7 @@ class PyfficeScript(PyfficeDocument):
             for i, page in self.pages.items():
                 if i not in doc["data"]["pages"]:
                     doc["data"]["pages"][str(i)] = {"entries": {}}
-                logma.info(f"Entries {len(page["entries"])}")
+                logma.info(f"Entries {len(page['entries'])}")
                 for entry in page["entries"]:
                     if "entries" not in doc["data"]["pages"][str(i)]:
                         doc["data"]["pages"][str(i)]["entries"] = {}

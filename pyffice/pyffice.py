@@ -333,8 +333,24 @@ class PyfficeCodex(PyfficeDocumentManager):
         self, path: Optional[str] = None, syntax: Optional[str] = None, encrypt_key: Optional[str] = None
     ) -> "PyfficeCodex":
         """Save the codex to a file."""
-        # TODO: Implement actual save logic
-        logger.info(f"Saving to {path}")
+        if path is None:
+            raise PyfficeCodexError("Save path is required")
+        
+        import yaml
+        from pathlib import Path
+        
+        # Determine syntax and get appropriate serializer
+        syntax = syntax or "yaml"
+        
+        # Serialize the codex
+        data = self.to_dict()
+        
+        # Write to file
+        file_path = Path(path)
+        with open(file_path, 'w', encoding='utf-8') as f:
+            yaml.dump(data, f, default_flow_style=False)
+        
+        logger.info(f"Saved codex to {path}")
         return self
 
     def set_imports(self, imports: Optional[dict[str, Any]] = None) -> "PyfficeCodex":
