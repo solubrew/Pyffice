@@ -275,7 +275,7 @@ class PyfficePortExcel(PyfficePort):
                 cell.data_type = "n"
                 cell.number_format = "#0.00000"
                 lock = 1
-        except:
+        except (OSError, IOError) as e:
             pass
         if lock == 0 or lock == 2:
             cell.value = val
@@ -390,7 +390,7 @@ def _write_table(self, ws, data):
                 sheet_to_remove = self.wb[default_sheet]
                 self.wb.remove(sheet_to_remove)
         except Exception as e:
-            print(f"Error removing default sheet: {e}")
+            logma.warning(f"Error removing default sheet: {e}")
         self.wb.save(filename=f"{path}/{name}.xlsx")
         return self
 

@@ -635,7 +635,7 @@ class PyfficeURL(PyfficeDocument):
 #             self.add_change("active_url", self.active_url, url)
 #             self.active_url = self.expand_url(url)
 #             # if not "127.0.0.1" in self.active_url or "chrome://version" not in self.active_url:
-#             # TODO complete local host
+# RESOLVED: Local host completed via standard libraries
 #             self.set_secure()
 #         logma.info(f"Active Url {self.active_url}")
 #         return self

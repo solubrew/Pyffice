@@ -1,85 +1,92 @@
 # Pyffice CLI
 
-## Overview
-Pyffice is a polyglot office document package that creates YAML versions of office files with bidirectional conversion. Provides AI Agent enhanced tool-ready functions.
+Command-line interface for Pyffice.
+
+## Installation
+
+```bash
+pip install pyffice
+```
 
 ## Usage
 
+### Convert Documents
+
 ```bash
-pyffice <command> [OPTIONS]
+pyffice convert input.docx output.pdf
 ```
+
+### Create New Document
+
+```bash
+pyffice create --type spreadsheet output.xlsx
+pyffice create --type presentation output.pptx
+pyffice create --type document output.docx
+```
+
+### List Supported Formats
+
+```bash
+pyffice formats
+```
+
+### Diagram Operations
+
+```bash
+# Convert diagram formats
+pyffice diagram convert input.dia output.svg
+
+# List supported diagram formats
+pyffice diagram formats
+```
+
+### Configuration
+
+```bash
+# Show configuration
+pyffice config show
+
+# Validate configuration
+pyffice config validate
+```
+
+## Options
+
+- `--verbose`, `-v` - Enable verbose output
+- `--quiet`, `-q` - Suppress output
+- `--config CONFIG` - Specify config file
 
 ## Arguments
 
-| Argument | Type | Required | Description | Default |
-|----------|------|----------|--------------|---------|
-| `command` | string | Yes | The subcommand to run | - |
-| `type` | string | For create | Document type | - |
-| `id` | string | For info | Document ID | - |
-| `source` | string | For import | Source YAML file | - |
-| `--name` | string | No | Document name | `untitled_<type>` |
-| `--output` | string | No | Output file (- for stdout) | stdout |
-| `--format` | string | No | Output format (yaml/json) | yaml |
+### convert
+- `input` (required) - Input file path
+- `output` (required) - Output file path
 
-## Commands
+### create
+- `--type`, `-t` (required) - Document type: document, spreadsheet, presentation
+- `--template`, `-m` (optional) - Template file to use
 
-| Command | Description |
-|---------|-------------|
-| `create <type>` | Create a new document |
-| `list` | List all documents in codex |
-| `info <doc_id>` | Get document info |
-| `export` | Export codex to YAML or JSON |
-| `summary` | Get token-efficient summary |
-| `schema` | Get JSON schema for LLM validation |
-| `import <file>` | Import from YAML file |
-| `skill` | Show skill document |
+### diagram convert
+- `input` (required) - Input diagram file path
+- `output` (required) - Output diagram file path
 
-## Document Types
+### diagram formats
+- `--verbose`, `-v` (optional) - Show detailed format information
 
-| Type | Description |
-|------|-------------|
-| calendar | Calendar/scheduling document |
-| chart | Chart/visualization document |
-| contacts | Contact/rolodex database |
-| files | Filesystem document |
-| form | Form document |
-| image | Image document |
-| matrix | Spreadsheet document |
-| notebook | Notebook document |
-| pdf | PDF document |
-| prompt | Prompts manager |
-| script | Text/script document |
-| sketch | Diagram/sketch document |
-| source | Data source |
-| browser | Web browser |
+### config show
+- `--key` (optional) - Show specific config key only
+
+### config validate
+- `--strict` (optional) - Exit with error if config is invalid
 
 ## Examples
 
+Convert a Dia diagram to SVG:
 ```bash
-# Create a calendar document
-pyffice create calendar --name "my_calendar"
+pyffice diagram convert my_diagram.dia output.svg
+```
 
-# Create a matrix document
-pyffice create matrix --name "budget"
-
-# List all documents
-pyffice list
-
-# Get document info
-pyffice info doc_123
-
-# Export to YAML file
-pyffice export --output codex.yaml --format yaml
-
-# Get summary for LLM
-pyffice summary
-
-# Get JSON schema
-pyffice schema
-
-# Import from YAML
-pyffice import my_codex.yaml
-
-# Show skill document
-pyffice skill
+Create a new spreadsheet:
+```bash
+pyffice create --type spreadsheet --template monthly_budget.xlsx
 ```

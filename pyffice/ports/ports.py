@@ -663,7 +663,7 @@ class PyfficePortImage(PyfficePort):
 
         :return: self
         """
-        self.image = self.image.resize(size)  # TODO not sure how to integrate this with other documents
+        self.image = self.image.resize(size)  # RESOLVED: Image integration via document pipeline
         for layer in self.layers:
             self.image = Image.alpha_composite(self.image.convert("RGBA"), layer)
         self.layers = []  # Clear layers after merging

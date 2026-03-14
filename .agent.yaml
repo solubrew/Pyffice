@@ -1,0 +1,27 @@
+# Agent Configuration
+
+name: pyffice
+description: Universal Office Suite Converter
+capabilities:
+  - document_conversion
+  - diagram_conversion
+  - image_conversion
+  - video_conversion
+  - audio_conversion
+  - cad_conversion
+  - spreadsheet_conversion
+  - presentation_conversion
+  - calendar_management
+  - email_processing
+  - database_operations
+  - web_services
+  - workflow_automation
+
+workspace:
+  type: hybrid
+  auto_sync: true
+
+preferences:
+  default_format: odt
+  parallel_processing: true
+  cache_enabled: true

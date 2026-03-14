@@ -1,0 +1,218 @@
+---
+PyfficeChart:
+    axis:
+      dimension: "x"
+      title: "X Axis"
+      position: "bottom"
+      orientation: "horizontal"
+      scale: "linear"
+      start: "auto"
+      end: "auto"
+      step: "auto"
+      show_labels: True
+      primary: False
+      grid:
+        minor:
+          show: False
+          step: "auto"
+        major:
+          show: True
+          step: "auto"
+    background:
+    chart:
+      type: "line"
+    legend:
+    plotarea:
+      size:
+      color:
+      border:
+      axes:
+    series:
+      width: 1
+      style: "solid"
+      marker:
+        shape: "circle"
+        color: "blue"
+        size: 10
+    template:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        metadata:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:
+            position:
+            size:
+            origin:
+            content:
+              title:
+              type:
+              background:
+                  color:
+                  translucence:
+                  image:
+                  border:
+              plotarea:
+                  position:
+                  size:
+                  background:
+                      color:
+                      translucence:
+                      image:
+                      border:
+                  grids:
+                      - start:
+                        step:
+                        style:
+                        color:
+                        axis:
+              legend:
+                  - name:
+                    series:
+                    position:
+                    size:
+                    background:
+                        color:
+                        translucence:
+                        image:
+                        border:
+                    text:
+                        size:
+                        color:
+                        font:
+              axis:
+                  - dimension: x
+                    name:
+                    primary: True
+                    start:
+                    step:
+                    labels:
+                  - dimension: y
+                    name:
+                    primary: True
+                    start:
+                    step:
+                    labels:
+                  - dimension: y
+                    name:
+                    primary: False
+                    start:
+                    step:
+                    labels:
+              data:
+                  - name:
+                    values:
+                    label:
+                    format:
+                        color:
+                        style:
+                        value:
+                            size:
+                            color:
+                            font:
+PyfficeChartAxis:
+    template:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        metadata:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:
+PyfficeChartDataSeries:
+    template:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        metadata:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:
+          series:
+            - name:
+              values:
+              label:
+              format:
+                color:
+                style:
+                value:
+                  size:
+                  color:
+                  font:
+PyfficeChartLegend:
+    template:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        metadata:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:
+PyfficeChartBuilder:
+    standard_charts: ["scatter", "line", "bar", "pie", "area", "radar", "doughnut", "polararea", "bubble", "scatter3d",
+                      "surface"]
+    advanced_charts: ["heatmap", "drilltree"]
+    interactive_charts: []
+    geographic_charts: ["folium", "geoplotlib"]
+    special_charts:
+        sankey: sankey
+        gantt: gantt
+    template:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        metadata:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:

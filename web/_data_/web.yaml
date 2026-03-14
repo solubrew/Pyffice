@@ -1,0 +1,122 @@
+---
+PyfficeWebBrowser:
+    template:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        version: 0.0.1.0.1.1
+        metadata:
+          author:
+          editors:
+          document_type:
+          compatability:
+          creon_dttm:
+          modon_dttm:
+        data:
+            home_page:
+            active_page:
+            profile_manager:
+            pages:
+            library:
+            content:
+PyfficeWebPage:
+    template:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        version: 0.0.1.0.1.1
+        metadata:
+            author:
+            editors:
+            document_type:
+            compatability:
+            creon_dttm:
+            modon_dttm:
+        data:
+            pinned_on:
+            last_refresh:
+            history:
+            snapshots:
+            versions:
+            level_of_trust:
+            url:
+            source:
+            profile:
+PyfficeWebSource:
+    template:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        version: 0.0.1.0.1.1
+        metadata:
+            author:
+            editors:
+            document_type:
+            compatability:
+            creon_dttm:
+            modon_dttm:
+        data:
+PyfficeWebProfile:
+    template:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        version: 0.0.1.0.1.1
+        metadata:
+            author:
+            editors:
+            document_type:
+            compatability:
+            creon_dttm:
+            modon_dttm:
+        data:
+PyfficeWebProfileManager:
+    template:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        version: 0.0.1.0.1.1
+        metadata:
+            author:
+            editors:
+            document_type:
+            compatability:
+            creon_dttm:
+            modon_dttm:
+        data:
+            profile_manager:

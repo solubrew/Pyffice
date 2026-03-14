@@ -1,0 +1,44 @@
+# Pyffice Configuration
+
+# Application Settings
+app:
+  name: pyffice
+  version: "0.1.0"
+  debug: false
+
+# Logging Configuration
+logging:
+  level: INFO
+  format: "%(levelname)s: %(message)s"
+  file: null
+
+# Default Paths
+paths:
+  config_dir: ~/.pyffice
+  cache_dir: ~/.cache/pyffice
+  temp_dir: /tmp/pyffice
+
+# Document Conversion Defaults
+conversion:
+  default_format: pdf
+  supported_formats:
+    - pdf
+    - docx
+    - odt
+    - rtf
+    - txt
+  max_file_size_mb: 100
+
+# Module Features (enable/disable)
+features:
+  diagrams: true
+  spreadsheets: true
+  presentations: true
+  pdfs: true
+  web: true
+
+# Network Settings
+network:
+  timeout: 30
+  retry_count: 3
+  user_agent: "Pyffice/0.1.0"

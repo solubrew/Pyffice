@@ -1,0 +1,265 @@
+rm 'pyffice/__pycache__/__init__.cpython-310.pyc'
+On branch gamma0
+All conflicts fixed but you are still merging.
+  (use "git commit" to conclude merge)
+Changes to be committed:
+        new file:   .agent.yaml
+        new file:   .github/workflows/ci.yml
+        new file:   AGENT.md
+        modified:   CHANGES.md
+        modified:   CLI.md
+        new file:   CONTRIBUTING.md
+        new file:   LICENSE_DEPENDENCIES.md
+        new file:   PROJECT_TRACKER.yaml
+        modified:   STATE.md
+        new file:   __init__.py
+        new file:   __main__.py
+        new file:   analytics/__init__.py
+        new file:   analytics/_data_/sources.yaml
+        new file:   analytics/sources.py
+        new file:   audio/__init__.py
+        new file:   audio/_data_/audio.yaml
+        new file:   audio/audio.py
+        new file:   cad/__init__.py
+        new file:   cad/_data_/cad.yaml
+        new file:   cad/cad.py
+        new file:   cad/items.py
+        new file:   calendars/__init__.py
+        new file:   calendars/_data_/calendars.yaml
+        new file:   calendars/calendars.py
+        new file:   calendars/gantt.py
+        new file:   calendars/tasks.py
+        new file:   cam/__init__.py
+        new file:   cam/_data_/cam.yaml
+        new file:   cam/bom.py
+        new file:   cam/cam.py
+        new file:   cam/gcode.py
+        new file:   charts/__init__.py
+        new file:   charts/_data_/charts.yaml
+        new file:   charts/charts.py
+        new file:   charts/sankey.py
+        modified:   cli.py
+        new file:   config.yaml
+        new file:   config/__init__.py
+        new file:   config/_data_/dev_new_web.yaml
+        new file:   config/_data_/dev_previous_web.yaml
+        new file:   config/_data_/imports.yaml
+        new file:   config/_data_/policies.yaml
+        new file:   config/_data_/ports.yaml
+        new file:   config/config.py
+        new file:   config/gports.py
+        new file:   config/msports.py
+        new file:   config/policies.py
+        new file:   config/ports.py
+        new file:   contacts/__init__.py
+        new file:   contacts/_data_/contacts.yaml
+        new file:   contacts/contacts.py
+        new file:   databases/__init__.py
+        new file:   databases/_data_/databases.yaml
+        new file:   databases/_data_/table.yaml
+        new file:   databases/databases.py
+        new file:   databases/table.py
+        new file:   diagrams/__init__.py
+        new file:   diagrams/_data_/diagrams.yaml
+        new file:   diagrams/diagrams.py
+        new file:   diagrams/formats.py
+        new file:   docs/CLI.md
+        new file:   document.py
+        new file:   email/__init__.py
+        new file:   email/__pycache__/__init__.cpython-312.pyc
+        new file:   email/_data_/email.yaml
+        new file:   email/email.py
+        new file:   filesystems/__init__.py
+        new file:   filesystems/_data_/filesystems.yaml
+        new file:   filesystems/filesystems.py
+        new file:   forms/__init__.py
+        new file:   forms/_data_/forms.yaml
+        new file:   forms/forms.py
+        new file:   forms/surveys.py
+        new file:   images/__init__.py
+        new file:   images/_data_/colors.yaml
+        new file:   images/_data_/images.yaml
+        new file:   images/_data_/pdfs.yaml
+        new file:   images/images.py
+        new file:   images/pdfs.py
+        new file:   images/utilities.py
+        new file:   items/__init__.py
+        new file:   items/_data_/cells.yaml
+        new file:   items/_data_/colors.yaml
+        new file:   items/_data_/items.yaml
+        new file:   items/_data_/persona.yaml
+        new file:   items/_data_/text.yaml
+        new file:   items/cells.py
+        new file:   items/colors.py
+        new file:   items/items.py
+        new file:   items/persona.py
+        new file:   items/shapes.py
+        new file:   items/tasks.py
+        new file:   items/text.py
+        new file:   notebooks/__init__.py
+        new file:   notebooks/_data_/notebooks.yaml
+        new file:   notebooks/notebooks.py
+        new file:   presentation/__init__.py
+        new file:   presentation/_data_/presentation.yaml
+        new file:   presentation/presentation.py
+        new file:   projects/__init__.py
+        new file:   projects/paxn.py
+        new file:   pyffice.py
+        new file:   pyffice/PROJECT_TRACKER.yaml
+        modified:   pyffice/__init__.py
+        new file:   pyffice/__main__.py
+        deleted:    pyffice/__pycache__/__init__.cpython-310.pyc
+        new file:   pyffice/__pycache__/document.cpython-310.pyc
+        modified:   pyffice/audio/audio.py
+        modified:   pyffice/calendars/gantt.py
+        modified:   pyffice/charts/sankey.py
+        modified:   pyffice/cli.py
+        modified:   pyffice/diagrams/__init__.py
+        new file:   pyffice/diagrams/formats.py
+        modified:   pyffice/document.py
+        modified:   pyffice/forms/forms.py
+        modified:   pyffice/images/utilities.py
+        modified:   pyffice/ports/msports.py
+        modified:   pyffice/ports/ports.py
+        modified:   pyffice/text/text.py
+        modified:   pyffice/web/url.py
+        modified:   pyproject.toml
+        new file:   reports/__init__.py
+        new file:   reports/_data_/reports.yaml
+        new file:   reports/reports.py
+        new file:   socials/__init__.py
+        new file:   socials/messages.py
+        new file:   socials/socials.py
+        new file:   spreadsheet/__init__.py
+        new file:   spreadsheet/_data_/spreadsheet.yaml
+        new file:   spreadsheet/spreadsheet.py
+        new file:   tags/__init__.py
+        new file:   tags/_data_/tags.yaml
+        new file:   tags/manager.py
+        new file:   tags/ratings.py
+        new file:   tags/references.py
+        new file:   tags/tags.py
+        new file:   test_pyffice/__pycache__/conftest.cpython-310-pytest-9.0.2.pyc
+        new file:   test_pyffice/__pycache__/conftest.cpython-312-pytest-9.0.2.pyc
+        modified:   test_pyffice/conftest.py
+        new file:   tests/__init__.py
+        new file:   tests/__pycache__/__init__.cpython-310.pyc
+        new file:   tests/integration/__pycache__/test_integration.cpython-310-pytest-9.0.2.pyc
+        new file:   tests/integration/test_integration.py
+        new file:   tests/test_pyffice.py
+        new file:   tests/unit/__init__.py
+        new file:   tests/unit/__pycache__/test_pyffice.cpython-310-pytest-9.0.2.pyc
+        new file:   tests/unit/test_document.py
+        new file:   tests/unit/test_pyffice.py
+        new file:   text/__init__.py
+        new file:   text/_data_/bibliographies.yaml
+        new file:   text/_data_/text.yaml
+        new file:   text/bibliographies.py
+        new file:   text/messages.py
+        new file:   text/text.py
+        new file:   updates/__init__.py
+        new file:   updates/_data_/updates.yaml
+        new file:   updates/updates.py
+        new file:   video/__init__.py
+        new file:   video/_data_/video.yaml
+        new file:   video/video.py
+        new file:   web/__init__.py
+        new file:   web/_data_/prompts.yaml
+        new file:   web/_data_/url.yaml
+        new file:   web/_data_/web.yaml
+        new file:   web/prompts.py
+        new file:   web/services.py
+        new file:   web/url.py
+        new file:   web/web.py
+        new file:   workflows/__init__.py
+        new file:   workflows/_data_/alarms.yaml
+        new file:   workflows/_data_/automations.yaml
+        new file:   workflows/_data_/formulas.yaml
+        new file:   workflows/_data_/playlists.yaml
+        new file:   workflows/_data_/workflows.yaml
+        new file:   workflows/alarms.py
+        new file:   workflows/automations.py
+        new file:   workflows/formulas.py
+        new file:   workflows/playlists.py
+        new file:   workflows/source_control.py
+        new file:   workflows/workflows.py
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    email/__pycache__/__init__.cpython-312.pyc
+        deleted:    pyffice/__pycache__/__init__.cpython-312.pyc
+        deleted:    pyffice/__pycache__/document.cpython-310.pyc
+        deleted:    pyffice/__pycache__/document.cpython-312.pyc
+        deleted:    pyffice/__pycache__/pyffice.cpython-310.pyc
+        deleted:    pyffice/analytics/__pycache__/__init__.cpython-310.pyc
+        deleted:    pyffice/analytics/__pycache__/__init__.cpython-312.pyc
+        deleted:    pyffice/analytics/__pycache__/sources.cpython-312.pyc
+        deleted:    pyffice/audio/__pycache__/__init__.cpython-310.pyc
+        deleted:    pyffice/cad/__pycache__/__init__.cpython-310.pyc
+        deleted:    pyffice/calendars/__pycache__/__init__.cpython-310.pyc
+        deleted:    pyffice/calendars/__pycache__/__init__.cpython-312.pyc
+        deleted:    pyffice/calendars/__pycache__/calendars.cpython-312.pyc
+        deleted:    pyffice/calendars/__pycache__/tasks.cpython-312.pyc
+        deleted:    pyffice/cam/__pycache__/__init__.cpython-310.pyc
+        deleted:    pyffice/charts/__pycache__/__init__.cpython-310.pyc
+        deleted:    pyffice/charts/__pycache__/__init__.cpython-312.pyc
+        deleted:    pyffice/charts/__pycache__/charts.cpython-312.pyc
+        deleted:    pyffice/config/__pycache__/__init__.cpython-310.pyc
+        deleted:    pyffice/config/__pycache__/__init__.cpython-312.pyc
+        deleted:    pyffice/config/__pycache__/gports.cpython-312.pyc
+        deleted:    pyffice/config/__pycache__/msports.cpython-312.pyc
+        deleted:    pyffice/config/__pycache__/ports.cpython-312.pyc
+        deleted:    pyffice/contacts/__pycache__/__init__.cpython-310.pyc
+        deleted:    pyffice/contacts/__pycache__/__init__.cpython-312.pyc
+        deleted:    pyffice/contacts/__pycache__/contacts.cpython-312.pyc
+        deleted:    pyffice/databases/__pycache__/__init__.cpython-310.pyc
+        deleted:    pyffice/diagrams/__pycache__/__init__.cpython-310.pyc
+        deleted:    pyffice/diagrams/__pycache__/__init__.cpython-312.pyc
+        deleted:    pyffice/diagrams/__pycache__/diagrams.cpython-312.pyc
+        deleted:    pyffice/email/__pycache__/__init__.cpython-310.pyc
+        deleted:    pyffice/filesystems/__pycache__/__init__.cpython-310.pyc
+        deleted:    pyffice/filesystems/__pycache__/__init__.cpython-312.pyc
+        deleted:    pyffice/filesystems/__pycache__/filesystems.cpython-312.pyc
+        deleted:    pyffice/forms/__pycache__/__init__.cpython-310.pyc
+        deleted:    pyffice/forms/__pycache__/__init__.cpython-312.pyc
+        deleted:    pyffice/forms/__pycache__/forms.cpython-312.pyc
+        deleted:    pyffice/images/__pycache__/__init__.cpython-310.pyc
+        deleted:    pyffice/images/__pycache__/__init__.cpython-312.pyc
+        deleted:    pyffice/images/__pycache__/images.cpython-312.pyc
+        deleted:    pyffice/images/__pycache__/pdfs.cpython-312.pyc
+        deleted:    pyffice/items/__pycache__/__init__.cpython-310.pyc
+        deleted:    pyffice/items/__pycache__/__init__.cpython-312.pyc
+        deleted:    pyffice/items/__pycache__/cells.cpython-312.pyc
+        deleted:    pyffice/items/__pycache__/colors.cpython-312.pyc
+        deleted:    pyffice/items/__pycache__/items.cpython-312.pyc
+        deleted:    pyffice/items/__pycache__/text.cpython-312.pyc
+        deleted:    pyffice/notebooks/__pycache__/__init__.cpython-310.pyc
+        deleted:    pyffice/notebooks/__pycache__/__init__.cpython-312.pyc
+        deleted:    pyffice/notebooks/__pycache__/notebooks.cpython-312.pyc
+        deleted:    pyffice/presentation/__pycache__/__init__.cpython-310.pyc
+        deleted:    pyffice/presentation/__pycache__/__init__.cpython-312.pyc
+        deleted:    pyffice/reports/__pycache__/__init__.cpython-310.pyc
+        deleted:    pyffice/spreadsheet/__pycache__/__init__.cpython-310.pyc
+        deleted:    pyffice/spreadsheet/__pycache__/__init__.cpython-312.pyc
+        deleted:    pyffice/spreadsheet/__pycache__/spreadsheet.cpython-312.pyc
+        deleted:    pyffice/tags/__pycache__/__init__.cpython-310.pyc
+        deleted:    pyffice/tags/__pycache__/__init__.cpython-312.pyc
+        deleted:    pyffice/tags/__pycache__/tags.cpython-312.pyc
+        deleted:    pyffice/text/__pycache__/__init__.cpython-310.pyc
+        deleted:    pyffice/text/__pycache__/__init__.cpython-312.pyc
+        deleted:    pyffice/text/__pycache__/text.cpython-312.pyc
+        deleted:    pyffice/updates/__pycache__/__init__.cpython-310.pyc
+        deleted:    pyffice/updates/__pycache__/__init__.cpython-312.pyc
+        deleted:    pyffice/updates/__pycache__/updates.cpython-312.pyc
+        deleted:    pyffice/video/__pycache__/__init__.cpython-310.pyc
+        deleted:    pyffice/web/__pycache__/__init__.cpython-310.pyc
+        deleted:    pyffice/web/__pycache__/__init__.cpython-312.pyc
+        deleted:    pyffice/web/__pycache__/prompts.cpython-312.pyc
+        deleted:    pyffice/web/__pycache__/url.cpython-312.pyc
+        deleted:    pyffice/web/__pycache__/web.cpython-312.pyc
+        deleted:    pyffice/workflows/__pycache__/__init__.cpython-310.pyc
+        deleted:    test_pyffice/__pycache__/conftest.cpython-310-pytest-9.0.2.pyc
+        deleted:    test_pyffice/__pycache__/conftest.cpython-312-pytest-9.0.2.pyc
+        deleted:    tests/__pycache__/__init__.cpython-310.pyc
+        deleted:    tests/integration/__pycache__/test_integration.cpython-310-pytest-9.0.2.pyc
+        deleted:    tests/unit/__pycache__/test_pyffice.cpython-310-pytest-9.0.2.pyc

@@ -1,0 +1,122 @@
+PyfficeBibliography:
+  styles:
+    APA:
+      style: "APA (7th Edition)"
+      media:
+        Book:
+          physical: "<[author]>. (<[year]>). <[title]>. <[publisher]>."
+          digital: "<[author]>. (<[year]>). <[title]> [eBook]. <[publisher]>. <[URL or DOI]>"
+        Journal:
+          physical: "<[author]>. (<[year]>). <[title]>. <[journal title]>, <[volume]>(<[issue]>), <[page range]>.  "
+          digital: "<[author]>. (<[year]>). <[title]>. <[journal title]>, <[volume]>(<[issue]>), <[page range]>. <[DOI or URL]>"
+        Newspaper:
+          physical:
+          digital:
+        Podcast:
+          digital:
+        Website:
+          digital:
+        Video:
+          digital:
+    MLA:
+      style: "MLA (9th Edition)"
+      media:
+        Book:
+          physical: "<[author]>. <[title]>. <[publisher]>, <[year]>."
+          digital: "<[author]>. <[title]>. E-book, <[publisher]>, <[year]>, <[DOI or URL]>."
+        Journal:
+          physical:
+          digital:
+        Newspaper:
+          physical:
+          digital:
+        Podcast:
+          digital:
+        Website:
+          digital:
+        Video:
+          digital:
+    CAD:
+      style: "Chicago Author-Date"
+      media:
+        Book:
+          physical: "<[author]>. <[year]>. <[title]>. <[city]>: <[publisher]>."
+        Journal:
+          physical:
+          digital:
+        Newspaper:
+          physical:
+          digital:
+        Podcast:
+          digital:
+        Website:
+          digital:
+        Video:
+          digital:
+    CNB:
+      style: "Chicago Notes-Bibliography"
+      media:
+        Book:
+          physical:
+        Journal:
+          physical:
+          digital:
+        Newspaper:
+          physical:
+          digital:
+        Podcast:
+          digital:
+        Website:
+          digital:
+        Video:
+          digital:
+    document:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        metadata:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:
+          references:
+            -
+PyfficeReference:
+    document:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        metadata:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:
+            author:
+            publisher:
+            media_type:
+            name:
+            volume:
+            edition:
+            issue:
+            year:
+            month:
+            day:
+            url:

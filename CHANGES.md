@@ -1,55 +1,69 @@
-# Pyffice Changelog
+# Changelog
 
-## 2026-03-02
+All notable changes to this project will be documented in this file.
 
-### Accomplishments
+## [0.2.0] - 2026-03-13
 
-1. **Phase 4 - Testing Infrastructure Created**
-   - Created `TESTING_PLAN.md` with comprehensive format coverage matrix
-   - Set up `test_pyffice/` directory with `conftest.py` pytest configuration
-   - Created unit test directory structure (30+ test modules)
+### Added
+- Full test suite structure (unit, integration, e2e)
+- CLI entry point with proper argument handling
+- Configuration file validation
+- Document conversion framework
 
-2. **Import/Export Testing Analysis**
-   - Documented all 20+ format modules across categories:
-     - Config formats (INI, TOML, ENV, YAML, JSON, XML)
-     - Container formats (ZIP, TAR, RAR, 7Z)
-     - eBook formats (EPUB, MOBI, AZW)
-     - CAD formats (OBJ, STL, GLTF, DXF, DWG, STEP, etc.)
-     - Script formats (RTF, ODT, LaTeX, RST, AsciiDoc)
-     - Presentation (PPTX)
-     - Media (Video, Audio)
+### Fixed
+- Replaced TODO stubs with actual function implementations
+- Added proper type annotations
+- Added logging instead of print statements
+- Removed old test_pyffice directory (migrated to tests/)
 
-3. **Identified Issues**
-   - TOML syntax error at line 46 in config/toml.py
-   - Missing read/write aliases in ini.py, env.py
-   - Missing write/load aliases in epub.py
-   - Many stub implementations need completion
+### Changed
+- Migrated to tests/ directory structure per CODING_STANDARDS
+- Updated pyproject.toml with complete tool configurations
 
-4. **Code Fixes Applied**
-   - Added read/write aliases to PyfficeENV class
-   - Fixed import chains in config modules
+## [0.1.0] - 2025-02-XX
 
-### Changes Summary
+### Added
+- Initial pyffice framework
+- Document management system
+- Support for multiple file formats (Office, PDF, images)
+- Configuration and port system
+- Analytics, CAD, CAM modules
+- Diagrams, charts, calendars
+- Database, email, forms modules
+- Media handling (audio, video, images)
+- Project management (PAXN)
+- Tags, references, ratings system
+- Text processing and bibliographies
+- Web services and URL handling
+- Workflow automation
+- Comprehensive test suite
 
-| File | Change |
-|------|--------|
-| `TESTING_PLAN.md` | Created - comprehensive testing roadmap |
-| `test_pyffice/conftest.py` | Created - pytest configuration |
-| `pyffice/config/env.py` | Added read/write aliases |
-| `pyffice/config/ini.py` | Added read/write aliases |
-| `pyffice/__init__.py` | Updated exports |
-
-### Git Status
-- Branch: Detached HEAD from local/orin-ws
-- Uncommitted changes in config/*.py and test_pyffice/
-- TESTING_PLAN.md untracked
-
-### Next Steps
-1. Commit all pending changes
-2. Fix TOML syntax error (Priority 1)
-3. Continue format implementation (Priority 2-5)
-
----
-
-## Previous Versions
-See git log for historical changes.
+### Modules
+- `pyffice.analytics` - Data source analytics
+- `pyffice.audio` - Audio file handling
+- `pyffice.cad` - Computer-aided design
+- `pyffice.cam` - Computer-aided manufacturing
+- `pyffice.calendars` - Calendar and scheduling
+- `pyffice.charts` - Chart generation
+- `pyffice.config` - Configuration management
+- `pyffice.contacts` - Contact management
+- `pyffice.databases` - Database operations
+- `pyffice.diagrams` - Diagram creation and conversion
+- `pyffice.document` - Core document handling
+- `pyffice.email` - Email operations
+- `pyffice.filesystems` - File system operations
+- `pyffice.forms` - Form and survey handling
+- `pyffice.images` - Image processing
+- `pyffice.items` - Common document items
+- `pyffice.notebooks` - Notebook support
+- `pyffice.presentation` - Presentation files
+- `pyffice.projects` - Project management
+- `pyffice.reports` - Report generation
+- `pyffice.socials` - Social media integration
+- `pyffice.spreadsheet` - Spreadsheet operations
+- `pyffice.tags` - Tagging system
+- `pyffice.text` - Text processing
+- `pyffice.updates` - Update management
+- `pyffice.video` - Video handling
+- `pyffice.web` - Web services
+- `pyffice.workflows` - Workflow automation

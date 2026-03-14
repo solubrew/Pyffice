@@ -1,0 +1,90 @@
+---
+PyfficePort:
+PyfficePortCherryTree:
+PyfficePortJupyter:
+  template:
+    cells:
+      -
+        cell_type:
+        execution_count:
+        id:
+        metadata:
+          ExecuteTime:
+            end_time:
+            start_time:
+        outputs:
+          -
+            name:
+            output_type:
+            text:
+          -
+            ename:
+            evalue:
+            output_type:
+            traceback:
+        source:
+    meta_data:
+      kernelspec:
+        display_name:
+        language:
+        name:
+      language_info:
+        codemirror_mode:
+          name:
+          version:
+        file_extension:
+        mimetype:
+        name:
+        nbconvert_exporter:
+        pygments_lexer:
+        version:
+  nbformat:
+  nbformat_minor:
+PyfficePortWebSession:
+  template:
+    -
+      windows:
+        <[window_id]>:
+          <[tab_id]>:
+            active:
+            "audible": False
+            "autoDiscardable": True
+            "discarded": False
+            "favIconUrl": ""
+            "frozen": False
+            "groupId": -1
+            "height": 895
+            "highlighted": True
+            "id": 1907570404
+            "incognito": False
+            "index": 0
+            "lastAccessed": 1744409528033.501
+            "mutedInfo":
+              "muted": False
+            "pinned": False
+            "selected": True
+            "status": "complete"
+            "title": ""
+            "url": "chrome://newtab/"
+            "width": 1920
+            "windowId": <[window_id]>
+        "windowsNumber": 6
+        "windowsInfo":
+          "<[window_id]>":
+            "alwaysOnTop": false
+            "focused": false
+            "height": 1016
+            "id": 1907570403
+            "incognito": false
+            "left": 0
+            "state": "maximized"
+            "top": 32
+            "type": "normal"
+            "width": 1920
+        "tabsNumber": 145
+        "name": "(115) YouTube"
+        "date": 1744434769001
+        "lastEditedTime": 1744434769001
+        "tag": ["browserExit"]
+        "sessionStartTime": 1744409533174
+        "id": "0239be40-0071-4426-b3b9-99b6e3037138"
