@@ -1,0 +1,24 @@
+PyfficeAlarm:
+    template:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        version: 0.0.1.0.1.1
+        metadata:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:
+          alarm_on:
+          unit:
+          unit_multiple:
+          action:

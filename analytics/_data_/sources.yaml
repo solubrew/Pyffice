@@ -1,0 +1,98 @@
+PyfficeDataSet:
+    template:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        metadata:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:
+PyfficeDataView:
+    template:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        metadata:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:
+PyfficeSourcesManager:
+    template:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        metadata:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:
+  sources:
+    PyfficeBrowser:
+      tables:
+    PyfficeCalendar:
+      tables:
+        timespan:
+        events:
+    PyfficeChart:
+      tables:
+    PyfficeFiles:
+      tables:
+        files:
+        directories:
+        paths:
+    PyfficeForm:
+      tables:
+        submissions:
+        inputs:
+    PyfficeImage:
+      tables:
+        palette:
+    PyfficeMatrix:
+      tables:
+    PyfficeNotebook:
+      tables:
+    PyfficePDF:
+      tables:
+        - pages:
+    PyfficePrompt:
+      tables:
+    PyfficeScript:
+      tables:
+        - letters:
+        - words:
+        - sentences:
+        - paragraphs:
+        - pages:
+    PyfficeSketch:
+      tables:
+    PyfficeSource:
+      tables:

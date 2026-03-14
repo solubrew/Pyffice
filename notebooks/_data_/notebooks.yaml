@@ -1,0 +1,33 @@
+---
+PyfficeNotebook:
+    template:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        metadata:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:
+          notebook:
+            cells:
+              -
+                cell_type:
+                execution_count:
+                id:
+                metadata:
+                  ExecuteTime:
+                    end_time:
+                    start_time:
+                outputs:
+                source:
+                sequence:

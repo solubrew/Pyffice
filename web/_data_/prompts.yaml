@@ -1,0 +1,162 @@
+PyfficePrompt:
+    template:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        version: 0.0.1.0.1.1
+        metadata:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:
+            datetime:
+            tags: ""
+            input:
+                structured:
+                  context:
+                      data:
+                        text:
+                            did:
+                            unit:
+                                value:
+                        metrics:
+                          accuracy:
+                          relevance:
+                          length:
+                      document:
+                        text:
+                            did:
+                            unit:
+                                value:
+                        metrics:
+                          accuracy:
+                          relevance:
+                          length:
+                      application:
+                        text:
+                            did:
+                            unit:
+                                value:
+                        metrics:
+                          accuracy:
+                          relevance:
+                          length:
+                  persona:
+                    text:
+                      did:
+                      unit:
+                        value:
+                    metrics:
+                      accuracy:
+                      relevance:
+                      length:
+                  topic:
+                    text:
+                      did:
+                      unit:
+                        value:
+                    metrics:
+                      accuracy:
+                      relevance:
+                      length:
+                  scope_response:
+                    #Outline audience.... individual/crowd....mix of Myers.... intent persuade etc
+                    audience:
+                      size: #define the size of the audience
+                      distributions: #define the distribution of the audience in personality, age, gender, etc.
+                      selection: #define the selection criteria
+                    intent: #define intent of the expected response....persuade, inform, entertain, etc.
+                      persuasion: #
+                      information: #
+                      entertainment: #
+                    agreeableness: #
+                    groundedness: #
+                    inventiveness: #
+                    overview:
+                      text:
+                        did:
+                        unit:
+                          value:
+                      metrics:
+                        breadth:
+                        depth:
+                text:
+                    did:
+                    unit:
+                        value:
+                metrics:
+            responses:
+                - text:
+                    did:
+                    unit:
+                        value:
+                  response_dttm:
+                  service:
+                  sources:
+                    - source:
+                  metrics:
+                    completeness:
+                    user_satisfaction:
+            response_processing:
+              curiosity: #0 - 1...set how curious the ai should be in follow up of concepts
+              confidence: #0 - 1...set how confident the ai should be in final conclusions/investigation of unsupported arguments
+              time_range:
+              expansiveness: #0 - 1...set how expansive the ai should be in follow up of concepts
+              interactivity: #0 - 1...set how interactive the ai should be with the user in providing choices for paths to follow
+              complexity:
+              urgency:
+              accuracy_target:
+              insight_depth:
+              tasks:
+                extract_tables: #task create a table of the data - task store data in a datastore
+                extract_concepts: #task create a list of concepts if any
+                parse_concepts:
+                  logical_arguments: #task create bullet points for each argument
+                  emotional_arguments: #task create bullet points for each argument
+                  logical_relationships: #task create a chart showing the relationships between arguments
+                  logical_conclusions: #task research the counterfactuals of each conclusion
+                  logical_fallacies: #task research fallacies further
+                  logical_implications: #task calculate probabilities of each implication
+                  unsupported_arguments: #task research unsupported arguments further
+                extract_people: #task create a list of people if any
+                extract_topics: #task create a list of topics if any
+                extract_locations: #task create a list of locations if any
+                extract_products: #task create a list of products if any
+                extract_papers: #task create a list of papers if any...create tab for the paper
+                extract_organizations: #task create a list of organizations if any...create rolodex entry for the org
+                extract_events: #task create a list of events if any...create calendar entry for the event
+                extract_dates: #task place dates into a calendar overview if any...create calendar entry for the date
+                create_charts: #task create charts for each table if any
+                summarization: #task create a summary of the data
+                finalization: #task create a final conclusion based on the data and summarization
+                notification: #task send a notification to the user of the final conclusion
+
+
+PyfficePromptManager:
+    template:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        metadata:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:

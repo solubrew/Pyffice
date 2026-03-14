@@ -1,0 +1,49 @@
+---
+PyfficeLibrary:
+    template:
+        name:
+        uuid:
+        name:
+        description:
+        metadata:
+            author:
+            path:
+            location:
+            encoding:
+            tags:
+            context:
+            hash:
+            policy_fk:
+        document:
+PyfficePlaylist:
+    template:
+        name:
+        uuid:
+        name:
+        description:
+        metadata:
+            author:
+            path:
+            location:
+            encoding:
+            tags:
+            context:
+            hash:
+            policy_fk:
+        document:
+PyfficeSong:
+    template:
+        name:
+        uuid:
+        name:
+        description:
+        metadata:
+            author:
+            path:
+            location:
+            encoding:
+            tags:
+            context:
+            hash:
+            policy_fk:
+        document:

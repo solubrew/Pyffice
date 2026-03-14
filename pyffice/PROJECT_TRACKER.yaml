@@ -1,0 +1,265 @@
+agent: orin
+analysis:
+  counts:
+    class_counts: {}
+    directories: 1
+    file_sizes: {}
+    files_by_type:
+      .yaml: 3
+    function_counts: {}
+    import_counts: {}
+    word_counts: {}
+audit_date: '1773452154.9903984'
+dimensions:
+  agent_awareness:
+    details:
+      issues:
+      - No CLI file found
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  changelog_tracking:
+    details:
+      missing:
+      - CHANGES.md
+      - CHANGELOG.md
+      - CHANGELOG.rst
+      - HISTORY.md
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  ci_cd_config:
+    details:
+      ci_cd_found: []
+      issues:
+      - fix: Add CI/CD configuration (GitHub Actions, GitLab CI, etc.)
+        rule: No CI/CD configuration found
+        severity: high
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  cli_documentation:
+    details:
+      exists: false
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  code_quality_pylint:
+    details:
+      issues: []
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  configuration:
+    details:
+      config_exists: false
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  dependency_strategy:
+    details:
+      external_imports: 0
+      internal_import_details: []
+      internal_imports: 0
+      internal_projects_used: []
+      leverage_score: 0
+      score: 0
+      status: fail
+      total_imports: 0
+    score: 0
+    status: fail
+  documentation:
+    details:
+      missing:
+      - README.md
+      - CHANGES.md
+      - STATE.md
+      - CONTRIBUTING.md
+      present: []
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  duplicate_files:
+    details:
+      duplicate_count: 0
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  error_handling:
+    details:
+      bare_excepts: 0
+      generic_excepts: 0
+      issues: []
+      proper_try_except: 0
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  file_sizes:
+    details:
+      large_file_count: 0
+      score: 100
+      small_file_count: 0
+      status: pass
+    score: 100
+    status: pass
+  git_workflow:
+    details:
+      is_git_repo: false
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  import_organization:
+    details:
+      has_isort_config: false
+      issues:
+      - fix: Add isort configuration to pyproject.toml or .isort.cfg
+        rule: No isort configuration found
+        severity: low
+      potential_misordered: 0
+      score: 75
+      status: partial
+    score: 75
+    status: partial
+  kiss_dry:
+    details:
+      duplicate_warnings: 0
+      magic_numbers_found: 0
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  license_dependencies:
+    details:
+      issues: []
+      mit_pct: 48.25581395348838
+      score: 25
+      status: fail
+      total_deps: 344
+    score: 25
+    status: fail
+  licenses:
+    details:
+      issues:
+      - Missing pyproject.toml
+      - Missing LICENSE file
+      score: 25
+      status: fail
+    score: 25
+    status: fail
+  logging:
+    details:
+      print_files: []
+      print_statements: 0
+      score: 0
+      status: fail
+      uses_logging: false
+      uses_logma: false
+    score: 0
+    status: fail
+  module_cli_coverage:
+    details:
+      issues:
+      - No package directory found
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  readme_quality:
+    details:
+      issues:
+      - fix: Create README.md
+        rule: README.md not found
+        severity: critical
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  security_bandit:
+    details:
+      details:
+        files_scanned: 0
+        high: 0
+        low: 0
+        medium: 0
+        total: 0
+      issues: []
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  security_ruff:
+    details:
+      issues: []
+      score: 75
+      status: partial
+    score: 75
+    status: partial
+  structure:
+    details:
+      missing_dirs:
+      - pyffice
+      - tests
+      - docs
+      missing_files:
+      - README.md
+      - pyproject.toml
+      - CLI.md
+      - STATE.md
+      present_dirs:
+      - _data_
+      - __pycache__
+      present_files:
+      - PROJECT_TRACKER.yaml
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  testing:
+    details:
+      score: 0
+      status: fail
+      test_dir_exists: false
+    score: 0
+    status: fail
+  todo_tracking:
+    details:
+      issues: []
+      score: 100
+      status: pass
+      todo_count: 0
+    score: 100
+    status: pass
+  type_annotations:
+    details:
+      annotated_functions: 0
+      annotation_percentage: 100
+      issues: []
+      score: 100
+      status: pass
+      total_functions: 0
+    score: 100
+    status: pass
+  type_check_pyright:
+    details:
+      issues: []
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+overall_score: 15.91
+project: pyffice
+summary:
+  failing: 15
+  gitvein_projects_available: 66
+  passing: 9
+  total_dimensions: 26

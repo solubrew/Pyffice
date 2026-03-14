@@ -1,0 +1,29 @@
+---
+PyfficeForm:
+    template:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        version: 0.0.1.0.1.1
+        metadata:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:
+            form_id:
+            header_image_path:
+            footer_image_path:
+            sections:
+                fields:
+                    0:
+                    1:
+

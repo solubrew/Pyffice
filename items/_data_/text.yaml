@@ -1,0 +1,48 @@
+---
+PyfficeText:
+    alignment:
+      horizontal: left
+      vertical: top
+    data_format: str
+    font:
+      size: 12
+      color: black
+      background: white
+      style: arial
+      bold: False
+      italic: False
+      underline: False
+      subscript: False
+      superscript: False
+    template:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        version: 0.0.1.0.1.1
+        metadata:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        unit:
+            alignment:
+                horizontal:
+                vertical:
+            font:
+                size:
+                type:
+                color:
+                bold:
+                italic:
+                underline:
+                subscript:
+                superscript:
+            value:

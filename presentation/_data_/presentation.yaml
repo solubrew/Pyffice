@@ -1,0 +1,16 @@
+---
+PyfficePresentation:
+    template:
+        uuid:
+        name:
+        description:
+        metadata:
+            author:
+            path:
+            location:
+            encoding:
+            tags:
+            context:
+            hash:
+            policy_fk:
+        document:

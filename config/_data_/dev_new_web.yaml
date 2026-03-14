@@ -1,0 +1,26 @@
+document:
+  did:
+  name:
+  description:
+  path:
+  location:
+  syntax:
+  encoding:
+  tags:
+  context:
+  hash:
+  version: 0.0.1.0.1.1
+  metadata:
+    author:
+    editors:
+    document_type:
+    compatability:
+    creon_dttm:
+    modon_dttm:
+  data:
+    home_page:
+    active_page:
+    profile_manager:
+    pages:
+    library:
+    content:

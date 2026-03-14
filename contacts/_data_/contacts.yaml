@@ -1,0 +1,55 @@
+---
+PyfficeContact:
+    template:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        metadata:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:
+            group:
+            name_details:
+                full:
+                first:
+                middle:
+                last:
+                sur:
+                suffix:
+            nicknames:
+                0:
+                1:
+            channels:
+                -
+                    "method": "phone"
+                    "address": "555-555-5555"
+                    "label": "mobile"
+PyfficeRolodex:
+    template:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        metadata:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:
