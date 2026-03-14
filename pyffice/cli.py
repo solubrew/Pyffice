@@ -1,14 +1,21 @@
 """Pyffice CLI - Command Line Interface."""
 
 import sys
+import os
+from pathlib import Path
 from typing import Optional
 
 import click
 
-from pyffice import analytics, audio, cad, calendars, cam, charts, contacts, databases
-from pyffice import diagrams, email, filesystems, forms, images, items, notebooks
-from pyffice import presentation, projects, reports, socials, spreadsheet, tags
-from pyffice import text, updates, video, web, workflows
+# Import all modules for CLI coverage
+from pyffice import (
+    analytics, audio, cad, calendars, cam, charts, contacts, databases,
+    diagrams, email, filesystems, forms, images, items, notebooks,
+    presentation, projects, reports, socials, spreadsheet, tags,
+    text, updates, video, web, workflows,
+)
+from pyffice.document import PyfficeDocument
+from pyffice.pyffice import Pyffice
 
 
 @click.group()
@@ -22,6 +29,8 @@ def cli(ctx: click.Context, verbose: bool, quiet: bool, config: Optional[str]) -
     ctx.obj['verbose'] = verbose
     ctx.obj['quiet'] = quiet
     ctx.obj['config'] = config
+    # Initialize Pyffice instance
+    ctx.obj['pyffice'] = Pyffice()
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -34,23 +43,41 @@ def cli(ctx: click.Context, verbose: bool, quiet: bool, config: Optional[str]) -
 @click.argument('output', type=click.Path())
 @click.option('--format', '-f', help='Output format')
 @click.option('--template', '-t', help='Template to use')
-def document_convert(input: str, output: str, format: Optional[str], template: Optional[str]) -> None:
+@click.pass_context
+def document_convert(ctx: click.Context, input: str, output: str, format: Optional[str], template: Optional[str]) -> None:
     """Convert documents between formats.
 
     INPUT: Source document path
     OUTPUT: Destination document path
     """
-    click.echo(f"Converting document: {input} -> {output}")
+    pyffice = ctx.obj.get('pyffice')
+    try:
+        doc = PyfficeDocument()
+        doc.file_open(input)
+        doc.save(output, syntax=format or 'pdf')
+        click.echo(f"✓ Converted document: {input} -> {output}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 @cli.command()
 @click.argument('input', type=click.Path(exists=True))
-def document_info(input: str) -> None:
+@click.pass_context
+def document_info(ctx: click.Context, input: str) -> None:
     """Show document information.
 
     INPUT: Document path to inspect
     """
-    click.echo(f"Document: {input}")
+    try:
+        doc = PyfficeDocument()
+        doc.file_open(input)
+        info = doc.to_dict()
+        click.echo(f"Document: {input}")
+        click.echo(f"  Name: {info.get('name', 'N/A')}")
+        click.echo(f"  Type: {info.get('document_type', 'N/A')}")
+        click.echo(f"  Version: {info.get('version', 0)}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -62,23 +89,40 @@ def document_info(input: str) -> None:
 @click.argument('input', type=click.Path(exists=True))
 @click.argument('output', type=click.Path())
 @click.option('--format', '-f', type=click.Choice(['xlsx', 'csv', 'ods']), help='Output format')
-def spreadsheet_convert(input: str, output: str, format: Optional[str]) -> None:
+@click.pass_context
+def spreadsheet_convert(ctx: click.Context, input: str, output: str, format: Optional[str]) -> None:
     """Convert spreadsheets between formats.
 
     INPUT: Source spreadsheet path
     OUTPUT: Destination spreadsheet path
     """
-    click.echo(f"Converting spreadsheet: {input} -> {output}")
+    from pyffice.spreadsheet.spreadsheet import PyfficeMatrix
+    try:
+        wb = PyfficeMatrix()
+        wb.file_import(input)
+        wb.save(output, syntax=format or 'excel')
+        click.echo(f"✓ Converted spreadsheet: {input} -> {output}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 @cli.command()
 @click.argument('input', type=click.Path(exists=True))
-def spreadsheet_info(input: str) -> None:
+@click.pass_context
+def spreadsheet_info(ctx: click.Context, input: str) -> None:
     """Show spreadsheet information.
 
     INPUT: Spreadsheet path to inspect
     """
-    click.echo(f"Spreadsheet: {input}")
+    from pyffice.spreadsheet.spreadsheet import PyfficeMatrix
+    try:
+        wb = PyfficeMatrix()
+        wb.file_import(input)
+        sheets = wb.sheets.keys() if wb.sheets else []
+        click.echo(f"Spreadsheet: {input}")
+        click.echo(f"  Sheets: {len(list(sheets))}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -90,13 +134,21 @@ def spreadsheet_info(input: str) -> None:
 @click.argument('input', type=click.Path(exists=True))
 @click.argument('output', type=click.Path())
 @click.option('--format', '-f', type=click.Choice(['pptx', 'odp']), help='Output format')
-def presentation_convert(input: str, output: str, format: Optional[str]) -> None:
+@click.pass_context
+def presentation_convert(ctx: click.Context, input: str, output: str, format: Optional[str]) -> None:
     """Convert presentations between formats.
 
     INPUT: Source presentation path
     OUTPUT: Destination presentation path
     """
-    click.echo(f"Converting presentation: {input} -> {output}")
+    from pyffice.presentation.presentation import PyfficePresentation
+    try:
+        pres = PyfficePresentation()
+        pres.file_import(input)
+        pres.save(output, syntax=format or 'pptx')
+        click.echo(f"✓ Converted presentation: {input} -> {output}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -114,33 +166,57 @@ def diagram() -> None:
 @click.argument('input', type=click.Path(exists=True))
 @click.argument('output', type=click.Path())
 @click.option('--format', '-f', help='Output format')
-def diagram_convert(input: str, output: str, format: Optional[str]) -> None:
+@click.pass_context
+def diagram_convert(ctx: click.Context, input: str, output: str, format: Optional[str]) -> None:
     """Convert diagram formats.
 
     INPUT: Source diagram file
     OUTPUT: Destination diagram file
     """
-    click.echo(f"Converting diagram: {input} -> {output}")
+    from pyffice.diagrams.diagrams import PyfficeSketch
+    try:
+        sketch = PyfficeSketch()
+        sketch.load(input)
+        sketch.save(output, format=format or 'svg')
+        click.echo(f"✓ Converted diagram: {input} -> {output}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 @diagram.command(name='validate')
 @click.argument('input', type=click.Path(exists=True))
-def diagram_validate(input: str) -> None:
+@click.pass_context
+def diagram_validate(ctx: click.Context, input: str) -> None:
     """Validate diagram file.
 
     INPUT: Diagram file to validate
     """
-    click.echo(f"Validating diagram: {input}")
+    from pyffice.diagrams.formats import DiaConverter
+    try:
+        converter = DiaConverter({})
+        converter.validate(input)
+        click.echo(f"✓ Valid diagram: {input}")
+    except Exception as e:
+        click.echo(f"Invalid: {e}", err=True)
 
 
 @diagram.command(name='info')
 @click.argument('input', type=click.Path(exists=True))
-def diagram_info(input: str) -> None:
+@click.pass_context
+def diagram_info(ctx: click.Context, input: str) -> None:
     """Show diagram information.
 
     INPUT: Diagram file to inspect
     """
-    click.echo(f"Diagram: {input}")
+    from pyffice.diagrams.diagrams import PyfficeSketch
+    try:
+        sketch = PyfficeSketch()
+        sketch.load(input)
+        info = sketch.to_dict()
+        click.echo(f"Diagram: {input}")
+        click.echo(f"  Elements: {len(info.get('elements', []))}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -158,13 +234,21 @@ def image() -> None:
 @click.argument('input', type=click.Path(exists=True))
 @click.argument('output', type=click.Path())
 @click.option('--format', '-f', type=click.Choice(['png', 'jpg', 'jpeg', 'gif', 'bmp', 'tiff', 'webp']), help='Output format')
-def image_convert(input: str, output: str, format: Optional[str]) -> None:
+@click.pass_context
+def image_convert(ctx: click.Context, input: str, output: str, format: Optional[str]) -> None:
     """Convert images between formats.
 
     INPUT: Source image path
     OUTPUT: Destination image path
     """
-    click.echo(f"Converting image: {input} -> {output}")
+    from pyffice.images.images import PyfficeImage
+    try:
+        img = PyfficeImage()
+        img.load(input)
+        img.convert(output, format=format or 'png')
+        click.echo(f"✓ Converted image: {input} -> {output}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 @image.command(name='resize')
@@ -172,23 +256,41 @@ def image_convert(input: str, output: str, format: Optional[str]) -> None:
 @click.argument('output', type=click.Path())
 @click.option('--width', '-w', type=int, help='Target width')
 @click.option('--height', '-h', type=int, help='Target height')
-def image_resize(input: str, output: str, width: Optional[int], height: Optional[int]) -> None:
+@click.pass_context
+def image_resize(ctx: click.Context, input: str, output: str, width: Optional[int], height: Optional[int]) -> None:
     """Resize an image.
 
     INPUT: Source image path
     OUTPUT: Destination image path
     """
-    click.echo(f"Resizing image: {input} -> {output}")
+    from pyffice.images.images import PyfficeImage
+    try:
+        img = PyfficeImage()
+        img.load(input)
+        img.resize(width or 800, height or 600)
+        img.save(output)
+        click.echo(f"✓ Resized image: {input} -> {output}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 @image.command(name='info')
 @click.argument('input', type=click.Path(exists=True))
-def image_info(input: str) -> None:
+@click.pass_context
+def image_info(ctx: click.Context, input: str) -> None:
     """Show image information.
 
     INPUT: Image path to inspect
     """
-    click.echo(f"Image: {input}")
+    from pyffice.images.images import PyfficeImage
+    try:
+        img = PyfficeImage()
+        img.load(input)
+        info = img.to_dict()
+        click.echo(f"Image: {input}")
+        click.echo(f"  Size: {info.get('width', '?')}x{info.get('height', '?')}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -206,23 +308,40 @@ def video() -> None:
 @click.argument('input', type=click.Path(exists=True))
 @click.argument('output', type=click.Path())
 @click.option('--format', '-f', type=click.Choice(['mp4', 'avi', 'mov', 'mkv']), help='Output format')
-def video_convert(input: str, output: str, format: Optional[str]) -> None:
+@click.pass_context
+def video_convert(ctx: click.Context, input: str, output: str, format: Optional[str]) -> None:
     """Convert videos between formats.
 
     INPUT: Source video path
     OUTPUT: Destination video path
     """
-    click.echo(f"Converting video: {input} -> {output}")
+    from pyffice.video.video import PyfficeVideo
+    try:
+        vid = PyfficeVideo()
+        vid.load(input)
+        vid.convert(output, format=format or 'mp4')
+        click.echo(f"✓ Converted video: {input} -> {output}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 @video.command(name='info')
 @click.argument('input', type=click.Path(exists=True))
-def video_info(input: str) -> None:
+@click.pass_context
+def video_info(ctx: click.Context, input: str) -> None:
     """Show video information.
 
     INPUT: Video path to inspect
     """
-    click.echo(f"Video: {input}")
+    from pyffice.video.video import PyfficeVideo
+    try:
+        vid = PyfficeVideo()
+        vid.load(input)
+        info = vid.to_dict()
+        click.echo(f"Video: {input}")
+        click.echo(f"  Duration: {info.get('duration', 'N/A')}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -240,23 +359,40 @@ def audio() -> None:
 @click.argument('input', type=click.Path(exists=True))
 @click.argument('output', type=click.Path())
 @click.option('--format', '-f', type=click.Choice(['mp3', 'wav', 'ogg', 'flac']), help='Output format')
-def audio_convert(input: str, output: str, format: Optional[str]) -> None:
+@click.pass_context
+def audio_convert(ctx: click.Context, input: str, output: str, format: Optional[str]) -> None:
     """Convert audio between formats.
 
     INPUT: Source audio path
     OUTPUT: Destination audio path
     """
-    click.echo(f"Converting audio: {input} -> {output}")
+    from pyffice.audio.audio import PyfficeAudio
+    try:
+        aud = PyfficeAudio()
+        aud.load(input)
+        aud.convert(output, format=format or 'mp3')
+        click.echo(f"✓ Converted audio: {input} -> {output}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 @audio.command(name='info')
 @click.argument('input', type=click.Path(exists=True))
-def audio_info(input: str) -> None:
+@click.pass_context
+def audio_info(ctx: click.Context, input: str) -> None:
     """Show audio information.
 
     INPUT: Audio path to inspect
     """
-    click.echo(f"Audio: {input}")
+    from pyffice.audio.audio import PyfficeAudio
+    try:
+        aud = PyfficeAudio()
+        aud.load(input)
+        info = aud.to_dict()
+        click.echo(f"Audio: {input}")
+        click.echo(f"  Duration: {info.get('duration', 'N/A')}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -273,23 +409,39 @@ def cad() -> None:
 @cad.command(name='convert')
 @click.argument('input', type=click.Path(exists=True))
 @click.argument('output', type=click.Path())
-def cad_convert(input: str, output: str) -> None:
+@click.pass_context
+def cad_convert(ctx: click.Context, input: str, output: str) -> None:
     """Convert CAD formats.
 
     INPUT: Source CAD file
     OUTPUT: Destination CAD file
     """
-    click.echo(f"Converting CAD: {input} -> {output}")
+    from pyffice.cad.cad import PyfficeCAD
+    try:
+        cad = PyfficeCAD()
+        cad.load(input)
+        cad.convert(output)
+        click.echo(f"✓ Converted CAD: {input} -> {output}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 @cad.command(name='info')
 @click.argument('input', type=click.Path(exists=True))
-def cad_info(input: str) -> None:
+@click.pass_context
+def cad_info(ctx: click.Context, input: str) -> None:
     """Show CAD file information.
 
     INPUT: CAD file to inspect
     """
-    click.echo(f"CAD: {input}")
+    from pyffice.cad.cad import PyfficeCAD
+    try:
+        cad = PyfficeCAD()
+        cad.load(input)
+        info = cad.to_dict()
+        click.echo(f"CAD: {input}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -307,13 +459,22 @@ def chart() -> None:
 @click.argument('input', type=click.Path(exists=True))
 @click.argument('output', type=click.Path())
 @click.option('--type', '-t', type=click.Choice(['bar', 'line', 'pie', 'scatter']), help='Chart type')
-def chart_create(input: str, output: str, type: str) -> None:
+@click.pass_context
+def chart_create(ctx: click.Context, input: str, output: str, type: str) -> None:
     """Create a chart from data.
 
     INPUT: Data file (CSV, Excel)
     OUTPUT: Output chart file
     """
-    click.echo(f"Creating chart: {output}")
+    from pyffice.charts.charts import PyfficeChart
+    try:
+        chart = PyfficeChart()
+        chart.load_data(input)
+        chart.set_type(type or 'bar')
+        chart.save(output)
+        click.echo(f"✓ Created chart: {output}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -330,13 +491,22 @@ def calendar() -> None:
 @calendar.command(name='list')
 @click.option('--from', 'from_date', help='Start date (YYYY-MM-DD)')
 @click.option('--to', 'to_date', help='End date (YYYY-MM-DD)')
-def calendar_list(from_date: Optional[str], to_date: Optional[str]) -> None:
+@click.pass_context
+def calendar_list(ctx: click.Context, from_date: Optional[str], to_date: Optional[str]) -> None:
     """List calendar events.
 
     FROM: Start date
     TO: End date
     """
-    click.echo("Calendar events:")
+    from pyffice.calendars.calendars import PyfficeCalendar
+    try:
+        cal = PyfficeCalendar()
+        events = cal.get_events(from_date, to_date)
+        click.echo(f"Calendar events ({len(events)}):")
+        for event in events:
+            click.echo(f"  - {event.get('title', 'Untitled')}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -351,19 +521,33 @@ def contact() -> None:
 
 
 @contact.command(name='list')
-def contact_list() -> None:
+@click.pass_context
+def contact_list(ctx: click.Context) -> None:
     """List contacts."""
-    click.echo("Contacts:")
+    from pyffice.contacts.contacts import PyfficeContacts
+    try:
+        contacts = PyfficeContacts()
+        all_contacts = contacts.get_all()
+        click.echo(f"Contacts ({len(all_contacts)}):")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 @contact.command(name='search')
 @click.argument('query')
-def contact_search(query: str) -> None:
+@click.pass_context
+def contact_search(ctx: click.Context, query: str) -> None:
     """Search contacts.
 
     QUERY: Search term
     """
-    click.echo(f"Searching contacts: {query}")
+    from pyffice.contacts.contacts import PyfficeContacts
+    try:
+        contacts = PyfficeContacts()
+        results = contacts.search(query)
+        click.echo(f"Found {len(results)} contacts:")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -382,14 +566,21 @@ def email_cmd() -> None:
 @click.option('--subject', required=True, help='Email subject')
 @click.option('--body', help='Email body')
 @click.option('--attach', multiple=True, help='Attachment files')
-def email_send(to: str, subject: str, body: Optional[str], attach: tuple) -> None:
+@click.pass_context
+def email_send(ctx: click.Context, to: str, subject: str, body: Optional[str], attach: tuple) -> None:
     """Send an email.
 
     TO: Recipient email address
     SUBJECT: Email subject
     BODY: Email body text
     """
-    click.echo(f"Sending email to {to}: {subject}")
+    from pyffice.email.email import PyfficeEmail
+    try:
+        email = PyfficeEmail()
+        email.send(to, subject, body or '', list(attach))
+        click.echo(f"✓ Sent email to {to}: {subject}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -405,22 +596,36 @@ def database() -> None:
 
 @database.command(name='connect')
 @click.argument('connection_string')
-def database_connect(connection_string: str) -> None:
+@click.pass_context
+def database_connect(ctx: click.Context, connection_string: str) -> None:
     """Connect to a database.
 
     CONNECTION_STRING: Database connection string
     """
-    click.echo(f"Connecting to database: {connection_string}")
+    from pyffice.databases.databases import PyfficeDatabase
+    try:
+        db = PyfficeDatabase()
+        db.connect(connection_string)
+        click.echo(f"✓ Connected to database")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 @database.command(name='query')
 @click.argument('query')
-def database_query(query: str) -> None:
+@click.pass_context
+def database_query(ctx: click.Context, query: str) -> None:
     """Execute a database query.
 
     QUERY: SQL query to execute
     """
-    click.echo(f"Executing query: {query}")
+    from pyffice.databases.databases import PyfficeDatabase
+    try:
+        db = PyfficeDatabase()
+        results = db.execute(query)
+        click.echo(f"✓ Executed query: {query[:50]}...")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -437,24 +642,38 @@ def filesystem() -> None:
 @filesystem.command(name='list')
 @click.argument('path', type=click.Path(exists=True))
 @click.option('--recursive', '-r', is_flag=True, help='List recursively')
-def filesystem_list(path: str, recursive: bool) -> None:
+@click.pass_context
+def filesystem_list(ctx: click.Context, path: str, recursive: bool) -> None:
     """List filesystem contents.
 
     PATH: Directory path to list
     """
-    click.echo(f"Listing: {path}")
+    from pyffice.filesystems.filesystems import PyfficeFileSystem
+    try:
+        fs = PyfficeFileSystem()
+        items = fs.list(path, recursive=recursive)
+        click.echo(f"Items in {path}: {len(items)}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 @filesystem.command(name='sync')
 @click.argument('source', type=click.Path(exists=True))
 @click.argument('destination', type=click.Path())
-def filesystem_sync(source: str, destination: str) -> None:
+@click.pass_context
+def filesystem_sync(ctx: click.Context, source: str, destination: str) -> None:
     """Sync directories.
 
     SOURCE: Source directory
     DESTINATION: Destination directory
     """
-    click.echo(f"Syncing: {source} -> {destination}")
+    from pyffice.filesystems.filesystems import PyfficeFileSystem
+    try:
+        fs = PyfficeFileSystem()
+        fs.sync(source, destination)
+        click.echo(f"✓ Synced: {source} -> {destination}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -471,13 +690,20 @@ def analytics() -> None:
 @analytics.command(name='report')
 @click.argument('input', type=click.Path(exists=True))
 @click.argument('output', type=click.Path())
-def analytics_report(input: str, output: str) -> None:
+@click.pass_context
+def analytics_report(ctx: click.Context, input: str, output: str) -> None:
     """Generate analytics report.
 
     INPUT: Data file
     OUTPUT: Report output path
     """
-    click.echo(f"Generating report: {output}")
+    from pyffice.analytics.sources import PyfficeAnalytics
+    try:
+        an = PyfficeAnalytics()
+        an.generate_report(input, output)
+        click.echo(f"✓ Generated report: {output}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -494,13 +720,20 @@ def project() -> None:
 @project.command(name='create')
 @click.argument('name')
 @click.argument('output', type=click.Path())
-def project_create(name: str, output: str) -> None:
+@click.pass_context
+def project_create(ctx: click.Context, name: str, output: str) -> None:
     """Create a new project.
 
     NAME: Project name
     OUTPUT: Output directory
     """
-    click.echo(f"Creating project: {name}")
+    from pyffice.projects.paxn import PyfficeProject
+    try:
+        proj = PyfficeProject()
+        proj.create(name, output)
+        click.echo(f"✓ Created project: {name}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -515,29 +748,48 @@ def config() -> None:
 
 
 @config.command(name='show')
-def config_show() -> None:
+@click.pass_context
+def config_show(ctx: click.Context) -> None:
     """Show current configuration."""
-    click.echo("Pyffice Configuration:")
-    click.echo("  version: 0.1.0")
-    click.echo("  plugins: enabled")
+    from pyffice.config.config import PyfficeConfig
+    try:
+        cfg = PyfficeConfig()
+        click.echo("Pyffice Configuration:")
+        click.echo(f"  version: {cfg.get('version', '0.1.0')}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 @config.command(name='validate')
-def config_validate() -> None:
+@click.pass_context
+def config_validate(ctx: click.Context) -> None:
     """Validate configuration."""
-    click.echo("Configuration is valid.")
+    from pyffice.config.config import PyfficeConfig
+    try:
+        cfg = PyfficeConfig()
+        if cfg.validate():
+            click.echo("✓ Configuration is valid.")
+    except Exception as e:
+        click.echo(f"Invalid: {e}", err=True)
 
 
 @config.command(name='set')
 @click.argument('key')
 @click.argument('value')
-def config_set(key: str, value: str) -> None:
+@click.pass_context
+def config_set(ctx: click.Context, key: str, value: str) -> None:
     """Set configuration value.
 
     KEY: Configuration key
     VALUE: Configuration value
     """
-    click.echo(f"Setting {key} = {value}")
+    from pyffice.config.config import PyfficeConfig
+    try:
+        cfg = PyfficeConfig()
+        cfg.set(key, value)
+        click.echo(f"✓ Set {key} = {value}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -554,22 +806,38 @@ def form() -> None:
 @form.command(name='create')
 @click.argument('output', type=click.Path())
 @click.option('--title', help='Form title')
-def form_create(output: str, title: Optional[str]) -> None:
+@click.pass_context
+def form_create(ctx: click.Context, output: str, title: Optional[str]) -> None:
     """Create a new form.
 
     OUTPUT: Output file path
     """
-    click.echo(f"Creating form: {output}")
+    from pyffice.forms.forms import PyfficeForm
+    try:
+        frm = PyfficeForm()
+        frm.create(title or 'Untitled')
+        frm.save(output)
+        click.echo(f"✓ Created form: {output}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 @form.command(name='validate')
 @click.argument('input', type=click.Path(exists=True))
-def form_validate(input: str) -> None:
+@click.pass_context
+def form_validate(ctx: click.Context, input: str) -> None:
     """Validate a form.
 
     INPUT: Form file to validate
     """
-    click.echo(f"Validating form: {input}")
+    from pyffice.forms.forms import PyfficeForm
+    try:
+        frm = PyfficeForm()
+        frm.load(input)
+        if frm.validate():
+            click.echo(f"✓ Valid form: {input}")
+    except Exception as e:
+        click.echo(f"Invalid: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -586,13 +854,21 @@ def notebook() -> None:
 @notebook.command(name='convert')
 @click.argument('input', type=click.Path(exists=True))
 @click.argument('output', type=click.Path())
-def notebook_convert(input: str, output: str) -> None:
+@click.pass_context
+def notebook_convert(ctx: click.Context, input: str, output: str) -> None:
     """Convert notebook formats.
 
     INPUT: Source notebook file
     OUTPUT: Destination notebook file
     """
-    click.echo(f"Converting notebook: {input} -> {output}")
+    from pyffice.notebooks.notebooks import PyfficeNotebook
+    try:
+        nb = PyfficeNotebook()
+        nb.load(input)
+        nb.save(output)
+        click.echo(f"✓ Converted notebook: {input} -> {output}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -609,13 +885,20 @@ def report() -> None:
 @report.command(name='generate')
 @click.argument('input', type=click.Path(exists=True))
 @click.argument('output', type=click.Path())
-def report_generate(input: str, output: str) -> None:
+@click.pass_context
+def report_generate(ctx: click.Context, input: str, output: str) -> None:
     """Generate a report.
 
     INPUT: Data file
     OUTPUT: Report output path
     """
-    click.echo(f"Generating report: {output}")
+    from pyffice.reports.reports import PyfficeReport
+    try:
+        rep = PyfficeReport()
+        rep.generate(input, output)
+        click.echo(f"✓ Generated report: {output}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -632,12 +915,19 @@ def social() -> None:
 @social.command(name='post')
 @click.argument('message')
 @click.option('--platform', '-p', help='Target platform')
-def social_post(message: str, platform: Optional[str]) -> None:
+@click.pass_context
+def social_post(ctx: click.Context, message: str, platform: Optional[str]) -> None:
     """Post to social media.
 
     MESSAGE: Message to post
     """
-    click.echo(f"Posting to social: {message}")
+    from pyffice.socials.socials import PyfficeSocial
+    try:
+        soc = PyfficeSocial()
+        soc.post(message, platform)
+        click.echo(f"✓ Posted to social media")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -653,12 +943,19 @@ def tag() -> None:
 
 @tag.command(name='list')
 @click.argument('input', type=click.Path(exists=True))
-def tag_list(input: str) -> None:
+@click.pass_context
+def tag_list(ctx: click.Context, input: str) -> None:
     """List tags in a file.
 
     INPUT: File to list tags from
     """
-    click.echo(f"Tags in {input}:")
+    from pyffice.tags.manager import PyfficeTagManager
+    try:
+        mgr = PyfficeTagManager()
+        tags = mgr.list_tags(input)
+        click.echo(f"Tags in {input}: {len(tags)}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -676,13 +973,21 @@ def text() -> None:
 @click.argument('input', type=click.Path(exists=True))
 @click.argument('output', type=click.Path())
 @click.option('--format', '-f', help='Output format')
-def text_convert(input: str, output: str, format: Optional[str]) -> None:
+@click.pass_context
+def text_convert(ctx: click.Context, input: str, output: str, format: Optional[str]) -> None:
     """Convert text documents.
 
     INPUT: Source text file
     OUTPUT: Destination text file
     """
-    click.echo(f"Converting text: {input} -> {output}")
+    from pyffice.text.text import PyfficeText
+    try:
+        txt = PyfficeText()
+        txt.load(input)
+        txt.save(output, format=format or 'txt')
+        click.echo(f"✓ Converted text: {input} -> {output}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -697,19 +1002,35 @@ def update() -> None:
 
 
 @update.command(name='check')
-def update_check() -> None:
+@click.pass_context
+def update_check(ctx: click.Context) -> None:
     """Check for updates."""
-    click.echo("Checking for updates...")
+    from pyffice.updates.updates import PyfficeUpdates
+    try:
+        up = PyfficeUpdates()
+        if up.check():
+            click.echo("Updates available!")
+        else:
+            click.echo("No updates available.")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 @update.command(name='install')
 @click.argument('package')
-def update_install(package: str) -> None:
+@click.pass_context
+def update_install(ctx: click.Context, package: str) -> None:
     """Install an update.
 
     PACKAGE: Package name to update
     """
-    click.echo(f"Installing update: {package}")
+    from pyffice.updates.updates import PyfficeUpdates
+    try:
+        up = PyfficeUpdates()
+        up.install(package)
+        click.echo(f"✓ Installed update: {package}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -726,24 +1047,38 @@ def web() -> None:
 @web.command(name='fetch')
 @click.argument('url')
 @click.argument('output', type=click.Path())
-def web_fetch(url: str, output: str) -> None:
+@click.pass_context
+def web_fetch(ctx: click.Context, url: str, output: str) -> None:
     """Fetch a web page.
 
     URL: URL to fetch
     OUTPUT: Output file path
     """
-    click.echo(f"Fetching: {url}")
+    from pyffice.web.web import PyfficeWeb
+    try:
+        wb = PyfficeWeb()
+        wb.fetch(url, output)
+        click.echo(f"✓ Fetched: {url}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 @web.command(name='parse')
 @click.argument('input', type=click.Path(exists=True))
 @click.option('--format', '-f', help='Output format')
-def web_parse(input: str, format: Optional[str]) -> None:
+@click.pass_context
+def web_parse(ctx: click.Context, input: str, format: Optional[str]) -> None:
     """Parse web content.
 
     INPUT: Input file
     """
-    click.echo(f"Parsing: {input}")
+    from pyffice.web.web import PyfficeWeb
+    try:
+        wb = PyfficeWeb()
+        data = wb.parse(input)
+        click.echo(f"✓ Parsed: {input}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -759,18 +1094,33 @@ def workflow() -> None:
 
 @workflow.command(name='run')
 @click.argument('workflow_file', type=click.Path(exists=True))
-def workflow_run(workflow_file: str) -> None:
+@click.pass_context
+def workflow_run(ctx: click.Context, workflow_file: str) -> None:
     """Run a workflow.
 
     WORKFLOW_FILE: Workflow definition file
     """
-    click.echo(f"Running workflow: {workflow_file}")
+    from pyffice.workflows.workflows import PyfficeWorkflow
+    try:
+        wf = PyfficeWorkflow()
+        wf.load(workflow_file)
+        wf.run()
+        click.echo(f"✓ Ran workflow: {workflow_file}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 @workflow.command(name='list')
-def workflow_list() -> None:
+@click.pass_context
+def workflow_list(ctx: click.Context) -> None:
     """List available workflows."""
-    click.echo("Available workflows:")
+    from pyffice.workflows.workflows import PyfficeWorkflow
+    try:
+        wf = PyfficeWorkflow()
+        workflows = wf.list()
+        click.echo(f"Available workflows: {len(workflows)}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -787,13 +1137,20 @@ def cam() -> None:
 @cam.command(name='generate')
 @click.argument('input', type=click.Path(exists=True))
 @click.argument('output', type=click.Path())
-def cam_generate(input: str, output: str) -> None:
+@click.pass_context
+def cam_generate(ctx: click.Context, input: str, output: str) -> None:
     """Generate CNC code.
 
     INPUT: CAD file
     OUTPUT: CNC output file
     """
-    click.echo(f"Generating CNC code: {output}")
+    from pyffice.cam.cam import PyfficeCAM
+    try:
+        cam = PyfficeCAM()
+        cam.generate(input, output)
+        click.echo(f"✓ Generated CNC code: {output}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
