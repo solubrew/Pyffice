@@ -1,59 +1,69 @@
-# CLI Usage
+# Pyffice CLI
 
-## Pyffice Command Line Interface
+Command-line interface for Pyffice.
 
-Pyffice provides a comprehensive CLI for document processing and conversion.
-
-### Installation
+## Installation
 
 ```bash
 pip install pyffice
 ```
 
-### Basic Usage
+## Usage
+
+### Convert Documents
 
 ```bash
-# Convert a document
 pyffice convert input.docx output.pdf
-
-# Process multiple files
-pyffice batch convert --input-dir ./docs --output-dir ./output
-
-# Extract data from documents
-pyffice extract --format json document.pdf
-
-# List supported formats
-pyffice formats list
-
-# Validate a document
-pyffice validate document.docx
 ```
 
-### Commands
-
-| Command | Description |
-|---------|-------------|
-| `convert` | Convert between document formats |
-| `batch` | Batch process multiple files |
-| `extract` | Extract data from documents |
-| `formats` | List supported formats |
-| `validate` | Validate document structure |
-
-### Options
-
-- `-v, --verbose` - Enable verbose output
-- `-q, --quiet` - Suppress output
-- `--config PATH` - Custom configuration file
-
-### Examples
+### Create New Document
 
 ```bash
-# Convert DOCX to PDF
-pyffice convert report.docx report.pdf
+pyffice create --type spreadsheet output.xlsx
+pyffice create --type presentation output.pptx
+pyffice create --type document output.docx
+```
 
-# Batch convert all DOCX files
-pyffice batch convert --input-dir ./documents --pattern "*.docx"
+### List Supported Formats
 
-# Extract tables to JSON
-pyffice extract --type tables spreadsheet.xlsx --output tables.json
+```bash
+pyffice formats
+```
+
+### Diagram Operations
+
+```bash
+# Convert diagram formats
+pyffice diagram convert input.dia output.svg
+
+# List supported diagram formats
+pyffice diagram formats
+```
+
+### Configuration
+
+```bash
+# Show configuration
+pyffice config show
+
+# Validate configuration
+pyffice config validate
+```
+
+## Options
+
+- `--verbose`, `-v` - Enable verbose output
+- `--quiet`, `-q` - Suppress output
+- `--config CONFIG` - Specify config file
+
+## Examples
+
+Convert a Dia diagram to SVG:
+```bash
+pyffice diagram convert my_diagram.dia output.svg
+```
+
+Create a new spreadsheet:
+```bash
+pyffice create --type spreadsheet --template monthly_budget.xlsx
 ```

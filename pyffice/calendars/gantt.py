@@ -19,8 +19,11 @@ import datetime as dt
 # from ganttlab import GanttChart
 # import gantt
 
+import logging
 import pandas as pd
 import plotly.express as px
+
+logger = logging.getLogger(__name__)
 
 # ======================================Solutions Brewer Library Modules==============================================||
 from condor import condor
