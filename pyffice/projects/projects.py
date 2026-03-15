@@ -284,7 +284,7 @@ class PyfficeProjectTask(PyfficeUnit):
         }
 
 
-class ProjectResource(PyfficeUnit):
+class PyfficeProjectResource(PyfficeUnit):
     """Represents a resource in a project."""
 
     VERSION = "0.0.1.0.1.0"
@@ -303,7 +303,7 @@ class ProjectResource(PyfficeUnit):
         }
 
 
-class ProjectMilestone(PyfficeUnit):
+class PyfficeProjectMilestone(PyfficeUnit):
     """Represents a milestone in a project."""
 
     VERSION = "0.0.1.0.1.0"
