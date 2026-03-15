@@ -71,7 +71,6 @@ dependencies = [
     'pypiwin32; platform_system == "Windows"',
     'wheel<=0.29.0; python_version < "2.7"',
 ]
-]
 
 [project.optional-dependencies]
 dev = ["pytest", "ruff", "pyright", "bandit"]
