@@ -12,7 +12,64 @@ authors = [
     {name = "Pyffice Team"}
 ]
 requires-python = ">=3.10"
-dependencies = ['pycel',
+dependencies = [
+    'pycel',
+    # Core
+    "backoff",
+    "click",
+    "pyyaml",
+    "ruamel.yaml",
+
+     #Document formats
+    "openpyxl",
+    "python-docx",
+    "python-pptx",
+    "PyPDF2",
+    "PyMuPDF",
+    "nbformat",
+
+     #Data & visualization
+    #"networkx==2.7",
+    "plotly",
+    "pydot",
+    "matplotlib",
+    "seaborn",
+    "graphviz",
+    "colormath",
+    "cairosvg",
+    #"pycel",
+    "solidpython",
+
+    # Database
+    "sqlalchemy",
+
+    # Web & utilities
+    #"twof",
+    "furl",
+    "bs4",
+    "ffmpeg-python",
+    "pydub",
+    "schedule",
+
+    # External services
+    "ultimate-notion",
+    "notion-client",
+
+    # Hardware/IoT (optional)
+    "pyserial",
+    "adafruit-ampy",
+    "esptool",
+
+    # Special formats
+    "floweaver",
+
+    # Python 2 compatibility (legacy)
+    'defusedxml; platform_system == "Windows"',
+    'futures; python_version < "3"',
+    'six; platform_system == "Linux" and python_version > "3.3"',
+    'pypiwin32; platform_system == "Windows"',
+    'wheel<=0.29.0; python_version < "2.7"',
+]
 ]
 
 [project.optional-dependencies]
