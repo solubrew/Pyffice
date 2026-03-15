@@ -259,6 +259,15 @@ class PyfficeProject(PyfficeDocumentManager):
             return False
 
 
+class PyfficeProjectAssignment(PyfficeUnit):
+    """"""
+
+    def __init__(self, cfg=None):
+        """"""
+        super().__init__(cfg)
+        self.config.override(pxcfg).select("").override(cfg)
+
+
 class PyfficeProjectTask(PyfficeUnit):
     """Represents a task in a project."""
 
