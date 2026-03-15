@@ -57,8 +57,6 @@ from pyffice.ports.spreadsheetports import (
 from pyffice.ports.presentationports import (
     PresentationPort,
     PPTXPort,
-    PPTPort,
-    ODPort,
     KeyPort,
     PresentationPortsManager,
     get_ports_manager as get_presentation_ports_manager,
