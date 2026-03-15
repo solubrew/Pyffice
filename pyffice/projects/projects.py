@@ -259,7 +259,7 @@ class PyfficeProject(PyfficeDocumentManager):
             return False
 
 
-class ProjectTask(PyfficeUnit):
+class PyfficeProjectTask(PyfficeUnit):
     """Represents a task in a project."""
 
     VERSION = "0.0.1.0.1.0"
