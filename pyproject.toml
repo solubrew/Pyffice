@@ -12,7 +12,8 @@ authors = [
     {name = "Pyffice Team"}
 ]
 requires-python = ">=3.10"
-dependencies = []
+dependencies = ['pycel',
+]
 
 [project.optional-dependencies]
 dev = ["pytest", "ruff", "pyright", "bandit"]
