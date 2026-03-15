@@ -18,7 +18,17 @@ dependencies = []
 dev = ["pytest", "ruff", "pyright", "bandit"]
 
 [tool.setuptools]
-packages = ["pyffice"]
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["pyffice", "pyffice.*"]
+exclude = [
+    "test*",
+    "tests*",
+    "docs*",
+    "examples*",
+    "scripts*",
+    "tools*",
+]
 
 [tool.ruff]
 line-length = 100
