@@ -20,7 +20,6 @@ from typing import Optional, Any
 # ======================================3rd Party Library Modules=====================================================||
 from condor import condor
 from ogma.logma import Logma
-from axn.action import Action
 from pyffice.document import PyfficeDocumentManager, PyfficeUnit
 
 # ====================================================================================================================||
@@ -32,31 +31,31 @@ logma = Logma(__name__)
 pxcfg = join(here, "_data_", ".yaml")
 
 
-class ProjectAXN(Action):
-    """Base action model for project management operations.
-
-    Extends AXN Action to support all project management conversion activities.
-    """
-
-    def __init__(
-        self,
-        name: Optional[str] = None,
-        details: Optional[dict] = None,
-        cfg: Optional[dict] = None,
-    ):
-        super().__init__(name, details, cfg)
-        self.source_format = cfg.get("source_format") if cfg else None
-        self.target_format = cfg.get("target_format") if cfg else None
-        self.project_data = cfg.get("project_data") if cfg else None
-
-    def execute(self) -> bool:
-        """Execute the project action."""
-        logma.info(f"Executing project action: {self.name}")
-        return True
-
-    def can_execute(self) -> bool:
-        """Check if action can be executed."""
-        return self.name is not None
+# class ProjectAXN(PAction):
+#     """Base action model for project management operations.
+#
+#     Extends AXN Action to support all project management conversion activities.
+#     """
+#
+#     def __init__(
+#         self,
+#         name: Optional[str] = None,
+#         details: Optional[dict] = None,
+#         cfg: Optional[dict] = None,
+#     ):
+#         super().__init__(name, details, cfg)
+#         self.source_format = cfg.get("source_format") if cfg else None
+#         self.target_format = cfg.get("target_format") if cfg else None
+#         self.project_data = cfg.get("project_data") if cfg else None
+#
+#     def execute(self) -> bool:
+#         """Execute the project action."""
+#         logma.info(f"Executing project action: {self.name}")
+#         return True
+#
+#     def can_execute(self) -> bool:
+#         """Check if action can be executed."""
+#         return self.name is not None
 
 
 class PyfficeProject(PyfficeDocumentManager):
