@@ -2,14 +2,15 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
@@ -21,7 +22,7 @@ import datetime as dt
 from condor import condor
 from ogma.logma import Logma
 from pyffice.document import PyfficeDocumentManager, PyfficeUnit
-from axn.action import Action
+from axn.axn import AXN
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -40,7 +41,9 @@ class PyfficeTimeUnit(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeScaleUnit")).override(cfg)
+        self.config.override(
+            condor.Instruct(pxcfg).select("PyfficeScaleUnit")
+        ).override(cfg)
         self.start_time = None
         self.end_time = None
         self.days = None
@@ -221,7 +224,9 @@ class PyfficeEvent(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeEvent")).override(cfg)
+        self.config.override(condor.Instruct(pxcfg).select("PyfficeEvent")).override(
+            cfg
+        )
         self.event = None
         self.end_dttm = None
         self.location_attendance = None
@@ -295,7 +300,7 @@ class PyfficeTask(PyfficeUnit):
         name = None
         details = None
         cfg = None
-        self.action = Action(name, details, cfg)
+        self.action = AXN(name, details, cfg)
 
     def load_unit(self, unit):
         """"""
