@@ -23,28 +23,8 @@ from os.path import dirname, join, expanduser
 from typing import Any, Optional
 
 # ======================================3rd Party Library Modules=====================================================||
-try:
-    from condor import Instruct
-except ImportError:
-    Instruct = None
-
-try:
-    from ogma import Logma
-except ImportError:
-
-    class Logma:
-        def __init__(self, name):
-            self.logger = logging.getLogger(name)
-
-        def info(self, msg):
-            self.logger.info(msg)
-
-        def debug(self, msg):
-            self.logger.debug(msg)
-
-        def error(self, msg):
-            self.logger.error(msg)
-
+from condor.condor import Instruct
+from ogma.logma import Logma
 
 # Commented out - broken dependency chain from squirl->condor
 # from squirl.objnql import txtonql
@@ -111,16 +91,8 @@ class PyfficeCodex(PyfficeDocumentManager):
         """Initialize PyfficeCodex with optional configuration."""
         try:
             super().__init__(cfg)
-            if Instruct:
-                self.config.override(Instruct(pxcfg).select("PyfficeCodex")).override(cfg)
-            else:
-                from collections import defaultdict
-
-                self.config = defaultdict(dict)
-
-            cfg = cfg or {}
+            self.config.override(Instruct(pxcfg).select("PyfficeCodex")).override(cfg)
             self.url_library = PyfficeURLLibrary(cfg)
-
             self.contacts: Optional[PyfficeRolodex] = None
             self.documents: dict = {}
             self.forms_manager: Optional[PyfficeFormsManager] = None
@@ -299,7 +271,9 @@ class PyfficeCodex(PyfficeDocumentManager):
         self.documents[sketch.did] = sketch
         return sketch
 
-    def init_source_manager(self, cfg: Optional[dict[str, Any]] = None) -> Optional[Any]:
+    def init_source_manager(
+        self, cfg: Optional[dict[str, Any]] = None
+    ) -> Optional[Any]:
         """Initialize source manager."""
         cfg = cfg or {}
         cfg["codex"] = self
@@ -317,7 +291,9 @@ class PyfficeCodex(PyfficeDocumentManager):
         self.documents[self.source.did] = self.source
         return self.source
 
-    def load_document(self, document: Optional[dict[str, Any]] = None) -> dict[str, Any]:
+    def load_document(
+        self, document: Optional[dict[str, Any]] = None
+    ) -> dict[str, Any]:
         """Load documents into the codex."""
         logma.info(f"Load Document {document}")
         if document is None:
@@ -330,26 +306,29 @@ class PyfficeCodex(PyfficeDocumentManager):
         return document
 
     def save(
-        self, path: Optional[str] = None, syntax: Optional[str] = None, encrypt_key: Optional[str] = None
+        self,
+        path: Optional[str] = None,
+        syntax: Optional[str] = None,
+        encrypt_key: Optional[str] = None,
     ) -> "PyfficeCodex":
         """Save the codex to a file."""
         if path is None:
             raise PyfficeCodexError("Save path is required")
-        
+
         import yaml
         from pathlib import Path
-        
+
         # Determine syntax and get appropriate serializer
         syntax = syntax or "yaml"
-        
+
         # Serialize the codex
         data = self.to_dict()
-        
+
         # Write to file
         file_path = Path(path)
-        with open(file_path, 'w', encoding='utf-8') as f:
+        with open(file_path, "w", encoding="utf-8") as f:
             yaml.dump(data, f, default_flow_style=False)
-        
+
         logger.info(f"Saved codex to {path}")
         return self
 
@@ -391,7 +370,10 @@ class PyfficeCodex(PyfficeDocumentManager):
                     data["documents"][doc_id] = {"type": type(doc).__name__}
             except Exception as e:
                 # Skip documents that can't be serialized
-                data["documents"][doc_id] = {"type": type(doc).__name__, "_error": str(e)}
+                data["documents"][doc_id] = {
+                    "type": type(doc).__name__,
+                    "_error": str(e),
+                }
 
         if self.contacts:
             try:
@@ -403,7 +385,9 @@ class PyfficeCodex(PyfficeDocumentManager):
         return yaml.dump(data, default_flow_style=False)
 
     @classmethod
-    def from_yaml(cls, yaml_str: str, cfg: Optional[dict[str, Any]] = None) -> "PyfficeCodex":
+    def from_yaml(
+        cls, yaml_str: str, cfg: Optional[dict[str, Any]] = None
+    ) -> "PyfficeCodex":
         """Load a codex from a YAML string."""
         import yaml
 
@@ -437,7 +421,10 @@ class PyfficeCodex(PyfficeDocumentManager):
                 "documents": {
                     "type": "object",
                     "description": "Dictionary of documents by ID",
-                    "additionalProperties": {"type": "object", "description": "Document properties"},
+                    "additionalProperties": {
+                        "type": "object",
+                        "description": "Document properties",
+                    },
                 },
                 "document_types": {
                     "type": "array",
@@ -449,7 +436,9 @@ class PyfficeCodex(PyfficeDocumentManager):
             "required": ["version", "document_count"],
         }
 
-    def to_chunks(self, chunk_size: int = 1000, overlap: int = 100) -> list[dict[str, Any]]:
+    def to_chunks(
+        self, chunk_size: int = 1000, overlap: int = 100
+    ) -> list[dict[str, Any]]:
         """Split codex into embedding-ready chunks.
 
         Args:

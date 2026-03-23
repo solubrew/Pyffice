@@ -2,14 +2,15 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join, exists
@@ -35,7 +36,7 @@ from pycurity.pyhash import text_hashing_function
 here = join(dirname(__file__), "")  # ||
 log = True
 logma = Logma(__name__)
-# logma.off()
+logma.off()
 CHANGE_LIMIT = 100
 # ====================================================================================================================||
 pxcfg = join(here, "_data_", "document.yaml")
@@ -95,9 +96,23 @@ class PyfficeUnit(object):
         #     new_value = new_value.to_dict()
 
         if action == "add":
-            self.changes.append({"action": action, "label": label, "value": deepcopy(value), "new_value": new_value})
+            self.changes.append(
+                {
+                    "action": action,
+                    "label": label,
+                    "value": deepcopy(value),
+                    "new_value": new_value,
+                }
+            )
         elif action == "set":
-            self.changes.append({"action": action, "label": label, "value": value, "new_value": new_value})
+            self.changes.append(
+                {
+                    "action": action,
+                    "label": label,
+                    "value": value,
+                    "new_value": new_value,
+                }
+            )
         self.changes = self.changes[-change_limit:]
         return self
 
@@ -183,7 +198,9 @@ class PyfficeUnit(object):
         change = self.redos.pop()
         setattr(self, change["label"], change["new_value"])
         if change["action"] == "set":
-            self.add_change(change["label"], change["value"], change["new_value"], "set")
+            self.add_change(
+                change["label"], change["value"], change["new_value"], "set"
+            )
         return self
 
     def set_author(self, author):
@@ -433,8 +450,12 @@ class PyfficeDocument(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeDocument")).override(cfg)
-        self.document = self.config.select("template").override(self.config.select("document").dikt)
+        self.config.override(condor.Instruct(pxcfg).select("PyfficeDocument")).override(
+            cfg
+        )
+        self.document = self.config.select("template").override(
+            self.config.select("document").dikt
+        )
         self.cache = None
         self.compatibility = None
         self.data = None
@@ -475,8 +496,12 @@ class PyfficeDocument(PyfficeUnit):
         # document = self.update_document_structure(document)
         self.load_unit(document)
         self.set_content(document.get("data", {}).get("content", {}))
-        self.set_compatibility(document.get("meta_data", {}).get("compatibility", "pyffice"))
-        self.set_document_type(document.get("meta_data", {}).get("document_type", "text"))
+        self.set_compatibility(
+            document.get("meta_data", {}).get("compatibility", "pyffice")
+        )
+        self.set_document_type(
+            document.get("meta_data", {}).get("document_type", "text")
+        )
         self.set_data(document.get("data", {}))
         self.set_file_path(document.get("path", None))
         # self.set_file_type(document.get("file_type", None))
@@ -637,7 +662,9 @@ class PyfficeDocumentManager(PyfficeDocument):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeDocumentManager")).override(cfg)
+        self.config.override(
+            condor.Instruct(pxcfg).select("PyfficeDocumentManager")
+        ).override(cfg)
         self.store = conql.Doc()
 
     def add_document(self, document):
@@ -719,7 +746,9 @@ class PyfficeDeque(PyfficeDocument, deque):
         """"""
         super().__init__(cfg)
         PyfficeDocument.__init__(self, self.config)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeDeque")).override(cfg)
+        self.config.override(condor.Instruct(pxcfg).select("PyfficeDeque")).override(
+            cfg
+        )
         self.max_items = None
         self.set_max_items()
         self.history = deque()
