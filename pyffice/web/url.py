@@ -2,14 +2,15 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
@@ -22,8 +23,6 @@ import furl
 # ======================================Solutions Brewer Library Modules==============================================||
 from condor import condor
 from ogma.logma import Logma
-from twof.twofdns import TwoFDNS
-from subtrix.utilities import uuid
 from pyffice.document import PyfficeUnit, PyfficeDocumentManager
 from pycurity.pyhash import text_hashing_function
 
@@ -154,7 +153,9 @@ class PyfficeURL(PyfficeUnit):
             self.set_active_url(active_url)
 
         # Set geofence
-        self.set_geofence(unit.get("geofence_region", None), unit.get("geofence_active", False))
+        self.set_geofence(
+            unit.get("geofence_region", None), unit.get("geofence_active", False)
+        )
 
         # Parse the final URL
         parse_url = self.active_url or self.config.dikt.get("url", self.default_url)
@@ -271,7 +272,9 @@ class PyfficeURL(PyfficeUnit):
         """Convert URL to HTTPS."""
         logma.info(f"Active Url {self.active_url}")
         if self.active_url.startswith(self.HTTP_PREFIX):
-            self.secure_url = self.active_url.replace(self.HTTP_PREFIX, self.HTTPS_PREFIX)
+            self.secure_url = self.active_url.replace(
+                self.HTTP_PREFIX, self.HTTPS_PREFIX
+            )
         elif self.active_url.startswith(self.HTTPS_PREFIX):
             self.secure_url = self.active_url
         else:
@@ -287,9 +290,9 @@ class PyfficeURL(PyfficeUnit):
         """Set subdomain component."""
         return self._set_attribute("sub_domain", sub_domain)
 
-    def set_twofdns(self, twofdns):
-        """Set TwoFDNS preference."""
-        return self._set_attribute("twofdns", twofdns)
+    # def set_twofdns(self, twofdns):
+    #     """Set TwoFDNS preference."""
+    #     return self._set_attribute("twofdns", twofdns)
 
     def set_username(self, username):
         """Set username component."""
@@ -941,7 +944,9 @@ class PyfficeURLLibrary(PyfficeDocumentManager):
     def __init__(self, cfg=None):
         """Initialize URL Library with configuration."""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeURLLibrary").override(cfg))
+        self.config.override(
+            condor.Instruct(pxcfg).select("PyfficeURLLibrary").override(cfg)
+        )
         self.urls = None
         self.affiliate_patterns = None
         self.block_patterns = None
@@ -1049,12 +1054,12 @@ class PyfficeURLLibrary(PyfficeDocumentManager):
         stone = self.get_stone(service_name)
         data = stone.get_urls(cfg)
 
-    def verify(self, url):
-        """Verify if URL is safe and not blocked."""
-        if url not in self.block_patterns:
-            if TwoFDNS(self.url):
-                return True
-        return False
+    # def verify(self, url):
+    #     """Verify if URL is safe and not blocked."""
+    #     if url not in self.block_patterns:
+    #         if TwoFDNS(self.url):
+    #             return True
+    #     return False
 
 
 #

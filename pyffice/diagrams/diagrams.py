@@ -10,6 +10,7 @@
     security: seclvl2
     <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
@@ -69,7 +70,12 @@ class PyfficeEdge(PyfficeUnit):
         uid = uuid()
         cfg = {"color": color}
         color = PyfficeColor(cfg)
-        endpoint = {"position": position, "connection": connection, "style": style, "color": color}
+        endpoint = {
+            "position": position,
+            "connection": connection,
+            "style": style,
+            "color": color,
+        }
         self.add_change("endpoints", self.endpoints, endpoint, "add")
         self.endpoints[uid] = endpoint
         return self
@@ -167,7 +173,9 @@ class PyfficeEdge(PyfficeUnit):
     def set_position_endpoint(self, endpoint, position):
         """"""
         if position != self.endpoints[endpoint]["position"]:
-            self.add_change("position", self.endpoints[endpoint]["position"], position, "set")
+            self.add_change(
+                "position", self.endpoints[endpoint]["position"], position, "set"
+            )
         self.endpoints[endpoint]["position"] = position
         return self
 
@@ -209,7 +217,9 @@ class PyfficeLayer(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeLayer")).override(cfg)
+        self.config.override(condor.Instruct(pxcfg).select("PyfficeLayer")).override(
+            cfg
+        )
         self.objects = None
 
     def load_unit(self, unit):
@@ -307,7 +317,11 @@ class PyfficeNode(PyfficeUnit):
     def to_dict(self):
         """"""
         doc = super().to_dict()
-        doc["unit"] = {"cells": [x.to_dict() for x in self.cells], "lock": self.lock, "position": self.position}
+        doc["unit"] = {
+            "cells": [x.to_dict() for x in self.cells],
+            "lock": self.lock,
+            "position": self.position,
+        }
         return doc
 
 
@@ -319,7 +333,9 @@ class PyfficeSketch(PyfficeDocumentManager):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeSketch").override(cfg))
+        self.config.override(
+            condor.Instruct(pxcfg).select("PyfficeSketch").override(cfg)
+        )
         self.canvas = None
         self.connections = None
         self.edges = None
@@ -336,7 +352,16 @@ class PyfficeSketch(PyfficeDocumentManager):
         self.connections[connection.did] = connection
         return self
 
-    def add_edge(self, connections=None, end=None, start=None, type=None, version=None, visible=None, active=None):
+    def add_edge(
+        self,
+        connections=None,
+        end=None,
+        start=None,
+        type=None,
+        version=None,
+        visible=None,
+        active=None,
+    ):
         """"""
         cfg = {}
         edge = PyfficeEdge(cfg)
@@ -452,6 +477,16 @@ class PyfficeSketch(PyfficeDocumentManager):
     def to_dict(self):
         """"""
         doc = super().to_dict()
+        if self.connections is None:
+            self.connections = {}
+        if self.edges is None:
+            self.edges = {}
+        if self.endpoints is None:
+            self.endpoints = {}
+        if self.nodes is None:
+            self.nodes = {}
+        if self.layers is None:
+            self.layers = {}
         doc["document"] = {
             "canvas": self.canvas,
             "edges": {x.did: x.to_dict() for x in self.edges},
@@ -470,7 +505,9 @@ class PyfficeSketchConnection(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeSketchConnection")).override(cfg)
+        self.config.override(
+            condor.Instruct(pxcfg).select("PyfficeSketchConnection")
+        ).override(cfg)
         self.endpoints = None
         self.lock = None
         self.position = None
@@ -507,7 +544,11 @@ class PyfficeSketchConnection(PyfficeUnit):
     def to_dict(self):
         """"""
         doc = super().to_dict()
-        doc["unit"] = {"endpoints": self.endpoints, "position": self.position, "lock": self.lock}
+        doc["unit"] = {
+            "endpoints": self.endpoints,
+            "position": self.position,
+            "lock": self.lock,
+        }
         return doc
 
 
