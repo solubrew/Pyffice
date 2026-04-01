@@ -2556,7 +2556,7 @@ dimensions:
     status: fail
   configuration:
     details:
-      config_file: config.yaml
+      config_file: pyffice.yaml
       score: 100
       status: pass
     score: 100
@@ -2936,7 +2936,7 @@ dimensions:
       - AGENT.md
       - CONTRIBUTING.md
       - document.py
-      - config.yaml
+      - pyffice.yaml
       - pytest.ini
       - LICENSE.rst
       - README.md
@@ -2944,7 +2944,7 @@ dimensions:
       - LICENSE
       - __main__.py
       - __init__.py
-      - skill.md
+      - SKILL.md
       - PROJECT_TRACKER.yaml
       - pyffice_cli.py
       score: 100

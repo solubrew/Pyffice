@@ -2,14 +2,15 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
@@ -28,7 +29,7 @@ log = True
 logma = Logma(__name__)
 
 # ====================================================================================================================||
-pxcfg = join(here, "_data_", "config.yaml")
+pxcfg = join(here, "_data_", "pyffice.yaml")
 
 
 class PyfficeConfig(PyfficeDocument):
@@ -39,7 +40,9 @@ class PyfficeConfig(PyfficeDocument):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeConfig")).override(cfg)
+        self.config.override(condor.Instruct(pxcfg).select("PyfficeConfig")).override(
+            cfg
+        )
 
     def load_document(self, document=None):
         """"""
@@ -59,7 +62,9 @@ class PyfficeTOML(PyfficeConfig):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).override("PyfficeTOML")).override(cfg)
+        self.config.override(condor.Instruct(pxcfg).override("PyfficeTOML")).override(
+            cfg
+        )
 
 
 class PyfficeHelp(PyfficeConfig):
