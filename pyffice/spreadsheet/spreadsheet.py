@@ -2,14 +2,15 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import dirname, join
@@ -49,7 +50,9 @@ class PyfficeSpreadSheet(PyfficeDocument):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeSpreadSheet").override(cfg))
+        self.config.override(
+            condor.Instruct(pxcfg).select("PyfficeSpreadSheet").override(cfg)
+        )
         self.cells = None
         self.charts = None  # a Dictionary of Chart objects
         self.column_labels = None
@@ -148,7 +151,9 @@ class PyfficeSpreadSheet(PyfficeDocument):
         cfg = {"value": value, "format": format, "formula": formula}
         cell = PyfficeCell(cfg)
         if cell != self.cells.get(address, None):
-            self.add_change("cells", cell, self.cells.get(address, None), "assign", address)
+            self.add_change(
+                "cells", cell, self.cells.get(address, None), "assign", address
+            )
         self.cells[address] = cell
         return self
 
@@ -166,7 +171,13 @@ class PyfficeSpreadSheet(PyfficeDocument):
         if column not in self.column_labels:
             raise Exception(f"Column {column} not found")
         if int(width) != self.column_labels[column]:
-            self.add_change("column_labels", self.column_labels[column], int(width), "assign", {"key": column})
+            self.add_change(
+                "column_labels",
+                self.column_labels[column],
+                int(width),
+                "assign",
+                {"key": column},
+            )
         self.column_labels[column] = int(width)
         return self
 
@@ -209,14 +220,18 @@ class PyfficeSpreadSheet(PyfficeDocument):
         num_cols = size[1]
         if self.data is not None and len(self.data) > 0:
             self.num_rows = len(self.data) if len(self.data) > num_rows else num_rows
-            self.num_cols = len(self.data[0]) if len(self.data[0]) > num_cols else num_cols
+            self.num_cols = (
+                len(self.data[0]) if len(self.data[0]) > num_cols else num_cols
+            )
             self.end_row = self.get_end_row(plus=self.num_rows)
             self.end_column = self.get_end_column(plus=self.num_cols)
         else:
             self.num_rows = num_rows
             self.num_cols = num_cols
             row = [None] * num_cols
-            self.data = DataFrame([row] * num_rows, columns=self.get_columns(count=self.num_cols))
+            self.data = DataFrame(
+                [row] * num_rows, columns=self.get_columns(count=self.num_cols)
+            )
             self.end_row = self.get_end_row(plus=num_rows)
             self.end_column = self.get_end_column(plus=num_cols)
         return self
@@ -232,7 +247,12 @@ class PyfficeSpreadSheet(PyfficeDocument):
         }
         self.document["document"] = {
             "data": self.data,
-            "objects": {"tables": self.tables, "charts": self.charts, "images": self.images, "shapes": self.shapes},
+            "objects": {
+                "tables": self.tables,
+                "charts": self.charts,
+                "images": self.images,
+                "shapes": self.shapes,
+            },
         }
         self.load_document(self.document["document"])
         return doc
@@ -254,7 +274,9 @@ class PyfficeMatrix(PyfficeDocumentManager):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeMatrix").override(cfg))
+        self.config.override(
+            condor.Instruct(pxcfg).select("PyfficeMatrix").override(cfg)
+        )
         self.active_worksheet = None
         self.charts = None
         self.compatibility = None
@@ -316,7 +338,9 @@ class PyfficeMatrix(PyfficeDocumentManager):
             self.add_worksheet(sheet["name"], sheet)
         return self
 
-    def file_import(self, file_=None, if_data_only=False, read_only=False, keep_vba=False):
+    def file_import(
+        self, file_=None, if_data_only=False, read_only=False, keep_vba=False
+    ):
         """"""
         super().file_import()
         if file_ is None:
@@ -326,19 +350,32 @@ class PyfficeMatrix(PyfficeDocumentManager):
         if file_ is None:
             raise Exception(f"No File Provided {file_}")
         if ".csv" == file_[-4:]:
-            data = self.file_import_csv(file_, if_data_only=if_data_only, read_only=read_only, keep_vba=keep_vba)
+            data = self.file_import_csv(
+                file_, if_data_only=if_data_only, read_only=read_only, keep_vba=keep_vba
+            )
         elif ".xlsx" == file_[-5:]:
-            data = self.file_import_excel(file_, if_data_only=if_data_only, read_only=read_only, keep_vba=keep_vba)
+            data = self.file_import_excel(
+                file_, if_data_only=if_data_only, read_only=read_only, keep_vba=keep_vba
+            )
         elif ".gsheet" == file_[-7:]:
-            data = self.file_import_gsheet(file_, if_data_only=if_data_only, read_only=read_only, keep_vba=keep_vba)
+            data = self.file_import_gsheet(
+                file_, if_data_only=if_data_only, read_only=read_only, keep_vba=keep_vba
+            )
         else:
             raise Exception(f"File Type Unknown {file_}")
         name = file_.split("/")[-1].split(".")[0]
-        cfg = {"name": name, "parent": self, "file_format": self.file_format, "data": data}
+        cfg = {
+            "name": name,
+            "parent": self,
+            "file_format": self.file_format,
+            "data": data,
+        }
         self.add_worksheets(name, cfg)
         return self
 
-    def file_import_csv(self, path, if_data_only=False, read_only=False, keep_vba=False):
+    def file_import_csv(
+        self, path, if_data_only=False, read_only=False, keep_vba=False
+    ):
         """"""
         self.file_format = ".csv"
         cfg = {}
@@ -346,7 +383,9 @@ class PyfficeMatrix(PyfficeDocumentManager):
         data = importer.open_file(path, if_data_only, read_only, keep_vba)
         return data
 
-    def file_import_excel(self, path, if_data_only=False, read_only=False, keep_vba=False):
+    def file_import_excel(
+        self, path, if_data_only=False, read_only=False, keep_vba=False
+    ):
         """"""
         self.file_format = ".xlsx"
         cfg = {}
@@ -354,7 +393,9 @@ class PyfficeMatrix(PyfficeDocumentManager):
         data = importer.open_file(path, if_data_only, read_only, keep_vba)
         return data
 
-    def file_import_gsheet(self, path, if_data_only=False, read_only=False, keep_vba=False):
+    def file_import_gsheet(
+        self, path, if_data_only=False, read_only=False, keep_vba=False
+    ):
         """"""
         self.file_format = ".gsheet"
         cfg = {}
@@ -382,7 +423,9 @@ class PyfficeMatrix(PyfficeDocumentManager):
         """
         if compatibility == "excel":
             invalid_chars = ["\\", "/", "*", "[", "]", ":", "?"]
-            sanitized_name = "".join(c if c not in invalid_chars else "_" for c in sheet_name)
+            sanitized_name = "".join(
+                c if c not in invalid_chars else "_" for c in sheet_name
+            )
             return sanitized_name[:31]  # Excel sheet names are limited to 31 characters
         sanitized_name = sheet_name
         return sanitized_name
@@ -468,6 +511,8 @@ class PyfficeMatrix(PyfficeDocumentManager):
     def to_dict(self):
         """"""
         doc = super().to_dict()
+        if "document" not in doc:  # TODO: this may need to come from some other place
+            doc["document"] = {}
         doc["document"]["compatibility"] = self.compatibility
         doc["document"]["documents"] = self.sheets
         doc["document"]["document_type"] = "pyffice_matrix"
