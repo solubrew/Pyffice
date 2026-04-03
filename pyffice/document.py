@@ -495,14 +495,12 @@ class PyfficeDocument(PyfficeUnit):
         document = self.document.override(document).dikt
         # document = self.update_document_structure(document)
         self.load_unit(document)
-        self.set_content(document.get("data", {}).get("content", {}))
-        self.set_compatibility(
-            document.get("meta_data", {}).get("compatibility", "pyffice")
-        )
-        self.set_document_type(
-            document.get("meta_data", {}).get("document_type", "text")
-        )
-        self.set_data(document.get("data", {}))
+        data = document.get("data", {}) or {}
+        self.set_content(data.get("content", {}))
+        meta_data = document.get("meta_data", {}) or {}
+        self.set_compatibility(meta_data.get("compatibility", "pyffice"))
+        self.set_document_type(meta_data.get("document_type", "text"))
+        self.set_data(data)
         self.set_file_path(document.get("path", None))
         # self.set_file_type(document.get("file_type", None))
         self.set_version(document.get("version", None))

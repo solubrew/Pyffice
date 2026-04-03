@@ -441,7 +441,7 @@ class PyfficeScript(PyfficeDocument):
 
     def to_dict(self):
         """"""
-        logma.inspect_caller()
+        # logma.inspect_caller()
         doc = super().to_dict()
         doc["data"]["document_type"] = "script"
         doc["data"]["pages"] = {}
