@@ -88,6 +88,9 @@ line-length = 120
 select = ["E", "F", "I", "N", "W"]
 ignore = ["E501"]
 
+[tool.black]
+line-length = 120
+
 [tool.isort]
 profile = "black"
 line_length = 120

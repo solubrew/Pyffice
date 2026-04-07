@@ -30,18 +30,19 @@ from ogma.logma import Logma
 # from squirl.objnql import txtonql
 # from squirl.orgnql import conql, yonql
 from pyffice.document import PyfficeDocumentManager
-from pyffice.analytics.sources import PyfficeSources
+
+# from pyffice.analytics.sources import PyfficeSources
 from pyffice.calendars.calendars import PyfficeCalendar
 from pyffice.charts.charts import PyfficeChart
 from pyffice.ports.ports import PyfficePortCherryTree
 from pyffice.contacts.contacts import PyfficeRolodex
 from pyffice.forms.forms import PyfficeFormsManager
 from pyffice.images.images import PyfficeImage
-from pyffice.diagrams.diagrams import PyfficeSketch
+from pyffice.images.sketches import PyfficeSketch
 from pyffice.images.pdfs import PyfficePDF
 from pyffice.notebooks.notebooks import PyfficeNotebook
-from pyffice.spreadsheet.spreadsheet import PyfficeMatrix
-from pyffice.text.text import PyfficeScript
+from pyffice.matrix.matrix import PyfficeMatrix
+from pyffice.script.script import PyfficeScript
 from pyffice.web.prompts import PyfficePromptsManager
 from pyffice.web.url import PyfficeURLLibrary
 from pyffice.web.web import PyfficeWebBrowser
@@ -97,15 +98,13 @@ class PyfficeCodex(PyfficeDocumentManager):
             self.documents: dict = {}
             self.forms_manager: Optional[PyfficeFormsManager] = None
             self.imports: dict = {}
-            self.source_manager: Optional[PyfficeSources] = None
+            # self.source_manager: Optional[PyfficeSources] = None
             self.source: Any = None
         except Exception as e:
             raise InitializationError(f"Failed to initialize PyfficeCodex: {e}") from e
 
     @classmethod
-    def from_yaml(
-        cls, yaml_str: str, cfg: Optional[dict[str, Any]] = None
-    ) -> "PyfficeCodex":
+    def from_yaml(cls, yaml_str: str, cfg: Optional[dict[str, Any]] = None) -> "PyfficeCodex":
         """Load a codex from a YAML string."""
         import yaml
 
@@ -284,29 +283,27 @@ class PyfficeCodex(PyfficeDocumentManager):
         self.documents[sketch.did] = sketch
         return sketch
 
-    def init_source_manager(
-        self, cfg: Optional[dict[str, Any]] = None
-    ) -> Optional[Any]:
-        """Initialize source manager."""
-        cfg = cfg or {}
-        cfg["codex"] = self
-        self.source_manager = PyfficeSources(cfg)
-        self.documents[self.source_manager.did] = self.source_manager
-        return self.source_manager
+    # def init_source_manager(
+    #     self, cfg: Optional[dict[str, Any]] = None
+    # ) -> Optional[Any]:
+    #     """Initialize source manager."""
+    #     cfg = cfg or {}
+    #     cfg["codex"] = self
+    #     self.source_manager = PyfficeSources(cfg)
+    #     self.documents[self.source_manager.did] = self.source_manager
+    #     return self.source_manager
 
-    def init_source(self, cfg: Optional[dict[str, Any]] = None) -> Optional[Any]:
-        """Initialize a data source."""
-        cfg = cfg or {}
-        cfg["codex"] = self
-        if self.source_manager is None:
-            self.init_source_manager(cfg)
-        self.source = self.source_manager.create_new_source(cfg)
-        self.documents[self.source.did] = self.source
-        return self.source
+    # def init_source(self, cfg: Optional[dict[str, Any]] = None) -> Optional[Any]:
+    #     """Initialize a data source."""
+    #     cfg = cfg or {}
+    #     cfg["codex"] = self
+    #     if self.source_manager is None:
+    #         self.init_source_manager(cfg)
+    #     self.source = self.source_manager.create_new_source(cfg)
+    #     self.documents[self.source.did] = self.source
+    #     return self.source
 
-    def load_document(
-        self, document: Optional[dict[str, Any]] = None
-    ) -> dict[str, Any]:
+    def load_document(self, document: Optional[dict[str, Any]] = None) -> dict[str, Any]:
         """Load documents into the codex."""
         logma.info(f"Load Document {document}")
         if document is None:
@@ -319,10 +316,7 @@ class PyfficeCodex(PyfficeDocumentManager):
         return document
 
     def save(
-        self,
-        path: Optional[str] = None,
-        syntax: Optional[str] = None,
-        encrypt_key: Optional[str] = None,
+        self, path: Optional[str] = None, syntax: Optional[str] = None, encrypt_key: Optional[str] = None
     ) -> "PyfficeCodex":
         """Save the codex to a file."""
         if path is None:
@@ -358,9 +352,7 @@ class PyfficeCodex(PyfficeDocumentManager):
         """Set storage location for the codex (folder or database)."""
         logger.info("set_storage not yet implemented")
 
-    def to_chunks(
-        self, chunk_size: int = 1000, overlap: int = 100
-    ) -> list[dict[str, Any]]:
+    def to_chunks(self, chunk_size: int = 1000, overlap: int = 100) -> list[dict[str, Any]]:
         """Split codex into embedding-ready chunks.
 
         Args:
