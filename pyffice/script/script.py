@@ -35,7 +35,7 @@ logma = Logma(__name__)
 logma.off()
 
 # ====================================================================================================================||
-pxcfg = join(here, "_data_", "text.yaml")
+pxcfg = join(here, "_data_", "script.yaml")
 
 
 class PyfficeScript(PyfficeDocument):

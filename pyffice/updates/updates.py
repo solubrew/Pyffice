@@ -56,6 +56,9 @@ class PyfficeUnitUpdate(PyfficeUpdate):
     def create_temp_unit(self):
         """"""
 
+    def get_version_schema(self, version):
+        """Get the version schema for a given version."""
+
 
 class PyfficeDocumentUpdate(PyfficeUpdate):
     """"""
@@ -224,6 +227,20 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
 
     # listing out the update for every version and every document is unsustainable
     # how can we write this to use an yaml config file?
+
+
+class PyfficeUpdater(object):
+    """"""
+
+    def __init__(self, cfg=None):
+        """"""
+        self.config = condor.Instruct(pxcfg).select("PyfficeUpdater").override(cfg)
+
+    def update_document(self):
+        """"""
+
+    def update_unit(self):
+        """"""
 
 
 # ====================================================================================================================||

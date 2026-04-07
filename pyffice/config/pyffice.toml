@@ -1,7 +1,0 @@
-[pyffice]
-name = "pyffice"
-version = "1.0.0"
-
-[settings]
-debug = true
-max_size = 256

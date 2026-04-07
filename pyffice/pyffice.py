@@ -102,6 +102,19 @@ class PyfficeCodex(PyfficeDocumentManager):
         except Exception as e:
             raise InitializationError(f"Failed to initialize PyfficeCodex: {e}") from e
 
+    @classmethod
+    def from_yaml(
+        cls, yaml_str: str, cfg: Optional[dict[str, Any]] = None
+    ) -> "PyfficeCodex":
+        """Load a codex from a YAML string."""
+        import yaml
+
+        data = yaml.safe_load(yaml_str)
+        codex = cls(cfg)
+        codex.documents = data.get("documents", {})
+        codex.imports = data.get("imports", {})
+        return codex
+
     def add_pydocument(self, pydoc: Any) -> Any:
         """Add a Pyffice document to the codex."""
         try:
@@ -345,97 +358,6 @@ class PyfficeCodex(PyfficeDocumentManager):
         """Set storage location for the codex (folder or database)."""
         logger.info("set_storage not yet implemented")
 
-    # ============================================================================
-    # AI Agent Enhancement Methods
-    # ============================================================================
-
-    def to_yaml(self) -> str:
-        """Convert the entire codex to a YAML string for serialization."""
-        import yaml
-
-        # Build serializable dict
-        data = {
-            "version": self.VERSION,
-            "documents": {},
-            "imports": self.imports,
-            "contacts": None,
-        }
-
-        # Serialize each document - skip ones that fail
-        for doc_id, doc in self.documents.items():
-            try:
-                if hasattr(doc, "to_dict"):
-                    data["documents"][doc_id] = doc.to_dict()
-                else:
-                    data["documents"][doc_id] = {"type": type(doc).__name__}
-            except Exception as e:
-                # Skip documents that can't be serialized
-                data["documents"][doc_id] = {
-                    "type": type(doc).__name__,
-                    "_error": str(e),
-                }
-
-        if self.contacts:
-            try:
-                if hasattr(self.contacts, "to_dict"):
-                    data["contacts"] = self.contacts.to_dict()
-            except Exception as e:
-                data["contacts"] = {"type": "PyfficeRolodex", "_error": str(e)}
-
-        return yaml.dump(data, default_flow_style=False)
-
-    @classmethod
-    def from_yaml(
-        cls, yaml_str: str, cfg: Optional[dict[str, Any]] = None
-    ) -> "PyfficeCodex":
-        """Load a codex from a YAML string."""
-        import yaml
-
-        data = yaml.safe_load(yaml_str)
-        codex = cls(cfg)
-        codex.documents = data.get("documents", {})
-        codex.imports = data.get("imports", {})
-        return codex
-
-    def to_summary(self) -> dict[str, Any]:
-        """Get a token-efficient summary of the codex for AI agents."""
-        doc_types = []
-        for doc_id, doc in self.documents.items():
-            doc_types.append(type(doc).__name__)
-
-        return {
-            "version": self.VERSION,
-            "document_count": len(self.documents),
-            "document_types": doc_types,
-            "has_contacts": self.contacts is not None,
-            "has_forms_manager": self.forms_manager is not None,
-            "import_count": len(self.imports),
-        }
-
-    def to_json_schema(self) -> dict[str, Any]:
-        """Get JSON Schema for LLM output validation."""
-        return {
-            "type": "object",
-            "properties": {
-                "version": {"type": "string", "description": "Pyffice version"},
-                "documents": {
-                    "type": "object",
-                    "description": "Dictionary of documents by ID",
-                    "additionalProperties": {
-                        "type": "object",
-                        "description": "Document properties",
-                    },
-                },
-                "document_types": {
-                    "type": "array",
-                    "items": {"type": "string"},
-                    "description": "List of document type names",
-                },
-                "import_count": {"type": "integer", "description": "Number of imports"},
-            },
-            "required": ["version", "document_count"],
-        }
-
     def to_chunks(
         self, chunk_size: int = 1000, overlap: int = 100
     ) -> list[dict[str, Any]]:
@@ -484,6 +406,87 @@ class PyfficeCodex(PyfficeDocumentManager):
                 )
 
         return chunks
+
+    # ============================================================================
+    # AI Agent Enhancement Methods
+    # ============================================================================
+    def to_json_schema(self) -> dict[str, Any]:
+        """Get JSON Schema for LLM output validation."""
+        return {
+            "type": "object",
+            "properties": {
+                "version": {"type": "string", "description": "Pyffice version"},
+                "documents": {
+                    "type": "object",
+                    "description": "Dictionary of documents by ID",
+                    "additionalProperties": {
+                        "type": "object",
+                        "description": "Document properties",
+                    },
+                },
+                "document_types": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "List of document type names",
+                },
+                "import_count": {"type": "integer", "description": "Number of imports"},
+            },
+            "required": ["version", "document_count"],
+        }
+
+    def to_summary(self) -> dict[str, Any]:
+        """Get a token-efficient summary of the codex for AI agents."""
+        doc_types = []
+        for doc_id, doc in self.documents.items():
+            doc_types.append(type(doc).__name__)
+
+        return {
+            "version": self.VERSION,
+            "document_count": len(self.documents),
+            "document_types": doc_types,
+            "has_contacts": self.contacts is not None,
+            "has_forms_manager": self.forms_manager is not None,
+            "import_count": len(self.imports),
+        }
+
+    def to_yaml(self) -> str:
+        """Convert the entire codex to a YAML string for serialization."""
+        import yaml
+
+        # Build serializable dict
+        data = {
+            "version": self.VERSION,
+            "documents": {},
+            "imports": self.imports,
+            "contacts": None,
+        }
+
+        # Serialize each document - skip ones that fail
+        for doc_id, doc in self.documents.items():
+            try:
+                if hasattr(doc, "to_dict"):
+                    data["documents"][doc_id] = doc.to_dict()
+                else:
+                    data["documents"][doc_id] = {"type": type(doc).__name__}
+            except Exception as e:
+                # Skip documents that can't be serialized
+                data["documents"][doc_id] = {
+                    "type": type(doc).__name__,
+                    "_error": str(e),
+                }
+
+        if self.contacts:
+            try:
+                if hasattr(self.contacts, "to_dict"):
+                    data["contacts"] = self.contacts.to_dict()
+            except Exception as e:
+                data["contacts"] = {"type": "PyfficeRolodex", "_error": str(e)}
+
+        return yaml.dump(data, default_flow_style=False)
+
+    def update(self):
+        """Update the codex with new documents."""
+        return PyfficeUpdater()
 
     def _chunk_text(self, text: str, chunk_size: int, overlap: int) -> list[str]:
         """Split text into overlapping chunks."""
