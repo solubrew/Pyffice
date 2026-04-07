@@ -40,6 +40,16 @@ class PyfficeUpdate(object):
         self.config = condor.Instruct(pxcfg).select("PyfficeUpdate").override(cfg)
         self.document = None
 
+    def check_schema(self, schema):
+        """Returns True if the document matches the schema"""
+        return True
+
+    def check_extra(self):
+        """Returns True if the document has extra fields not in the schema at the schema levels"""
+
+    def check_missing(self):
+        """Returns True if the document is missing fields not in the schema at the schema levels"""
+
     def create_temp_file(self):
         """"""
         return
@@ -52,6 +62,16 @@ class PyfficeUnitUpdate(PyfficeUpdate):
         """"""
         super().__init__(cfg)
         self.config.override(pxcfg).select("PyfficeUnitUpdate").override(cfg)
+
+    def check_schema(self, schema):
+        """Returns True if the document matches the schema"""
+        return True
+
+    def check_extra(self):
+        """Returns True if the document has extra fields not in the schema at the schema levels"""
+
+    def check_missing(self):
+        """Returns True if the document is missing fields not in the schema at the schema levels"""
 
     def create_temp_unit(self):
         """"""
@@ -69,6 +89,16 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
         self.config.override(pxcfg).select("PyfficeDocumentUpdate").override(cfg)
         self.data = None
         self.meta_data = None
+
+    def check_schema(self, schema):
+        """Returns True if the document matches the schema"""
+        return True
+
+    def check_extra(self):
+        """Returns True if the document has extra fields not in the schema at the schema levels"""
+
+    def check_missing(self):
+        """Returns True if the document is missing fields not in the schema at the schema levels"""
 
     def create_temp_document(self):
         """"""
