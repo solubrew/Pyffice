@@ -10,6 +10,7 @@
     security: seclvl2
     <(WT)>: -32
 """
+
 from copy import deepcopy
 
 # -*- coding: utf-8 -*
@@ -22,7 +23,7 @@ import datetime as dt
 # ======================================Solutions Brewer Library Modules==============================================||
 from condor import condor
 from ogma.logma import Logma
-from pyffice.config.msports import PyfficePortExcel
+from pyffice.ports.msports import PyfficePortExcel
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 from pyffice.items.text import PyfficeText
 

@@ -28,7 +28,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageOps, ImageFilter
 # ======================================Solutions Brewer Library Modules==============================================||
 from condor import condor
 from ogma.logma import Logma
-from pyffice.items.colors import PyfficeColorPalette
+from pyffice.images.palettes import PyfficeColorPalette
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 from squirl.orgnql import fonql
 from pyffice.items.items import PyfficeTable

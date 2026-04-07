@@ -29,7 +29,7 @@ from pyffice.ports.gports import PyfficePortGoogleSheets
 from pyffice.ports.msports import PyfficePortExcel
 from pyffice.ports.ports import PyfficePortCSV
 from pyffice.document import PyfficeDocumentManager
-from pyffice.spreadsheet.spreadsheet import PyfficeSpreadSheet
+from pyffice.matrix.spreadsheet import PyfficeSpreadSheet
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -48,9 +48,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(
-            condor.Instruct(pxcfg).select("PyfficeMatrix").override(cfg)
-        )
+        self.config.override(condor.Instruct(pxcfg).select("PyfficeMatrix").override(cfg))
         self.active_worksheet = None
         self.charts = None
         self.compatibility = None
@@ -112,9 +110,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
             self.add_worksheet(sheet["name"], sheet)
         return self
 
-    def file_import(
-        self, file_=None, if_data_only=False, read_only=False, keep_vba=False
-    ):
+    def file_import(self, file_=None, if_data_only=False, read_only=False, keep_vba=False):
         """"""
         super().file_import()
         if file_ is None:
@@ -124,17 +120,11 @@ class PyfficeMatrix(PyfficeDocumentManager):
         if file_ is None:
             raise Exception(f"No File Provided {file_}")
         if ".csv" == file_[-4:]:
-            data = self.file_import_csv(
-                file_, if_data_only=if_data_only, read_only=read_only, keep_vba=keep_vba
-            )
+            data = self.file_import_csv(file_, if_data_only=if_data_only, read_only=read_only, keep_vba=keep_vba)
         elif ".xlsx" == file_[-5:]:
-            data = self.file_import_excel(
-                file_, if_data_only=if_data_only, read_only=read_only, keep_vba=keep_vba
-            )
+            data = self.file_import_excel(file_, if_data_only=if_data_only, read_only=read_only, keep_vba=keep_vba)
         elif ".gsheet" == file_[-7:]:
-            data = self.file_import_gsheet(
-                file_, if_data_only=if_data_only, read_only=read_only, keep_vba=keep_vba
-            )
+            data = self.file_import_gsheet(file_, if_data_only=if_data_only, read_only=read_only, keep_vba=keep_vba)
         else:
             raise Exception(f"File Type Unknown {file_}")
         name = file_.split("/")[-1].split(".")[0]
@@ -147,9 +137,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         self.add_worksheets(name, cfg)
         return self
 
-    def file_import_csv(
-        self, path, if_data_only=False, read_only=False, keep_vba=False
-    ):
+    def file_import_csv(self, path, if_data_only=False, read_only=False, keep_vba=False):
         """"""
         self.file_format = ".csv"
         cfg = {}
@@ -157,9 +145,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         data = importer.open_file(path, if_data_only, read_only, keep_vba)
         return data
 
-    def file_import_excel(
-        self, path, if_data_only=False, read_only=False, keep_vba=False
-    ):
+    def file_import_excel(self, path, if_data_only=False, read_only=False, keep_vba=False):
         """"""
         self.file_format = ".xlsx"
         cfg = {}
@@ -167,9 +153,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         data = importer.open_file(path, if_data_only, read_only, keep_vba)
         return data
 
-    def file_import_gsheet(
-        self, path, if_data_only=False, read_only=False, keep_vba=False
-    ):
+    def file_import_gsheet(self, path, if_data_only=False, read_only=False, keep_vba=False):
         """"""
         self.file_format = ".gsheet"
         cfg = {}
@@ -197,9 +181,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         """
         if compatibility == "excel":
             invalid_chars = ["\\", "/", "*", "[", "]", ":", "?"]
-            sanitized_name = "".join(
-                c if c not in invalid_chars else "_" for c in sheet_name
-            )
+            sanitized_name = "".join(c if c not in invalid_chars else "_" for c in sheet_name)
             return sanitized_name[:31]  # Excel sheet names are limited to 31 characters
         sanitized_name = sheet_name
         return sanitized_name

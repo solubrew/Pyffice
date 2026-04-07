@@ -38,7 +38,7 @@ from condor import condor
 from subtrix.utilities import uuid
 from ogma.logma import Logma
 from pyffice.document import PyfficeDocumentManager
-from pyffice.text.text import PyfficeScript
+from pyffice.script.script import PyfficeScript
 from pyffice.images.images import PyfficeImage
 from pyffice.web.url import PyfficeURL
 from pyffice.items.text import PyfficeText

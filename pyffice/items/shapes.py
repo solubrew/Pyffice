@@ -2,14 +2,15 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
@@ -22,7 +23,7 @@ from condor import condor
 from ogma.logma import Logma
 from pyffice.document import PyfficeUnit
 from pyffice.items.colors import PyfficeColor
-from pyffice.text.text import PyfficeText
+from pyffice.items.text import PyfficeText
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||

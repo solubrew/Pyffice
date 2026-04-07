@@ -24,7 +24,7 @@ import datetime as dt
 from condor import condor
 from ogma.logma import Logma
 from pyffice.document import PyfficeDocumentManager, PyfficeUnit
-from pyffice.calendars.tasks import PyfficeEvent, PyfficeTimeUnit  # , PyfficeTask
+from pyffice.calendars.events import PyfficeEvent, PyfficeTimeUnit  # , PyfficeTask
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
