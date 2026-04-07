@@ -22,6 +22,7 @@ import datetime as dt
 from condor import condor
 from ogma.logma import Logma
 from pyffice.document import PyfficeDocument
+from pyffice.items.layers import PyfficeLayer
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -40,9 +41,7 @@ class PyfficeSketch(PyfficeDocument):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(
-            condor.Instruct(pxcfg).select("PyfficeSketch").override(cfg)
-        )
+        self.config.override(condor.Instruct(pxcfg).select("PyfficeSketch").override(cfg))
         self.canvas = None
         self.connections = None
         self.edges = None
@@ -50,34 +49,6 @@ class PyfficeSketch(PyfficeDocument):
         self.nodes = None
         self.layers = None
         self.lock = None
-
-    def add_connection(self, connection):
-        """"""
-        cfg = {"connection": connection}
-        connection = PyfficeSketchConnection(cfg)
-        self.add_change("connections", self.connections, connection, "add")
-        self.connections[connection.did] = connection
-        return self
-
-    def add_edge(
-        self,
-        connections=None,
-        end=None,
-        start=None,
-        type=None,
-        version=None,
-        visible=None,
-        active=None,
-    ):
-        """"""
-        cfg = {}
-        edge = PyfficeEdge(cfg)
-        self.add_layer(edge.did)
-        self.edges[edge.did] = edge
-        self.add_change("edges", self.edges, edge, "add")
-        for endpoint in edge.endpoints:
-            self.add_connection(connections[endpoint])
-        return self
 
     def add_layer(self, layer):
         """"""
@@ -87,36 +58,10 @@ class PyfficeSketch(PyfficeDocument):
         self.layers[layer.name] = layer
         return self
 
-    def add_node(self):
-        """"""
-        cfg = {}
-        node = PyfficeNode(cfg)
-        self.add_change("nodes", self.nodes, node, "add")
-        self.nodes[node.did] = node
-        return self
-
-    def del_connection(self, connection):
-        """"""
-        self.add_change("connections", self.connections, connection, "del")
-        del self.connections[connection.did]
-        return self
-
-    def del_edge(self, edge):
-        """"""
-        self.add_change("edges", self.edges, edge, "del")
-        del self.edges[edge.did]
-        return self
-
     def del_layer(self, layer):
         """"""
         self.add_change("layers", self.layers, layer, "del")
         del self.layers[layer.name]
-        return self
-
-    def del_node(self, node):
-        """"""
-        self.add_change("nodes", self.nodes, node, "del")
-        del self.nodes[node.did]
         return self
 
     def load_document(self, document=None):
@@ -131,54 +76,6 @@ class PyfficeSketch(PyfficeDocument):
         self.set_edges(document.get("edges", {}))
         self.set_endpoints(document.get("endpoints", {}))
         self.set_nodes(document.get("nodes", {}))
-        return self
-
-    def set_lock(self, lock):
-        """"""
-        if lock != self.lock:
-            self.add_change("lock", self.lock, lock)
-        return self
-
-    def set_edge_position(self, edge, position, maintain_connection=True):
-        """"""
-        self.edges[edge].set_position(position)
-        if maintain_connection:
-            for connection in self.connections.values():
-                connection.set_position(position)
-        return self
-
-    def set_edges(self, edges):
-        """"""
-        if edges != self.edges:
-            self.add_change("edges", self.edges, edges, "set")
-        self.edges = edges
-        return self
-
-    def set_endpoint_position(self, endpoint, position, maintain_connection=True):
-        """"""
-        self.endpoints[endpoint].set_position(position)
-        return self
-
-    def set_endpoints(self, endpoints):
-        """"""
-        if endpoints != self.endpoints:
-            self.add_change("endpoints", self.endpoints, endpoints)
-            self.endpoints = endpoints
-        return self
-
-    def set_node_position(self, node, position, maintain_connections=True):
-        """"""
-        self.nodes[node].set_position(position)
-        if maintain_connections:
-            for connection in self.connections.values():
-                connection.set_position(position)
-        return self
-
-    def set_nodes(self, nodes):
-        """"""
-        if nodes != self.nodes:
-            self.add_change("nodes", self.nodes, nodes, "set")
-            self.nodes = nodes
         return self
 
     def to_dict(self):
@@ -202,6 +99,9 @@ class PyfficeSketch(PyfficeDocument):
             "connections": {x.did: x.to_dict() for x in self.connections},
         }
         return doc
+
+    def to_md(self):
+        """"""
 
 
 # ====================================================================================================================||
