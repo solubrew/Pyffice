@@ -2,14 +2,15 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
 """
+
 from copy import deepcopy
 
 # -*- coding: utf-8 -*
@@ -23,7 +24,7 @@ import datetime as dt
 from condor import condor
 from ogma.logma import Logma
 from pyffice.document import PyfficeDocumentManager, PyfficeUnit
-from pyffice.calendars.tasks import PyfficeEvent, PyfficeTask, PyfficeTimeUnit
+from pyffice.calendars.tasks import PyfficeEvent, PyfficeTimeUnit  # , PyfficeTask
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -58,13 +59,13 @@ class PyfficeCalendar(PyfficeDocumentManager):
         self.events.append(event)
         return self
 
-    def add_task(self, task):
-        """"""
-        cfg = {"task": task}
-        task = PyfficeTask(cfg)
-        self.add_change("tasks", deepcopy(self.tasks), task)
-        self.tasks.append(task)
-        return self
+    # def add_task(self, task):
+    #     """"""
+    #     cfg = {"task": task}
+    #     task = PyfficeTask(cfg)
+    #     self.add_change("tasks", deepcopy(self.tasks), task)
+    #     self.tasks.append(task)
+    #     return self
 
     def del_event(self, event):
         """"""
@@ -72,11 +73,11 @@ class PyfficeCalendar(PyfficeDocumentManager):
             self.events.remove(event)
             self.add_change("events", deepcopy(self.events), self.events, "del")
 
-    def del_task(self, task):
-        """"""
-        if task in self.tasks:
-            self.tasks.remove(task)
-            self.add_change("tasks", deepcopy(self.tasks), self.tasks, "del")
+    # def del_task(self, task):
+    #     """"""
+    #     if task in self.tasks:
+    #         self.tasks.remove(task)
+    #         self.add_change("tasks", deepcopy(self.tasks), self.tasks, "del")
 
     def load_document(self, document=None):
         """"""
@@ -124,12 +125,12 @@ class PyfficeCalendar(PyfficeDocumentManager):
             self.time_unit = time_unit
         return self
 
-    def set_tasks(self, tasks):
-        """"""
-        cfg = {"tasks": tasks}
-        task = PyfficeTask(cfg)
-        self.tasks.append(task)
-        return self
+    # def set_tasks(self, tasks):
+    #     """"""
+    #     cfg = {"tasks": tasks}
+    #     task = PyfficeTask(cfg)
+    #     self.tasks.append(task)
+    #     return self
 
     def set_time_scale(self, time_scale):
         """"""
