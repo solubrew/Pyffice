@@ -11,6 +11,7 @@
     security: seclvl2
     <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join, exists
@@ -27,13 +28,14 @@ from zipfile import ZipFile
 # Try importing optional dependencies
 try:
     from PIL import Image
+
     HAS_PIL = True
 except ImportError:
     HAS_PIL = False
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.diagrams.diagrams import PyfficeSketch, PyfficeNode, PyfficeEdge, PyfficeLayer
 
 # ====================================================================================================================||
@@ -194,29 +196,30 @@ class DiaConverter(DiagramConverter):
         lines.append('  <dia:layer name="Background" visible="true">')
 
         # Export nodes
-        for node in (diagram.nodes or []):
+        for node in diagram.nodes or []:
             lines.append(f'    <dia:object type="Box" id="{node.did}">')
             lines.append(f'      <dia:attribute name="obj_pos">{node.position[0]},{node.position[1]}</dia:attribute>')
             lines.append(f'      <dia:attribute name="elem_box">{node.width},{node.height}</dia:attribute>')
             lines.append(f'      <dia:attribute name="name">{node.name or ""}</dia:attribute>')
-            lines.append('    </dia:object>')
+            lines.append("    </dia:object>")
 
         # Export edges
-        for edge in (diagram.edges or []):
+        for edge in diagram.edges or []:
             lines.append(f'    <dia:object type="Line" id="{edge.did}">')
             for ep_name, endpoint in (edge.endpoints or {}).items():
                 pos = endpoint.get("position", [0, 0])
                 lines.append(f'      <dia:attribute name="conn_endpoints">{pos[0]},{pos[1]}</dia:attribute>')
-            lines.append('    </dia:object>')
+            lines.append("    </dia:object>")
 
-        lines.append('  </dia:layer>')
-        lines.append('</dia:diagram>')
+        lines.append("  </dia:layer>")
+        lines.append("</dia:diagram>")
 
         content = "\n".join(lines)
 
         # Handle .dia.gz
         if file_path.endswith(".gz"):
             import gzip
+
             with gzip.open(file_path, "wt", encoding="utf-8") as f:
                 f.write(content)
         else:
@@ -247,9 +250,9 @@ class DotConverter(DiagramConverter):
 
         # Extract nodes and edges using regex
         # Match node definitions: node [label="..."];
-        node_pattern = r'(\w+)\s*\[([^\]]*)\]'
+        node_pattern = r"(\w+)\s*\[([^\]]*)\]"
         # Match edges: a -> b [label="..."];
-        edge_pattern = r'(\w+)\s*(->|--)\s*(\w+)\s*(\[([^\]]*)\])?'
+        edge_pattern = r"(\w+)\s*(->|--)\s*(\w+)\s*(\[([^\]]*)\])?"
 
         nodes = {}
         for match in re.finditer(node_pattern, content):
@@ -292,13 +295,13 @@ class DotConverter(DiagramConverter):
         lines.append("  rankdir=LR;")
 
         # Export nodes
-        for node in (diagram.nodes or []):
+        for node in diagram.nodes or []:
             name = node.name or node.did
             lines.append(f'  "{name}" [label="{name}"];')
 
         # Export edges
         # (simplified - would need proper edge tracking)
-        for edge in (diagram.edges or []):
+        for edge in diagram.edges or []:
             lines.append("  // edge")
 
         lines.append("}")
@@ -363,14 +366,14 @@ class GraphMLConverter(DiagramConverter):
         # Graph
         lines.append('  <graph id="G" edgedefault="undirected">')
 
-        for node in (diagram.nodes or []):
+        for node in diagram.nodes or []:
             name = node.name or node.did
             lines.append(f'    <node id="{node.did}">')
             lines.append(f'      <data key="label">{name}</data>')
-            lines.append('    </node>')
+            lines.append("    </node>")
 
-        lines.append('  </graph>')
-        lines.append('</graphml>')
+        lines.append("  </graph>")
+        lines.append("</graphml>")
 
         with open(file_path, "w", encoding="utf-8") as f:
             f.write("\n".join(lines))
@@ -446,7 +449,7 @@ class SVGConverter(DiagramConverter):
         lines.append('<svg xmlns="http://www.w3.org/2000/svg">')
 
         # Export nodes as rectangles
-        for node in (diagram.nodes or []):
+        for node in diagram.nodes or []:
             x = node.position[0] if node.position else 0
             y = node.position[1] if node.position else 0
             w = node.width or 50
@@ -455,7 +458,7 @@ class SVGConverter(DiagramConverter):
             lines.append(f'  <rect x="{x}" y="{y}" width="{w}" height="{h}" id="{name}" />')
 
         # Export edges as lines
-        for edge in (diagram.edges or []):
+        for edge in diagram.edges or []:
             endpoints = edge.endpoints or {}
             if len(endpoints) >= 2:
                 pts = list(endpoints.values())
@@ -465,7 +468,7 @@ class SVGConverter(DiagramConverter):
                 y2 = pts[1].get("position", [0, 0])[1]
                 lines.append(f'  <line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" />')
 
-        lines.append('</svg>')
+        lines.append("</svg>")
 
         with open(file_path, "w", encoding="utf-8") as f:
             f.write("\n".join(lines))
@@ -547,7 +550,8 @@ class DrawIOConverter(DiagramConverter):
                 if value:
                     # Strip HTML tags for basic label
                     import re
-                    label = re.sub(r'<[^>]+>', '', value)
+
+                    label = re.sub(r"<[^>]+>", "", value)
                     node.set_name(label)
 
                 sketch.add_node(node)
@@ -557,17 +561,17 @@ class DrawIOConverter(DiagramConverter):
     def save(self, diagram, file_path):
         """Save PyfficeSketch to DrawIO format"""
         lines = ['<?xml version="1.0" encoding="UTF-8"?>']
-        lines.append('<mxfile>')
+        lines.append("<mxfile>")
         lines.append('  <diagram name="Page-1">')
         lines.append('    <mxGraphModel dx="800" dy="600">')
-        lines.append('      <root>')
+        lines.append("      <root>")
         lines.append('        <mxCell id="0" />')
         lines.append('        <mxCell id="1" parent="0" />')
 
         cell_id = 2
 
         # Export nodes
-        for node in (diagram.nodes or []):
+        for node in diagram.nodes or []:
             x = node.position[0] if node.position else 0
             y = node.position[1] if node.position else 0
             w = node.width or 50
@@ -576,13 +580,13 @@ class DrawIOConverter(DiagramConverter):
 
             lines.append(f'        <mxCell id="{cell_id}" value="{name}" vertex="1" parent="1">')
             lines.append(f'          <mxGeometry x="{x}" y="{y}" width="{w}" height="{h}" as="geometry" />')
-            lines.append('        </mxCell>')
+            lines.append("        </mxCell>")
             cell_id += 1
 
-        lines.append('      </root>')
-        lines.append('    </mxGraphModel>')
-        lines.append('  </diagram>')
-        lines.append('</mxfile>')
+        lines.append("      </root>")
+        lines.append("    </mxGraphModel>")
+        lines.append("  </diagram>")
+        lines.append("</mxfile>")
 
         with open(file_path, "w", encoding="utf-8") as f:
             f.write("\n".join(lines))
@@ -747,12 +751,12 @@ class BPMNConverter(DiagramConverter):
         lines.append('  <process id="Process_1" isExecutable="false">')
 
         # Export nodes as tasks
-        for node in (diagram.nodes or []):
+        for node in diagram.nodes or []:
             name = node.name or node.did
             lines.append(f'    <task id="{node.did}" name="{name}" />')
 
-        lines.append('  </process>')
-        lines.append('</definitions>')
+        lines.append("  </process>")
+        lines.append("</definitions>")
 
         with open(file_path, "w", encoding="utf-8") as f:
             f.write("\n".join(lines))

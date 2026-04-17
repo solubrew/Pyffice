@@ -2,14 +2,15 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
@@ -18,8 +19,8 @@ import datetime as dt
 # ======================================3rd Party Library Modules=====================================================||
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 from subtrix.utilities import uuid
 from pyffice.web.web import PyfficeWebBrowser
@@ -42,7 +43,7 @@ class PyfficeContext(PyfficeDocument):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeContext")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeContext")).override(cfg)
 
 
 class PyfficePrompt(PyfficeDocument):
@@ -53,7 +54,7 @@ class PyfficePrompt(PyfficeDocument):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficePrompt")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficePrompt")).override(cfg)
         self.file_type = "prompt"
         self.context = None
         self.context_metrics = None
@@ -234,7 +235,7 @@ class PyfficeResponse(PyfficeDocument):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeResponse")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeResponse")).override(cfg)
 
     def add_source(self):
         """"""
@@ -258,7 +259,7 @@ class PyfficePromptsManager(PyfficeDocumentManager):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficePromptsManager")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficePromptsManager")).override(cfg)
         self.active_service = None
         self.services = None
         self.browser_left = None

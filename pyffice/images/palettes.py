@@ -19,8 +19,8 @@ import datetime as dt
 # ======================================3rd Party Library Modules=====================================================||
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument
 
 # ====================================================================================================================||
@@ -49,7 +49,7 @@ class PyfficeColorPalette(PyfficeDocument):
             cfg (dict, optional): Configuration dictionary.
         """
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeColorPalette")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeColorPalette")).override(cfg)
         self.parent = self.config.dikt.get("parent", None)
         self.colors = None  # Store colors as PyfficeColor objects
         self.hex_colors = None  # Store as HEX values for quick lookup

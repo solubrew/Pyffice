@@ -19,8 +19,8 @@ import datetime as dt
 # ======================================3rd Party Library Modules=====================================================||
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -38,7 +38,7 @@ class PyfficeTag(object):
 
     def __init__(self, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).select("PyfficeTag").override(cfg)
+        self.config = kahndor.Instruct(pxcfg).select("PyfficeTag").override(cfg)
         self.description = None
         self.label = None
         self.value = None

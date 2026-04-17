@@ -25,8 +25,8 @@ except ImportError:
     HAS_DIA = False
     pass
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 
 from pyffice.ports.ports import PyfficePort
 
@@ -47,7 +47,7 @@ class PyfficePortGoogleDocs(PyfficePort):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficePortGoogleDocs")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortGoogleDocs")).override(cfg)
 
     def to_native(self):
         """"""
@@ -64,7 +64,7 @@ class PyfficePortGoogleForms(PyfficePort):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("")).override(cfg)
 
     def to_native(self):
         """"""
@@ -81,7 +81,7 @@ class PyfficePortGoogleSheets(PyfficePort):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficePortGoogleSheets")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortGoogleSheets")).override(cfg)
 
     def to_native(self):
         """"""

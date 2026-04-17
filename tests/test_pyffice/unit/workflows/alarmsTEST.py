@@ -30,22 +30,22 @@ from pathlib import Path  # 2026-01-15 20:31:31
 from typing import Any, Dict, List, Optional  # 2026-01-15 20:31:31
 from os.path import join  # 2026-01-15 20:31:31
 from os.path import dirname  # 2026-01-15 20:31:31
-from ogma.logma import Logma  # 2026-01-15 20:31:31
+from kahndor.logma import Logma  # 2026-01-15 20:31:31
 from pyffice.workflows.alarms import PyfficeAlarm  # 2026-01-15 20:31:31
 
 # =========================================Local Library Modules======================================================||
-from ogma.logma import Logma  # 2026-01-15 15:15:16
-from condor import condor  # 2026-01-15 20:21:46
+from kahndor.logma import Logma  # 2026-01-15 15:15:16
+from kahndor import kahndor  # 2026-01-15 20:21:46
 
 import pytest  # 2026-01-15 20:31:31
 import hypothesis  # 2026-01-15 20:31:31
-from condor import condor  # 2026-01-15 20:31:31
+from kahndor import kahndor  # 2026-01-15 20:31:31
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:31:31
 LOGMA = Logma(__name__)  # 2026-01-15 20:31:31
 PXCFG = join(HERE, "_data_", "alarmsTEST.yaml")  # 2026-01-15 20:31:31
-CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:31:31
+CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:31:31
 
 
 # ====================================================================================================================||

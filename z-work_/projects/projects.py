@@ -18,8 +18,8 @@ import datetime as dt
 from typing import Optional, Any
 
 # ======================================3rd Party Library Modules=====================================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.document import PyfficeDocumentManager, PyfficeUnit
 
 # ====================================================================================================================||
@@ -84,9 +84,7 @@ class PyfficeProject(PyfficeDocumentManager):
 
     def __init__(self, cfg: Optional[dict] = None):
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeProject")).override(
-            cfg
-        )
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeProject")).override(cfg)
         self.tasks = []
         self.resources = []
         self.milestones = []
@@ -107,13 +105,9 @@ class PyfficeProject(PyfficeDocumentManager):
         self.milestones.append(milestone)
         return self
 
-    def add_dependency(
-        self, from_task: str, to_task: str, dependency_type: str = "FS"
-    ) -> "PyfficeProject":
+    def add_dependency(self, from_task: str, to_task: str, dependency_type: str = "FS") -> "PyfficeProject":
         """Add a task dependency (Finish-to-Start by default)."""
-        self.dependencies.append(
-            {"from": from_task, "to": to_task, "type": dependency_type}
-        )
+        self.dependencies.append({"from": from_task, "to": to_task, "type": dependency_type})
         return self
 
     def to_dict(self) -> dict:
@@ -127,9 +121,7 @@ class PyfficeProject(PyfficeDocumentManager):
         }
 
     @classmethod
-    def from_microsoft_project(
-        cls, file_path: str, cfg: Optional[dict] = None
-    ) -> "PyfficeProject":
+    def from_microsoft_project(cls, file_path: str, cfg: Optional[dict] = None) -> "PyfficeProject":
         """Import from Microsoft Project format."""
         import struct
 
@@ -151,9 +143,7 @@ class PyfficeProject(PyfficeDocumentManager):
         return project
 
     @classmethod
-    def from_projectlibre(
-        cls, file_path: str, cfg: Optional[dict] = None
-    ) -> "PyfficeProject":
+    def from_projectlibre(cls, file_path: str, cfg: Optional[dict] = None) -> "PyfficeProject":
         """Import from ProjectLibre format."""
         import xml.etree.ElementTree as ET
 
@@ -172,9 +162,7 @@ class PyfficeProject(PyfficeDocumentManager):
         return project
 
     @classmethod
-    def from_ganttproject(
-        cls, file_path: str, cfg: Optional[dict] = None
-    ) -> "PyfficeProject":
+    def from_ganttproject(cls, file_path: str, cfg: Optional[dict] = None) -> "PyfficeProject":
         """Import from GanttProject format."""
         import xml.etree.ElementTree as ET
 
@@ -329,9 +317,7 @@ class PyfficeProjectMilestone(PyfficeUnit):
 
 
 # Factory function for bidirectional conversion
-def create_project_from_file(
-    file_path: str, cfg: Optional[dict] = None
-) -> PyfficeProject:
+def create_project_from_file(file_path: str, cfg: Optional[dict] = None) -> PyfficeProject:
     """Create a PyfficeProject from any supported file format.
 
     Args:

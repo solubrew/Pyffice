@@ -30,22 +30,22 @@ from pathlib import Path  # 2026-01-15 20:30:20
 from typing import Any, Dict, List, Optional  # 2026-01-15 20:30:20
 from os.path import join  # 2026-01-15 20:30:20
 from os.path import dirname  # 2026-01-15 20:30:20
-from ogma.logma import Logma  # 2026-01-15 20:30:20
+from kahndor.logma import Logma  # 2026-01-15 20:30:20
 from pyffice.items.shapes import PyfficeShape  # 2026-01-15 20:30:20
 
 # =========================================Local Library Modules======================================================||
-from ogma.logma import Logma  # 2026-01-15 15:13:58
-from condor import condor  # 2026-01-15 20:20:38
+from kahndor.logma import Logma  # 2026-01-15 15:13:58
+from kahndor import kahndor  # 2026-01-15 20:20:38
 
 import pytest  # 2026-01-15 20:30:20
 import hypothesis  # 2026-01-15 20:30:20
-from condor import condor  # 2026-01-15 20:30:20
+from kahndor import kahndor  # 2026-01-15 20:30:20
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:30:20
 LOGMA = Logma(__name__)  # 2026-01-15 20:30:20
 PXCFG = join(HERE, "_data_", "shapesTEST.yaml")  # 2026-01-15 20:30:20
-CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:20
+CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:20
 
 
 # ====================================================================================================================||
@@ -69,12 +69,9 @@ class Test_PyfficeShape:  # 2026-01-15 15:13:59
     def reset(self):  # 2026-01-15 15:13:59
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:59
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_add_shape(self):  # 2026-01-15 15:13:58
         """"""

@@ -30,22 +30,22 @@ from pathlib import Path  # 2026-01-15 20:29:58
 from typing import Any, Dict, List, Optional  # 2026-01-15 20:29:58
 from os.path import join  # 2026-01-15 20:29:58
 from os.path import dirname  # 2026-01-15 20:29:58
-from ogma.logma import Logma  # 2026-01-15 20:29:58
+from kahndor.logma import Logma  # 2026-01-15 20:29:58
 from pyffice.filesystems.filesystems import PyfficeFileSystem  # 2026-01-15 20:29:58
 
 # =========================================Local Library Modules======================================================||
-from ogma.logma import Logma  # 2026-01-15 15:13:32
-from condor import condor  # 2026-01-15 20:20:17
+from kahndor.logma import Logma  # 2026-01-15 15:13:32
+from kahndor import kahndor  # 2026-01-15 20:20:17
 
 import pytest  # 2026-01-15 20:29:58
 import hypothesis  # 2026-01-15 20:29:58
-from condor import condor  # 2026-01-15 20:29:58
+from kahndor import kahndor  # 2026-01-15 20:29:58
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:29:58
 LOGMA = Logma(__name__)  # 2026-01-15 20:29:58
 PXCFG = join(HERE, "_data_", "filesystemsTEST.yaml")  # 2026-01-15 20:29:58
-CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:58
+CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:58
 
 
 # ====================================================================================================================||
@@ -69,12 +69,9 @@ class Test_PyfficeFileSystem:  # 2026-01-15 15:13:33
     def reset(self):  # 2026-01-15 15:13:33
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:33
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_add_directory(self):  # 2026-01-15 15:13:32
         """"""

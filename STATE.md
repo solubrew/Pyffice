@@ -20,7 +20,7 @@ Pyffice is a comprehensive Python framework for handling various document format
 
 ### Dependencies
 - External: 344 packages
-- Internal: pyffice, ogma, condor
+- Internal: pyffice, ogma, kahndor
 
 ### Test Coverage
 - Unit tests: Comprehensive

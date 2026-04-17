@@ -18,8 +18,8 @@ from os.path import dirname, join
 # ======================================3rd Party Library Modules=====================================================||
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.images.images import PyfficeImage
 from pyffice.charts.charts import PyfficeChart
 from pyffice.items.items import PyfficeTable
@@ -48,7 +48,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeMatrix").override(cfg))
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeMatrix").override(cfg))
         self.active_worksheet = None
         self.charts = None
         self.compatibility = None

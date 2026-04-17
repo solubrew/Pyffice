@@ -10,6 +10,7 @@
     security: seclvl2
     <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
@@ -22,9 +23,9 @@ import numpy as np
 from xml.etree import ElementTree as ET
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
+from kahndor import kahndor
 from squirl.objnql import imgonql
-from ogma.logma import Logma
+from kahndor.logma import Logma
 
 from pyffice.pyffice import PyfficeDocument
 

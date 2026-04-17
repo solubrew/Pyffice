@@ -33,25 +33,25 @@ from pathlib import Path  # 2026-01-15 20:30:24
 from typing import Any, Dict, List, Optional  # 2026-01-15 20:30:24
 from os.path import join  # 2026-01-15 20:30:24
 from os.path import dirname  # 2026-01-15 20:30:25
-from ogma.logma import Logma  # 2026-01-15 20:30:25
+from kahndor.logma import Logma  # 2026-01-15 20:30:25
 from pyffice.items.text import PyfficeText  # 2026-01-15 20:30:25
 from pyffice.items.text import PyfficeHTML  # 2026-01-15 20:30:25
 from pyffice.items.text import PyfficePage  # 2026-01-15 20:30:25
 from pyffice.items.text import PyfficeParagraph  # 2026-01-15 20:30:25
 
 # =========================================Local Library Modules======================================================||
-from ogma.logma import Logma  # 2026-01-15 15:14:04
-from condor import condor  # 2026-01-15 20:20:42
+from kahndor.logma import Logma  # 2026-01-15 15:14:04
+from kahndor import kahndor  # 2026-01-15 20:20:42
 
 import pytest  # 2026-01-15 20:30:25
 import hypothesis  # 2026-01-15 20:30:25
-from condor import condor  # 2026-01-15 20:30:25
+from kahndor import kahndor  # 2026-01-15 20:30:25
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:30:25
 LOGMA = Logma(__name__)  # 2026-01-15 20:30:25
 PXCFG = join(HERE, "_data_", "textTEST.yaml")  # 2026-01-15 20:30:25
-CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:25
+CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:25
 
 
 # ====================================================================================================================||
@@ -75,12 +75,9 @@ class Test_PyfficeText:  # 2026-01-15 15:14:05
     def reset(self):  # 2026-01-15 15:14:05
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:14:05
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_load_unit(self):  # 2026-01-15 15:14:04
         """"""
@@ -149,12 +146,9 @@ class Test_PyfficeHTML:  # 2026-01-15 15:14:05
     def reset(self):  # 2026-01-15 15:14:05
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:14:05
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test___init__(self):  # 2026-01-15 15:14:04
         """"""
@@ -179,12 +173,9 @@ class Test_PyfficePage:  # 2026-01-15 15:14:05
     def reset(self):  # 2026-01-15 15:14:05
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:14:05
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test___init__(self):  # 2026-01-15 15:14:05
         """"""
@@ -209,12 +200,9 @@ class Test_PyfficeParagraph:  # 2026-01-15 15:14:05
     def reset(self):  # 2026-01-15 15:14:05
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:14:05
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test___init__(self):  # 2026-01-15 15:14:05
         """"""

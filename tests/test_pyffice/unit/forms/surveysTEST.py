@@ -32,24 +32,24 @@ from pathlib import Path  # 2026-01-15 20:30:02
 from typing import Any, Dict, List, Optional  # 2026-01-15 20:30:02
 from os.path import join  # 2026-01-15 20:30:02
 from os.path import dirname  # 2026-01-15 20:30:02
-from ogma.logma import Logma  # 2026-01-15 20:30:02
+from kahndor.logma import Logma  # 2026-01-15 20:30:02
 from pyffice.forms.surveys import PyfficeResponse  # 2026-01-15 20:30:03
 from pyffice.forms.surveys import PyfficeSurvey  # 2026-01-15 20:30:03
 from pyffice.forms.surveys import PyfficeSurveyManager  # 2026-01-15 20:30:03
 
 # =========================================Local Library Modules======================================================||
-from ogma.logma import Logma  # 2026-01-15 15:13:37
-from condor import condor  # 2026-01-15 20:20:21
+from kahndor.logma import Logma  # 2026-01-15 15:13:37
+from kahndor import kahndor  # 2026-01-15 20:20:21
 
 import pytest  # 2026-01-15 20:30:02
 import hypothesis  # 2026-01-15 20:30:03
-from condor import condor  # 2026-01-15 20:30:02
+from kahndor import kahndor  # 2026-01-15 20:30:02
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:30:03
 LOGMA = Logma(__name__)  # 2026-01-15 20:30:03
 PXCFG = join(HERE, "_data_", "surveysTEST.yaml")  # 2026-01-15 20:30:03
-CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:03
+CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:03
 
 
 # ====================================================================================================================||
@@ -73,12 +73,9 @@ class Test_PyfficeResponse:  # 2026-01-15 15:13:39
     def reset(self):  # 2026-01-15 15:13:39
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:39
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_add_answer(self):  # 2026-01-15 15:13:38
         """"""
@@ -119,12 +116,9 @@ class Test_PyfficeSurvey:  # 2026-01-15 15:13:39
     def reset(self):  # 2026-01-15 15:13:39
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:39
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test___init__(self):  # 2026-01-15 15:13:38
         """"""
@@ -149,12 +143,9 @@ class Test_PyfficeSurveyManager:  # 2026-01-15 15:13:39
     def reset(self):  # 2026-01-15 15:13:39
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:39
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_clear_responses(self):  # 2026-01-15 15:13:38
         """"""

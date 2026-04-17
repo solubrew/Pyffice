@@ -20,15 +20,15 @@ from os.path import join  # 2026-01-15 20:29:33
 from os.path import dirname  # 2026-01-15 20:29:33
 
 # =========================================Local Library Modules======================================================||
-from ogma.logma import Logma  # 2026-01-15 15:13:02
+from kahndor.logma import Logma  # 2026-01-15 15:13:02
 
-from condor import condor  # 2026-01-15 20:29:33
+from kahndor import kahndor  # 2026-01-15 20:29:33
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:29:33
 LOGMA = Logma(__name__)  # 2026-01-15 20:29:33
 PXCFG = join(HERE, "_data_", "msportsTEST.yaml")  # 2026-01-15 20:29:34
-CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:34
+CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:34
 
 
 # ====================================================================================================================||

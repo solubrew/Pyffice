@@ -29,8 +29,8 @@ import os
 from matplotlib.colors import CSS4_COLORS
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.document import PyfficeUnit, PyfficeDocument
 from pyffice.items.items import PyfficeTable
 
@@ -75,7 +75,7 @@ class PyfficeColor(PyfficeUnit):
             cfg (dict, optional): Configuration object.
         """
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeColor")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeColor")).override(cfg)
         self.rgb = None
         self.hex = None
         self.rgba = None

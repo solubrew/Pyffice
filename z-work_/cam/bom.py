@@ -2,15 +2,16 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-	    A BOM is a workflow because in its ultimate form the needs of that BOM are placed on a timeline of events.
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
+        docid:
+        name:
+        description: >
+            A BOM is a workflow because in its ultimate form the needs of that BOM are placed on a timeline of events.
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
@@ -19,8 +20,8 @@ import datetime as dt
 # ======================================3rd Party Library Modules=====================================================||
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 
 # ====================================================================================================================||
@@ -39,7 +40,7 @@ class PyfficeBOM(PyfficeDocumentManager):
 
     def __init__(self, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).override("PyfficeBOM")
+        self.config = kahndor.Instruct(pxcfg).override("PyfficeBOM")
         super().__init__(self)
         self.config.override(cfg)
 
@@ -68,7 +69,7 @@ class PyfficeSoftwareBOM(PyfficeBOM):
 
     def __init__(self, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).override("PyfficeSoftwareBOM")
+        self.config = kahndor.Instruct(pxcfg).override("PyfficeSoftwareBOM")
         super().__init__(self)
         self.config.override(cfg)
 

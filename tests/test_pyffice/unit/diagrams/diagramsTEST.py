@@ -34,7 +34,7 @@ from pathlib import Path  # 2026-01-15 20:29:49
 from typing import Any, Dict, List, Optional  # 2026-01-15 20:29:49
 from os.path import join  # 2026-01-15 20:29:49
 from os.path import dirname  # 2026-01-15 20:29:49
-from ogma.logma import Logma  # 2026-01-15 20:29:49
+from kahndor.logma import Logma  # 2026-01-15 20:29:49
 from pyffice.diagrams.diagrams import PyfficeEdge  # 2026-01-15 20:29:49
 from pyffice.diagrams.diagrams import PyfficeLayer  # 2026-01-15 20:29:49
 from pyffice.diagrams.diagrams import PyfficeNode  # 2026-01-15 20:29:49
@@ -42,18 +42,18 @@ from pyffice.diagrams.diagrams import PyfficeSketch  # 2026-01-15 20:29:49
 from pyffice.diagrams.diagrams import PyfficeSketchConnection  # 2026-01-15 20:29:49
 
 # =========================================Local Library Modules======================================================||
-from ogma.logma import Logma  # 2026-01-15 15:13:20
-from condor import condor  # 2026-01-15 20:20:08
+from kahndor.logma import Logma  # 2026-01-15 15:13:20
+from kahndor import kahndor  # 2026-01-15 20:20:08
 
 import pytest  # 2026-01-15 20:29:49
 import hypothesis  # 2026-01-15 20:29:49
-from condor import condor  # 2026-01-15 20:29:49
+from kahndor import kahndor  # 2026-01-15 20:29:49
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:29:49
 LOGMA = Logma(__name__)  # 2026-01-15 20:29:49
 PXCFG = join(HERE, "_data_", "diagramsTEST.yaml")  # 2026-01-15 20:29:49
-CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:49
+CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:49
 
 
 # ====================================================================================================================||
@@ -77,12 +77,9 @@ class Test_PyfficeEdge:  # 2026-01-15 15:13:22
     def reset(self):  # 2026-01-15 15:13:22
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:22
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_add_endpoint(self):  # 2026-01-15 15:13:20
         """"""
@@ -167,12 +164,9 @@ class Test_PyfficeLayer:  # 2026-01-15 15:13:22
     def reset(self):  # 2026-01-15 15:13:22
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:22
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_load_unit(self):  # 2026-01-15 15:13:21
         """"""
@@ -209,12 +203,9 @@ class Test_PyfficeNode:  # 2026-01-15 15:13:22
     def reset(self):  # 2026-01-15 15:13:22
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:22
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_add_cell(self):  # 2026-01-15 15:13:21
         """"""
@@ -271,12 +262,9 @@ class Test_PyfficeSketch:  # 2026-01-15 15:13:22
     def reset(self):  # 2026-01-15 15:13:22
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:22
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_add_connection(self):  # 2026-01-15 15:13:21
         """"""
@@ -369,12 +357,9 @@ class Test_PyfficeSketchConnection:  # 2026-01-15 15:13:22
     def reset(self):  # 2026-01-15 15:13:22
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:22
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_connect(self):  # 2026-01-15 15:13:22
         """"""

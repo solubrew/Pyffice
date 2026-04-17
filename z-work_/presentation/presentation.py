@@ -2,14 +2,15 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
@@ -20,8 +21,8 @@ from pptx import Presentation
 from pptx.util import Inches
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 
 # ====================================================================================================================||
@@ -40,7 +41,7 @@ class PyfficePresentation(PyfficeDocument):
 
     def __init__(self, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).select("PyfficeSlideShow").override(cfg)
+        self.config = kahndor.Instruct(pxcfg).select("PyfficeSlideShow").override(cfg)
 
     def load_document(self, document):
         """"""

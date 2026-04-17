@@ -21,8 +21,8 @@ from urllib.parse import urlparse, urljoin, urlencode
 import furl
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.document import PyfficeUnit, PyfficeDocumentManager
 from pycurity.pyhash import text_hashing_function
 
@@ -52,7 +52,7 @@ class PyfficeURL(PyfficeUnit):
     def __init__(self, cfg=None):
         """Initialize PyfficeURL with configuration."""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeURL").override(cfg))
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeURL").override(cfg))
 
         # Initialize all URL-related attributes
         self._initialize_attributes()
@@ -153,9 +153,7 @@ class PyfficeURL(PyfficeUnit):
             self.set_active_url(active_url)
 
         # Set geofence
-        self.set_geofence(
-            unit.get("geofence_region", None), unit.get("geofence_active", False)
-        )
+        self.set_geofence(unit.get("geofence_region", None), unit.get("geofence_active", False))
 
         # Parse the final URL
         parse_url = self.active_url or self.config.dikt.get("url", self.default_url)
@@ -272,9 +270,7 @@ class PyfficeURL(PyfficeUnit):
         """Convert URL to HTTPS."""
         logma.info(f"Active Url {self.active_url}")
         if self.active_url.startswith(self.HTTP_PREFIX):
-            self.secure_url = self.active_url.replace(
-                self.HTTP_PREFIX, self.HTTPS_PREFIX
-            )
+            self.secure_url = self.active_url.replace(self.HTTP_PREFIX, self.HTTPS_PREFIX)
         elif self.active_url.startswith(self.HTTPS_PREFIX):
             self.secure_url = self.active_url
         else:
@@ -470,7 +466,7 @@ class PyfficeURL(PyfficeUnit):
 #     def __init__(self, cfg=None):
 #         """"""
 #         super().__init__(cfg)
-#         self.config.override(condor.Instruct(pxcfg).select("PyfficeURL").override(cfg))
+#         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeURL").override(cfg))
 #         self.active_url = None
 #         self.block_ads = None
 #         self.block_adult = None
@@ -944,9 +940,7 @@ class PyfficeURLLibrary(PyfficeDocumentManager):
     def __init__(self, cfg=None):
         """Initialize URL Library with configuration."""
         super().__init__(cfg)
-        self.config.override(
-            condor.Instruct(pxcfg).select("PyfficeURLLibrary").override(cfg)
-        )
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeURLLibrary").override(cfg))
         self.urls = None
         self.affiliate_patterns = None
         self.block_patterns = None
@@ -1070,7 +1064,7 @@ class PyfficeURLLibrary(PyfficeDocumentManager):
 #     def __init__(self, cfg=None):
 #         """"""
 #         super().__init__(cfg)
-#         self.config.override(condor.Instruct(pxcfg).select("PyfficeURLLibrary").override(cfg))
+#         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeURLLibrary").override(cfg))
 #         self.urls = None
 #         self.affiliate_patterns = None
 #         self.block_patterns = None

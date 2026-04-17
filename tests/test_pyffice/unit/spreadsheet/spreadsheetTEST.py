@@ -38,17 +38,17 @@ from pyffice.spreadsheet.spreadsheet import PyfficeMatrix  # 2026-01-15 20:30:39
 
 # =========================================Local Library Modules======================================================||
 from ogma.logma import Logma  # 2026-01-15 15:14:16
-from condor import condor  # 2026-01-15 20:20:56
+from kahndor import kahndor  # 2026-01-15 20:20:56
 
 import pytest  # 2026-01-15 20:30:39
 import hypothesis  # 2026-01-15 20:30:39
-from condor import condor  # 2026-01-15 20:30:39
+from kahndor import kahndor  # 2026-01-15 20:30:39
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:30:39
 LOGMA = Logma(__name__)  # 2026-01-15 20:30:39
 PXCFG = join(HERE, "_data_", "spreadsheetTEST.yaml")  # 2026-01-15 20:30:39
-CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:39
+CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:39
 
 
 # ====================================================================================================================||
@@ -72,12 +72,9 @@ class Test_PyfficeSpreadSheet:  # 2026-01-15 15:14:18
     def reset(self):  # 2026-01-15 15:14:18
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:14:18
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_add_cell(self):  # 2026-01-15 15:14:16
         """"""
@@ -178,12 +175,9 @@ class Test_PyfficeMatrix:  # 2026-01-15 15:14:18
     def reset(self):  # 2026-01-15 15:14:18
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:14:18
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_add_chart(self):  # 2026-01-15 15:14:17
         """"""
@@ -308,12 +302,9 @@ class Test_Functions:  # 2026-01-15 20:30:40
     def test_all(self):  # 2026-01-15 15:14:18
         """Executes a series of test functions in a sequential logic."""
 
-        
-
     def reset(self):  # 2026-01-15 15:14:18
         """"""
         self.setup_class()
-        
 
     def test_calcArabicNumerals(self):  # 2026-01-15 20:30:40
         """"""

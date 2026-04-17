@@ -36,23 +36,23 @@ from pathlib import Path  # 2026-01-15 20:30:15
 from typing import Any, Dict, List, Optional  # 2026-01-15 20:30:15
 from os.path import join  # 2026-01-15 20:30:15
 from os.path import dirname  # 2026-01-15 20:30:15
-from ogma.logma import Logma  # 2026-01-15 20:30:15
+from kahndor.logma import Logma  # 2026-01-15 20:30:15
 from pyffice.items.colors import PyfficeColor  # 2026-01-15 20:30:15
 from pyffice.items.colors import PyfficeColorPalette  # 2026-01-15 20:30:15
 
 # =========================================Local Library Modules======================================================||
-from ogma.logma import Logma  # 2026-01-15 15:13:51
-from condor import condor  # 2026-01-15 20:20:33
+from kahndor.logma import Logma  # 2026-01-15 15:13:51
+from kahndor import kahndor  # 2026-01-15 20:20:33
 
 import pytest  # 2026-01-15 20:30:15
 import hypothesis  # 2026-01-15 20:30:15
-from condor import condor  # 2026-01-15 20:30:15
+from kahndor import kahndor  # 2026-01-15 20:30:15
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:30:16
 LOGMA = Logma(__name__)  # 2026-01-15 20:30:16
 PXCFG = join(HERE, "_data_", "colorsTEST.yaml")  # 2026-01-15 20:30:16
-CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:16
+CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:16
 
 
 # ====================================================================================================================||
@@ -76,12 +76,9 @@ class Test_PyfficeColor:  # 2026-01-15 15:13:54
     def reset(self):  # 2026-01-15 15:13:54
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:54
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_calculate_complementary_color(self):  # 2026-01-15 15:13:51
         """"""
@@ -254,12 +251,9 @@ class Test_PyfficeColorPalette:  # 2026-01-15 15:13:54
     def reset(self):  # 2026-01-15 15:13:54
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:54
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_add_color(self):  # 2026-01-15 15:13:53
         """"""
@@ -372,12 +366,9 @@ class Test_Functions:  # 2026-01-15 20:30:16
     def test_all(self):  # 2026-01-15 15:13:54
         """Executes a series of test functions in a sequential logic."""
 
-        
-
     def reset(self):  # 2026-01-15 15:13:54
         """"""
         self.setup_class()
-        
 
     def test_calculate_complementary_color(self):  # 2026-01-15 20:30:16
         """"""

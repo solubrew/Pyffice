@@ -2,14 +2,15 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
@@ -18,8 +19,8 @@ import datetime as dt
 # ======================================3rd Party Library Modules=====================================================||
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 
 # ====================================================================================================================||
@@ -47,7 +48,7 @@ class PyfficeResponse(PyfficeDocument):
 
     def __init__(self, form_id, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).override("")
+        self.config = kahndor.Instruct(pxcfg).override("")
         super().__init__(self)
         self.config.override(cfg)
 
@@ -75,7 +76,7 @@ class PyfficeSurvey(PyfficeDocument):
 
     def __init__(self, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).override("PyfficeSurvey")
+        self.config = kahndor.Instruct(pxcfg).override("PyfficeSurvey")
         super().__init__(self.config)
         self.config.override(cfg)
 
@@ -87,7 +88,7 @@ class PyfficeSurveyManager(PyfficeDocumentManager):
 
     def __init__(self, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).override("PyfficeSurveyManager")
+        self.config = kahndor.Instruct(pxcfg).override("PyfficeSurveyManager")
         super().__init__(self.config)
         self.config.override(cfg)
         self.surveys = {}
@@ -131,7 +132,7 @@ class PyfficeSurveyManager(PyfficeDocumentManager):
 
     def __init__(self, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).select("PyfficeSurveyManager")
+        self.config = kahndor.Instruct(pxcfg).select("PyfficeSurveyManager")
         super().__init__()
         self.config.override(cfg)
         self.recipients = []

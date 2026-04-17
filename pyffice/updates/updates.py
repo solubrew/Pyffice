@@ -20,8 +20,8 @@ from copy import deepcopy
 # ======================================3rd Party Library Modules=====================================================||
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -37,7 +37,7 @@ class PyfficeUpdate(object):
 
     def __init__(self, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).select("PyfficeUpdate").override(cfg)
+        self.config = kahndor.Instruct(pxcfg).select("PyfficeUpdate").override(cfg)
         self.document = None
 
     def check_schema(self, schema):
@@ -164,11 +164,7 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
         if not update_data:
             return
         for key, value in update_data.items():
-            if (
-                isinstance(value, dict)
-                and key in target
-                and isinstance(target[key], dict)
-            ):
+            if isinstance(value, dict) and key in target and isinstance(target[key], dict):
                 self.run_updates(target[key], value)
             else:
                 # If value is a string and it matches another key in target,
@@ -236,9 +232,7 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
                 # We expect version_updates to be a dict where keys are next versions
                 # For simplicity, we take the first one found, usually there's only one next version
                 for next_version, updates in version_updates.items():
-                    logma.info(
-                        f"Updating {document_type} from {version} to {next_version}"
-                    )
+                    logma.info(f"Updating {document_type} from {version} to {next_version}")
 
                     if "document" in updates:
                         self.update_document(updates["document"])
@@ -264,7 +258,7 @@ class PyfficeUpdater(object):
 
     def __init__(self, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).select("PyfficeUpdater").override(cfg)
+        self.config = kahndor.Instruct(pxcfg).select("PyfficeUpdater").override(cfg)
 
     def update_document(self):
         """"""

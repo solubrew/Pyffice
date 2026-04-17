@@ -19,8 +19,8 @@ import datetime as dt
 # ======================================3rd Party Library Modules=====================================================||
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.document import PyfficeUnit
 from pyffice.items.colors import PyfficeColor
 from pyffice.items.text import PyfficeText
@@ -42,7 +42,7 @@ class PyfficeShape(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeShape")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeShape")).override(cfg)
         self.background_color = None
         self.corner = None
         self.origin = None

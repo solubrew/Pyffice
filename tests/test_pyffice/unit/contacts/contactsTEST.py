@@ -31,23 +31,23 @@ from pathlib import Path  # 2026-01-15 20:29:41
 from typing import Any, Dict, List, Optional  # 2026-01-15 20:29:42
 from os.path import join  # 2026-01-15 20:29:42
 from os.path import dirname  # 2026-01-15 20:29:42
-from ogma.logma import Logma  # 2026-01-15 20:29:42
+from kahndor.logma import Logma  # 2026-01-15 20:29:42
 from pyffice.contacts.contacts import PyfficeContact  # 2026-01-15 20:29:42
 from pyffice.contacts.contacts import PyfficeRolodex  # 2026-01-15 20:29:42
 
 # =========================================Local Library Modules======================================================||
-from ogma.logma import Logma  # 2026-01-15 15:13:12
-from condor import condor  # 2026-01-15 20:20:02
+from kahndor.logma import Logma  # 2026-01-15 15:13:12
+from kahndor import kahndor  # 2026-01-15 20:20:02
 
 import pytest  # 2026-01-15 20:29:42
 import hypothesis  # 2026-01-15 20:29:42
-from condor import condor  # 2026-01-15 20:29:42
+from kahndor import kahndor  # 2026-01-15 20:29:42
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:29:42
 LOGMA = Logma(__name__)  # 2026-01-15 20:29:42
 PXCFG = join(HERE, "_data_", "contactsTEST.yaml")  # 2026-01-15 20:29:42
-CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:42
+CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:42
 
 
 # ====================================================================================================================||
@@ -71,12 +71,9 @@ class Test_PyfficeContact:  # 2026-01-15 15:13:15
     def reset(self):  # 2026-01-15 15:13:15
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:15
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_add_connection(self):  # 2026-01-15 15:13:12
         """"""
@@ -237,12 +234,9 @@ class Test_PyfficeRolodex:  # 2026-01-15 15:13:15
     def reset(self):  # 2026-01-15 15:13:15
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:15
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_add_contact(self):  # 2026-01-15 15:13:14
         """"""

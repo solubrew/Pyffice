@@ -32,24 +32,24 @@ from pathlib import Path  # 2026-01-15 20:30:05
 from typing import Any, Dict, List, Optional  # 2026-01-15 20:30:05
 from os.path import join  # 2026-01-15 20:30:06
 from os.path import dirname  # 2026-01-15 20:30:06
-from ogma.logma import Logma  # 2026-01-15 20:30:06
+from kahndor.logma import Logma  # 2026-01-15 20:30:06
 from pyffice.images.images import PyfficeImage  # 2026-01-15 20:30:06
 from pyffice.images.images import PyfficeImageManager  # 2026-01-15 20:30:06
 from pyffice.images.images import PyfficeScreenShot  # 2026-01-15 20:30:06
 
 # =========================================Local Library Modules======================================================||
-from ogma.logma import Logma  # 2026-01-15 15:13:40
-from condor import condor  # 2026-01-15 20:20:24
+from kahndor.logma import Logma  # 2026-01-15 15:13:40
+from kahndor import kahndor  # 2026-01-15 20:20:24
 
 import pytest  # 2026-01-15 20:30:06
 import hypothesis  # 2026-01-15 20:30:06
-from condor import condor  # 2026-01-15 20:30:06
+from kahndor import kahndor  # 2026-01-15 20:30:06
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:30:06
 LOGMA = Logma(__name__)  # 2026-01-15 20:30:06
 PXCFG = join(HERE, "_data_", "imagesTEST.yaml")  # 2026-01-15 20:30:06
-CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:06
+CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:06
 
 
 # ====================================================================================================================||
@@ -73,12 +73,9 @@ class Test_PyfficeImage:  # 2026-01-15 15:13:42
     def reset(self):  # 2026-01-15 15:13:42
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:42
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_add_filter(self):  # 2026-01-15 15:13:40
         """"""
@@ -199,12 +196,9 @@ class Test_PyfficeImageManager:  # 2026-01-15 15:13:42
     def reset(self):  # 2026-01-15 15:13:42
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:42
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_add_image(self):  # 2026-01-15 15:13:41
         """"""
@@ -257,12 +251,9 @@ class Test_PyfficeScreenShot:  # 2026-01-15 15:13:42
     def reset(self):  # 2026-01-15 15:13:42
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:42
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_load_document(self):  # 2026-01-15 15:13:42
         """"""

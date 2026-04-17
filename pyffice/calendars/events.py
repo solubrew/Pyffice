@@ -19,8 +19,8 @@ import datetime as dt
 # ======================================3rd Party Library Modules=====================================================||
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.document import PyfficeUnit
 
 # ====================================================================================================================||
@@ -40,7 +40,7 @@ class PyfficeTimeUnit(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeScaleUnit")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeScaleUnit")).override(cfg)
         self.start_time = None
         self.end_time = None
         self.days = None
@@ -221,7 +221,7 @@ class PyfficeEvent(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeEvent")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeEvent")).override(cfg)
         self.event = None
         self.end_dttm = None
         self.location_attendance = None

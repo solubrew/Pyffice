@@ -33,25 +33,25 @@ from pathlib import Path  # 2026-01-15 20:31:29
 from typing import Any, Dict, List, Optional  # 2026-01-15 20:31:29
 from os.path import join  # 2026-01-15 20:31:29
 from os.path import dirname  # 2026-01-15 20:31:29
-from ogma.logma import Logma  # 2026-01-15 20:31:29
+from kahndor.logma import Logma  # 2026-01-15 20:31:29
 from pyffice.web.web import PyfficeWebBrowser  # 2026-01-15 20:31:29
 from pyffice.web.web import PyfficeWebPage  # 2026-01-15 20:31:29
 from pyffice.web.web import PyfficeWebProfile  # 2026-01-15 20:31:29
 from pyffice.web.web import PyfficeWebProfileManager  # 2026-01-15 20:31:29
 
 # =========================================Local Library Modules======================================================||
-from ogma.logma import Logma  # 2026-01-15 15:15:13
-from condor import condor  # 2026-01-15 20:21:44
+from kahndor.logma import Logma  # 2026-01-15 15:15:13
+from kahndor import kahndor  # 2026-01-15 20:21:44
 
 import pytest  # 2026-01-15 20:31:29
 import hypothesis  # 2026-01-15 20:31:29
-from condor import condor  # 2026-01-15 20:31:29
+from kahndor import kahndor  # 2026-01-15 20:31:29
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:31:29
 LOGMA = Logma(__name__)  # 2026-01-15 20:31:29
 PXCFG = join(HERE, "_data_", "webTEST.yaml")  # 2026-01-15 20:31:29
-CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:31:29
+CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:31:29
 
 
 # ====================================================================================================================||

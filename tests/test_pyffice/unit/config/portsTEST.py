@@ -21,15 +21,15 @@ from os.path import join  # 2026-01-15 20:29:38
 from os.path import dirname  # 2026-01-15 20:29:38
 
 # =========================================Local Library Modules======================================================||
-from ogma.logma import Logma  # 2026-01-15 15:13:07
+from kahndor.logma import Logma  # 2026-01-15 15:13:07
 
-from condor import condor  # 2026-01-15 20:29:38
+from kahndor import kahndor  # 2026-01-15 20:29:38
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:29:39
 LOGMA = Logma(__name__)  # 2026-01-15 20:29:39
 PXCFG = join(HERE, "_data_", "portsTEST.yaml")  # 2026-01-15 20:29:39
-CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:39
+CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:39
 
 
 # ====================================================================================================================||

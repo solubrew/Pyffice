@@ -23,8 +23,8 @@ from openpyxl.drawing.image import Image
 from openpyxl.worksheet.table import Table, TableStyleInfo
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.ports.ports import PyfficePort
 
 # ====================================================================================================================||
@@ -44,7 +44,7 @@ class PyfficePortExcel(PyfficePort):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("")).override(cfg)
 
     def add_object(self, ws, image_path, cell):
         """
@@ -310,7 +310,7 @@ class PyfficePortWord(PyfficePort):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficePortWord")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortWord")).override(cfg)
 
     def set_paragraph_alignment(self, index, alignment="left"):
         """

@@ -2,14 +2,15 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
@@ -20,8 +21,8 @@ from abc import ABC, abstractmethod
 # ======================================3rd Party Library Modules=====================================================||
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 from pyffice.items.items import PyfficePart
 
@@ -41,7 +42,7 @@ class PyfficeCADAssembly(PyfficeDocumentManager):
 
     def __init__(self, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).select("PyfficeCADAssembly")
+        self.config = kahndor.Instruct(pxcfg).select("PyfficeCADAssembly")
         super().__init__(self.config)
         self.config.override(cfg)
 
@@ -79,7 +80,7 @@ class PyfficeCADManager(PyfficeDocumentManager):
 
     def __init__(self, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).select("PyfficeCADManager")
+        self.config = kahndor.Instruct(pxcfg).select("PyfficeCADManager")
         super().__init__(self)
         self.config.override(cfg)
 
@@ -107,7 +108,7 @@ class PyfficeCADPart(PyfficePart):
 
     def __init__(self, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).override("PyfficeCADPart")
+        self.config = kahndor.Instruct(pxcfg).override("PyfficeCADPart")
         super().__init__(self)
         self.config.override(cfg)
 

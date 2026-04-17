@@ -20,8 +20,8 @@ from pycel.excelcompiler import ExcelCompiler
 from pandas import read_csv, read_excel, DataFrame
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.ports.gports import PyfficePortGoogleSheets
 from pyffice.ports.msports import PyfficePortExcel
 from pyffice.ports.ports import PyfficePortCSV
@@ -51,7 +51,7 @@ class PyfficeSpreadSheet(PyfficeDocument):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeSpreadSheet").override(cfg))
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeSpreadSheet").override(cfg))
         self.cells = None
         self.charts = None  # a Dictionary of Chart objects
         self.column_labels = None
@@ -267,7 +267,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeMatrix").override(cfg))
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeMatrix").override(cfg))
         self.active_worksheet = None
         self.charts = None
         self.compatibility = None

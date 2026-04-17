@@ -21,8 +21,8 @@ from click import style
 # ======================================3rd Party Library Modules=====================================================||
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from subtrix.utilities import uuid
 from pyffice.items.cells import PyfficeCell
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager, PyfficeUnit
@@ -46,7 +46,7 @@ class PyfficeEdge(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeEdge")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeEdge")).override(cfg)
         self.active = None
         self.endpoints = None
         self.envelope_size = None
@@ -213,7 +213,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeDiagram").override(cfg))
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDiagram").override(cfg))
 
     def add_connection(self, connection):
         """"""
@@ -346,7 +346,7 @@ class PyfficeLayer(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeLayer")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeLayer")).override(cfg)
         self.objects = None
 
     def load_unit(self, unit):
@@ -381,7 +381,7 @@ class PyfficeNode(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeNode")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeNode")).override(cfg)
         self.cells = None
         self.lock = None
         self.position = None
@@ -460,7 +460,7 @@ class PyfficeDiagramConnection(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeSketchConnection")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeSketchConnection")).override(cfg)
         self.endpoints = None
         self.lock = None
         self.position = None

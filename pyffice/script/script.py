@@ -22,8 +22,8 @@ from docx.shared import Pt
 from docx.oxml.table import CT_Tbl
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 from squirl.objnql import txtonql
 from pyffice.items.text import PyfficeText
@@ -48,9 +48,7 @@ class PyfficeScript(PyfficeDocument):
         if cfg is None:
             cfg = {"document": None}
         super().__init__(cfg)
-        self.config.override(
-            condor.Instruct(pxcfg).select("PyfficeScript").override(cfg)
-        )
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeScript").override(cfg))
         self.active_page = None
         self.file_format = None
         self.html = None
@@ -323,12 +321,7 @@ class PyfficeScript(PyfficeDocument):
         logma.info(f"Pages {pages}")
         for page in range(0, pages):
             logma.info(f"Page {page}")
-            entries = (
-                int(
-                    len(content[page * page_size : (page + 1) * page_size]) / entry_size
-                )
-                + 1
-            )
+            entries = int(len(content[page * page_size : (page + 1) * page_size]) / entry_size) + 1
             if str(page) not in self.pages:
                 self.pages[str(page)] = {
                     "page_size": page_size,
@@ -347,9 +340,7 @@ class PyfficeScript(PyfficeDocument):
                     continue
                 cfg = {"unit": {"value": text}}
                 logma.info(f"Text {text}")
-                self.pages[str(page)]["entries"][str(entry)] = PyfficeText(
-                    cfg
-                ).load_unit()
+                self.pages[str(page)]["entries"][str(entry)] = PyfficeText(cfg).load_unit()
         self.set_text()
         return self
 
@@ -387,9 +378,7 @@ class PyfficeScript(PyfficeDocument):
     def set_file_format_options(self):
         """"""
         formats = self.config.dikt.get("file_formats", {})
-        self.file_formats = {
-            ext: key for key, extensions in formats.items() for ext in extensions
-        }
+        self.file_formats = {ext: key for key, extensions in formats.items() for ext in extensions}
         return self
 
     def set_full_text(self, text=None):
@@ -490,9 +479,7 @@ def get_table_positions(docx_path):
     for element in document.element.body:
         # Check if the element is a table
         if isinstance(element, CT_Tbl):
-            tables_positions.append(
-                (position_counter, document.tables[len(tables_positions)])
-            )
+            tables_positions.append((position_counter, document.tables[len(tables_positions)]))
         position_counter += 1
 
     return tables_positions

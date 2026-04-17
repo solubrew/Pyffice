@@ -23,8 +23,8 @@ from copy import deepcopy
 # from sentence_transformers import SentenceTransformer
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from squirl.orgnql import conql, yonql
 from subtrix.utilities import uuid
 from pycurity.pytime import PyTime
@@ -49,7 +49,7 @@ class PyfficeUnit(object):
 
     def __init__(self, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).select("PyfficeUnit").override(cfg)
+        self.config = kahndor.Instruct(pxcfg).select("PyfficeUnit").override(cfg)
         self.unit = self.config.select("template").override(self.config.select("unit"))
         self.author = None
         self.change_limit = None
@@ -198,9 +198,7 @@ class PyfficeUnit(object):
         change = self.redos.pop()
         setattr(self, change["label"], change["new_value"])
         if change["action"] == "set":
-            self.add_change(
-                change["label"], change["value"], change["new_value"], "set"
-            )
+            self.add_change(change["label"], change["value"], change["new_value"], "set")
         return self
 
     def set_author(self, author):
@@ -450,12 +448,8 @@ class PyfficeDocument(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeDocument")).override(
-            cfg
-        )
-        self.document = self.config.select("template").override(
-            self.config.select("document").dikt
-        )
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDocument")).override(cfg)
+        self.document = self.config.select("template").override(self.config.select("document").dikt)
         self.cache = None
         self.compatibility = None
         self.data = None
@@ -660,9 +654,7 @@ class PyfficeDocumentManager(PyfficeDocument):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(
-            condor.Instruct(pxcfg).select("PyfficeDocumentManager")
-        ).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDocumentManager")).override(cfg)
         self.store = conql.Doc()
 
     def add_document(self, document):
@@ -744,9 +736,7 @@ class PyfficeDeque(PyfficeDocument, deque):
         """"""
         super().__init__(cfg)
         PyfficeDocument.__init__(self, self.config)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeDeque")).override(
-            cfg
-        )
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDeque")).override(cfg)
         self.max_items = None
         self.set_max_items()
         self.history = deque()

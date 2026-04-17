@@ -33,25 +33,25 @@ from pathlib import Path  # 2026-01-15 20:29:52
 from typing import Any, Dict, List, Optional  # 2026-01-15 20:29:52
 from os.path import join  # 2026-01-15 20:29:52
 from os.path import dirname  # 2026-01-15 20:29:52
-from ogma.logma import Logma  # 2026-01-15 20:29:52
+from kahndor.logma import Logma  # 2026-01-15 20:29:52
 from pyffice.document import PyfficeUnit  # 2026-01-15 20:29:52
 from pyffice.document import PyfficeDocument  # 2026-01-15 20:29:52
 from pyffice.document import PyfficeDocumentManager  # 2026-01-15 20:29:52
 from pyffice.document import PyfficeDeque  # 2026-01-15 20:29:52
 
 # =========================================Local Library Modules======================================================||
-from ogma.logma import Logma  # 2026-01-15 15:13:24
-from condor import condor  # 2026-01-15 20:20:12
+from kahndor.logma import Logma  # 2026-01-15 15:13:24
+from kahndor import kahndor  # 2026-01-15 20:20:12
 
 import pytest  # 2026-01-15 20:29:52
 import hypothesis  # 2026-01-15 20:29:52
-from condor import condor  # 2026-01-15 20:29:52
+from kahndor import kahndor  # 2026-01-15 20:29:52
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:29:52
 LOGMA = Logma(__name__)  # 2026-01-15 20:29:52
 PXCFG = join(HERE, "_data_", "documentTEST.yaml")  # 2026-01-15 20:29:52
-CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:52
+CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:52
 
 
 # ====================================================================================================================||
@@ -75,12 +75,9 @@ class Test_PyfficeUnit:  # 2026-01-15 15:13:28
     def reset(self):  # 2026-01-15 15:13:28
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:28
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_add_change(self):  # 2026-01-15 15:13:25
         """"""
@@ -261,12 +258,9 @@ class Test_PyfficeDocument:  # 2026-01-15 15:13:28
     def reset(self):  # 2026-01-15 15:13:28
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:28
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_file_export(self):  # 2026-01-15 15:13:26
         """"""
@@ -383,12 +377,9 @@ class Test_PyfficeDocumentManager:  # 2026-01-15 15:13:28
     def reset(self):  # 2026-01-15 15:13:28
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:28
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_add_document(self):  # 2026-01-15 15:13:27
         """"""
@@ -453,12 +444,9 @@ class Test_PyfficeDeque:  # 2026-01-15 15:13:28
     def reset(self):  # 2026-01-15 15:13:28
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:28
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_append(self):  # 2026-01-15 15:13:28
         """"""

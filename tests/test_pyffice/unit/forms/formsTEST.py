@@ -32,24 +32,24 @@ from pathlib import Path  # 2026-01-15 20:30:00
 from typing import Any, Dict, List, Optional  # 2026-01-15 20:30:00
 from os.path import join  # 2026-01-15 20:30:01
 from os.path import dirname  # 2026-01-15 20:30:01
-from ogma.logma import Logma  # 2026-01-15 20:30:01
+from kahndor.logma import Logma  # 2026-01-15 20:30:01
 from pyffice.forms.forms import PyfficeForm  # 2026-01-15 20:30:01
 from pyffice.forms.forms import PyfficeFormsManager  # 2026-01-15 20:30:01
 from pyffice.forms.forms import PyfficeSurvey  # 2026-01-15 20:30:01
 
 # =========================================Local Library Modules======================================================||
-from ogma.logma import Logma  # 2026-01-15 15:13:34
-from condor import condor  # 2026-01-15 20:20:19
+from kahndor.logma import Logma  # 2026-01-15 15:13:34
+from kahndor import kahndor  # 2026-01-15 20:20:19
 
 import pytest  # 2026-01-15 20:30:01
 import hypothesis  # 2026-01-15 20:30:01
-from condor import condor  # 2026-01-15 20:30:01
+from kahndor import kahndor  # 2026-01-15 20:30:01
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:30:01
 LOGMA = Logma(__name__)  # 2026-01-15 20:30:01
 PXCFG = join(HERE, "_data_", "formsTEST.yaml")  # 2026-01-15 20:30:01
-CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:01
+CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:01
 
 
 # ====================================================================================================================||
@@ -73,12 +73,9 @@ class Test_PyfficeForm:  # 2026-01-15 15:13:36
     def reset(self):  # 2026-01-15 15:13:36
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:36
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_add_answer(self):  # 2026-01-15 15:13:35
         """"""
@@ -155,12 +152,9 @@ class Test_PyfficeFormsManager:  # 2026-01-15 15:13:36
     def reset(self):  # 2026-01-15 15:13:36
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:36
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_load_document(self):  # 2026-01-15 15:13:35
         """"""
@@ -197,12 +191,9 @@ class Test_PyfficeSurvey:  # 2026-01-15 15:13:36
     def reset(self):  # 2026-01-15 15:13:36
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:13:36
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_add_field_response(self):  # 2026-01-15 15:13:35
         """"""

@@ -30,22 +30,22 @@ from pathlib import Path  # 2026-01-15 20:31:32
 from typing import Any, Dict, List, Optional  # 2026-01-15 20:31:32
 from os.path import join  # 2026-01-15 20:31:32
 from os.path import dirname  # 2026-01-15 20:31:32
-from ogma.logma import Logma  # 2026-01-15 20:31:33
+from kahndor.logma import Logma  # 2026-01-15 20:31:33
 from pyffice.workflows.automations import PyfficeAutomationManager  # 2026-01-15 20:31:33
 
 # =========================================Local Library Modules======================================================||
-from ogma.logma import Logma  # 2026-01-15 15:15:18
-from condor import condor  # 2026-01-15 20:21:47
+from kahndor.logma import Logma  # 2026-01-15 15:15:18
+from kahndor import kahndor  # 2026-01-15 20:21:47
 
 import pytest  # 2026-01-15 20:31:33
 import hypothesis  # 2026-01-15 20:31:33
-from condor import condor  # 2026-01-15 20:31:32
+from kahndor import kahndor  # 2026-01-15 20:31:32
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:31:33
 LOGMA = Logma(__name__)  # 2026-01-15 20:31:33
 PXCFG = join(HERE, "_data_", "automationsTEST.yaml")  # 2026-01-15 20:31:33
-CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:31:33
+CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:31:33
 
 
 # ====================================================================================================================||

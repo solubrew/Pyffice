@@ -2,14 +2,15 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
@@ -18,8 +19,8 @@ import datetime as dt
 # ======================================3rd Party Library Modules=====================================================||
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument
 
 # ====================================================================================================================||
@@ -43,7 +44,7 @@ class PyfficeShape(PyfficeDocument):
 
     def __init__(self, center=(0, 0, 0), dimensions=2, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).override("")
+        self.config = kahndor.Instruct(pxcfg).override("")
         super().__init__(self)
         self.config.override(cfg)
         self.dimensions = dimensions

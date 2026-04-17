@@ -19,8 +19,8 @@ import datetime as dt
 # ======================================3rd Party Library Modules=====================================================||
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.document import PyfficeDocumentManager, PyfficeUnit
 from axn.axn import AXN
 
@@ -52,9 +52,9 @@ import datetime as dt
 # ======================================3rd Party Library Modules=====================================================||
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
+from kahndor import kahndor
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
-from ogma.logma import Logma
+from kahndor.logma import Logma
 from pyffice.calendars.calendars import PyfficeTask
 
 # ====================================================================================================================||
@@ -73,7 +73,7 @@ class PyfficeRecurrenceManager(PyfficeDocumentManager):
 
     def __init__(self, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).override("")
+        self.config = kahndor.Instruct(pxcfg).override("")
         super().__init__(self)
         self.config.override(cfg)
 
@@ -98,7 +98,7 @@ class PyfficeTasksManager(PyfficeDocumentManager):
 
     def __init__(self, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).select("PyfficeTaskManager")
+        self.config = kahndor.Instruct(pxcfg).select("PyfficeTaskManager")
         super().__init__(self.config)
         self.config.override(cfg)
         self.init_tasks_manager()
@@ -115,7 +115,7 @@ class PyfficeProject(PyfficeTasksManager):
 
     def __init__(self, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).select("PyfficeProject")
+        self.config = kahndor.Instruct(pxcfg).select("PyfficeProject")
         super().__init__(self.config)
         self.config.override(cfg)
 
@@ -151,7 +151,7 @@ class PyfficeProjectsManager(PyfficeTasksManager):
 
     def __init__(self, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).select("PyfficeProject")
+        self.config = kahndor.Instruct(pxcfg).select("PyfficeProject")
         super().__init__(self.config)
         self.config.override(cfg)
 
@@ -186,7 +186,7 @@ class PyfficeTaskFrame(PyfficeTask):
 
     def __init__(self, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).select("PyfficeTask")
+        self.config = kahndor.Instruct(pxcfg).select("PyfficeTask")
         super().__init__(self.config)
         self.config.override(cfg)
 
@@ -272,7 +272,7 @@ class PyfficeWork(PyfficeDocument):
 
     def __init__(self, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).override("PyfficeWork")
+        self.config = kahndor.Instruct(pxcfg).override("PyfficeWork")
         super().__init__(self.config)
         self.config.override(cfg)
 
@@ -339,7 +339,7 @@ class PyfficeTask(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeTask")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeTask")).override(cfg)
         self.action_verb_noun = None
         self.complete_dttm = None
         self.due_dttm = None

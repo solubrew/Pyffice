@@ -64,7 +64,7 @@
 | charset-normalizer        | 3.4.5           | MIT                                                                            |
 | ckzg                      | 2.1.7           | Apache-2.0                                                                     |
 | click                     | 8.3.1           | BSD-3-Clause                                                                   |
-| condor                    | 0.0.1.0.1.2     | MIT License                                                                    |
+| kahndor                    | 0.0.1.0.1.2     | MIT License                                                                    |
 | croniter                  | 6.0.0           | MIT License                                                                    |
 | cryptography              | 46.0.5          | Apache-2.0 OR BSD-3-Clause                                                     |
 | cssselect                 | 1.4.0           | BSD-3-Clause                                                                   |

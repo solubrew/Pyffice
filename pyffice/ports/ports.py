@@ -34,9 +34,9 @@ except ImportError:
     HAS_DIA = False
     pass
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
+from kahndor import kahndor
 from subtrix.utilities import uuid
-from ogma.logma import Logma
+from kahndor.logma import Logma
 from pyffice.document import PyfficeDocumentManager
 from pyffice.script.script import PyfficeScript
 from pyffice.images.images import PyfficeImage
@@ -64,7 +64,7 @@ class PyfficePort(PyfficeDocumentManager):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficePort")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficePort")).override(cfg)
 
     def file_export(self, file_=None):
         """"""
@@ -110,7 +110,7 @@ class PyfficePortCherryTree(PyfficePort):
         """"""
         logma.info(f"Init Cherry Tree {cfg}")
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficePortCherryTree")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortCherryTree")).override(cfg)
         logma.info(f"Init Cherry Tree {self.config.dikt}")
         self.nodes = None
         self.root = None
@@ -411,7 +411,7 @@ class PyfficePortOffice(PyfficePort):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficePortOffice")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortOffice")).override(cfg)
 
     def load_document(self, document=None):
         """"""
@@ -433,7 +433,7 @@ class PyfficePortCSV(PyfficePort):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficePortCSV")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortCSV")).override(cfg)
 
     def open_file(self, file, if_data_only=False, read_only=False, keep_vba=False):
         """"""
@@ -455,7 +455,7 @@ class PyfficePortDia(PyfficePort):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficePortDia")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortDia")).override(cfg)
         self.is_dia_installed = HAS_DIA
         self.diagram = None
         self.nodes = None
@@ -549,7 +549,7 @@ class PyfficePortFileSystem(PyfficePort):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficePortFileSystem")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortFileSystem")).override(cfg)
 
     def to_dict(self):
         """"""
@@ -565,7 +565,7 @@ class PyfficePortImage(PyfficePort):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficePortImage")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortImage")).override(cfg)
 
     def convert_svg_color(self, input_color, output_color):
         """"""
@@ -694,7 +694,7 @@ class PyfficePortJupyter(PyfficePort):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficePortJupyter")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortJupyter")).override(cfg)
         self.notebook = None
 
     def file_export(self, file_=None):
@@ -736,7 +736,7 @@ class PyfficePortText(PyfficePort):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficePortWebSession")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortWebSession")).override(cfg)
 
     def to_dict(self):
         """"""
@@ -752,7 +752,7 @@ class PyfficePortWebSession(PyfficePort):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficePortWebSession")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortWebSession")).override(cfg)
         self.nodes = None
         self.sessions = None
 

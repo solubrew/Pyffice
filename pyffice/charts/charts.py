@@ -21,8 +21,8 @@ import datetime as dt
 # ======================================3rd Party Library Modules=====================================================||
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.ports.msports import PyfficePortExcel
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 from pyffice.items.text import PyfficeText
@@ -54,7 +54,7 @@ class PyfficeChart(PyfficeDocument):
             figsize (tuple): Size of the figure (width, height).
         """
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeChart")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeChart")).override(cfg)
         self.axes = None
         self.background = None
         self.compatibility = None

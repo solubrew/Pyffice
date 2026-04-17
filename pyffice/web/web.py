@@ -2,14 +2,15 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
@@ -21,8 +22,8 @@ import json as j
 from collections import deque
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.contacts.contacts import PyfficeContact, PyfficeRolodex
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager, PyfficeDeque
 from pyffice.web.url import PyfficeURL, PyfficeURLLibrary
@@ -46,7 +47,7 @@ class PyfficeWebBrowser(PyfficeDocument):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeWebBrowser")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeWebBrowser")).override(cfg)
         self.document = self.config.select("template").override(self.config.select("document").dikt)
         self.active_page = None
         self.active_profile = None
@@ -256,7 +257,7 @@ class PyfficeWebPage(PyfficeDocument):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeWebPage")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeWebPage")).override(cfg)
         self.active_url = None
         self.active_profile = None
         self.history = None
@@ -410,7 +411,7 @@ class PyfficeWebProfile(PyfficeContact):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeWebProfile")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeWebProfile")).override(cfg)
 
     def load_document(self, document=None):
         """"""
@@ -437,7 +438,7 @@ class PyfficeWebProfileManager(PyfficeRolodex):
             cfg = {}
         cfg["group"] = "profile"
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeWebProfileManager")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeWebProfileManager")).override(cfg)
         self.active_profile = None
         self.profiles = None
 

@@ -2571,35 +2571,35 @@ dimensions:
         module: pyffice.document
         project: pyffice
       - file: pyffice.py
-        module: condor
-        project: condor
+        module: kahndor
+        project: kahndor
       - file: pyffice.py
-        module: condor
-        project: condor
+        module: kahndor
+        project: kahndor
       - file: pyffice.py
-        module: condor
-        project: condor
+        module: kahndor
+        project: kahndor
       - file: pyffice.py
-        module: condor
-        project: condor
+        module: kahndor
+        project: kahndor
       - file: pyffice.py
-        module: condor
-        project: condor
+        module: kahndor
+        project: kahndor
       - file: pyffice.py
-        module: condor
-        project: condor
+        module: kahndor
+        project: kahndor
       - file: pyffice.py
-        module: condor
-        project: condor
+        module: kahndor
+        project: kahndor
       - file: pyffice.py
-        module: condor
-        project: condor
+        module: kahndor
+        project: kahndor
       - file: document.py
-        module: condor
-        project: condor
+        module: kahndor
+        project: kahndor
       internal_imports: 809
       internal_projects_used:
-      - condor
+      - kahndor
       - pyffice
       - ogma
       leverage_score: 26.68

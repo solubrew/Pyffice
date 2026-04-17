@@ -31,23 +31,23 @@ from pathlib import Path  # 2026-01-15 20:29:20
 from typing import Any, Dict, List, Optional  # 2026-01-15 20:29:20
 from os.path import join  # 2026-01-15 20:29:20
 from os.path import dirname  # 2026-01-15 20:29:20
-from ogma.logma import Logma  # 2026-01-15 20:29:20
+from kahndor.logma import Logma  # 2026-01-15 20:29:20
 from pyffice.cam.bom import PyfficeBOM  # 2026-01-15 20:29:21
 from pyffice.cam.bom import PyfficeSoftwareBOM  # 2026-01-15 20:29:21
 
 # =========================================Local Library Modules======================================================||
-from ogma.logma import Logma  # 2026-01-15 15:12:49
-from condor import condor  # 2026-01-15 20:19:41
+from kahndor.logma import Logma  # 2026-01-15 15:12:49
+from kahndor import kahndor  # 2026-01-15 20:19:41
 
 import pytest  # 2026-01-15 20:29:21
 import hypothesis  # 2026-01-15 20:29:21
-from condor import condor  # 2026-01-15 20:29:20
+from kahndor import kahndor  # 2026-01-15 20:29:20
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:29:21
 LOGMA = Logma(__name__)  # 2026-01-15 20:29:21
 PXCFG = join(HERE, "_data_", "bomTEST.yaml")  # 2026-01-15 20:29:21
-CFG = condor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:21
+CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:21
 
 
 # ====================================================================================================================||
@@ -71,12 +71,9 @@ class Test_PyfficeBOM:  # 2026-01-15 15:12:50
     def reset(self):  # 2026-01-15 15:12:50
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:12:50
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_add_part(self):  # 2026-01-15 15:12:50
         """"""
@@ -117,12 +114,9 @@ class Test_PyfficeSoftwareBOM:  # 2026-01-15 15:12:50
     def reset(self):  # 2026-01-15 15:12:50
         """"""
         self.setup_class()
-        
 
     def test_all(self):  # 2026-01-15 15:12:50
         """Executes a series of test functions in a sequential logic."""
-
-        
 
     def test_add_part(self):  # 2026-01-15 15:12:50
         """"""

@@ -23,10 +23,10 @@ from os.path import dirname, join, expanduser
 from typing import Any, Optional
 
 # ======================================3rd Party Library Modules=====================================================||
-from condor.condor import Instruct
-from ogma.logma import Logma
+from kahndor.kahndor import Instruct
+from kahndor.logma import Logma
 
-# Commented out - broken dependency chain from squirl->condor
+# Commented out - broken dependency chain from squirl->kahndor
 # from squirl.objnql import txtonql
 # from squirl.orgnql import conql, yonql
 from pyffice.document import PyfficeDocumentManager

@@ -41,7 +41,7 @@
 
 ## Dependencies
 - External: click, pyyaml, reportlab, pillow, etc.
-- Internal: ogma (logging), condor (utilities)
+- Internal: ogma (logging), kahndor (utilities)
 
 ## Common Tasks
 - Document conversion: `convert_document(input, output, format)`
