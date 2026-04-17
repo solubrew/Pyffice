@@ -32,6 +32,7 @@ from pyffice.charts.charts import PyfficeChart
 from pyffice.items.items import PyfficeTable
 from pyffice.items.shapes import PyfficeShape
 from pyffice.workflows.formulas import PyfficeFormulasLibrary
+from thingery.numbers.numerals import calcExtendedRomanNumerals, calcArabicNumerals
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -491,42 +492,6 @@ class PyfficeMatrix(PyfficeDocumentManager):
         doc["document"]["documents"] = self.sheets
         doc["document"]["document_type"] = "pyffice_matrix"
         return doc
-
-
-def calcArabicNumerals(input_):
-    """"""
-    # Roman numeral to Arabic numeral mapping
-    numerals = condor.Instruct(pxcfg).select("extended_roman_numerals").dikt
-    numerals = dict(zip(numerals.values(), numerals.keys()))
-    arabic_value = 0
-    prev_value = 0
-    # Loop through the Roman numerals in reverse order
-    for char in reversed(input_):
-        current_value = int(numerals[char])
-        if current_value < prev_value:
-            arabic_value -= current_value
-        else:
-            arabic_value += current_value
-        prev_value = current_value
-    return arabic_value
-
-
-def calcExtendedRomanNumerals(input_):
-    """Calculate the Extended Roman Numeral Symbol from Arabic Numeral"""
-    numerals = condor.Instruct(pxcfg).select("extended_roman_numerals").dikt
-    logma.info(f"Numerals: {numerals}")
-    keys = [int(x) for x in numerals.keys()]
-    keys.sort()
-    ern = ""
-    while input_ != 0:
-        for val in reversed(keys):
-            calc = input_ - val
-            if calc < 0:
-                continue
-            input_ = calc
-            ern += numerals[str(val)]
-            break
-    return ern
 
 
 # ====================================================================================================================||

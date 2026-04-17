@@ -63,9 +63,7 @@ class PyfficeText(PyfficeUnit):
         logma.info(f"Load PyfficeText {unit}")
         super().load_unit(unit)
         self.set_alignment(unit.get("alignment", self.config.dikt.get("alignment", {})))
-        self.set_data_format(
-            unit.get("data_format", self.config.dikt.get("data_format", {}))
-        )
+        self.set_data_format(unit.get("data_format", self.config.dikt.get("data_format", {})))
         self.set_font(unit.get("font", self.config.dikt.get("font", {})))
         self.set_html(unit.get("html", self.config.dikt.get("html", {})))
         text = unit.get("unit", {}).get("value", None)
@@ -97,22 +95,16 @@ class PyfficeText(PyfficeUnit):
         self.set_color_background(font)
         self.set_color_foreground(font)
         font = {
-            "size": font.get("size", self.config.dikt["font"].get("size", None)),
+            "size": font.get("size", self.config.dikt.get("font", {}).get("size", None)),
             "color": self.color,
             "background": self.color_background,
             "highlight": self.color_foreground,
-            "style": font.get("style", self.config.dikt["font"].get("style", None)),
-            "bold": font.get("bold", self.config.dikt["font"].get("bold", None)),
-            "italic": font.get("italic", self.config.dikt["font"].get("italic", None)),
-            "underline": font.get(
-                "underline", self.config.dikt["font"].get("underline", None)
-            ),
-            "subscript": font.get(
-                "subscript", self.config.dikt["font"].get("subscript", None)
-            ),
-            "superscript": font.get(
-                "superscript", self.config.dikt["font"].get("superscript", None)
-            ),
+            "style": font.get("style", self.config.dikt.get("font", {}).get("style", None)),
+            "bold": font.get("bold", self.config.dikt.get("font", {}).get("bold", None)),
+            "italic": font.get("italic", self.config.dikt.get("font", {}).get("italic", None)),
+            "underline": font.get("underline", self.config.dikt.get("font", {}).get("underline", None)),
+            "subscript": font.get("subscript", self.config.dikt.get("font", {}).get("subscript", None)),
+            "superscript": font.get("superscript", self.config.dikt.get("font", {}).get("superscript", None)),
         }
         if font != self.font:
             # logma.info(f"Set Font: {font}")
@@ -122,11 +114,7 @@ class PyfficeText(PyfficeUnit):
 
     def set_font_color(self, font=None):
         """"""
-        cfg = {
-            "color": font.get(
-                "color", self.config.dikt.get("font", {}).get("color", None)
-            )
-        }
+        cfg = {"color": font.get("color", self.config.dikt.get("font", {}).get("color", None))}
         color = PyfficeColor(cfg)
         color.load_unit()
         if color != self.color:
@@ -136,7 +124,7 @@ class PyfficeText(PyfficeUnit):
 
     def set_color_background(self, font):
         """"""
-        cfg = {"color": font.get("color", self.config.dikt["font"].get("color", None))}
+        cfg = {"color": font.get("color", self.config.dikt.get("font", {}).get("color", None))}
         color = PyfficeColor(cfg)
         color.load_unit()
         if color != self.color:
@@ -146,7 +134,7 @@ class PyfficeText(PyfficeUnit):
 
     def set_color_foreground(self, font):
         """"""
-        cfg = {"color": font.get("color", self.config.dikt["font"].get("color", None))}
+        cfg = {"color": font.get("color", self.config.dikt.get("font", {}).get("color", None))}
         color = PyfficeColor(cfg)
         color.load_unit()
         if color != self.color:
@@ -188,12 +176,7 @@ class PyfficeText(PyfficeUnit):
 
     def to_html(self):
         """"""
-        text = (
-            f"<font size={self.font['size']} color={self.font['color'].to_html()} "
-            + ">"
-            + self.value
-            + "</font>"
-        )
+        text = f"<font size={self.font['size']} color={self.font['color'].to_html()} " + ">" + self.value + "</font>"
         self.html = text
         return self.html
 
