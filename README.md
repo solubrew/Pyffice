@@ -1,80 +1,265 @@
 # Pyffice
 
-A unified Python interface for document processing, CAD, media, and office automation.
+**Unified Python Office Automation & Productivity Suite**
 
-## Overview
+Pyffice provides a unified Python interface for document processing, CAD, media handling, email, calendar, and comprehensive office automation with an extensible port architecture.
 
-Pyffice provides a consistent API for working with various file formats and office applications:
+---
 
-- **Documents**: PDF, Word, Excel, PowerPoint, RTF, ODT
-- **CAD**: STL, OBJ, DWG, DXF, STEP, IGES, FBX, GLTF
-- **Media**: Images, Audio, Video, HEIC, RAW
-- **Data**: CSV, JSON, XML, YAML
-- **Office**: Calendar, Tasks, Contacts, Email
+## Features
+
+### Document Processing
+- **Word Processing**: DOC, DOCX, ODT, RTF, PDF, LaTeX
+- **Spreadsheets**: XLS, XLSX, ODS, CSV
+- **Presentations**: PPT, PPTX, ODP
+- **Ebooks**: EPUB, MOBI, AZW
+- **Technical**: Markdown, reStructuredText, AsciiDoc
+
+### Media Handling
+- **Images**: PNG, JPG, GIF, BMP, WEBP, HEIC, SVG, TIFF
+- **Video**: MP4, AVI, MKV, MOV, WEBM
+- **Audio**: MP3, WAV, FLAC, OGG, M4A, AAC
+- **CAD**: DXF, DWG (limited)
+
+### Office Integration
+- **Email**: SMTP/IMAP with send/receive capabilities
+- **Calendar**: iCal support with event management
+- **Contacts**: Contact management and search
+- **Tasks**: Task and project tracking
+
+### Automation & Workflows
+- **Workflows**: Custom workflow creation and execution
+- **Scripts**: Python script execution framework
+- **CLI**: 72+ command-line operations
+- **Ports**: Extensible architecture for custom integrations
+
+### Data & Analytics
+- **Charts**: Chart generation and visualization
+- **Analytics**: Data analytics and reporting
+- **Databases**: Database connectivity (SQLite, PostgreSQL)
+- **Matrix**: Matrix operations and calculations
+
+### Web & Utilities
+- **Web**: URL fetching, parsing, scraping
+- **Forms**: Form creation and validation
+- **Tags**: Tagging system for organization
+- **Filesystems**: Virtual filesystem management
+
+---
 
 ## Installation
 
+### From PyPI
 ```bash
 pip install pyffice
 ```
 
-## Usage
+### From Source
+```bash
+git clone https://github.com/solubrew/pyffice.git
+cd pyffice
+pip install -e .
+```
 
-### Command Line
+### Development Installation
+```bash
+git clone https://github.com/solubrew/pyffice.git
+cd pyffice
+pip install -e ".[dev]"
+pip install pylint pytest bandit
+```
+
+---
+
+## Quick Start
+
+### CLI Usage
 
 ```bash
-# Convert a document
+# Document operations
 pyffice document convert input.docx output.pdf
+pyffice document info input.docx
 
-# Convert a spreadsheet
-pyffice spreadsheet convert data.xlsx output.csv
+# Spreadsheet operations
+pyffice spreadsheet convert data.xlsx data.csv
+pyffice spreadsheet info data.xlsx
 
-# Convert an image
-pyffice image convert photo.png output.jpg
+# Media operations
+pyffice image convert photo.png photo.jpg
+pyffice video convert video.mov video.mp4
+pyffice audio convert audio.wav audio.mp3
 
-# List supported formats
-pyffice formats
+# Email operations
+pyffice email send --to user@example.com --subject "Hello" --body "Message"
+
+# Calendar operations
+pyffice calendar list
+pyffice calendar add --title "Meeting" --date 2026-06-25
+
+# Workflow operations
+pyffice workflow run my-workflow
+pyffice workflow list
 ```
 
 ### Python API
 
 ```python
-from pyffice import document, spreadsheet, presentation
+from pyffice import Pyffice
 
-# Open a document
-doc = document.open("report.docx")
+# Initialize
+app = Pyffice()
 
-# Work with spreadsheets
-sheet = spreadsheet.open("data.xlsx")
-sheet.save("output.xlsx")
+# Document processing
+app.document.convert("input.docx", "output.pdf")
 
-# Process CAD files
-cad = pyffice.cad.load("model.stl")
+# Media conversion
+app.image.convert("photo.png", "photo.jpg")
+app.video.convert("video.mov", "video.mp4")
+
+# Email
+app.email.send(
+    to="user@example.com",
+    subject="Hello",
+    body="Message"
+)
+
+# Calendar
+events = app.calendar.list()
+
+# Workflow
+app.workflow.run("my-workflow")
 ```
 
-## Quick Start
+---
+
+## Documentation
+
+| Document | Description |
+|----------|-------------|
+| [CLI.md](CLI.md) | Complete CLI command reference |
+| [AGENT.md](AGENT.md) | Agent system documentation |
+| [STATE.md](STATE.md) | Project state and roadmap |
+| [CHANGES.md](CHANGES.md) | Changelog and release notes |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Contribution guidelines |
+
+---
+
+## Architecture
+
+### Port System
+
+Pyffice uses a flexible port architecture for extensibility:
 
 ```python
-from pyffice import document, spreadsheet, presentation
+from pyffice.ports import DocumentPort, ImagePort, MediaPort
 
-# Open a document
-doc = document.open("report.docx")
-
-# Work with spreadsheets
-sheet = spreadsheet.open("data.xlsx")
-sheet.save("output.xlsx")
-
-# Process CAD files
-cad = pyffice.cad.load("model.stl")
+# Create custom document handler
+class MyHandler(DocumentPort):
+    def read(self, path):
+        # Custom implementation
+        pass
+    
+    def write(self, path, content):
+        # Custom implementation
+        pass
 ```
 
-## Features
+### Module Structure
 
-- Unified API across file formats
-- Port-based architecture for extensibility
-- Full support for create, read, update, delete operations
-- Cross-platform compatibility
+```
+pyffice/
+├── calendars/      # Calendar & event management
+├── charts/         # Chart generation
+├── config/         # Configuration management
+├── contacts/       # Contact management
+├── filesystems/    # Virtual filesystem
+├── forms/          # Form handling
+├── images/         # Image processing
+├── items/          # Item utilities & colors
+├── matrix/         # Matrix operations
+├── notebooks/      # Jupyter notebooks
+├── ports/          # Extensible port system
+├── script/         # Script execution
+├── skills/         # Skill framework
+├── tags/           # Tagging system
+├── updates/        # Update management
+├── web/            # Web utilities
+├── workflows/      # Workflow automation
+├── cli.py          # CLI interface (72 commands)
+├── document.py     # Document processing
+└── pyffice.py      # Main entry point
+```
+
+---
+
+## Configuration
+
+Create `pyffice.yaml` in your project root:
+
+```yaml
+# General settings
+general:
+  debug: false
+  log_level: INFO
+
+# Email configuration
+email:
+  smtp_host: smtp.gmail.com
+  smtp_port: 587
+  imap_host: imap.gmail.com
+  imap_port: 993
+
+# Database configuration
+database:
+  default: sqlite
+  connections:
+    sqlite:
+      path: ./data/pyffice.db
+    
+# Workflow configuration
+workflows:
+  default_timeout: 3600
+  max_parallel: 4
+```
+
+---
+
+## Development
+
+### Running Tests
+```bash
+pytest tests/
+```
+
+### Code Quality
+```bash
+# Linting
+pylint pyffice/
+
+# Security
+bandit -r pyffice/
+
+# Type checking
+pyright pyffice/
+```
+
+### Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for:
+- Development setup
+- Coding standards
+- Pull request workflow
+- Release process
+
+---
 
 ## License
 
-MIT License
+MIT License - See [LICENSE](LICENSE) for details.
+
+---
+
+## Support
+
+- **Issues**: https://github.com/solubrew/pyffice/issues
+- **Discussions**: https://github.com/solubrew/pyffice/discussions

@@ -6,103 +6,264 @@
 pyffice [COMMAND] [OPTIONS]
 ```
 
-## Commands
-
-### document
-
-Work with documents (Word, PDF, etc.)
-
-```bash
-pyffice document open <file>
-pyffice document convert <input> <output>
-pyffice document info <file>
-```
-
-### spreadsheet
-
-Work with spreadsheets (Excel, CSV)
-
-```bash
-pyffice spreadsheet open <file>
-pyffice spreadsheet create <name>
-pyffice spreadsheet export <file> --format csv
-```
-
-### cad
-
-Process CAD files
-
-```bash
-pyffice cad convert <input> <output>
-pyffice cad info <file>
-pyffice cad validate <file>
-```
-
-### image
-
-Process images
-
-```bash
-pyffice image convert <input> <output>
-pyffice image resize <file> --width 800 --height 600
-pyffice image thumbnail <file>
-```
-
-## Options
+## Global Options
 
 | Option | Description |
 |--------|-------------|
 | `-v, --verbose` | Enable verbose output |
 | `-q, --quiet` | Suppress output |
 | `--version` | Show version |
-| `--help` | Show help |
+| `--help` | Show help message |
 
-## Arguments
+## Commands
 
-### Global Arguments
+### document
 
-| Argument | Type | Required | Description |
-|----------|------|----------|-------------|
-| `-v, --verbose` | flag | No | Enable verbose output |
-| `-q, --quiet` | flag | No | Suppress output |
-| `--version` | flag | No | Show version |
-| `--help` | flag | No | Show help |
+Work with documents (Word, PDF, RTF, ODT)
 
-### Command Arguments
+```bash
+pyffice document open <file>
+pyffice document convert <input> <output>
+pyffice document info <file>
+pyffice document extract <file>
+```
 
-#### document
+### spreadsheet
 
-| Argument | Type | Required | Description |
-|----------|------|----------|-------------|
-| `open` | subcommand | No | Open a document |
-| `convert` | subcommand | No | Convert document format |
-| `info` | subcommand | No | Show document information |
-| `<file>` | string | Yes | Input file path |
+Work with spreadsheets (Excel, CSV, ODS)
 
-#### spreadsheet
+```bash
+pyffice spreadsheet open <file>
+pyffice spreadsheet create <name>
+pyffice spreadsheet convert <input> <output>
+pyffice spreadsheet export <file> --format csv
+pyffice spreadsheet info <file>
+```
 
-| Argument | Type | Required | Description |
-|----------|------|----------|-------------|
-| `open` | subcommand | No | Open a spreadsheet |
-| `create` | subcommand | No | Create new spreadsheet |
-| `export` | subcommand | No | Export spreadsheet |
-| `--format` | string | No | Output format (csv, xlsx, ods) |
-| `<file>` | string | Yes | Input file path |
+### presentation
+
+Work with presentations (PowerPoint, ODP)
+
+```bash
+pyffice presentation open <file>
+pyffice presentation convert <input> <output>
+pyffice presentation info <file>
+```
+
+### cad
+
+Process CAD files (STL, OBJ, DWG, DXF, STEP)
+
+```bash
+pyffice cad convert <input> <output>
+pyffice cad info <file>
+pyffice cad validate <file>
+pyffice cad repair <file>
+```
+
+### image
+
+Process images (PNG, JPG, HEIC, RAW, WebP)
+
+```bash
+pyffice image convert <input> <output>
+pyffice image resize <file> --width 800 --height 600
+pyffice image thumbnail <file>
+pyffice image info <file>
+pyffice image optimize <file>
+```
+
+### video
+
+Process video files
+
+```bash
+pyffice video convert <input> <output>
+pyffice video info <file>
+pyffice video thumbnail <file>
+pyffice video extract-audio <file>
+```
+
+### audio
+
+Process audio files
+
+```bash
+pyffice audio convert <input> <output>
+pyffice audio info <file>
+pyffice audio trim <file> --start 0 --end 60
+pyffice audio extract <file>
+```
+
+### diagram
+
+Process diagram files (Draw.io, Graphviz)
+
+```bash
+pyffice diagram convert <input> <output>
+pyffice diagram validate <file>
+pyffice diagram info <file>
+pyffice diagram export <file> --format png
+```
+
+### chart
+
+Create and process charts
+
+```bash
+pyffice chart create <type> --data <data>
+pyffice chart export <chart> --output <file>
+pyffice chart types
+```
+
+### calendar
+
+Manage calendars and events
+
+```bash
+pyffice calendar list
+pyffice calendar events <date>
+pyffice calendar create <name>
+pyffice calendar export <calendar>
+```
+
+### contact
+
+Manage contacts
+
+```bash
+pyffice contact list
+pyffice contact search <query>
+pyffice contact add <name>
+pyffice contact export
+```
+
+### email
+
+Manage emails
+
+```bash
+pyffice email send --to <recipient> --subject <subject> --body <body>
+pyffice email list
+pyffice email read <id>
+pyffice email attach <file>
+```
+
+### database
+
+Work with databases
+
+```bash
+pyffice database connect <connection_string>
+pyffice database query <sql>
+pyffice database tables
+pyffice database export <table>
+```
+
+### filesystem
+
+Work with filesystems
+
+```bash
+pyffice filesystem list <path>
+pyffice filesystem sync <source> <target>
+pyffice filesystem search <query>
+pyffice filesystem info <path>
+```
+
+### config
+
+Manage configuration
+
+```bash
+pyffice config show
+pyffice config set <key> <value>
+pyffice config validate
+pyffice config reset
+```
+
+### update
+
+Manage updates
+
+```bash
+pyffice update check
+pyffice update install
+pyffice update status
+pyffice update history
+```
+
+### formats
+
+List supported formats
+
+```bash
+pyffice formats
+pyffice formats --document
+pyffice formats --media
+pyffice formats --cad
+```
+
+### help
+
+Show help information
+
+```bash
+pyffice help [command]
+```
+
+## Exit Codes
+
+| Code | Description |
+|------|-------------|
+| `0` | Success |
+| `1` | General error |
+| `2` | Invalid arguments |
+| `3` | File not found |
+| `4` | Permission denied |
 
 ## Examples
 
 ```bash
-# Open and convert a document
-pyffice document convert input.docx output.pdf
+# Convert a document to PDF
+pyffice document convert report.docx output.pdf
 
 # Create a spreadsheet
 pyffice spreadsheet create report.xlsx
 
 # Convert CAD file
 pyffice cad convert model.stl model.obj
+
+# Resize an image
+pyffice image resize photo.png --width 800 --height 600
+
+# List calendars
+pyffice calendar list
+
+# Send an email
+pyffice email send --to user@example.com --subject "Hello" --body "Message"
+
+# Check for updates
+pyffice update check
+
+# Show configuration
+pyffice config show
 ```
 
-## Exit Codes
+## Configuration File
 
-- `0` - Success
-- `1` - Error
+Pyffice uses `pyffice.yaml` for configuration:
+
+```yaml
+version: "1.0"
+paths:
+  data: "~/.pyffice/data"
+  cache: "~/.pyffice/cache"
+  logs: "~/.pyffice/logs"
+logging:
+  level: "INFO"
+  file: "~/.pyffice/logs/pyffice.log"
+defaults:
+  image_format: "png"
+  document_format: "pdf"
+```

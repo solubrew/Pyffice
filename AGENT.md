@@ -1,54 +1,101 @@
-# AGENT.md - Pyffice Agent Context
+# Pyffice Agent Guidelines
 
-## Project Overview
-- **Name**: Pyffice
-- **Type**: Python Office Suite Wrapper Library
-- **Purpose**: Unified Python interface for office document manipulation (diagrams, spreadsheets, presentations, PDFs, etc.)
-- **Language**: Python 3.12+
-- **Agent**: orin (this workspace)
-- **Git Branch**: orin-ws
-- **Audit Score**: 82.27% (target: 95%)
+## Project Context
+
+Pyffice is a comprehensive Python framework for handling document formats, media types, and office operations. It uses a port-based architecture for extensibility.
 
 ## Architecture
-- **Core**: pyffice/document.py - Base document classes
-- **Modules**: 30+ submodules covering office formats
-- **Testing**: test_pyffice/ with unit tests
-- **CLI**: pyffice/cli.py with Click (30 commands)
 
-## Current Status
-### Dimensions Passing (9/15)
-- cli_documentation (100%)
-- configuration (100%)
-- dependency_strategy (100%)
-- documentation (100%)
-- git_workflow (100%)
-- structure (100%)
-- licenses (100%)
+```
+pyffice/
+├── cli.py              # 72+ CLI commands
+├── document.py         # Document processing
+├── spreadsheet.py      # Spreadsheet handling
+├── presentation.py     # Presentation files
+├── pyffice.py          # Core Pyffice class
+├── pyffice/
+│   ├── ports/          # Port interfaces
+│   ├── calendars/      # Calendar integration
+│   ├── charts/         # Chart generation
+│   ├── config/         # Configuration management
+│   ├── contacts/       # Contact management
+│   ├── filesystems/    # Filesystem operations
+│   ├── forms/          # Form processing
+│   ├── images/         # Image processing
+│   ├── items/          # Item management
+│   ├── matrix/         # Matrix operations
+│   ├── notebooks/      # Notebook support
+│   ├── script/         # Script execution
+│   ├── skills/         # Skill definitions
+│   ├── tags/           # Tag management
+│   ├── updates/        # Update system
+│   └── web/            # Web integration
+└── workflows/          # Workflow automation
+```
 
-### Dimensions Failing/Partial (6/15)
-- module_cli_coverage (0%) - CLI exists but analyzer not detecting
-- agent_awareness (0%) - Need comprehensive agent context
-- license_dependencies (25%) - Need pip-licenses
-- logging (50%) - Uses logging but not logma
-- kiss_dry (50%) - 328 magic numbers
-- duplicate_files (50%) - 10 duplicate files
+## Key Patterns
 
-## Key Conventions
-- All modules use `logger = logging.getLogger(__name__)`
-- Classes use snake_case naming internally
-- CLI via pyffice/cli.py using Click
-- Configuration via config.yaml
+### Port-Based Architecture
 
-## Dependencies
-- External: click, pyyaml, reportlab, pillow, etc.
-- Internal: ogma (logging), kahndor (utilities)
+Pyffice uses ports (interfaces) to define capabilities:
 
-## Common Tasks
-- Document conversion: `convert_document(input, output, format)`
-- Configuration: `validate_config(path)`
-- CLI: `pyffice convert <input> <output> --format pdf`
+```python
+from pyffice.ports import DocumentPort
 
-## Quality Gates
-- Type annotations preferred (0.7% current - needs improvement)
-- Pylint score: 100%
-- No security issues (bandit)
+class MyDocumentHandler(DocumentPort):
+    def read(self, path: str) -> bytes:
+        ...
+    def write(self, path: str, data: bytes) -> None:
+        ...
+```
+
+### CLI Commands
+
+All CLI commands should:
+- Use argparse with proper type hints
+- Include help text
+- Support --verbose and --quiet flags
+- Return appropriate exit codes
+
+### Logging
+
+Use the logging module, not print():
+
+```python
+import logging
+logger = logging.getLogger(__name__)
+
+logger.info("Processing document")
+logger.error("Failed to open file")
+```
+
+## Quality Standards
+
+- **Pylint**: 0 errors, minimal warnings
+- **Bandit**: 0 HIGH/MEDIUM issues
+- **Type Annotations**: Use where practical
+- **Docstrings**: Required for public APIs
+
+## Version Management
+
+Versions are managed in `pyffice/updates/version.yaml`:
+
+```yaml
+version: 0.1.1
+transitions:
+  - from: 0.1.0
+    to: 0.1.1
+    changes:
+      - Replace print() with logging
+      - Fix pylint errors
+```
+
+## Agent Workflow
+
+1. Check current state: `git status`
+2. Create feature branch: `git checkout -b feature/name`
+3. Make changes with tests
+4. Run quality checks
+5. Update documentation
+6. Commit with clear messages
+7. Push and create PR
