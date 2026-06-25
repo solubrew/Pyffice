@@ -207,7 +207,7 @@ class PyfficeEdge(PyfficeUnit):
         return doc
 
 
-class PyfficeDiagram(PyfficeDocumentManager):
+class PyfficeSketch(PyfficeDocumentManager):
     """"""
 
     def __init__(self, cfg=None):
