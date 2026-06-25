@@ -78,6 +78,18 @@ class PyfficeSketch(PyfficeDocument):
         self.set_nodes(document.get("nodes", {}))
         return self
 
+    def set_lock(self, lock):
+        """"""
+
+    def set_edges(self, edges):
+        """"""
+
+    def set_endpoints(self, endpoints):
+        """"""
+
+    def set_nodes(self, nodes):
+        """"""
+
     def to_dict(self):
         """"""
         doc = super().to_dict()

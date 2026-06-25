@@ -17,8 +17,22 @@ from os.path import abspath, dirname, join
 import datetime as dt
 
 # ======================================3rd Party Library Modules=====================================================||
-from pycel import ExcelCompiler
-from pycel.excelformula import ExcelFormula
+try:
+    from pycel.excelformula import ExcelFormula
+    from pycel import ExcelCompiler
+except ImportError:
+
+    def class_builder():
+        """"""
+
+        class GenericClass(object):
+            valid = False
+
+        return GenericClass
+
+    ExcelFormula = class_builder()
+    ExcelCompiler = class_builder()
+
 
 # ======================================Solutions Brewer Library Modules==============================================||
 from kahndor import kahndor
@@ -42,6 +56,7 @@ class PyfficeFormulasLibrary(PyfficeDocumentManager):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
+
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeFormulasLibrary")).override(cfg)
         self.compiler = ExcelCompiler
         self.formulas = None

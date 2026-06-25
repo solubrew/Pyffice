@@ -24,7 +24,7 @@ from collections import Counter
 import cv2
 import numpy as np
 from PIL import Image
-import cairosvg
+
 import os
 from matplotlib.colors import CSS4_COLORS
 
@@ -513,6 +513,8 @@ def extract_colors_from_svg(image=None, file_path=None):
         svg_path (str): Path to the SVG file.
     """
     # Convert SVG to a PNG image
+    import cairosvg
+
     temp_path = self.path + ".tmp.png"
     cairosvg.svg2png(url=self.path, write_to=temp_path)
     # Load the rendered PNG and extract its colors
