@@ -13,6 +13,7 @@ authors = [
 ]
 requires-python = ">=3.10"
 dependencies = [
+     "subtrix>=0.0.1",
      "adafruit-ampy==1.1.0",
      "annotated-doc==0.0.4",
      "annotated-types==0.7.0",
