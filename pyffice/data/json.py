@@ -1,52 +1,91 @@
-"""
-Pyffice JSON Data Handler
+"""Pyffice JSON Module
+
+Provides JSON file handling capabilities for Pyffice.
+Uses PyfficeDataMixin for common operations.
 """
 
 import json
 from pathlib import Path
-from typing import Any, Dict, List, Union
+from typing import Any, Optional
+
+from .base import PyfficeDataMixin
 
 
-def read(filepath: str, encoding: str = "utf-8") -> Union[Dict, List]:
-    """Read JSON file and return data."""
-    with open(filepath, "r", encoding=encoding) as f:
-        return json.load(f)
+class PyfficeJSON(PyfficeDataMixin):
+    """Handler for JSON file operations."""
 
+    def __init__(self, file_path: Optional[str] = None):
+        """
+        Initialize PyfficeJSON handler.
+        
+        Args:
+            file_path: Optional path to JSON file
+        """
+        super().__init__()
+        self.file_path = Path(file_path) if file_path else None
 
-def write(filepath: str, data: Any, indent: int = 2, encoding: str = "utf-8") -> None:
-    """Write data to JSON file."""
-    with open(filepath, "w", encoding=encoding) as f:
-        json.dump(data, f, indent=indent)
+    def load(self, file_path: Optional[str] = None) -> "PyfficeJSON":
+        """
+        Load JSON from file.
+        
+        Args:
+            file_path: Path to JSON file
+            
+        Returns:
+            Self for chaining
+        """
+        path = Path(file_path) if file_path else self.file_path
+        if not path:
+            raise ValueError("No file path specified")
+            
+        with open(path, "r", encoding="utf-8") as f:
+            self._data = json.load(f)
+            
+        return self
 
+    def save(self, file_path: Optional[str] = None, indent: int = 2) -> "PyfficeJSON":
+        """
+        Save data to JSON file.
+        
+        Args:
+            file_path: Optional path, uses self.file_path if not provided
+            indent: JSON indentation level
+            
+        Returns:
+            Self for chaining
+        """
+        path = Path(file_path) if file_path else self.file_path
+        if not path:
+            raise ValueError("No file path specified")
+            
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(self._data, f, indent=indent, ensure_ascii=False)
+            
+        return self
 
-def append(filepath: str, data: Any, encoding: str = "utf-8") -> None:
-    """Append data to JSON file (list or object)."""
-    existing = []
-    path = Path(filepath)
-    if path.exists() and path.stat().st_size > 0:
-        existing = read(filepath, encoding)
-    
-    if isinstance(existing, list):
-        if isinstance(data, list):
-            existing.extend(data)
-        else:
-            existing.append(data)
-    elif isinstance(existing, dict) and isinstance(data, dict):
-        existing.update(data)
-    else:
-        existing = [existing, data] if existing else data
-    
-    write(filepath, existing, encoding=encoding)
+    def to_string(self, indent: int = 2) -> str:
+        """
+        Return JSON as formatted string.
+        
+        Args:
+            indent: JSON indentation level
+            
+        Returns:
+            Formatted JSON string
+        """
+        return json.dumps(self._data, indent=indent, ensure_ascii=False)
 
-
-def merge(filepath: str, data: Dict, encoding: str = "utf-8") -> None:
-    """Merge data into existing JSON object."""
-    existing = {}
-    path = Path(filepath)
-    if path.exists() and path.stat().st_size > 0:
-        existing = read(filepath, encoding)
-        if not isinstance(existing, dict):
-            existing = {"data": existing}
-    
-    existing.update(data)
-    write(filepath, existing, encoding=encoding)
+    @staticmethod
+    def from_string(json_string: str) -> "PyfficeJSON":
+        """
+        Create PyfficeJSON from string.
+        
+        Args:
+            json_string: JSON formatted string
+            
+        Returns:
+            New PyfficeJSON instance
+        """
+        obj = PyfficeJSON()
+        obj._data = json.loads(json_string)
+        return obj
