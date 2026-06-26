@@ -1,1 +1,1 @@
-"""Charts module for pyffice."""
+"""Charts module for pyffice - Chart and graph generation."""

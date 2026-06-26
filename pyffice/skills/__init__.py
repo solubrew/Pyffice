@@ -1,1 +1,1 @@
-"""Skills module for pyffice."""
+"""Skills module for pyffice - Custom agent capabilities."""

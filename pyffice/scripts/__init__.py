@@ -1,1 +1,1 @@
-"""Scripts module for pyffice."""
+"""Scripts module for pyffice - Command-line utilities."""
