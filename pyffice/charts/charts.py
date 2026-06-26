@@ -26,7 +26,7 @@ from kahndor.logma import Logma
 from pyffice.ports.msports import PyfficePortExcel
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 from pyffice.items.text import PyfficeText
-
+from pyffice.analytics.sources import PyfficeDataSet
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True
