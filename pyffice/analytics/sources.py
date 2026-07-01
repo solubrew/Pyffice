@@ -90,7 +90,7 @@ class PyfficeDataSet(PyfficeDocumentManager):
         self.path = None
         self.sources = None
         self.relationships = None
-        self.views = None
+        self.views = set()
 
     def add_source(self, source, type_="file"):
         """"""

@@ -525,12 +525,12 @@ class PyfficeDocument(PyfficeUnit):
     def save_pyffice(self, path, syntax, encrypt_key=None):
         """ """
         # use syntax to select a template
+        if path is None:
+            raise Exception(f"No path provided")
         if encrypt_key:
-            doc = encrypt256(self.to_string(), encrypt_key)
-            txtonql.Doc(doc).write(path)
+            txtonql.Doc(path).write(encrypt256(self.to_string(), encrypt_key))
         else:
-            doc = self.to_dict()
-            yonql.Doc(doc).write(path)
+           yonql.Doc(path).write(self.to_dict())
         return self
 
     def save_as(self, path, set_file_active=True, syntax=None, encrypt_key=None):
@@ -656,6 +656,7 @@ class PyfficeDocumentManager(PyfficeDocument):
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDocumentManager")).override(cfg)
         self.store = conql.Doc()
+        self.documents = {}
 
     def add_document(self, document):
         """"""

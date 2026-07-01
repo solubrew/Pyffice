@@ -107,7 +107,10 @@ class PyfficeNotebook(PyfficeDocument):
         """"""
         doc = super().to_dict()
         doc["document"] = {"notebook": self.notebook}
-        doc["document"]["notebook"]["cells"] = [x.to_dict() for x in self.cells]
+        if self.cells is None:
+            doc["document"]["notebook"]["cells"] = []
+        else:
+            doc["document"]["notebook"]["cells"] = [x.to_dict() for x in self.cells if x is not None]
         return doc
 
     def to_html(self):
