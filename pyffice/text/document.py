@@ -25,7 +25,7 @@ from typing import Any, Dict, List, Optional, Union
 from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument
-from pyffice.items.text import PyfficeText
+from pyffice.items.text import PyfficeText, PyfficeParagraph, PyfficeFont
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__), "")  # ||
