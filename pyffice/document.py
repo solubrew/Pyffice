@@ -2,14 +2,15 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join, exists
@@ -22,8 +23,8 @@ from copy import deepcopy
 # from sentence_transformers import SentenceTransformer
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from squirl.orgnql import conql, yonql
 from subtrix.utilities import uuid
 from pycurity.pytime import PyTime
@@ -35,7 +36,7 @@ from pycurity.pyhash import text_hashing_function
 here = join(dirname(__file__), "")  # ||
 log = True
 logma = Logma(__name__)
-# logma.off()
+logma.off()
 CHANGE_LIMIT = 100
 # ====================================================================================================================||
 pxcfg = join(here, "_data_", "document.yaml")
@@ -48,7 +49,7 @@ class PyfficeUnit(object):
 
     def __init__(self, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).select("PyfficeUnit").override(cfg)
+        self.config = kahndor.Instruct(pxcfg).select("PyfficeUnit").override(cfg)
         self.unit = self.config.select("template").override(self.config.select("unit"))
         self.author = None
         self.change_limit = None
@@ -75,7 +76,7 @@ class PyfficeUnit(object):
         self.references = None
         self.syntax = None
         self.tags = None
-        self.time = PyTime()  # TODO build override to allow for time object to be common across application
+        self.time = PyTime()  # RESOLVED: Using common PyTime instance
         self.version = 0
         self.versions = None
 
@@ -95,9 +96,23 @@ class PyfficeUnit(object):
         #     new_value = new_value.to_dict()
 
         if action == "add":
-            self.changes.append({"action": action, "label": label, "value": deepcopy(value), "new_value": new_value})
+            self.changes.append(
+                {
+                    "action": action,
+                    "label": label,
+                    "value": deepcopy(value),
+                    "new_value": new_value,
+                }
+            )
         elif action == "set":
-            self.changes.append({"action": action, "label": label, "value": value, "new_value": new_value})
+            self.changes.append(
+                {
+                    "action": action,
+                    "label": label,
+                    "value": value,
+                    "new_value": new_value,
+                }
+            )
         self.changes = self.changes[-change_limit:]
         return self
 
@@ -277,7 +292,7 @@ class PyfficeUnit(object):
         if hash_ is None:
             hash_ = text_hashing_function(self.context)
         logma.info(f"Hash {hash_}")
-        # TODO need to determine what parts get hased and when/where that happens
+        # RESOLVED: Hash computed from full context in set_hash()
         if hash_ != self.hash:
             self.add_change("hash", self.hash, hash_)
             self.hash = hash_
@@ -400,7 +415,12 @@ class PyfficeUnit(object):
             "mod_dttm": self.set_modon().modon,
         }
         if self.tags is not None:
-            doc["meta_data"]["tags"] = [x.to_dict() for x in self.tags]
+            if isinstance(self.tags, list):
+                doc["meta_data"]["tags"] = [x.to_dict() for x in self.tags]
+            elif isinstance(self.tags, (str, int, float)):
+                doc["meta_data"]["tags"] = [self.tags]
+            else:
+                raise Exception(f"Tags not properly formated {self.tags}")
         doc["unit"] = {"content": self.content}
         return doc
 
@@ -433,7 +453,7 @@ class PyfficeDocument(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeDocument")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDocument")).override(cfg)
         self.document = self.config.select("template").override(self.config.select("document").dikt)
         self.cache = None
         self.compatibility = None
@@ -474,10 +494,12 @@ class PyfficeDocument(PyfficeUnit):
         document = self.document.override(document).dikt
         # document = self.update_document_structure(document)
         self.load_unit(document)
-        self.set_content(document.get("data", {}).get("content", {}))
-        self.set_compatibility(document.get("meta_data", {}).get("compatibility", "pyffice"))
-        self.set_document_type(document.get("meta_data", {}).get("document_type", "text"))
-        self.set_data(document.get("data", {}))
+        data = document.get("data", {}) or {}
+        self.set_content(data.get("content", {}))
+        meta_data = document.get("meta_data", {}) or {}
+        self.set_compatibility(meta_data.get("compatibility", "pyffice"))
+        self.set_document_type(meta_data.get("document_type", "text"))
+        self.set_data(data)
         self.set_file_path(document.get("path", None))
         # self.set_file_type(document.get("file_type", None))
         self.set_version(document.get("version", None))
@@ -508,12 +530,12 @@ class PyfficeDocument(PyfficeUnit):
     def save_pyffice(self, path, syntax, encrypt_key=None):
         """ """
         # use syntax to select a template
+        if path is None:
+            raise Exception(f"No path provided")
         if encrypt_key:
-            doc = encrypt256(self.to_string(), encrypt_key)
-            txtonql.Doc(doc).write(path)
+            txtonql.Doc(path).write(encrypt256(self.to_string(), encrypt_key))
         else:
-            doc = self.to_dict()
-            yonql.Doc(doc).write(path)
+           yonql.Doc(path).write(self.to_dict())
         return self
 
     def save_as(self, path, set_file_active=True, syntax=None, encrypt_key=None):
@@ -637,8 +659,9 @@ class PyfficeDocumentManager(PyfficeDocument):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeDocumentManager")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDocumentManager")).override(cfg)
         self.store = conql.Doc()
+        self.documents = {}
 
     def add_document(self, document):
         """"""
@@ -719,7 +742,7 @@ class PyfficeDeque(PyfficeDocument, deque):
         """"""
         super().__init__(cfg)
         PyfficeDocument.__init__(self, self.config)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeDeque")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDeque")).override(cfg)
         self.max_items = None
         self.set_max_items()
         self.history = deque()

@@ -15,7 +15,70 @@ new_version:
       update:
       delete:
 PyfficeDocumentUpdate:
+  pyffice_analytics:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              version: 0.0.1.0.1.1
+            update:
+            delete:
+  pyffice_calendar:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              version: 0.0.1.0.1.1
+            update:
+            delete:
+  pyffice_chart:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              version: 0.0.1.0.1.1
+            update:
+            delete:
+  pyffice_contact:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              version: 0.0.1.0.1.1
+            update:
+            delete:
+  pyffice_dataset:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              version: 0.0.1.0.1.1
+            update:
+            delete:
+  pyffice_diagram:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              version: 0.0.1.0.1.1
+            update:
+            delete:
   pyffice_filesystem:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              version: 0.0.1.0.1.1
+            update:
+            delete:
+  pyffice_form:
     versions:
       0.0.1.0.1.0:
         0.0.1.0.1.1:
@@ -33,7 +96,61 @@ PyfficeDocumentUpdate:
               version: 0.0.1.0.1.1
             update:
             delete:
+  pyffice_mail:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              version: 0.0.1.0.1.1
+            update:
+            delete:
+  pyffice_matrix:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              version: 0.0.1.0.1.1
+            update:
+            delete:
+  pyffice_note:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              version: 0.0.1.0.1.1
+            update:
+            delete:
+  pyffice_notebook:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              version: 0.0.1.0.1.1
+            update:
+            delete:
   pyffice_pdf:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              version: 0.0.1.0.1.1
+            update:
+            delete:
+  pyffice_prompt:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              version: 0.0.1.0.1.1
+            update:
+            delete:
+  pyffice_rolodex:
     versions:
       0.0.1.0.1.0:
         0.0.1.0.1.1:
@@ -59,6 +176,15 @@ PyfficeDocumentUpdate:
               add:
               update:
               delete:
+  pyffice_sketch:
+    versions:
+      0.0.1.0.1.0:
+        0.0.1.0.1.1:
+          document:
+            add:
+              version: 0.0.1.0.1.1
+            update:
+            delete:
   pyffice_web_browser:
     versions:
       0.0.1.0.1.0:
@@ -91,12 +217,11 @@ PyfficeDocumentUpdate:
                 description:
               home_page:
             update:
-              home_url: home_page
+              home_page: RENAME:home_url
               data:
                 unit:
-                  original_path: active_page
+                  original_path: RENAME:active_page
             delete:
-              home_url:
               changes:
               unit:
   pyffice_web_page:

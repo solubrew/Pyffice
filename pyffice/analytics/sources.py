@@ -2,14 +2,15 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
@@ -18,8 +19,8 @@ import datetime as dt
 # ======================================3rd Party Library Modules=====================================================||
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeUnit, PyfficeDocumentManager
 from pyffice.items.items import PyfficeTable
 
@@ -40,7 +41,7 @@ class PyfficeSources(PyfficeDocumentManager):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeSources")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeSources")).override(cfg)
         self.sources = None
 
     def add_source(self, source, type_="file"):
@@ -85,11 +86,11 @@ class PyfficeDataSet(PyfficeDocumentManager):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeDataSet")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDataSet")).override(cfg)
         self.path = None
         self.sources = None
         self.relationships = None
-        self.views = None
+        self.views = set()
 
     def add_source(self, source, type_="file"):
         """"""
@@ -191,7 +192,7 @@ class PyfficeDataView(PyfficeDocument):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeDataView")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDataView")).override(cfg)
         self.columns = None
         self.filters = None
         self.records = None

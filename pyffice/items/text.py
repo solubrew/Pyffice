@@ -2,24 +2,28 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
 import datetime as dt
+from dataclasses import dataclass, field, asdict
+from enum import Enum
+from typing import Optional, Dict, List, Any
 
 # ======================================3rd Party Library Modules=====================================================||
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.document import PyfficeUnit
 from pyffice.items.colors import PyfficeColor
 
@@ -29,7 +33,127 @@ log = True
 logma = Logma(__name__)
 logma.off()
 # ====================================================================================================================||
-pxcfg = join(here, "_data_", "text.yaml")
+pxcfg = join(here, "_data_", "script.yaml")
+
+
+class TextAlignment(Enum):
+    """Text alignment options."""
+
+    LEFT = "left"
+    CENTER = "center"
+    RIGHT = "right"
+    JUSTIFY = "justify"
+
+
+class TextCase(Enum):
+    """Text case options."""
+
+    UPPER = "upper"
+    LOWER = "lower"
+    TITLE = "title"
+    SENTENCE = "sentence"
+    TOGGLE = "toggle"
+
+
+@dataclass
+class PyfficeFont:
+    """Font definition for text formatting."""
+
+    name: str = "Arial"
+    size: float = 11.0
+    bold: bool = False
+    italic: bool = False
+    underline: bool = False
+    strikethrough: bool = False
+    color: Optional[str] = None
+    highlight: Optional[str] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert font to dictionary."""
+        return {
+            "name": self.name,
+            "size": self.size,
+            "bold": self.bold,
+            "italic": self.italic,
+            "underline": self.underline,
+            "strikethrough": self.strikethrough,
+            "color": self.color,
+            "highlight": self.highlight,
+        }
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "PyfficeFont":
+        """Create font from dictionary."""
+        return cls(
+            name=data.get("name", "Arial"),
+            size=data.get("size", 11.0),
+            bold=data.get("bold", False),
+            italic=data.get("italic", False),
+            underline=data.get("underline", False),
+            strikethrough=data.get("strikethrough", False),
+            color=data.get("color"),
+            highlight=data.get("highlight"),
+        )
+
+
+@dataclass
+class PyfficeRun:
+    """A text run with formatting."""
+
+    text: str
+    font: Optional[PyfficeFont] = None
+    style: Optional[str] = None
+
+    def __post_init__(self):
+        if self.font is None:
+            self.font = PyfficeFont()
+
+
+@dataclass
+class PyfficeParagraph:
+    """A paragraph with text runs."""
+
+    runs: List[PyfficeRun] = field(default_factory=list)
+    alignment: TextAlignment = TextAlignment.LEFT
+    spacing_before: float = 0.0
+    spacing_after: float = 0.0
+    line_spacing: float = 1.0
+    indent_left: float = 0.0
+    indent_right: float = 0.0
+    first_line_indent: float = 0.0
+    style: Optional[str] = None
+    numbering: Optional[Dict[str, Any]] = None
+
+    def add_run(self, text: str, font: Optional[PyfficeFont] = None) -> PyfficeRun:
+        """Add a text run to this paragraph."""
+        run = PyfficeRun(text=text, font=font)
+        self.runs.append(run)
+        return run
+
+    @property
+    def text(self) -> str:
+        """Get full text of paragraph."""
+        return "".join(run.text for run in self.runs)
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert paragraph to dictionary."""
+        return {
+            "text": self.text,
+            "runs": [{"text": r.text, "font": r.font.to_dict() if r.font else None} for r in self.runs],
+            "alignment": self.alignment.value,
+            "spacing": {
+                "before": self.spacing_before,
+                "after": self.spacing_after,
+                "line": self.line_spacing,
+            },
+            "indent": {
+                "left": self.indent_left,
+                "right": self.indent_right,
+                "first_line": self.first_line_indent,
+            },
+            "style": self.style,
+            "numbering": self.numbering,
+        }
 
 
 class PyfficeText(PyfficeUnit):
@@ -40,7 +164,7 @@ class PyfficeText(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeText")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeText")).override(cfg)
         self.alignment = None
         self.color = None
         self.color_background = None
@@ -94,16 +218,16 @@ class PyfficeText(PyfficeUnit):
         self.set_color_background(font)
         self.set_color_foreground(font)
         font = {
-            "size": font.get("size", self.config.dikt["font"].get("size", None)),
+            "size": font.get("size", self.config.dikt.get("font", {}).get("size", None)),
             "color": self.color,
             "background": self.color_background,
             "highlight": self.color_foreground,
-            "style": font.get("style", self.config.dikt["font"].get("style", None)),
-            "bold": font.get("bold", self.config.dikt["font"].get("bold", None)),
-            "italic": font.get("italic", self.config.dikt["font"].get("italic", None)),
-            "underline": font.get("underline", self.config.dikt["font"].get("underline", None)),
-            "subscript": font.get("subscript", self.config.dikt["font"].get("subscript", None)),
-            "superscript": font.get("superscript", self.config.dikt["font"].get("superscript", None)),
+            "style": font.get("style", self.config.dikt.get("font", {}).get("style", None)),
+            "bold": font.get("bold", self.config.dikt.get("font", {}).get("bold", None)),
+            "italic": font.get("italic", self.config.dikt.get("font", {}).get("italic", None)),
+            "underline": font.get("underline", self.config.dikt.get("font", {}).get("underline", None)),
+            "subscript": font.get("subscript", self.config.dikt.get("font", {}).get("subscript", None)),
+            "superscript": font.get("superscript", self.config.dikt.get("font", {}).get("superscript", None)),
         }
         if font != self.font:
             # logma.info(f"Set Font: {font}")
@@ -123,7 +247,7 @@ class PyfficeText(PyfficeUnit):
 
     def set_color_background(self, font):
         """"""
-        cfg = {"color": font.get("color", self.config.dikt["font"].get("color", None))}
+        cfg = {"color": font.get("color", self.config.dikt.get("font", {}).get("color", None))}
         color = PyfficeColor(cfg)
         color.load_unit()
         if color != self.color:
@@ -133,7 +257,7 @@ class PyfficeText(PyfficeUnit):
 
     def set_color_foreground(self, font):
         """"""
-        cfg = {"color": font.get("color", self.config.dikt["font"].get("color", None))}
+        cfg = {"color": font.get("color", self.config.dikt.get("font", {}).get("color", None))}
         color = PyfficeColor(cfg)
         color.load_unit()
         if color != self.color:
@@ -179,6 +303,40 @@ class PyfficeText(PyfficeUnit):
         self.html = text
         return self.html
 
+    # def add_text(
+    #     self,
+    #     text: str,
+    #     font: Optional[PyfficeFont] = None,
+    #     alignment: TextAlignment = TextAlignment.LEFT,
+    # ) -> "PyfficeText":
+    #     """Add text as a new paragraph (fluent interface)."""
+    #     self.add_paragraph(text, alignment, font)
+    #     return self
+    #
+    # @property
+    # def text(self) -> str:
+    #     """Get full text content."""
+    #     return "\n".join(para.text for para in self.paragraphs)
+    #
+    # def to_dict(self) -> Dict[str, Any]:
+    #     """Convert text to dictionary."""
+    #     return {
+    #         "paragraphs": [p.to_dict() for p in self.paragraphs],
+    #         "default_font": self.default_font.to_dict(),
+    #     }
+
+    def to_markdown(self) -> str:
+        """Convert to Markdown format."""
+        lines = []
+        for para in self.paragraphs:
+            text = para.text
+            if para.alignment == TextAlignment.CENTER:
+                text = f"<center>{text}</center>"
+            elif para.alignment == TextAlignment.RIGHT:
+                text = f"<right>{text}</right>"
+            lines.append(text)
+        return "\n\n".join(lines)
+
 
 class PyfficeHTML(PyfficeText):
     """"""
@@ -188,7 +346,7 @@ class PyfficeHTML(PyfficeText):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("")).override(cfg)
 
 
 class PyfficePage(PyfficeUnit):
@@ -200,17 +358,6 @@ class PyfficePage(PyfficeUnit):
         """"""
         super().__init__(cfg)
         self.config.override(pxcfg).select("PyfficePage").override(cfg)
-
-
-class PyfficeParagraph(PyfficeUnit):
-    """"""
-
-    VERSION = "0.0.1.0.1.0"
-
-    def __init__(self, cfg=None):
-        """"""
-        super().__init__(cfg)
-        self.config.override(pxcfg).select("PyfficeParagraph").override(cfg)
 
 
 # ====================================================================================================================||

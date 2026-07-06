@@ -10,6 +10,7 @@
     security: seclvl2
     <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
@@ -22,9 +23,9 @@ import numpy as np
 from xml.etree import ElementTree as ET
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
+from kahndor import kahndor
 from squirl.objnql import imgonql
-from ogma.logma import Logma
+from kahndor.logma import Logma
 
 from pyffice.pyffice import PyfficeDocument
 
@@ -123,7 +124,7 @@ def convert_shades_of_color_in_svg(input_path, output_path, source_color, target
 
     # Save the modified SVG
     tree.write(output_path)
-    print(f"SVG shades updated and saved to '{output_path}'.")
+    logma.info(f"SVG shades updated and saved to '{output_path}'.")
 
 
 def convert_shades_of_color_in_jpg(image_path, output_path, source_color, target_color, tolerance=40):

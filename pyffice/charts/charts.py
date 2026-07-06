@@ -10,6 +10,7 @@
     security: seclvl2
     <(WT)>: -32
 """
+
 from copy import deepcopy
 
 # -*- coding: utf-8 -*
@@ -20,12 +21,12 @@ import datetime as dt
 # ======================================3rd Party Library Modules=====================================================||
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
-from pyffice.config.msports import PyfficePortExcel
+from kahndor import kahndor
+from kahndor.logma import Logma
+from pyffice.ports.msports import PyfficePortExcel
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 from pyffice.items.text import PyfficeText
-
+from pyffice.analytics.sources import PyfficeDataSet
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True
@@ -53,7 +54,7 @@ class PyfficeChart(PyfficeDocument):
             figsize (tuple): Size of the figure (width, height).
         """
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeChart")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeChart")).override(cfg)
         self.axes = None
         self.background = None
         self.compatibility = None
@@ -353,6 +354,8 @@ class PyfficeChart(PyfficeDocument):
     def to_dict(self):
         """"""
         doc = super().to_dict()
+        if "document" not in doc.keys():
+            doc["document"] = {}
         doc["document"]["title"] = self.title.to_dict()
         doc["document"]["axes"] = {"xlabel": self.xlabel, "ylabel": self.ylabel}
         doc["document"]["theme"] = self.theme
@@ -364,6 +367,8 @@ class PyfficeChart(PyfficeDocument):
         doc["document"]["background"] = self.background
         doc["document"]["plotareas"] = self.plotareas
         doc["document"]["legends"] = self.legends
+        if self.data is None:
+            self.data = PyfficeDataSet()
         doc["document"]["data"] = self.data.to_dict()
         return doc
 

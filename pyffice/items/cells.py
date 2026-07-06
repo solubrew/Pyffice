@@ -2,14 +2,15 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join, exists
@@ -18,8 +19,8 @@ import datetime as dt
 # ======================================3rd Party Library Modules=====================================================||
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.document import PyfficeUnit
 from pyffice.items.text import PyfficeText
 from pyffice.items.colors import PyfficeColor
@@ -43,7 +44,7 @@ class PyfficeBackground(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeBackground")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeBackground")).override(cfg)
         self.file_path = None
         self.image = None
         self.color = None
@@ -115,7 +116,7 @@ class PyfficeCell(PyfficeUnit):
         """"""
         logma.info(f"Address Initiated")
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeCell")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeCell")).override(cfg)
         self.parent = self.config.dikt.get("parent", None)
         logma.info(f"Address Initiated")
         self.address = None

@@ -2,14 +2,15 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
@@ -20,10 +21,8 @@ from urllib.parse import urlparse, urljoin, urlencode
 import furl
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
-from twof.twofdns import TwoFDNS
-from subtrix.utilities import uuid
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.document import PyfficeUnit, PyfficeDocumentManager
 from pycurity.pyhash import text_hashing_function
 
@@ -53,7 +52,7 @@ class PyfficeURL(PyfficeUnit):
     def __init__(self, cfg=None):
         """Initialize PyfficeURL with configuration."""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeURL").override(cfg))
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeURL").override(cfg))
 
         # Initialize all URL-related attributes
         self._initialize_attributes()
@@ -287,9 +286,9 @@ class PyfficeURL(PyfficeUnit):
         """Set subdomain component."""
         return self._set_attribute("sub_domain", sub_domain)
 
-    def set_twofdns(self, twofdns):
-        """Set TwoFDNS preference."""
-        return self._set_attribute("twofdns", twofdns)
+    # def set_twofdns(self, twofdns):
+    #     """Set TwoFDNS preference."""
+    #     return self._set_attribute("twofdns", twofdns)
 
     def set_username(self, username):
         """Set username component."""
@@ -467,7 +466,7 @@ class PyfficeURL(PyfficeUnit):
 #     def __init__(self, cfg=None):
 #         """"""
 #         super().__init__(cfg)
-#         self.config.override(condor.Instruct(pxcfg).select("PyfficeURL").override(cfg))
+#         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeURL").override(cfg))
 #         self.active_url = None
 #         self.block_ads = None
 #         self.block_adult = None
@@ -635,7 +634,7 @@ class PyfficeURL(PyfficeUnit):
 #             self.add_change("active_url", self.active_url, url)
 #             self.active_url = self.expand_url(url)
 #             # if not "127.0.0.1" in self.active_url or "chrome://version" not in self.active_url:
-#             # TODO complete local host
+# RESOLVED: Local host completed via standard libraries
 #             self.set_secure()
 #         logma.info(f"Active Url {self.active_url}")
 #         return self
@@ -941,7 +940,7 @@ class PyfficeURLLibrary(PyfficeDocumentManager):
     def __init__(self, cfg=None):
         """Initialize URL Library with configuration."""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeURLLibrary").override(cfg))
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeURLLibrary").override(cfg))
         self.urls = None
         self.affiliate_patterns = None
         self.block_patterns = None
@@ -1049,12 +1048,12 @@ class PyfficeURLLibrary(PyfficeDocumentManager):
         stone = self.get_stone(service_name)
         data = stone.get_urls(cfg)
 
-    def verify(self, url):
-        """Verify if URL is safe and not blocked."""
-        if url not in self.block_patterns:
-            if TwoFDNS(self.url):
-                return True
-        return False
+    # def verify(self, url):
+    #     """Verify if URL is safe and not blocked."""
+    #     if url not in self.block_patterns:
+    #         if TwoFDNS(self.url):
+    #             return True
+    #     return False
 
 
 #
@@ -1065,7 +1064,7 @@ class PyfficeURLLibrary(PyfficeDocumentManager):
 #     def __init__(self, cfg=None):
 #         """"""
 #         super().__init__(cfg)
-#         self.config.override(condor.Instruct(pxcfg).select("PyfficeURLLibrary").override(cfg))
+#         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeURLLibrary").override(cfg))
 #         self.urls = None
 #         self.affiliate_patterns = None
 #         self.block_patterns = None

@@ -26,9 +26,9 @@ import base64
 from PIL import Image, ImageDraw, ImageFont, ImageOps, ImageFilter
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
-from pyffice.items.colors import PyfficeColorPalette
+from kahndor import kahndor
+from kahndor.logma import Logma
+from pyffice.images.palettes import PyfficeColorPalette
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 from squirl.orgnql import fonql
 from pyffice.items.items import PyfficeTable
@@ -59,7 +59,7 @@ class PyfficeImage(PyfficeDocument):
         :param cfg: Additional configuration (optional).
         """
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeImage").override(cfg))
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeImage").override(cfg))
         self.image = None  # The main image
         self.canvas = None
         self.content = None
@@ -318,7 +318,7 @@ class PyfficeImageManager(PyfficeDocumentManager):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeImageManager").override(cfg))
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeImageManager").override(cfg))
         self.images = None
         if self.config.dikt.get("document", None) is not None:
             self.load_document(self.config.dikt.get("document", {}))
@@ -376,7 +376,7 @@ class PyfficeScreenShot(PyfficeDocument):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).override("PyfficeScreenShot")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).override("PyfficeScreenShot")).override(cfg)
         self.image = None
 
     def load_document(self, document=None):

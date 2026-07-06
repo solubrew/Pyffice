@@ -2,14 +2,15 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
@@ -21,16 +22,16 @@ try:
     import ffmpeg
 
     has_ffmpeg = True
-except:
-    print("FFMPEG not Available.")
+except ImportError:
+    logma.warning("FFMPEG not Available.")
 # try:
 #     import pydub
 # except:
 #     print("Pydub not Available.")
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 
 # ====================================================================================================================||
@@ -49,7 +50,7 @@ class PyfficeAudio(PyfficeDocument):
 
     def __init__(self, path, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).select("PyfficeAudio")
+        self.config = kahndor.Instruct(pxcfg).select("PyfficeAudio")
         super().__init__()
         self.config.override(cfg)
         self.path = path
@@ -117,7 +118,7 @@ class PyfficePlayList(PyfficeDocumentManager):
 
     def __init__(self, cfg=None):
         """"""
-        self.config = condor.Instruct(pxcfg).override("")
+        self.config = kahndor.Instruct(pxcfg).override("")
         super().__init__(self)
         self.config.override(cfg)
 

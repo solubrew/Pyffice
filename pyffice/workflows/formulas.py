@@ -2,26 +2,41 @@
 """
 ---
 <(META)>:
-	docid:
-	name:
-	description: >
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
 import datetime as dt
 
 # ======================================3rd Party Library Modules=====================================================||
-from pycel import ExcelCompiler
-from pycel.excelformula import ExcelFormula
+try:
+    from pycel.excelformula import ExcelFormula
+    from pycel import ExcelCompiler
+except ImportError:
+
+    def class_builder():
+        """"""
+
+        class GenericClass(object):
+            valid = False
+
+        return GenericClass
+
+    ExcelFormula = class_builder()
+    ExcelCompiler = class_builder()
+
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from pyffice.document import PyfficeDocumentManager, PyfficeUnit
 
 # ====================================================================================================================||
@@ -41,7 +56,8 @@ class PyfficeFormulasLibrary(PyfficeDocumentManager):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeFormulasLibrary")).override(cfg)
+
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeFormulasLibrary")).override(cfg)
         self.compiler = ExcelCompiler
         self.formulas = None
 
@@ -62,7 +78,7 @@ class PyfficeFormulasLibrary(PyfficeDocumentManager):
     def set_formulas(self, formulas=None):
         """"""
         if formulas is None:
-            formulas = condor.Instruct(pxcfg).select("Formulas").dikt
+            formulas = kahndor.Instruct(pxcfg).select("Formulas").dikt
         if formulas != self.formulas:
             self.add_change("formulas", self.formulas, formulas, "set")
             self.formulas = formulas
@@ -83,7 +99,7 @@ class PyfficeFormula(PyfficeUnit, ExcelFormula):
         """"""
         super().__init__(cfg)
         PyfficeUnit.__init__(self, self.config)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeFormula")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeFormula")).override(cfg)
         self.formula = self.config.dikt.get("formula", None)
         self.formula_tag = "<{" + self.formula + "}>"
 

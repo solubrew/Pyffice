@@ -1,0 +1,1145 @@
+agent: seuss
+analysis:
+  counts:
+    files: 557
+    python_files: 357
+    python_lines: 40792
+    test_files: 149
+audit_date: '1783050003.8544347'
+dimensions:
+  base_class_duplication:
+    details:
+      details:
+        issues: []
+        score: 100
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  changelog_tracking:
+    details:
+      details:
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  ci_cd_config:
+    details:
+      details:
+        branch: gamma
+        ci_files_found:
+        - .github/workflows
+        has_commits: true
+        is_git_repo: true
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  ci_cd_documentation:
+    details:
+      details:
+        ci_cd_docs_found: 0
+        issues:
+        - rule: Missing CI/CD documentation
+          severity: low
+        score: 0
+        status: fail
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  circular_dependencies:
+    details:
+      details:
+        cycles: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  cli_documentation:
+    details:
+      details:
+        file: CLI.md
+        issues:
+        - details: 'Found: <data>, <key>, <date>, <input>, <recipient>, <table>, <value>,
+            <type>, <source>, <connection_string>, <file>, <path>, <body>, <sql>,
+            <query>, <name>, <chart>, <calendar>, <target>, <subject>, <id>, <output>'
+          fix: Replace generic placeholders with actual project-specific content
+          rule: Generic/placeholder content detected
+          severity: critical
+        score: 0
+        status: fail
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  configuration:
+    details:
+      details:
+        config_exists: false
+        score: 0
+        status: fail
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  data_clumps:
+    details:
+      details:
+        data_clump_count: 13
+        issues:
+        - clumps:
+          - locations: 8
+            params:
+            - encrypt_key
+            - path
+            - self
+            - syntax
+          - locations: 7
+            params:
+            - ctx
+            - format
+            - input
+            - output
+          - locations: 7
+            params:
+            - format_name
+            - port
+            - self
+          - locations: 7
+            params:
+            - input_path
+            - output_path
+            - self
+          - locations: 6
+            params:
+            - audio
+            - file_path
+            - self
+          fix: Consider creating a dataclass to group these parameters
+          rule: 'Data clumps detected: 13 combinations'
+          severity: medium
+        score: 0
+        status: fail
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  dependency_strategy:
+    details:
+      details:
+        issues: []
+        leverage_percent: 0
+        score: 0
+        status: fail
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  documentation:
+    details:
+      details:
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  duplicate_filenames:
+    details:
+      details:
+        duplicate_count: 37
+        issues:
+        - paths:
+          - pyffice/document.py
+          - pyffice/text/document.py
+          rule: 'Duplicate filename: document.py'
+          severity: medium
+        - paths:
+          - tests/test_pyffice.py
+          - tests/unit/test_pyffice.py
+          rule: 'Duplicate filename: test_pyffice.py'
+          severity: medium
+        - paths:
+          - pyffice/data/xml.py
+          - pyffice/documents/data/xml.py
+          rule: 'Duplicate filename: xml.py'
+          severity: medium
+        - paths:
+          - pyffice/data/yaml.py
+          - pyffice/documents/data/yaml.py
+          rule: 'Duplicate filename: yaml.py'
+          severity: medium
+        - paths:
+          - pyffice/data/json.py
+          - pyffice/documents/data/json.py
+          rule: 'Duplicate filename: json.py'
+          severity: medium
+        - paths:
+          - pyffice/data/csv.py
+          - pyffice/documents/data/csv.py
+          rule: 'Duplicate filename: csv.py'
+          severity: medium
+        - paths:
+          - pyffice/items/items.py
+          - pyffice/cad/items.py
+          rule: 'Duplicate filename: items.py'
+          severity: medium
+        - paths:
+          - pyffice/text/messages.py
+          - pyffice/socials/messages.py
+          rule: 'Duplicate filename: messages.py'
+          severity: medium
+        - paths:
+          - pyffice/audio/audio.py
+          - pyffice/media/audio.py
+          rule: 'Duplicate filename: audio.py'
+          severity: medium
+        - paths:
+          - pyffice/cad/cam.py
+          - pyffice/cam/cam.py
+          rule: 'Duplicate filename: cam.py'
+          severity: medium
+        - paths:
+          - pyffice/cad/gcode.py
+          - pyffice/cam/gcode.py
+          rule: 'Duplicate filename: gcode.py'
+          severity: medium
+        - paths:
+          - pyffice/cad/bom.py
+          - pyffice/cam/bom.py
+          rule: 'Duplicate filename: bom.py'
+          severity: medium
+        - paths:
+          - pyffice/matrix/spreadsheet.py
+          - pyffice/spreadsheet/spreadsheet.py
+          rule: 'Duplicate filename: spreadsheet.py'
+          severity: medium
+        - paths:
+          - pyffice/video/video.py
+          - pyffice/media/video.py
+          rule: 'Duplicate filename: video.py'
+          severity: medium
+        - paths:
+          - tests/test_pyffice/tests/test_csv.py
+          - tests/test_pyffice/tests/tests/test_csv.py
+          rule: 'Duplicate filename: test_csv.py'
+          severity: medium
+        - paths:
+          - tests/test_pyffice/tests/test_pptx.py
+          - tests/test_pyffice/tests/tests/test_pptx.py
+          rule: 'Duplicate filename: test_pptx.py'
+          severity: medium
+        - paths:
+          - tests/test_pyffice/tests/test_azw.py
+          - tests/test_pyffice/tests/tests/test_azw.py
+          rule: 'Duplicate filename: test_azw.py'
+          severity: medium
+        - paths:
+          - tests/test_pyffice/tests/test_xml.py
+          - tests/test_pyffice/tests/tests/test_xml.py
+          rule: 'Duplicate filename: test_xml.py'
+          severity: medium
+        - paths:
+          - tests/test_pyffice/tests/test_zip.py
+          - tests/test_pyffice/tests/tests/test_zip.py
+          rule: 'Duplicate filename: test_zip.py'
+          severity: medium
+        - paths:
+          - tests/test_pyffice/tests/test_yaml.py
+          - tests/test_pyffice/tests/tests/test_yaml.py
+          rule: 'Duplicate filename: test_yaml.py'
+          severity: medium
+        - paths:
+          - tests/test_pyffice/tests/test_tar.py
+          - tests/test_pyffice/tests/tests/test_tar.py
+          rule: 'Duplicate filename: test_tar.py'
+          severity: medium
+        - paths:
+          - tests/test_pyffice/tests/test_json.py
+          - tests/test_pyffice/tests/tests/test_json.py
+          rule: 'Duplicate filename: test_json.py'
+          severity: medium
+        - paths:
+          - tests/test_pyffice/tests/test_rar.py
+          - tests/test_pyffice/tests/tests/test_rar.py
+          rule: 'Duplicate filename: test_rar.py'
+          severity: medium
+        - paths:
+          - tests/test_pyffice/tests/test_env.py
+          - tests/test_pyffice/tests/tests/test_env.py
+          rule: 'Duplicate filename: test_env.py'
+          severity: medium
+        - paths:
+          - tests/test_pyffice/tests/test_sevenzip.py
+          - tests/test_pyffice/tests/tests/test_sevenzip.py
+          rule: 'Duplicate filename: test_sevenzip.py'
+          severity: medium
+        - paths:
+          - tests/test_pyffice/tests/test_mobi.py
+          - tests/test_pyffice/tests/tests/test_mobi.py
+          rule: 'Duplicate filename: test_mobi.py'
+          severity: medium
+        - paths:
+          - tests/test_pyffice/tests/test_video.py
+          - tests/test_pyffice/tests/tests/test_video.py
+          rule: 'Duplicate filename: test_video.py'
+          severity: medium
+        - paths:
+          - tests/test_pyffice/tests/test_epub.py
+          - tests/test_pyffice/tests/tests/test_epub.py
+          rule: 'Duplicate filename: test_epub.py'
+          severity: medium
+        - paths:
+          - tests/test_pyffice/tests/test_obj.py
+          - tests/test_pyffice/tests/tests/test_obj.py
+          rule: 'Duplicate filename: test_obj.py'
+          severity: medium
+        - paths:
+          - tests/test_pyffice/tests/test_toml.py
+          - tests/test_pyffice/tests/tests/test_toml.py
+          rule: 'Duplicate filename: test_toml.py'
+          severity: medium
+        - paths:
+          - tests/test_pyffice/tests/test_ini.py
+          - tests/test_pyffice/tests/tests/test_ini.py
+          rule: 'Duplicate filename: test_ini.py'
+          severity: medium
+        - paths:
+          - tests/test_pyffice/tests/test_audio.py
+          - tests/test_pyffice/tests/tests/test_audio.py
+          rule: 'Duplicate filename: test_audio.py'
+          severity: medium
+        - paths:
+          - tests/test_pyffice/unit/__init__TEST.py
+          - tests/test_pyffice/unit/diagrams/__init__TEST.py
+          - tests/test_pyffice/unit/email/__init__TEST.py
+          - tests/test_pyffice/unit/items/__init__TEST.py
+          - tests/test_pyffice/unit/text/__init__TEST.py
+          - tests/test_pyffice/unit/audio/__init__TEST.py
+          - tests/test_pyffice/unit/workflows/__init__TEST.py
+          - tests/test_pyffice/unit/contacts/__init__TEST.py
+          - tests/test_pyffice/unit/presentation/__init__TEST.py
+          - tests/test_pyffice/unit/cad/__init__TEST.py
+          - tests/test_pyffice/unit/filesystems/__init__TEST.py
+          - tests/test_pyffice/unit/images/__init__TEST.py
+          - tests/test_pyffice/unit/calendars/__init__TEST.py
+          - tests/test_pyffice/unit/web/__init__TEST.py
+          - tests/test_pyffice/unit/analytics/__init__TEST.py
+          - tests/test_pyffice/unit/charts/__init__TEST.py
+          - tests/test_pyffice/unit/video/__init__TEST.py
+          - tests/test_pyffice/unit/cam/__init__TEST.py
+          - tests/test_pyffice/unit/tags/__init__TEST.py
+          - tests/test_pyffice/unit/forms/__init__TEST.py
+          - tests/test_pyffice/unit/spreadsheet/__init__TEST.py
+          - tests/test_pyffice/unit/config/__init__TEST.py
+          - tests/test_pyffice/unit/socials/__init__TEST.py
+          - tests/test_pyffice/unit/reports/__init__TEST.py
+          - tests/test_pyffice/unit/notebooks/__init__TEST.py
+          - tests/test_pyffice/unit/databases/__init__TEST.py
+          rule: 'Duplicate filename: __init__TEST.py'
+          severity: medium
+        - paths:
+          - tests/test_pyffice/unit/items/itemsTEST.py
+          - tests/test_pyffice/unit/cad/itemsTEST.py
+          rule: 'Duplicate filename: itemsTEST.py'
+          severity: medium
+        - paths:
+          - tests/test_pyffice/unit/items/textTEST.py
+          - tests/test_pyffice/unit/text/textTEST.py
+          rule: 'Duplicate filename: textTEST.py'
+          severity: medium
+        - paths:
+          - tests/test_pyffice/unit/items/tasksTEST.py
+          - tests/test_pyffice/unit/calendars/tasksTEST.py
+          rule: 'Duplicate filename: tasksTEST.py'
+          severity: medium
+        - paths:
+          - tests/test_pyffice/unit/text/messagesTEST.py
+          - tests/test_pyffice/unit/socials/messagesTEST.py
+          rule: 'Duplicate filename: messagesTEST.py'
+          severity: medium
+        score: 0
+        status: fail
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  error_handling:
+    details:
+      details:
+        bare_except_count: 1
+        broad_except_count: 0
+        issues:
+        - count: 1
+          rule: bare_except
+          severity: high
+        score: 95
+        status: pass
+      score: 95
+      status: pass
+    score: 95
+    status: pass
+  external_dependencies_declared:
+    details:
+      details:
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  feature_envy:
+    details:
+      details:
+        feature_envy_count: 38
+        issues:
+        - fix: Move method to the class it uses most
+          items:
+          - class: PNGPort
+            envy_of: image
+            file: z-work_/imageports.py
+            foreign_calls: 6
+            method: import_file
+            own_calls: 0
+          - class: JPEGPort
+            envy_of: image
+            file: z-work_/imageports.py
+            foreign_calls: 6
+            method: import_file
+            own_calls: 0
+          - class: GIFPort
+            envy_of: image
+            file: z-work_/imageports.py
+            foreign_calls: 6
+            method: import_file
+            own_calls: 0
+          - class: BMPPort
+            envy_of: image
+            file: z-work_/imageports.py
+            foreign_calls: 6
+            method: import_file
+            own_calls: 0
+          - class: WebPPort
+            envy_of: image
+            file: z-work_/imageports.py
+            foreign_calls: 6
+            method: import_file
+            own_calls: 0
+          rule: 'Feature envy detected: 38 methods'
+          severity: medium
+        score: 0
+        status: fail
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  file_sizes:
+    details:
+      details:
+        issues: []
+        large_file_count: 0
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  git_workflow:
+    details:
+      details:
+        details:
+          branch: gamma
+          branches:
+            local: []
+            remote: []
+          commit_count: 212
+          commits: []
+          contributors: []
+          is_repo: true
+          remotes: {}
+          root: /mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice
+          status: {}
+          tags: []
+        issues:
+        - file: null
+          line: null
+          message: No git remote configured
+          type: low
+        score: 85
+        status: pass
+      score: 85
+      status: pass
+    score: 85
+    status: pass
+  god_class:
+    details:
+      details:
+        god_class_count: 4
+        issues:
+        - fix: Split into smaller, focused classes using SRP
+          items:
+          - class: PyfficeURL
+            file: pyffice/web/url.py
+            line_count: 421
+            method_count: 50
+          - class: Test_PyfficeUnit
+            file: tests/test_pyffice/unit/documentTEST.py
+            line_count: 180
+            method_count: 44
+          - class: Test_PyfficeColor
+            file: tests/test_pyffice/unit/items/colorsTEST.py
+            line_count: 172
+            method_count: 42
+          - class: Test_PyfficeURL
+            file: tests/test_pyffice/unit/web/urlTEST.py
+            line_count: 222
+            method_count: 55
+          rule: 'God classes detected: 4'
+          severity: high
+        score: 0
+        status: fail
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  import_cycle:
+    details:
+      details:
+        bad_import_files: 12
+        issues: []
+        score: 80
+      score: 80
+      status: pass
+    score: 80
+    status: pass
+  import_organization:
+    details:
+      details:
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  internal_project_paths:
+    details:
+      details:
+        issues:
+        - fix: Move internal projects out of integration paths
+          rule: 'Internal project path violation: tests/integration/test_integration.py'
+          severity: medium
+        score: 90
+        status: pass
+        violations: 1
+      score: 90
+      status: pass
+    score: 90
+    status: pass
+  lambda_antipattern:
+    details:
+      details:
+        issues: []
+        lambda_count: 0
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  license_dependencies:
+    details:
+      details:
+        issues: []
+        score: 0.0
+        status: fail
+      score: 0.0
+      status: fail
+    score: 0.0
+    status: fail
+  licenses:
+    details:
+      details:
+        issues:
+        - Missing LICENSE file
+        score: 75
+        status: partial
+      score: 75
+      status: partial
+    score: 75
+    status: partial
+  logging:
+    details:
+      details:
+        detection_criteria:
+          files_checked: All .py files in project
+          pass_condition: Must have kahndor.logma import (standard logging or print()
+            = fail)
+          pattern: from\s+ogma\.logma\s+import|import\s+ogma\.logma
+        issues:
+        - count: 1
+          fix: Consider replacing 1 print() with logma calls
+          rule: print() statements found but kahndor.logma is also used
+          severity: medium
+        print_statements: 1
+        score: 75
+        status: partial
+        uses_logma: true
+      score: 75
+      status: partial
+    score: 75
+    status: partial
+  long_method:
+    details:
+      details:
+        issues: []
+        long_method_count: 0
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  memory:
+    details:
+      details:
+        checks:
+          efficiency_issues: 0
+          large_objects: 0
+          potential_leaks: 0
+          resource_management: 0
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  message_chains:
+    details:
+      details:
+        chain_count: 0
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  mkdocs_mkdocstrings:
+    details:
+      details:
+        issues:
+        - rule: Missing mkdocs.yml
+          severity: low
+        score: 0
+        status: fail
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  module_cli_coverage:
+    details:
+      details:
+        issues:
+        - rule: No CLI found
+          severity: low
+        score: 50
+        status: partial
+      score: 50
+      status: partial
+    score: 50
+    status: partial
+  parallel_inheritance:
+    details:
+      details:
+        issues:
+        - fix: Consider merging hierarchies or using composition
+          items:
+          - class: MP4Port
+            locations:
+            - z-work_/camports.py
+            - z-work_/videoports.py
+          - class: AVIPort
+            locations:
+            - z-work_/camports.py
+            - z-work_/videoports.py
+          - class: MKVPort
+            locations:
+            - z-work_/camports.py
+            - z-work_/videoports.py
+          - class: RTFPort
+            locations:
+            - z-work_/documentports.py
+            - z-work_/textports.py
+          - class: PortRegistry
+            locations:
+            - z-work_/diagramsports.py
+            - z-work_/analyticsports.py
+          - class: PyfficeResponse
+            locations:
+            - z-work_/surveys.py
+            - pyffice/web/prompts.py
+          - class: PyfficeSurvey
+            locations:
+            - z-work_/surveys.py
+            - pyffice/forms/forms.py
+          - class: PyfficeSurveyManager
+            locations:
+            - z-work_/surveys.py
+            - z-work_/surveys.py
+          - class: CSVPort
+            locations:
+            - z-work_/matrixports.py
+            - z-work_/analyticsports.py
+            - z-work_/spreadsheetports.py
+          - class: PNGPort
+            locations:
+            - z-work_/imageports.py
+            - z-work_/imagesports.py
+          - class: JPEGPort
+            locations:
+            - z-work_/imageports.py
+            - z-work_/imagesports.py
+          - class: GIFPort
+            locations:
+            - z-work_/imageports.py
+            - z-work_/imagesports.py
+          - class: BMPPort
+            locations:
+            - z-work_/imageports.py
+            - z-work_/imagesports.py
+          - class: TIFFPort
+            locations:
+            - z-work_/imageports.py
+            - z-work_/imagesports.py
+          - class: SVGBPort
+            locations:
+            - z-work_/imageports.py
+            - z-work_/imagesports.py
+          - class: PyfficeProject
+            locations:
+            - z-work_/tasks.py
+            - pyffice/projects/projects.py
+          - class: PyfficeTOML
+            locations:
+            - z-work_/toml.py
+            - pyffice/config/config.py
+          - class: PyfficeYAML
+            locations:
+            - pyffice/data/yaml.py
+            - pyffice/documents/data/yaml.py
+          - class: PyfficeJSON
+            locations:
+            - pyffice/data/json.py
+            - pyffice/documents/data/json.py
+          - class: PyfficeSketch
+            locations:
+            - pyffice/diagrams/diagrams.py
+            - pyffice/images/sketches.py
+          - class: PyfficeLayer
+            locations:
+            - pyffice/diagrams/diagrams.py
+            - pyffice/items/layers.py
+          - class: PyfficeShape
+            locations:
+            - pyffice/items/shapes.py
+            - pyffice/cad/items.py
+          - class: PyfficeTable
+            locations:
+            - pyffice/items/items.py
+            - pyffice/databases/table.py
+          - class: GenericClass
+            locations:
+            - pyffice/workflows/formulas.py
+            - pyffice/matrix/spreadsheet.py
+          - class: PyfficeCAM
+            locations:
+            - pyffice/cad/cam.py
+            - pyffice/cam/cam.py
+          - class: PyfficeCAMManager
+            locations:
+            - pyffice/cad/cam.py
+            - pyffice/cam/cam.py
+          - class: PyfficeGCode
+            locations:
+            - pyffice/cad/gcode.py
+            - pyffice/cam/gcode.py
+          - class: PyfficeBOM
+            locations:
+            - pyffice/cad/bom.py
+            - pyffice/cam/bom.py
+          - class: PyfficeSoftwareBOM
+            locations:
+            - pyffice/cad/bom.py
+            - pyffice/cam/bom.py
+          - class: PyfficeMatrix
+            locations:
+            - pyffice/matrix/matrix.py
+            - pyffice/matrix/spreadsheet.py
+            - pyffice/spreadsheet/spreadsheet.py
+          - class: PyfficeSpreadSheet
+            locations:
+            - pyffice/matrix/spreadsheet.py
+            - pyffice/spreadsheet/spreadsheet.py
+          - class: TestDocument
+            locations:
+            - tests/unit/test_document.py
+            - tests/unit/__init__.py
+          - class: Test_PyfficeTable
+            locations:
+            - tests/test_pyffice/unit/items/itemsTEST.py
+            - tests/test_pyffice/unit/databases/tableTEST.py
+          - class: Test_Functions
+            locations:
+            - tests/test_pyffice/unit/items/colorsTEST.py
+            - tests/test_pyffice/unit/text/textTEST.py
+            - tests/test_pyffice/unit/images/utilitiesTEST.py
+            - tests/test_pyffice/unit/spreadsheet/spreadsheetTEST.py
+            - tests/test_pyffice/unit/config/msportsTEST.py
+          - class: Test_PyfficeShape
+            locations:
+            - tests/test_pyffice/unit/items/shapesTEST.py
+            - tests/test_pyffice/unit/cad/itemsTEST.py
+          - class: Test_PyfficeResponse
+            locations:
+            - tests/test_pyffice/unit/web/promptsTEST.py
+            - tests/test_pyffice/unit/forms/surveysTEST.py
+          - class: Test_PyfficeSurvey
+            locations:
+            - tests/test_pyffice/unit/forms/formsTEST.py
+            - tests/test_pyffice/unit/forms/surveysTEST.py
+          rule: 'Parallel inheritance detected: 37 classes'
+          severity: medium
+        parallel_inheritance_count: 37
+        score: 0
+        status: fail
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  pii_secrets:
+    details:
+      details:
+        details:
+          files_with_secrets: 0
+          findings: []
+          score: 100
+          secrets_found: 0
+          status: pass
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  private_leak:
+    details:
+      details:
+        issues: []
+        private_leak_count: 0
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  readme_quality:
+    details:
+      details:
+        issues:
+        - rule: 'Missing section: Project overview'
+          severity: medium
+        score: 80
+        status: pass
+      score: 80
+      status: pass
+    score: 80
+    status: pass
+  security_bandit:
+    details:
+      details:
+        issues:
+        - fix: 'Install bandit: pip install bandit'
+          rule: Bandit not installed
+          severity: high
+        score: 0
+        status: fail
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  security_internal:
+    details:
+      details:
+        findings:
+        - category: getattr_dynamic
+          content: setattr(self, change["label"], change["new_value"])
+          file: pyffice/document.py
+          line: 199
+          pattern: setattr\(
+          severity: 60
+        - category: getattr_dynamic
+          content: setattr(self, last_change["label"], last_change["value"])
+          file: pyffice/document.py
+          line: 439
+          pattern: setattr\(
+          severity: 60
+        - category: base64_decode
+          content: return base64.b64decode(doc['data'])
+          file: pyffice/container/binary.py
+          line: 126
+          pattern: base64\.b64decode\(
+          severity: 70
+        - category: getattr_dynamic
+          content: setattr(self, attr, None)
+          file: pyffice/web/url.py
+          line: 376
+          pattern: setattr\(
+          severity: 60
+        - category: getattr_dynamic
+          content: setattr(self, attr_name, new_value)
+          file: pyffice/web/url.py
+          line: 459
+          pattern: setattr\(
+          severity: 60
+        - category: unicode_escape
+          content: 'if header[:4] == b"\xd0\xcf\x11\xe0":'
+          file: pyffice/projects/projects.py
+          line: 136
+          pattern: \\x[0-9a-fA-F]{2}
+          severity: 40
+        - category: unicode_escape
+          content: 'if header[:4] == b"\xd0\xcf\x11\xe0":'
+          file: pyffice/projects/projects.py
+          line: 136
+          pattern: \\x[0-9a-fA-F]{2}
+          severity: 40
+        - category: unicode_escape
+          content: 'if header[:4] == b"\xd0\xcf\x11\xe0":'
+          file: pyffice/projects/projects.py
+          line: 136
+          pattern: \\x[0-9a-fA-F]{2}
+          severity: 40
+        - category: unicode_escape
+          content: 'if header[:4] == b"\xd0\xcf\x11\xe0":'
+          file: pyffice/projects/projects.py
+          line: 136
+          pattern: \\x[0-9a-fA-F]{2}
+          severity: 40
+        - category: unicode_escape
+          content: ole_header = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
+          file: pyffice/projects/projects.py
+          line: 192
+          pattern: \\x[0-9a-fA-F]{2}
+          severity: 40
+        - category: unicode_escape
+          content: ole_header = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
+          file: pyffice/projects/projects.py
+          line: 192
+          pattern: \\x[0-9a-fA-F]{2}
+          severity: 40
+        - category: unicode_escape
+          content: ole_header = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
+          file: pyffice/projects/projects.py
+          line: 192
+          pattern: \\x[0-9a-fA-F]{2}
+          severity: 40
+        - category: unicode_escape
+          content: ole_header = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
+          file: pyffice/projects/projects.py
+          line: 192
+          pattern: \\x[0-9a-fA-F]{2}
+          severity: 40
+        - category: unicode_escape
+          content: ole_header = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
+          file: pyffice/projects/projects.py
+          line: 192
+          pattern: \\x[0-9a-fA-F]{2}
+          severity: 40
+        - category: unicode_escape
+          content: ole_header = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
+          file: pyffice/projects/projects.py
+          line: 192
+          pattern: \\x[0-9a-fA-F]{2}
+          severity: 40
+        - category: unicode_escape
+          content: ole_header = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
+          file: pyffice/projects/projects.py
+          line: 192
+          pattern: \\x[0-9a-fA-F]{2}
+          severity: 40
+        - category: unicode_escape
+          content: ole_header = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
+          file: pyffice/projects/projects.py
+          line: 192
+          pattern: \\x[0-9a-fA-F]{2}
+          severity: 40
+        - category: input_usage
+          content: file_ = ffmpeg.input(self.path, start, end)
+          file: pyffice/video/video.py
+          line: 58
+          pattern: \binput\(
+          severity: 20
+        - category: input_usage
+          content: file_ = ffmpeg.input(self.path, start, end)
+          file: pyffice/video/video.py
+          line: 62
+          pattern: \binput\(
+          severity: 20
+        - category: url_open
+          content: 'with urllib.request.urlopen(self.source) as response:'
+          file: pyffice/media/media.py
+          line: 49
+          pattern: urllib\.request\.urlopen\(
+          severity: 50
+        - category: open_url
+          content: 'with urllib.request.urlopen(self.source) as response:'
+          file: pyffice/media/media.py
+          line: 49
+          pattern: urlopen\(
+          severity: 50
+        score: 0
+        status: fail
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  security_ruff:
+    details:
+      details:
+        issues:
+        - fix: 'Install ruff: pip install ruff'
+          rule: Ruff not installed
+          severity: high
+        score: 0
+        status: fail
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  speed:
+    details:
+      details:
+        checks:
+          builtin_optimizations: 0
+          efficiency_issues: 0
+          inefficient_loops: 0
+          string_concatenation: 0
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  structure:
+    details:
+      details:
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  switch_abuse:
+    details:
+      details:
+        issues:
+        - fix: Use polymorphism or a mapping instead of complex if-else
+          items:
+          - count: 11
+            file: pyffice/items/colors.py
+            function: set_color
+            var: style
+          - count: 5
+            file: pyffice/items/colors.py
+            function: hsl_to_rgb
+            var: t
+          - count: 5
+            file: pyffice/items/colors.py
+            function: hue_to_rgb
+            var: t
+          - count: 7
+            file: pyffice/web/prompts.py
+            function: set_response_scope
+            var: scope
+          - count: 11
+            file: pyffice/ports/msports.py
+            function: set_chart_type
+            var: chart_type
+          rule: 'Switch abuse detected: 8 instances'
+          severity: medium
+        score: 20
+        status: partial
+        switch_abuse_count: 8
+      score: 20
+      status: partial
+    score: 20
+    status: partial
+  testing:
+    details:
+      details:
+        coverage: 83.69565217391305
+        files_with_tests: 77
+        score: 100
+        status: pass
+        test_dir: tests
+        test_file_count: 148
+        total_source_files: 92
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  type_annotations:
+    details:
+      details:
+        issues:
+        - rule: low_coverage
+          severity: medium
+          total: 4003
+          typed: 716
+        score: 17
+        status: partial
+        total_functions: 4003
+        typed_functions: 716
+        untyped_functions: 3287
+      score: 17
+      status: partial
+    score: 17
+    status: partial
+  wrapper_antipattern:
+    details:
+      details:
+        issues: []
+        score: 100
+        status: pass
+        wrapper_count: 18
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+overall_score: 65.06
+project: pyffice
+summary:
+  failing: 14
+  partial: 5
+  passing: 23
+  total_auditors: 9
+  total_dimensions: 42
+versions:
+  project: '1573760'
+  project_status: dirty
+  project_uncommitted_changes: 3
+  sasquatch: a0fd9d5

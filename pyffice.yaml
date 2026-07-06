@@ -1,0 +1,24 @@
+# Pyffice Configuration
+
+app:
+  name: pyffice
+  version: "0.1.0"
+  debug: false
+
+logging:
+  level: INFO
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+paths:
+  data_dir: ~/.pyffice/data
+  cache_dir: ~/.pyffice/cache
+  temp_dir: ~/.pyffice/tmp
+
+features:
+  enable_caching: true
+  enable_logging: true
+  max_workers: 4
+
+ports:
+  default_timeout: 30
+  retry_attempts: 3

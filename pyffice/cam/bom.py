@@ -1,95 +1,186 @@
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
+"""Pyffice BOM Module
+
+Provides Bill of Materials generation and management.
 """
----
-<(META)>:
-	docid:
-	name:
-	description: >
-	    A BOM is a workflow because in its ultimate form the needs of that BOM are placed on a timeline of events.
-	version: 0.0.0.0.0.0
-	authority: filesystem
-	security: seclvl2
-	<(WT)>: -32
-"""
-# -*- coding: utf-8 -*
-# ======================================Standard Library Modules======================================================||
-from os.path import abspath, dirname, join
-import datetime as dt
 
-# ======================================3rd Party Library Modules=====================================================||
-
-# ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
-from pyffice.document import PyfficeDocument, PyfficeDocumentManager
-
-# ====================================================================================================================||
-here = join(dirname(__file__), "")  # ||
-log = True
-logma = Logma(__name__)
-
-# ====================================================================================================================||
-pxcfg = join(here, "_data_", "bom.yaml")
+from dataclasses import dataclass, field
+from typing import Any, Optional
 
 
-class PyfficeBOM(PyfficeDocumentManager):
-    """"""
+@dataclass
+class PyfficeBOM:
+    """Bill of Materials handler.
 
-    VERSION = "0.0.1.0.1.0"
+    Manages component lists for manufacturing and assembly.
 
-    def __init__(self, cfg=None):
-        """"""
-        self.config = condor.Instruct(pxcfg).override("PyfficeBOM")
-        super().__init__(self)
-        self.config.override(cfg)
+    Attributes:
+        project_name: Name of the associated project.
+        items: List of BOM items.
+        revision: BOM revision number.
+    """
 
-    def add_part(self, part):
-        """"""
-        super().add_document(part)
+    project_name: str = "Untitled"
+    items: list[dict[str, Any]] = field(default_factory=list)
+    revision: str = "A"
 
-    def load_document(self, document):
-        """"""
-        super().load_document(document)
+    def add_item(
+        self,
+        part_number: str,
+        description: str,
+        quantity: int = 1,
+        **kwargs: Any
+    ) -> "PyfficeBOM":
+        """Add item to BOM.
+
+        Args:
+            part_number: Part identifier.
+            description: Part description.
+            quantity: Number of units.
+            **kwargs: Additional item properties.
+
+        Returns:
+            Self for chaining.
+        """
+        item = {
+            "part_number": part_number,
+            "description": description,
+            "quantity": quantity,
+            **kwargs
+        }
+        self.items.append(item)
         return self
 
-    def open_file(self, document):
-        """"""
+    def remove_item(self, part_number: str) -> bool:
+        """Remove item by part number.
 
-    def to_dict(self):
-        """"""
-        doc = super().to_dict()
-        return doc
+        Args:
+            part_number: Part identifier.
+
+        Returns:
+            True if removed, False if not found.
+        """
+        for i, item in enumerate(self.items):
+            if item.get("part_number") == part_number:
+                self.items.pop(i)
+                return True
+        return False
+
+    def get_item(self, part_number: str) -> Optional[dict[str, Any]]:
+        """Get item by part number.
+
+        Args:
+            part_number: Part identifier.
+
+        Returns:
+            Item dictionary or None.
+        """
+        for item in self.items:
+            if item.get("part_number") == part_number:
+                return item
+        return None
+
+    def total_quantity(self) -> int:
+        """Get total quantity of all items.
+
+        Returns:
+            Sum of all item quantities.
+        """
+        return sum(item.get("quantity", 1) for item in self.items)
+
+    def to_dict(self) -> dict[str, Any]:
+        """Export BOM as dictionary.
+
+        Returns:
+            BOM data as dictionary.
+        """
+        return {
+            "project_name": self.project_name,
+            "revision": self.revision,
+            "items": self.items,
+            "total_quantity": self.total_quantity()
+        }
 
 
-class PyfficeSoftwareBOM(PyfficeBOM):
-    """"""
+@dataclass
+class PyfficeSoftwareBOM:
+    """Software Bill of Materials handler.
 
-    VERSION = "0.0.1.0.1.0"
+    Tracks software dependencies and components.
 
-    def __init__(self, cfg=None):
-        """"""
-        self.config = condor.Instruct(pxcfg).override("PyfficeSoftwareBOM")
-        super().__init__(self)
-        self.config.override(cfg)
+    Attributes:
+        project_name: Name of the software project.
+        packages: List of software packages.
+        version: SBOM version format.
+    """
 
-    def add_part(self, part):
-        """"""
-        super().add_part(part)
+    project_name: str = "Untitled"
+    packages: list[dict[str, Any]] = field(default_factory=list)
+    version: str = "SPDX"
 
-    def load_document(self, document):
-        """"""
-        super().load_document(document)
+    def add_package(
+        self,
+        name: str,
+        version: str,
+        license_: Optional[str] = None,
+        **kwargs: Any
+    ) -> "PyfficeSoftwareBOM":
+        """Add package to SBOM.
+
+        Args:
+            name: Package name.
+            version: Package version.
+            license_: Package license.
+            **kwargs: Additional package properties.
+
+        Returns:
+            Self for chaining.
+        """
+        pkg = {
+            "name": name,
+            "version": version,
+            "license": license_,
+            **kwargs
+        }
+        self.packages.append(pkg)
         return self
 
-    def open_file(self, document):
-        """"""
+    def remove_package(self, name: str) -> bool:
+        """Remove package by name.
 
-    def to_dict(self):
-        """"""
-        doc = super().to_dict()
-        return doc
+        Args:
+            name: Package name.
 
+        Returns:
+            True if removed, False if not found.
+        """
+        for i, pkg in enumerate(self.packages):
+            if pkg.get("name") == name:
+                self.packages.pop(i)
+                return True
+        return False
 
-# ====================================================================================================================||
+    def get_package(self, name: str) -> Optional[dict[str, Any]]:
+        """Get package by name.
 
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
+        Args:
+            name: Package name.
+
+        Returns:
+            Package dictionary or None.
+        """
+        for pkg in self.packages:
+            if pkg.get("name") == name:
+                return pkg
+        return None
+
+    def to_dict(self) -> dict[str, Any]:
+        """Export SBOM as dictionary.
+
+        Returns:
+            SBOM data as dictionary.
+        """
+        return {
+            "project_name": self.project_name,
+            "version": self.version,
+            "packages": self.packages
+        }

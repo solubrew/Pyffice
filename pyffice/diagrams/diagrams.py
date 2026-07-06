@@ -10,6 +10,7 @@
     security: seclvl2
     <(WT)>: -32
 """
+
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
@@ -20,8 +21,8 @@ from click import style
 # ======================================3rd Party Library Modules=====================================================||
 
 # ======================================Solutions Brewer Library Modules==============================================||
-from condor import condor
-from ogma.logma import Logma
+from kahndor import kahndor
+from kahndor.logma import Logma
 from subtrix.utilities import uuid
 from pyffice.items.cells import PyfficeCell
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager, PyfficeUnit
@@ -45,7 +46,7 @@ class PyfficeEdge(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeEdge")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeEdge")).override(cfg)
         self.active = None
         self.endpoints = None
         self.envelope_size = None
@@ -69,7 +70,12 @@ class PyfficeEdge(PyfficeUnit):
         uid = uuid()
         cfg = {"color": color}
         color = PyfficeColor(cfg)
-        endpoint = {"position": position, "connection": connection, "style": style, "color": color}
+        endpoint = {
+            "position": position,
+            "connection": connection,
+            "style": style,
+            "color": color,
+        }
         self.add_change("endpoints", self.endpoints, endpoint, "add")
         self.endpoints[uid] = endpoint
         return self
@@ -201,6 +207,137 @@ class PyfficeEdge(PyfficeUnit):
         return doc
 
 
+class PyfficeSketch(PyfficeDocumentManager):
+    """"""
+
+    def __init__(self, cfg=None):
+        """"""
+        super().__init__(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDiagram").override(cfg))
+
+    def add_connection(self, connection):
+        """"""
+        cfg = {"connection": connection}
+        connection = PyfficeSketchConnection(cfg)
+        self.add_change("connections", self.connections, connection, "add")
+        self.connections[connection.did] = connection
+        return self
+
+    def add_edge(
+        self,
+        connections=None,
+        end=None,
+        start=None,
+        type=None,
+        version=None,
+        visible=None,
+        active=None,
+    ):
+        """"""
+        cfg = {}
+        edge = PyfficeEdge(cfg)
+        self.add_layer(edge.did)
+        self.edges[edge.did] = edge
+        self.add_change("edges", self.edges, edge, "add")
+        for endpoint in edge.endpoints:
+            self.add_connection(connections[endpoint])
+        return self
+
+    def add_layer(self, layer):
+        """"""
+        cfg = {"layer": layer}
+        layer = PyfficeLayer(cfg)
+        self.add_change("layers", self.layers, layer, "add")
+        self.layers[layer.name] = layer
+        return self
+
+    def add_node(self):
+        """"""
+        cfg = {}
+        node = PyfficeNode(cfg)
+        self.add_change("nodes", self.nodes, node, "add")
+        self.nodes[node.did] = node
+        return self
+
+    def del_connection(self, connection):
+        """"""
+        self.add_change("connections", self.connections, connection, "del")
+        del self.connections[connection.did]
+        return self
+
+    def del_edge(self, edge):
+        """"""
+        self.add_change("edges", self.edges, edge, "del")
+        del self.edges[edge.did]
+        return self
+
+    def del_layer(self, layer):
+        """"""
+        self.add_change("layers", self.layers, layer, "del")
+        del self.layers[layer.name]
+        return self
+
+    def del_node(self, node):
+        """"""
+        self.add_change("nodes", self.nodes, node, "del")
+        del self.nodes[node.did]
+        return self
+
+    def set_lock(self, lock):
+        """"""
+        if lock != self.lock:
+            self.add_change("lock", self.lock, lock)
+        return self
+
+    def set_edge_position(self, edge, position, maintain_connection=True):
+        """"""
+        self.edges[edge].set_position(position)
+        if maintain_connection:
+            for connection in self.connections.values():
+                connection.set_position(position)
+        return self
+
+    def set_edges(self, edges):
+        """"""
+        if edges != self.edges:
+            self.add_change("edges", self.edges, edges, "set")
+        self.edges = edges
+        return self
+
+    def set_endpoint_position(self, endpoint, position, maintain_connection=True):
+        """"""
+        self.endpoints[endpoint].set_position(position)
+        return self
+
+    def set_endpoints(self, endpoints):
+        """"""
+        if endpoints != self.endpoints:
+            self.add_change("endpoints", self.endpoints, endpoints)
+            self.endpoints = endpoints
+        return self
+
+    def set_node_position(self, node, position, maintain_connections=True):
+        """"""
+        self.nodes[node].set_position(position)
+        if maintain_connections:
+            for connection in self.connections.values():
+                connection.set_position(position)
+        return self
+
+    def set_nodes(self, nodes):
+        """"""
+        if nodes != self.nodes:
+            self.add_change("nodes", self.nodes, nodes, "set")
+            self.nodes = nodes
+        return self
+
+    def to_dict(self):
+        """"""
+
+    def to_md(self):
+        """"""
+
+
 class PyfficeLayer(PyfficeUnit):
     """"""
 
@@ -209,7 +346,7 @@ class PyfficeLayer(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeLayer")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeLayer")).override(cfg)
         self.objects = None
 
     def load_unit(self, unit):
@@ -244,7 +381,7 @@ class PyfficeNode(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeNode")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeNode")).override(cfg)
         self.cells = None
         self.lock = None
         self.position = None
@@ -307,162 +444,15 @@ class PyfficeNode(PyfficeUnit):
     def to_dict(self):
         """"""
         doc = super().to_dict()
-        doc["unit"] = {"cells": [x.to_dict() for x in self.cells], "lock": self.lock, "position": self.position}
-        return doc
-
-
-class PyfficeSketch(PyfficeDocumentManager):
-    """A Sketch overlay custom components ontop of a standard image"""
-
-    VERSION = "0.0.1.0.1.0"
-
-    def __init__(self, cfg=None):
-        """"""
-        super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeSketch").override(cfg))
-        self.canvas = None
-        self.connections = None
-        self.edges = None
-        self.endpoints = None
-        self.nodes = None
-        self.layers = None
-        self.lock = None
-
-    def add_connection(self, connection):
-        """"""
-        cfg = {"connection": connection}
-        connection = PyfficeSketchConnection(cfg)
-        self.add_change("connections", self.connections, connection, "add")
-        self.connections[connection.did] = connection
-        return self
-
-    def add_edge(self, connections=None, end=None, start=None, type=None, version=None, visible=None, active=None):
-        """"""
-        cfg = {}
-        edge = PyfficeEdge(cfg)
-        self.add_layer(edge.did)
-        self.edges[edge.did] = edge
-        self.add_change("edges", self.edges, edge, "add")
-        for endpoint in edge.endpoints:
-            self.add_connection(connections[endpoint])
-        return self
-
-    def add_layer(self, layer):
-        """"""
-        cfg = {"layer": layer}
-        layer = PyfficeLayer(cfg)
-        self.add_change("layers", self.layers, layer, "add")
-        self.layers[layer.name] = layer
-        return self
-
-    def add_node(self):
-        """"""
-        cfg = {}
-        node = PyfficeNode(cfg)
-        self.add_change("nodes", self.nodes, node, "add")
-        self.nodes[node.did] = node
-        return self
-
-    def del_connection(self, connection):
-        """"""
-        self.add_change("connections", self.connections, connection, "del")
-        del self.connections[connection.did]
-        return self
-
-    def del_edge(self, edge):
-        """"""
-        self.add_change("edges", self.edges, edge, "del")
-        del self.edges[edge.did]
-        return self
-
-    def del_layer(self, layer):
-        """"""
-        self.add_change("layers", self.layers, layer, "del")
-        del self.layers[layer.name]
-        return self
-
-    def del_node(self, node):
-        """"""
-        self.add_change("nodes", self.nodes, node, "del")
-        del self.nodes[node.did]
-        return self
-
-    def load_document(self, document=None):
-        """"""
-        logma.info(f"Load Document {document}")
-        if document is None:
-            document = self.config.dikt.get("document", {})
-            if document is None:
-                document = {}
-        super().load_document(document)
-        self.set_lock(document.get("lock", False))
-        self.set_edges(document.get("edges", {}))
-        self.set_endpoints(document.get("endpoints", {}))
-        self.set_nodes(document.get("nodes", {}))
-        return self
-
-    def set_lock(self, lock):
-        """"""
-        if lock != self.lock:
-            self.add_change("lock", self.lock, lock)
-        return self
-
-    def set_edge_position(self, edge, position, maintain_connection=True):
-        """"""
-        self.edges[edge].set_position(position)
-        if maintain_connection:
-            for connection in self.connections.values():
-                connection.set_position(position)
-        return self
-
-    def set_edges(self, edges):
-        """"""
-        if edges != self.edges:
-            self.add_change("edges", self.edges, edges, "set")
-        self.edges = edges
-        return self
-
-    def set_endpoint_position(self, endpoint, position, maintain_connection=True):
-        """"""
-        self.endpoints[endpoint].set_position(position)
-        return self
-
-    def set_endpoints(self, endpoints):
-        """"""
-        if endpoints != self.endpoints:
-            self.add_change("endpoints", self.endpoints, endpoints)
-            self.endpoints = endpoints
-        return self
-
-    def set_node_position(self, node, position, maintain_connections=True):
-        """"""
-        self.nodes[node].set_position(position)
-        if maintain_connections:
-            for connection in self.connections.values():
-                connection.set_position(position)
-        return self
-
-    def set_nodes(self, nodes):
-        """"""
-        if nodes != self.nodes:
-            self.add_change("nodes", self.nodes, nodes, "set")
-            self.nodes = nodes
-        return self
-
-    def to_dict(self):
-        """"""
-        doc = super().to_dict()
-        doc["document"] = {
-            "canvas": self.canvas,
-            "edges": {x.did: x.to_dict() for x in self.edges},
-            "layers": self.layers,
-            "nodes": {x.did: x.to_dict() for x in self.nodes},
-            "connections": {x.did: x.to_dict() for x in self.connections},
+        doc["unit"] = {
+            "cells": [x.to_dict() for x in self.cells],
+            "lock": self.lock,
+            "position": self.position,
         }
         return doc
 
 
-class PyfficeSketchConnection(PyfficeUnit):
+class PyfficeDiagramConnection(PyfficeUnit):
     """"""
 
     VERSION = "0.0.1.0.1.0"
@@ -470,7 +460,7 @@ class PyfficeSketchConnection(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(condor.Instruct(pxcfg).select("PyfficeSketchConnection")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeSketchConnection")).override(cfg)
         self.endpoints = None
         self.lock = None
         self.position = None
@@ -507,7 +497,11 @@ class PyfficeSketchConnection(PyfficeUnit):
     def to_dict(self):
         """"""
         doc = super().to_dict()
-        doc["unit"] = {"endpoints": self.endpoints, "position": self.position, "lock": self.lock}
+        doc["unit"] = {
+            "endpoints": self.endpoints,
+            "position": self.position,
+            "lock": self.lock,
+        }
         return doc
 
 

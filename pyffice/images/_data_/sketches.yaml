@@ -1,0 +1,29 @@
+---
+PyfficeSketch:
+    template:
+        did:
+        name:
+        description:
+        path:
+        location:
+        syntax:
+        encoding:
+        tags:
+        context:
+        hash:
+        version: 0.0.1.0.1.1
+        metadata:
+          author:
+          editors:
+          document_type:
+          creon_dttm:
+          modon_dttm:
+        data:
+          L0:
+              path:
+              OBJ0:
+                  path:
+                  content:
+                  palette:
+                  size:
+                  location:
