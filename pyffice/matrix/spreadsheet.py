@@ -20,10 +20,13 @@ try:
     from pycel.excelformula import ExcelFormula
     from pycel import ExcelCompiler
 except ImportError:
+
     def formula_builder():
         class GenericClass(object):
             pass
+
         return GenericClass
+
     ExcelFormula = formula_builder()
 from pandas import read_csv, read_excel, DataFrame
 
@@ -87,6 +90,7 @@ class PyfficeSpreadSheet(PyfficeDocument):
         if syntax == "arabic":
             column = calcArabicNumerals(column)
         elif syntax == "roman":
+            logma.info(f"Convert Column {column}")
             column = calcExtendedRomanNumerals(column)
         else:
             raise Exception(f"Unknown Syntax {syntax}")

@@ -415,7 +415,12 @@ class PyfficeUnit(object):
             "mod_dttm": self.set_modon().modon,
         }
         if self.tags is not None:
-            doc["meta_data"]["tags"] = [x.to_dict() for x in self.tags]
+            if isinstance(self.tags, list):
+                doc["meta_data"]["tags"] = [x.to_dict() for x in self.tags]
+            elif isinstance(self.tags, (str, int, float)):
+                doc["meta_data"]["tags"] = [self.tags]
+            else:
+                raise Exception(f"Tags not properly formated {self.tags}")
         doc["unit"] = {"content": self.content}
         return doc
 
