@@ -282,8 +282,16 @@ class PyfficeText(PyfficeUnit):
     def to_dict(self):
         """"""
         doc = super().to_dict()
+        if self.color is None:
+            self.color = PyfficeColor("black")
+        if self.font is None:
+            self.font = {}
         self.font["color"] = self.color.to_dict()
+        if self.color_background is None:
+            self.color_background = PyfficeColor("white")
         self.font["background"] = self.color_background.to_dict()
+        if self.color_foreground is None:
+            self.color_foreground = PyfficeColor("white")
         self.font["highlight"] = self.color_foreground.to_dict()
         doc["unit"] = {
             "data_format": self.data_format,
