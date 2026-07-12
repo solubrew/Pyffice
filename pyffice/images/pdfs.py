@@ -184,14 +184,11 @@ class PyfficePDF(PyfficeDocument):
         """"""
         logma.info(f"Load Document {document}")
         if document is None:
-            document = self.config.dikt.get("document", {})
-        if document is None:
-            document = {}
+            document = self.config.get("document", {}) or {}
         super().load_document(document)
-        content = document.get("data", {}).get("content", {})
-        if content is None:
-            content = {}
-            self.set_content(content)
+        data = document.get("data", {}) or {}
+        content = data.get("content", {}) or {}
+        self.set_content(content)
         self.set_file_path(content.get("file_path", None))
         return self
 

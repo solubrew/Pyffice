@@ -397,7 +397,7 @@ class PyfficeURL(PyfficeUnit):
             "redirect_affiliates": unit.get("redirect_affiliates", True),
             "scheme": unit.get("scheme", ""),
             "sub_domain": unit.get("sub_domain", ""),
-            "twofdns": unit.get("twofdns", False),
+            #"twofdns": unit.get("twofdns", False),
             "username": unit.get("username", ""),
         }
 

@@ -42,7 +42,7 @@ class PyfficeNotebook(PyfficeDocument):
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).override("PyfficeNotebook")).override(cfg)
-        self.cells = None
+        self.cells = []
         self.notebook = None
 
     def add_cell(self, cell):
@@ -102,6 +102,9 @@ class PyfficeNotebook(PyfficeDocument):
             self.add_change("notebook", self.notebook, notebook)
             self.notebook = notebook
         return self
+
+    def set_pinned(self, pinned):
+        """"""
 
     def to_dict(self):
         """"""
