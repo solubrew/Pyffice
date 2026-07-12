@@ -110,6 +110,11 @@ class PyfficeMatrix(PyfficeDocumentManager):
             self.add_worksheet(sheet["name"], sheet)
         return self
 
+    def determine_file_type(self, path):
+        """"""
+        # TODO build out determination/compability method
+        return "excel"
+
     def file_import(self, file_=None, if_data_only=False, read_only=False, keep_vba=False):
         """"""
         super().file_import()
@@ -160,6 +165,17 @@ class PyfficeMatrix(PyfficeDocumentManager):
         importer = PyfficePortGoogleSheets(cfg)
         data = importer.open_file(path, if_data_only, read_only, keep_vba)
         return data
+
+    def file_open(self, path):
+        """"""
+        file_type = self.determine_file_type(path)
+        if file_type == "csv":
+            self.file_import_csv(path)
+        elif file_type == "excel":
+            self.file_import_excel(path)
+        elif file_type == "gsheet":
+            self.file_import_gsheet(path)
+        # super().file_open(path)
 
     def load_document(self, document=None):
         """"""
