@@ -34,6 +34,23 @@ logma.off()
 pxcfg = join(here, "_data_", "contacts.yaml")
 
 
+class PyfficeAddress(PyfficeDocument):
+    """"""
+
+    VERSION = "0.0.1.0.1.0"
+
+    def __init__(self, cfg=None):
+        """"""
+        super().__init__(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeAddress").override(cfg))
+        self.street_name = None
+        self.street_number = None
+        self.city = None
+        self.state = None
+        self.zip = None
+        self.apt = None
+
+
 class PyfficeContact(PyfficeDocument):
     """"""
 
@@ -42,8 +59,9 @@ class PyfficeContact(PyfficeDocument):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(pxcfg).select("PyfficeContact").override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeContact").override(cfg))
         self.address = None
+        self.addresses = None
         self.emails = None
         self.full_name = None
         self.first_name = None
@@ -55,10 +73,10 @@ class PyfficeContact(PyfficeDocument):
         self.user_name = None
         self.phones = None
         self.preferred_name = None
-        self.connections = None
+        self.connections = []
         self.connection = None
-        self.channels = None
-        self.groups = None
+        self.channels = []
+        self.groups = []
         self.names = None
         self.nicknames = None
         self.preferred_channel = None
@@ -66,7 +84,7 @@ class PyfficeContact(PyfficeDocument):
 
     def add_connection(self, connection):
         """A connection is another contact that this contact is connected to."""
-        self.connections[connection] = {}
+        self.connections.append(connection)
         return self
 
     def add_email_address(self, email):
@@ -110,26 +128,32 @@ class PyfficeContact(PyfficeDocument):
 
     def del_channel(self, dex):
         """"""
+        # TODO implement method
         return self
 
     def del_connection(self, dex):
         """"""
+        # TODO implement method
         return self
 
     def del_email_address(self):
         """"""
+        # TODO implement method
         return self
 
     def del_add_phone_address(self, phone):
         """"""
+        # TODO implement method
         return self
 
     def del_postal_address(self, address):
         """"""
+        # TODO implement method
         return self
 
     def del_social_contact(self, contact):
         """"""
+        # TODO implement method
         return self
 
     def connect_contact(self):
@@ -139,10 +163,12 @@ class PyfficeContact(PyfficeDocument):
 
     def get_postal_address(self):
         """"""
+        # TODO implement method
         return self
 
     def get_email_address(self):
         """"""
+        # TODO implement method
         return self
 
     def load_document(self, document=None):
@@ -229,6 +255,7 @@ class PyfficeContact(PyfficeDocument):
 
     def set_name_salutation(self, name):
         """"""
+        # TODO implement method
         return self
 
     def set_name_suffix(self, name):
@@ -267,7 +294,9 @@ class PyfficeContact(PyfficeDocument):
 
     def to_dict(self):
         """"""
-        doc = super().to_dict()
+        doc = super().to_dict() or {}
+        if "data" not in doc.keys():
+            doc["data"] = {}
         doc["data"]["name_details"] = {
             "full": self.full_name,
             "first": self.first_name,
