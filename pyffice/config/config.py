@@ -37,10 +37,11 @@ class PyfficeConfig(PyfficeDocument):
 
     VERSION = "0.0.1.0.1.0"
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None, parent=None):
         """"""
+        self.parent = parent
         super().__init__(cfg)
-        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeConfig")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeConfig").override(cfg))
 
     def load_document(self, document=None):
         """"""

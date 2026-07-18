@@ -45,10 +45,16 @@ class PyfficeAddress(PyfficeDocument):
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeAddress").override(cfg))
         self.street_name = None
         self.street_number = None
-        self.city = None
-        self.state = None
-        self.zip = None
+        self.city_name = None
+        self.state_name = None
+        self.zip_code = None
         self.apt = None
+
+    @classmethod
+    def from_dict(cls, dikt):
+        """"""
+        cfg = {"street_name": dikt}
+        return cls(cfg)
 
 
 class PyfficeContact(PyfficeDocument):
@@ -61,8 +67,9 @@ class PyfficeContact(PyfficeDocument):
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeContact").override(cfg))
         self.address = None
-        self.addresses = None
+        self.addresses = []
         self.emails = None
+        self.emergency_phone = None
         self.full_name = None
         self.first_name = None
         self.middle_name = None
@@ -71,16 +78,28 @@ class PyfficeContact(PyfficeDocument):
         self.suffix = None
         self.name = None
         self.user_name = None
-        self.phones = None
+        self.phones = []
+        self.phone = None
+        self.secondary_phone = None
         self.preferred_name = None
         self.connections = []
         self.connection = None
+        self.company_email = None
+        self.company_phone = None
         self.channels = []
         self.groups = []
         self.names = None
         self.nicknames = None
         self.preferred_channel = None
         self.salutation = None
+
+    def add_address(self, address):
+        """"""
+        if isinstance(address, dict):
+            address = PyfficeAddress.from_dict(address)
+        if self.addresses == []:
+            self.address = address
+        self.addresses.append(address)
 
     def add_connection(self, connection):
         """A connection is another contact that this contact is connected to."""
@@ -95,6 +114,10 @@ class PyfficeContact(PyfficeDocument):
             self.channels.append(email)
         return self
 
+    def add_emergency_contact(self, contact: "PyfficeContact"):
+        """"""
+        self.emergency_contact = contact
+
     def add_group(self, group):
         """"""
         if group not in self.groups:
@@ -105,6 +128,8 @@ class PyfficeContact(PyfficeDocument):
     def add_phone_address(self, phone):
         """"""
         phone = {"type": "phone", "contact": phone}
+        if self.phone is None:
+            self.phone = phone
         self.add_change("channels", self.channels, phone)
         if self.verify_phone_number(phone["contact"]):
             self.channels.append(phone)
@@ -348,8 +373,8 @@ class PyfficeRolodex(PyfficeDocumentManager):
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeRolodex").override(cfg))
         self.default_group = None
-        self.groups = None
-        self.contacts = None
+        self.groups = []
+        self.contacts = {}
 
     def add_contact(self, contact, group=None):
         """"""

@@ -25,17 +25,12 @@ from typing import Any, Optional
 # ======================================3rd Party Library Modules=====================================================||
 from kahndor.kahndor import Instruct
 from kahndor.logma import Logma
-
-# Commented out - broken dependency chain from squirl->kahndor
-# from squirl.objnql import txtonql
-# from squirl.orgnql import conql, yonql
 from pyffice.document import PyfficeDocumentManager
-
-# from pyffice.analytics.sources import PyfficeSources
+from pyffice.analytics.sources import PyfficeSources
 from pyffice.calendars.calendars import PyfficeCalendar
 from pyffice.charts.charts import PyfficeChart
 from pyffice.ports.ports import PyfficePortCherryTree
-from pyffice.contacts.contacts import PyfficeRolodex
+from pyffice.contacts.contacts import PyfficeRolodex, PyfficeContact
 from pyffice.forms.forms import PyfficeFormsManager
 from pyffice.images.images import PyfficeImage
 from pyffice.images.sketches import PyfficeSketch
@@ -192,6 +187,21 @@ class PyfficeCodex(PyfficeDocumentManager):
         self.contacts = PyfficeRolodex(cfg)
         self.documents[self.contacts.did] = self.contacts
         return self.contacts
+
+    def init_contact(self, cfg: Optional[dict[str, Any]] = None) -> Optional[Any]:
+        """Initialize a contacts/rolodex document."""
+        cfg = cfg or {}
+        cfg["codex"] = self
+        contact = PyfficeContact(cfg)
+        if self.contacts is None:
+            cfg = {}
+            self.init_contacts(cfg)
+        self.contacts.add_contact(contact)
+        return contact
+
+    def get_rolodex(self):
+        """"""
+        # TODO implement method
 
     def init_files(self, cfg: Optional[dict[str, Any]] = None) -> Optional[Any]:
         """Initialize a filesystem document."""
