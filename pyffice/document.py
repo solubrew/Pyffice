@@ -492,7 +492,6 @@ class PyfficeDocument(PyfficeUnit):
         if isinstance(document, str):
             document = j.loads(document)
         document = self.document.override(document).dikt
-        # document = self.update_document_structure(document)
         self.load_unit(document)
         data = document.get("data", {}) or {}
         self.set_content(data.get("content", {}))
@@ -501,7 +500,6 @@ class PyfficeDocument(PyfficeUnit):
         self.set_document_type(meta_data.get("document_type", "text"))
         self.set_data(data)
         self.set_file_path(document.get("path", None))
-        # self.set_file_type(document.get("file_type", None))
         self.set_version(document.get("version", None))
         return self
 
@@ -535,7 +533,7 @@ class PyfficeDocument(PyfficeUnit):
         if encrypt_key:
             txtonql.Doc(path).write(encrypt256(self.to_string(), encrypt_key))
         else:
-           yonql.Doc(path).write(self.to_dict())
+            yonql.Doc(path).write(self.to_dict())
         return self
 
     def save_as(self, path, set_file_active=True, syntax=None, encrypt_key=None):
@@ -583,14 +581,14 @@ class PyfficeDocument(PyfficeUnit):
             self.content = content
         return self
 
-    def set_context(self, content):
+    def set_context(self, context):
         """"""
-        if content is None:
-            content = ""
-        if content != self.context:
-            self.add_change("context", self.context, content)
+        if context is None:
+            context = ""
+        if context != self.context:
+            self.add_change("context", self.context, context)
             # self.vectorize(content)
-            self.context = content
+            self.context = context
         return self
 
     def set_data(self, data):
@@ -677,8 +675,7 @@ class PyfficeDocumentManager(PyfficeDocument):
 
     def get_context(self):
         """"""
-        super().get_context()
-        return self
+        return super().get_context()
 
     def get_document(self, name):
         """"""

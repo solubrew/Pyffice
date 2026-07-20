@@ -29,6 +29,7 @@ from pyffice.document import PyfficeDocumentManager
 from pyffice.analytics.sources import PyfficeSources
 from pyffice.calendars.calendars import PyfficeCalendar
 from pyffice.charts.charts import PyfficeChart
+from pyffice.matrix.spreadsheet import PyfficeSpreadSheet
 from pyffice.ports.ports import PyfficePortCherryTree
 from pyffice.contacts.contacts import PyfficeRolodex, PyfficeContact
 from pyffice.forms.forms import PyfficeFormsManager
@@ -128,6 +129,10 @@ class PyfficeCodex(PyfficeDocumentManager):
         except Exception as e:
             raise PyfficeCodexError(f"Failed to add URL: {e}") from e
 
+    def get_rolodex(self):
+        """"""
+        # TODO implement method
+
     def get_url(self, url_id: Optional[str] = None) -> Optional[Any]:
         """Get URL by ID."""
         if self.url_library is None:
@@ -164,10 +169,11 @@ class PyfficeCodex(PyfficeDocumentManager):
         self.documents[browser.did] = browser
         return browser
 
-    def init_calendar(self, cfg: Optional[dict[str, Any]] = None) -> Optional[Any]:
+    def init_calendar(self, cfg: Optional[dict[str, Any]] = None, pid=None) -> Optional[Any]:
         """Initialize a calendar document."""
         cfg = cfg or {}
         cfg["codex"] = self
+        cfg["workbook_parent_id"] = pid
         calendar = PyfficeCalendar(cfg)
         self.documents[calendar.did] = calendar
         return calendar
@@ -199,10 +205,6 @@ class PyfficeCodex(PyfficeDocumentManager):
         self.contacts.add_contact(contact)
         return contact
 
-    def get_rolodex(self):
-        """"""
-        # TODO implement method
-
     def init_files(self, cfg: Optional[dict[str, Any]] = None) -> Optional[Any]:
         """Initialize a filesystem document."""
         cfg = cfg or {}
@@ -229,10 +231,11 @@ class PyfficeCodex(PyfficeDocumentManager):
         self.documents[self.forms_manager.did] = self.forms_manager
         return self.forms_manager
 
-    def init_image(self, cfg: Optional[dict[str, Any]] = None) -> Optional[Any]:
+    def init_image(self, cfg: Optional[dict[str, Any]] = None, pid=None) -> Optional[Any]:
         """Initialize an image document."""
         cfg = cfg or {}
         cfg["codex"] = self
+        cfg["workbook_parent_id"] = pid
         image = PyfficeImage(cfg)
         self.documents[image.did] = image
         return image
@@ -293,25 +296,32 @@ class PyfficeCodex(PyfficeDocumentManager):
         self.documents[sketch.did] = sketch
         return sketch
 
-    # def init_source_manager(
-    #     self, cfg: Optional[dict[str, Any]] = None
-    # ) -> Optional[Any]:
-    #     """Initialize source manager."""
-    #     cfg = cfg or {}
-    #     cfg["codex"] = self
-    #     self.source_manager = PyfficeSources(cfg)
-    #     self.documents[self.source_manager.did] = self.source_manager
-    #     return self.source_manager
+    def init_spreadsheet(self, cfg: Optional[dict[str, Any]] = None, pid=None) -> Optional[Any]:
+        """Initialize a spreadsheet document."""
+        cfg = cfg or {}
+        cfg["codex"] = self
+        cfg["workbook_parent_id"] = pid
+        sheet = PyfficeSpreadSheet(cfg)
+        self.documents[sheet.did] = sheet
+        return sheet
 
-    # def init_source(self, cfg: Optional[dict[str, Any]] = None) -> Optional[Any]:
-    #     """Initialize a data source."""
-    #     cfg = cfg or {}
-    #     cfg["codex"] = self
-    #     if self.source_manager is None:
-    #         self.init_source_manager(cfg)
-    #     self.source = self.source_manager.create_new_source(cfg)
-    #     self.documents[self.source.did] = self.source
-    #     return self.source
+    def init_source_manager(self, cfg: Optional[dict[str, Any]] = None) -> Optional[Any]:
+        """Initialize source manager."""
+        cfg = cfg or {}
+        cfg["codex"] = self
+        self.source_manager = PyfficeSourceManager(cfg)
+        self.documents[self.source_manager.did] = self.source_manager
+        return self.source_manager
+
+    def init_source(self, cfg: Optional[dict[str, Any]] = None) -> Optional[Any]:
+        """Initialize a data source."""
+        cfg = cfg or {}
+        cfg["codex"] = self
+        if self.source_manager is None:
+            self.init_source_manager(cfg)
+        self.source = self.source_manager.create_new_source(cfg)
+        self.documents[self.source.did] = self.source
+        return self.source
 
     def load_document(self, document: Optional[dict[str, Any]] = None) -> dict[str, Any]:
         """Load documents into the codex."""

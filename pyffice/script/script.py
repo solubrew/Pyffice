@@ -258,9 +258,6 @@ class PyfficeScript(PyfficeDocument):
             document = self.config.dikt.get("document", {})
             if document is None:
                 document = {}
-        # logma.info(f"Document {document}")
-        # logma.info(f"Document {document.get("data", {})}")
-        # logma.info(f"Document {type(document.get("data", {}))}")
         super().load_document(document)
         logma.info(f"Content {self.content}")
         logma.info(f"Pages {self.pages}")
@@ -452,7 +449,6 @@ class PyfficeScript(PyfficeDocument):
                         text = PyfficeText(text)
                         text.load_unit()
                     doc["data"]["pages"][str(i)]["entries"][str(entry)] = text.to_dict()
-        # logma.json(doc)
         return doc
 
     def to_html(self):

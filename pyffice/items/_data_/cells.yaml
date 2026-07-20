@@ -67,3 +67,31 @@ PyfficeCell:
             formula:
             object:
             value:
+
+
+
+
+            cell:
+                address:
+                value:
+                formula:
+                format:
+                    text: [{"start": "<[start]>", "end": "<[end]>", "color": "<[color]>", "size": "<[size]>", "style": "<[style]>", "alters": {"is_underline": False, "is_bold": False, "is_italic": False, "is_subscript": False, "is_superscript": False}}]
+                    border:
+                        top:
+                            style:
+                            color:
+                            weight:
+                        right:
+                            style:
+                            color:
+                            weight:
+                        bottom:
+                            style:
+                            color:
+                            weight:
+                        left:
+                            style:
+                            color:
+                            weight:
+                    color:

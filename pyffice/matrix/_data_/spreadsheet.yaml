@@ -19,41 +19,22 @@ PyfficeSpreadSheet:
           document_type:
           creon_dttm:
           modon_dttm:
-        document:
-           cells:
-               I|0:
-           objects:
-    document:
-        file_path:
-        file_structure:
+        data:
             columns:
-                range: ["I", "MLM"]
+                ranges:
+                counts:
             rows:
-                range: ["0", "10000000"]
-            cell:
-                address:
-                value:
-                formula:
-                format:
-                    text: [{"start": "<[start]>", "end": "<[end]>", "color": "<[color]>", "size": "<[size]>", "style": "<[style]>", "alters": {"is_underline": False, "is_bold": False, "is_italic": False, "is_subscript": False, "is_superscript": False}}]
-                    border:
-                        top:
-                            style:
-                            color:
-                            weight:
-                        right:
-                            style:
-                            color:
-                            weight:
-                        bottom:
-                            style:
-                            color:
-                            weight:
-                        left:
-                            style:
-                            color:
-                            weight:
-                    color:
+                ranges:
+                counts:
+            cells:
+                I|0: cell
+            objects:
+                - object
+    file_formats:
+        "excel": [".xlsx", ".xls", ".xlst"]
+        "csv": [".csv", ]
+        "tsv": [".tsv", ]
+        "gsheet": [".gsheet", ]
 #extended_roman_numerals:
 #    '1': 'I'
 #    '5': 'V'
