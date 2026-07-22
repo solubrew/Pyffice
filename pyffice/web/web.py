@@ -31,9 +31,10 @@ from pycurity.pyhash import text_hashing_function, encode64, decode64
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
-log = True
+log = False
 logma = Logma(__name__)
-# logma.off()
+if not log:
+    logma.off()
 
 # ====================================================================================================================||
 pxcfg = join(here, "_data_", "web.yaml")
@@ -469,7 +470,10 @@ class PyfficeWebProfileManager(PyfficeRolodex):
 
     def get_profile(self, name):
         """"""
-        self.active_profile = self.get_contact(name)
+        return self.get_contact(name)
+
+    def get_current_profile(self):
+        """"""
         return self.active_profile
 
     def load_document(self, document=None):

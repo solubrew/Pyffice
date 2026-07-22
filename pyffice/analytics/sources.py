@@ -33,7 +33,7 @@ logma = Logma(__name__)
 pxcfg = join(here, "_data_", "sources.yaml")
 
 
-class PyfficeSources(PyfficeDocumentManager):
+class PyfficeSourceManager(PyfficeDocumentManager):
     """"""
 
     VERSION = "0.0.1.0.1.0"
@@ -41,7 +41,7 @@ class PyfficeSources(PyfficeDocumentManager):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeSources")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeSourceManager").override(cfg))
         self.sources = None
 
     def add_source(self, source, type_="file"):
@@ -86,11 +86,11 @@ class PyfficeDataSet(PyfficeDocumentManager):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDataSet")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDataSet").override(cfg))
         self.path = None
         self.sources = None
         self.relationships = None
-        self.views = None
+        self.views = set()
 
     def add_source(self, source, type_="file"):
         """"""

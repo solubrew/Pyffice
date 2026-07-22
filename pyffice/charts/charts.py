@@ -197,6 +197,8 @@ class PyfficeChart(PyfficeDocument):
         if syntax is None:
             syntax = self.compatibility
         super().save(path, syntax, encrypt_key)
+        if path is None:
+            return self
         match syntax:
             case "latex":
                 self.save_latex(path)

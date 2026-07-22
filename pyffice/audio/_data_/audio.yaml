@@ -14,7 +14,7 @@ PyfficeLibrary:
             context:
             hash:
             policy_fk:
-        document:
+        data:
 PyfficePlaylist:
     template:
         name:
@@ -30,7 +30,7 @@ PyfficePlaylist:
             context:
             hash:
             policy_fk:
-        document:
+        data:
 PyfficeSong:
     template:
         name:
@@ -46,4 +46,4 @@ PyfficeSong:
             context:
             hash:
             policy_fk:
-        document:
+        data:

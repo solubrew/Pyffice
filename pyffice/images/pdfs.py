@@ -31,9 +31,10 @@ from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
-log = True
+log = False
 logma = Logma(__name__)
-
+if not log:
+    logma.off()
 # ====================================================================================================================||
 pxcfg = join(here, "_data_", "pdfs.yaml")
 
@@ -153,6 +154,9 @@ class PyfficePDF(PyfficeDocument):
     def get_binary(self):
         """"""
 
+    def get_content(self):
+        """"""
+
     def get_page_size(self, page_n=0):
         """
         Get the size (width and height) of a specific page.
@@ -184,14 +188,11 @@ class PyfficePDF(PyfficeDocument):
         """"""
         logma.info(f"Load Document {document}")
         if document is None:
-            document = self.config.dikt.get("document", {})
-        if document is None:
-            document = {}
+            document = self.config.get("document", {}) or {}
         super().load_document(document)
-        content = document.get("data", {}).get("content", {})
-        if content is None:
-            content = {}
-            self.set_content(content)
+        data = document.get("data", {}) or {}
+        content = data.get("content", {}) or {}
+        self.set_content(content)
         self.set_file_path(content.get("file_path", None))
         return self
 

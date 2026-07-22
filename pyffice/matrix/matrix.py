@@ -14,6 +14,7 @@
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import dirname, join
+from typing import Any
 
 # ======================================3rd Party Library Modules=====================================================||
 
@@ -24,6 +25,7 @@ from pyffice.images.images import PyfficeImage
 from pyffice.charts.charts import PyfficeChart
 from pyffice.items.items import PyfficeTable
 from pyffice.items.shapes import PyfficeShape
+from pyffice.matrix import spreadsheet
 from pyffice.workflows.formulas import PyfficeFormulasLibrary
 from pyffice.ports.gports import PyfficePortGoogleSheets
 from pyffice.ports.msports import PyfficePortExcel
@@ -50,12 +52,12 @@ class PyfficeMatrix(PyfficeDocumentManager):
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeMatrix").override(cfg))
         self.active_worksheet = None
-        self.charts = None
+        self.charts = []
         self.compatibility = None
         self.file_path = None
         self.formula_library = None
-        self.objects = None
-        self.sheets = None
+        self.objects = []
+        self.sheets = {}
 
     def add_chart(self, chart):
         """"""
@@ -110,9 +112,15 @@ class PyfficeMatrix(PyfficeDocumentManager):
             self.add_worksheet(sheet["name"], sheet)
         return self
 
+    def determine_file_type(self, path):
+        """"""
+        # TODO build out determination/compability method
+        return "excel"
+
     def file_import(self, file_=None, if_data_only=False, read_only=False, keep_vba=False):
         """"""
-        super().file_import()
+        file_type = ""
+        super().file_import(file_type)
         if file_ is None:
             file_ = self.file_path
         else:
@@ -161,15 +169,32 @@ class PyfficeMatrix(PyfficeDocumentManager):
         data = importer.open_file(path, if_data_only, read_only, keep_vba)
         return data
 
+    def file_open(self, path):
+        """"""
+        file_type = self.determine_file_type(path)
+        if file_type == "csv":
+            self.file_import_csv(path)
+        elif file_type == "excel":
+            self.file_import_excel(path)
+        elif file_type == "gsheet":
+            self.file_import_gsheet(path)
+        # super().file_open(path)
+
     def load_document(self, document=None):
         """"""
         if document is None:
-            document = {}
+            document = self.config.dikt.get("document", {})
+            if document is None:
+                document = {}
         super().load_document(document)
         self.file_path = self.config.dikt.get("file_path", None)
         self.executable_file = None
         self.set_formula_library()
         self.set_compatibility(self.config.dikt.get("compatibility", "nchantdmatrix"))
+        if self.documents == {}:
+            cfg = {}
+            spreadsheet = PyfficeSpreadSheet(cfg)
+            self.documents[spreadsheet.did] = spreadsheet
         return self
 
     def sanitize_sheet_name(self, sheet_name, compatibility="excel"):
@@ -196,6 +221,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
                 self.save_csv(path)
             case "gsheet":
                 self.save_gsheet(path)
+        # if i store always at the manager level then is that the right thing to do?
         return self
 
     def save_csv(self, path):
@@ -267,11 +293,9 @@ class PyfficeMatrix(PyfficeDocumentManager):
     def to_dict(self):
         """"""
         doc = super().to_dict()
-        if "document" not in doc:  # TODO: this may need to come from some other place
-            doc["document"] = {}
-        doc["document"]["compatibility"] = self.compatibility
-        doc["document"]["documents"] = self.sheets
-        doc["document"]["document_type"] = "pyffice_matrix"
+        doc["data"]["compatibility"] = self.compatibility
+        doc["data"]["documents"] = {x: y.to_dict() for x, y in self.documents.items()}
+        doc["data"]["document_type"] = "matrix"
         return doc
 
     def to_json_schema(self) -> dict:
@@ -304,6 +328,68 @@ class PyfficeMatrix(PyfficeDocumentManager):
             }
         )
         return schema
+
+    @classmethod
+    def from_list(cls, data: list[list[Any]]) -> "PyfficeMatrix":
+        """Create matrix from 2D list."""
+        if not data:
+            return cls()
+        rows = len(data)
+        cols = len(data[0]) if data[0] else 0
+        matrix = cls(rows=rows, cols=cols)
+        matrix._data = [[float(cell) if cell is not None else 0.0 for cell in row] for row in data]
+        return matrix
+
+    @classmethod
+    def identity(cls, size: int) -> "PyfficeMatrix":
+        """Create identity matrix."""
+        matrix = cls(rows=size, cols=size)
+        for i in range(size):
+            matrix._data[i][i] = 1.0
+        return matrix
+
+    def get(self, row: int, col: int) -> float:
+        """Get cell value."""
+        return self._data[row][col]
+
+    def set(self, row: int, col: int, value: float) -> None:
+        """Set cell value."""
+        self._data[row][col] = value
+
+    def add(self, other: "PyfficeMatrix") -> "PyfficeMatrix":
+        """Add two matrices."""
+        if self.rows != other.rows or self.cols != other.cols:
+            raise ValueError("Matrix dimensions must match")
+        result = PyfficeMatrix(rows=self.rows, cols=self.cols)
+        for i in range(self.rows):
+            for j in range(self.cols):
+                result._data[i][j] = self._data[i][j] + other._data[i][j]
+        return result
+
+    def multiply(self, other: "PyfficeMatrix") -> "PyfficeMatrix":
+        """Multiply two matrices."""
+        if self.cols != other.rows:
+            raise ValueError("Matrix dimensions incompatible for multiplication")
+        result = PyfficeMatrix(rows=self.rows, cols=other.cols)
+        for i in range(self.rows):
+            for j in range(other.cols):
+                total = 0.0
+                for k in range(self.cols):
+                    total += self._data[i][k] * other._data[k][j]
+                result._data[i][j] = total
+        return result
+
+    def transpose(self) -> "PyfficeMatrix":
+        """Return transpose of matrix."""
+        result = PyfficeMatrix(rows=self.cols, cols=self.rows)
+        for i in range(self.rows):
+            for j in range(self.cols):
+                result._data[j][i] = self._data[i][j]
+        return result
+
+    def to_list(self) -> list[list[float]]:
+        """Return matrix as 2D list."""
+        return [row[:] for row in self._data]
 
 
 # ====================================================================================================================||

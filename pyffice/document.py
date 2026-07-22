@@ -31,12 +31,14 @@ from pycurity.pytime import PyTime
 from pyffice.tags.tags import PyfficeTag
 from pyffice.updates.updates import PyfficeUnitUpdate, PyfficeDocumentUpdate
 from pycurity.pyhash import text_hashing_function
+from squirl.objnql import txtonql
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
-log = True
+log = False
 logma = Logma(__name__)
-logma.off()
+if not log:
+    logma.off()
 CHANGE_LIMIT = 100
 # ====================================================================================================================||
 pxcfg = join(here, "_data_", "document.yaml")
@@ -415,7 +417,12 @@ class PyfficeUnit(object):
             "mod_dttm": self.set_modon().modon,
         }
         if self.tags is not None:
-            doc["meta_data"]["tags"] = [x.to_dict() for x in self.tags]
+            if isinstance(self.tags, list):
+                doc["meta_data"]["tags"] = [x.to_dict() for x in self.tags]
+            elif isinstance(self.tags, (str, int, float)):
+                doc["meta_data"]["tags"] = [self.tags]
+            else:
+                raise Exception(f"Tags not properly formated {self.tags}")
         doc["unit"] = {"content": self.content}
         return doc
 
@@ -448,7 +455,7 @@ class PyfficeDocument(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDocument")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDocument").override(cfg))
         self.document = self.config.select("template").override(self.config.select("document").dikt)
         self.cache = None
         self.compatibility = None
@@ -483,11 +490,9 @@ class PyfficeDocument(PyfficeUnit):
 
     def load_document(self, document=None):
         """"""
-        logma.info(f"Load Document {document}")
         if isinstance(document, str):
             document = j.loads(document)
         document = self.document.override(document).dikt
-        # document = self.update_document_structure(document)
         self.load_unit(document)
         data = document.get("data", {}) or {}
         self.set_content(data.get("content", {}))
@@ -496,7 +501,6 @@ class PyfficeDocument(PyfficeUnit):
         self.set_document_type(meta_data.get("document_type", "text"))
         self.set_data(data)
         self.set_file_path(document.get("path", None))
-        # self.set_file_type(document.get("file_type", None))
         self.set_version(document.get("version", None))
         return self
 
@@ -525,12 +529,12 @@ class PyfficeDocument(PyfficeUnit):
     def save_pyffice(self, path, syntax, encrypt_key=None):
         """ """
         # use syntax to select a template
+        if path is None:
+            raise Exception(f"No path provided")
         if encrypt_key:
-            doc = encrypt256(self.to_string(), encrypt_key)
-            txtonql.Doc(doc).write(path)
+            txtonql.Doc(path).write(encrypt256(self.to_string(), encrypt_key))
         else:
-            doc = self.to_dict()
-            yonql.Doc(doc).write(path)
+            yonql.Doc(path).write(self.to_dict())
         return self
 
     def save_as(self, path, set_file_active=True, syntax=None, encrypt_key=None):
@@ -578,14 +582,14 @@ class PyfficeDocument(PyfficeUnit):
             self.content = content
         return self
 
-    def set_context(self, content):
+    def set_context(self, context):
         """"""
-        if content is None:
-            content = ""
-        if content != self.context:
-            self.add_change("context", self.context, content)
+        if context is None:
+            context = ""
+        if context != self.context:
+            self.add_change("context", self.context, context)
             # self.vectorize(content)
-            self.context = content
+            self.context = context
         return self
 
     def set_data(self, data):
@@ -656,6 +660,7 @@ class PyfficeDocumentManager(PyfficeDocument):
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDocumentManager")).override(cfg)
         self.store = conql.Doc()
+        self.documents = {}
 
     def add_document(self, document):
         """"""
@@ -671,8 +676,7 @@ class PyfficeDocumentManager(PyfficeDocument):
 
     def get_context(self):
         """"""
-        super().get_context()
-        return self
+        return super().get_context()
 
     def get_document(self, name):
         """"""

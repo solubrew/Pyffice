@@ -36,9 +36,10 @@ from pycurity.pyhash import encode64, decode64
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
-log = True
+log = False
 logma = Logma(__name__)
-
+if not log:
+    logma.off()
 # ====================================================================================================================||
 pxcfg = join(here, "_data_", "images.yaml")
 
@@ -229,6 +230,8 @@ class PyfficeImage(PyfficeDocument):
 
     def open_file(self, file=None, if_text_only=True):
         """"""
+        if file is None:
+            file = self.file_path
         self.set_syntax("file")
         if exists(file):
             self.set_file_path(file)

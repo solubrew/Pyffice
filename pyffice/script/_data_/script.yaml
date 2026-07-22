@@ -36,17 +36,20 @@ PyfficeScript:
     file_formats:
         "word": [".docx", ".dotx"]
         "css": [".css", ".qss"]
-        "plaintext": [".txt",]
+        "plaintext": [".txt", ".log", ".bat"]
         "python": [".py",]
         "xml": [".xml",]
         "javascript": [".js",]
+        "c": [".c", ".h", ".cpp", ".hpp"]
+        "java": [".java", ]
         "json": [".json",]
-        "yaml": [".yaml",]
+        "yaml": [".yaml", ".yml"]
         "r": [".r"]
-        "toml": [".toml", ".ini", ".cfg"]
+        "toml": [".toml", ".ini", ".cfg", ".conf"]
         "markdown": [".md", ]
         "bash": [".sh"]
         "html": [".html"]
+        "sql": [".sql"]
 PyfficeParagraph:
     template:
         did:
