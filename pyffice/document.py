@@ -31,12 +31,14 @@ from pycurity.pytime import PyTime
 from pyffice.tags.tags import PyfficeTag
 from pyffice.updates.updates import PyfficeUnitUpdate, PyfficeDocumentUpdate
 from pycurity.pyhash import text_hashing_function
+from squirl.objnql import txtonql
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
-log = True
+log = False
 logma = Logma(__name__)
-logma.off()
+if not log:
+    logma.off()
 CHANGE_LIMIT = 100
 # ====================================================================================================================||
 pxcfg = join(here, "_data_", "document.yaml")
@@ -453,7 +455,7 @@ class PyfficeDocument(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDocument")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDocument").override(cfg))
         self.document = self.config.select("template").override(self.config.select("document").dikt)
         self.cache = None
         self.compatibility = None
@@ -488,7 +490,6 @@ class PyfficeDocument(PyfficeUnit):
 
     def load_document(self, document=None):
         """"""
-        logma.info(f"Load Document {document}")
         if isinstance(document, str):
             document = j.loads(document)
         document = self.document.override(document).dikt

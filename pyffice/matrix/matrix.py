@@ -14,6 +14,7 @@
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import dirname, join
+from typing import Any
 
 # ======================================3rd Party Library Modules=====================================================||
 
@@ -24,6 +25,7 @@ from pyffice.images.images import PyfficeImage
 from pyffice.charts.charts import PyfficeChart
 from pyffice.items.items import PyfficeTable
 from pyffice.items.shapes import PyfficeShape
+from pyffice.matrix import spreadsheet
 from pyffice.workflows.formulas import PyfficeFormulasLibrary
 from pyffice.ports.gports import PyfficePortGoogleSheets
 from pyffice.ports.msports import PyfficePortExcel
@@ -181,12 +183,18 @@ class PyfficeMatrix(PyfficeDocumentManager):
     def load_document(self, document=None):
         """"""
         if document is None:
-            document = {}
+            document = self.config.dikt.get("document", {})
+            if document is None:
+                document = {}
         super().load_document(document)
         self.file_path = self.config.dikt.get("file_path", None)
         self.executable_file = None
         self.set_formula_library()
         self.set_compatibility(self.config.dikt.get("compatibility", "nchantdmatrix"))
+        if self.documents == {}:
+            cfg = {}
+            spreadsheet = PyfficeSpreadSheet(cfg)
+            self.documents[spreadsheet.did] = spreadsheet
         return self
 
     def sanitize_sheet_name(self, sheet_name, compatibility="excel"):
@@ -213,6 +221,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
                 self.save_csv(path)
             case "gsheet":
                 self.save_gsheet(path)
+        # if i store always at the manager level then is that the right thing to do?
         return self
 
     def save_csv(self, path):
@@ -284,11 +293,9 @@ class PyfficeMatrix(PyfficeDocumentManager):
     def to_dict(self):
         """"""
         doc = super().to_dict()
-        if "document" not in doc:  # TODO: this may need to come from some other place
-            doc["document"] = {}
-        doc["document"]["compatibility"] = self.compatibility
-        doc["document"]["documents"] = self.sheets
-        doc["document"]["document_type"] = "pyffice_matrix"
+        doc["data"]["compatibility"] = self.compatibility
+        doc["data"]["documents"] = {x: y.to_dict() for x, y in self.documents.items()}
+        doc["data"]["document_type"] = "matrix"
         return doc
 
     def to_json_schema(self) -> dict:

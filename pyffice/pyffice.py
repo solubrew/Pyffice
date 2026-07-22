@@ -26,7 +26,7 @@ from typing import Any, Optional
 from kahndor.kahndor import Instruct
 from kahndor.logma import Logma
 from pyffice.document import PyfficeDocumentManager
-from pyffice.analytics.sources import PyfficeSources
+from pyffice.analytics.sources import PyfficeSourceManager
 from pyffice.calendars.calendars import PyfficeCalendar
 from pyffice.charts.charts import PyfficeChart
 from pyffice.matrix.spreadsheet import PyfficeSpreadSheet
@@ -246,6 +246,8 @@ class PyfficeCodex(PyfficeDocumentManager):
         cfg["codex"] = self
         matrix = PyfficeMatrix(cfg)
         self.documents[matrix.did] = matrix
+        cfg = {}
+        spreadsheet = self.init_spreadsheet(cfg, matrix.did)
         return matrix
 
     def init_note(self, cfg: Optional[dict[str, Any]] = None) -> Optional[Any]:

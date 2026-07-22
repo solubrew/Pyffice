@@ -31,9 +31,10 @@ from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
-log = True
+log = False
 logma = Logma(__name__)
-
+if not log:
+    logma.off()
 # ====================================================================================================================||
 pxcfg = join(here, "_data_", "pdfs.yaml")
 
@@ -151,6 +152,9 @@ class PyfficePDF(PyfficeDocument):
         pix = page.get_pixmap(matrix=mat)
 
     def get_binary(self):
+        """"""
+
+    def get_content(self):
         """"""
 
     def get_page_size(self, page_n=0):

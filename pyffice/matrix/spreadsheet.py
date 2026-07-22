@@ -105,6 +105,8 @@ class PyfficeSpreadSheet(PyfficeDocument):
 
     def get_columns(self, count=None):
         """"""
+        if count is None:
+            count = 0
         columns = []
         for column in range(1, count + 1):
             columns.append(self.convert_column(column))
@@ -132,6 +134,11 @@ class PyfficeSpreadSheet(PyfficeDocument):
     def get_formula(self, address):
         """"""
         return self.cells[address].get_formula()
+
+    def get_rows(self):
+        """"""
+        #TODO: implement method
+        return []
 
     def load_document(self, document=None):
         """"""
@@ -242,15 +249,27 @@ class PyfficeSpreadSheet(PyfficeDocument):
         """"""
         doc = super().to_dict()
         doc["data"]["document_type"] = "sheet"
+        if self.cells is None:
+            self.cells = {}
         doc["data"]["cells"] = {x: cell.to_dict() for x, cell in self.cells.items()}
+        if self.tables is None:
+            self.tables = []
+        if self.charts is None:
+            self.charts = []
+        if self.images is None:
+            self.images = []
+        if self.shapes is None:
+            self.shapes = []
         doc["data"]["objects"] = {
             "tables": [x.to_dict() for x in self.tables],
             "charts": [x.to_dict() for x in self.charts],
             "images": [x.to_dict() for x in self.images],
             "shapes": [x.to_dict() for x in self.shapes],
         }
+        columns = self.get_columns()
         doc["data"]["columns"] = {"ranges": [], "counts": len(columns)}
-        doc["data"]["rows"] = {"ranges": [], "counts": len(columns)}
+        rows = self.get_rows()
+        doc["data"]["rows"] = {"ranges": [], "counts": len(rows)}
         return doc
 
     def _sanitize_sheet_name(self, name):

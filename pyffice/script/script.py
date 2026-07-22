@@ -32,7 +32,9 @@ from pycurity.pysan import Sanitized
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 logma = Logma(__name__)
-logma.off()
+log = False
+if not log:
+    logma.off()
 
 # ====================================================================================================================||
 pxcfg = join(here, "_data_", "script.yaml")
@@ -259,8 +261,6 @@ class PyfficeScript(PyfficeDocument):
             if document is None:
                 document = {}
         super().load_document(document)
-        logma.info(f"Content {self.content}")
-        logma.info(f"Pages {self.pages}")
         self.set_file_format_options()
         self.set_pages(document.get("data", {}).get("pages", {}))
         self.set_text(None)
@@ -310,7 +310,6 @@ class PyfficeScript(PyfficeDocument):
 
     def parse_content(self, content=None, page_size=100000, entry_size=10000):
         """"""
-        logma.json(content)
         if content is None:
             content = ""
         self.pages = {}
