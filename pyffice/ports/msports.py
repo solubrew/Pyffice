@@ -130,6 +130,20 @@ class PyfficePortExcel(PyfficePort):
         except Exception as e:
             logma.warning(e)
             formula = None
+        try:
+            color = cell.font.color
+            rgb = color.rgb
+        except Exception as e:
+            logma.warning(e)
+            color = None
+            rgb = None
+        try:
+            fill_color = cell.font.color
+            fill_rgb = fill_color.rgb
+        except Exception as e:
+            logma.warning(e)
+            fill_color = None
+            fill_rgb = None
         cell_ = {
             "value": cell.value,
             "column": cell.column,
@@ -142,7 +156,7 @@ class PyfficePortExcel(PyfficePort):
                 "italic": cell.font.italic,
                 "underline": cell.font.underline,
                 "strike": cell.font.strike,
-                "color": cell.font.color.rgb,
+                "color": color,
             },
             "alignment": {
                 "horizontal": cell.alignment.horizontal,

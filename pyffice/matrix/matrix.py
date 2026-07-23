@@ -191,30 +191,36 @@ class PyfficeMatrix(PyfficeDocumentManager):
         data = importer.open_file(path, if_data_only, read_only, keep_vba)
         return data
 
-    def open_file(self, file):
-        """"""
-        if file is None:
-            file = self.file_path
-        self.set_syntax("file")
-        if exists(file):
-            self.set_file_path(file)
-        file_type = self.determine_file_type(file)
-        if file.endswith(".csv"):
-            data = self.file_import_csv(file)
-        elif file.endswith(".xlsx") or file.endswith(".xls"):
-            data = self.file_import_excel(file)
-        elif file.endswith(".gsheet"):
-            data = self.file_import_gsheet(file)
-        else:
-            raise Exception(f"Unknown File Type {file_type} for file {file}")
-        self.data = data
-        # super().file_open(path)
+    def load_csv(self, file_path):
+        """Load CSV file into spreadsheet"""
+        import csv
 
-    def open_file_csv(self):
-        """"""
+        logma.info(f"Load CSV {file_path}")
+        self.table.clearContents()
+        with open(file_path, "r", encoding="utf-8") as f:
+            reader = csv.reader(f)
+            for row_idx, row in enumerate(reader):
+                for col_idx, value in enumerate(row):
+                    if col_idx >= self.table.columnCount():
+                        self.table.insertColumn(col_idx)
+                        self.table.setHorizontalHeaderItem(col_idx, pyqt.QTableWidgetItem(chr(65 + col_idx)))
+                    item = pyqt.QTableWidgetItem(value)
+                    self.table.setItem(row_idx, col_idx, item)
+                if row_idx >= self.table.rowCount() - 1:
+                    self.table.insertRow(row_idx + 1)
 
-    def open_file_excel(self):
-        """"""
+    def load_data(self, data):
+        """Load data into the spreadsheet"""
+        if isinstance(data, dict):
+            # Load from cell dictionary
+            for address, value in data.items():
+                self.set_cell_value(address, value)
+        elif isinstance(data, list):
+            # Load from list (rows)
+            for row_idx, row in enumerate(data):
+                for col_idx, value in enumerate(row):
+                    address = f"{chr(65 + col_idx)}{row_idx + 1}"
+                    self.set_cell_value(address, value)
 
     def load_dataset(self, dataset_name):
         """Load data from a named dataset into the table"""
@@ -242,35 +248,28 @@ class PyfficeMatrix(PyfficeDocumentManager):
                 logma.error(f"Error loading dataset {dataset_name}: {e}")
         return self
 
-    def load_from_file(self, file_path):
-        """Load spreadsheet from file"""
+    def load_document(self, document=None):
+        """"""
+        if document is None:
+            document = self.config.dikt.get("document", {}) or {}
+        logma.json(document)
+        super().load_document(document)
+        logma.info(f"Load Pyffice Matrix")
+        logma.info(document)
+        self.file_path = self.config.dikt.get("file_path", None)
+        self.executable_file = None
+        self.set_formula_library()
+        self.set_compatibility(self.config.dikt.get("compatibility", "nchantdmatrix"))
         try:
-            if file_path.endswith(".csv"):
-                self.load_csv(file_path)
-            elif file_path.endswith(".xlsx") or file_path.endswith(".xls"):
-                self.load_excel(file_path)
-            else:
-                pyqt.QMessageBox.warning(self, "Error", "Unsupported file format")
+            self.set_data(self.config.get("data", {}).get("content", {}).get("data", None))
         except Exception as e:
-            pyqt.QMessageBox.warning(self, "Error", f"Failed to load file: {e}")
-
-    def load_csv(self, file_path):
-        """Load CSV file into spreadsheet"""
-        import csv
-
-        logma.info(f"Load CSV {file_path}")
-        self.table.clearContents()
-        with open(file_path, "r", encoding="utf-8") as f:
-            reader = csv.reader(f)
-            for row_idx, row in enumerate(reader):
-                for col_idx, value in enumerate(row):
-                    if col_idx >= self.table.columnCount():
-                        self.table.insertColumn(col_idx)
-                        self.table.setHorizontalHeaderItem(col_idx, pyqt.QTableWidgetItem(chr(65 + col_idx)))
-                    item = pyqt.QTableWidgetItem(value)
-                    self.table.setItem(row_idx, col_idx, item)
-                if row_idx >= self.table.rowCount() - 1:
-                    self.table.insertRow(row_idx + 1)
+            logma.warning(e)
+            self.set_data(None)
+        if self.documents == {}:
+            cfg = {}
+            _spreadsheet = PyfficeSpreadSheet(cfg)
+            self.documents[_spreadsheet.did] = _spreadsheet
+        return self
 
     def load_excel(self, file_path, sheet_name=None):
         """Load Excel file into spreadsheet with formula preservation
@@ -364,41 +363,42 @@ class PyfficeMatrix(PyfficeDocumentManager):
             for sheet_name, sheet_data in cfg["sheets"].items():
                 self.add_sheet(sheet_name, sheet_data)
 
-    def load_data(self, data):
-        """Load data into the spreadsheet"""
-        if isinstance(data, dict):
-            # Load from cell dictionary
-            for address, value in data.items():
-                self.set_cell_value(address, value)
-        elif isinstance(data, list):
-            # Load from list (rows)
-            for row_idx, row in enumerate(data):
-                for col_idx, value in enumerate(row):
-                    address = f"{chr(65 + col_idx)}{row_idx + 1}"
-                    self.set_cell_value(address, value)
-
-    def load_document(self, document=None):
-        """"""
-        if document is None:
-            document = self.config.dikt.get("document", {}) or {}
-        logma.json(document)
-        super().load_document(document)
-        logma.info(f"Load Pyffice Matrix")
-        logma.info(document)
-        self.file_path = self.config.dikt.get("file_path", None)
-        self.executable_file = None
-        self.set_formula_library()
-        self.set_compatibility(self.config.dikt.get("compatibility", "nchantdmatrix"))
+    def load_from_file(self, file_path):
+        """Load spreadsheet from file"""
         try:
-            self.set_data(self.config.get("data", {}).get("content", {}).get("data", None))
+            if file_path.endswith(".csv"):
+                self.load_csv(file_path)
+            elif file_path.endswith(".xlsx") or file_path.endswith(".xls"):
+                self.load_excel(file_path)
+            else:
+                pyqt.QMessageBox.warning(self, "Error", "Unsupported file format")
         except Exception as e:
-            logma.warning(e)
-            self.set_data(None)
-        if self.documents == {}:
-            cfg = {}
-            _spreadsheet = PyfficeSpreadSheet(cfg)
-            self.documents[_spreadsheet.did] = _spreadsheet
-        return self
+            pyqt.QMessageBox.warning(self, "Error", f"Failed to load file: {e}")
+
+    def open_file(self, file):
+        """"""
+        if file is None:
+            file = self.file_path
+        self.set_syntax("file")
+        if exists(file):
+            self.set_file_path(file)
+        file_type = self.determine_file_type(file)
+        if file.endswith(".csv"):
+            data = self.file_import_csv(file)
+        elif file.endswith(".xlsx") or file.endswith(".xls"):
+            data = self.file_import_excel(file)
+        elif file.endswith(".gsheet"):
+            data = self.file_import_gsheet(file)
+        else:
+            raise Exception(f"Unknown File Type {file_type} for file {file}")
+        self.data = data
+        # super().file_open(path)
+
+    def open_file_csv(self):
+        """"""
+
+    def open_file_excel(self):
+        """"""
 
     def sanitize_sheet_name(self, sheet_name, compatibility="excel"):
         """

@@ -71,7 +71,7 @@ class PyfficeFormulasLibrary(PyfficeDocumentManager):
         """"""
         if self.formulas is None:
             self.set_formulas()
-        return [x for x in self.formulas.keys()]
+        return list(self.formulas.keys())
 
     def load_document(self, document=None):
         """"""
@@ -89,6 +89,7 @@ class PyfficeFormulasLibrary(PyfficeDocumentManager):
         formulas = formulas or {}
         if formulas != self.formulas:
             self.add_change("formulas", self.formulas, formulas, "set")
+            # TODO implement factory methods for execution, etc for each formula using the config file
             self.formulas = {x: PyfficeFormula(y) for x, y in formulas.items()}
         if self.formulas is None:
             self.formulas = {}

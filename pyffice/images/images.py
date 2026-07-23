@@ -218,11 +218,8 @@ class PyfficeImage(PyfficeDocument):
         :param path: Path to an image file to load.
         :return: self
         """
-        logma.info(f"Load Document {document}")
         if document is None:
-            document = self.config.dikt.get("document", {})
-            if document is None:
-                document = {}
+            document = self.config.dikt.get("document", {}) or {}
         logma.info(f"Load Document {document}")
         super().load_document(document)
         self.get_image_palette()
