@@ -18,6 +18,7 @@ from typing import Any
 
 # ======================================3rd Party Library Modules=====================================================||
 from pandas import DataFrame
+
 # ======================================Solutions Brewer Library Modules==============================================||
 from kahndor import kahndor
 from kahndor.logma import Logma
@@ -380,11 +381,19 @@ class PyfficeMatrix(PyfficeDocumentManager):
         """"""
         if document is None:
             document = self.config.dikt.get("document", {}) or {}
+        logma.json(document)
         super().load_document(document)
+        logma.info(f"Load Pyffice Matrix")
+        logma.info(document)
         self.file_path = self.config.dikt.get("file_path", None)
         self.executable_file = None
         self.set_formula_library()
         self.set_compatibility(self.config.dikt.get("compatibility", "nchantdmatrix"))
+        try:
+            self.set_data(self.config.get("data", {}).get("content", {}).get("data", None))
+        except Exception as e:
+            logma.warning(e)
+            self.set_data(None)
         if self.documents == {}:
             cfg = {}
             _spreadsheet = PyfficeSpreadSheet(cfg)
@@ -575,7 +584,10 @@ class PyfficeMatrix(PyfficeDocumentManager):
         doc["data"]["compatibility"] = self.compatibility
         doc["data"]["documents"] = {x: y.to_dict() for x, y in self.documents.items()}
         doc["data"]["document_type"] = "matrix"
-        doc["data"]["content"]["data"] = doc["data"]["content"]["data"].values.tolist()
+        try:
+            doc["data"]["content"]["data"] = doc["data"]["content"]["data"].values.tolist()
+        except Exception as e:
+            logma.warning(e)
         logma.warning(f"Matrix Doc {doc}")
         return doc
 

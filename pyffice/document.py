@@ -161,8 +161,8 @@ class PyfficeUnit(object):
     def increment_version(self):
         """"""
         logma.info(f"Increment Version {self.version}")
-        # self.version = int(self.version)
-        # self.version += 1
+        self.version = int(self.version)
+        self.version += 1
         return self
 
     def load_unit(self, unit=None):
@@ -494,6 +494,7 @@ class PyfficeDocument(PyfficeUnit):
             document = j.loads(document)
         document = self.document.override(document).dikt
         self.load_unit(document)
+        logma.warning(f"Document {document}")
         data = document.get("data", {}) or {}
         self.set_content(data.get("content", {}))
         meta_data = document.get("meta_data", {}) or {}
@@ -594,6 +595,7 @@ class PyfficeDocument(PyfficeUnit):
 
     def set_data(self, data):
         """"""
+        logma.info(f"Data {data}")
         data = data or {}
         if isinstance(data, str):
             data = j.loads(data)
