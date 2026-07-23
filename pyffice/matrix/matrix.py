@@ -13,11 +13,11 @@
 
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-from os.path import dirname, join
+from os.path import dirname, join, exists
 from typing import Any
 
 # ======================================3rd Party Library Modules=====================================================||
-
+from pandas import DataFrame
 # ======================================Solutions Brewer Library Modules==============================================||
 from kahndor import kahndor
 from kahndor.logma import Logma
@@ -117,6 +117,26 @@ class PyfficeMatrix(PyfficeDocumentManager):
         # TODO build out determination/compability method
         return "excel"
 
+    def export(self, format_=None):
+        """"""
+        super().export()
+        if format_ == "excel":
+            self.export_excel()
+            # self.wb.save(filename=self.path)
+        elif format_ == "csv":
+            self.export_csv()
+        elif format_ == "gsheet":
+            self.export_gsheet()
+
+    def export_excel(self, format_=None):
+        """"""
+
+    def export_csv(self, format_=None):
+        """"""
+
+    def export_gsheet(self, format_=None):
+        """"""
+
     def file_import(self, file_=None, if_data_only=False, read_only=False, keep_vba=False):
         """"""
         file_type = ""
@@ -151,6 +171,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         cfg = {}
         importer = PyfficePortCSV(cfg)
         data = importer.open_file(path, if_data_only, read_only, keep_vba)
+        logma.info(f"Data {data}")
         return data
 
     def file_import_excel(self, path, if_data_only=False, read_only=False, keep_vba=False):
@@ -169,23 +190,196 @@ class PyfficeMatrix(PyfficeDocumentManager):
         data = importer.open_file(path, if_data_only, read_only, keep_vba)
         return data
 
-    def file_open(self, path):
+    def open_file(self, file):
         """"""
-        file_type = self.determine_file_type(path)
-        if file_type == "csv":
-            self.file_import_csv(path)
-        elif file_type == "excel":
-            self.file_import_excel(path)
-        elif file_type == "gsheet":
-            self.file_import_gsheet(path)
+        if file is None:
+            file = self.file_path
+        self.set_syntax("file")
+        if exists(file):
+            self.set_file_path(file)
+        file_type = self.determine_file_type(file)
+        if file.endswith(".csv"):
+            data = self.file_import_csv(file)
+        elif file.endswith(".xlsx") or file.endswith(".xls"):
+            data = self.file_import_excel(file)
+        elif file.endswith(".gsheet"):
+            data = self.file_import_gsheet(file)
+        else:
+            raise Exception(f"Unknown File Type {file_type} for file {file}")
+        self.data = data
         # super().file_open(path)
+
+    def open_file_csv(self):
+        """"""
+
+    def open_file_excel(self):
+        """"""
+
+    def load_dataset(self, dataset_name):
+        """Load data from a named dataset into the table"""
+        if self.app and hasattr(self.app, "model"):
+            try:
+                dataset = self.app.model.codex.get_dataset(dataset_name)
+                if dataset and self.table:
+                    # Clear existing data
+                    self.table.clearContents()
+                    # Load new data
+                    if hasattr(dataset, "values"):
+                        data = dataset.values
+                    else:
+                        data = dataset
+
+                    for row_idx, row_data in enumerate(data):
+                        if row_idx >= self.table.rowCount():
+                            self.table.setRowCount(row_idx + 1)
+                        for col_idx, cell_value in enumerate(row_data):
+                            if col_idx >= self.table.columnCount():
+                                self.table.setColumnCount(col_idx + 1)
+                            item = pyqt.QTableWidgetItem(str(cell_value))
+                            self.table.setItem(row_idx, col_idx, item)
+            except Exception as e:
+                logma.error(f"Error loading dataset {dataset_name}: {e}")
+        return self
+
+    def load_from_file(self, file_path):
+        """Load spreadsheet from file"""
+        try:
+            if file_path.endswith(".csv"):
+                self.load_csv(file_path)
+            elif file_path.endswith(".xlsx") or file_path.endswith(".xls"):
+                self.load_excel(file_path)
+            else:
+                pyqt.QMessageBox.warning(self, "Error", "Unsupported file format")
+        except Exception as e:
+            pyqt.QMessageBox.warning(self, "Error", f"Failed to load file: {e}")
+
+    def load_csv(self, file_path):
+        """Load CSV file into spreadsheet"""
+        import csv
+
+        logma.info(f"Load CSV {file_path}")
+        self.table.clearContents()
+        with open(file_path, "r", encoding="utf-8") as f:
+            reader = csv.reader(f)
+            for row_idx, row in enumerate(reader):
+                for col_idx, value in enumerate(row):
+                    if col_idx >= self.table.columnCount():
+                        self.table.insertColumn(col_idx)
+                        self.table.setHorizontalHeaderItem(col_idx, pyqt.QTableWidgetItem(chr(65 + col_idx)))
+                    item = pyqt.QTableWidgetItem(value)
+                    self.table.setItem(row_idx, col_idx, item)
+                if row_idx >= self.table.rowCount() - 1:
+                    self.table.insertRow(row_idx + 1)
+
+    def load_excel(self, file_path, sheet_name=None):
+        """Load Excel file into spreadsheet with formula preservation
+
+        Args:
+            file_path: Path to the Excel file
+            sheet_name: Optional specific sheet to load. If None, loads active sheet.
+        """
+        try:
+            import openpyxl
+            from openpyxl.utils import get_column_letter
+
+            # Load workbook WITHOUT data_only to preserve formulas
+            wb = openpyxl.load_workbook(file_path, data_only=False)
+
+            # Select sheet
+            if sheet_name and sheet_name in wb.sheetnames:
+                ws = wb[sheet_name]
+            else:
+                ws = wb.active
+
+            self.table.clearContents()
+
+            # Track workbook data for multi-sheet support
+            self._excel_workbook = wb
+            self._excel_sheets = list(wb.sheetnames)
+
+            # Get dimensions
+            max_row = ws.max_row or 100
+            max_col = ws.max_column or 26
+
+            # Ensure we have enough rows/columns
+            self.table.setRowCount(max(max_row, 100))
+            self.table.setColumnCount(max(max_col, 26))
+
+            # Update column headers for columns beyond Z (AA, AB, etc.)
+            for col_idx in range(26, max_col):
+                self.table.setHorizontalHeaderItem(col_idx, pyqt.QTableWidgetItem(get_column_letter(col_idx + 1)))
+
+            # Load cells with formulas preserved
+            for row_idx, row in enumerate(ws.iter_rows()):
+                for col_idx, cell in enumerate(row):
+                    value = None
+
+                    # Get formula or value - key for H1: preserve formulas!
+                    if cell.data_type == "f":  # Formula cell
+                        value = cell.value  # Returns the formula string
+                    elif cell.value is not None:
+                        value = cell.value
+
+                    # Set cell value (formula or plain value)
+                    if value is not None:
+                        item = pyqt.QTableWidgetItem(str(value))
+
+                        # Preserve number format
+                        if cell.number_format and cell.number_format != "General":
+                            item.setData(
+                                pyqt.Qt.ItemDataRole.UserRole,
+                                {
+                                    "number_format": cell.number_format,
+                                    "font_bold": cell.font.bold if cell.font else False,
+                                    "font_italic": cell.font.italic if cell.font else False,
+                                    "fill_color": cell.fill.fgColor.rgb if cell.fill and cell.fill.fgColor else None,
+                                },
+                            )
+
+                        self.table.setItem(row_idx, col_idx, item)
+
+                    # Preserve column widths
+                    if col_idx < max_col:
+                        col_dim = ws.column_dimensions.get(get_column_letter(col_idx + 1))
+                        if col_dim and col_dim.width:
+                            self.table.setColumnWidth(col_idx, int(col_dim.width * 7))
+
+            # Update sheet tabs if in workbook mode
+            if self.is_workbook and self.sheet_tabs:
+                self._setup_sheet_tabs()
+
+            self.current_sheet = ws.title
+
+        except ImportError:
+            pyqt.QMessageBox.warning(self, "Error", "openpyxl not installed. Please install: pip install openpyxl")
+        except Exception as e:
+            pyqt.QMessageBox.warning(self, "Error", f"Failed to load Excel: {e}")
+
+    def load_from_config(self, cfg):
+        """Load spreadsheet data from configuration"""
+        if "data" in cfg:
+            self.load_data(cfg["data"])
+        if "sheets" in cfg:
+            for sheet_name, sheet_data in cfg["sheets"].items():
+                self.add_sheet(sheet_name, sheet_data)
+
+    def load_data(self, data):
+        """Load data into the spreadsheet"""
+        if isinstance(data, dict):
+            # Load from cell dictionary
+            for address, value in data.items():
+                self.set_cell_value(address, value)
+        elif isinstance(data, list):
+            # Load from list (rows)
+            for row_idx, row in enumerate(data):
+                for col_idx, value in enumerate(row):
+                    address = f"{chr(65 + col_idx)}{row_idx + 1}"
+                    self.set_cell_value(address, value)
 
     def load_document(self, document=None):
         """"""
         if document is None:
-            document = self.config.dikt.get("document", {})
-            if document is None:
-                document = {}
+            document = self.config.dikt.get("document", {}) or {}
         super().load_document(document)
         self.file_path = self.config.dikt.get("file_path", None)
         self.executable_file = None
@@ -193,8 +387,8 @@ class PyfficeMatrix(PyfficeDocumentManager):
         self.set_compatibility(self.config.dikt.get("compatibility", "nchantdmatrix"))
         if self.documents == {}:
             cfg = {}
-            spreadsheet = PyfficeSpreadSheet(cfg)
-            self.documents[spreadsheet.did] = spreadsheet
+            _spreadsheet = PyfficeSpreadSheet(cfg)
+            self.documents[_spreadsheet.did] = _spreadsheet
         return self
 
     def sanitize_sheet_name(self, sheet_name, compatibility="excel"):
@@ -236,6 +430,98 @@ class PyfficeMatrix(PyfficeDocumentManager):
         """"""
         return self
 
+    def save_document(self, file_path=None):
+        """Save the current spreadsheet to a file"""
+        if file_path is None:
+            file_path = self.file_path
+
+        if file_path is None:
+            logma.warning("No file path specified for saving")
+            return self
+
+        # Determine file format from extension
+        file_ext = file_path.split(".")[-1].lower()
+
+        if file_ext in ["xlsx", "xls"]:
+            self.save_as_excel(file_path)
+        elif file_ext == "ods":
+            self.save_as_ods(file_path)
+        elif file_ext == "csv":
+            self.save_as_csv(file_path)
+        elif file_ext == "tsv":
+            self.save_as_tsv(file_path)
+        else:
+            logma.warning(f"Unsupported file format: {file_ext}")
+
+        return self
+
+    def save_as_excel(self, file_path):
+        """Save as Excel file (.xlsx)"""
+        try:
+            if self.document:
+                # Update document data from table
+                self.document.data = self.extract_table_data()
+                # Save using PyfficeMatrix
+                self.document.file_path = file_path
+                self.document.save_file()
+            else:
+                # Fallback: save using basic method
+                import openpyxl
+
+                wb = openpyxl.Workbook()
+                ws = wb.active
+                data = self.extract_table_data()
+                for row_idx, row_data in enumerate(data, start=1):
+                    for col_idx, cell_value in enumerate(row_data, start=1):
+                        ws.cell(row=row_idx, column=col_idx, value=cell_value)
+                wb.save(file_path)
+            logma.info(f"Saved Excel file: {file_path}")
+        except Exception as e:
+            logma.error(f"Error saving Excel file: {e}")
+        return self
+
+    def save_as_ods(self, file_path):
+        """Save as OpenDocument Spreadsheet (.ods)"""
+        try:
+            if self.document:
+                # Update document data from table
+                self.document.data = self.extract_table_data()
+                # Save using PyfficeMatrix
+                self.document.file_path = file_path
+                self.document.save_as_ods()
+            else:
+                logma.warning("ODS export requires PyfficeMatrix document")
+        except Exception as e:
+            logma.error(f"Error saving ODS file: {e}")
+        return self
+
+    def save_as_csv(self, file_path, delimiter=","):
+        """Save as CSV file"""
+        try:
+            import csv
+
+            data = self.extract_table_data()
+            with open(file_path, "w", newline="", encoding="utf-8") as f:
+                writer = csv.writer(f, delimiter=delimiter)
+                writer.writerows(data)
+            logma.info(f"Saved CSV file: {file_path}")
+        except Exception as e:
+            logma.error(f"Error saving CSV file: {e}")
+        return self
+
+    def save_as_tsv(self, file_path):
+        """Save as TSV (Tab-Separated Values) file"""
+        return self.save_as_csv(file_path, delimiter="\t")
+
+    def save_file(self):
+        """Save spreadsheet to file"""
+        file_path, _ = pyqt.QFileDialog.getSaveFileName(
+            self, "Save Spreadsheet", "", "CSV Files (*.csv);;Excel Files (*.xlsx);;All Files (*)"
+        )
+
+        if file_path:
+            self.save_to_file(file_path)
+
     def set_charts(self, charts):
         """"""
         return self
@@ -264,17 +550,6 @@ class PyfficeMatrix(PyfficeDocumentManager):
             self.sheets[sheet["name"]] = PyfficeSpreadSheet(sheet)
         return self
 
-    def save(self, format_=None):
-        """"""
-        super().save()
-        if format_ == "excel":
-            self.export_excel()
-            # self.wb.save(filename=self.path)
-        elif format_ == "csv":
-            self.export_csv()
-        elif format_ == "gsheet":
-            self.export_gsheet()
-
     def save_as(self, name, path):
         """"""
         super().save_as(path)
@@ -293,9 +568,15 @@ class PyfficeMatrix(PyfficeDocumentManager):
     def to_dict(self):
         """"""
         doc = super().to_dict()
+        if isinstance(self.data, DataFrame):
+            doc["data"]["table"] = self.data.values.tolist()
+        else:
+            doc["data"]["table"] = self.data
         doc["data"]["compatibility"] = self.compatibility
         doc["data"]["documents"] = {x: y.to_dict() for x, y in self.documents.items()}
         doc["data"]["document_type"] = "matrix"
+        doc["data"]["content"]["data"] = doc["data"]["content"]["data"].values.tolist()
+        logma.warning(f"Matrix Doc {doc}")
         return doc
 
     def to_json_schema(self) -> dict:

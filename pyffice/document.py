@@ -594,11 +594,10 @@ class PyfficeDocument(PyfficeUnit):
 
     def set_data(self, data):
         """"""
-        if data is None:
-            data = {}
+        data = data or {}
         if isinstance(data, str):
             data = j.loads(data)
-        self.data = data
+        super().set_data(data)
         return self
 
     def set_document_type(self, document_type):
@@ -722,7 +721,9 @@ class PyfficeDocumentManager(PyfficeDocument):
 
     def to_dict(self):
         """"""
-        doc = super().to_dict()
+        doc = super().to_dict() or {}
+        if "data" not in doc.keys():
+            doc["data"] = {}
         doc["data"]["documents"] = []
         if self.documents is None:
             return doc

@@ -122,11 +122,19 @@ class PyfficePortExcel(PyfficePort):
 
     def read_cell(self, cell):
         """"""
+        target = None
+        if cell.hyperlink is not None:
+            target = cell.hyperlink.target
+        try:
+            formula = cell.formula if cell.data_type == "f" else None
+        except Exception as e:
+            logma.warning(e)
+            formula = None
         cell_ = {
             "value": cell.value,
             "column": cell.column,
             "row": cell.row,
-            "formula": cell.formula if cell.data_type == "f" else None,
+            "formula": formula,
             "font": {
                 "name": cell.font.name,
                 "size": cell.font.size,
@@ -141,7 +149,7 @@ class PyfficePortExcel(PyfficePort):
                 "vertical": cell.alignment.vertical,
             },
             "file": {
-                "name": cell.hyperlink.target,
+                "name": target,
             },
             "fill": {
                 "patternType": cell.fill.patternType,
