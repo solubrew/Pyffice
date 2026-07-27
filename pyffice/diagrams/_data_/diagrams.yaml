@@ -40,7 +40,7 @@ PyfficeEdge:
           show_background:
           padding:
           text:
-PyfficeLayer:
+PyfficeDiagramLayer:
     template:
         did:
         name:
@@ -103,7 +103,7 @@ PyfficeNode:
               alignment:
                 horizontal:
                 vertical:
-PyfficeSketch:
+PyfficeDiagram:
     template:
         did:
         name:
@@ -122,7 +122,7 @@ PyfficeSketch:
           creon_dttm:
           modon_dttm:
         data:
-PyfficeSketchConnection:
+PyfficeDiagramConnection:
     template:
         did:
         name:

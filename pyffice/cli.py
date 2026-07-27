@@ -173,9 +173,9 @@ def diagram_convert(ctx: click.Context, input: str, output: str, format: Optiona
     INPUT: Source diagram file
     OUTPUT: Destination diagram file
     """
-    from pyffice.diagrams.diagrams import PyfficeSketch
+    from pyffice.diagrams.diagrams import PyfficeDiagram
     try:
-        sketch = PyfficeSketch()
+        sketch = PyfficeDiagram()
         sketch.load(input)
         sketch.save(output, format=format or 'svg')
         click.echo(f"✓ Converted diagram: {input} -> {output}")
@@ -208,9 +208,9 @@ def diagram_info(ctx: click.Context, input: str) -> None:
 
     INPUT: Diagram file to inspect
     """
-    from pyffice.diagrams.diagrams import PyfficeSketch
+    from pyffice.diagrams.diagrams import PyfficeDiagram
     try:
-        sketch = PyfficeSketch()
+        sketch = PyfficeDiagram()
         sketch.load(input)
         info = sketch.to_dict()
         click.echo(f"Diagram: {input}")

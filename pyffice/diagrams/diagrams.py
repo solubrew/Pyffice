@@ -207,7 +207,7 @@ class PyfficeEdge(PyfficeUnit):
         return doc
 
 
-class PyfficeSketch(PyfficeDocumentManager):
+class PyfficeDiagram(PyfficeDocumentManager):
     """"""
 
     def __init__(self, cfg=None):
@@ -218,7 +218,7 @@ class PyfficeSketch(PyfficeDocumentManager):
     def add_connection(self, connection):
         """"""
         cfg = {"connection": connection}
-        connection = PyfficeSketchConnection(cfg)
+        connection = PyfficeDiagramConnection(cfg)
         self.add_change("connections", self.connections, connection, "add")
         self.connections[connection.did] = connection
         return self
@@ -246,7 +246,7 @@ class PyfficeSketch(PyfficeDocumentManager):
     def add_layer(self, layer):
         """"""
         cfg = {"layer": layer}
-        layer = PyfficeLayer(cfg)
+        layer = PyfficeDiagramLayer(cfg)
         self.add_change("layers", self.layers, layer, "add")
         self.layers[layer.name] = layer
         return self
@@ -338,7 +338,7 @@ class PyfficeSketch(PyfficeDocumentManager):
         """"""
 
 
-class PyfficeLayer(PyfficeUnit):
+class PyfficeDiagramLayer(PyfficeUnit):
     """"""
 
     VERSION = "0.0.1.0.1.0"
@@ -346,7 +346,7 @@ class PyfficeLayer(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeLayer")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDiagramLayer")).override(cfg)
         self.objects = None
 
     def load_unit(self, unit):
@@ -460,7 +460,7 @@ class PyfficeDiagramConnection(PyfficeUnit):
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
-        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeSketchConnection")).override(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDiagramConnection")).override(cfg)
         self.endpoints = None
         self.lock = None
         self.position = None

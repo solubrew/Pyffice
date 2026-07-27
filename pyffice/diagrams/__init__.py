@@ -20,10 +20,15 @@
 
 # ====================================================================================================================||
 
-from pyffice.diagrams.diagrams import PyfficeEdge, PyfficeLayer, PyfficeNode, PyfficeSketch, PyfficeSketchConnection
+from pyffice.diagrams.diagrams import (
+    PyfficeEdge,
+    PyfficeDiagramLayer,
+    PyfficeNode,
+    PyfficeDiagram,
+    PyfficeDiagramConnection,
+)
 
-# PyfficeDiagram alias for PyfficeSketch (backward compatibility)
-PyfficeDiagram = PyfficeSketch
+# Re-export PyfficeDiagram as the canonical name (was PyfficeSketch)
 
 # Diagram format converters
 from pyffice.diagrams.formats import (
@@ -49,11 +54,11 @@ from pyffice.diagrams.formats import (
 __all__ = [
     # Core diagram classes
     "PyfficeEdge",
-    "PyfficeLayer",
+    "PyfficeDiagramLayer",
     "PyfficeNode",
-    "PyfficeSketch",
-    "PyfficeSketchConnection",
-    "PyfficeDiagram",  # Alias for PyfficeSketch
+    "PyfficeDiagram",
+    "PyfficeDiagramConnection",
+    "PyfficeDiagram",
     # Converters
     "DiagramConverter",
     "DiaConverter",

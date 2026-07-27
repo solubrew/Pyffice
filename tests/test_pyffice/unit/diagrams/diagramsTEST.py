@@ -25,10 +25,10 @@ from os.path import dirname  # 2026-01-15 20:20:08
 
 # ======================================3rd Party Library Modules=====================================================||
 from pyffice.diagrams.diagrams import PyfficeEdge  # 2026-01-15 20:20:08
-from pyffice.diagrams.diagrams import PyfficeLayer  # 2026-01-15 20:20:08
+from pyffice.diagrams.diagrams import PyfficeDiagramLayer  # 2026-01-15 20:20:08
 from pyffice.diagrams.diagrams import PyfficeNode  # 2026-01-15 20:20:08
-from pyffice.diagrams.diagrams import PyfficeSketch  # 2026-01-15 20:20:08
-from pyffice.diagrams.diagrams import PyfficeSketchConnection  # 2026-01-15 20:20:09
+from pyffice.diagrams.diagrams import PyfficeDiagram  # 2026-01-15 20:20:08
+from pyffice.diagrams.diagrams import PyfficeDiagramConnection  # 2026-01-15 20:20:09
 
 from pathlib import Path  # 2026-01-15 20:29:49
 from typing import Any, Dict, List, Optional  # 2026-01-15 20:29:49
@@ -36,10 +36,10 @@ from os.path import join  # 2026-01-15 20:29:49
 from os.path import dirname  # 2026-01-15 20:29:49
 from kahndor.logma import Logma  # 2026-01-15 20:29:49
 from pyffice.diagrams.diagrams import PyfficeEdge  # 2026-01-15 20:29:49
-from pyffice.diagrams.diagrams import PyfficeLayer  # 2026-01-15 20:29:49
+from pyffice.diagrams.diagrams import PyfficeDiagramLayer  # 2026-01-15 20:29:49
 from pyffice.diagrams.diagrams import PyfficeNode  # 2026-01-15 20:29:49
-from pyffice.diagrams.diagrams import PyfficeSketch  # 2026-01-15 20:29:49
-from pyffice.diagrams.diagrams import PyfficeSketchConnection  # 2026-01-15 20:29:49
+from pyffice.diagrams.diagrams import PyfficeDiagram  # 2026-01-15 20:29:49
+from pyffice.diagrams.diagrams import PyfficeDiagramConnection  # 2026-01-15 20:29:49
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:13:20
@@ -146,7 +146,7 @@ class Test_PyfficeEdge:  # 2026-01-15 15:13:22
         pass
 
 
-class Test_PyfficeLayer:  # 2026-01-15 15:13:22
+class Test_PyfficeDiagramLayer:  # 2026-01-15 15:13:22
     """"""
 
     @classmethod
@@ -244,7 +244,7 @@ class Test_PyfficeNode:  # 2026-01-15 15:13:22
         pass
 
 
-class Test_PyfficeSketch:  # 2026-01-15 15:13:22
+class Test_PyfficeDiagram:  # 2026-01-15 15:13:22
     """"""
 
     @classmethod
@@ -339,7 +339,7 @@ class Test_PyfficeSketch:  # 2026-01-15 15:13:22
         pass
 
 
-class Test_PyfficeSketchConnection:  # 2026-01-15 15:13:22
+class Test_PyfficeDiagramConnection:  # 2026-01-15 15:13:22
     """"""
 
     @classmethod

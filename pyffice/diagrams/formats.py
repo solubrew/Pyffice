@@ -36,7 +36,13 @@ except ImportError:
 # ======================================Solutions Brewer Library Modules==============================================||
 from kahndor import kahndor
 from kahndor.logma import Logma
-from pyffice.diagrams.diagrams import PyfficeSketch, PyfficeNode, PyfficeEdge, PyfficeLayer
+from pyffice.diagrams.diagrams import (
+    PyfficeDiagram,
+    PyfficeDiagramConnection,
+    PyfficeDiagramLayer,
+    PyfficeNode,
+    PyfficeEdge,
+)
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -74,11 +80,11 @@ class DiagramConverter:
         self.cfg = cfg or {}
 
     def load(self, file_path):
-        """Load diagram from file and convert to PyfficeSketch"""
+        """Load diagram from file and convert to PyfficeDiagram"""
         raise NotImplementedError
 
     def save(self, diagram, file_path):
-        """Save PyfficeSketch to file"""
+        """Save PyfficeDiagram to file"""
         raise NotImplementedError
 
     @staticmethod
@@ -94,8 +100,8 @@ class DiaConverter(DiagramConverter):
     """Converter for Dia diagram files (.dia, .dia.gz)"""
 
     def load(self, file_path):
-        """Load Dia file and convert to PyfficeSketch"""
-        sketch = PyfficeSketch(self.cfg)
+        """Load Dia file and convert to PyfficeDiagram"""
+        sketch = PyfficeDiagram(self.cfg)
 
         import gzip
 
@@ -120,7 +126,7 @@ class DiaConverter(DiagramConverter):
         return sketch
 
     def _parse_dia_xml(self, root, sketch):
-        """Parse Dia XML into PyfficeSketch"""
+        """Parse Dia XML into PyfficeDiagram"""
         ns = {"dia": "http://www.lysator.liu.se/~alla/dia/"}
 
         # Find all diagram objects
@@ -189,7 +195,7 @@ class DiaConverter(DiagramConverter):
         return edge
 
     def save(self, diagram, file_path):
-        """Save PyfficeSketch to Dia format"""
+        """Save PyfficeDiagram to Dia format"""
         # Generate Dia XML
         lines = ['<?xml version="1.0" encoding="UTF-8"?>']
         lines.append('<dia:diagram xmlns:dia="http://www.lysator.liu.se/~alla/dia/">')
@@ -233,8 +239,8 @@ class DotConverter(DiagramConverter):
     """Converter for DOT/Graphviz files"""
 
     def load(self, file_path):
-        """Load DOT file and convert to PyfficeSketch"""
-        sketch = PyfficeSketch(self.cfg)
+        """Load DOT file and convert to PyfficeDiagram"""
+        sketch = PyfficeDiagram(self.cfg)
 
         with open(file_path, "r", encoding="utf-8") as f:
             content = f.read()
@@ -244,7 +250,7 @@ class DotConverter(DiagramConverter):
         return sketch
 
     def _parse_dot(self, content, sketch):
-        """Parse DOT content into PyfficeSketch"""
+        """Parse DOT content into PyfficeDiagram"""
         # Extract graph type
         is_directed = "digraph" in content
 
@@ -290,7 +296,7 @@ class DotConverter(DiagramConverter):
         return match.group(1) if match else None
 
     def save(self, diagram, file_path):
-        """Save PyfficeSketch to DOT format"""
+        """Save PyfficeDiagram to DOT format"""
         lines = ["digraph diagram {"]
         lines.append("  rankdir=LR;")
 
@@ -316,8 +322,8 @@ class GraphMLConverter(DiagramConverter):
     """Converter for GraphML files"""
 
     def load(self, file_path):
-        """Load GraphML file and convert to PyfficeSketch"""
-        sketch = PyfficeSketch(self.cfg)
+        """Load GraphML file and convert to PyfficeDiagram"""
+        sketch = PyfficeDiagram(self.cfg)
 
         tree = ET.parse(file_path)
         root = tree.getroot()
@@ -356,7 +362,7 @@ class GraphMLConverter(DiagramConverter):
         return sketch
 
     def save(self, diagram, file_path):
-        """Save PyfficeSketch to GraphML format"""
+        """Save PyfficeDiagram to GraphML format"""
         lines = ['<?xml version="1.0" encoding="UTF-8"?>']
         lines.append('<graphml xmlns="http://graphml.graphdrawing.org/xmlns">')
 
@@ -385,8 +391,8 @@ class SVGConverter(DiagramConverter):
     """Converter for SVG files"""
 
     def load(self, file_path):
-        """Load SVG file and convert to PyfficeSketch"""
-        sketch = PyfficeSketch(self.cfg)
+        """Load SVG file and convert to PyfficeDiagram"""
+        sketch = PyfficeDiagram(self.cfg)
 
         tree = ET.parse(file_path)
         root = tree.getroot()
@@ -444,7 +450,7 @@ class SVGConverter(DiagramConverter):
         return sketch
 
     def save(self, diagram, file_path):
-        """Save PyfficeSketch to SVG format"""
+        """Save PyfficeDiagram to SVG format"""
         lines = ['<?xml version="1.0" encoding="UTF-8"?>']
         lines.append('<svg xmlns="http://www.w3.org/2000/svg">')
 
@@ -480,8 +486,8 @@ class DrawIOConverter(DiagramConverter):
     """Converter for DrawIO/MXGraph files"""
 
     def load(self, file_path):
-        """Load DrawIO file and convert to PyfficeSketch"""
-        sketch = PyfficeSketch(self.cfg)
+        """Load DrawIO file and convert to PyfficeDiagram"""
+        sketch = PyfficeDiagram(self.cfg)
 
         # DrawIO files can be XML or ZIP
         if file_path.endswith(".drawio") or file_path.endswith(".dio"):
@@ -559,7 +565,7 @@ class DrawIOConverter(DiagramConverter):
         return sketch
 
     def save(self, diagram, file_path):
-        """Save PyfficeSketch to DrawIO format"""
+        """Save PyfficeDiagram to DrawIO format"""
         lines = ['<?xml version="1.0" encoding="UTF-8"?>']
         lines.append("<mxfile>")
         lines.append('  <diagram name="Page-1">')
@@ -598,8 +604,8 @@ class FreemindConverter(DiagramConverter):
     """Converter for FreeMind mind map files"""
 
     def load(self, file_path):
-        """Load FreeMind file and convert to PyfficeSketch"""
-        sketch = PyfficeSketch(self.cfg)
+        """Load FreeMind file and convert to PyfficeDiagram"""
+        sketch = PyfficeDiagram(self.cfg)
 
         tree = ET.parse(file_path)
         root = tree.getroot()
@@ -630,8 +636,8 @@ class VSDXConverter(DiagramConverter):
     """Converter for Visio files (.vsdx)"""
 
     def load(self, file_path):
-        """Load VSDX file and convert to PyfficeSketch"""
-        sketch = PyfficeSketch(self.cfg)
+        """Load VSDX file and convert to PyfficeDiagram"""
+        sketch = PyfficeDiagram(self.cfg)
 
         try:
             with ZipFile(file_path, "r") as zf:
@@ -650,7 +656,7 @@ class VSDXConverter(DiagramConverter):
         return sketch
 
     def save(self, diagram, file_path):
-        """Save PyfficeSketch to VSDX (simplified)"""
+        """Save PyfficeDiagram to VSDX (simplified)"""
         # VSDX is complex - create basic structure
         # This would need proper Visio XML generation
         logma.warn("VSDX save not fully implemented")
@@ -661,8 +667,8 @@ class XMindConverter(DiagramConverter):
     """Converter for XMind mind map files"""
 
     def load(self, file_path):
-        """Load XMind file and convert to PyfficeSketch"""
-        sketch = PyfficeSketch(self.cfg)
+        """Load XMind file and convert to PyfficeDiagram"""
+        sketch = PyfficeDiagram(self.cfg)
 
         try:
             with ZipFile(file_path, "r") as zf:
@@ -694,7 +700,7 @@ class XMindConverter(DiagramConverter):
         return node.did
 
     def save(self, diagram, file_path):
-        """Save PyfficeSketch to XMind format"""
+        """Save PyfficeDiagram to XMind format"""
         logma.warn("XMind save not fully implemented")
         return False
 
@@ -703,8 +709,8 @@ class BPMNConverter(DiagramConverter):
     """Converter for BPMN 2.0 files"""
 
     def load(self, file_path):
-        """Load BPMN file and convert to PyfficeSketch"""
-        sketch = PyfficeSketch(self.cfg)
+        """Load BPMN file and convert to PyfficeDiagram"""
+        sketch = PyfficeDiagram(self.cfg)
 
         try:
             tree = ET.parse(file_path)
@@ -743,7 +749,7 @@ class BPMNConverter(DiagramConverter):
         return sketch
 
     def save(self, diagram, file_path):
-        """Save PyfficeSketch to BPMN format"""
+        """Save PyfficeDiagram to BPMN format"""
         lines = ['<?xml version="1.0" encoding="UTF-8"?>']
         lines.append('<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" ')
         lines.append('           xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" ')
@@ -768,9 +774,9 @@ class MindManagerConverter(DiagramConverter):
     """Converter for MindManager files (.mmap)"""
 
     def load(self, file_path):
-        """Load MindManager file and convert to PyfficeSketch"""
+        """Load MindManager file and convert to PyfficeDiagram"""
         # MindManager uses XML format
-        sketch = PyfficeSketch(self.cfg)
+        sketch = PyfficeDiagram(self.cfg)
 
         try:
             tree = ET.parse(file_path)
@@ -798,7 +804,7 @@ class MindManagerConverter(DiagramConverter):
         return sketch
 
     def save(self, diagram, file_path):
-        """Save PyfficeSketch to MindManager format"""
+        """Save PyfficeDiagram to MindManager format"""
         logma.warn("MindManager save not fully implemented")
         return False
 
@@ -825,7 +831,7 @@ def get_converter(file_path):
 
 
 def load_diagram(file_path):
-    """Load diagram from file and convert to PyfficeSketch"""
+    """Load diagram from file and convert to PyfficeDiagram"""
     converter = get_converter(file_path)
     if converter:
         return converter.load(file_path)
@@ -833,7 +839,7 @@ def load_diagram(file_path):
 
 
 def save_diagram(diagram, file_path):
-    """Save PyfficeSketch to file"""
+    """Save PyfficeDiagram to file"""
     converter = get_converter(file_path)
     if converter:
         return converter.save(diagram, file_path)
