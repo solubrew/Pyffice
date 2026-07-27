@@ -21,55 +21,104 @@ DOCUMENT_TYPES = {
 }
 
 
+# Format dispatch — each doc_type maps to a writer callable rather than
+# an if/elif chain. Add a new format by registering a writer here.
+def _write_csv(filepath):
+    with open(filepath, "w") as f:
+        f.write("name,value\ntest,123\n")
+
+
+def _write_json(filepath):
+    with open(filepath, "w") as f:
+        f.write('{"name": "test", "value": 123}')
+
+
+def _write_yaml(filepath):
+    with open(filepath, "w") as f:
+        f.write("name: test\nvalue: 123\n")
+
+
+def _write_xml(filepath):
+    with open(filepath, "w") as f:
+        f.write('<?xml version="1.0"?><root><item name="test" value="123"/></root>')
+
+
+def _write_ini(filepath):
+    with open(filepath, "w") as f:
+        f.write("[section]\nkey = value\n")
+
+
+def _write_toml(filepath):
+    with open(filepath, "w") as f:
+        f.write('[section]\nkey = "value"\n')
+
+
+def _write_env(filepath):
+    with open(filepath, "w") as f:
+        f.write("KEY=value\n")
+
+
+def _write_zip(filepath):
+    import zipfile
+    with zipfile.ZipFile(filepath, "w") as zf:
+        zf.writestr("test.txt", "content")
+
+
+def _write_tar(filepath):
+    import io
+    import tarfile
+    with tarfile.open(filepath, "w") as tf:
+        tf.addfile(tarfile.TarInfo("test.txt"), io.BytesIO(b"content"))
+
+
+def _write_epub(filepath):
+    from pyffice.ebook import epub
+    epub.create("Test", "Author", "<p>Chapter 1 content</p>", filepath)
+
+
+def _write_obj(filepath):
+    with open(filepath, "w") as f:
+        f.write("v 1.0 2.0 3.0\nf 1 2 3\n")
+
+
+def _write_stl(filepath):
+    with open(filepath, "w") as f:
+        f.write("solid test\nendsolid test\n")
+
+
+def _write_gltf(filepath):
+    with open(filepath, "w") as f:
+        f.write('{"asset": {"version": "2.0"}, "scene": 0}')
+
+
+def _write_default(doc_type, filepath):
+    with open(filepath, "w") as f:
+        f.write(f"Sample {doc_type} content")
+
+
+_SAMPLE_WRITERS = {
+    "csv": _write_csv,
+    "json": _write_json,
+    "yaml": _write_yaml,
+    "xml": _write_xml,
+    "ini": _write_ini,
+    "toml": _write_toml,
+    "env": _write_env,
+    "zip": _write_zip,
+    "tar": _write_tar,
+    "epub": _write_epub,
+    "obj": _write_obj,
+    "stl": _write_stl,
+    "gltf": _write_gltf,
+}
+
+
 def create_sample_file(doc_type, filepath):
-    ext = os.path.splitext(filepath)[1]
-    
-    if doc_type == "csv":
-        with open(filepath, "w") as f:
-            f.write("name,value\ntest,123\n")
-    elif doc_type == "json":
-        with open(filepath, "w") as f:
-            f.write('{"name": "test", "value": 123}')
-    elif doc_type == "yaml":
-        with open(filepath, "w") as f:
-            f.write("name: test\nvalue: 123\n")
-    elif doc_type == "xml":
-        with open(filepath, "w") as f:
-            f.write('<?xml version="1.0"?><root><item name="test" value="123"/></root>')
-    elif doc_type == "ini":
-        with open(filepath, "w") as f:
-            f.write("[section]\nkey = value\n")
-    elif doc_type == "toml":
-        with open(filepath, "w") as f:
-            f.write('[section]\nkey = "value"\n')
-    elif doc_type == "env":
-        with open(filepath, "w") as f:
-            f.write("KEY=value\n")
-    elif doc_type == "zip":
-        import zipfile
-        with zipfile.ZipFile(filepath, "w") as zf:
-            zf.writestr("test.txt", "content")
-    elif doc_type == "tar":
-        import tarfile
-        with tarfile.open(filepath, "w") as tf:
-            import io
-            data = b"content"
-            tf.addfile(tarfile.TarInfo("test.txt"), io.BytesIO(data))
-    elif doc_type == "epub":
-        from pyffice.ebook import epub
-        epub.create("Test", "Author", "<p>Chapter 1 content</p>", filepath)
-    elif doc_type == "obj":
-        with open(filepath, "w") as f:
-            f.write("v 1.0 2.0 3.0\nf 1 2 3\n")
-    elif doc_type == "stl":
-        with open(filepath, "w") as f:
-            f.write("solid test\nendsolid test\n")
-    elif doc_type == "gltf":
-        with open(filepath, "w") as f:
-            f.write('{"asset": {"version": "2.0"}, "scene": 0}')
+    writer = _SAMPLE_WRITERS.get(doc_type)
+    if writer is None:
+        _write_default(doc_type, filepath)
     else:
-        with open(filepath, "w") as f:
-            f.write(f"Sample {doc_type} content")
+        writer(filepath)
 
 
 def test_import_export(doc_type, category):

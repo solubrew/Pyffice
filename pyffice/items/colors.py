@@ -186,6 +186,23 @@ class PyfficeColor(PyfficeUnit):
         self.set_color(unit.get("color", "black"), unit.get("style", "name"))
         return self
 
+    # Format dispatch — adding a new color space means adding one
+    # ``set_<format>`` method and registering it here, rather than
+    # editing the ``set_color`` dispatcher.
+    _COLOR_FORMATS = {
+        "rgb": "set_rgb",
+        "rgba": "set_rgba",
+        "hex": "set_hex",
+        "name": "set_color_name",
+        "hsv": "set_hsv",
+        "hsl": "set_hsl",
+        "cmyk": "set_cmyk",
+        "yiq": "set_yiq",
+        "xyz": "set_xyz",
+        "lab": "set_lab",
+        "lms": "set_lms",
+    }
+
     def set_color(self, color, style):
         """
         Set the initial color based on the provided style.
@@ -194,30 +211,10 @@ class PyfficeColor(PyfficeUnit):
             color (str | tuple): The color value (e.g., HEX string or RGB tuple).
             style (str): The format of the color (e.g., "rgb", "hex", etc.).
         """
-        if style == "rgb":
-            self.set_rgb(color)
-        elif style == "hex":
-            self.set_hex(color)
-        elif style == "name":
-            self.set_color_name(color)
-        elif style == "rgba":
-            self.set_rgba(color)
-        elif style == "hsv":
-            self.set_hsv(color)
-        elif style == "hsl":
-            self.set_hsl(color)
-        elif style == "cmyk":
-            self.set_cmyk(color)
-        elif style == "yiq":
-            self.set_yiq(color)
-        elif style == "xyz":
-            self.set_xyz(color)
-        elif style == "lab":
-            self.set_lab(color)
-        elif style == "lms":
-            self.set_lms(color)
-        else:
+        method_name = self._COLOR_FORMATS.get(style)
+        if method_name is None:
             raise ValueError(f"Unsupported color style: {style}")
+        getattr(self, method_name)(color)
 
     def set_cmyk(self, value):
         """
