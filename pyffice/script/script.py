@@ -261,7 +261,8 @@ class PyfficeScript(PyfficeDocument):
         super().load_document(document)
         self.file_path = self.config.dikt.get("file_path", None)
         self.set_file_format_options()
-        self.set_pages(document.get("data", {}).get("pages", {}))
+        data = document.get("data", {}) or {}
+        self.set_pages(data.get("pages", {}) or {})
         self.set_text()
         self.set_file_format(document.get("file_format", None))
         self.set_compatibility(self.config.dikt.get("compatibility", "nchantdmatrix"))
