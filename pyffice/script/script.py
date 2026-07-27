@@ -13,7 +13,7 @@
 
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
-from os.path import abspath, dirname, join
+from os.path import abspath, dirname, join, exists
 import datetime as dt
 
 # ======================================3rd Party Library Modules=====================================================||
@@ -255,25 +255,25 @@ class PyfficeScript(PyfficeDocument):
 
     def load_document(self, document=None):
         """"""
-        logma.info(f"Load Document {document}")
         if document is None:
-            document = self.config.dikt.get("document", {})
-            if document is None:
-                document = {}
+            document = self.config.dikt.get("document", {}) or {}
+        logma.json(document)
         super().load_document(document)
+        self.file_path = self.config.dikt.get("file_path", None)
         self.set_file_format_options()
         self.set_pages(document.get("data", {}).get("pages", {}))
-        self.set_text(None)
+        self.set_text()
         self.set_file_format(document.get("file_format", None))
+        self.set_compatibility(self.config.dikt.get("compatibility", "nchantdmatrix"))
         return self
 
     def open_file(self, file_=None, if_text_only=True):
         """"""
-        logma.info(f"Open File {file_}")
-        # file_ = super().open_file(file_, False)
         if file_ is None:
             file_ = self.file_path
-        self.file_path = file_
+        self.set_syntax("file")
+        if exists(file_):
+            self.set_file_path(file_)
         for file_format in self.file_formats:
             if file_.endswith(file_format):
                 self.syntax = self.file_formats[file_format]
