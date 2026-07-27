@@ -1,0 +1,28 @@
+site_name: Pyffice
+site_description: Unified Microsoft Office suite — Word, Excel, PowerPoint, Outlook, OneNote, Visio, Project, SharePoint.
+site_author: Solutions Brewer
+
+theme:
+  name: material
+
+plugins:
+  - search
+  - mkdocstrings
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - API Reference:
+      - cli: api/cli.md
+      - config: api/config.md
+  - CLI Reference: ../CLI.md
+  - CI/CD: ../CI_CD.md
+  - Architecture: ../ARCHITECTURE.md
+
+docs_dir: .
+use_directory_urls: true

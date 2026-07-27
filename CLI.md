@@ -1,5 +1,15 @@
 # Pyffice CLI
 
+## Purpose
+
+Pyffice provides a unified interface across the Microsoft Office ecosystem
+— Word, Excel, PowerPoint, Outlook, OneNote, Visio, Project, and SharePoint.
+The CLI offers command-line access to the full suite: import/export
+between formats, batch document conversion, schema validation, and
+template-driven document generation. Use it for scripts, batch jobs, and
+automation pipelines that need to programmatically produce or consume Office
+files without launching the desktop applications.
+
 ## Usage
 
 ```bash
