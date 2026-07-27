@@ -23,32 +23,34 @@ Formulas:
   ACCRINT:
     description: Accrued Interest 'Returns the accrued interest for a security that
       pays periodic interest'
+    name: Accrued Interest Periodic
     formula: "=ACCRINT(<[issue]>, <[first_interest]>, <[settlement]>, <[rate]>, <[par]>, <[frequency]>, <~[basis]~>, <~[calc_method]~>)"
     tags:
     - Financial
   ACCRINTM:
     description: '''Returns the accrued interest for a security that pays interest at
       maturity'''
+    name: Accrued Interest at Maturity
     formula: "=ACCRINTM(<[issue]>, <[settlement]>, <[rate]>, <[par]>,<~[basis]~>)"
     tags:
     - Financial
   ACOS:
     description: '''Returns the arccosine of a number'''
-    name: ''
+    name: Arccosine
     formula: "=ACOS()"
     tags:
     - Math
     - Trigonometry
   ACOSH:
     description: Returns the inverse hyperbolic cosine of a number
-    name: ''
+    name: Inverse Hyperbolic Cosine
     formula: =ACOSH()
     tags:
     - Math
     - Trigonometry
   ACOT:
     description: '''Returns the arccotangent of a number'''
-    name: ''
+    name: Arccotangent
     formula: =ACOT()
     tags:
     - Excel 2013
@@ -56,7 +58,7 @@ Formulas:
     - Trigonometry
   ACOTH:
     description: Returns the hyperbolic arccotangent of a number
-    name: ''
+    name: Hyperbolic Arccotangent
     formula: =ACOTH()
     tags:
     - Excel 2013
@@ -64,14 +66,14 @@ Formulas:
     - Trigonometry
   ADDRESS:
     description: Returns a reference as text to a single cell in a worksheet
-    name: ''
-    formula: '='
+    name: Cell Reference as Text
+    formula: "=ADDRESS(<[row]>, <[column]>, <~[abs_num]~>, <~[a1]~>, <~[sheet_text]~>)"
     tags:
     - Lookup
     - Reference
   AGGREGATE:
     description: '''Returns an aggregate in a list or database'''
-    name: ''
+    name: Aggregate
     formula: =AGGREGATE()
     tags:
     - Math
@@ -79,169 +81,169 @@ Formulas:
   AMORDEGRC:
     description: Returns the depreciation for each accounting period by using a depreciation
       coefficient
-    name: ''
-    formula: '='
+    name: Depreciation by Coefficient
+    formula: "=AMORDEGRC(<[cost]>, <[date_purchased]>, <[first_period]>, <[salvage]>, <[period]>, <[rate]>, <~[basis]~>)"
     tags:
     - Financial'
   AMORLINC:
     description: Returns the depreciation for each accounting period
-    name: ''
-    formula: '='
+    name: Depreciation per Period
+    formula: "=AMORLINC(<[cost]>, <[date_purchased]>, <[first_period]>, <[salvage]>, <[period]>, <[rate]>, <~[basis]~>)"
     tags:
     - Financial
   AND:
     description: Returns TRUE if all of its arguments are TRUE
-    name: ''
-    formula: '='
+    name: Logical AND
+    formula: "=AND(<[logical1]>, <~[logical2]~>)"
     tags:
     - Logical
   ARABIC:
     description: Converts a Roman number to Arabic', 'as a number
-    name: ''
-    formula: '='
+    name: Arabic Numeral
+    formula: "=ARABIC(<[text]>)"
     tags:
     - Excel 2013 Math
     - trigonometry
   AREAS:
     description: Returns the number of areas in a reference
-    name: ''
-    formula: '='
+    name: Number of Areas in Reference
+    formula: "=AREAS(<[reference]>)"
     tags:
     - Lookup
     - reference
   ASC:
     description: Changes full-width (double-byte) English letters or katakana within
       a character string to half-width (single-byte) characters
-    name: ''
-    formula: '='
+    name: Full-width to Half-width
+    formula: "=ASC(<[text]>)"
     tags:
     - Text
   ASIN:
     description: Returns the arcsine of a number
-    name: ''
-    formula: '='
+    name: Arcsine
+    formula: "=ASIN(<[number]>)"
     tags:
     - Math
     - trigonometry
   ASINH:
     description: Returns the inverse hyperbolic sine of a number
-    name: ''
-    formula: '='
+    name: Inverse Hyperbolic Sine
+    formula: "=ASINH(<[number]>)"
     tags:
     - Math
     - trigonometry
   ATAN:
     description: Returns the arctangent of a number
-    name: ''
-    formula: '='
+    name: Arctangent
+    formula: "=ATAN(<[number]>)"
     tags:
     - Math
     - trigonometry
   ATAN2:
     description: Returns the arctangent from x-', 'y-coordinates
-    name: ''
-    formula: '='
+    name: Arctangent from x,y
+    formula: "=ATAN2(<[x_num]>, <[y_num]>)"
     tags:
     - Math
     - trigonometry
   ATANH:
     description: Returns the inverse hyperbolic tangent of a number
-    name: ''
-    formula: '='
+    name: Inverse Hyperbolic Tangent
+    formula: "=ATANH(<[number]>)"
     tags:
     - Math
     - trigonometry
   AVEDEV:
     description: Returns the average of the absolute deviations of data points from
       their mean
-    name: ''
-    formula: '='
+    name: Average Absolute Deviation
+    formula: "=AVEDEV(<[number1]>, <~[number2]~>)"
     tags:
     - Statistical
   AVERAGE:
     description: Returns the average of its arguments
-    name: ''
-    formula: '='
+    name: Average
+    formula: "=AVERAGE(<[number1]>, <~[number2]~>)"
     tags:
     - Statistical
   AVERAGEA:
     description: Returns the average of its arguments', 'including numbers', 'text,',
       'logical values
-    name: ''
-    formula: '='
+    name: Average Including Text/Logical
+    formula: "=AVERAGEA(<[value1]>, <~[value2]~>)"
     tags:
     - '[Statistical'
   AVERAGEIF:
     description: Returns the average (arithmetic mean) of all the cells in a range that
       meet a given criteria
-    name: ''
-    formula: '='
+    name: Average If
+    formula: "=AVERAGEIF(<[range]>, <[criteria]>, <~[average_range]~>)"
     tags:
     - Statistical
   AVERAGEIFS:
     description: Returns the average (arithmetic mean) of all cells that meet multiple
       criteria.
-    name: ''
-    formula: '='
+    name: Average Ifs
+    formula: "=AVERAGEIFS(<[average_range]>, <[criteria_range1]>, <[criteria1]>, <~[criteria_range2]~>, <~[criteria2]~>)"
     tags:
     - Statistical
   BAHTTEXT:
     description: "Converts a number to text', 'using the \xDF (baht) currency format"
-    name: ''
-    formula: '='
+    name: Number to Baht Text
+    formula: "=BAHTTEXT(<[number]>)"
     tags:
     - Text
   BASE:
     description: '''Converts a number into a text representation with the given radix
       (base)'''
-    name: ''
-    formula: '='
+    name: Base Conversion
+    formula: "=BASE(<[number]>, <[radix]>, <~[min_length]~>)"
     tags:
     - Math
     - trigonometry
   BESSELI:
     description: Returns the modified Bessel  In(x)
-    name: ''
-    formula: '='
+    name: Modified Bessel In(x)
+    formula: "=BESSELI(<[x]>, <[n]>)"
     tags:
     - Engineering
   BESSELJ:
     description: '''Returns the Bessel  Jn(x)'''
-    name: ''
-    formula: '='
+    name: Bessel Jn(x)
+    formula: "=BESSELJ(<[x]>, <[n]>)"
     tags:
     - Engineering
   BESSELK:
     description: '''Returns the modified Bessel  Kn(x)'''
-    name: ''
-    formula: '='
+    name: Modified Bessel Kn(x)
+    formula: "=BESSELK(<[x]>, <[n]>)"
     tags:
     - Engineering
   BESSELY:
     description: '''Returns the Bessel  Yn(x)'''
-    name: ''
-    formula: '='
+    name: Bessel Yn(x)
+    formula: "=BESSELY(<[x]>, <[n]>)"
     tags:
     - Engineering
   BETA.DIST:
     description: '''Returns the beta cumulative distribution'''
-    name: ''
-    formula: '='
+    name: Beta Cumulative Distribution
+    formula: "=BETA.DIST(<[x]>, <[alpha]>, <[beta]>, <[cumulative]>, <~[A]~>, <~[B]~>)"
     tags:
     - Excel 2010
     - Statistical
   BETA.INV:
     description: '''Returns the inverse of the cumulative distribution'' ''for a specified
       beta distribution'''
-    name: ''
-    formula: '='
+    name: Inverse Beta Distribution
+    formula: "=BETA.INV(<[probability]>, <[alpha]>, <[beta]>, <~[A]~>, <~[B]~>)"
     tags:
     - Excel 2010
     - Statistical
   BETADIST:
     description: '''Returns the beta cumulative distribution'''
-    name: ''
-    formula: '='
+    name: Beta Cumulative Distribution (legacy)
+    formula: "=BETADIST(<[x]>, <[alpha]>, <[beta]>, <~[A]~>, <~[B]~>)"
     tags:
     - Compatibility
     - Excel 2007
@@ -249,404 +251,404 @@ Formulas:
   BETAINV:
     description: '''Returns the inverse of the cumulative distribution'' ''for a specified
       beta distribution'''
-    name: ''
-    formula: '='
+    name: Inverse Beta Distribution (legacy)
+    formula: "=BETAINV(<[probability]>, <[alpha]>, <[beta]>, <~[A]~>, <~[B]~>)"
     tags:
     - Compatibility
     - Excel 2007
     - Statistical
   BIN2DEC:
     description: Converts a binary number to decimal
-    name: ''
-    formula: '='
+    name: Binary to Decimal
+    formula: "=BIN2DEC(<[number]>)"
     tags:
     - '[Engineering'
   BIN2HEX:
     description: Converts a binary number to hexadecimal
-    name: ''
-    formula: '='
+    name: Binary to Hexadecimal
+    formula: "=BIN2HEX(<[number]>, <~[places]~>)"
     tags:
     - '[Engineering'
   BIN2OCT:
     description: Converts a binary number to octal
-    name: ''
-    formula: '='
+    name: Binary to Octal
+    formula: "=BIN2OCT(<[number]>, <~[places]~>)"
     tags:
     - '[Engineering'
   BINOM.DIST:
     description: Returns the individual term binomial distribution probability
-    name: ''
-    formula: '='
+    name: Binomial Distribution Probability
+    formula: "=BINOM.DIST(<[number_s]>, <[trials]>, <[probability_s]>, <[cumulative]>)"
     tags:
     - '[Excel 2010 Statistical'
   BINOM.DIST.RANGE:
     description: Returns the probability of a trial result using a binomial distribution
-    name: ''
-    formula: '='
+    name: Binomial Distribution Range
+    formula: "=BINOM.DIST.RANGE(<[trials]>, <[probability_s]>, <[number_s]>, <~[number_s2]~>)"
     tags:
     - '[Excel 2013Statistical'
   BINOM.INV:
     description: Returns the smallest value for which the cumulative binomial distribution
       is less than or equal to a criterion value
-    name: ''
-    formula: '='
+    name: Binomial Inverse
+    formula: "=BINOM.INV(<[trials]>, <[probability_s]>, <[alpha]>)"
     tags:
     - '[Excel 2010Statistical'
   BINOMDIST:
     description: Returns the individual term binomial distribution probability In Excel
       2007', 'this is a Statistical .
-    name: ''
-    formula: '='
+    name: Binomial Distribution (legacy)
+    formula: "=BINOMDIST(<[number_s]>, <[trials]>, <[probability_s]>, <[cumulative]>)"
     tags:
     - '[Compatibility'
   BITAND:
     description: Returns a 'Bitwise And' of two numbers
-    name: ''
-    formula: '='
+    name: Bitwise AND
+    formula: "=BITAND(<[number1]>, <[number2]>)"
     tags:
     - Excel 2013 Engineering
   BITLSHIFT:
     description: Returns a value number shifted left by shift_amount bits
-    name: ''
-    formula: '='
+    name: Bitwise Left Shift
+    formula: "=BITLSHIFT(<[number]>, <[shift_amount]>)"
     tags:
     - Excel 2013 Engineering
   BITOR:
     description: Returns a bitwise OR of 2 numbers
-    name: ''
-    formula: '='
+    name: Bitwise OR
+    formula: "=BITOR(<[number1]>, <[number2]>)"
     tags:
     - Excel 2013 Engineering
   BITRSHIFT:
     description: Returns a value number shifted right by shift_amount bits
-    name: ''
-    formula: '='
+    name: Bitwise Right Shift
+    formula: "=BITRSHIFT(<[number]>, <[shift_amount]>)"
     tags:
     - Excel 2013 Engineering
   BITXOR:
     description: Returns a bitwise 'Exclusive Or' of two numbers
-    name: ''
-    formula: '='
+    name: Bitwise XOR
+    formula: "=BITXOR(<[number1]>, <[number2]>)"
     tags:
     - Excel 2013 Engineering
   CALL:
     description: Calls a procedure in a dynamic link library or code resource
-    name: ''
-    formula: '='
+    name: Call DLL Procedure
+    formula: "=CALL(<[register_id]>, <~[argument1]~>, <~[argument2]~>)"
     tags:
     - Add-in
     - Automation
   CEILING:
     description: Rounds a number to the nearest integer or to the nearest multiple of
       significance
-    name: ''
-    formula: '='
+    name: Ceiling
+    formula: "=CEILING(<[number]>, <[significance]>)"
     tags:
     - Math
     - trigonometry
   CEILING.MATH:
     description: Rounds a number up', 'to the nearest integer or to the nearest multiple
       of significance
-    name: ''
-    formula: '='
+    name: Ceiling Math
+    formula: "=CEILING.MATH(<[number]>, <~[significance]~>, <~[mode]~>)"
     tags:
     - Excel 2013 Math
     - trigonometry
   CEILING.PRECISE:
     description: Rounds a number the nearest integer or to the nearest multiple of significance.
       Regardless of the sign of the number, the number is rounded up.
-    name: ''
-    formula: ''
+    name: Ceiling Precise
+    formula: "=CEILING.PRECISE(<[number]>, <~[significance]~>)"
     tags:
     - '[Math'
     - trigonometry
   CELL:
     description: Returns information about the formatting', 'location', 'or contents
       of a cell not Excel Online.
-    name: ''
-    formula: ''
+    name: Cell Information
+    formula: "=CELL(<[info_type]>, <~[reference]~>)"
     tags:
     - Information
   CHAR:
     description: Returns the character specified by the code number
-    name: ''
-    formula: ''
+    name: Character from Code
+    formula: "=CHAR(<[number]>)"
     tags:
     - Text
   CHIDIST:
     description: 'Returns the one-tailed probability of the chi-squared distribution
       Note'': In Excel 2007'', ''this is a Statistical .'
-    name: ''
-    formula: ''
+    name: Chi-squared One-tailed (legacy)
+    formula: "=CHIDIST(<[x]>, <[deg_freedom]>)"
     tags:
     - Compatibility
   CHIINV:
     description: 'Returns the inverse of the one-tailed probability of the chi-squared
       distribution Note'': In Excel 2007'', ''this is a Statistical .'
-    name: ''
-    formula: ''
+    name: Inverse Chi-squared (legacy)
+    formula: "=CHIINV(<[probability]>, <[deg_freedom]>)"
     tags:
     - Compatibility
   CHISQ.DIST:
     description: Returns the cumulative beta probability density
-    name: ''
-    formula: ''
+    name: Chi-squared Distribution
+    formula: "=CHISQ.DIST(<[x]>, <[deg_freedom]>, <[cumulative]>)"
     tags:
     - Excel 2010  Statistical
   CHISQ.DIST.RT:
     description: Returns the one-tailed probability of the chi-squared distribution
-    name: ''
-    formula: ''
+    name: Chi-squared One-tailed
+    formula: "=CHISQ.DIST.RT(<[x]>, <[deg_freedom]>)"
     tags:
     - Excel 2010 Statistical
   CHISQ.INV:
     description: Returns the cumulative beta probability density
-    name: ''
-    formula: ''
+    name: Chi-squared Distribution Inverse
+    formula: "=CHISQ.INV(<[probability]>, <[deg_freedom]>)"
     tags:
     - Excel 2010 Statistical
   CHISQ.INV.RT:
     description: Returns the inverse of the one-tailed probability of the chi-squared
       distribution
-    name: ''
-    formula: ''
+    name: Inverse Chi-squared One-tailed
+    formula: "=CHISQ.INV.RT(<[probability]>, <[deg_freedom]>)"
     tags:
     - Excel 2010
     - Statistical
   CHISQ.TEST:
     description: Returns the test for independence
-    name: ''
-    formula: ''
+    name: Chi-squared Independence Test
+    formula: "=CHISQ.TEST(<[actual_range]>, <[expected_range]>)"
     tags:
     - Excel 2010 Statistical
   CHITEST:
     description: 'Returns the test for independence Note'': In Excel 2007'', ''this
       is a Statistical .'
-    name: ''
-    formula: ''
+    name: Chi-squared Independence Test (legacy)
+    formula: "=CHITEST(<[actual_range]>, <[expected_range]>)"
     tags:
     - Compatibility
   CHOOSE:
     description: Chooses a value from a list of values
-    name: ''
-    formula: ''
+    name: Choose Value from List
+    formula: "=CHOOSE(<[index_num]>, <[value1]>, <~[value2]~>)"
     tags:
     - Lookup
     - reference
   CLEAN:
     description: Removes all nonprintable characters from text
-    name: ''
-    formula: ''
+    name: Strip Nonprintable
+    formula: "=CLEAN(<[text]>)"
     tags:
     - Text
   CODE:
     description: Returns a numeric code for the first character in a text string
-    name: ''
-    formula: ''
+    name: Numeric Code of First Char
+    formula: "=CODE(<[text]>)"
     tags:
     - Text
   COLUMN:
     description: Returns the column number of a reference
-    name: ''
-    formula: ''
+    name: Column Number of Reference
+    formula: "=COLUMN(<~[reference]~>)"
     tags:
     - Lookup
     - reference
   COLUMNS:
     description: Returns the number of columns in a reference
-    name: ''
-    formula: ''
+    name: Number of Columns
+    formula: "=COLUMNS(<[array]>)"
     tags:
     - Lookup
     - reference
   COMBIN:
     description: Returns the number of combinations for a given number of objects
-    name: ''
-    formula: ''
+    name: Combinations
+    formula: "=COMBIN(<[number]>, <[number_chosen]>)"
     tags:
     - Math
     - trigonometry
   COMBINA:
     description: Returns the number of combinations with repetitions for a given number
       of items
-    name: ''
-    formula: ''
+    name: Combinations with Repetitions
+    formula: "=COMBINA(<[number]>, <[number_chosen]>)"
     tags:
     - Excel 2013 Math
     - trigonometry
   COMPLEX:
     description: Converts real', 'imaginary coefficients into a complex number
-    name: ''
-    formula: ''
+    name: Complex Number
+    formula: "=COMPLEX(<[real_num]>, <[i_num]>, <~[suffix]~>)"
     tags:
     - Engineering
   CONCAT:
     description: Combines the text from multiple ranges and/or strings', 'but it doesn't
       provide the delimiter or IgnoreEmpty arguments.
-    name: ''
-    formula: ''
+    name: Concatenate Range
+    formula: "=CONCAT(<[text1]>, <~[text2]~>)"
     tags:
     - Excel 2016'
     - Text
   CONCATENATE:
     description: Joins several text items into one text item
-    name: ''
-    formula: ''
+    name: Concatenate Strings
+    formula: "=CONCATENATE(<[text1]>, <~[text2]~>)"
     tags:
     - Text
   CONFIDENCE:
     description: Returns the confidence interval for a population mean In Excel 2007',
       'this is a Statistical .
-    name: ''
-    formula: ''
+    name: Confidence Interval (legacy)
+    formula: "=CONFIDENCE(<[alpha]>, <[standard_dev]>, <[size]>)"
     tags:
     - Compatibility
   CONFIDENCE.NORM:
     description: Returns the confidence interval for a population mean
-    name: ''
-    formula: ''
+    name: Confidence Interval Normal
+    formula: "=CONFIDENCE.NORM(<[alpha]>, <[standard_dev]>, <[size]>)"
     tags:
     - Excel 2010'
     - Statistical
   CONFIDENCE.T:
     description: Returns the confidence interval for a population mean', 'using a Student's
       t distribution
-    name: ''
-    formula: ''
+    name: Confidence Interval Student t
+    formula: "=CONFIDENCE.T(<[alpha]>, <[standard_dev]>, <[size]>)"
     tags:
     - Excel 2010
     - Statistical
   CONVERT:
     description: Converts a number from one measurement system to another
-    name: ''
-    formula: ''
+    name: Unit Conversion
+    formula: "=CONVERT(<[number]>, <[from_unit]>, <[to_unit]>)"
     tags:
     - Engineering'
   CORREL:
     description: Returns the correlation coefficient between two data sets
-    name: ''
-    formula: ''
+    name: Correlation Coefficient
+    formula: "=CORREL(<[array1]>, <[array2]>)"
     tags:
     - Statistical'
   COS:
     description: Returns the cosine of a number
-    name: ''
-    formula: ''
+    name: Cosine
+    formula: "=COS(<[number]>)"
     tags:
     - Math'
     - trigonometry
   COSH:
     description: Returns the hyperbolic cosine of a number
-    name: ''
-    formula: ''
+    name: Hyperbolic Cosine
+    formula: "=COSH(<[number]>)"
     tags:
     - Math'
     - trigonometry
   COT:
     description: Returns the hyperbolic cosine of a number
-    name: ''
-    formula: ''
+    name: Cotangent
+    formula: "=COT(<[number]>)"
     tags:
     - Excel 2013
     - Math
     - trigonometry
   COTH:
     description: Returns the cotangent of an angle
-    name: ''
-    formula: ''
+    name: Hyperbolic Cotangent
+    formula: "=COTH(<[number]>)"
     tags:
     - Excel 2013
     - Math
     - trigonometry
   COUNT:
     description: Counts how many numbers are in the list of arguments
-    name: ''
-    formula: ''
+    name: Count Numbers
+    formula: "=COUNT(<[value1]>, <~[value2]~>)"
     tags:
     - Statistical
   COUNTA:
     description: Counts how many values are in the list of arguments
-    name: ''
-    formula: ''
+    name: Count Non-blank
+    formula: "=COUNTA(<[value1]>, <~[value2]~>)"
     tags:
     - Statistical
   COUNTBLANK:
     description: Counts the number of blank cells within a range
-    name: ''
-    formula: ''
+    name: Count Blank
+    formula: "=COUNTBLANK(<[range]>)"
     tags:
     - Statistical
   COUNTIF:
     description: Counts the number of cells within a range that meet the given criteria
-    name: ''
-    formula: ''
+    name: Count If
+    formula: "=COUNTIF(<[range]>, <[criteria]>)"
     tags:
     - Statistical
   COUNTIFS:
     description: Counts the number of cells within a range that meet multiple criteria
-    name: ''
-    formula: ''
+    name: Count Ifs
+    formula: "=COUNTIFS(<[criteria_range1]>, <[criteria1]>, <~[criteria_range2]~>, <~[criteria2]~>)"
     tags:
     - Statistical
   COUPDAYBS:
     description: Returns the number of days from the beginning of the coupon period
       to the settlement date
-    name: ''
-    formula: ''
+    name: Days from Coupon Start
+    formula: "=COUPDAYBS(<[settlement]>, <[maturity]>, <[frequency]>, <~[basis]~>)"
     tags:
     - Financial
   COUPDAYS:
     description: Returns the number of days in the coupon period that contains the settlement
       date
-    name: ''
-    formula: ''
+    name: Days in Coupon Period
+    formula: "=COUPDAYS(<[settlement]>, <[maturity]>, <[frequency]>, <~[basis]~>)"
     tags:
     - Financial
   COUPDAYSNC:
     description: Returns the number of days from the settlement date to the next coupon
       date
-    name: ''
-    formula: ''
+    name: Days to Next Coupon
+    formula: "=COUPDAYSNC(<[settlement]>, <[maturity]>, <[frequency]>, <~[basis]~>)"
     tags:
     - Financial
   COUPNCD:
     description: Returns the next coupon date after the settlement date
-    name: ''
-    formula: ''
+    name: Next Coupon Date
+    formula: "=COUPNCD(<[settlement]>, <[maturity]>, <[frequency]>, <~[basis]~>)"
     tags:
     - Financial
   COUPNUM:
     description: Returns the number of coupons payable between the settlement date',
       'maturity date
-    name: ''
-    formula: ''
+    name: Number of Coupons Payable
+    formula: "=COUPNUM(<[settlement]>, <[maturity]>, <[frequency]>, <~[basis]~>)"
     tags:
     - Financial
   COUPPCD:
     description: Returns the previous coupon date before the settlement date
-    name: ''
-    formula: ''
+    name: Previous Coupon Date
+    formula: "=COUPPCD(<[settlement]>, <[maturity]>, <[frequency]>, <~[basis]~>)"
     tags:
     - Financial
   COVAR:
     description: Returns covariance', 'the average of the products of paired deviations
       In Excel 2007', 'this is a Statistical .
-    name: ''
-    formula: ''
+    name: Covariance (legacy)
+    formula: "=COVAR(<[array1]>, <[array2]>)"
     tags:
     - Compatibility
   COVARIANCE.P:
     description: Returns covariance', 'the average of the products of paired deviations
-    name: ''
-    formula: ''
+    name: Covariance Population
+    formula: "=COVARIANCE.P(<[array1]>, <[array2]>)"
     tags:
     - Excel 2010
     - Statistical
   COVARIANCE.S:
     description: Returns the sample covariance', 'the average of the products deviations
       for each data point pair in two data sets
-    name: ''
-    formula: ''
+    name: Covariance Sample
+    formula: "=COVARIANCE.S(<[array1]>, <[array2]>)"
     tags:
     - Excel 2010
     - Statistical
@@ -654,22 +656,22 @@ Formulas:
     description: Returns the smallest value for which the cumulative binomial distribution
       is less than or equal to a criterion value In Excel 2007', 'this is a Statistical
       .
-    name: ''
-    formula: ''
+    name: Critical Binomial (legacy)
+    formula: "=CRITBINOM(<[trials]>, <[probability_s]>, <[alpha]>)"
     tags:
     - Compatibility
   CSC:
     description: Returns the cosecant of an angle
-    name: ''
-    formula: ''
+    name: Cosecant
+    formula: "=CSC(<[number]>)"
     tags:
     - Excel 2013
     - Math
     - trigonometry
   CSCH:
     description: Returns the hyperbolic cosecant of an angle
-    name: ''
-    formula: ''
+    name: Hyperbolic Cosecant
+    formula: "=CSCH(<[number]>)"
     tags:
     - Excel 2013
     - Math
@@ -679,103 +681,103 @@ Formulas:
       'displays the name', 'property in the cell. A KPI is a quantifiable measurement',
       'such as monthly gross profit or quarterly employee turnover', 'used to monitor
       an organization's performance.
-    name: ''
-    formula: ''
+    name: Cube KPI Member
+    formula: "=CUBEKPIMEMBER(<[connection]>, <[kpi_name]>, <[kpi_property]>, <[caption]>)"
     tags:
     - Cube
   CUBEMEMBER:
     description: Returns a member or tuple in a cube hierarchy. Use to validate that
       the member or tuple exists in the cube.
-    name: ''
-    formula: ''
+    name: Cube Member
+    formula: "=CUBEMEMBER(<[connection]>, <[member_expression]>, <~[caption]~>)"
     tags:
     - Cube
   CUBEMEMBERPROPERTY:
     description: Returns the value of a member property in the cube. Use to validate
       that a member name exists within the cube', 'to return the specified property
       for this member.
-    name: ''
-    formula: ''
+    name: Cube Member Property
+    formula: "=CUBEMEMBERPROPERTY(<[connection]>, <[member_expression]>, <[property]>)"
     tags:
     - Cube
   CUBERANKEDMEMBER:
     description: Returns the nth', 'or ranked', 'member in a set. Use to return one
       or more elements in a set', 'such as the top sales performer or top 10 students.
-    name: ''
-    formula: ''
+    name: Cube Ranked Member
+    formula: "=CUBERANKEDMEMBER(<[connection]>, <[set_expression]>, <[rank]>, <~[caption]~>)"
     tags:
     - Cube
   CUBESET:
     description: '''Defines a calculated set of members or tuples by sending a set expression
       to the cube on the server'', ''which creates the set,'', ''then returns that set
       to Microsoft Office Excel.'
-    name: ''
-    formula: ''
+    name: Cube Set
+    formula: "=CUBESET(<[connection]>, <[set_expression]>, <~[caption]~>, <~[sort_order]~>, <~[sort_by]~>)"
     tags:
     - Cube
   CUBESETCOUNT:
     description: Returns the number of items in a set.
-    name: ''
-    formula: ''
+    name: Cube Set Count
+    formula: "=CUBESETCOUNT(<[set]>)"
     tags:
     - Cube
   CUBEVALUE:
     description: Returns an aggregated value from a cube.
-    name: ''
-    formula: ''
+    name: Cube Value
+    formula: "=CUBEVALUE(<[connection]>, <[member_expression1]>, <~[member_expression2]~>)"
     tags:
     - Cube
   CUMIPMT:
     description: Returns the cumulative interest paid between two periods
-    name: ''
-    formula: ''
+    name: Cumulative Interest Paid
+    formula: "=CUMIPMT(<[rate]>, <[nper]>, <[pv]>, <[start_period]>, <[end_period]>, <[type]>)"
     tags:
     - Financial
   CUMPRINC:
     description: Returns the cumulative principal paid on a loan between two periods
-    name: ''
-    formula: ''
+    name: Cumulative Principal Paid
+    formula: "=CUMPRINC(<[rate]>, <[nper]>, <[pv]>, <[start_period]>, <[end_period]>, <[type]>)"
     tags:
     - Financial
   DATE:
     description: Returns the serial number of a particular date
-    name: ''
-    formula: ''
+    name: Serial Date
+    formula: "=DATE(<[year]>, <[month]>, <[day]>)"
     tags:
     - Date
     - time
   DATEDIF:
     description: Calculates the number of days', 'months', 'or years between two dates.
       This  is useful in formulas where you need to calculate an age.
-    name: ''
-    formula: ''
+    name: Days/Months/Years Between
+    formula: "=DATEDIF(<[start_date]>, <[end_date]>, <[unit]>)"
     tags:
     - Date
     - time
   DATEVALUE:
     description: Converts a date in the form of text to a serial number
-    name: ''
-    formula: ''
+    name: Text Date to Serial
+    formula: "=DATEVALUE(<[date_text]>)"
     tags:
     - Date
     - time
   DAVERAGE:
     description: Returns the average of selected database entries
-    name: ''
-    formula: ''
+    name: Average Database Entries
+    formula: "=DAVERAGE(<[database]>, <[field]>, <[criteria]>)"
     tags:
     - Database
   DAY:
     description: Converts a serial number to a day of the month
-    name: ''
-    formula: ''
+    name: Day of Month
+    formula: "=DAY(<[serial_number]>)"
     tags:
     - Date
     - time
   DAYS:
     description: Returns the number of days between two dates
-    name: ''
-    formula: ''
+    name: Days Between
+    formula: "=DAYS(<[end_date]>, <[start_date]>)"
     tags:
     - Excel 2013
     - Date
@@ -783,353 +785,353 @@ Formulas:
   DAYS360:
     description: Calculates the number of days between two dates based on a 360-day
       year
-    name: ''
-    formula: ''
+    name: Days Between 360-day Year
+    formula: "=DAYS360(<[start_date]>, <[end_date]>, <~[method]~>)"
     tags:
     - Date
     - time
   DB:
     description: Returns the depreciation of an asset for a specified period by using
       the fixed-declining balance method
-    name: ''
-    formula: ''
+    name: Depreciation Fixed Declining Balance
+    formula: "=DB(<[cost]>, <[salvage]>, <[life]>, <[period]>, <~[month]~>)"
     tags:
     - Financial
   DBCS:
     description: Changes half-width (single-byte) English letters or katakana within
       a character string to full-width (double-byte) characters
-    name: ''
-    formula: ''
+    name: Half-width to Full-width
+    formula: "=DBCS(<[text]>)"
     tags:
     - Excel 2013
     - Text
   DCOUNT:
     description: Counts the cells that contain numbers in a database
-    name: ''
-    formula: ''
+    name: Count Numbers Database
+    formula: "=DCOUNT(<[database]>, <[field]>, <[criteria]>)"
     tags:
     - Database
   DCOUNTA:
     description: Counts nonblank cells in a database
-    name: ''
-    formula: ''
+    name: Count Non-blank Database
+    formula: "=DCOUNTA(<[database]>, <[field]>, <[criteria]>)"
     tags:
     - Database
   DDB:
     description: Returns the depreciation of an asset for a specified period by using
       the double-declining balance method or some other method that you specify
-    name: ''
-    formula: ''
+    name: Depreciation Double Declining Balance
+    formula: "=DDB(<[cost]>, <[salvage]>, <[life]>, <[period]>, <~[factor]~>)"
     tags:
     - Financial
   DEC2BIN:
     description: Converts a decimal number to binary
-    name: ''
-    formula: ''
+    name: Decimal to Binary
+    formula: "=DEC2BIN(<[number]>, <~[places]~>)"
     tags:
     - Engineering
   DEC2HEX:
     description: Converts a decimal number to hexadecimal
-    name: ''
-    formula: ''
+    name: Decimal to Hexadecimal
+    formula: "=DEC2HEX(<[number]>, <~[places]~>)"
     tags:
     - Engineering
   DEC2OCT:
     description: Converts a decimal number to octal
-    name: ''
-    formula: ''
+    name: Decimal to Octal
+    formula: "=DEC2OCT(<[number]>, <~[places]~>)"
     tags:
     - Engineering
   DECIMAL:
     description: Converts a text representation of a number in a given base into a decimal
       number
-    name: ''
-    formula: ''
+    name: Decimal Number
+    formula: "=DECIMAL(<[number]>, <[radix]>)"
     tags:
     - Excel 2013
     - Math
     - trigonometry
   DEGREES:
     description: Converts radians to degrees
-    name: ''
-    formula: ''
+    name: Degrees
+    formula: "=DEGREES(<[angle]>)"
     tags:
     - Math
     - trigonometry
   DELTA:
     description: Tests whether two values are equal
-    name: ''
-    formula: ''
+    name: Delta Test Equality
+    formula: "=DELTA(<[number1]>, <~[number2]~>)"
     tags:
     - Engineering
   DEVSQ:
     description: Returns the sum of squares of deviations
-    name: ''
-    formula: ''
+    name: Sum of Squared Deviations
+    formula: "=DEVSQ(<[number1]>, <~[number2]~>)"
     tags:
     - Statistical
   DGET:
     description: Extracts from a database a single record that matches the specified
       criteria
-    name: ''
-    formula: ''
+    name: Single Database Value
+    formula: "=DGET(<[database]>, <[field]>, <[criteria]>)"
     tags:
     - Database
   DISC:
     description: Returns the discount rate for a security
-    name: ''
-    formula: ''
+    name: Discount Rate
+    formula: "=DISC(<[settlement]>, <[maturity]>, <[pr]>, <[redemption]>, <~[basis]~>)"
     tags:
     - Financial
   DMAX:
     description: Returns the maximum value from selected database entries
-    name: ''
-    formula: ''
+    name: Max Database
+    formula: "=DMAX(<[database]>, <[field]>, <[criteria]>)"
     tags:
     - Database
   DMIN:
     description: Returns the minimum value from selected database entries
-    name: ''
-    formula: ''
+    name: Min Database
+    formula: "=DMIN(<[database]>, <[field]>, <[criteria]>)"
     tags:
     - Database
   DOLLAR:
     description: Converts a number to text', 'using the $ (dollar) currency format
-    name: ''
-    formula: ''
+    name: Dollar Format
+    formula: "=DOLLAR(<[number]>, <~[decimals]~>)"
     tags:
     - Text
   DOLLARDE:
     description: Converts a dollar price', 'expressed as a fraction', 'into a dollar
       price', 'expressed as a decimal number
-    name: ''
-    formula: ''
+    name: Fractional Dollar to Decimal
+    formula: "=DOLLARDE(<[fractional_dollar]>, <[fraction]>)"
     tags:
     - Financial
   DOLLARFR:
     description: Converts a dollar price', 'expressed as a decimal number', 'into a
       dollar price', 'expressed as a fraction
-    name: ''
-    formula: ''
+    name: Decimal Dollar to Fractional
+    formula: "=DOLLARFR(<[decimal_dollar]>, <[fraction]>)"
     tags:
     - Financial
   DPRODUCT:
     description: Multiplies the values in a particular field of records that match the
       criteria in a database
-    name: ''
-    formula: ''
+    name: Product Database
+    formula: "=DPRODUCT(<[database]>, <[field]>, <[criteria]>)"
     tags:
     - Database
   DSTDEV:
     description: Estimates the standard deviation based on a sample of selected database
       entries
-    name: ''
-    formula: ''
+    name: Sample Std Dev Database
+    formula: "=DSTDEV(<[database]>, <[field]>, <[criteria]>)"
     tags:
     - Database
   DSTDEVP:
     description: Calculates the standard deviation based on the entire population of
       selected database entries
-    name: ''
-    formula: ''
+    name: Population Std Dev Database
+    formula: "=DSTDEVP(<[database]>, <[field]>, <[criteria]>)"
     tags:
     - Database
   DSUM:
     description: Adds the numbers in the field column of records in the database that
       match the criteria
-    name: ''
-    formula: ''
+    name: Sum Database
+    formula: "=DSUM(<[database]>, <[field]>, <[criteria]>)"
     tags:
     - Database
   DURATION:
     description: Returns the annual duration of a security with periodic interest payments
-    name: ''
-    formula: ''
+    name: Duration Macaulay
+    formula: "=DURATION(<[settlement]>, <[maturity]>, <[coupon]>, <[yld]>, <[frequency]>, <~[basis]~>)"
     tags:
     - Financial
   DVAR:
     description: Estimates variance based on a sample from selected database entries
-    name: ''
-    formula: ''
+    name: Sample Variance Database
+    formula: "=DVAR(<[database]>, <[field]>, <[criteria]>)"
     tags:
     - Database
   DVARP:
     description: Calculates variance based on the entire population of selected database
       entries
-    name: ''
-    formula: ''
+    name: Population Variance Database
+    formula: "=DVARP(<[database]>, <[field]>, <[criteria]>)"
     tags:
     - Database
   EDATE:
     description: Returns the serial number of the date that is the indicated number
       of months before or after the start date
-    name: ''
-    formula: ''
+    name: Date After Months
+    formula: "=EDATE(<[start_date]>, <[months]>)"
     tags:
     - Date
     - time
   EFFECT:
     description: Returns the effective annual interest rate
-    name: ''
-    formula: ''
+    name: Effective Annual Interest Rate
+    formula: "=EFFECT(<[nominal_rate]>, <[npery]>)"
     tags:
     - Financial
   ENCODEURL:
     description: Returns a URL-encoded string This  is not available in Excel Online.
-    name: ''
-    formula: ''
+    name: URL Encode
+    formula: "=ENCODEURL(<[text]>)"
     tags:
     - Excel 2013
     - Web
   EOMONTH:
     description: Returns the serial number of the last day of the month before or after
       a specified number of months
-    name: ''
-    formula: ''
+    name: End of Month
+    formula: "=EOMONTH(<[start_date]>, <[months]>)"
     tags:
     - Date
     - time
   ERF:
     description: Returns the error
-    name: ''
-    formula: ''
+    name: Error Function
+    formula: "=ERF(<[lower_limit]>, <~[upper_limit]~>)"
     tags:
     - Engineering
   ERF.PRECISE:
     description: Returns the error
-    name: ''
-    formula: ''
+    name: Error Function Precise
+    formula: "=ERF.PRECISE(<[x]>)"
     tags:
     - Excel 2010
     - Engineering
   ERFC:
     description: Returns the complementary error
-    name: ''
-    formula: ''
+    name: Complementary Error Function
+    formula: "=ERFC(<[x]>)"
     tags:
     - Engineering
   ERFC.PRECISE:
     description: Returns the complementary ERF  integrated between x', 'infinity
-    name: ''
-    formula: ''
+    name: Complementary Error Function Precise
+    formula: "=ERFC.PRECISE(<[x]>)"
     tags:
     - Excel 2010
     - Engineering
   ERROR.TYPE:
     description: Returns a number corresponding to an error type
-    name: ''
-    formula: ''
+    name: Error Type Number
+    formula: "=ERROR.TYPE(<[error_val]>)"
     tags:
     - Information
   EUROCONVERT:
     description: Converts a number to euros', 'converts a number from euros to a euro
       member currency', 'or converts a number from one euro member currency to another
       by using the euro as an intermediary (triangulation).
-    name: ''
-    formula: ''
+    name: Euro Conversion (legacy)
+    formula: "=EUROCONVERT(<[number]>, <[source]>, <[target]>, <~[full_precision]~>, <~[triangulation_precision]~>)"
     tags:
     - Add-in
     - Automation
   EVEN:
     description: Rounds a number up to the nearest even integer
-    name: ''
-    formula: ''
+    name: Even
+    formula: "=EVEN(<[number]>)"
     tags:
     - Math
     - trigonometry
   EXACT:
     description: Checks to see if two text values are identical
-    name: ''
-    formula: ''
+    name: Exact Compare
+    formula: "=EXACT(<[text1]>, <[text2]>)"
     tags:
     - Text
   EXP:
     description: Returns e raised to the power of a given number
-    name: ''
-    formula: ''
+    name: Exponential
+    formula: "=EXP(<[number]>)"
     tags:
     - Math
     - trigonometry
   EXPON.DIST:
     description: Returns the exponential distribution
-    name: ''
-    formula: ''
+    name: Exponential Distribution
+    formula: "=EXPON.DIST(<[x]>, <[lambda]>, <[cumulative]>)"
     tags:
     - Excel 2010
     - Statistical
   EXPONDIST:
     description: Returns the exponential distribution In Excel 2007', 'this is a Statistical
       .
-    name: ''
-    formula: ''
+    name: Exponential Distribution (legacy)
+    formula: "=EXPONDIST(<[x]>, <[lambda]>, <[cumulative]>)"
     tags:
     - Compatibility
   F.DIST:
     description: Returns the F probability distribution
-    name: ''
-    formula: ''
+    name: F Distribution
+    formula: "=F.DIST(<[x]>, <[deg_freedom1]>, <[deg_freedom2]>, <[cumulative]>)"
     tags:
     - Excel 2010
     - Statistical
   F.DIST.RT:
     description: Returns the F probability distribution
-    name: ''
-    formula: ''
+    name: F Distribution One-tailed
+    formula: "=F.DIST.RT(<[x]>, <[deg_freedom1]>, <[deg_freedom2]>)"
     tags:
     - Excel 2010
     - Statistical
   F.INV:
     description: Returns the inverse of the F probability distribution
-    name: ''
-    formula: ''
+    name: Inverse F Distribution
+    formula: "=F.INV(<[probability]>, <[deg_freedom1]>, <[deg_freedom2]>)"
     tags:
     - Excel 2010
     - Statistical
   F.INV.RT:
     description: Returns the inverse of the F probability distribution
-    name: ''
-    formula: ''
+    name: Inverse F Distribution One-tailed
+    formula: "=F.INV.RT(<[probability]>, <[deg_freedom1]>, <[deg_freedom2]>)"
     tags:
     - Excel 2010
     - Statistical
   F.TEST:
     description: Returns the result of an F-test
-    name: ''
-    formula: ''
+    name: F Test
+    formula: "=F.TEST(<[array1]>, <[array2]>)"
     tags:
     - Excel 2010
     - Statistical
   FACT:
     description: Returns the factorial of a number
-    name: ''
-    formula: ''
+    name: Factorial
+    formula: "=FACT(<[number]>)"
     tags:
     - Math
     - trigonometry
   FACTDOUBLE:
     description: Returns the double factorial of a number
-    name: ''
-    formula: ''
+    name: Double Factorial
+    formula: "=FACTDOUBLE(<[number]>)"
     tags:
     - Math
     - trigonometry
   'FALSE':
     description: Returns the logical value FALSE
-    name: ''
-    formula: ''
+    name: Logical FALSE
+    formula: "=FALSE()"
     tags:
     - Logical
   FDIST:
     description: Returns the F probability distribution In Excel 2007', 'this is a Statistical
       .
-    name: ''
-    formula: ''
+    name: F Distribution (legacy)
+    formula: "=FDIST(<[x]>, <[deg_freedom1]>, <[deg_freedom2]>)"
     tags:
     - Compatibility
   FILTER:
     description: Filters a range of data based on criteria you define
-    name: ''
-    formula: ''
+    name: F Distribution (legacy)
+    formula: "=FDIST(<[x]>, <[deg_freedom1]>, <[deg_freedom2]>)"
     tags:
     - Office 365 button
     - Lookup
@@ -1137,54 +1139,54 @@ Formulas:
   FILTERXML:
     description: Returns specific data from the XML content by using the specified XPath
       This  is not available in Excel Online.
-    name: ''
-    formula: ''
+    name: Filter XML (legacy)
+    formula: "=FILTERXML(<[xml]>, <[xpath]>)"
     tags:
     - Excel 2013
     - Web
   FIND:
     description: Finds one text value within another (case-sensitive)
-    name: ''
-    formula: ''
+    name: Find String (case-sensitive)
+    formula: "=FIND(<[find_text]>, <[within_text]>, <~[start_num]~>)"
     tags:
     - FINDB
     - Text
   FINV:
     description: Returns the inverse of the F probability distribution
-    name: ''
-    formula: ''
+    name: Inverse F Distribution (legacy)
+    formula: "=FINV(<[probability]>, <[deg_freedom1]>, <[deg_freedom2]>)"
     tags:
     - Statistical
   FISHER:
     description: Returns the Fisher transformation
-    name: ''
-    formula: ''
+    name: Fisher Transformation
+    formula: "=FISHER(<[x]>)"
     tags:
     - Statistical
   FISHERINV:
     description: Returns the inverse of the Fisher transformation
-    name: ''
-    formula: ''
+    name: Inverse Fisher Transformation
+    formula: "=FISHERINV(<[y]>)"
     tags:
     - Statistical
   FIXED:
     description: Formats a number as text with a fixed number of decimals
-    name: ''
-    formula: ''
+    name: Fixed Format
+    formula: "=FIXED(<[number]>, <~[decimals]~>, <~[no_commas]~>)"
     tags:
     - Text
   FLOOR:
     description: Rounds a number down', 'toward zero In Excel 2007', 'Excel 2010', 'this
       is a Math', 'trigonometry .
-    name: ''
-    formula: ''
+    name: Floor
+    formula: "=FLOOR(<[number]>, <[significance]>)"
     tags:
     - Compatibility
   FLOOR.MATH:
     description: Rounds a number down', 'to the nearest integer or to the nearest multiple
       of significance
-    name: ''
-    formula: ''
+    name: Floor Math
+    formula: "=FLOOR.MATH(<[number]>, <~[significance]~>, <~[mode]~>)"
     tags:
     - Excel 2013
     - Math
@@ -1192,8 +1194,8 @@ Formulas:
   FLOOR.PRECISE:
     description: Rounds a number the nearest integer or to the nearest multiple of significance.
       Regardless of the sign of the number', 'the number is rounded up.
-    name: ''
-    formula: ''
+    name: Floor Precise
+    formula: "=FLOOR.PRECISE(<[number]>, <~[significance]~>)"
     tags:
     - Math
     - trigonometry
@@ -1201,1517 +1203,1514 @@ Formulas:
     description: Returns a value along a linear trend In Excel 2016', 'this  is replaced
       with FORECAST.LINEAR as part of the new Forecasting s', 'but it's still available
       for compatibility with earlier versions.
-    name: ''
-    formula: ''
+    name: Forecast
+    formula: "=FORECAST(<[x]>, <[known_ys]>, <[known_xs]>)"
     tags:
     - Statistical
   FORECAST.ETS:
     description: Returns a future value based on existing (historical) values by using
       the AAA version of the Exponential Smoothing (ETS) algorithm
-    name: ''
-    formula: ''
+    name: Forecast ETS
+    formula: "=FORECAST.ETS(<[target_date]>, <[values]>, <[timeline]>, <~[seasonality]~>, <~[data_completion]~>, <~[aggregation]~>)"
     tags:
     - Excel 2016
     - Statistical
   FORECAST.ETS.CONFINT:
     description: Returns a confidence interval for the forecast value at the specified
       target date
-    name: ''
-    formula: ''
+    name: Forecast ETS Confidence Interval
+    formula: "=FORECAST.ETS.CONFINT(<[target_date]>, <[values]>, <[timeline]>, <~[confidence_level]~>, <~[seasonality]~>, <~[data_completion]~>, <~[aggregation]~>)"
     tags:
     - Excel 2016
     - Statistical
   FORECAST.ETS.SEASONALITY:
     description: Returns the length of the repetitive pattern Excel detects for the
       specified time series
-    name: ''
-    formula: ''
+    name: Forecast ETS Seasonality
+    formula: "=FORECAST.ETS.SEASONALITY(<[values]>, <[timeline]>, <~[data_completion]~>, <~[aggregation]~>)"
     tags:
     - Excel 2016
     - Statistical
   FORECAST.ETS.STAT:
     description: Returns a statistical value as a result of time series forecasting
-    name: ''
-    formula: ''
+    name: Forecast ETS Statistic
+    formula: "=FORECAST.ETS.STAT(<[values]>, <[timeline]>, <[stat_type]>, <~[seasonality]~>, <~[data_completion]~>, <~[aggregation]~>)"
     tags:
     - Excel 2016
     - Statistical
   FORECAST.LINEAR:
     description: Returns a future value based on existing values
-    name: ''
-    formula: ''
+    name: Forecast Linear
+    formula: "=FORECAST.LINEAR(<[x]>, <[known_ys]>, <[known_xs]>)"
     tags:
     - Excel 2016
     - Statistical
   FORMULATEXT:
     description: Returns the formula at the given reference as text
-    name: ''
-    formula: ''
+    name: Formula at Reference
+    formula: "=FORMULATEXT(<[reference]>)"
     tags:
     - Excel 2013
     - Lookup
     - reference
   FREQUENCY:
     description: Returns a frequency distribution as a vertical array
-    name: ''
-    formula: ''
+    name: Frequency Distribution
+    formula: "=FREQUENCY(<[data_array]>, <[bins_array]>)"
     tags:
     - Statistical
   FTEST:
     description: Returns the result of an F-test In Excel 2007', 'this is a Statistical
       .
-    name: ''
-    formula: ''
+    name: F Test (legacy)
+    formula: "=FTEST(<[array1]>, <[array2]>)"
     tags:
     - Compatibility
   FV:
     description: Returns the future value of an investment
-    name: ''
-    formula: ''
+    name: Future Value
+    formula: "=FV(<[rate]>, <[nper]>, <[pmt]>, <~[pv]~>, <~[type]~>)"
     tags:
     - Financial
   FVSCHEDULE:
     description: Returns the future value of an initial principal after applying a series
       of compound interest rates
-    name: ''
-    formula: ''
+    name: Future Value With Schedule
+    formula: "=FVSCHEDULE(<[principal]>, <[schedule]>)"
     tags:
     - Financial
   GAMMA:
     description: Returns the Gamma  value
-    name: ''
-    formula: ''
+    name: Gamma Function
+    formula: "=GAMMA(<[number]>)"
     tags:
     - Excel 2013
     - Statistical
   GAMMA.DIST:
     description: Returns the gamma distribution
-    name: ''
-    formula: ''
+    name: Gamma Distribution
+    formula: "=GAMMA.DIST(<[x]>, <[alpha]>, <[beta]>, <[cumulative]>)"
     tags:
     - Excel 2010
     - Statistical
   GAMMA.INV:
     description: Returns the inverse of the gamma cumulative distribution
-    name: ''
-    formula: ''
+    name: Inverse Gamma Distribution
+    formula: "=GAMMA.INV(<[probability]>, <[alpha]>, <[beta]>)"
     tags:
     - Excel 2010
     - Statistical
   GAMMADIST:
     description: Returns the gamma distribution In Excel 2007', 'this is a Statistical
       .
-    name: ''
-    formula: ''
+    name: Gamma Distribution (legacy)
+    formula: "=GAMMADIST(<[x]>, <[alpha]>, <[beta]>, <[cumulative]>)"
     tags:
     - Compatibility
   GAMMAINV:
     description: Returns the inverse of the gamma cumulative distribution In Excel 2007',
       'this is a Statistical .
-    name: ''
-    formula: ''
+    name: Inverse Gamma Distribution (legacy)
+    formula: "=GAMMAINV(<[probability]>, <[alpha]>, <[beta]>)"
     tags:
     - Compatibility
   GAMMALN:
     description: "Returns the natural logarithm of the gamma ', '\u0393(x)"
-    name: ''
-    formula: ''
+    name: Natural Log of Gamma
+    formula: "=GAMMALN(<[x]>)"
     tags:
     - Statistical
   GAMMALN.PRECISE:
     description: "Returns the natural logarithm of the gamma ', '\u0393(x)"
-    name: ''
-    formula: ''
+    name: Natural Log of Gamma Precise
+    formula: "=GAMMALN.PRECISE(<[x]>)"
     tags:
     - Excel 2010
     - Statistical
   GAUSS:
     description: Returns 0.5 less than the standard normal cumulative distribution
-    name: ''
-    formula: ''
+    name: Gauss
+    formula: "=GAUSS(<[x]>)"
     tags:
     - Excel 2013
     - Statistical
   GCD:
     description: Returns the greatest common divisor
-    name: ''
-    formula: ''
+    name: Greatest Common Divisor
+    formula: "=GCD(<[number1]>, <~[number2]~>)"
     tags:
     - Math
     - trigonometry
   GEOMEAN:
     description: Returns the geometric mean
-    name: ''
-    formula: ''
+    name: Geometric Mean
+    formula: "=GEOMEAN(<[number1]>, <~[number2]~>)"
     tags:
     - Statistical
   GESTEP:
     description: Tests whether a number is greater than a threshold value
-    name: ''
-    formula: ''
+    name: Greater Than or Equal Step
+    formula: "=GESTEP(<[number]>, <~[step]~>)"
     tags:
     - Engineering
   GETPIVOTDATA:
     description: Returns data stored in a PivotTable report
-    name: ''
-    formula: ''
+    name: Pivot Table Data
+    formula: "=GETPIVOTDATA(<[data_field]>, <[pivot_table]>, <~[field1]~>, <~[item1]~>)"
     tags:
     - Lookup
     - reference
   GROWTH:
     description: Returns values along an exponential trend
-    name: ''
-    formula: ''
+    name: Growth
+    formula: "=GROWTH(<[known_ys]>, <~[known_xs]~>, <~[new_xs]~>, <~[const]~>)"
     tags:
     - Statistical
   HARMEAN:
     description: Returns the harmonic mean
-    name: ''
-    formula: ''
+    name: Harmonic Mean
+    formula: "=HARMEAN(<[number1]>, <~[number2]~>)"
     tags:
     - Statistical
   HEX2BIN:
     description: Converts a hexadecimal number to binary
-    name: ''
-    formula: ''
+    name: Hexadecimal to Binary
+    formula: "=HEX2BIN(<[number]>, <~[places]~>)"
     tags:
     - Engineering
   HEX2DEC:
     description: Converts a hexadecimal number to decimal
-    name: ''
-    formula: ''
+    name: Hexadecimal to Decimal
+    formula: "=HEX2DEC(<[number]>)"
     tags:
     - Engineering
   HEX2OCT:
     description: Converts a hexadecimal number to octal
-    name: ''
-    formula: ''
+    name: Hexadecimal to Octal
+    formula: "=HEX2OCT(<[number]>, <~[places]~>)"
     tags:
     - Engineering
   HLOOKUP:
     description: Looks in the top row of an array', 'returns the value of the indicated
       cell
-    name: ''
-    formula: ''
+    name: Horizontal Lookup
+    formula: "=HLOOKUP(<[lookup_value]>, <[table_array]>, <[row_index_num]>, <~[range_lookup]~>)"
     tags:
     - Lookup
     - reference
   HOUR:
     description: Converts a serial number to an hour
-    name: ''
-    formula: ''
+    name: Hour
+    formula: "=HOUR(<[serial_number]>)"
     tags:
     - Date
     - time
   HYPERLINK:
     description: Creates a shortcut or jump that opens a document stored on a network
       server', 'an intranet', 'or the Internet
-    name: ''
-    formula: ''
+    name: Hyperlink
+    formula: "=HYPERLINK(<[link_location]>, <~[friendly_name]~>)"
     tags:
     - Lookup
     - reference
   HYPGEOM.DIST:
     description: Returns the hypergeometric distribution
-    name: ''
-    formula: ''
+    name: Hypergeometric Distribution
+    formula: "=HYPGEOM.DIST(<[sample_s]>, <[number_sample]>, <[population_s]>, <[number_pop]>, <[cumulative]>)"
     tags:
     - Statistical
   HYPGEOMDIST:
     description: Returns the hypergeometric distribution In Excel 2007', 'this is a
       Statistical .
-    name: ''
-    formula: ''
+    name: Hypergeometric Distribution (legacy)
+    formula: "=HYPGEOMDIST(<[sample_s]>, <[number_sample]>, <[population_s]>, <[number_pop]>)"
     tags:
     - Compatibility
   IF:
     description: Specifies a logical test to perform
-    name: ''
-    formula: ''
+    name: If Condition
+    formula: "=IF(<[logical_test]>, <[value_if_true]>, <~[value_if_false]~>)"
     fx: =IF({a}={b},{c},{d})
     tags:
     - Logical
   IFERROR:
     description: Returns a value you specify if a formula evaluates to an error; otherwise',
       'returns the result of the formula
-    name: ''
-    formula: ''
+    name: If Error
+    formula: "=IFERROR(<[value]>, <[value_if_error]>)"
     tags:
     - Logical
   IFNA:
     description: 'Returns the value you specify if the expression resolves to #N/A'',
       ''otherwise returns the result of the expression'
-    name: ''
-    formula: ''
+    name: If N/A
+    formula: "=IFNA(<[value]>, <[value_if_na]>)"
     tags:
     - Excel 2013
     - Logical
   IFS:
     description: Checks whether one or more conditions are met', 'returns a value that
       corresponds to the first TRUE condition.
-    name: ''
-    formula: ''
+    name: Multiple Ifs
+    formula: "=IFS(<[logical_test1]>, <[value_if_true1]>, <~[logical_test2]~>, <~[value_if_true2]~>)"
     tags:
     - Excel 2016
     - Logical
   IMABS:
     description: Returns the absolute value (modulus) of a complex number
-    name: ''
-    formula: ''
+    name: Imaginary Absolute Value
+    formula: "=IMABS(<[inumber]>)"
     tags:
     - Engineering
   IMAGINARY:
     description: Returns the imaginary coefficient of a complex number
-    name: ''
-    formula: ''
+    name: Imaginary Coefficient
+    formula: "=IMAGINARY(<[inumber]>)"
     tags:
     - Engineering
   IMARGUMENT:
     description: Returns the argument theta', 'an angle expressed in radians
-    name: ''
-    formula: ''
+    name: Theta Argument
+    formula: "=IMARGUMENT(<[inumber]>)"
     tags:
     - Engineering
   IMCONJUGATE:
     description: Returns the complex conjugate of a complex number
-    name: ''
-    formula: ''
+    name: Complex Conjugate
+    formula: "=IMCONJUGATE(<[inumber]>)"
     tags:
     - Engineering
   IMCOS:
     description: Returns the cosine of a complex number
-    name: ''
-    formula: ''
+    name: Complex Cosine
+    formula: "=IMCOS(<[inumber]>)"
     tags:
     - Engineering
   IMCOSH:
     description: Returns the hyperbolic cosine of a complex number
-    name: ''
-    formula: ''
+    name: Complex Hyperbolic Cosine
+    formula: "=IMCOSH(<[inumber]>)"
     tags:
     - Excel 2013
     - Engineering
   IMCOT:
     description: Returns the cotangent of a complex number
-    name: ''
-    formula: ''
+    name: Complex Cotangent
+    formula: "=IMCOT(<[inumber]>)"
     tags:
     - Excel 2013
     - Engineering
   IMCSC:
     description: Returns the cosecant of a complex number
-    name: ''
-    formula: ''
+    name: Complex Cosecant
+    formula: "=IMCSC(<[inumber]>)"
     tags:
     - Excel 2013
     - Engineering
   IMCSCH:
     description: Returns the hyperbolic cosecant of a complex number
-    name: ''
-    formula: ''
+    name: Complex Hyperbolic Cosecant
+    formula: "=IMCSCH(<[inumber]>)"
     tags:
     - Excel 2013
     - Engineering
   IMDIV:
     description: Returns the quotient of two complex numbers
-    name: ''
-    formula: ''
+    name: Complex Quotient
+    formula: "=IMDIV(<[inumber1]>, <[inumber2]>)"
     tags:
     - Engineering
   IMEXP:
     description: Returns the exponential of a complex number
-    name: ''
-    formula: ''
+    name: Complex Exponential
+    formula: "=IMEXP(<[inumber]>)"
     tags:
     - Engineering
   IMLN:
     description: Returns the natural logarithm of a complex number
-    name: ''
-    formula: ''
+    name: Complex Natural Log
+    formula: "=IMLN(<[inumber]>)"
     tags:
     - Engineering
   IMLOG10:
     description: Returns the base-10 logarithm of a complex number
-    name: ''
-    formula: ''
+    name: Complex Base-10 Log
+    formula: "=IMLOG10(<[inumber]>)"
     tags:
     - Engineering
   IMLOG2:
     description: Returns the base-2 logarithm of a complex number
-    name: ''
-    formula: ''
+    name: Complex Base-2 Log
+    formula: "=IMLOG2(<[inumber]>)"
     tags:
     - Engineering
   IMPOWER:
     description: Returns a complex number raised to an integer power
-    name: ''
-    formula: ''
+    name: Complex Power
+    formula: "=IMPOWER(<[inumber]>, <[number]>)"
     tags:
     - Engineering
   IMPRODUCT:
     description: Returns the product of complex numbers
-    name: ''
-    formula: ''
+    name: Complex Product
+    formula: "=IMPRODUCT(<[inumber1]>, <~[inumber2]~>)"
     tags:
     - Engineering
   IMREAL:
     description: Returns the real coefficient of a complex number
-    name: ''
-    formula: ''
+    name: Real Coefficient
+    formula: "=IMREAL(<[inumber]>)"
     tags:
     - Engineering
   IMSEC:
     description: Returns the secant of a complex number
-    name: ''
-    formula: ''
+    name: Complex Secant
+    formula: "=IMSEC(<[inumber]>)"
     tags:
     - Excel 2013
     - Engineering
   IMSECH:
     description: Returns the hyperbolic secant of a complex number
-    name: ''
-    formula: ''
+    name: Complex Hyperbolic Secant
+    formula: "=IMSECH(<[inumber]>)"
     tags:
     - Excel 2013
     - Engineering
   IMSIN:
     description: Returns the sine of a complex number
-    name: ''
-    formula: ''
+    name: Complex Sine
+    formula: "=IMSIN(<[inumber]>)"
     tags:
     - Engineering
   IMSINH:
     description: Returns the hyperbolic sine of a complex number
-    name: ''
-    formula: ''
+    name: Complex Hyperbolic Sine
+    formula: "=IMSINH(<[inumber]>)"
     tags:
     - Excel 2013
     - Engineering
   IMSQRT:
     description: Returns the square root of a complex number
-    name: ''
-    formula: ''
+    name: Complex Square Root
+    formula: "=IMSQRT(<[inumber]>)"
     tags:
     - Engineering
   IMSUB:
     description: Returns the difference between two complex numbers
-    name: ''
-    formula: ''
+    name: Complex Difference
+    formula: "=IMSUB(<[inumber1]>, <[inumber2]>)"
     tags:
     - Engineering
   IMSUM:
     description: Returns the sum of complex numbers
-    name: ''
-    formula: ''
+    name: Complex Sum
+    formula: "=IMSUM(<[inumber1]>, <~[inumber2]~>)"
     tags:
     - Engineering
   IMTAN:
     description: Returns the tangent of a complex number
-    name: ''
-    formula: ''
+    name: Complex Tangent
+    formula: "=IMTAN(<[inumber]>)"
     tags:
     - Excel 2013
     - Engineering
   INDEX:
     description: Uses an index to choose a value from a reference or array
-    name: ''
-    formula: ''
+    name: Index Value
+    formula: "=INDEX(<[array]>, <[row_num]>, <~[column_num]~>)"
     tags:
     - Lookup
     - reference
   INDIRECT:
     description: Returns a reference indicated by a text value
-    name: ''
-    formula: ''
+    name: Indirect Reference
+    formula: "=INDIRECT(<[ref_text]>, <~[a1]~>)"
     tags:
     - Lookup
     - reference
   INFO:
     description: Returns information about the current operating environment This  is
       not available in Excel Online.
-    name: ''
-    formula: ''
+    name: Environment Information
+    formula: "=INFO(<[type_text]>)"
     tags:
     - Information
   INT:
     description: Rounds a number down to the nearest integer
-    name: ''
-    formula: ''
+    name: Integer
+    formula: "=INT(<[number]>)"
     tags:
     - Math
     - trigonometry
   INTERCEPT:
     description: Returns the intercept of the linear regression line
-    name: ''
-    formula: ''
+    name: Intercept
+    formula: "=INTERCEPT(<[known_ys]>, <[known_xs]>)"
     tags:
     - Statistical
   INTRATE:
     description: Returns the interest rate for a fully invested security
-    name: ''
-    formula: ''
+    name: Interest Rate for Fully Invested Security
+    formula: "=INTRATE(<[settlement]>, <[maturity]>, <[investment]>, <[redemption]>, <~[basis]~>)"
     tags:
     - Financial
   IPMT:
     description: Returns the interest payment for an investment for a given period
-    name: ''
-    formula: ''
+    name: Interest Payment for Period
+    formula: "=IPMT(<[rate]>, <[per]>, <[nper]>, <[pv]>, <~[fv]~>, <~[type]~>)"
     tags:
     - Financial
   IRR:
     description: Returns the internal rate of return for a series of cash flows
-    name: ''
-    formula: ''
+    name: Internal Rate of Return
+    formula: "=IRR(<[values]>, <~[guess]~>)"
     tags:
     - Financial
   ISBLANK:
     description: Returns TRUE if the value is blank
-    name: ''
-    formula: ''
+    name: Is Blank
+    formula: "=ISBLANK(<[value]>)"
     tags:
     - Information
   ISERR:
     description: 'Returns TRUE if the value is any error value except #N/A'
-    name: ''
-    formula: ''
+    name: Is Error Except NA
+    formula: "=ISERR(<[value]>)"
     tags:
     - Information
   ISERROR:
     description: Returns TRUE if the value is any error value
-    name: ''
-    formula: ''
+    name: Is Error
+    formula: "=ISERROR(<[value]>)"
     tags:
     - Information
   ISEVEN:
     description: Returns TRUE if the number is even
-    name: ''
-    formula: ''
+    name: Is Even
+    formula: "=ISEVEN(<[number]>)"
     tags:
     - Information
   ISFORMULA:
-    name: ''
-    formula: ''
+    name: Is Formula
+    formula: "=ISFORMULA(<[reference]>)"
     tags:
     - Excel 2013
   ISLOGICAL:
     description: Returns TRUE if the value is a logical value
-    name: ''
-    formula: ''
+    name: Is Logical
+    formula: "=ISLOGICAL(<[value]>)"
     tags:
     - Information
   ISNA:
     description: 'Returns TRUE if the value is the #N/A error value'
-    name: ''
-    formula: ''
+    name: Is N/A
+    formula: "=ISNA(<[value]>)"
     tags:
     - Information
   ISNONTEXT:
     description: Returns TRUE if the value is not text
-    name: ''
-    formula: ''
+    name: Is Non-text
+    formula: "=ISNONTEXT(<[value]>)"
     tags:
     - Information
   ISNUMBER:
     description: Returns TRUE if the value is a number
-    name: ''
-    formula: ''
+    name: Is Number
+    formula: "=ISNUMBER(<[value]>)"
     tags:
     - Information
   ISO.CEILING:
     description: Returns a number that is rounded up to the nearest integer or to the
       nearest multiple of significance
-    name: ''
-    formula: ''
+    name: ISO Ceiling
+    formula: "=ISO.CEILING(<[number]>, <~[significance]~>)"
     tags:
     - Excel 2013 Math
     - trigonometry
   ISODD:
     description: Returns TRUE if the number is odd
-    name: ''
-    formula: ''
+    name: Is Odd
+    formula: "=ISODD(<[number]>)"
     tags:
     - Information
   ISOWEEKNUM:
     description: Returns the number of the ISO week number of the year for a given date
-    name: ''
-    formula: ''
+    name: ISO Week Number
+    formula: "=ISOWEEKNUM(<[date]>)"
     tags:
     - Excel 2013 Date
     - time
   ISPMT:
     description: Calculates the interest paid during a specific period of an investment
-    name: ''
-    formula: ''
+    name: Interest Paid During Period
+    formula: "=ISPMT(<[rate]>, <[per]>, <[nper]>, <[pv]>)"
     tags:
     - Financial
   ISREF:
     description: Returns TRUE if the value is a reference
-    name: ''
-    formula: ''
+    name: Is Reference
+    formula: "=ISREF(<[value]>)"
     tags:
     - Information
   ISTEXT:
     description: Returns TRUE if the value is text
-    name: ''
-    formula: ''
+    name: Is Text
+    formula: "=ISTEXT(<[value]>)"
     tags:
     - Information
-  Information:
-    description: Returns TRUE if there is a reference to a cell that contains a formula
-    formula: ''
   JIS:
     description: Changes half-width (single-byte) characters within a string to full-width
       (double-byte) characters
-    name: ''
-    formula: ''
+    name: Japanese Industrial Standard
+    formula: "=JIS(<[text]>)"
     tags:
     - Text
   KURT:
     description: Returns the kurtosis of a data set
-    name: ''
-    formula: ''
+    name: Kurtosis
+    formula: "=KURT(<[number1]>, <~[number2]~>)"
     tags:
     - Statistical
   LARGE:
     description: Returns the k-th largest value in a data set
-    name: ''
-    formula: ''
+    name: Large
+    formula: "=LARGE(<[array]>, <[k]>)"
     tags:
     - Statistical
   LCM:
     description: Returns the least common multiple
-    name: ''
-    formula: ''
+    name: Least Common Multiple
+    formula: "=LCM(<[number1]>, <~[number2]~>)"
     tags:
     - Math
     - trigonometry
   LEFT:
     description: Returns the leftmost characters from a text value
-    name: ''
-    formula: ''
+    name: Left Substring
+    formula: "=LEFT(<[text]>, <~[num_chars]~>)"
     tags:
     - LEFTB
     - Text
   LEN:
     description: Returns the number of characters in a text string
-    name: ''
-    formula: ''
+    name: String Length
+    formula: "=LEN(<[text]>)"
     tags:
     - LENB
     - Text
   LINEST:
     description: Returns the parameters of a linear trend
-    name: ''
-    formula: ''
+    name: Linear Trend Parameters
+    formula: "=LINEST(<[known_ys]>, <~[known_xs]~>, <~[const]~>, <~[stats]~>)"
     tags:
     - Statistical
   LN:
     description: Returns the natural logarithm of a number
-    name: ''
-    formula: ''
+    name: Natural Logarithm
+    formula: "=LN(<[number]>)"
     tags:
     - Math
     - trigonometry
   LOG:
     description: Returns the logarithm of a number to a specified base
-    name: ''
-    formula: ''
+    name: Logarithm
+    formula: "=LOG(<[number]>, <~[base]~>)"
     tags:
     - Math
     - trigonometry
   LOG10:
     description: Returns the base-10 logarithm of a number
-    name: ''
-    formula: ''
+    name: Base-10 Logarithm
+    formula: "=LOG10(<[number]>)"
     tags:
     - Math
     - trigonometry
   LOGEST':
     description: Returns the parameters of an exponential trend
-    name: ''
-    formula: ''
+    name: Base-10 Logarithm
+    formula: "=LOG10(<[number]>)"
     tags:
     - Statistical
   LOGINV:
     description: Returns the inverse of the lognormal cumulative distribution
-    name: ''
-    formula: ''
+    name: Inverse Log-normal (legacy)
+    formula: "=LOGINV(<[probability]>, <[mean]>, <[standard_dev]>)"
     tags:
     - Compatibility
   LOGNORM.DIST:
     description: Returns the cumulative lognormal distribution
-    name: ''
-    formula: ''
+    name: Log-normal Distribution
+    formula: "=LOGNORM.DIST(<[x]>, <[mean]>, <[standard_dev]>, <[cumulative]>)"
     tags:
     - Excel 2010
     - Statistical
   LOGNORM.INV:
     description: Returns the inverse of the lognormal cumulative distribution
-    name: ''
-    formula: ''
+    name: Inverse Log-normal
+    formula: "=LOGNORM.INV(<[probability]>, <[mean]>, <[standard_dev]>)"
     tags:
     - Excel 2010
     - Statistical
   LOGNORMDIST:
     description: Returns the cumulative lognormal distribution
-    name: ''
-    formula: ''
+    name: Log-normal Distribution (legacy)
+    formula: "=LOGNORMDIST(<[x]>, <[mean]>, <[standard_dev]>)"
     tags:
     - Compatibility
   LOOKUP:
     description: Looks up values in a vector or array
-    name: ''
-    formula: ''
+    name: Lookup Value
+    formula: "=LOOKUP(<[lookup_value]>, <[lookup_vector]>, <~[result_vector]~>)"
     fx: =IF(a=b,c,d)
     tags:
     - Lookup
     - reference
   LOWER:
     description: Converts text to lowercase
-    name: ''
-    formula: ''
+    name: Lowercase
+    formula: "=LOWER(<[text]>)"
     tags:
     - Text
   MATCH:
     description: Looks up values in a reference or array
-    name: ''
-    formula: ''
+    name: Position in Array
+    formula: "=MATCH(<[lookup_value]>, <[lookup_array]>, <~[match_type]~>)"
     tags:
     - Lookup
     - reference
   MAX:
     description: Returns the maximum value in a list of arguments
-    name: ''
-    formula: ''
+    name: Maximum
+    formula: "=MAX(<[number1]>, <~[number2]~>)"
     tags:
     - Statistical
   MAXA:
     description: Returns the maximum value in a list of arguments', 'including numbers',
       'text,', 'logical values
-    name: ''
-    formula: ''
+    name: Maximum Including Text/Logical
+    formula: "=MAXA(<[value1]>, <~[value2]~>)"
     tags:
     - Statistical
   MAXIFS:
     description: Returns the maximum value among cells specified by a given set of conditions
       or criteria
-    name: ''
-    formula: ''
+    name: Maximum Ifs
+    formula: "=MAXIFS(<[max_range]>, <[criteria_range1]>, <[criteria1]>, <~[criteria_range2]~>, <~[criteria2]~>)"
     tags:
     - Excel 2016
     - Statistical
   MDETERM:
     description: Returns the matrix determinant of an array
-    name: ''
-    formula: ''
+    name: Matrix Determinant
+    formula: "=MDETERM(<[array]>)"
     tags:
     - Math
     - trigonometry
   MDURATION:
     description: Returns the Macauley modified duration for a security with an assumed
       par value of $100
-    name: ''
-    formula: ''
+    name: Modified Duration
+    formula: "=MDURATION(<[settlement]>, <[maturity]>, <[coupon]>, <[yld]>, <[frequency]>, <~[basis]~>)"
     tags:
     - Financial
   MEDIAN:
     description: Returns the median of the given numbers
-    name: ''
-    formula: ''
+    name: Median
+    formula: "=MEDIAN(<[number1]>, <~[number2]~>)"
     tags:
     - Statistical
   MID:
     description: Returns a specific number of characters from a text string starting
       at the position you specify
-    name: ''
-    formula: ''
+    name: Mid Substring
+    formula: "=MID(<[text]>, <[start_num]>, <[num_chars]>)"
     tags:
     - MIDB
     - Text
   MIN:
     description: Returns the minimum value in a list of arguments
-    name: ''
-    formula: ''
+    name: Minimum
+    formula: "=MIN(<[number1]>, <~[number2]~>)"
     tags:
     - Statistical
   MINA:
     description: Returns the smallest value in a list of arguments', 'including numbers',
       'text,', 'logical values
-    name: ''
-    formula: ''
+    name: Minimum Including Text/Logical
+    formula: "=MINA(<[value1]>, <~[value2]~>)"
     tags:
     - Statistical
   MINIFS:
     description: Returns the minimum value among cells specified by a given set of conditions
       or criteria.
-    name: ''
-    formula: ''
+    name: Minimum Ifs
+    formula: "=MINIFS(<[min_range]>, <[criteria_range1]>, <[criteria1]>, <~[criteria_range2]~>, <~[criteria2]~>)"
     tags:
     - Excel 2016
     - Statistical
   MINUTE:
     description: Converts a serial number to a minute
-    name: ''
-    formula: ''
+    name: Minute
+    formula: "=MINUTE(<[serial_number]>)"
     tags:
     - Date
     - time
   MINVERSE:
     description: Returns the matrix inverse of an array
-    name: ''
-    formula: ''
+    name: Matrix Inverse
+    formula: "=MINVERSE(<[array]>)"
     tags:
     - Math
     - trigonometry
   MIRR:
     description: Returns the internal rate of return where positive', 'negative cash
       flows are financed at different rates
-    name: ''
-    formula: ''
+    name: Modified Internal Rate of Return
+    formula: "=MIRR(<[values]>, <[finance_rate]>, <[reinvest_rate]>)"
     tags:
     - Financial
   MMULT:
     description: Returns the matrix product of two arrays
-    name: ''
-    formula: ''
+    name: Matrix Multiplication
+    formula: "=MMULT(<[array1]>, <[array2]>)"
     tags:
     - Math
     - trigonometry
   MOD:
     description: Returns the remainder from division
-    name: ''
-    formula: ''
+    name: Modulo
+    formula: "=MOD(<[number]>, <[divisor]>)"
     tags:
     - Math
     - trigonometry
   MODE:
     description: Returns the most common value in a data set In Excel 2007', 'this is
       a Statistical .
-    name: ''
-    formula: ''
+    name: Most Common Value (legacy)
+    formula: "=MODE(<[number1]>, <~[number2]~>)"
     tags:
     - Compatibility
   MODE.MULT:
     description: Returns a vertical array of the most frequently occurring', 'or repetitive
       values in an array or range of data
-    name: ''
-    formula: ''
+    name: Most Common Values
+    formula: "=MODE.MULT(<[number1]>, <~[number2]~>)"
     tags:
     - Excel 2010
     - Statistical
   MODE.SNGL:
     description: Returns the most common value in a data set
-    name: ''
-    formula: ''
+    name: Most Common Value
+    formula: "=MODE.SNGL(<[number1]>, <~[number2]~>)"
     tags:
     - Excel 2010
     - Statistical
   MONTH:
     description: Converts a serial number to a month
-    name: ''
-    formula: ''
+    name: Month
+    formula: "=MONTH(<[serial_number]>)"
     tags:
     - Date
     - time
   MROUND:
     description: Returns a number rounded to the desired multiple
-    name: ''
-    formula: ''
+    name: Multiple Round
+    formula: "=MROUND(<[number]>, <[multiple]>)"
     tags:
     - Math
     - trigonometry
   MULTINOMIAL:
     description: Returns the multinomial of a set of numbers
-    name: ''
-    formula: ''
+    name: Multinomial
+    formula: "=MULTINOMIAL(<[number1]>, <~[number2]~>)"
     tags:
     - Math
     - trigonometry
   MUNIT:
     description: Returns the unit matrix or the specified dimension
-    name: ''
-    formula: ''
+    name: Unit Matrix
+    formula: "=MUNIT(<[dimension]>)"
     tags:
     - Excel 2013
     - Math
     - trigonometry
   N:
     description: Returns a value converted to a number
-    name: ''
-    formula: ''
+    name: Value to Number
+    formula: "=N(<[value]>)"
     tags:
     - Information
   NA:
     description: 'Returns the error value #N/A'
-    name: ''
-    formula: ''
+    name: N/A Error
+    formula: "=NA()"
     tags:
     - Information
   NEGBINOM.DIST:
     description: Returns the negative binomial distribution
-    name: ''
-    formula: ''
+    name: Negative Binomial Distribution
+    formula: "=NEGBINOM.DIST(<[number_f]>, <[number_s]>, <[probability_s]>, <[cumulative]>)"
     tags:
     - Excel 2010
     - Statistical
   NEGBINOMDIST:
     description: Returns the negative binomial distribution In Excel 2007', 'this is
       a Statistical .
-    name: ''
-    formula: ''
+    name: Negative Binomial Distribution (legacy)
+    formula: "=NEGBINOMDIST(<[number_f]>, <[number_s]>, <[probability_s]>)"
     tags:
     - Compatibility
   NETWORKDAYS:
     description: Returns the number of whole workdays between two dates
-    name: ''
-    formula: ''
+    name: Whole Workdays Between
+    formula: "=NETWORKDAYS(<[start_date]>, <[end_date]>, <~[holidays]~>)"
     tags:
     - Date
     - time
   NETWORKDAYS.INTL:
     description: Returns the number of whole workdays between two dates using parameters
       to indicate which', 'how many days are weekend days
-    name: ''
-    formula: ''
+    name: Whole Workdays Between Intl
+    formula: "=NETWORKDAYS.INTL(<[start_date]>, <[end_date]>, <~[weekend]~>, <~[holidays]~>)"
     tags:
     - Excel 2010
     - Date
     - time
   NOMINAL:
     description: Returns the annual nominal interest rate
-    name: ''
-    formula: ''
+    name: Nominal Annual Interest Rate
+    formula: "=NOMINAL(<[effect_rate]>, <[npery]>)"
     tags:
     - Financial
   NORM.DIST:
     description: Returns the normal cumulative distribution
-    name: ''
-    formula: ''
+    name: Normal Cumulative Distribution
+    formula: "=NORM.DIST(<[x]>, <[mean]>, <[standard_dev]>, <[cumulative]>)"
     tags:
     - Excel 2010
     - Statistical
   NORM.INV:
     description: 'Returns the inverse of the normal cumulative distribution Note'':
       In Excel 2007'', ''this is a Statistical .'
-    name: ''
-    formula: ''
+    name: Inverse Normal Distribution
+    formula: "=NORM.INV(<[probability]>, <[mean]>, <[standard_dev]>)"
     tags:
     - Excel 2010
     - Compatibility
   NORM.S.DIST:
     description: Returns the standard normal cumulative distribution
-    name: ''
-    formula: ''
+    name: Standard Normal Cumulative Distribution
+    formula: "=NORM.S.DIST(<[z]>, <[cumulative]>)"
     tags:
     - Excel 2010
     - Statistical
   NORM.S.INV:
     description: Returns the inverse of the standard normal cumulative distribution
-    name: ''
-    formula: ''
+    name: Inverse Standard Normal
+    formula: "=NORM.S.INV(<[probability]>)"
     tags:
     - Excel 2010
     - Statistical
   NORMDIST:
     description: Returns the normal cumulative distribution In Excel 2007', 'this is
       a Statistical .
-    name: ''
-    formula: ''
+    name: Normal Cumulative Distribution (legacy)
+    formula: "=NORMDIST(<[x]>, <[mean]>, <[standard_dev]>, <[cumulative]>)"
     tags:
     - Compatibility
   NORMINV:
     description: Returns the inverse of the normal cumulative distribution
-    name: ''
-    formula: ''
+    name: Inverse Normal Distribution (legacy)
+    formula: "=NORMINV(<[probability]>, <[mean]>, <[standard_dev]>)"
     tags:
     - Statistical
   NORMSDIST:
     description: Returns the standard normal cumulative distribution In Excel 2007',
       'this is a Statistical .
-    name: ''
-    formula: ''
+    name: Standard Normal Distribution (legacy)
+    formula: "=NORMSDIST(<[z]>)"
     tags:
     - Compatibility
   NORMSINV:
     description: Returns the inverse of the standard normal cumulative distribution
       In Excel 2007', 'this is a Statistical .
-    name: ''
-    formula: ''
+    name: Inverse Standard Normal (legacy)
+    formula: "=NORMSINV(<[probability]>)"
     tags:
     - Compatibility
   NOT:
     description: Reverses the logic of its argument
-    name: ''
-    formula: ''
+    name: Logical NOT
+    formula: "=NOT(<[logical]>)"
     tags:
     - Logical
   NOW:
     description: Returns the serial number of the current date', 'time
-    name: ''
-    formula: ''
+    name: Current Date and Time
+    formula: "=NOW()"
     tags:
     - Date
     - time
   NPER:
     description: Returns the number of periods for an investment
-    name: ''
-    formula: ''
+    name: Number of Periods
+    formula: "=NPER(<[rate]>, <[pmt]>, <[pv]>, <~[fv]~>, <~[type]~>)"
     tags:
     - Financial
   NPV:
     description: Returns the net present value of an investment based on a series of
       periodic cash flows', 'a discount rate
-    name: ''
-    formula: ''
+    name: Net Present Value
+    formula: "=NPV(<[rate]>, <[value1]>, <~[value2]~>)"
     tags:
     - Financial
   NUMBERVALUE:
     description: Converts text to number in a locale-independent manner
-    name: ''
-    formula: ''
+    name: Text to Number Locale-Independent
+    formula: "=NUMBERVALUE(<[text]>, <~[decimal_separator]~>, <~[group_separator]~>)"
     tags:
     - Excel 2013
     - Text
   OCT2BIN:
     description: Converts an octal number to binary
-    name: ''
-    formula: ''
+    name: Octal to Binary
+    formula: "=OCT2BIN(<[number]>, <~[places]~>)"
     tags:
     - Engineering
   OCT2DEC:
     description: Converts an octal number to decimal
-    name: ''
-    formula: ''
+    name: Octal to Decimal
+    formula: "=OCT2DEC(<[number]>)"
     tags:
     - Engineering
   OCT2HEX:
     description: Converts an octal number to hexadecimal
-    name: ''
-    formula: ''
+    name: Octal to Hexadecimal
+    formula: "=OCT2HEX(<[number]>, <~[places]~>)"
     tags:
     - Engineering
   ODD:
     description: Rounds a number up to the nearest odd integer
-    name: ''
-    formula: ''
+    name: Odd
+    formula: "=ODD(<[number]>)"
     tags:
     - Math
     - trigonometry
   ODDFPRICE:
     description: Returns the price per $100 face value of a security with an odd first
       period
-    name: ''
-    formula: ''
+    name: Odd First Period Price
+    formula: "=ODDFPRICE(<[settlement]>, <[maturity]>, <[issue]>, <[first_coupon]>, <[rate]>, <[yld]>, <[redemption]>, <[frequency]>, <~[basis]~>)"
     tags:
     - Financial
   ODDFYIELD:
     description: Returns the yield of a security with an odd first period
-    name: ''
-    formula: ''
+    name: Odd First Period Yield
+    formula: "=ODDFYIELD(<[settlement]>, <[maturity]>, <[issue]>, <[first_coupon]>, <[rate]>, <[pr]>, <[redemption]>, <[frequency]>, <~[basis]~>)"
     tags:
     - Financial
   ODDLPRICE:
     description: Returns the price per $100 face value of a security with an odd last
       period
-    name: ''
-    formula: ''
+    name: Odd Last Period Price
+    formula: "=ODDLPRICE(<[settlement]>, <[maturity]>, <[last_interest]>, <[rate]>, <[yld]>, <[redemption]>, <[frequency]>, <~[basis]~>)"
     tags:
     - Financial
   ODDLYIELD:
     description: Returns the yield of a security with an odd last period
-    name: ''
-    formula: ''
+    name: Odd Last Period Yield
+    formula: "=ODDLYIELD(<[settlement]>, <[maturity]>, <[last_interest]>, <[rate]>, <[pr]>, <[redemption]>, <[frequency]>, <~[basis]~>)"
     tags:
     - Financial
   OFFSET:
     description: Returns a reference offset from a given reference
-    name: ''
-    formula: ''
+    name: Reference Offset
+    formula: "=OFFSET(<[reference]>, <[rows]>, <[cols]>, <~[height]~>, <~[width]~>)"
     tags:
     - Lookup
     - reference
   OR:
     description: Returns TRUE if any argument is TRUE
-    name: ''
-    formula: ''
+    name: Logical OR
+    formula: "=OR(<[logical1]>, <~[logical2]~>)"
     tags:
     - Logical
   PDURATION:
     description: Returns the number of periods required by an investment to reach a
       specified value
-    name: ''
-    formula: ''
+    name: Periods to Reach Value
+    formula: "=PDURATION(<[rate]>, <[pv]>, <[fv]>)"
     tags:
     - Excel 2013
     - Financial
   PEARSON:
     description: Returns the Pearson product moment correlation coefficient
-    name: ''
-    formula: ''
+    name: Pearson Correlation
+    formula: "=PEARSON(<[array1]>, <[array2]>)"
     tags:
     - Statistical
   PERCENTILE:
     description: Returns the k-th percentile of values in a range In Excel 2007', 'this
       is a Statistical .
-    name: ''
-    formula: ''
+    name: K-th Percentile (legacy)
+    formula: "=PERCENTILE(<[array]>, <[k]>)"
     tags:
     - Compatibility
   PERCENTILE.EXC:
     description: Returns the k-th percentile of values in a range', 'where k is in the
       range 0..1', 'exclusive
-    name: ''
-    formula: ''
+    name: K-th Percentile Exclusive
+    formula: "=PERCENTILE.EXC(<[array]>, <[k]>)"
     tags:
     - Excel 2010
     - Statistical
   PERCENTILE.INC:
     description: Returns the k-th percentile of values in a range
-    name: ''
-    formula: ''
+    name: K-th Percentile Inclusive
+    formula: "=PERCENTILE.INC(<[array]>, <[k]>)"
     tags:
     - Excel 2010
     - Statistical
   PERCENTRANK:
     description: Returns the percentage rank of a value in a data set In Excel 2007',
       'this is a Statistical .
-    name: ''
-    formula: ''
+    name: Percentage Rank (legacy)
+    formula: "=PERCENTRANK(<[array]>, <[x]>, <~[significance]~>)"
     tags:
     - Compatibility
   PERCENTRANK.EXC:
     description: Returns the rank of a value in a data set as a percentage (0..1', 'exclusive)
       of the data set
-    name: ''
-    formula: ''
+    name: Percentage Rank Exclusive
+    formula: "=PERCENTRANK.EXC(<[array]>, <[x]>, <~[significance]~>)"
     tags:
     - Excel 2010
     - Statistical
   PERCENTRANK.INC:
     description: Returns the percentage rank of a value in a data set
-    name: ''
-    formula: ''
+    name: Percentage Rank Inclusive
+    formula: "=PERCENTRANK.INC(<[array]>, <[x]>, <~[significance]~>)"
     tags:
     - Excel 2010
     - Statistical
   PERMUT:
     description: Returns the number of permutations for a given number of objects
-    name: ''
-    formula: ''
+    name: Permutations
+    formula: "=PERMUT(<[number]>, <[number_chosen]>)"
     tags:
     - Statistical
   PERMUTATIONA:
     description: Returns the number of permutations for a given number of objects (with
       repetitions) that can be selected from the total objects
-    name: ''
-    formula: ''
+    name: Permutations with Repetitions
+    formula: "=PERMUTATIONA(<[number]>, <[number_chosen]>)"
     tags:
     - Excel 2013
     - Statistical
   PHI:
     description: Returns the value of the density  for a standard normal distribution
-    name: ''
-    formula: ''
+    name: Phi Density
+    formula: "=PHI(<[x]>)"
     tags:
     - Excel 2013
     - Statistical
   PHONETIC:
     description: Extracts the phonetic (furigana) characters from a text string
-    name: ''
-    formula: ''
+    name: Phonetic Furigana
+    formula: "=PHONETIC(<[reference]>)"
     tags:
     - Text
   PI:
     description: Returns the value of pi
-    name: ''
-    formula: ''
+    name: Pi
+    formula: "=PI()"
     tags:
     - Math
     - trigonometry
   PMT:
     description: Returns the periodic payment for an annuity
-    name: ''
-    formula: ''
+    name: Periodic Payment Annuity
+    formula: "=PMT(<[rate]>, <[nper]>, <[pv]>, <~[fv]~>, <~[type]~>)"
     tags:
     - Financial
   POISSON:
     description: Returns the Poisson distribution In Excel 2007', 'this is a Statistical
       .
-    name: ''
-    formula: ''
+    name: Poisson Distribution (legacy)
+    formula: "=POISSON(<[x]>, <[mean]>, <[cumulative]>)"
     tags:
     - Compatibility
   POISSON.DIST:
     description: Returns the Poisson distribution
-    name: ''
-    formula: ''
+    name: Poisson Distribution
+    formula: "=POISSON.DIST(<[x]>, <[mean]>, <[cumulative]>)"
     tags:
     - Excel 2010
     - Statistical
   POWER:
     description: Returns the result of a number raised to a power
-    name: ''
-    formula: ''
+    name: Power
+    formula: "=POWER(<[number]>, <[power]>)"
     tags:
     - Math
     - trigonometry
   PPMT:
     description: Returns the payment on the principal for an investment for a given
       period
-    name: ''
-    formula: ''
+    name: Principal Payment for Period
+    formula: "=PPMT(<[rate]>, <[per]>, <[nper]>, <[pv]>, <~[fv]~>, <~[type]~>)"
     tags:
     - Financial
   PRICE:
     description: Returns the price per $100 face value of a security that pays periodic
       interest
-    name: ''
-    formula: ''
+    name: Price Per $100 Face Value
+    formula: "=PRICE(<[settlement]>, <[maturity]>, <[rate]>, <[yld]>, <[redemption]>, <[frequency]>, <~[basis]~>)"
     tags:
     - Financial
   PRICEDISC:
     description: Returns the price per $100 face value of a discounted security
-    name: ''
-    formula: ''
+    name: Discounted Security Price
+    formula: "=PRICEDISC(<[settlement]>, <[maturity]>, <[discount]>, <[redemption]>, <~[basis]~>)"
     tags:
     - Financial
   PRICEMAT:
     description: Returns the price per $100 face value of a security that pays interest
       at maturity
-    name: ''
-    formula: ''
+    name: Maturity Security Price
+    formula: "=PRICEMAT(<[settlement]>, <[maturity]>, <[issue]>, <[rate]>, <[yld]>, <~[basis]~>)"
     tags:
     - Financial
   PROB:
     description: Returns the probability that values in a range are between two limits
-    name: ''
-    formula: ''
+    name: Probability Between
+    formula: "=PROB(<[x_range]>, <[prob_range]>, <~[lower_limit]~>, <~[upper_limit]~>)"
     tags:
     - Statistical
   PRODUCT:
     description: Multiplies its arguments
-    name: ''
-    formula: ''
+    name: Product
+    formula: "=PRODUCT(<[number1]>, <~[number2]~>)"
     tags:
     - Math
     - trigonometry
   PROPER:
     description: Capitalizes the first letter in each word of a text value
-    name: ''
-    formula: ''
+    name: Proper Case
+    formula: "=PROPER(<[text]>)"
     tags:
     - Text
   PV:
     description: Returns the present value of an investment
-    name: ''
-    formula: ''
+    name: Present Value
+    formula: "=PV(<[rate]>, <[nper]>, <[pmt]>, <~[fv]~>, <~[type]~>)"
     tags:
     - Financial
   QUARTILE:
     description: Returns the quartile of a data set In Excel 2007', 'this is a Statistical
       .
-    name: ''
-    formula: ''
+    name: Quartile (legacy)
+    formula: "=QUARTILE(<[array]>, <[quart]>)"
     tags:
     - Compatibility
   QUARTILE.EXC:
     description: Returns the quartile of the data set', 'based on percentile values
       from 0..1', 'exclusive
-    name: ''
-    formula: ''
+    name: Quartile Exclusive
+    formula: "=QUARTILE.EXC(<[array]>, <[quart]>)"
     tags:
     - Excel 2010
     - Statistical
   QUARTILE.INC:
     description: Returns the quartile of a data set
-    name: ''
-    formula: ''
+    name: Quartile Inclusive
+    formula: "=QUARTILE.INC(<[array]>, <[quart]>)"
     tags:
     - Excel 2010
     - Statistical
   QUOTIENT:
     description: Returns the integer portion of a division
-    name: ''
-    formula: ''
+    name: Quotient
+    formula: "=QUOTIENT(<[numerator]>, <[denominator]>)"
     tags:
     - Math
     - trigonometry
   RADIANS:
     description: Converts degrees to radians
-    name: ''
-    formula: ''
+    name: Radians
+    formula: "=RADIANS(<[angle]>)"
     tags:
     - Math
     - trigonometry
   RAND:
     description: Returns a random number between 0', '1
-    name: ''
-    formula: ''
+    name: Random Number
+    formula: "=RAND()"
     tags:
     - Math
     - trigonometry
   RANDARRAY:
     description: Returns an array of random numbers between 0', '1
-    name: ''
-    formula: ''
+    name: Random Array
+    formula: "=RANDARRAY(<~[rows]~>, <~[cols]~>, <~[min]~>, <~[max]~>, <~[whole]~>)"
     tags:
     - Office 365 button
     - Math
     - trigonometry
   RANDBETWEEN:
     description: Returns a random number between the numbers you specify
-    name: ''
-    formula: ''
+    name: Random Between
+    formula: "=RANDBETWEEN(<[bottom]>, <[top]>)"
     tags:
     - Math
     - trigonometry
   RANK:
     description: Returns the rank of a number in a list of numbers In Excel 2007', 'this
       is a Statistical .
-    name: ''
-    formula: ''
+    name: Rank (legacy)
+    formula: "=RANK(<[number]>, <[ref]>, <~[order]~>)"
     tags:
     - Compatibility
   RANK.AVG:
     description: Returns the rank of a number in a list of numbers
-    name: ''
-    formula: ''
+    name: Rank Average
+    formula: "=RANK.AVG(<[number]>, <[ref]>, <~[order]~>)"
     tags:
     - Excel 2010
     - Statistical
   RANK.EQ:
     description: Returns the rank of a number in a list of numbers
-    name: ''
-    formula: ''
+    name: Rank Equal
+    formula: "=RANK.EQ(<[number]>, <[ref]>, <~[order]~>)"
     tags:
     - Excel 2010
     - Statistical
   RATE:
     description: Returns the interest rate per period of an annuity
-    name: ''
-    formula: ''
+    name: Interest Rate per Period
+    formula: "=RATE(<[nper]>, <[pmt]>, <[pv]>, <~[fv]~>, <~[type]~>, <~[guess]~>)"
     tags:
     - Financial
   RECEIVED:
     description: Returns the amount received at maturity for a fully invested security
-    name: ''
-    formula: ''
+    name: Amount Received at Maturity
+    formula: "=RECEIVED(<[settlement]>, <[maturity]>, <[investment]>, <[discount]>, <~[basis]~>)"
     tags:
     - Financial
   REGISTER.ID:
     description: Returns the register ID of the specified dynamic link library (DLL)
       or code resource that has been previously registered
-    name: ''
-    formula: ''
+    name: Register ID (legacy)
+    formula: "=REGISTER.ID(<[module_text]>, <[procedure]>, <~[type_text]~>)"
     tags:
     - Add-in
     - Automation
   REPLACE:
     description: Replaces characters within text
-    name: ''
-    formula: ''
+    name: Replace Characters
+    formula: "=REPLACE(<[old_text]>, <[start_num]>, <[num_chars]>, <[new_text]>)"
     tags:
     - REPLACEB s
     - Text
   REPT:
     description: Repeats text a given number of times
-    name: ''
-    formula: ''
+    name: Repeat Text
+    formula: "=REPT(<[text]>, <[number_times]>)"
     tags:
     - Text
   RIGHT:
     description: Returns the rightmost characters from a text value
-    name: ''
-    formula: ''
+    name: Right Substring
+    formula: "=RIGHT(<[text]>, <~[num_chars]~>)"
     tags:
     - RIGHTB s
     - Text
   ROMAN:
     description: Converts an arabic numeral to roman', 'as text
-    name: ''
-    formula: ''
+    name: Roman Numeral
+    formula: "=ROMAN(<[number]>, <~[form]~>)"
     tags:
     - Math
     - trigonometry
   ROUND:
     description: Rounds a number to a specified number of digits
-    name: ''
-    formula: ''
+    name: Round
+    formula: "=ROUND(<[number]>, <[num_digits]>)"
     tags:
     - Math
     - trigonometry
   ROUNDDOWN:
     description: Rounds a number down', 'toward zero
-    name: ''
-    formula: ''
+    name: Round Down
+    formula: "=ROUNDDOWN(<[number]>, <[num_digits]>)"
     tags:
     - Math
     - trigonometry
   ROUNDUP:
     description: Rounds a number up', 'away from zero
-    name: ''
-    formula: ''
+    name: Round Up
+    formula: "=ROUNDUP(<[number]>, <[num_digits]>)"
     tags:
     - Math
     - trigonometry
   ROW:
     description: Returns the row number of a reference
-    name: ''
-    formula: ''
+    name: Row Number of Reference
+    formula: "=ROW(<~[reference]~>)"
     tags:
     - Lookup
     - reference
   ROWS:
     description: Returns the number of rows in a reference
-    name: ''
-    formula: ''
+    name: Number of Rows
+    formula: "=ROWS(<[array]>)"
     tags:
     - Lookup
     - reference
   RRI:
     description: Returns an equivalent interest rate for the growth of an investment
-    name: ''
-    formula: ''
+    name: Equivalent Interest Rate Growth
+    formula: "=RRI(<[nper]>, <[pv]>, <[fv]>)"
     tags:
     - Excel 2013
     - Financial
   RSQ:
     description: Returns the square of the Pearson product moment correlation coefficient
-    name: ''
-    formula: ''
+    name: R-squared
+    formula: "=RSQ(<[known_ys]>, <[known_xs]>)"
     tags:
     - Statistical
   RTD:
     description: Retrieves real-time data from a program that supports COM automation
-    name: ''
-    formula: ''
+    name: Real-time Data
+    formula: "=RTD(<[prog_id]>, <[server]>, <[topic1]>, <~[topic2]~>)"
     tags:
     - Lookup
     - reference
   SEARCH:
     description: Finds one text value within another (not case-sensitive)
-    name: ''
-    formula: ''
+    name: Search String (not case-sensitive)
+    formula: "=SEARCH(<[find_text]>, <[within_text]>, <~[start_num]~>)"
     tags:
     - SEARCHB
     - Text
   SEC:
     description: Returns the secant of an angle
-    name: ''
-    formula: ''
+    name: Secant
+    formula: "=SEC(<[number]>)"
     tags:
     - Excel 2013
     - Math
     - trigonometry
   SECH:
     description: Returns the hyperbolic secant of an angle
-    name: ''
-    formula: ''
+    name: Hyperbolic Secant
+    formula: "=SECH(<[number]>)"
     tags:
     - Excel 2013
     - Math
     - trigonometry
   SECOND:
     description: Converts a serial number to a second
-    name: ''
-    formula: ''
+    name: Second
+    formula: "=SECOND(<[serial_number]>)"
     tags:
     - Date
     - time
   SEQUENCE:
     description: Generates a list of sequential numbers in an array', 'such as 1', '2',
       '3', '4
-    name: ''
-    formula: ''
+    name: Sequence Array
+    formula: "=SEQUENCE(<[rows]>, <~[cols]~>, <~[start]~>, <~[step]~>)"
     tags:
     - Office 365 button
     - Math
     - trigonometry
   SERIESSUM:
     description: Returns the sum of a power series based on the formula
-    name: ''
-    formula: ''
+    name: Series Sum
+    formula: "=SERIESSUM(<[x]>, <[n]>, <[m]>, <[coefficients]>)"
     tags:
     - Math
     - trigonometry
   SHEET:
     description: Returns the sheet number of the referenced sheet
-    name: ''
-    formula: ''
+    name: Sheet Number
+    formula: "=SHEET(<~[value]~>)"
     tags:
     - Excel 2013
     - Information
   SHEETS:
     description: Returns the number of sheets in a reference
-    name: ''
-    formula: ''
+    name: Number of Sheets
+    formula: "=SHEETS(<~[reference]~>)"
     tags:
     - Excel 2013
     - Information
   SIGN:
     description: Returns the sign of a number
-    name: ''
-    formula: ''
+    name: Sign
+    formula: "=SIGN(<[number]>)"
     tags:
     - Math
     - trigonometry
   SIN:
     description: Returns the sine of the given angle
-    name: ''
-    formula: ''
+    name: Sine
+    formula: "=SIN(<[number]>)"
     tags:
     - Math
     - trigonometry
   SINGLE:
     description: Returns a single value using logic known as implicit intersection
-    name: ''
-    formula: ''
+    name: Single Value Implicit Intersection
+    formula: "=SINGLE(<[value]>)"
     tags:
     - Lookup
     - reference
   SINH:
     description: Returns the hyperbolic sine of a number
-    name: ''
-    formula: ''
+    name: Hyperbolic Sine
+    formula: "=SINH(<[number]>)"
     tags:
     - Math
     - trigonometry
   SKEW:
     description: Returns the skewness of a distribution
-    name: ''
-    formula: ''
+    name: Skewness
+    formula: "=SKEW(<[number1]>, <~[number2]~>)"
     tags:
     - Statistical
   SKEW.P:
     description: 'Returns the skewness of a distribution based on a population'': a
       characterization of the degree of asymmetry of a distribution around its mean'
-    name: ''
-    formula: ''
+    name: Skewness Population
+    formula: "=SKEW.P(<[number1]>, <~[number2]~>)"
     tags:
     - Excel 2013
     - Statistical
   SLN:
     description: Returns the straight-line depreciation of an asset for one period
-    name: ''
-    formula: ''
+    name: Straight-line Depreciation
+    formula: "=SLN(<[cost]>, <[salvage]>, <[life]>)"
     tags:
     - Financial
   SLOPE:
     description: Returns the slope of the linear regression line
-    name: ''
-    formula: ''
+    name: Linear Regression Slope
+    formula: "=SLOPE(<[known_ys]>, <[known_xs]>)"
     tags:
     - Statistical
   SMALL:
     description: Returns the k-th smallest value in a data set
-    name: ''
-    formula: ''
+    name: Small
+    formula: "=SMALL(<[array]>, <[k]>)"
     tags:
     - Statistical
   SORT:
     description: Sorts the contents of a range or array
-    name: ''
-    formula: ''
+    name: Sort Range or Array
+    formula: "=SORT(<[array]>, <~[sort_index]~>, <~[sort_order]~>, <~[by_col]~>)"
     tags:
     - Office 365 button
     - Lookup
@@ -2719,152 +2718,152 @@ Formulas:
   SORTBY:
     description: Sorts the contents of a range or array based on the values in a corresponding
       range or array
-    name: ''
-    formula: ''
+    name: Sort by Values
+    formula: "=SORTBY(<[array]>, <[by_array1]>, <~[sort_order1]~>)"
     tags:
     - Office 365 button
     - Lookup
     - reference
   SQRT:
     description: Returns a positive square root
-    name: ''
-    formula: ''
+    name: Square Root
+    formula: "=SQRT(<[number]>)"
     tags:
     - Math
     - trigonometry
   SQRTPI:
     description: Returns the square root of (number * pi)
-    name: ''
-    formula: ''
+    name: Square Root Pi
+    formula: "=SQRTPI(<[number]>)"
     tags:
     - Math
     - trigonometry
   STANDARDIZE:
     description: Returns a normalized value
-    name: ''
-    formula: ''
+    name: Normalized Value
+    formula: "=STANDARDIZE(<[x]>, <[mean]>, <[standard_dev]>)"
     tags:
     - Statistical
   STDEV:
     description: Estimates standard deviation based on a sample
-    name: ''
-    formula: ''
+    name: Sample Std Dev (legacy)
+    formula: "=STDEV(<[number1]>, <~[number2]~>)"
     tags:
     - Compatibility
   STDEV.P:
     description: Calculates standard deviation based on the entire population
-    name: ''
-    formula: ''
+    name: Population Std Dev
+    formula: "=STDEV.P(<[number1]>, <~[number2]~>)"
     tags:
     - Excel 2010
     - Statistical
   STDEV.S:
     description: Estimates standard deviation based on a sample
-    name: ''
-    formula: ''
+    name: Sample Std Dev
+    formula: "=STDEV.S(<[number1]>, <~[number2]~>)"
     tags:
     - Excel 2010
     - Statistical
   STDEVA:
     description: Estimates standard deviation based on a sample', 'including numbers',
       'text,', 'logical values
-    name: ''
-    formula: ''
+    name: Sample Std Dev Including Text/Logical
+    formula: "=STDEVA(<[value1]>, <~[value2]~>)"
     tags:
     - Statistical
   STDEVP:
     description: Calculates standard deviation based on the entire population In Excel
       2007', 'this is a Statistical .
-    name: ''
-    formula: ''
+    name: Population Std Dev (legacy)
+    formula: "=STDEVP(<[number1]>, <~[number2]~>)"
     tags:
     - Compatibility
   STDEVPA:
     description: Calculates standard deviation based on the entire population', 'including
       numbers', 'text,', 'logical values
-    name: ''
-    formula: ''
+    name: Population Std Dev Including Text/Logical
+    formula: "=STDEVPA(<[value1]>, <~[value2]~>)"
     tags:
     - Statistical
   STEYX:
     description: Returns the standard error of the predicted y-value for each x in the
       regression
-    name: ''
-    formula: ''
+    name: Standard Error of Predicted Y
+    formula: "=STEYX(<[known_ys]>, <[known_xs]>)"
     tags:
     - Statistical
   SUBSTITUTE:
     description: Substitutes new text for old text in a text string
-    name: ''
-    formula: ''
+    name: Substitute Text
+    formula: "=SUBSTITUTE(<[text]>, <[old_text]>, <[new_text]>, <~[instance_num]~>)"
     tags:
     - Text
   SUBTOTAL:
     description: Returns a subtotal in a list or database
-    name: ''
-    formula: ''
+    name: Subtotal
+    formula: "=SUBTOTAL(<[function_num]>, <[ref1]>, <~[ref2]~>)"
     tags:
     - Math
     - trigonometry
   SUM:
     description: Adds its arguments
-    name: ''
-    formula: ''
+    name: Sum
+    formula: "=SUM(<[number1]>, <~[number2]~>)"
     fx: =IF(a=b,c,d)
     tags:
     - Math
     - trigonometry
   SUMIF:
     description: Adds the cells specified by a given criteria
-    name: ''
-    formula: ''
+    name: Sum If
+    formula: "=SUMIF(<[range]>, <[criteria]>, <~[sum_range]~>)"
     fx: =SUMIF({a},{b},{c})
     tags:
     - Math
     - trigonometry
   SUMIFS:
     description: Adds the cells in a range that meet multiple criteria
-    name: ''
-    formula: ''
+    name: Sum Ifs
+    formula: "=SUMIFS(<[sum_range]>, <[criteria_range1]>, <[criteria1]>, <~[criteria_range2]~>, <~[criteria2]~>)"
     fx: =IF(a=b,c,d)
     tags:
     - Math
     - trigonometry
   SUMPRODUCT:
     description: Returns the sum of the products of corresponding array components
-    name: ''
-    formula: ''
+    name: Sum Product
+    formula: "=SUMPRODUCT(<[array1]>, <~[array2]~>)"
     tags:
     - Math
     - trigonometry
   SUMSQ:
     description: Returns the sum of the squares of the arguments
-    name: ''
-    formula: ''
+    name: Sum of Squares
+    formula: "=SUMSQ(<[number1]>, <~[number2]~>)"
     tags:
     - Math
     - trigonometry
   SUMX2MY2:
     description: Returns the sum of the difference of squares of corresponding values
       in two arrays
-    name: ''
-    formula: ''
+    name: Sum X^2 Minus Y^2
+    formula: "=SUMX2MY2(<[array_x]>, <[array_y]>)"
     tags:
     - Math
     - trigonometry
   SUMX2PY2:
     description: Returns the sum of the sum of squares of corresponding values in two
       arrays
-    name: ''
-    formula: ''
+    name: Sum X^2 Plus Y^2
+    formula: "=SUMX2PY2(<[array_x]>, <[array_y]>)"
     tags:
     - Math
     - trigonometry
   SUMXMY2:
     description: Returns the sum of squares of differences of corresponding values in
       two arrays
-    name: ''
-    formula: ''
+    name: Sum (X Minus Y)^2
+    formula: "=SUMXMY2(<[array_x]>, <[array_y]>)"
     tags:
     - Math
     - trigonometry
@@ -2872,340 +2871,340 @@ Formulas:
     description: Evaluates an expression against a list of values', 'returns the result
       corresponding to the first matching value. If there is no match', 'an optional
       default value may be returned.
-    name: ''
-    formula: ''
+    name: Switch
+    formula: "=SWITCH(<[expression]>, <[value1]>, <[result1]>, <~[default_or_value2]~>, <~[result2]~>)"
     tags:
     - Excel 2016
     - Logical
   SYD:
     description: Returns the sum-of-years' digits depreciation of an asset for a specified
       period
-    name: ''
-    formula: ''
+    name: Sum-of-years' Digits Depreciation
+    formula: "=SYD(<[cost]>, <[salvage]>, <[life]>, <[period]>)"
     tags:
     - Financial
   T:
     description: Converts its arguments to text
-    name: ''
-    formula: ''
+    name: Convert to Text
+    formula: "=T(<[value]>)"
     tags:
     - Text
   T.DIST:
     description: Returns the Percentage Points (probability) for the Student t-distribution
-    name: ''
-    formula: ''
+    name: Student t-Distribution
+    formula: "=T.DIST(<[x]>, <[deg_freedom]>, <[cumulative]>)"
     tags:
     - Excel 2010
     - Statistical
   T.DIST.2T:
     description: Returns the Percentage Points (probability) for the Student t-distribution
-    name: ''
-    formula: ''
+    name: Student t-Distribution Two-tailed
+    formula: "=T.DIST.2T(<[x]>, <[deg_freedom]>)"
     tags:
     - Excel 2010
     - Statistical
   T.DIST.RT:
     description: Returns the Student's t-distribution
-    name: ''
-    formula: ''
+    name: Student t-Distribution Right-tailed
+    formula: "=T.DIST.RT(<[x]>, <[deg_freedom]>)"
     tags:
     - Excel 2010
     - Statistical
   T.INV:
     description: Returns the t-value of the Student's t-distribution as a  of the probability',
       'the degrees of freedom
-    name: ''
-    formula: ''
+    name: Inverse Student t-Distribution
+    formula: "=T.INV(<[probability]>, <[deg_freedom]>)"
     tags:
     - Excel 2010
     - Statistical
   T.INV.2T:
     description: Returns the inverse of the Student's t-distribution
-    name: ''
-    formula: ''
+    name: Inverse Student t-Distribution Two-tailed
+    formula: "=T.INV.2T(<[probability]>, <[deg_freedom]>)"
     tags:
     - Excel 2010
     - Statistical
   T.TEST:
     description: Returns the probability associated with a Student's t-test
-    name: ''
-    formula: ''
+    name: Student t-Test
+    formula: "=T.TEST(<[array1]>, <[array2]>, <[tails]>, <[type]>)"
     tags:
     - Excel 2010
     - Statistical
   TAN:
     description: Returns the tangent of a number
-    name: ''
-    formula: ''
+    name: Tangent
+    formula: "=TAN(<[number]>)"
     tags:
     - Math
     - trigonometry
   TANH:
     description: Returns the hyperbolic tangent of a number
-    name: ''
-    formula: ''
+    name: Hyperbolic Tangent
+    formula: "=TANH(<[number]>)"
     tags:
     - Math
     - trigonometry
   TBILLEQ:
     description: Returns the bond-equivalent yield for a Treasury bill
-    name: ''
-    formula: ''
+    name: Treasury Bill Bond-equivalent Yield
+    formula: "=TBILLEQ(<[settlement]>, <[maturity]>, <[discount]>)"
     tags:
     - Financial
   TBILLPRICE:
     description: Returns the price per $100 face value for a Treasury bill
-    name: ''
-    formula: ''
+    name: Treasury Bill Price
+    formula: "=TBILLPRICE(<[settlement]>, <[maturity]>, <[discount]>)"
     tags:
     - Financial
   TBILLYIELD:
     description: Returns the yield for a Treasury bill
-    name: ''
-    formula: ''
+    name: Treasury Bill Yield
+    formula: "=TBILLYIELD(<[settlement]>, <[maturity]>, <[pr]>)"
     tags:
     - Financial
   TDIST:
     description: Returns the Student's t-distribution
-    name: ''
-    formula: ''
+    name: Student t-Distribution (legacy)
+    formula: "=TDIST(<[x]>, <[deg_freedom]>, <[tails]>)"
     tags:
     - Compatibility
   TEXT:
     description: Formats a number', 'converts it to text
-    name: ''
-    formula: ''
+    name: Format Number as Text
+    formula: "=TEXT(<[value]>, <[format_text]>)"
     tags:
     - Text
   TEXTJOIN:
     description: Combines the text from multiple ranges and/or strings,', 'includes
       a delimiter you specify between each text value that will be combined. If the
       delimiter is an empty text string', 'this  will effectively concatenate the ranges.
-    name: ''
-    formula: ''
+    name: Join With Delimiter
+    formula: "=TEXTJOIN(<[delimiter]>, <[ignore_empty]>, <[text1]>, <~[text2]~>)"
     tags:
     - Excel 2016
     - Text
   TIME:
     description: Returns the serial number of a particular time
-    name: ''
-    formula: ''
+    name: Serial Time
+    formula: "=TIME(<[hour]>, <[minute]>, <[second]>)"
     tags:
     - Date
     - time
   TIMEVALUE:
     description: Converts a time in the form of text to a serial number
-    name: ''
-    formula: ''
+    name: Text Time to Serial
+    formula: "=TIMEVALUE(<[time_text]>)"
     tags:
     - Date
     - time
   TINV:
     description: Returns the inverse of the Student's t-distribution
-    name: ''
-    formula: ''
+    name: Inverse Student t-Distribution (legacy)
+    formula: "=TINV(<[probability]>, <[deg_freedom]>)"
     tags:
     - Compatibility
   TODAY:
     description: Returns the serial number of today's date
-    name: ''
-    formula: ''
+    name: Today's Date
+    formula: "=TODAY()"
     tags:
     - Date
     - time
   TRANSPOSE:
     description: Returns the transpose of an array
-    name: ''
-    formula: ''
+    name: Transpose Array
+    formula: "=TRANSPOSE(<[array]>)"
     tags:
     - Lookup
     - reference
   TREND:
     description: Returns values along a linear trend
-    name: ''
-    formula: ''
+    name: Linear Trend Values
+    formula: "=TREND(<[known_ys]>, <~[known_xs]~>, <~[new_xs]~>, <~[const]~>)"
     tags:
     - Statistical
   TRIM:
     description: Removes spaces from text
-    name: ''
-    formula: ''
+    name: Trim Whitespace
+    formula: "=TRIM(<[text]>)"
     tags:
     - Text
   TRIMMEAN:
     description: Returns the mean of the interior of a data set
-    name: ''
-    formula: ''
+    name: Trimmed Mean
+    formula: "=TRIMMEAN(<[array]>, <[percent]>)"
     tags:
     - Statistical
   'TRUE':
     description: Returns the logical value TRUE
-    name: ''
-    formula: ''
+    name: Logical TRUE
+    formula: "=TRUE()"
     tags:
     - Logical
   TRUNC:
     description: Truncates a number to an integer
-    name: ''
-    formula: ''
+    name: Truncate
+    formula: "=TRUNC(<[number]>, <~[num_digits]~>)"
     tags:
     - Math
     - trigonometry
   TTEST:
     description: Returns the probability associated with a Student's t-test In Excel
       2007', 'this is a Statistical .
-    name: ''
-    formula: ''
+    name: Student t-Test (legacy)
+    formula: "=TTEST(<[array1]>, <[array2]>, <[tails]>, <[type]>)"
     tags:
     - Compatibility
   TYPE:
     description: Returns a number indicating the data type of a value
-    name: ''
-    formula: ''
+    name: Data Type Number
+    formula: "=TYPE(<[value]>)"
     tags:
     - Information
   UNICHAR:
     description: Returns the Unicode character that is references by the given numeric
       value
-    name: ''
-    formula: ''
+    name: Unicode Character
+    formula: "=UNICHAR(<[number]>)"
     tags:
     - Excel 2013
     - Text
   UNICODE:
     description: Returns the number (code point) that corresponds to the first character
       of the text
-    name: ''
-    formula: ''
+    name: Unicode Code Point
+    formula: "=UNICODE(<[text]>)"
     tags:
     - Excel 2013
     - Text
   UNIQUE:
     description: Returns a list of unique values in a list or range
-    name: ''
-    formula: ''
+    name: Unique Values
+    formula: "=UNIQUE(<[array]>, <~[by_col]~>, <~[exactly_once]~>)"
     tags:
     - Office 365 button
     - Lookup
     - reference
   UPPER:
     description: Converts text to uppercase
-    name: ''
-    formula: ''
+    name: Uppercase
+    formula: "=UPPER(<[text]>)"
     tags:
     - Text
   VALUE:
     description: Converts a text argument to a number
-    name: ''
-    formula: ''
+    name: Text to Number
+    formula: "=VALUE(<[text]>)"
     tags:
     - Text
   VAR:
     description: Estimates variance based on a sample In Excel 2007', 'this is a Statistical
       .
-    name: ''
-    formula: ''
+    name: Sample Variance (legacy)
+    formula: "=VAR(<[number1]>, <~[number2]~>)"
     tags:
     - Compatibility
   VAR.P:
     description: Calculates variance based on the entire population
-    name: ''
-    formula: ''
+    name: Population Variance
+    formula: "=VAR.P(<[number1]>, <~[number2]~>)"
     tags:
     - Excel 2010
     - Statistical
   VAR.S:
     description: Estimates variance based on a sample
-    name: ''
-    formula: ''
+    name: Sample Variance
+    formula: "=VAR.S(<[number1]>, <~[number2]~>)"
     tags:
     - Excel 2010
     - Statistical
   VARA:
     description: Estimates variance based on a sample', 'including numbers', 'text,',
       'logical values
-    name: ''
-    formula: ''
+    name: Sample Variance Including Text/Logical
+    formula: "=VARA(<[value1]>, <~[value2]~>)"
     tags:
     - Statistical
   VARP:
     description: Calculates variance based on the entire population In Excel 2007',
       'this is a Statistical .
-    name: ''
-    formula: ''
+    name: Population Variance (legacy)
+    formula: "=VARP(<[number1]>, <~[number2]~>)"
     tags:
     - Compatibility
   VARPA:
     description: Calculates variance based on the entire population', 'including numbers',
       'text,', 'logical values
-    name: ''
-    formula: ''
+    name: Population Variance Including Text/Logical
+    formula: "=VARPA(<[value1]>, <~[value2]~>)"
     tags:
     - Statistical
   VDB:
     description: Returns the depreciation of an asset for a specified or partial period
       by using a declining balance method
-    name: ''
-    formula: ''
+    name: Declining Balance Depreciation
+    formula: "=VDB(<[cost]>, <[salvage]>, <[life]>, <[start_period]>, <[end_period]>, <~[factor]~>, <~[no_switch]~>)"
     tags:
     - Financial
   VLOOKUP:
     description: Looks in the first column of an array', 'moves across the row to return
       the value of a cell
-    name: ''
-    formula: ''
+    name: Vertical Lookup
+    formula: "=VLOOKUP(<[lookup_value]>, <[table_array]>, <[col_index_num]>, <~[range_lookup]~>)"
     tags:
     - Lookup
     - reference
   WEBSERVICE:
     description: Returns data from a web service. This  is not available in Excel Online.
-    name: ''
-    formula: ''
+    name: Web Service
+    formula: "=WEBSERVICE(<[url]>)"
     tags:
     - Excel 2013
     - Web
   WEEKDAY:
     description: Converts a serial number to a day of the week
-    name: ''
-    formula: ''
+    name: Day of Week
+    formula: "=WEEKDAY(<[serial_number]>, <~[return_type]~>)"
     tags:
     - Date
     - time
   WEEKNUM:
     description: Converts a serial number to a number representing where the week falls
       numerically with a year
-    name: ''
-    formula: ''
+    name: Week Number
+    formula: "=WEEKNUM(<[serial_number]>, <~[return_type]~>)"
     tags:
     - Date
     - time
   WEIBULL:
     description: Calculates variance based on the entire population', 'including numbers',
       'text,', 'logical values In Excel 2007', 'this is a Statistical .
-    name: ''
-    formula: ''
+    name: Weibull Distribution (legacy)
+    formula: "=WEIBULL(<[x]>, <[alpha]>, <[beta]>, <[cumulative]>)"
     tags:
     - Compatibility
   WEIBULL.DIST:
     description: Returns the Weibull distribution
-    name: ''
-    formula: ''
+    name: Weibull Distribution
+    formula: "=WEIBULL.DIST(<[x]>, <[alpha]>, <[beta]>, <[cumulative]>)"
     tags:
     - Excel 2010
     - Statistical
   WORKDAY:
     description: Returns the serial number of the date before or after a specified number
       of workdays
-    name: ''
-    formula: ''
+    name: Date After Workdays
+    formula: "=WORKDAY(<[start_date]>, <[days]>, <~[holidays]~>)"
     tags:
     - Date
     - time
   WORKDAY.INTL:
     description: Returns the serial number of the date before or after a specified number
       of workdays using parameters to indicate which', 'how many days are weekend days
-    name: ''
-    formula: ''
+    name: Date After Workdays Intl
+    formula: "=WORKDAY.INTL(<[start_date]>, <[days]>, <~[weekend]~>, <~[holidays]~>)"
     tags:
     - Excel 2010
     - Date
@@ -3213,69 +3212,69 @@ Formulas:
   XIRR:
     description: Returns the internal rate of return for a schedule of cash flows that
       is not necessarily periodic
-    name: ''
-    formula: ''
+    name: XIRR
+    formula: "=XIRR(<[values]>, <[dates]>, <~[guess]~>)"
     tags:
     - Financial
   XNPV:
     description: Returns the net present value for a schedule of cash flows that is
       not necessarily periodic
-    name: ''
-    formula: ''
+    name: XNPV
+    formula: "=XNPV(<[rate]>, <[values]>, <[dates]>)"
     tags:
     - Financial
   XOR:
     description: Returns a logical exclusive OR of all arguments
-    name: ''
-    formula: ''
+    name: Logical XOR
+    formula: "=XOR(<[logical1]>, <~[logical2]~>)"
     tags:
     - Excel 2013
     - Logical
   YEAR:
     description: Converts a serial number to a year
-    name: ''
-    formula: ''
+    name: Year
+    formula: "=YEAR(<[serial_number]>)"
     tags:
     - Date
     - time
   YEARFRAC:
     description: Returns the year fraction representing the number of whole days between
       start_date', 'end_date
-    name: ''
-    formula: ''
+    name: Year Fraction
+    formula: "=YEARFRAC(<[start_date]>, <[end_date]>, <~[basis]~>)"
     tags:
     - Date
     - time
   YIELD:
     description: Returns the yield on a security that pays periodic interest
-    name: ''
-    formula: ''
+    name: Yield Periodic Interest Security
+    formula: "=YIELD(<[settlement]>, <[maturity]>, <[rate]>, <[pr]>, <[redemption]>, <[frequency]>, <~[basis]~>)"
     tags:
     - Financial
   YIELDDISC:
     description: Returns the annual yield for a discounted security; for example', 'a
       Treasury bill
-    name: ''
-    formula: ''
+    name: Discounted Security Yield
+    formula: "=YIELDDISC(<[settlement]>, <[maturity]>, <[pr]>, <[redemption]>, <~[basis]~>)"
     tags:
     - Financial
   YIELDMAT:
     description: Returns the annual yield of a security that pays interest at maturity
-    name: ''
-    formula: ''
+    name: Maturity Security Yield
+    formula: "=YIELDMAT(<[settlement]>, <[maturity]>, <[issue]>, <[rate]>, <[pr]>, <~[basis]~>)"
     tags:
     - Financial
   Z.TEST:
     description: Returns the one-tailed probability-value of a z-test
-    name: ''
-    formula: ''
+    name: One-tailed z-test
+    formula: "=Z.TEST(<[array]>, <~[x]~>, <~[sigma]~>)"
     tags:
     - Excel 2010
     - Statistical
   ZTEST:
     description: Returns the one-tailed probability-value of a z-test In Excel 2007',
       'this is a Statistical .
-    name: ''
-    formula: ''
+    name: One-tailed z-test (legacy)
+    formula: "=ZTEST(<[array]>, <~[x]~>, <~[sigma]~>)"
     tags:
     - Compatibility
