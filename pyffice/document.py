@@ -161,8 +161,32 @@ class PyfficeUnit(object):
     def increment_version(self):
         """"""
         logma.info(f"Increment Version {self.version}")
-        self.version = int(self.version)
-        self.version += 1
+        self.version = int(self.version) + 1 #TODO need to fix version
+#         8 02:49:17", "mod_dttm": "2026-07-28 02:49:17"}, "unit": {"original_path": null, "active_url": null, "trust_level": null, "qualified_path": null, "domain": null, "redirect_path": null}}, "source": null}}}
+#         2026-07-27 22:49:17,464 - nchantdoffice.models                      439: INFO     - Document Content Saved
+#         Traceback (most recent call last):
+#         File "/mnt/iverse/SB/3_Functions/Projects/NchantdOffice/3_Work/1_DELTA/nchantdoffice/nchantdoffice/widgets/widgets.py", line 163, in on_tab_focus
+#         self.model.load_tab(self.model.tabsdata[tabn], tabn, self.pane_position)
+#     File "/mnt/iverse/SB/3_Functions/Projects/NchantdOffice/3_Work/1_DELTA/nchantdoffice/nchantdoffice/models.py", line 3258, in load_tab
+#     super().load_tab(tab, tabn, tabset, active_tab_position)
+# File "/mnt/iverse/SB/3_Functions/Operations/opENGRg/3_Work/jobElfSys/actvPython/tskNchantrs/1_DELTA/nchantrs/nchantrs/models/tabsetmodels.py", line 237, in load_tab
+# self.tab_widgets.insert(tabn, self.load_widget(self.parse_widget_data(tab), tabset, tab))
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# File "/mnt/iverse/SB/3_Functions/Projects/NchantdOffice/3_Work/1_DELTA/nchantdoffice/nchantdoffice/models.py", line 3334, in load_widget
+# tabW.initWidget()
+# File "/mnt/iverse/SB/3_Functions/Projects/NchantdOffice/3_Work/1_DELTA/nchantdoffice/nchantdoffice/widgets/documents/atnrg/browsers.py", line 1699, in initWidget
+# self.initView()
+# File "/mnt/iverse/SB/3_Functions/Projects/NchantdOffice/3_Work/1_DELTA/nchantdoffice/nchantdoffice/widgets/documents/atnrg/browsers.py", line 1693, in initView
+# self.populate_document()
+# File "/mnt/iverse/SB/3_Functions/Projects/NchantdOffice/3_Work/1_DELTA/nchantdoffice/nchantdoffice/widgets/documents/atnrg/browsers.py", line 1724, in populate_document
+# self.document.save()
+# File "/mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice/pyffice/document.py", line 519, in save
+# self.increment_version()
+# File "/mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice/pyffice/document.py", line 164, in increment_version
+# self.version = int(self.version)
+# ^^^^^^^^^^^^^^^^^
+# ValueError: invalid literal for int() with base 10: '1.0.1.0'
+# 2026-07-27 22:49:17,629 - nchantrs.widgets.browsers.browsers        336: INFO     - URL Changed: PySide6.QtCore.QUrl('https://duckduckgo.com/')
         return self
 
     def load_unit(self, unit=None):
