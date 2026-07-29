@@ -1,0 +1,1219 @@
+agent: m3rl1n
+analysis:
+  counts:
+    files: 510
+    python_files: 315
+    python_lines: 35173
+    test_files: 149
+audit_date: '1785190892.262549'
+dimensions:
+  base_class_duplication:
+    details:
+      details:
+        issues: []
+        score: 100
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  changelog_tracking:
+    details:
+      details:
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  ci_cd_config:
+    details:
+      details:
+        branch: gamma
+        ci_files_found:
+        - .github/workflows
+        has_commits: true
+        is_git_repo: true
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  ci_cd_documentation:
+    details:
+      details:
+        ci_cd_docs_found: 1
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  circular_dependencies:
+    details:
+      details:
+        cycles: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  cli_documentation:
+    details:
+      details:
+        file: CLI.md
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  configuration:
+    details:
+      details:
+        config_file: pyproject.toml
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  data_clumps:
+    details:
+      details:
+        data_clump_count: 4
+        issues:
+        - clumps:
+          - locations: 7
+            params:
+            - encrypt_key
+            - path
+            - self
+            - syntax
+          - locations: 7
+            params:
+            - ctx
+            - format
+            - input
+            - output
+          - locations: 10
+            params:
+            - diagram
+            - file_path
+            - self
+          - locations: 7
+            params:
+            - cfg
+            - file_path
+            - self
+          fix: Consider creating a dataclass to group these parameters
+          rule: 'Data clumps detected: 4 combinations'
+          severity: medium
+        score: 60
+        status: partial
+      score: 60
+      status: partial
+    score: 60
+    status: partial
+  dependency_strategy:
+    details:
+      details:
+        external_imports: 2183
+        info: 'Hint: 23 GitVein projects available but not used: eaglis, glain, goalt,
+          knightsort, ladyol...'
+        internal_import_details:
+        - file: pyffice/pyffice.py
+          module: kahndor.kahndor
+          project: kahndor
+        - file: pyffice/pyffice.py
+          module: kahndor.kahndor
+          project: kahndor
+        - file: pyffice/__main__.py
+          module: pyffice.cli
+          project: pyffice
+        - file: pyffice/document.py
+          module: kahndor
+          project: kahndor
+        - file: pyffice/document.py
+          module: kahndor
+          project: kahndor
+        - file: pyffice/document.py
+          module: kahndor
+          project: kahndor
+        - file: pyffice/cli.py
+          module: pyffice.document
+          project: pyffice
+        - file: pyffice/data/__init__.py
+          module: pyffice.data.csv
+          project: pyffice
+        - file: pyffice/data/__init__.py
+          module: pyffice.data.csv
+          project: pyffice
+        - file: pyffice/data/__init__.py
+          module: pyffice.data.csv
+          project: pyffice
+        internal_imports: 741
+        internal_projects_used:
+        - condor
+        - pyffice
+        - ogma
+        - kahndor
+        leverage_score: 25.34
+        score: 100
+        status: pass
+        total_imports: 2924
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  documentation:
+    details:
+      details:
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  duplicate_filenames:
+    details:
+      details:
+        duplicate_count: 1
+        issues:
+        - paths:
+          - pyffice/items/items.py
+          - pyffice/cad/items.py
+          rule: 'Duplicate filename: items.py'
+          severity: medium
+        score: 95
+        status: pass
+      score: 95
+      status: pass
+    score: 95
+    status: pass
+  embedded_todos:
+    details:
+      details:
+        count: 19
+        examples:
+        - file: pyffice/pyffice.py
+          line: 134
+          text: '# TODO implement method'
+        - file: pyffice/skills/skills.py
+          line: 37
+          text: '# TODO:'
+        - file: pyffice/workflows/formulas.py
+          line: 92
+          text: '# TODO implement factory methods for execution, etc for each formula
+            using the config file'
+        - file: pyffice/workflows/formulas.py
+          line: 125
+          text: '# TODO convert the formula to be compatability with a specific protocol'
+        - file: pyffice/workflows/formulas.py
+          line: 138
+          text: '# TODO separate string formula into its defined attributes'
+        - file: pyffice/workflows/formulas.py
+          line: 142
+          text: '# TODO execute the formula and return the result'
+        - file: pyffice/contacts/contacts.py
+          line: 156
+          text: '# TODO implement method'
+        - file: pyffice/contacts/contacts.py
+          line: 161
+          text: '# TODO implement method'
+        - file: pyffice/contacts/contacts.py
+          line: 166
+          text: '# TODO implement method'
+        - file: pyffice/contacts/contacts.py
+          line: 171
+          text: '# TODO implement method'
+        issues:
+        - dimension: embedded_todos
+          rule: Inline TODOs need tracking
+          severity: medium
+        score: 62
+        status: partial
+      score: 62
+      status: partial
+    score: 62
+    status: partial
+  error_handling:
+    details:
+      details:
+        bare_except_count: 1
+        broad_except_count: 0
+        issues:
+        - count: 1
+          rule: bare_except
+          severity: high
+        score: 95
+        status: pass
+      score: 95
+      status: pass
+    score: 95
+    status: pass
+  external_dependencies_declared:
+    details:
+      details:
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  feature_envy:
+    details:
+      details:
+        feature_envy_count: 13
+        issues:
+        - fix: Move method to the class it uses most
+          items:
+          - class: DiaConverter
+            envy_of: lines
+            file: pyffice/diagrams/formats.py
+            foreign_calls: 12
+            method: save
+            own_calls: 0
+          - class: DrawIOConverter
+            envy_of: lines
+            file: pyffice/diagrams/formats.py
+            foreign_calls: 13
+            method: save
+            own_calls: 0
+          - class: PyfficeChart
+            envy_of: axis
+            file: pyffice/charts/charts.py
+            foreign_calls: 10
+            method: add_axis
+            own_calls: 2
+          - class: PyfficeChart
+            envy_of: default_axis
+            file: pyffice/charts/charts.py
+            foreign_calls: 10
+            method: add_axis
+            own_calls: 2
+          - class: PyfficeChart
+            envy_of: format_
+            file: pyffice/charts/charts.py
+            foreign_calls: 10
+            method: add_series
+            own_calls: 3
+          rule: 'Feature envy detected: 13 methods'
+          severity: medium
+        score: 0
+        status: fail
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  file_sizes:
+    details:
+      details:
+        issues: []
+        large_file_count: 0
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  git_workflow:
+    details:
+      details:
+        details:
+          branch: gamma
+          branches:
+            local: []
+            remote: []
+          commit_count: 235
+          commits: []
+          contributors: []
+          is_repo: true
+          remotes: {}
+          root: /mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice
+          status: {}
+          tags: []
+        issues:
+        - file: null
+          line: null
+          message: No git remote configured
+          type: low
+        score: 85
+        status: pass
+      score: 85
+      status: pass
+    score: 85
+    status: pass
+  god_class:
+    details:
+      details:
+        god_class_count: 0
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  import_cycle:
+    details:
+      details:
+        bad_import_files: 10
+        issues: []
+        score: 100
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  import_organization:
+    details:
+      details:
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  internal_project_paths:
+    details:
+      details:
+        issues:
+        - fix: Move internal projects out of integration paths
+          rule: 'Internal project path violation: tests/integration/test_integration.py'
+          severity: medium
+        score: 95
+        status: pass
+        violations: 1
+      score: 95
+      status: pass
+    score: 95
+    status: pass
+  lambda_antipattern:
+    details:
+      details:
+        issues: []
+        lambda_count: 0
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  license_dependencies:
+    details:
+      details:
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  licenses:
+    details:
+      details:
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  logging:
+    details:
+      details:
+        detection_criteria:
+          files_checked: All .py files in project
+          pass_condition: Must have kahndor.logma import (standard logging or print()
+            = fail)
+          pattern: from\s+kahndor\.logma\s+import|import\s+kahndor\.logma
+        issues: []
+        print_locations: []
+        print_statements: 0
+        score: 100
+        status: pass
+        uses_logma: true
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  logging_coverage:
+    details:
+      details:
+        examples:
+          silent_classes:
+          - class: PyfficeDeque
+            file: pyffice/document.py
+            method_count: 5
+          - class: DatabasePortsManager
+            file: zz-hist_work/databasesports.py
+            method_count: 8
+          - class: AudioPortsManager
+            file: zz-hist_work/audioports.py
+            method_count: 8
+          - class: PyfficeAutomationManager
+            file: zz-hist_work/automations.py
+            method_count: 5
+          - class: PyfficeResponse
+            file: zz-hist_work/surveys.py
+            method_count: 5
+          unused_logma:
+          - file: zz-hist_work/automations.py
+            logma_imported: true
+          - file: zz-hist_work/surveys.py
+            logma_imported: true
+          - file: zz-hist_work/playlists.py
+            logma_imported: true
+          - file: zz-hist_work/source_control.py
+            logma_imported: true
+          - file: pyffice/diagrams/diagrams.py
+            logma_imported: true
+        issues:
+        - dimension: logging_coverage
+          rule: Add logging to silent modules/classes
+          severity: medium
+        score: 0
+        silent_classes: 76
+        status: fail
+        unused_logma_files: 32
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  long_method:
+    details:
+      details:
+        issues: []
+        long_method_count: 0
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  memory:
+    details:
+      details:
+        checks:
+          efficiency_issues: 0
+          large_objects: 0
+          potential_leaks: 0
+          resource_management: 0
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  message_chains:
+    details:
+      details:
+        chain_count: 0
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  mkdocs_mkdocstrings:
+    details:
+      details:
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  module_cli_coverage:
+    details:
+      details:
+        issues:
+        - message: Module __main__ has no corresponding CLI command
+          module: __main__
+          type: no_cli
+        score: 85
+        status: pass
+      score: 85
+      status: pass
+    score: 85
+    status: pass
+  not_implemented:
+    details:
+      details:
+        count: 4
+        examples:
+        - class: DWGPort
+          file: zz-hist_work/cadports.py
+          line: 219
+          method: export_file
+        - class: FBXPort
+          file: zz-hist_work/cadports.py
+          line: 353
+          method: export_file
+        - class: BLENDPort
+          file: zz-hist_work/cadports.py
+          line: 470
+          method: export_file
+        - class: PyfficeDataBase
+          file: pyffice/data/base.py
+          line: 165
+          method: from_dict
+        issues:
+        - dimension: not_implemented
+          rule: NotImplementedError stubs need implementation
+          severity: high
+        score: 68
+        status: partial
+      score: 68
+      status: partial
+    score: 68
+    status: partial
+  note_comments:
+    details:
+      details:
+        count: 0
+        examples: []
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  parallel_inheritance:
+    details:
+      details:
+        issues:
+        - fix: Consider merging hierarchies or using composition
+          items:
+          - class: PyfficeShape
+            locations:
+            - pyffice/items/shapes.py
+            - pyffice/cad/items.py
+          - class: GenericClass
+            locations:
+            - pyffice/workflows/formulas.py
+            - pyffice/matrix/spreadsheet.py
+          rule: 'Parallel inheritance detected: 2 classes'
+          severity: medium
+        parallel_inheritance_count: 2
+        score: 90
+        status: pass
+      score: 90
+      status: pass
+    score: 90
+    status: pass
+  pii_secrets:
+    details:
+      details:
+        details:
+          files_with_secrets: 0
+          findings: []
+          score: 100
+          secrets_found: 0
+          status: pass
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  platform_conditionals:
+    details:
+      details:
+        details:
+          conditionals: []
+          files_with_excessive_checks: 0
+          issues: []
+          score: 100
+          status: pass
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  platform_specific_imports:
+    details:
+      details:
+        details:
+          issues: []
+          score: 100
+          status: pass
+          violation_count: 0
+          violations: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  private_leak:
+    details:
+      details:
+        issues: []
+        private_leak_count: 0
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  python_version_floor:
+    details:
+      details:
+        details:
+          issues: []
+          requires_python: '>=3.10'
+          score: 100
+          status: pass
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  readme_quality:
+    details:
+      details:
+        issues:
+        - rule: 'Missing section: Project overview'
+          severity: medium
+        score: 90
+        status: pass
+      score: 90
+      status: pass
+    score: 90
+    status: pass
+  security_bandit:
+    details:
+      details:
+        issues:
+        - file: /mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice/pyffice/container/tar.py
+          line: 38
+          rule: 'Bandit: tarfile.extractall used without any validation. Please check
+            and discard dangerous members.'
+          severity: high
+        - file: /mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice/pyffice/data/xml.py
+          line: 12
+          rule: 'Bandit: Using xml.etree.ElementTree.parse to parse untrusted XML
+            data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.parse
+            with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
+            is called'
+          severity: medium
+        - file: /mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice/pyffice/diagrams/formats.py
+          line: 119
+          rule: 'Bandit: Using xml.etree.ElementTree.fromstring to parse untrusted
+            XML data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.fromstring
+            with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
+            is called'
+          severity: medium
+        - file: /mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice/pyffice/diagrams/formats.py
+          line: 328
+          rule: 'Bandit: Using xml.etree.ElementTree.parse to parse untrusted XML
+            data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.parse
+            with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
+            is called'
+          severity: medium
+        - file: /mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice/pyffice/diagrams/formats.py
+          line: 397
+          rule: 'Bandit: Using xml.etree.ElementTree.parse to parse untrusted XML
+            data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.parse
+            with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
+            is called'
+          severity: medium
+        - file: /mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice/pyffice/diagrams/formats.py
+          line: 519
+          rule: 'Bandit: Using xml.etree.ElementTree.fromstring to parse untrusted
+            XML data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.fromstring
+            with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
+            is called'
+          severity: medium
+        - file: /mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice/pyffice/diagrams/formats.py
+          line: 610
+          rule: 'Bandit: Using xml.etree.ElementTree.parse to parse untrusted XML
+            data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.parse
+            with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
+            is called'
+          severity: medium
+        - file: /mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice/pyffice/diagrams/formats.py
+          line: 649
+          rule: 'Bandit: Using xml.etree.ElementTree.fromstring to parse untrusted
+            XML data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.fromstring
+            with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
+            is called'
+          severity: medium
+        - file: /mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice/pyffice/diagrams/formats.py
+          line: 716
+          rule: 'Bandit: Using xml.etree.ElementTree.parse to parse untrusted XML
+            data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.parse
+            with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
+            is called'
+          severity: medium
+        - file: /mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice/pyffice/diagrams/formats.py
+          line: 782
+          rule: 'Bandit: Using xml.etree.ElementTree.parse to parse untrusted XML
+            data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.parse
+            with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
+            is called'
+          severity: medium
+        - file: /mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice/pyffice/images/utilities.py
+          line: 99
+          rule: 'Bandit: Using xml.etree.ElementTree.parse to parse untrusted XML
+            data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.parse
+            with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
+            is called'
+          severity: medium
+        - file: /mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice/pyffice/media/media.py
+          line: 49
+          rule: 'Bandit: Audit url open for permitted schemes. Allowing use of file:/
+            or custom schemes is often unexpected.'
+          severity: medium
+        - file: /mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice/pyffice/ports/ports.py
+          line: 202
+          rule: 'Bandit: Using xml.etree.ElementTree.fromstring to parse untrusted
+            XML data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.fromstring
+            with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
+            is called'
+          severity: medium
+        - file: /mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice/pyffice/ports/ports.py
+          line: 477
+          rule: 'Bandit: Using xml.etree.ElementTree.fromstring to parse untrusted
+            XML data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.fromstring
+            with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
+            is called'
+          severity: medium
+        - file: /mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice/pyffice/projects/projects.py
+          line: 155
+          rule: 'Bandit: Using xml.etree.ElementTree.parse to parse untrusted XML
+            data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.parse
+            with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
+            is called'
+          severity: medium
+        - file: /mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice/pyffice/projects/projects.py
+          line: 174
+          rule: 'Bandit: Using xml.etree.ElementTree.parse to parse untrusted XML
+            data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.parse
+            with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
+            is called'
+          severity: medium
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  security_internal:
+    details:
+      details:
+        findings:
+        - category: getattr_dynamic
+          content: setattr(self, change["label"], change["new_value"])
+          file: pyffice/document.py
+          line: 201
+          pattern: setattr\(
+          severity: 60
+        - category: getattr_dynamic
+          content: setattr(self, last_change["label"], last_change["value"])
+          file: pyffice/document.py
+          line: 441
+          pattern: setattr\(
+          severity: 60
+        - category: base64_decode
+          content: return base64.b64decode(doc['data'])
+          file: pyffice/container/binary.py
+          line: 126
+          pattern: base64\.b64decode\(
+          severity: 70
+        - category: getattr_dynamic
+          content: setattr(self, attr, None)
+          file: pyffice/web/url.py
+          line: 376
+          pattern: setattr\(
+          severity: 60
+        - category: getattr_dynamic
+          content: setattr(self, attr_name, new_value)
+          file: pyffice/web/url.py
+          line: 459
+          pattern: setattr\(
+          severity: 60
+        - category: unicode_escape
+          content: 'if header[:4] == b"\xd0\xcf\x11\xe0":'
+          file: pyffice/projects/projects.py
+          line: 136
+          pattern: \\x[0-9a-fA-F]{2}
+          severity: 40
+        - category: unicode_escape
+          content: 'if header[:4] == b"\xd0\xcf\x11\xe0":'
+          file: pyffice/projects/projects.py
+          line: 136
+          pattern: \\x[0-9a-fA-F]{2}
+          severity: 40
+        - category: unicode_escape
+          content: 'if header[:4] == b"\xd0\xcf\x11\xe0":'
+          file: pyffice/projects/projects.py
+          line: 136
+          pattern: \\x[0-9a-fA-F]{2}
+          severity: 40
+        - category: unicode_escape
+          content: 'if header[:4] == b"\xd0\xcf\x11\xe0":'
+          file: pyffice/projects/projects.py
+          line: 136
+          pattern: \\x[0-9a-fA-F]{2}
+          severity: 40
+        - category: unicode_escape
+          content: ole_header = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
+          file: pyffice/projects/projects.py
+          line: 192
+          pattern: \\x[0-9a-fA-F]{2}
+          severity: 40
+        - category: unicode_escape
+          content: ole_header = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
+          file: pyffice/projects/projects.py
+          line: 192
+          pattern: \\x[0-9a-fA-F]{2}
+          severity: 40
+        - category: unicode_escape
+          content: ole_header = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
+          file: pyffice/projects/projects.py
+          line: 192
+          pattern: \\x[0-9a-fA-F]{2}
+          severity: 40
+        - category: unicode_escape
+          content: ole_header = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
+          file: pyffice/projects/projects.py
+          line: 192
+          pattern: \\x[0-9a-fA-F]{2}
+          severity: 40
+        - category: unicode_escape
+          content: ole_header = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
+          file: pyffice/projects/projects.py
+          line: 192
+          pattern: \\x[0-9a-fA-F]{2}
+          severity: 40
+        - category: unicode_escape
+          content: ole_header = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
+          file: pyffice/projects/projects.py
+          line: 192
+          pattern: \\x[0-9a-fA-F]{2}
+          severity: 40
+        - category: unicode_escape
+          content: ole_header = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
+          file: pyffice/projects/projects.py
+          line: 192
+          pattern: \\x[0-9a-fA-F]{2}
+          severity: 40
+        - category: unicode_escape
+          content: ole_header = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
+          file: pyffice/projects/projects.py
+          line: 192
+          pattern: \\x[0-9a-fA-F]{2}
+          severity: 40
+        - category: input_usage
+          content: file_ = ffmpeg.input(self.path, start, end)
+          file: pyffice/video/video_export.py
+          line: 58
+          pattern: \binput\(
+          severity: 20
+        - category: input_usage
+          content: file_ = ffmpeg.input(self.path, start, end)
+          file: pyffice/video/video_export.py
+          line: 62
+          pattern: \binput\(
+          severity: 20
+        - category: url_open
+          content: 'with urllib.request.urlopen(self.source) as response:'
+          file: pyffice/media/media.py
+          line: 49
+          pattern: urllib\.request\.urlopen\(
+          severity: 50
+        - category: open_url
+          content: 'with urllib.request.urlopen(self.source) as response:'
+          file: pyffice/media/media.py
+          line: 49
+          pattern: urlopen\(
+          severity: 50
+        score: 85.0
+        status: pass
+      score: 85.0
+      status: pass
+    score: 85.0
+    status: pass
+  security_oidc:
+    details:
+      details:
+        findings: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  security_post_install:
+    details:
+      details:
+        findings:
+        - category: post_install_main_module
+          content: "__main__.py present \u2014 auto-executes on 'python -m pyffice'"
+          file: pyffice/__main__.py
+          line: 0
+          recommendation: __main__.py auto-executes when invoked via python -m. Standard
+            for CLIs. Review for unintended side effects.
+          severity: 15
+        score: 85
+        status: partial
+      score: 85
+      status: partial
+    score: 85
+    status: partial
+  security_ruff:
+    details:
+      details:
+        issues:
+        - fix: 'Install ruff: pip install ruff'
+          rule: Ruff not installed
+          severity: high
+        score: 0
+        status: fail
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  speed:
+    details:
+      details:
+        checks:
+          builtin_optimizations: 0
+          efficiency_issues: 0
+          inefficient_loops: 0
+          string_concatenation: 0
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  structure:
+    details:
+      details:
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  switch_abuse:
+    details:
+      details:
+        issues:
+        - fix: Use polymorphism or a mapping instead of complex if-else
+          items:
+          - count: 5
+            file: pyffice/items/colors.py
+            function: hsl_to_rgb
+            var: t
+          - count: 5
+            file: pyffice/items/colors.py
+            function: hue_to_rgb
+            var: t
+          - count: 7
+            file: pyffice/web/prompts.py
+            function: set_response_scope
+            var: scope
+          - count: 11
+            file: pyffice/ports/msports.py
+            function: set_chart_type
+            var: chart_type
+          - count: 5
+            file: tests/test_pyffice/tests/tests/test_import_export.py
+            function: test_import_export
+            var: category
+          rule: 'Switch abuse detected: 6 instances'
+          severity: medium
+        score: 40
+        status: partial
+        switch_abuse_count: 6
+      score: 40
+      status: partial
+    score: 40
+    status: partial
+  testing:
+    details:
+      details:
+        coverage: 74.74747474747475
+        files_with_tests: 74
+        score: 100
+        status: pass
+        test_dir: tests
+        test_file_count: 148
+        total_source_files: 99
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+  todo_tracking:
+    details:
+      details:
+        files_with_todos: 7
+        issues:
+        - dimension: todo_tracking
+          rule: Embedded TODOs require resolution
+          severity: high
+        score: 81
+        status: pass
+        total_todos: 19
+        worst_offenders:
+        - count: 9
+          file: pyffice/contacts/contacts.py
+        - count: 4
+          file: pyffice/workflows/formulas.py
+        - count: 2
+          file: pyffice/matrix/spreadsheet.py
+        - count: 1
+          file: pyffice/pyffice.py
+        - count: 1
+          file: pyffice/skills/skills.py
+        - count: 1
+          file: pyffice/matrix/matrix.py
+        - count: 1
+          file: pyffice/calendars/calendars.py
+      score: 81
+      status: pass
+    score: 81
+    status: pass
+  type_annotations:
+    details:
+      details:
+        issues:
+        - rule: low_coverage
+          severity: medium
+          total: 2124
+          typed: 690
+        score: 32
+        status: partial
+        total_functions: 2124
+        typed_functions: 690
+        untyped_functions: 1434
+      score: 32
+      status: partial
+    score: 32
+    status: partial
+  unfinished_code:
+    details:
+      details:
+        empty_methods: 151
+        examples:
+        - class: PyfficeCodex
+          file: pyffice/pyffice.py
+          line: 132
+          method: get_rolodex
+        - class: PyfficeDocument
+          file: pyffice/document.py
+          line: 474
+          method: file_export
+        - class: PyfficeDocument
+          file: pyffice/document.py
+          line: 477
+          method: file_import
+        - class: PyfficeDocument
+          file: pyffice/document.py
+          line: 554
+          method: search_vector
+        - class: PyfficeGanttChart
+          file: zz-hist_work/gantt.py
+          line: 128
+          method: open_file
+        - class: PyfficeResponse
+          file: zz-hist_work/surveys.py
+          line: 55
+          method: add_answer
+        - class: PyfficeResponse
+          file: zz-hist_work/surveys.py
+          line: 63
+          method: open_file
+        - class: PyfficeSurveyManager
+          file: zz-hist_work/surveys.py
+          line: 99
+          method: add_question
+        - class: PyfficeSurveyManager
+          file: zz-hist_work/surveys.py
+          line: 102
+          method: create_survey
+        - class: PyfficeSurveyManager
+          file: zz-hist_work/surveys.py
+          line: 105
+          method: select_question
+        issues:
+        - dimension: unfinished_code
+          rule: Empty methods need implementation
+          severity: high
+        score: 0
+        status: fail
+      score: 0
+      status: fail
+    score: 0
+    status: fail
+  wrapper_antipattern:
+    details:
+      details:
+        issues: []
+        score: 100
+        status: pass
+        wrapper_count: 5
+      score: 100
+      status: pass
+    score: 100
+    status: pass
+overall_score: 74.07
+project: pyffice
+rubric:
+  audit_overall: 84.07
+  categories: []
+  max_points: 0
+  percentage: 0.0
+  rubric_name: 06a67dab-e006-711f-8000-ff1d16966741
+  rubric_score: 0
+  rubric_version: '1.0'
+  score_difference: -84.07
+  total_points: 0
+  weighted_score: 0
+summary:
+  failing: 4
+  partial: 6
+  passing: 43
+  tasks_created: 10
+  total_auditors: 11
+  total_dimensions: 53
+test_execution:
+  duration_seconds: 5.765586853027344
+  project_score: 0.0
+  report_file: /mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice/FALCON_TEST.yaml
+  results:
+    tests_failed: 0
+    tests_passed: 0
+    tests_run: 0
+    tests_skipped: 0
+  runner: falcon
+  score_adjustment: -10
+  score_threshold: 80.0
+  should_run: true
+  status: skipped
+  status_message: -10% penalty (0 tests ran)
+  timestamp: ''
+versions:
+  project: 6aadaa1
+  project_status: dirty
+  project_uncommitted_changes: 2
+  sasquatch: unknown
