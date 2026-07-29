@@ -400,7 +400,16 @@ class PyfficeUnit(object):
 
         these additional meta datas are not neccesarily internally as their values are carried in context
 
+        T-NEW-005 (item 2): ``meta_data["semver"]`` records the
+        Pyffice package version that produced this payload. The
+        receiving side uses it to dispatch upgrade paths when
+        loading older payloads.
         """
+        # Lazy import to avoid a circular import at module
+        # load time (PyfficeUnit is defined before the
+        # ``pyffice`` package init is fully populated).
+        from pyffice import __version__
+
         doc = {"did": self.did}
         doc["name"] = self.name
         doc["description"] = self.description
@@ -413,6 +422,7 @@ class PyfficeUnit(object):
             "location": self.location,
             "path": self.path,
             "syntax": self.syntax,
+            "semver": __version__,
             "creon_dttm": self.set_creon().creon,
             "mod_dttm": self.set_modon().modon,
         }
