@@ -6,6 +6,7 @@ from pyffice.document import PyfficeDocument
 
 
 class PyfficeSCAD(PyfficeDocument):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """OpenSCAD script document."""
     
     def __init__(self, path: Optional[str] = None, content: Optional[str] = None):

@@ -7,6 +7,7 @@ from pyffice.document import PyfficeDocument
 
 
 class PyfficeOBJ(PyfficeDocument):
+    SERIALIZATION_VERSION = (1, 0, 0)
     EXTENSIONS = {'.obj'}
     DEFAULT_LIMIT = 256 * 1024 * 1024  # 256MB
     

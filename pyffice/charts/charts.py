@@ -37,11 +37,10 @@ pxcfg = join(here, "_data_", "charts.yaml")
 
 
 class PyfficeChart(PyfficeDocument):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """
     A flexible general-purpose charting class for creating various charts using Seaborn and Matplotlib.
     """
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """

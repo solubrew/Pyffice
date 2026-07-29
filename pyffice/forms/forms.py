@@ -35,13 +35,12 @@ pxcfg = join(here, "_data_", "forms.yaml")
 
 
 class PyfficeForm(PyfficeDocument):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """
     PyfficeForm is a subclass of PyfficeDocument that facilitates the creation and management
     of forms with sections, questions, and answers. It provides methods for adding, editing, and
     removing elements within the form dynamically.
     """
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""
@@ -181,8 +180,6 @@ class PyfficeForm(PyfficeDocument):
 class PyfficeFormsManager(PyfficeDocumentManager):
     """"""
 
-    VERSION = "0.0.1.0.1.0"
-
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -223,8 +220,6 @@ class PyfficeSurvey(PyfficeDocument):
     additionally allow for creating surveys on sites like X and incorporating results into survey
 
     """
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

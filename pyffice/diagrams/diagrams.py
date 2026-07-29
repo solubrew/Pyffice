@@ -39,9 +39,8 @@ pxcfg = join(here, "_data_", "diagrams.yaml")
 
 
 class PyfficeEdge(PyfficeUnit):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """"""
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""
@@ -341,8 +340,6 @@ class PyfficeDiagram(PyfficeDocumentManager):
 class PyfficeDiagramLayer(PyfficeUnit):
     """"""
 
-    VERSION = "0.0.1.0.1.0"
-
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -375,8 +372,6 @@ class PyfficeDiagramLayer(PyfficeUnit):
 
 class PyfficeNode(PyfficeUnit):
     """"""
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""
@@ -454,8 +449,6 @@ class PyfficeNode(PyfficeUnit):
 
 class PyfficeDiagramConnection(PyfficeUnit):
     """"""
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

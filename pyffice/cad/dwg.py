@@ -8,6 +8,7 @@ from pyffice.document import PyfficeDocument
 
 
 class PyfficeDWG(PyfficeDocument):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """DWG CAD drawing handler"""
     
     EXTENSIONS = {'.dwg'}

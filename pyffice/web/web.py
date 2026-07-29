@@ -41,9 +41,8 @@ pxcfg = join(here, "_data_", "web.yaml")
 
 
 class PyfficeWebBrowser(PyfficeDocument):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """"""
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""
@@ -252,8 +251,6 @@ class PyfficeWebBrowser(PyfficeDocument):
 
 class PyfficeWebPage(PyfficeDocument):
     """"""
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

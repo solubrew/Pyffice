@@ -38,9 +38,8 @@ pxcfg = join(here, "_data_", ".yaml")
 # AutoCAD
 #
 class PyfficeShape(PyfficeDocument):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """"""
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, center=(0, 0, 0), dimensions=2, cfg=None):
         """"""

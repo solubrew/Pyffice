@@ -53,9 +53,8 @@ pxcfg = join(here, "_data_", "spreadsheet.yaml")
 
 
 class PyfficeSpreadSheet(PyfficeDocument):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """Pyffice SpreadSheet is a single page spreadsheet that can be included in a Pyffice Matrix to create a workbook"""
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

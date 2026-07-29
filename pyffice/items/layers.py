@@ -33,6 +33,7 @@ pxcfg = join(here, "_data_", "layers.yaml")
 
 
 class PyfficeLayer(PyfficeUnit):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """"""
 
     def __init__(self, cfg=None):

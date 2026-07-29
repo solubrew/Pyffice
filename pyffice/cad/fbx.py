@@ -8,6 +8,7 @@ from pyffice.document import PyfficeDocument
 
 
 class PyfficeFBX(PyfficeDocument):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """FBX 3D model handler"""
     
     EXTENSIONS = {'.fbx'}

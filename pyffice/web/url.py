@@ -37,9 +37,9 @@ pxcfg = join(here, "_data_", "url.yaml")
 
 
 class PyfficeURL(PyfficeUnit):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """URL handling and parsing functionality for Pyffice system."""
 
-    VERSION = "0.0.1.0.1.0"
     # URL scheme constants
     HTTP_PREFIX = "http://"
     HTTPS_PREFIX = "https://"
@@ -934,8 +934,6 @@ class PyfficeURL(PyfficeUnit):
 class PyfficeURLLibrary(PyfficeDocumentManager):
     """URL Library is a data object for integrating affiliate links into the web apps and browsing features provided
     within Pyffice"""
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """Initialize URL Library with configuration."""

@@ -10,6 +10,7 @@ from pyffice.document import PyfficeDocument
 
 
 class PyfficeSTL(PyfficeDocument):
+    SERIALIZATION_VERSION = (1, 0, 0)
     EXTENSIONS = {'.stl'}
     DEFAULT_LIMIT = 256 * 1024 * 1024  # 256MB
     

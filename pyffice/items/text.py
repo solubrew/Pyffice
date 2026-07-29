@@ -157,9 +157,8 @@ class PyfficeParagraph:
 
 
 class PyfficeText(PyfficeUnit):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """Pyffice Text object consists of one string of text that can be formated in various ways by setting the selections"""
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""
@@ -348,8 +347,6 @@ class PyfficeText(PyfficeUnit):
 
 class PyfficeHTML(PyfficeText):
     """"""
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

@@ -34,9 +34,8 @@ pxcfg = join(here, "_data_", "items.yaml")
 
 
 class PyfficeTable(PyfficeUnit):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """"""
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

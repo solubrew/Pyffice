@@ -36,8 +36,6 @@ pxcfg = join(here, "_data_", ".yaml")
 class PyfficeDatabaseConnection(sonql.Doc):
     """"""
 
-    VERSION = "0.0.1.0.1.0"
-
     def __init__(self, path=None, cfg=None):
         """"""
         self.config = kahndor.Instruct(pxcfg).select("PyfficeDatabaseConnection")

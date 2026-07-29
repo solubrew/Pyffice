@@ -45,12 +45,11 @@ pxcfg = join(here, "_data_", "images.yaml")
 
 
 class PyfficeImage(PyfficeDocument):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """
     A class to work with images in various formats, supporting
     layers, shapes, tags, and other image operations.
     """
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """
@@ -313,8 +312,6 @@ class PyfficeImage(PyfficeDocument):
 class PyfficeImageManager(PyfficeDocumentManager):
     """"""
 
-    VERSION = "0.0.1.0.1.0"
-
     def __init__(self, cfg=None):
         """"""
         super().__init__(cfg)
@@ -370,8 +367,6 @@ class PyfficeImageManager(PyfficeDocumentManager):
 
 class PyfficeScreenShot(PyfficeDocument):
     """"""
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

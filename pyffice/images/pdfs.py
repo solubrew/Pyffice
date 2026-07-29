@@ -40,12 +40,11 @@ pxcfg = join(here, "_data_", "pdfs.yaml")
 
 
 class PyfficePDF(PyfficeDocument):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """
     A class to work with PDF files using PyPDF2, supporting
     annotations, embedded media, and encryption.
     """
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """

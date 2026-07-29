@@ -36,8 +36,6 @@ pxcfg = join(here, "_data_", "email.yaml")
 class PyfficeEmailMessage(PyfficeMessage):
     """"""
 
-    VERSION = "0.0.1.0.1.0"
-
     def __init__(self, cfg=None):
         """"""
         self.config = kahndor.Instruct(pxcfg).select("PyfficeEmailDocument")

@@ -44,9 +44,8 @@ pxcfg = join(here, "_data_", "matrix.yaml")
 
 
 class PyfficeMatrix(PyfficeDocumentManager):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """A Pyffice Matrix is a top level pyffice document type that can be included in a Pyffice Book"""
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

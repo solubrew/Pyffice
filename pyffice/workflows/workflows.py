@@ -33,9 +33,8 @@ pxcfg = join(here, "_data_", "workflows.yaml")
 
 
 class PyfficeWorkflow(PyfficeUnit):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """"""
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

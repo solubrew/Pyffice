@@ -49,9 +49,8 @@ pxcfg = join(here, "_data_", "formulas.yaml")
 
 
 class PyfficeFormulasLibrary(PyfficeDocumentManager):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """"""
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""
@@ -103,8 +102,6 @@ class PyfficeFormulasLibrary(PyfficeDocumentManager):
 
 class PyfficeFormula(PyfficeUnit):
     """A Functional Formula object for use in various Pyffice Documents"""
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

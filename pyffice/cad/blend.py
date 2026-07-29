@@ -8,6 +8,7 @@ from pyffice.document import PyfficeDocument
 
 
 class PyfficeBLEND(PyfficeDocument):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """Blender .blend file handler"""
     
     EXTENSIONS = {'.blend'}

@@ -59,6 +59,7 @@ pxcfg = join(here, "_data_", ".yaml")
 
 
 class PyfficeProject(PyfficeDocumentManager):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """Project management document with bidirectional format conversion.
 
     Supports:
@@ -68,8 +69,6 @@ class PyfficeProject(PyfficeDocumentManager):
     - CSV/Excel export
     - OpenSource formats (TaskJuggler, etc.)
     """
-
-    VERSION = "0.0.1.0.1.0"
 
     # Supported project file formats
     SUPPORTED_FORMATS = {
@@ -258,8 +257,6 @@ class PyfficeProjectAssignment(PyfficeUnit):
 class PyfficeProjectTask(PyfficeUnit):
     """Represents a task in a project."""
 
-    VERSION = "0.0.1.0.1.0"
-
     def __init__(self, cfg: Optional[dict] = None):
         super().__init__(cfg)
         self.name = cfg.get("name") if cfg else None
@@ -283,8 +280,6 @@ class PyfficeProjectTask(PyfficeUnit):
 class PyfficeProjectResource(PyfficeUnit):
     """Represents a resource in a project."""
 
-    VERSION = "0.0.1.0.1.0"
-
     def __init__(self, cfg: Optional[dict] = None):
         super().__init__(cfg)
         self.name = cfg.get("name") if cfg else None
@@ -301,8 +296,6 @@ class PyfficeProjectResource(PyfficeUnit):
 
 class PyfficeProjectMilestone(PyfficeUnit):
     """Represents a milestone in a project."""
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg: Optional[dict] = None):
         super().__init__(cfg)

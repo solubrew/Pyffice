@@ -33,9 +33,8 @@ pxcfg = join(here, "_data_", "cam.yaml")
 
 
 class PyfficeCAM(PyfficeDocument):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """"""
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""
@@ -55,8 +54,6 @@ class PyfficeCAM(PyfficeDocument):
 
 class PyfficeCAMManager(PyfficeDocumentManager):
     """"""
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

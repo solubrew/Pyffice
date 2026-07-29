@@ -45,6 +45,7 @@ pxcfg = join(here, "_data_", "colors.yaml")
 
 
 class PyfficeColor(PyfficeUnit):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """
     PyfficeColor provides utilities for working with various color formats.
 
@@ -62,8 +63,6 @@ class PyfficeColor(PyfficeUnit):
     - XYZ (CIE 1931 Color Space)
     - LMS (Long-Medium-Short cone response)
     """
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """

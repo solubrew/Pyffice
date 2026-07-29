@@ -6,6 +6,7 @@ from pyffice.document import PyfficeDocument
 
 
 class PyfficeSTEP(PyfficeDocument):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """STEP CAD file handler"""
     
     EXTENSIONS = {'.step', '.stp'}

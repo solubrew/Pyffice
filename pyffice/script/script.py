@@ -41,9 +41,8 @@ pxcfg = join(here, "_data_", "script.yaml")
 
 
 class PyfficeScript(PyfficeDocument):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """Pyffice Script is a Document type that handles text-based versions of documents within the pyffice framework."""
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

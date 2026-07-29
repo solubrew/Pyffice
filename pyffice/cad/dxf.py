@@ -8,6 +8,7 @@ from pyffice.document import PyfficeDocument
 
 
 class PyfficeDXF(PyfficeDocument):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """DXF CAD drawing handler"""
     
     EXTENSIONS = {'.dxf'}

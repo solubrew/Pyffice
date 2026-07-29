@@ -44,9 +44,8 @@ pxcfg = join(here, "_data_", "audio.yaml")
 
 
 class PyfficeAudio(PyfficeDocument):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """"""
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, path, cfg=None):
         """"""
@@ -113,8 +112,6 @@ class PyfficeAudio(PyfficeDocument):
 
 class PyfficePlayList(PyfficeDocumentManager):
     """"""
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

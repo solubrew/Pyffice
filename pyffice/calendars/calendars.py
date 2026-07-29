@@ -36,9 +36,8 @@ pxcfg = join(here, "_data_", "calendars.yaml")
 
 
 class PyfficeCalendar(PyfficeDocumentManager):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """"""
-
-    VERSION = "0.0.1.0.1.0"
 
     def __init__(self, cfg=None):
         """"""

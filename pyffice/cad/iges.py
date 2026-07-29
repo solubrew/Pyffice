@@ -6,6 +6,7 @@ from pyffice.document import PyfficeDocument
 
 
 class PyfficeIGES(PyfficeDocument):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """IGES CAD file handler"""
     
     EXTENSIONS = {'.iges', '.igs'}

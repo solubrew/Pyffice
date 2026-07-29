@@ -8,6 +8,7 @@ from pyffice.document import PyfficeDocument
 
 
 class PyfficeGLTF(PyfficeDocument):
+    SERIALIZATION_VERSION = (1, 0, 0)
     """glTF 3D model handler"""
     
     EXTENSIONS = {'.gltf', '.glb'}
