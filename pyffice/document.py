@@ -47,7 +47,14 @@ pxcfg = join(here, "_data_", "document.yaml")
 class PyfficeUnit(object):
     """"""
 
-    VERSION = "0.0.1.0.1.0"
+    # T-NEW-005 (item 2): per-class serialization version
+    # (semver triple). When ``to_dict``'s schema changes in a
+    # non-backward-compatible way, bump ``MAJOR`` (or
+    # ``MINOR`` for additive-but-required changes). The
+    # receiving side reads ``meta_data["schema_version"]``
+    # from the payload and dispatches upgrade paths by
+    # comparing this triple to the producer's triple.
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None):
         """"""
@@ -447,6 +454,7 @@ class PyfficeUnit(object):
             "path": self.path,
             "syntax": self.syntax,
             "semver": __version__,
+            "schema_version": list(self.SERIALIZATION_VERSION),
             "creon_dttm": self.set_creon().creon,
             "mod_dttm": self.set_modon().modon,
         }
@@ -484,7 +492,7 @@ class PyfficeUnit(object):
 class PyfficeDocument(PyfficeUnit):
     """"""
 
-    VERSION = "0.0.1.0.1.0"
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None):
         """"""
@@ -688,7 +696,7 @@ class PyfficeDocument(PyfficeUnit):
 class PyfficeDocumentManager(PyfficeDocument):
     """"""
 
-    VERSION = "0.0.1.0.1.0"
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None):
         """"""
@@ -771,7 +779,7 @@ class PyfficeDocumentManager(PyfficeDocument):
 class PyfficeDeque(PyfficeDocument, deque):
     """"""
 
-    VERSION = "0.0.1.0.1.0"
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None):
         """"""
