@@ -102,3 +102,41 @@ This TODO reflects what git log shows is **actually still pending**. Items compl
 ---
 
 *File last edited: 2026-07-06 (rewritten from prior stale contents reflecting actual git state)*
+
+
+---
+
+## Session handoff — Sprint 16 (2026-07-29)
+
+Upstream ``pyffice/gamma`` already has Sprint 16 work
+(commit ``5b858c2 feat(pyffice): per-class SERIALIZATION_VERSION
++ record schema_version``): each PyfficeDocument subclass
+declares ``SERIALIZATION_VERSION = (1, 0, 0)`` and
+``to_dict()`` records both ``"semver"`` (package-level,
+from ``pyffice.__version__``) and ``"schema_version"``
+(per-class, ``list(self.SERIALIZATION_VERSION)``) into
+``meta_data``. This was driven by user correction
+(2026-07-29): "it isn't the package version each
+PyfficeDocument type needs its own version control as
+each can have a different to_dict() schema".
+
+The change applies to ``PyfficeUnit``, ``PyfficeDocument``,
+``PyfficeDocumentManager``, ``PyfficeDeque``. Was verified
+locally with the registered tests in
+``tests/test_pyffice_semver.py``.
+
+**Open items (unchanged from before Sprint 16):** the
+existing R0801 dedup work plus the docstring cleanup
+items above are the live backlog.
+
+**Architectural facts to remember for the next session:**
+
+- Each PyfficeDocument subclass declares
+  ``SERIALIZATION_VERSION = (1, 0, 0)`` independently.
+- The receiving side reads both ``semver`` (what Pyffice
+  produced this blob) and ``schema_version`` (how to
+  deserialize THIS class). Subclasses can move schema
+  versions independently.
+- ``pyffice.__version__`` is ``"0.1.0"`` and
+  ``pyffice.__version_info__`` is ``(0, 1, 0)`` — exposed
+  for callers who want the package-level version.
