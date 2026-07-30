@@ -33,6 +33,45 @@ logma = Logma(__name__)
 pxcfg = join(here, "_data_", "sources.yaml")
 
 
+class PyfficeSource(PyfficeDocumentManager):
+    """"""
+
+    def __init__(self, cfg):
+        """"""
+        super().__init__(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeSource").override(cfg))
+        self.data_sets = []
+        self.data_views = []
+
+    def add_data_set(self, data_set):
+        """"""
+        # TODO implement method
+
+    def add_data_view(self, data_set):
+        """"""
+        # TODO implement method
+
+    def edit_data_set(self, changes):
+        """"""
+        # TODO implement method
+
+    def edit_data_view(self, changes):
+        """"""
+        # TODO implement method
+
+    def load_document(self, document=None):
+        """"""
+        logma.info(f"Load Document {document}")
+        document = document or self.config.dikt.get("document", {}) or {}
+        super().load_document(document)
+        return self
+
+    def to_dict(self):
+        """"""
+        doc = super().to_dict()
+        return doc
+
+
 class PyfficeSourceManager(PyfficeDocumentManager):
     SERIALIZATION_VERSION = (1, 0, 0)
     """"""
@@ -41,22 +80,19 @@ class PyfficeSourceManager(PyfficeDocumentManager):
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeSourceManager").override(cfg))
-        self.sources = None
+        self.sources = []
 
     def add_source(self, source, type_="file"):
         """"""
-        source = {"name": source.name, "type": type_, "path": source.path}
+        source = PyfficeSource({"name": source.name, "type": type_, "path": source.path})
         self.add_change("sources", self.sources, source, "add")
-        self.sources.add(source)
+        self.sources.append(source)
         return self
 
     def load_document(self, document=None):
         """"""
         logma.info(f"Load Document {document}")
-        if document is None:
-            document = self.config.dikt.get("document", {})
-            if document is None:
-                document = {}
+        document = document or self.config.dikt.get("document", {}) or {}
         super().load_document(document)
         self.set_sources(document.get("sources", []))
         return self
@@ -73,11 +109,11 @@ class PyfficeSourceManager(PyfficeDocumentManager):
     def to_dict(self):
         """"""
         doc = super().to_dict()
-        doc["document"] = {"sources": self.sources}
+        doc["document"] = {"sources": [source.to_dict() for source in self.sources]}
         return doc
 
 
-class PyfficeDataSet(PyfficeDocumentManager):
+class PyfficeDataSet(PyfficeDocument):
     """"""
 
     def __init__(self, cfg=None):
@@ -88,13 +124,6 @@ class PyfficeDataSet(PyfficeDocumentManager):
         self.sources = None
         self.relationships = None
         self.views = set()
-
-    def add_source(self, source, type_="file"):
-        """"""
-        source = {"name": source.name, "type": type_, "path": source.path}
-        self.add_change("sources", self.sources, source, "add")
-        self.sources.add(source)
-        return self
 
     def add_relationship(self, left_view, right_view, relationship_type=None, relationship_name=None):
         """"""
