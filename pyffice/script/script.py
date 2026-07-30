@@ -52,10 +52,12 @@ class PyfficeScript(PyfficeDocument):
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeScript").override(cfg))
         self.active_page = None
         self.file_format = None
+        self.file_formats = None
         self.html = None
         self.pages = None
         self.paragraphs = None
         self.text = None
+        self.full_text = None
         self.doc_type = "script"
 
     def add_comment(self, text: str):
@@ -254,11 +256,11 @@ class PyfficeScript(PyfficeDocument):
 
     def load_document(self, document=None):
         """"""
-        if document is None:
-            document = self.config.dikt.get("document", {}) or {}
+        document = document or self.config.dikt.get("document", {}) or {}
         logma.json(document)
         super().load_document(document)
         self.file_path = self.config.dikt.get("file_path", None)
+        # self.set_syntax("file")
         self.set_file_format_options()
         data = document.get("data", {}) or {}
         self.set_pages(data.get("pages", {}) or {})
@@ -274,6 +276,8 @@ class PyfficeScript(PyfficeDocument):
         self.set_syntax("file")
         if exists(file_):
             self.set_file_path(file_)
+        if self.file_formats is None:
+            self.set_file_format_options()
         for file_format in self.file_formats:
             if file_.endswith(file_format):
                 self.syntax = self.file_formats[file_format]
@@ -431,7 +435,7 @@ class PyfficeScript(PyfficeDocument):
         doc["data"]["document_type"] = "script"
         doc["data"]["pages"] = {}
         # logma.info(f"Pages {self.pages}")
-        self.parse_content(self.full_text)
+        self.parse_content(self.full_text or "")
         if self.pages is not None:
             for i, page in self.pages.items():
                 if i not in doc["data"]["pages"]:

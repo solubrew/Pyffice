@@ -35,7 +35,7 @@ from squirl.objnql import txtonql
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
-log = False
+log = True
 logma = Logma(__name__)
 if not log:
     logma.off()
@@ -168,32 +168,32 @@ class PyfficeUnit(object):
     def increment_version(self):
         """"""
         logma.info(f"Increment Version {self.version}")
-        self.version = int(self.version) + 1 #TODO need to fix version
-#         8 02:49:17", "mod_dttm": "2026-07-28 02:49:17"}, "unit": {"original_path": null, "active_url": null, "trust_level": null, "qualified_path": null, "domain": null, "redirect_path": null}}, "source": null}}}
-#         2026-07-27 22:49:17,464 - nchantdoffice.models                      439: INFO     - Document Content Saved
-#         Traceback (most recent call last):
-#         File "/mnt/iverse/SB/3_Functions/Projects/NchantdOffice/3_Work/1_DELTA/nchantdoffice/nchantdoffice/widgets/widgets.py", line 163, in on_tab_focus
-#         self.model.load_tab(self.model.tabsdata[tabn], tabn, self.pane_position)
-#     File "/mnt/iverse/SB/3_Functions/Projects/NchantdOffice/3_Work/1_DELTA/nchantdoffice/nchantdoffice/models.py", line 3258, in load_tab
-#     super().load_tab(tab, tabn, tabset, active_tab_position)
-# File "/mnt/iverse/SB/3_Functions/Operations/opENGRg/3_Work/jobElfSys/actvPython/tskNchantrs/1_DELTA/nchantrs/nchantrs/models/tabsetmodels.py", line 237, in load_tab
-# self.tab_widgets.insert(tabn, self.load_widget(self.parse_widget_data(tab), tabset, tab))
-# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-# File "/mnt/iverse/SB/3_Functions/Projects/NchantdOffice/3_Work/1_DELTA/nchantdoffice/nchantdoffice/models.py", line 3334, in load_widget
-# tabW.initWidget()
-# File "/mnt/iverse/SB/3_Functions/Projects/NchantdOffice/3_Work/1_DELTA/nchantdoffice/nchantdoffice/widgets/documents/atnrg/browsers.py", line 1699, in initWidget
-# self.initView()
-# File "/mnt/iverse/SB/3_Functions/Projects/NchantdOffice/3_Work/1_DELTA/nchantdoffice/nchantdoffice/widgets/documents/atnrg/browsers.py", line 1693, in initView
-# self.populate_document()
-# File "/mnt/iverse/SB/3_Functions/Projects/NchantdOffice/3_Work/1_DELTA/nchantdoffice/nchantdoffice/widgets/documents/atnrg/browsers.py", line 1724, in populate_document
-# self.document.save()
-# File "/mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice/pyffice/document.py", line 519, in save
-# self.increment_version()
-# File "/mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice/pyffice/document.py", line 164, in increment_version
-# self.version = int(self.version)
-# ^^^^^^^^^^^^^^^^^
-# ValueError: invalid literal for int() with base 10: '1.0.1.0'
-# 2026-07-27 22:49:17,629 - nchantrs.widgets.browsers.browsers        336: INFO     - URL Changed: PySide6.QtCore.QUrl('https://duckduckgo.com/')
+        self.version = int(self.version) + 1  # TODO need to fix version
+        #         8 02:49:17", "mod_dttm": "2026-07-28 02:49:17"}, "unit": {"original_path": null, "active_url": null, "trust_level": null, "qualified_path": null, "domain": null, "redirect_path": null}}, "source": null}}}
+        #         2026-07-27 22:49:17,464 - nchantdoffice.models                      439: INFO     - Document Content Saved
+        #         Traceback (most recent call last):
+        #         File "/mnt/iverse/SB/3_Functions/Projects/NchantdOffice/3_Work/1_DELTA/nchantdoffice/nchantdoffice/widgets/widgets.py", line 163, in on_tab_focus
+        #         self.model.load_tab(self.model.tabsdata[tabn], tabn, self.pane_position)
+        #     File "/mnt/iverse/SB/3_Functions/Projects/NchantdOffice/3_Work/1_DELTA/nchantdoffice/nchantdoffice/models.py", line 3258, in load_tab
+        #     super().load_tab(tab, tabn, tabset, active_tab_position)
+        # File "/mnt/iverse/SB/3_Functions/Operations/opENGRg/3_Work/jobElfSys/actvPython/tskNchantrs/1_DELTA/nchantrs/nchantrs/models/tabsetmodels.py", line 237, in load_tab
+        # self.tab_widgets.insert(tabn, self.load_widget(self.parse_widget_data(tab), tabset, tab))
+        # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        # File "/mnt/iverse/SB/3_Functions/Projects/NchantdOffice/3_Work/1_DELTA/nchantdoffice/nchantdoffice/models.py", line 3334, in load_widget
+        # tabW.initWidget()
+        # File "/mnt/iverse/SB/3_Functions/Projects/NchantdOffice/3_Work/1_DELTA/nchantdoffice/nchantdoffice/widgets/documents/atnrg/browsers.py", line 1699, in initWidget
+        # self.initView()
+        # File "/mnt/iverse/SB/3_Functions/Projects/NchantdOffice/3_Work/1_DELTA/nchantdoffice/nchantdoffice/widgets/documents/atnrg/browsers.py", line 1693, in initView
+        # self.populate_document()
+        # File "/mnt/iverse/SB/3_Functions/Projects/NchantdOffice/3_Work/1_DELTA/nchantdoffice/nchantdoffice/widgets/documents/atnrg/browsers.py", line 1724, in populate_document
+        # self.document.save()
+        # File "/mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice/pyffice/document.py", line 519, in save
+        # self.increment_version()
+        # File "/mnt/iverse/SB/3_Functions/Projects/Pyffice/3_Work/1_DELTA/pyffice/pyffice/document.py", line 164, in increment_version
+        # self.version = int(self.version)
+        # ^^^^^^^^^^^^^^^^^
+        # ValueError: invalid literal for int() with base 10: '1.0.1.0'
+        # 2026-07-27 22:49:17,629 - nchantrs.widgets.browsers.browsers        336: INFO     - URL Changed: PySide6.QtCore.QUrl('https://duckduckgo.com/')
         return self
 
     def load_unit(self, unit=None):
@@ -654,13 +654,31 @@ class PyfficeDocument(PyfficeUnit):
     def set_file_path(self, file_path):
         """"""
         if file_path is None:
-            file_path = self.config.dikt.get("file_path", "")
-        file_path = str(file_path)
+            file_path = self.config.get("file_path", None)
+        if file_path is None:  # PyfficePDF
+            file_path = self.config.dikt.get("document", {}).get("content", {}).get("file_path", None)
+        if file_path is None:  # PyfficeImage
+            file_path = self.config.dikt.get("document", {}).get("data", {}).get("content", {}).get("file_path", None)
+        if file_path is None:  # PyfficeScript
+            file_path = (
+                self.config.dikt.get("document", {})
+                .get("data", {})
+                .get("content", {})
+                .get("content", {})
+                .get("file_path", None)
+            )
+        logma.info(f"\n[PyfficeDocument] Document {self.config.get("document", None)}\n")
+        logma.info(f"\n[PyfficeDocument] File Path {file_path}\n")
+        if file_path is None:
+            return self
         if exists(file_path):
             if file_path != self.file_path:
                 self.add_change("file_path", self.file_path, file_path)
                 self.file_path = file_path
                 self.set_location("external")
+        else:
+            logma.warning(f"File Path Does Not Exist {file_path}")
+        logma.info(f"[PyfficeDocument] File Path {self.file_path}")
         return self
 
     def set_file_type(self, file_type):
