@@ -7,15 +7,66 @@ from typing import Optional
 
 import click
 
-# Import all modules for CLI coverage
-from pyffice import (
-    analytics, audio, cad, calendars, cam, charts, contacts, databases,
-    diagrams, email, filesystems, forms, images, items, notebooks,
-    presentation, projects, reports, socials, spreadsheet, tags,
-    text, updates, video, web, workflows,
-)
+# Import all modules for CLI coverage.
+# T-NEW-044: previously this was `from pyffice import (...)` with 25
+# subpackage names that pyffice/__init__.py never re-exported (the
+# only thing it exports is __version__/__version_info__ — T-NEW-051
+# covers the rest). Switched to explicit submodule imports so the
+# CLI can at least start. Many of these modules have broken
+# transitive imports (e.g. pyffice.email.email references a
+# non-existent pyffice.text.messages module; pyffice.reports.reports
+# references a non-existent pyffice.text.text module). Each is
+# wrapped in try/except so one broken submodule doesn't crash the
+# whole CLI; this matches the spirit of the original `import ...`
+# block (which only imported names for the side effect of making
+# modules available) but reports what failed so it's visible.
+def _safe_import(module_name: str, attr: str) -> object:
+    """Import a submodule; return None if it or its deps fail."""
+    try:
+        mod = __import__(module_name, fromlist=[attr])
+        return getattr(mod, attr, None)
+    except Exception as exc:  # noqa: BLE001 - reported, not raised
+        print(f"[pyffice.cli] skipping {module_name}.{attr}: {exc}",
+              file=sys.stderr)
+        return None
+
+
+analytics = _safe_import("pyffice.analytics", "sources")
+audio_module = _safe_import("pyffice.audio", "audio_export")
+calendars_module = _safe_import("pyffice.calendars", "calendars")
+cam_module = _safe_import("pyffice.cam", "cam")
+charts_module = _safe_import("pyffice.charts", "charts")
+contacts_module = _safe_import("pyffice.contacts", "contacts")
+databases_module = _safe_import("pyffice.databases", "databases")
+diagrams_module = _safe_import("pyffice.diagrams", "diagrams")
+email_module = _safe_import("pyffice.email", "email")
+filesystems_module = _safe_import("pyffice.filesystems", "filesystems")
+forms_module = _safe_import("pyffice.forms", "forms")
+images_module = _safe_import("pyffice.images", "images")
+items_module = _safe_import("pyffice.items", "items")
+matrix_module = _safe_import("pyffice.matrix", "matrix")
+notebooks_module = _safe_import("pyffice.notebooks", "notebooks")
+ports_module = _safe_import("pyffice.ports", "ports")
+presentation_module = _safe_import("pyffice.presentation", "presentation")
+projects_module = _safe_import("pyffice.projects", "projects")
+reports_module = _safe_import("pyffice.reports", "reports")
+script_module = _safe_import("pyffice.script", "script")
+skills_module = _safe_import("pyffice.skills", "skills")
+socials_module = _safe_import("pyffice.socials", "socials")
+tags_module = _safe_import("pyffice.tags", "tags")
+text_module = _safe_import("pyffice.text", "textdoc")
+updates_module = _safe_import("pyffice.updates", "updates")
+video_module = _safe_import("pyffice.video", "video_export")
+web_module = _safe_import("pyffice.web", "web")
+workflows_module = _safe_import("pyffice.workflows", "workflows")
+
+from pyffice import PyfficeCodex
 from pyffice.document import PyfficeDocument
-from pyffice.pyffice import Pyffice
+
+# T-NEW-044: keep the legacy alias so the rest of this file
+# (which references `Pyffice`) keeps compiling. The real class
+# is PyfficeCodex.
+Pyffice = PyfficeCodex
 
 
 @click.group()
