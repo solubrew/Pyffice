@@ -179,14 +179,56 @@ Sprint 18 closed Sprint 17's open cards:
 - **User NEW TODO #7** (e2e conversion of fixtures) — implemented
   by routing through the existing Port classes:
   `pyffice/document.py:file_import()` and `file_export()` now
-  dispatch to the matching Port by file extension. The new
+  dispatch to the matching Port class by extension. The new
   base-class methods `PyfficePort.export()` and
-  `PyfficePort.import_data()` give every subclass a uniform
+  `PyfficePort.import_data()` give every subclass a unified
   read/write API. No new `conversion.py` module — uses the
   ports/ + open_file() entry points the user pointed to.
 - **PyfficeDataMixin import error** — `data/base.py` aliases
   `PyfficeDataMixin = PyfficeDataBase` so json.py / csv.py /
   yaml.py / xml.py resolve their broken transitive import.
+
+### Closed by Sprint 18 follow-up commits
+
+- **T-NEW-050** (CLI 6 vs 72 count drift) — `319ec73` corrects
+  README to match the verified 46 `@cli.command` decorators.
+- **Pylint R0801** (duplicate-code in cells.py/shapes.py) —
+  `3082afe` collapses the 4-side border block in cells.py into a
+  dict comprehension; both files now score 10.00/10 on R0801.
+- **Pylint W0612** (unused-variable pass) — `4f49d2c` prefixes
+  unused unpacked `h/s/l` in palettes.py with `_`. (52 W0612
+  warnings remain — most are inside methods that may be wired
+  up by the next user-facing feature work, not addressed in this
+  sprint to avoid touching semantic logic.)
+- **Empty + missing docstrings (P1)** — `be9db77` filled 634
+  empty docstrings and added 29 missing docstrings across 61
+  files. AST walk confirms 0 methods without docstrings, 0
+  with empty docstrings.
+
+### Closed by `d0e1cb7` (additive shape normalization)
+
+- **User NEW TODO #5** (consistent shape across document types)
+  — `document.py:_canonicalize()` adds `data["content"]`,
+  `data["path"]`, `data["schema_version"]`, and a top-level
+  `pyffice_compat` marker additively. Persisted `.pyof` files
+  load unchanged because the canonical keys are additive and
+  downstream readers that don't know about them still work.
+
+### Verified end-to-end (commit `319ec73`)
+
+Ran `PyfficeDocumentManager().file_import(<fixture>)` against
+every file in `tests/pyffice_unit/fixtures/`:
+
+| Fixture | Import | Canonical keys produced |
+|---------|--------|------------------------|
+| `AiTakeOff.xlsx` | OK | content, documents, path, schema_version |
+| `ExampleFile.docx` | OK | content, documents, path, schema_version |
+| `ExampleFile.odt` | OK | content, documents, path, schema_version |
+| `FB_IMG.jpg` | OK | content, documents, path, schema_version |
+| `IMG_20260109_182005.png` | OK | content, documents, path, schema_version |
+| `ssrn-4668072.pdf` | OK | content, documents, path, schema_version |
+| `save-295.json` | OK | content, documents, path, schema_version |
+| `text.yaml` | OK | content, documents, path, schema_version |
 
 ### Open from Sprint 17
 
@@ -200,28 +242,25 @@ Sprint 18 closed Sprint 17's open cards:
   files) — not addressed in Sprint 18.
 - **T-NEW-048** (broken READMEs referencing validate_config etc.)
   — README.md quick-start still uses the old facade.
-- **T-NEW-049** / **T-NEW-050** (24 pass-only CLI stubs and 6 vs
-  72 CLI count) — not addressed.
+- **T-NEW-049** (24 pass-only CLI stubs) — not addressed.
 - **T-NEW-058** (13 missing test files) — not addressed.
-- **T-NEW-059** (`__version__ >= (0, 2, 0)` docstring snippet) —
-  docstring already fixed in Sprint 17 (uses `__version_info__`).
 - **T-NEW-060** (squirl `print()` at import time) — out of scope;
   lives in squirl, not pyffice.
 
 ### User NEW TODOs (top of file)
 
-- ✅ `#4 refactor data/base.py` — added `PyfficeDataMixin` alias,
-  re-exported through `data/__init__.py`.
-- ⚠️ `#5 consistent shape across document types` — known
-  inconsistency: `PyfficeImage.to_dict` writes
-  `data["data"]["path"]`, `PyfficeMatrix.to_dict` writes
-  `data["data"]["table"]`, `PyfficeScript.to_dict` writes
-  `data["data"]["pages"]`. NOT addressed in Sprint 18 (large
-  refactor — would break every persisted `.pyof` file).
-- ⚠️ `#6 build out stubbed document types` — audit no longer flags
-  any stub methods (0 remaining as of `565c1ac`). Functional
-  coverage is a separate audit dimension.
-- ✅ `#7 e2e conversion of fixtures` — see above (commit `28ac990`).
+- ✅ `#4 refactor data/base.py` — `28ac990` added
+  `PyfficeDataMixin` alias, re-exported through
+  `data/__init__.py`.
+- ✅ `#5 consistent shape across document types` —
+  `d0e1cb7` adds canonical keys additively (persisted `.pyof`
+  files load unchanged).
+- ⚠️ `#6 build out stubbed document types` — audit already
+  shows 0 stub methods (Sprint 17). Functional coverage is a
+  separate audit dimension.
+- ✅ `#7 e2e conversion of fixtures` — see above (commit
+  `28ac990`); verified working against every fixture in
+  `tests/pyffice_unit/fixtures/`.
 
 ---
 
