@@ -50,13 +50,7 @@ class PyfficePortGoogleDocs(PyfficePort):
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortGoogleDocs")).override(cfg)
 
-    def to_native(self):
-        """Convert to native format."""
-        return self.document
 
-    def to_xml(self):
-        """Convert to XML format."""
-        return self.to_dict()
 
 
 class PyfficePortGoogleForms(PyfficePort):
@@ -69,13 +63,7 @@ class PyfficePortGoogleForms(PyfficePort):
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("")).override(cfg)
 
-    def to_native(self):
-        """Convert to native format."""
-        return self.document
 
-    def to_xml(self):
-        """Convert to XML format."""
-        return self.to_dict()
 
 
 class PyfficePortGoogleSheets(PyfficePort):
@@ -88,13 +76,7 @@ class PyfficePortGoogleSheets(PyfficePort):
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortGoogleSheets")).override(cfg)
 
-    def to_native(self):
-        """Convert to native format."""
-        return self.document
 
-    def to_xml(self):
-        """Convert to XML format."""
-        return self.to_dict()
 
 
 # ====================================================================================================================||

@@ -1151,11 +1151,11 @@ def cam_generate(ctx: click.Context, input: str, output: str) -> None:
     # parallel cam/ dataclass module (see review: PyfficeCAM
     # duplicated across pyffice/cam/cam.py and
     # pyffice/cad/cad_cam.py).
-    from pyffice.cad.cad_cam import PyfficeCAM as CadPyfficeCAM
+    from pyffice.cad.cad_gcode import PyfficeGCode
     try:
-        cam = CadPyfficeCAM()
-        cam.file_import(input)
-        cam.file_export(output)
+        gcode = PyfficeGCode()
+        gcode.file_import(input)
+        gcode.save_gcode(output)
         click.echo(f"✓ Generated CNC code: {output}")
     except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)

@@ -253,14 +253,6 @@ class PyfficeShape(PyfficeUnit):
         }
         return doc
 
-    def to_html(self):
-        """Convert this document to html.
-        
-        Returns:
-            Self for chaining.
-        """
-        return self.html
-
     def _set_envelope(self, top_left, bottom_right):
         """"""
         self.origin = top_left

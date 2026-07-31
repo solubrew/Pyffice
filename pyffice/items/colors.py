@@ -517,15 +517,6 @@ class PyfficeColor(PyfficeUnit):
         }
         return doc
 
-    def to_html(self):
-        """Convert this document to html.
-        
-        Returns:
-            Self for chaining.
-        """
-        return self.html
-
-
 def calculate_hsl_complementary(h, s, l):
     """
     Calculate complementary color using HSL model.

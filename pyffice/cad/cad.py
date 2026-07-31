@@ -86,15 +86,6 @@ class PyfficeCADAssembly(PyfficeDocumentManager):
         self.parts = parts
         return self
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        return doc
-
 
 class PyfficeCADManager(PyfficeDocumentManager):
     """Manage all cad related items inlcuding assmeblys, objects, libraries, etc"""
@@ -134,16 +125,6 @@ class PyfficeCADManager(PyfficeDocumentManager):
         """
         super().create_new_document(name, "manager")
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        return doc
-
-
 class PyfficeCADPart(PyfficePart):
     """"""
 
@@ -165,16 +146,6 @@ class PyfficeCADPart(PyfficePart):
             Self for chaining.
         """
         super().create_new_document(name, "cadpart")
-
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        return doc
-
 
 # ====================================================================================================================||
 
