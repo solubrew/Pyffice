@@ -10,7 +10,7 @@ import below is wrapped in try/except so one broken submodule
 doesn't crash the whole package init.
 """
 
-from pyffice.data.base import PyfficeDataBase
+from pyffice.data.base import PyfficeDataBase, PyfficeDataMixin
 
 try:
     from pyffice.data.csv import (
@@ -47,6 +47,7 @@ __all__ = [
     "PyfficeJSON",
     "PyfficeYAML",
     "PyfficeDataBase",
+    "PyfficeDataMixin",
     "csv_read",
     "csv_write",
     "read_rows",

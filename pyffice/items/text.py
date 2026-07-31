@@ -356,6 +356,7 @@ class PyfficeHTML(PyfficeText):
 
 class PyfficePage(PyfficeUnit):
     """"""
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     VERSION = "0.0.1.0.1.0"
 

@@ -77,6 +77,59 @@ class PyfficePort(PyfficeDocumentManager):
         self.parse()
         return self
 
+    def export(self, document=None):
+        """Export a Pyffice document out to the port's native format.
+
+        Subclasses override this for format-specific writers (xlsx,
+        docx, png, etc.). The base implementation falls back to a
+        YAML serialization via :meth:`file_write`, which keeps the
+        round-trip-lossless path available for ports that don't have
+        a native exporter yet.
+
+        Args:
+            document: Optional Pyffice document to serialize. If
+                None, ``self.to_dict()`` is used.
+
+        Returns:
+            ``self`` for chaining.
+        """
+        if document is not None and hasattr(document, "to_dict"):
+            payload = document.to_dict()
+        else:
+            payload = self.to_dict()
+        if self.file_path:
+            self.file_write(self.file_path, payload)
+        return self
+
+    def import_data(self):
+        """Read the port's ``file_path`` and return the loaded payload.
+
+        Subclasses override this for format-specific readers (xlsx,
+        docx, png, etc.). The base implementation defers to
+        ``file_open`` and returns the raw text/bytes so subclasses
+        that don't have a specialized reader can still expose
+        something useful.
+
+        Returns:
+            Loaded data as a dict, list, or string depending on the
+            subclass; ``None`` if no ``file_path`` is set.
+        """
+        if not self.file_path:
+            return None
+        text = self.file_open(self.file_path, open_=True)
+        if text is None:
+            return None
+        # YAML is the canonical interchange format; default to it
+        # if text parses cleanly, else return the raw string.
+        try:
+            import yaml
+
+            return yaml.safe_load(text)
+        except ImportError:
+            return {"text": text}
+        except (ValueError, TypeError):
+            return {"text": text}
+
     def to_native(self):
         """Convert to native format."""
         return self.document

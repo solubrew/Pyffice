@@ -79,6 +79,7 @@ class PyfficeCADAssembly(PyfficeDocumentManager):
 
 class PyfficeCADManager(PyfficeDocumentManager):
     """Manage all cad related items inlcuding assmeblys, objects, libraries, etc"""
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None):
         """"""

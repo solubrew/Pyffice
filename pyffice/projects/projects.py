@@ -247,6 +247,7 @@ class PyfficeProject(PyfficeDocumentManager):
 
 class PyfficeProjectAssignment(PyfficeUnit):
     """"""
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None):
         """"""
@@ -256,6 +257,7 @@ class PyfficeProjectAssignment(PyfficeUnit):
 
 class PyfficeProjectTask(PyfficeUnit):
     """Represents a task in a project."""
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg: Optional[dict] = None):
         super().__init__(cfg)
@@ -279,6 +281,7 @@ class PyfficeProjectTask(PyfficeUnit):
 
 class PyfficeProjectResource(PyfficeUnit):
     """Represents a resource in a project."""
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg: Optional[dict] = None):
         super().__init__(cfg)
@@ -296,6 +299,7 @@ class PyfficeProjectResource(PyfficeUnit):
 
 class PyfficeProjectMilestone(PyfficeUnit):
     """Represents a milestone in a project."""
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg: Optional[dict] = None):
         super().__init__(cfg)

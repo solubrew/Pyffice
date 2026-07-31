@@ -343,6 +343,7 @@ class PyfficeImage(PyfficeDocument):
 
 class PyfficeImageManager(PyfficeDocumentManager):
     """"""
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None):
         """"""
@@ -405,6 +406,7 @@ class PyfficeImageManager(PyfficeDocumentManager):
 
 class PyfficeScreenShot(PyfficeDocument):
     """"""
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None):
         """"""

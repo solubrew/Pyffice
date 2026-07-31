@@ -58,6 +58,7 @@ class PyfficeAddress(PyfficeDocument):
 
 class PyfficeContact(PyfficeDocument):
     """"""
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None):
         """"""
@@ -387,6 +388,7 @@ class PyfficeContact(PyfficeDocument):
 
 class PyfficeRolodex(PyfficeDocumentManager):
     """"""
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None):
         """"""

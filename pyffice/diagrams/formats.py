@@ -20,6 +20,7 @@ import json
 import re
 import xml.etree.ElementTree as ET
 import zipfile
+from abc import ABC, abstractmethod
 from base64 import b64decode, b64encode
 from io import BytesIO
 from zipfile import ZipFile
@@ -73,19 +74,21 @@ DIAGRAM_FORMATS = {
 }
 
 
-class DiagramConverter:
+class DiagramConverter(ABC):
     """Base class for diagram format converters"""
 
     def __init__(self, cfg=None):
         self.cfg = cfg or {}
 
+    @abstractmethod
     def load(self, file_path):
         """Load diagram from file and convert to PyfficeDiagram"""
-        raise NotImplementedError
+        raise NotImplementedError("Subclass must implement load()")
 
+    @abstractmethod
     def save(self, diagram, file_path):
         """Save PyfficeDiagram to file"""
-        raise NotImplementedError
+        raise NotImplementedError("Subclass must implement save()")
 
     @staticmethod
     def detect_format(file_path):

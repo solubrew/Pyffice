@@ -527,27 +527,136 @@ class PyfficeDocument(PyfficeUnit):
         # self.img = utils.invert_dict(self.config.dikt.get("textLIST", None))
 
     def file_export(self, file_=None):
-        """Export document to file."""
+        """Export document to file via the appropriate Port class.
+
+        Dispatches on the destination file extension to select the
+        correct exporter (Excel -> PyfficePortExcel, CSV ->
+        PyfficePortCSV, image -> PyfficePortImage, etc.) and writes
+        the document contents out.
+
+        Args:
+            file_: Destination path. If None, uses ``self.file_path``.
+
+        Returns:
+            ``self`` for chaining.
+        """
         if not file_:
-            return self
-        # Placeholder - would use port system
+            file_ = self.file_path
+        if not file_:
+            from pyffice.pyffice import MissingPathError
+
+            raise MissingPathError("file_export requires a destination path")
+        from pathlib import Path
+        ext = Path(str(file_)).suffix.lower()
+
+        # Lazy import the matching Port class for the extension
+        port = self._port_for_ext(ext)
+        if port is not None:
+            port.file_path = str(file_)
+            port.export(self)
         return self
 
-    def file_import(self, file_type):
-        """Import document from file."""
-        if not file_type:
-            return self
-        # Placeholder - would use port system
+    def file_import(self, file_path=None):
+        """Import document content from a file via the matching Port.
+
+        Detects the file extension and dispatches to the right Port
+        class (PyfficePortExcel for .xlsx, PyfficePortCSV for .csv,
+        PyfficePortImage for image formats, etc.). The Port loads the
+        file, then this method copies the loaded payload into
+        ``self.data``.
+
+        Args:
+            file_path: Source path. If None, uses ``self.file_path``.
+
+        Returns:
+            ``self`` for chaining.
+        """
+        if file_path is None:
+            file_path = self.file_path
+        if not file_path:
+            from pyffice.pyffice import MissingPathError
+
+            raise MissingPathError("file_import requires a source path")
+        from pathlib import Path
+        ext = Path(str(file_path)).suffix.lower()
+
+        port = self._port_for_ext(ext)
+        if port is not None:
+            port.file_path = str(file_path)
+            loaded = port.import_data()
+            if loaded is not None:
+                self.set_data(loaded)
         return self
+
+    def _port_for_ext(self, ext):
+        """Return a fresh Port instance for the given extension, or
+        None if no Port class matches the extension."""
+        if not ext:
+            return None
+        # Local imports avoid cycles
+        try:
+            from pyffice.ports.ports import (
+                PyfficePortExcel,
+                PyfficePortCSV,
+                PyfficePortImage,
+                PyfficePortDia,
+                PyfficePortFileSystem,
+            )
+        except ImportError:
+            return None
+
+        mapping = {
+            ".xlsx": PyfficePortExcel,
+            ".xlsm": PyfficePortExcel,
+            ".xls": PyfficePortExcel,
+            ".csv": PyfficePortCSV,
+            ".tsv": PyfficePortCSV,
+            ".png": PyfficePortImage,
+            ".jpg": PyfficePortImage,
+            ".jpeg": PyfficePortImage,
+            ".gif": PyfficePortImage,
+            ".bmp": PyfficePortImage,
+            ".svg": PyfficePortImage,
+            ".webp": PyfficePortImage,
+            ".dia": PyfficePortDia,
+        }
+        cls = mapping.get(ext)
+        if cls is None:
+            return PyfficePortFileSystem()
+        return cls()
 
     def file_open(self, file_path, open_=True):
-        """"""
+        """Open a file and return its raw text content.
+
+        For binary formats (.xlsx, .pdf, .png, etc.), this returns
+        ``None`` and the caller should use ``file_import`` instead
+        so the appropriate Port can decode the binary payload.
+
+        Args:
+            file_path: Path to the file.
+            open_: If True, read the file content; otherwise just
+                record the path on ``self.file_path``.
+
+        Returns:
+            Decoded text, or None if the file is binary.
+        """
         if file_path is None:
             file_path = self.file_path
         self.file_path = file_path
         text = None
         if open_ is True:
-            with open(str(self.file_path), "r") as f:
+            from pathlib import Path
+            ext = Path(str(file_path)).suffix.lower()
+            # Detect binary by extension
+            binary_exts = {
+                ".xlsx", ".xlsm", ".xls", ".pdf", ".png", ".jpg",
+                ".jpeg", ".gif", ".bmp", ".webp", ".zip", ".tar",
+                ".gz", ".bz2", ".7z", ".rar", ".mp4", ".mp3",
+                ".wav", ".ogg", ".flac", ".heic", ".raw",
+            }
+            if ext in binary_exts:
+                return None
+            with open(str(self.file_path), "r", encoding="utf-8", errors="replace") as f:
                 text = f.read()
         return text
 

@@ -47,6 +47,7 @@ class PyfficeContext(PyfficeDocument):
 
 class PyfficePrompt(PyfficeDocument):
     """"""
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None):
         """"""
@@ -226,6 +227,7 @@ class PyfficePrompt(PyfficeDocument):
 
 class PyfficeResponse(PyfficeDocument):
     """"""
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None):
         """"""
@@ -252,6 +254,7 @@ class PyfficeResponse(PyfficeDocument):
 
 class PyfficePromptsManager(PyfficeDocumentManager):
     """"""
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None):
         """"""

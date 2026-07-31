@@ -35,6 +35,7 @@ pxcfg = join(here, "_data_", "sources.yaml")
 
 class PyfficeSource(PyfficeDocumentManager):
     """"""
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg):
         """"""
@@ -119,6 +120,7 @@ class PyfficeSourceManager(PyfficeDocumentManager):
 
 class PyfficeDataSet(PyfficeDocument):
     """"""
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None):
         """"""
@@ -216,6 +218,7 @@ class PyfficeDataSet(PyfficeDocument):
 
 class PyfficeDataView(PyfficeDocument):
     """"""
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None):
         """"""

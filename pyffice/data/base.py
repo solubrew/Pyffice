@@ -22,7 +22,7 @@ class PyfficeDataBase(ABC):
     @abstractmethod
     def data(self) -> Any:
         """Get raw data. Must be implemented by subclass."""
-        pass
+        raise NotImplementedError("Subclass must implement data property")
 
     def get(self, key: str, default: Any = None) -> Any:
         """Get value by key with dot notation support.
@@ -173,3 +173,11 @@ class PyfficeDataBase(ABC):
             New instance (must be implemented by subclass)
         """
         raise NotImplementedError("Subclass must implement from_dict")
+
+
+# Backwards-compatible alias. The data/format modules (json.py,
+# csv.py, yaml.py, xml.py) were originally written against a
+# `PyfficeDataMixin` name that doesn't exist on this codebase.
+# Aliasing it to `PyfficeDataBase` is the minimal-impact fix; new
+# code should prefer `PyfficeDataBase`.
+PyfficeDataMixin = PyfficeDataBase

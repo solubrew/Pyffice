@@ -933,6 +933,7 @@ class PyfficeURL(PyfficeUnit):
 
 class PyfficeURLLibrary(PyfficeDocumentManager):
     """URL Library is a data object for integrating affiliate links into the web apps and browsing features provided
+    SERIALIZATION_VERSION = (1, 0, 0)
     within Pyffice"""
 
     def __init__(self, cfg=None):

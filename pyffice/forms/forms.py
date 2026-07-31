@@ -188,6 +188,7 @@ class PyfficeForm(PyfficeDocument):
 
 class PyfficeFormsManager(PyfficeDocumentManager):
     """"""
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None):
         """"""
@@ -223,6 +224,7 @@ class PyfficeFormsManager(PyfficeDocumentManager):
 
 class PyfficeSurvey(PyfficeDocument):
     """
+    SERIALIZATION_VERSION = (1, 0, 0)
     Manages the creation, distribution and service used in surveys. Allowing the selection between Google Forms,
     YouForm and PyfficeForms.
 

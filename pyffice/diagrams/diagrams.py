@@ -209,6 +209,7 @@ class PyfficeEdge(PyfficeUnit):
 
 class PyfficeDiagram(PyfficeDocumentManager):
     """"""
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None):
         """"""
@@ -343,6 +344,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
 
 class PyfficeDiagramLayer(PyfficeUnit):
     """"""
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None):
         """"""
@@ -376,6 +378,7 @@ class PyfficeDiagramLayer(PyfficeUnit):
 
 class PyfficeNode(PyfficeUnit):
     """"""
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None):
         """"""
@@ -453,6 +456,7 @@ class PyfficeNode(PyfficeUnit):
 
 class PyfficeDiagramConnection(PyfficeUnit):
     """"""
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None):
         """"""

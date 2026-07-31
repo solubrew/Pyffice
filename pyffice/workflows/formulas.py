@@ -151,10 +151,9 @@ class BuiltinProtocol(PyfficeFormulaProtocol):
 
 class PyfficeFormulasLibrary(PyfficeDocumentManager):
     SERIALIZATION_VERSION = (1, 0, 0)
-    """"""
 
     def __init__(self, cfg=None):
-        """"""
+        """Initialize the formulas library and register default protocols."""
         super().__init__(cfg)
 
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeFormulasLibrary")).override(cfg)
@@ -168,19 +167,19 @@ class PyfficeFormulasLibrary(PyfficeDocumentManager):
         self.formulas = None
 
     def get_formula(self, formula):
-        """"""
+        """Look up a registered formula by name."""
         if self.formulas is None:
             self.set_formulas()
         return self.formulas.get(formula, None) or f"Formula {formula} Unknown"
 
     def get_formulas_list(self):
-        """"""
+        """Return the names of all registered formulas."""
         if self.formulas is None:
             self.set_formulas()
         return list(self.formulas.keys())
 
     def load_document(self, document=None):
-        """"""
+        """Load formulas from a document dict into the library."""
         if document is None:
             document = self.config.dikt.get("document", {})
         super().load_document(document)
@@ -188,7 +187,7 @@ class PyfficeFormulasLibrary(PyfficeDocumentManager):
         return self
 
     def set_formulas(self, formulas=None):
-        """"""
+        """Register a dict of formulas; each becomes a PyfficeFormula."""
         # SPEED: offload this to a separate process or lazy load the list in pieces
         if formulas is None:
             formulas = kahndor.Instruct(pxcfg).select("Formulas").dikt
@@ -206,13 +205,14 @@ class PyfficeFormulasLibrary(PyfficeDocumentManager):
         return self
 
     def to_dict(self):
-        """"""
+        """Serialize the formulas library to a dict."""
         doc = super().to_dict() or {}
         return doc
 
 
 class PyfficeFormula(PyfficeUnit):
     """A Functional Formula object for use in various Pyffice Documents"""
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None, _library=None):
         """"""
