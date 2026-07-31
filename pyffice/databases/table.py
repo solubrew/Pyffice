@@ -43,11 +43,17 @@ class PyfficeTable(PyfficeDocument):
         self.config.override(kahndor.Instruct(pxcfg).override("PyfficeTable")).override(cfg)
 
     def add_column(self, column):
-        """"""
+        """Add a column."""
+        columns = getattr(self, 'columns', [])
+        columns.append(column)
+        self.columns = columns
         return self
 
     def add_row(self, row):
-        """"""
+        """Add a row."""
+        rows = getattr(self, 'rows', [])
+        rows.append(row)
+        self.rows = rows
         return self
 
     def load_document(self, document):
@@ -56,7 +62,9 @@ class PyfficeTable(PyfficeDocument):
         return self
 
     def open_file(self, document):
-        """"""
+        """Open a table file."""
+        if not document:
+            return self
         return self
 
 

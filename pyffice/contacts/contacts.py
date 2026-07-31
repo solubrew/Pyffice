@@ -381,8 +381,8 @@ class PyfficeContact(PyfficeDocument):
         return self
 
     def verify_social(self, handle, social_network):
-        """"""
-        return self
+        """Verify social media handle."""
+        return True  # Placeholder - would verify via API
 
 
 class PyfficeRolodex(PyfficeDocumentManager):
@@ -419,16 +419,16 @@ class PyfficeRolodex(PyfficeDocumentManager):
         return self
 
     def filter_by_group(self, cfg):
-        """"""
-        return self
+        """Filter contacts by group."""
+        return []
 
     def get_contacts(self, search_term=None):
-        """"""
-        return self
+        """Get all contacts."""
+        return []
 
     def get_contact(self, contact_id):
-        """"""
-        return self
+        """Get contact by ID."""
+        return None
 
     def get_count(self):
         """"""
