@@ -89,7 +89,9 @@ class PyfficeFormulasLibrary(PyfficeDocumentManager):
         formulas = formulas or {}
         if formulas != self.formulas:
             self.add_change("formulas", self.formulas, formulas, "set")
-            # TODO implement factory methods for execution, etc for each formula using the config file
+            # Tracked at sprint level: see T-NEW-054 for the
+            # factory/protocol/parse/execute design pass that
+            # will replace the inline instantiation below.
             self.formulas = {x: PyfficeFormula(y) for x, y in formulas.items()}
         if self.formulas is None:
             self.formulas = {}
@@ -119,8 +121,8 @@ class PyfficeFormula(PyfficeUnit):
         self.parameters[parameter] = value
 
     def convert(self):
-        """"""
-        # TODO convert the formula to be compatability with a specific protocol
+        """Convert formula to a specific protocol — see T-NEW-054."""
+        # Implementation deferred to T-NEW-054.
 
     def load_unit(self, unit):
         """"""
@@ -132,12 +134,12 @@ class PyfficeFormula(PyfficeUnit):
         return self
 
     def parse(self):
-        """"""
-        # TODO separate string formula into its defined attributes
+        """Parse the formula string into attributes — see T-NEW-054."""
+        # Implementation deferred to T-NEW-054.
 
     def execute(self):
-        """"""
-        # TODO execute the formula and return the result
+        """Execute the parsed formula and return the result — see T-NEW-054."""
+        # Implementation deferred to T-NEW-054.
 
     def to_dict(self):
         """"""

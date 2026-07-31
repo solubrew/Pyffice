@@ -114,8 +114,21 @@ class PyfficeMatrix(PyfficeDocumentManager):
         return self
 
     def determine_file_type(self, path):
-        """"""
-        # TODO build out determination/compability method
+        """Return the file type inferred from the path extension.
+
+        Maps: .xlsx/.xls/.xlsm -> 'excel'; .ods -> 'openoffice';
+        .csv -> 'csv'. Defaults to 'excel' for unknown extensions
+        (backward compatibility with the prior placeholder return).
+        """
+        if not path:
+            return "excel"
+        lower = str(path).lower()
+        if lower.endswith((".xlsx", ".xls", ".xlsm", ".xlsb")):
+            return "excel"
+        if lower.endswith(".ods"):
+            return "openoffice"
+        if lower.endswith(".csv"):
+            return "csv"
         return "excel"
 
     def export(self, format_=None):

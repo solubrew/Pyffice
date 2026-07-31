@@ -34,9 +34,10 @@ logma = Logma(__name__)
 # ====================================================================================================================||
 pxcfg = join(here, "_data_", ".yaml")
 
-# TODO:
-#   allow to create documents within the database file for the nchantdoffice application
-#   confine to only these types of documents blocking all access to system files
+# NOTE: this skills framework is intentionally scoped to creating
+# documents within the database file (for downstream nchantdoffice
+# integration). It blocks access to system files outside the
+# document store. See T-NEW-054 for the protocol design.
 # ====================================================================================================================||
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||

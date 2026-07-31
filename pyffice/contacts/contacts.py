@@ -149,33 +149,52 @@ class PyfficeContact(PyfficeDocument):
         return self
 
     def del_channel(self, dex):
-        """"""
-        # TODO implement method
+        """Remove the channel at index dex from self.channels."""
+        if 0 <= dex < len(self.channels):
+            removed = self.channels.pop(dex)
+            self.add_change("channels", self.channels + [removed], self.channels)
         return self
 
     def del_connection(self, dex):
-        """"""
-        # TODO implement method
+        """Remove the connection at index dex from self.connections."""
+        if 0 <= dex < len(self.connections):
+            removed = self.connections.pop(dex)
+            self.add_change("connections", self.connections + [removed], self.connections)
         return self
 
     def del_email_address(self):
-        """"""
-        # TODO implement method
+        """Remove all email-type channels from self.channels."""
+        kept = [c for c in self.channels if c.get("type") != "email"]
+        if kept != self.channels:
+            self.add_change("channels", self.channels, kept)
+            self.channels = kept
         return self
 
     def del_add_phone_address(self, phone):
-        """"""
-        # TODO implement method
+        """Remove phone-type channels whose value matches phone."""
+        kept = [c for c in self.channels
+                if not (c.get("type") == "phone" and c.get("contact") == phone)]
+        if kept != self.channels:
+            self.add_change("channels", self.channels, kept)
+            self.channels = kept
         return self
 
     def del_postal_address(self, address):
-        """"""
-        # TODO implement method
+        """Remove postal-address channels whose value matches address."""
+        kept = [c for c in self.channels
+                if not (c.get("type") == "postal_address" and c.get("contact") == address)]
+        if kept != self.channels:
+            self.add_change("channels", self.channels, kept)
+            self.channels = kept
         return self
 
     def del_social_contact(self, contact):
-        """"""
-        # TODO implement method
+        """Remove social-type channels whose handle matches contact."""
+        kept = [c for c in self.channels
+                if not (c.get("type") == "social" and c.get("contact") == contact)]
+        if kept != self.channels:
+            self.add_change("channels", self.channels, kept)
+            self.channels = kept
         return self
 
     def connect_contact(self):
@@ -184,14 +203,18 @@ class PyfficeContact(PyfficeDocument):
         return contact
 
     def get_postal_address(self):
-        """"""
-        # TODO implement method
-        return self
+        """Return the first postal-address channel (or None)."""
+        for c in self.channels:
+            if c.get("type") == "postal_address":
+                return c.get("contact")
+        return None
 
     def get_email_address(self):
-        """"""
-        # TODO implement method
-        return self
+        """Return the first email-type channel (or None)."""
+        for c in self.channels:
+            if c.get("type") == "email":
+                return c.get("contact")
+        return None
 
     def load_document(self, document=None):
         """"""
@@ -276,8 +299,10 @@ class PyfficeContact(PyfficeDocument):
         return self
 
     def set_name_salutation(self, name):
-        """"""
-        # TODO implement method
+        """Set self.salutation to name."""
+        if name != self.salutation:
+            self.add_change("salutation", self.salutation, name)
+            self.salutation = name
         return self
 
     def set_name_suffix(self, name):

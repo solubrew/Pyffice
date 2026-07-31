@@ -111,8 +111,7 @@ class PyfficeCalendar(PyfficeDocumentManager):
         return self
 
     def set_events(self, events):
-        """"""
-        # TODO needs rewrite
+        """Replace self.events with [PyfficeEvent(e) for e in events]."""
         self.events = [PyfficeEvent({"event": x}) for x in events]
         return self
 

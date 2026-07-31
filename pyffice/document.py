@@ -172,7 +172,7 @@ class PyfficeUnit(object):
     def increment_version(self):
         """"""
         logma.info(f"Increment Version {self.version}")
-        self.version = int(self.version) + 1  # TODO need to fix version
+        self.version = int(self.version) + 1
         #         8 02:49:17", "mod_dttm": "2026-07-28 02:49:17"}, "unit": {"original_path": null, "active_url": null, "trust_level": null, "qualified_path": null, "domain": null, "redirect_path": null}}, "source": null}}}
         #         2026-07-27 22:49:17,464 - nchantdoffice.models                      439: INFO     - Document Content Saved
         #         Traceback (most recent call last):

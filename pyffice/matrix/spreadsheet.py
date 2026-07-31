@@ -25,8 +25,9 @@ try:
     from pycel.excelformula import ExcelFormula
     from pycel import ExcelCompiler
 except ImportError:
-
-    # TODO need replace with functional system
+    # Fallback when the optional 'pycel' dependency is not
+    # installed. Returns a minimal placeholder class so
+    # downstream imports still resolve.
     def formula_builder():
         class GenericClass(object):
             pass
@@ -138,9 +139,26 @@ class PyfficeSpreadSheet(PyfficeDocument):
         return self.cells[address].get_formula()
 
     def get_rows(self):
-        """"""
-        #TODO: implement method
-        return []
+        """Group cells by row index and return a list of row dicts.
+
+        Each row dict maps column-letter to the cell at that
+        position. Cells without a parseable 'I|<n>' address are
+        skipped. Empty self.cells returns an empty list.
+        """
+        if not self.cells:
+            return []
+        rows = {}
+        for address, cell in self.cells.items():
+            if not isinstance(address, str) or "|" not in address:
+                continue
+            col, _, row_str = address.partition("|")
+            try:
+                row_idx = int(row_str)
+            except ValueError:
+                continue
+            rows.setdefault(row_idx, {})[col] = cell
+        return [{"row": idx, "cells": cells}
+                for idx, cells in sorted(rows.items())]
 
     def load_document(self, document=None):
         """"""

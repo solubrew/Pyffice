@@ -173,8 +173,8 @@ class PyfficeCodex(PyfficeDocumentManager):
             raise PyfficeCodexError(f"Failed to add URL: {e}") from e
 
     def get_rolodex(self):
-        """"""
-        # TODO implement method
+        """Return the contacts rolodex (may be None if uninitialized)."""
+        return self.contacts
 
     def get_url(self, url_id: Optional[str] = None) -> Optional[Any]:
         """Get URL by ID."""

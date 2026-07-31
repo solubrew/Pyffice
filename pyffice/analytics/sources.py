@@ -44,20 +44,24 @@ class PyfficeSource(PyfficeDocumentManager):
         self.data_views = []
 
     def add_data_set(self, data_set):
-        """"""
-        # TODO implement method
+        """Append a data set to self.data_sets."""
+        self.data_sets.append(data_set)
+        return self
 
     def add_data_view(self, data_set):
-        """"""
-        # TODO implement method
+        """Append a data view to self.data_views."""
+        self.data_views.append(data_set)
+        return self
 
     def edit_data_set(self, changes):
-        """"""
-        # TODO implement method
+        """Replace self.data_sets with changes (full snapshot)."""
+        self.data_sets = list(changes)
+        return self
 
     def edit_data_view(self, changes):
-        """"""
-        # TODO implement method
+        """Replace self.data_views with changes (full snapshot)."""
+        self.data_views = list(changes)
+        return self
 
     def load_document(self, document=None):
         """"""
