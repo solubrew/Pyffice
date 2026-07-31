@@ -53,8 +53,13 @@ class PyfficeUpdate(object):
         return None
 
     def create_temp_file(self):
-        """"""
-        return
+        """Create a temporary file."""
+        import tempfile
+        import os
+        fd, path = tempfile.mkstemp()
+        os.close(fd)
+        self.temp_file = path
+        return self
 
 
 class PyfficeUnitUpdate(PyfficeUpdate):
@@ -78,7 +83,8 @@ class PyfficeUnitUpdate(PyfficeUpdate):
         return None
 
     def create_temp_unit(self):
-        """"""
+        """Create a temporary unit."""
+        self.temp_unit = {}
         return self
 
     def get_version_schema(self, version):
@@ -109,7 +115,8 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
         return None
 
     def create_temp_document(self):
-        """"""
+        """Create a temporary document."""
+        self.temp_document = {}
         return self
 
     def process(self, document=None):
@@ -270,11 +277,17 @@ class PyfficeUpdater(object):
         self.config = kahndor.Instruct(pxcfg).select("PyfficeUpdater").override(cfg)
 
     def update_document(self):
-        """"""
+        """Update the document."""
+        # Placeholder - would apply updates to document
+        if not hasattr(self, 'document'):
+            return self
         return self
 
     def update_unit(self):
-        """"""
+        """Update the unit."""
+        # Placeholder - would apply updates to unit
+        if not hasattr(self, 'unit'):
+            return self
         return self
 
 
