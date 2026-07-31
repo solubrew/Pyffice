@@ -162,12 +162,13 @@ class PyfficeDataBase(ABC):
         return self
 
     @staticmethod
+    @abstractmethod
     def from_dict(data: dict) -> "PyfficeDataBase":
         """Create instance from dictionary.
-        
+
         Args:
             data: Dictionary data
-            
+
         Returns:
             New instance (must be implemented by subclass)
         """

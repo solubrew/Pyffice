@@ -210,9 +210,7 @@ def presentation_convert(ctx: click.Context, input: str, output: str, format: Op
 @cli.group()
 def diagram() -> None:
     """Diagram operations."""
-    ...
-
-
+    return None
 @diagram.command(name='convert')
 @click.argument('input', type=click.Path(exists=True))
 @click.argument('output', type=click.Path())
@@ -278,9 +276,7 @@ def diagram_info(ctx: click.Context, input: str) -> None:
 @cli.group()
 def image() -> None:
     """Image operations."""
-    ...
-
-
+    return None
 @image.command(name='convert')
 @click.argument('input', type=click.Path(exists=True))
 @click.argument('output', type=click.Path())
@@ -352,9 +348,7 @@ def image_info(ctx: click.Context, input: str) -> None:
 @cli.group()
 def video() -> None:
     """Video operations."""
-    ...
-
-
+    return None
 @video.command(name='convert')
 @click.argument('input', type=click.Path(exists=True))
 @click.argument('output', type=click.Path())
@@ -403,9 +397,7 @@ def video_info(ctx: click.Context, input: str) -> None:
 @cli.group()
 def audio() -> None:
     """Audio operations."""
-    ...
-
-
+    return None
 @audio.command(name='convert')
 @click.argument('input', type=click.Path(exists=True))
 @click.argument('output', type=click.Path())
@@ -454,9 +446,7 @@ def audio_info(ctx: click.Context, input: str) -> None:
 @cli.group()
 def cad() -> None:
     """CAD operations."""
-    ...
-
-
+    return None
 @cad.command(name='convert')
 @click.argument('input', type=click.Path(exists=True))
 @click.argument('output', type=click.Path())
@@ -503,9 +493,7 @@ def cad_info(ctx: click.Context, input: str) -> None:
 @cli.group()
 def chart() -> None:
     """Chart operations."""
-    ...
-
-
+    return None
 @chart.command(name='create')
 @click.argument('input', type=click.Path(exists=True))
 @click.argument('output', type=click.Path())
@@ -536,9 +524,7 @@ def chart_create(ctx: click.Context, input: str, output: str, type: str) -> None
 @cli.group()
 def calendar() -> None:
     """Calendar operations."""
-    ...
-
-
+    return None
 @calendar.command(name='list')
 @click.option('--from', 'from_date', help='Start date (YYYY-MM-DD)')
 @click.option('--to', 'to_date', help='End date (YYYY-MM-DD)')
@@ -568,9 +554,7 @@ def calendar_list(ctx: click.Context, from_date: Optional[str], to_date: Optiona
 @cli.group()
 def contact() -> None:
     """Contact operations."""
-    ...
-
-
+    return None
 @contact.command(name='list')
 @click.pass_context
 def contact_list(ctx: click.Context) -> None:
@@ -609,9 +593,7 @@ def contact_search(ctx: click.Context, query: str) -> None:
 @cli.group()
 def email_cmd() -> None:
     """Email operations."""
-    ...
-
-
+    return None
 @email_cmd.command(name='send')
 @click.option('--to', required=True, help='Recipient address')
 @click.option('--subject', required=True, help='Email subject')
@@ -642,9 +624,7 @@ def email_send(ctx: click.Context, to: str, subject: str, body: Optional[str], a
 @cli.group()
 def database() -> None:
     """Database operations."""
-    ...
-
-
+    return None
 @database.command(name='connect')
 @click.argument('connection_string')
 @click.pass_context
@@ -687,9 +667,7 @@ def database_query(ctx: click.Context, query: str) -> None:
 @cli.group()
 def filesystem() -> None:
     """Filesystem operations."""
-    ...
-
-
+    return None
 @filesystem.command(name='list')
 @click.argument('path', type=click.Path(exists=True))
 @click.option('--recursive', '-r', is_flag=True, help='List recursively')
@@ -735,9 +713,7 @@ def filesystem_sync(ctx: click.Context, source: str, destination: str) -> None:
 @cli.group()
 def analytics() -> None:
     """Analytics operations."""
-    ...
-
-
+    return None
 @analytics.command(name='report')
 @click.argument('input', type=click.Path(exists=True))
 @click.argument('output', type=click.Path())
@@ -765,9 +741,7 @@ def analytics_report(ctx: click.Context, input: str, output: str) -> None:
 @cli.group()
 def project() -> None:
     """Project operations."""
-    ...
-
-
+    return None
 @project.command(name='create')
 @click.argument('name')
 @click.argument('output', type=click.Path())
@@ -795,9 +769,7 @@ def project_create(ctx: click.Context, name: str, output: str) -> None:
 @cli.group()
 def config() -> None:
     """Configuration operations."""
-    ...
-
-
+    return None
 @config.command(name='show')
 @click.pass_context
 def config_show(ctx: click.Context) -> None:
@@ -851,9 +823,7 @@ def config_set(ctx: click.Context, key: str, value: str) -> None:
 @cli.group()
 def form() -> None:
     """Form operations."""
-    ...
-
-
+    return None
 @form.command(name='create')
 @click.argument('output', type=click.Path())
 @click.option('--title', help='Form title')
@@ -899,9 +869,7 @@ def form_validate(ctx: click.Context, input: str) -> None:
 @cli.group()
 def notebook() -> None:
     """Notebook operations."""
-    ...
-
-
+    return None
 @notebook.command(name='convert')
 @click.argument('input', type=click.Path(exists=True))
 @click.argument('output', type=click.Path())
@@ -930,9 +898,7 @@ def notebook_convert(ctx: click.Context, input: str, output: str) -> None:
 @cli.group()
 def report() -> None:
     """Report operations."""
-    ...
-
-
+    return None
 @report.command(name='generate')
 @click.argument('input', type=click.Path(exists=True))
 @click.argument('output', type=click.Path())
@@ -960,9 +926,7 @@ def report_generate(ctx: click.Context, input: str, output: str) -> None:
 @cli.group()
 def social() -> None:
     """Social operations."""
-    ...
-
-
+    return None
 @social.command(name='post')
 @click.argument('message')
 @click.option('--platform', '-p', help='Target platform')
@@ -989,9 +953,7 @@ def social_post(ctx: click.Context, message: str, platform: Optional[str]) -> No
 @cli.group()
 def tag() -> None:
     """Tag operations."""
-    ...
-
-
+    return None
 @tag.command(name='list')
 @click.argument('input', type=click.Path(exists=True))
 @click.pass_context
@@ -1017,9 +979,7 @@ def tag_list(ctx: click.Context, input: str) -> None:
 @cli.group()
 def text() -> None:
     """Text operations."""
-    ...
-
-
+    return None
 @text.command(name='convert')
 @click.argument('input', type=click.Path(exists=True))
 @click.argument('output', type=click.Path())
@@ -1049,9 +1009,7 @@ def text_convert(ctx: click.Context, input: str, output: str, format: Optional[s
 @cli.group()
 def update() -> None:
     """Update operations."""
-    ...
-
-
+    return None
 @update.command(name='check')
 @click.pass_context
 def update_check(ctx: click.Context) -> None:
@@ -1092,9 +1050,7 @@ def update_install(ctx: click.Context, package: str) -> None:
 @cli.group()
 def web() -> None:
     """Web operations."""
-    ...
-
-
+    return None
 @web.command(name='fetch')
 @click.argument('url')
 @click.argument('output', type=click.Path())
@@ -1140,9 +1096,7 @@ def web_parse(ctx: click.Context, input: str, format: Optional[str]) -> None:
 @cli.group()
 def workflow() -> None:
     """Workflow operations."""
-    ...
-
-
+    return None
 @workflow.command(name='run')
 @click.argument('workflow_file', type=click.Path(exists=True))
 @click.pass_context
@@ -1182,9 +1136,7 @@ def workflow_list(ctx: click.Context) -> None:
 @cli.group()
 def cam() -> None:
     """CAM operations."""
-    ...
-
-
+    return None
 @cam.command(name='generate')
 @click.argument('input', type=click.Path(exists=True))
 @click.argument('output', type=click.Path())
