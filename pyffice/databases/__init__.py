@@ -7,7 +7,11 @@ Databases module for pyffice.
 _LAZY_EXPORTS = {
     "PyfficeDatabaseConnection": ("pyffice.databases.databases", "PyfficeDatabaseConnection"),
     "PyfficeDatabaseManager": ("pyffice.databases.databases", "PyfficeDatabaseManager"),
-    "PyfficeTable": ("pyffice.databases.table", "PyfficeTable"),
+    # NOTE: PyfficeTable is NOT re-exported here. The canonical
+    # implementation lives at pyffice.items.items:PyfficeTable
+    # (PyfficeUnit base, used by sources.py / ports.py / images.py
+    # / matrix.py / colors.py). The phantom PyfficeDocument-based
+    # PyfficeTable in databases/table.py is unused and was removed.
 }
 
 def __getattr__(name: str):
@@ -28,5 +32,4 @@ def __dir__():
 __all__ = [
     "PyfficeDatabaseConnection",
     "PyfficeDatabaseManager",
-    "PyfficeTable",
 ]

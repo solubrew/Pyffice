@@ -43,7 +43,11 @@ _LAZY_EXPORTS = {
     "read": ("pyffice.cad.stl", "read"),
     "write": ("pyffice.cad.stl", "write"),
     "dump": ("pyffice.cad.step", "dump"),
-    "PyfficeShape": ("pyffice.cad.items", "PyfficeShape"),
+    # NOTE: PyfficeShape is NOT re-exported here. The canonical
+    # implementation lives at pyffice.items.shapes:PyfficeShape
+    # (PyfficeUnit base, used by matrix.py). The phantom
+    # PyfficeDocument-based PyfficeShape in cad/items.py is
+    # unused and was removed.
     "PyfficeOBJ": ("pyffice.cad.obj", "PyfficeOBJ"),
     "read": ("pyffice.cad.stl", "read"),
     "load": ("pyffice.cad.stl", "load"),
@@ -114,7 +118,6 @@ __all__ = [
     "read",
     "write",
     "dump",
-    "PyfficeShape",
     "PyfficeOBJ",
     "read",
     "load",
