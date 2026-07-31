@@ -88,7 +88,7 @@ class PyfficeShape(PyfficeUnit):
         return self
 
     def mirror_text(self):
-        """"""
+        """Mirror text."""
         return self
 
     def move_shape(self, x, y):
@@ -97,7 +97,7 @@ class PyfficeShape(PyfficeUnit):
         return self
 
     def move_text(self, x, y):
-        """"""
+        """Move text."""
         return self
 
     def rotate_shape(self, axis, angle):
@@ -111,7 +111,7 @@ class PyfficeShape(PyfficeUnit):
         return self
 
     def rotate_text(self, axis, angle):
-        """"""
+        """Rotate text."""
         return self
 
     def set_background(self, background, item="0"):

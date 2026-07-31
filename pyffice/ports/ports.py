@@ -435,16 +435,22 @@ class PyfficePortOffice(PyfficePort):
     def parse_file(self):
         """Parse the loaded file."""
         # Placeholder - subclasses implement specific parsing
+        if not hasattr(self, 'file_path'):
+            return self
         return self
 
     def parse_table(self):
         """Parse tables from document."""
         # Placeholder - subclasses implement specific parsing
+        if not hasattr(self, 'document'):
+            return self
         return self
 
     def open_file_svg(self, file_):
         """Open SVG file."""
         # Placeholder - SVG requires special handling
+        if not file_:
+            return self
         return self
 
     def load_document(self, document=None):
@@ -676,6 +682,8 @@ class PyfficePortImage(PyfficePort):
     def open_file_svg(self, file_):
         """Open SVG file."""
         # Placeholder - SVG requires special handling
+        if not file_:
+            return self
         return self
 
     def save(self, output_path, format_=None):
