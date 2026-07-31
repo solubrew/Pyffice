@@ -20,21 +20,11 @@ from os.path import dirname, join
 from dataclasses import dataclass, field
 from typing import Any, Iterator
 
-# ======================================3rd Party Library Modules=====================================================||
-try:
-    from pycel.excelformula import ExcelFormula
-    from pycel import ExcelCompiler
-except ImportError:
-    # Fallback when the optional 'pycel' dependency is not
-    # installed. Returns a minimal placeholder class so
-    # downstream imports still resolve.
-    def formula_builder():
-        class GenericClass(object):
-            pass
+# ======================================3rd Party Library Modules======================================================||
+# T-NEW-054 (Option B): pycel removed. The formulas module
+# provides its own protocol-based execution; this module no
+# longer needs an Excel formula parser.
 
-        return GenericClass
-
-    ExcelFormula = formula_builder()
 from pandas import read_csv, read_excel, DataFrame
 
 # ======================================Solutions Brewer Library Modules==============================================||
