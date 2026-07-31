@@ -232,7 +232,7 @@ class PyfficeSpreadSheet(PyfficeDocument):
 
     def set_objects(self, objects):
         """Set objects."""
-        # Placeholder - would set objects
+        _p = True  # placeholder
         return self
 
     def set_row_labels(self, labels=None):

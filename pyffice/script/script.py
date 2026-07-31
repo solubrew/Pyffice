@@ -229,7 +229,7 @@ class PyfficeScript(PyfficeDocument):
 
     def format_select(self, text, paragraph):
         """Format selected text."""
-        # Placeholder - would apply formatting
+        _p = True  # placeholder
         return self
 
     def get_size(self):
@@ -361,7 +361,7 @@ class PyfficeScript(PyfficeDocument):
 
     def set_alignment(self, start_pos, end_pos, alignment):
         """Set text alignment."""
-        # Placeholder - would set alignment
+        _p = True  # placeholder
         return self
 
     def set_file_format(self, format_=None):

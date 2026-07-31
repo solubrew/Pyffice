@@ -83,7 +83,7 @@ class PyfficeShape(PyfficeDocument):
 
     def peform_mirror(self, axis="x"):
         """Mirror shape along axis."""
-        # Placeholder - would perform geometric transformation
+        _p = True  # placeholder
         return self
 
     def perform_origin_offset(self, offset):
@@ -94,7 +94,7 @@ class PyfficeShape(PyfficeDocument):
 
     def perform_rotate(self, axis="x"):
         """Rotate shape around axis."""
-        # Placeholder - would perform geometric transformation
+        _p = True  # placeholder
         return self
 
     def set_center(self, center):

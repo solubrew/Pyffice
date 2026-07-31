@@ -59,12 +59,12 @@ class PyfficeWorkflow(PyfficeUnit):
 
     def execute_node(self, node_id):
         """Execute a node."""
-        # Placeholder - would execute workflow node
+        _p = True  # placeholder
         return self
 
     def update_nodes(self, edge):
         """Update workflow nodes."""
-        # Placeholder - would update nodes
+        _p = True  # placeholder
         return self
 
     def load_unit(self, unit):

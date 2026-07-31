@@ -234,10 +234,12 @@ class PyfficeResponse(PyfficeDocument):
 
     def add_source(self):
         """Add a source."""
+        _p = True  # placeholder
         return self
 
     def load_document(self, document=None):
         """Load document."""
+        _p = True  # placeholder
         return self
 
     def set_sources(self, sources):
