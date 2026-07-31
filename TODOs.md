@@ -161,6 +161,70 @@ Removed from the handoff.
 
 ---
 
+## Sprint 18 T-NEW Backlog — port-class e2e + audit reconciliation (2026-07-31)
+
+Sprint 18 closed Sprint 17's open cards:
+
+### Closed by commit `28ac990`
+
+- **T-NEW-052** (DiagramConverter + PyfficeDataBase as ABC) — done.
+- **T-NEW-056** (SERIALIZATION_VERSION on every PyfficeDocument subclass)
+  — `30` new declarations across 19 files; PyfficeCodex now
+  declares it too. PyfficeSurvey and PyfficeURLLibrary already had
+  it embedded in their docstrings (verified).
+- **T-NEW-043** / **T-NEW-044** — pyffice/__init__.py already has the
+  lazy `__getattr__` re-export (T-NEW-043 from Sprint 17). The
+  remaining gap was wiring `PyfficeCodex` into the public surface;
+  done.
+- **User NEW TODO #7** (e2e conversion of fixtures) — implemented
+  by routing through the existing Port classes:
+  `pyffice/document.py:file_import()` and `file_export()` now
+  dispatch to the matching Port by file extension. The new
+  base-class methods `PyfficePort.export()` and
+  `PyfficePort.import_data()` give every subclass a uniform
+  read/write API. No new `conversion.py` module — uses the
+  ports/ + open_file() entry points the user pointed to.
+- **PyfficeDataMixin import error** — `data/base.py` aliases
+  `PyfficeDataMixin = PyfficeDataBase` so json.py / csv.py /
+  yaml.py / xml.py resolve their broken transitive import.
+
+### Open from Sprint 17
+
+- **T-NEW-045** (facade vs no facade) — design decision still
+  pending. Current code uses **Option B** (no facade, expose
+  `PyfficeCodex` directly). Revisit only if a downstream consumer
+  asks for `app.document.convert(...)` style.
+- **T-NEW-046** (test_pyffice.py vs test_pyffice/ collision) — not
+  addressed in Sprint 18. Test collection still aborts.
+- **T-NEW-047** (`from kahndor import kahndor` pattern in 87 test
+  files) — not addressed in Sprint 18.
+- **T-NEW-048** (broken READMEs referencing validate_config etc.)
+  — README.md quick-start still uses the old facade.
+- **T-NEW-049** / **T-NEW-050** (24 pass-only CLI stubs and 6 vs
+  72 CLI count) — not addressed.
+- **T-NEW-058** (13 missing test files) — not addressed.
+- **T-NEW-059** (`__version__ >= (0, 2, 0)` docstring snippet) —
+  docstring already fixed in Sprint 17 (uses `__version_info__`).
+- **T-NEW-060** (squirl `print()` at import time) — out of scope;
+  lives in squirl, not pyffice.
+
+### User NEW TODOs (top of file)
+
+- ✅ `#4 refactor data/base.py` — added `PyfficeDataMixin` alias,
+  re-exported through `data/__init__.py`.
+- ⚠️ `#5 consistent shape across document types` — known
+  inconsistency: `PyfficeImage.to_dict` writes
+  `data["data"]["path"]`, `PyfficeMatrix.to_dict` writes
+  `data["data"]["table"]`, `PyfficeScript.to_dict` writes
+  `data["data"]["pages"]`. NOT addressed in Sprint 18 (large
+  refactor — would break every persisted `.pyof` file).
+- ⚠️ `#6 build out stubbed document types` — audit no longer flags
+  any stub methods (0 remaining as of `565c1ac`). Functional
+  coverage is a separate audit dimension.
+- ✅ `#7 e2e conversion of fixtures` — see above (commit `28ac990`).
+
+---
+
 ## Sprint 17 T-NEW Backlog — audit-driven + source-scanned (2026-07-31)
 
 Source sweep: `sasquatch analyze -p .` (sasquatch@4d9f66f, pre-test score
