@@ -1,5 +1,16 @@
 # Pyffice — TODOs
 
+# New TODOs:
+- refactor data/base.py and other files in this directory as they are all covered by document types elsewhere in the package and any actual import/export work needs to be in the ports/ path
+- refactor all document types to maintain a consistent shape aligned with PyfficeImage, PyfficeScript, PyfficeMatrix duplicating keys as needed with deprication notes until all documents can be fully aligned
+- build out stubbed document types
+
+
+
+
+
+
+
 > **Status:** Active Development | **Last Updated:** 2026-07-06 | **Branch:** `gamma` (HEAD `08815ee`)
 
 This TODO reflects what git log shows is **actually still pending**. Items completed in prior commits have been removed; see git history.

@@ -259,8 +259,7 @@ class PyfficeScript(PyfficeDocument):
         document = document or self.config.dikt.get("document", {}) or {}
         logma.json(document)
         super().load_document(document)
-        self.file_path = self.config.dikt.get("file_path", None)
-        # self.set_syntax("file")
+        self.set_syntax(self.file_path)
         self.set_file_format_options()
         data = document.get("data", {}) or {}
         self.set_pages(data.get("pages", {}) or {})
