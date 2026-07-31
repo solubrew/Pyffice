@@ -21,10 +21,9 @@ PATCH)`` so callers can compare programmatically:
         ...
 """
 
-# T-NEW-043 (Option B): expose the actual public class so
-# `from pyffice import PyfficeCodex` works. The README/cli's
-# historical reference to a bare `Pyffice` facade is not built;
-# callers should use `PyfficeCodex` directly.
+# Lazy __getattr__ proxy decouples package import from
+# pyffice.pyffice import chain. Callers use PyfficeCodex
+# directly (no Pyffice facade).
 #
 # Lazy import via __getattr__ (PEP 562) so the heavy import
 # chain (pyffice.pyffice -> pyffice.document -> pyffice.tags.tags
@@ -42,8 +41,7 @@ _LAZY_EXPORTS = {
 def __getattr__(name: str):
     if name in _LAZY_EXPORTS:
         mod_path, attr = _LAZY_EXPORTS[name]
-        import importlib
-        mod = importlib.import_module(mod_path)
+        mod = __import__(mod_path, fromlist=[attr])
         value = getattr(mod, attr)
         globals()[name] = value  # cache for next access
         return value

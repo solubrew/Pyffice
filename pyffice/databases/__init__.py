@@ -2,8 +2,8 @@
 Databases module for pyffice.
 """
 
-# T-NEW-051: lazy __getattr__ proxy to break circular imports
-# when subpkg modules are partially initialized (PEP 562).
+# Lazy __getattr__ proxy to break circular imports when
+# subpkg modules are partially initialized (PEP 562).
 _LAZY_EXPORTS = {
     "PyfficeDatabaseConnection": ("pyffice.databases.databases", "PyfficeDatabaseConnection"),
     "PyfficeDatabaseManager": ("pyffice.databases.databases", "PyfficeDatabaseManager"),
@@ -12,9 +12,8 @@ _LAZY_EXPORTS = {
 
 def __getattr__(name: str):
     if name in _LAZY_EXPORTS:
-        import importlib
         mod_path, attr = _LAZY_EXPORTS[name]
-        mod = importlib.import_module(mod_path)
+        mod = __import__(mod_path, fromlist=[attr])
         value = getattr(mod, attr)
         globals()[name] = value  # cache for next access
         return value
