@@ -3,7 +3,7 @@ analysis:
   counts:
     files: 497
     python_files: 295
-    python_lines: 36044
+    python_lines: 36330
     test_files: 129
 audit_date: '1785470638.3677874'
 dimensions:
@@ -122,7 +122,7 @@ dimensions:
   dependency_strategy:
     details:
       details:
-        external_imports: 2158
+        external_imports: 2160
         info: 'Hint: 28 GitVein projects available but not used: eaglis, falcon, glain,
           goalt, hermes-agent-main...'
         internal_import_details:
@@ -156,16 +156,16 @@ dimensions:
         - file: tests/pyffice_unit/unit/documentTEST.py
           module: kahndor.logma
           project: kahndor
-        internal_imports: 912
+        internal_imports: 905
         internal_projects_used:
         - ogma
-        - kahndor
         - pyffice
         - condor
-        leverage_score: 29.71
+        - kahndor
+        leverage_score: 29.53
         score: 100
         status: pass
-        total_imports: 3070
+        total_imports: 3065
       score: 100
       status: pass
     score: 100
@@ -199,48 +199,15 @@ dimensions:
   embedded_todos:
     details:
       details:
-        count: 24
-        examples:
-        - file: pyffice/pyffice.py
-          line: 134
-          text: '# TODO implement method'
-        - file: pyffice/document.py
-          line: 171
-          text: 'self.version = int(self.version) + 1  # TODO need to fix version'
-        - file: pyffice/calendars/calendars.py
-          line: 115
-          text: '# TODO needs rewrite'
-        - file: pyffice/analytics/sources.py
-          line: 48
-          text: '# TODO implement method'
-        - file: pyffice/analytics/sources.py
-          line: 52
-          text: '# TODO implement method'
-        - file: pyffice/analytics/sources.py
-          line: 56
-          text: '# TODO implement method'
-        - file: pyffice/analytics/sources.py
-          line: 60
-          text: '# TODO implement method'
-        - file: pyffice/contacts/contacts.py
-          line: 153
-          text: '# TODO implement method'
-        - file: pyffice/contacts/contacts.py
-          line: 158
-          text: '# TODO implement method'
-        - file: pyffice/contacts/contacts.py
-          line: 163
-          text: '# TODO implement method'
-        issues:
-        - dimension: embedded_todos
-          rule: Inline TODOs need tracking
-          severity: medium
-        score: 52
-        status: partial
-      score: 52
-      status: partial
-    score: 52
-    status: partial
+        count: 0
+        examples: []
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
   error_handling:
     details:
       details:
@@ -330,7 +297,7 @@ dimensions:
           branches:
             local: []
             remote: []
-          commit_count: 256
+          commit_count: 262
           commits: []
           contributors: []
           is_repo: true
@@ -397,13 +364,19 @@ dimensions:
   lambda_antipattern:
     details:
       details:
-        issues: []
-        lambda_count: 0
-        score: 100
+        issues:
+        - fix: Use named functions instead of complex lambdas
+          items:
+          - file: pyffice/workflows/formulas.py
+            line: 141
+          rule: 'Lambda anti-patterns detected: 1 instances'
+          severity: medium
+        lambda_count: 1
+        score: 98
         status: pass
-      score: 100
+      score: 98
       status: pass
-    score: 100
+    score: 98
     status: pass
   license_dependencies:
     details:
@@ -549,7 +522,7 @@ dimensions:
   not_implemented:
     details:
       details:
-        count: 4
+        count: 5
         examples:
         - class: DWGPort
           file: zz-hist_work/cadports.py
@@ -563,25 +536,32 @@ dimensions:
           file: zz-hist_work/cadports.py
           line: 470
           method: export_file
+        - class: PyfficeDeque
+          file: pyffice/document.py
+          line: 824
+          method: appendleft
         - class: PyfficeDataBase
           file: pyffice/data/base.py
-          line: 165
+          line: 166
           method: from_dict
         issues:
         - dimension: not_implemented
           rule: NotImplementedError stubs need implementation
           severity: high
-        score: 68
+        score: 60
         status: partial
-      score: 68
+      score: 60
       status: partial
-    score: 68
+    score: 60
     status: partial
   note_comments:
     details:
       details:
-        count: 0
-        examples: []
+        count: 1
+        examples:
+        - file: pyffice/skills/skills.py
+          line: 37
+          text: '# NOTE: this skills framework is intentionally scoped to creating'
         issues: []
         score: 100
         status: pass
@@ -599,18 +579,14 @@ dimensions:
             locations:
             - pyffice/items/shapes.py
             - pyffice/cad/items.py
-          - class: GenericClass
-            locations:
-            - pyffice/workflows/formulas.py
-            - pyffice/matrix/spreadsheet.py
-          rule: 'Parallel inheritance detected: 2 classes'
+          rule: 'Parallel inheritance detected: 1 classes'
           severity: medium
-        parallel_inheritance_count: 2
-        score: 90
+        parallel_inheritance_count: 1
+        score: 95
         status: pass
-      score: 90
+      score: 95
       status: pass
-    score: 90
+    score: 95
     status: pass
   pii_secrets:
     details:
@@ -780,14 +756,14 @@ dimensions:
             or custom schemes is often unexpected.'
           severity: medium
         - file: /home/solubrew/.hermes/projects/pyffice/pyffice/ports/ports.py
-          line: 201
+          line: 202
           rule: 'Bandit: Using xml.etree.ElementTree.fromstring to parse untrusted
             XML data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.fromstring
             with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
             is called'
           severity: medium
         - file: /home/solubrew/.hermes/projects/pyffice/pyffice/ports/ports.py
-          line: 476
+          line: 477
           rule: 'Bandit: Using xml.etree.ElementTree.fromstring to parse untrusted
             XML data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.fromstring
             with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
@@ -806,6 +782,11 @@ dimensions:
             data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.parse
             with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
             is called'
+          severity: medium
+        - file: /home/solubrew/.hermes/projects/pyffice/pyffice/workflows/formulas.py
+          line: 128
+          rule: 'Bandit: Use of possibly insecure function - consider using safer
+            ast.literal_eval.'
           severity: medium
         score: 100
         status: pass
@@ -832,13 +813,13 @@ dimensions:
         - category: getattr_dynamic
           content: setattr(self, change["label"], change["new_value"])
           file: pyffice/document.py
-          line: 232
+          line: 236
           pattern: setattr\(
           severity: 60
         - category: getattr_dynamic
           content: setattr(self, last_change["label"], last_change["value"])
           file: pyffice/document.py
-          line: 483
+          line: 488
           pattern: setattr\(
           severity: 60
         - category: dynamic_import
@@ -1189,6 +1170,36 @@ dimensions:
           line: 16
           pattern: ast_call
           severity: 80
+        - category: exec_calls
+          content: return eval(filled, safe_globals, {})
+          file: pyffice/workflows/formulas.py
+          line: 128
+          pattern: \beval\(
+          severity: 100
+        - category: getattr_dynamic
+          content: parent = getattr(self, "_library", None)
+          file: pyffice/workflows/formulas.py
+          line: 253
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: proto = self._resolve_protocol(getattr(self, "protocol_name", "builtin"))
+          file: pyffice/workflows/formulas.py
+          line: 285
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: proto = self._resolve_protocol(getattr(self, "protocol_name", "builtin"))
+          file: pyffice/workflows/formulas.py
+          line: 295
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: exec_calls_ast
+          content: eval(...)
+          file: pyffice/workflows/formulas.py
+          line: 128
+          pattern: ast_call
+          severity: 100
         - category: dynamic_import
           content: mod = __import__(mod_path, fromlist=[attr])
           file: pyffice/workflows/__init__.py
@@ -1411,50 +1422,29 @@ dimensions:
   todo_tracking:
     details:
       details:
-        files_with_todos: 9
-        issues:
-        - dimension: todo_tracking
-          rule: Embedded TODOs require resolution
-          severity: high
-        score: 76
-        status: partial
-        total_todos: 24
-        worst_offenders:
-        - count: 9
-          file: pyffice/contacts/contacts.py
-        - count: 4
-          file: pyffice/analytics/sources.py
-        - count: 4
-          file: pyffice/workflows/formulas.py
-        - count: 2
-          file: pyffice/matrix/spreadsheet.py
-        - count: 1
-          file: pyffice/pyffice.py
-        - count: 1
-          file: pyffice/document.py
-        - count: 1
-          file: pyffice/calendars/calendars.py
-        - count: 1
-          file: pyffice/matrix/matrix.py
-        - count: 1
-          file: pyffice/skills/skills.py
-      score: 76
-      status: partial
-    score: 76
-    status: partial
+        files_with_todos: 0
+        issues: []
+        score: 100
+        status: pass
+        total_todos: 0
+        worst_offenders: []
+      score: 100
+      status: pass
+    score: 100
+    status: pass
   type_annotations:
     details:
       details:
         issues:
         - rule: low_coverage
           severity: medium
-          total: 2168
-          typed: 677
+          total: 2172
+          typed: 682
         score: 31
         status: partial
-        total_functions: 2168
-        typed_functions: 677
-        untyped_functions: 1491
+        total_functions: 2172
+        typed_functions: 682
+        untyped_functions: 1490
       score: 31
       status: partial
     score: 31
@@ -1462,7 +1452,7 @@ dimensions:
   unfinished_code:
     details:
       details:
-        empty_methods: 280
+        empty_methods: 274
         examples:
         - class: PyfficePlaylist
           file: zz-hist_work/playlists.py
@@ -1525,29 +1515,29 @@ dimensions:
       status: pass
     score: 100
     status: pass
-overall_score: 86.43
+overall_score: 88.43
 project: pyffice
 rubric:
-  audit_overall: 86.43
+  audit_overall: 88.43
   categories: []
   max_points: 0
   percentage: 0.0
-  rubric_name: 06a6ccd6-3738-7613-8000-514e58d432d2
+  rubric_name: 06a6cdc8-f27b-7a10-8000-0c6c4ad888c1
   rubric_score: 0
   rubric_version: '1.0'
-  score_difference: -86.43
+  score_difference: -88.43
   total_points: 0
   weighted_score: 0
 summary:
   failing: 3
-  partial: 7
-  passing: 42
-  tasks_created: 10
+  partial: 5
+  passing: 44
+  tasks_created: 8
   total_auditors: 11
   total_dimensions: 53
 test_execution:
-  duration_seconds: 17.687251806259155
-  project_score: 86.43
+  duration_seconds: 17.762173652648926
+  project_score: 88.43
   report_file: /home/solubrew/.hermes/projects/pyffice/FALCON_TEST.yaml
   results:
     tests_failed: 27
@@ -1562,7 +1552,7 @@ test_execution:
   status_message: no change (66/94 tests passed)
   timestamp: ''
 versions:
-  project: 69e07a8
+  project: 8dc85b8
   project_status: dirty
-  project_uncommitted_changes: 31
+  project_uncommitted_changes: 5
   sasquatch: 4d9f66f
