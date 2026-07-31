@@ -19,7 +19,7 @@ def validate_config(config_path: str) -> bool:
         with open(config_path, "r") as f:
             yaml.safe_load(f)
         return True
-    except Exception:
+    except (OSError, yaml.YAMLError):
         return False
 
 
@@ -60,7 +60,7 @@ def validate_config(config_path: str) -> bool:
         with open(config_path, "r") as f:
             yaml.safe_load(f)
         return True
-    except Exception:
+    except (OSError, yaml.YAMLError):
         return False
 
 

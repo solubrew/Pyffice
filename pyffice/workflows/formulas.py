@@ -130,7 +130,7 @@ class BuiltinProtocol(PyfficeFormulaProtocol):
         safe_globals = {"__builtins__": {}, **self._SAFE_FUNCS}
         try:
             return eval(filled, safe_globals, {})
-        except Exception:
+        except (NameError, SyntaxError, TypeError, ValueError, ZeroDivisionError):
             # Unsupported function / syntax — return the filled
             # template as a string so callers can still see what
             # they passed in.

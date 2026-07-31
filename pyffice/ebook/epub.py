@@ -30,7 +30,7 @@ def read(epub_path: str) -> str:
                 try:
                     content = zf.read(name).decode("utf-8")
                     text_parts.append(content)
-                except Exception:
+                except (KeyError, UnicodeDecodeError, OSError):
                     pass
     return "\n".join(text_parts)
 

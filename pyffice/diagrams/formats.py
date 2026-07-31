@@ -677,7 +677,7 @@ class XMindConverter(DiagramConverter):
                     content = zf.read("content.json").decode("utf-8")
                     data = json.loads(content)
                     self._parse_xmind(data, sketch)
-        except Exception as e:
+        except (KeyError, ValueError, OSError) as e:
             logma.error(f"Failed to load XMind: {e}")
 
         return sketch
@@ -743,7 +743,7 @@ class BPMNConverter(DiagramConverter):
                 edge = PyfficeEdge(self.cfg)
                 sketch.add_edge()
 
-        except Exception as e:
+        except (ET.ParseError, AttributeError, OSError) as e:
             logma.error(f"Failed to load BPMN: {e}")
 
         return sketch
@@ -786,7 +786,7 @@ class MindManagerConverter(DiagramConverter):
             # MindManager XML structure varies, basic parsing
             self._parse_mindmanager(root, sketch)
 
-        except Exception as e:
+        except (ET.ParseError, AttributeError, OSError) as e:
             logma.error(f"Failed to load MindManager: {e}")
 
         return sketch
