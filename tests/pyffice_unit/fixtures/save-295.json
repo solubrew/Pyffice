@@ -1,0 +1,213 @@
+{
+    "data": {
+        "content": {
+            "description": "",
+            "did": "06a6ce7d-3432-7ef0-8000-ea6e74aaf9ec",
+            "meta_data": {
+                "author": "",
+                "context": "",
+                "creon_dttm": "2026-07-31 18:22:54",
+                "editors": [],
+                "encoding": "utf-8",
+                "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "location": "internal",
+                "mod_dttm": "2026-07-31 18:22:54",
+                "path": "/intl/en-US/gmail/",
+                "syntax": "plain-text",
+                "tags": []
+            },
+            "name": "06a6ce7d-3432-7ef0-8000-ea6e74aaf9ec",
+            "unit": {
+                "active_url": "https://workspace.google.com/intl/en-US/gmail/",
+                "domain": "google.com",
+                "original_path": "https://workspace.google.com/intl/en-US/gmail/",
+                "qualified_path": null,
+                "redirect_path": true,
+                "trust_level": 0
+            }
+        },
+        "home_url": {
+            "description": "",
+            "did": "06a6ce7d-33f4-77d6-8000-75ef9d636b5a",
+            "meta_data": {
+                "author": "",
+                "context": "",
+                "creon_dttm": "2026-07-31 18:22:54",
+                "editors": [],
+                "encoding": "utf-8",
+                "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "location": "internal",
+                "mod_dttm": "2026-07-31 18:22:54",
+                "path": "/search",
+                "syntax": "plain-text",
+                "tags": []
+            },
+            "name": "06a6ce7d-33f4-77d6-8000-75ef9d636b5a",
+            "unit": {
+                "active_url": null,
+                "domain": "duckduckgo.com",
+                "original_path": null,
+                "qualified_path": null,
+                "redirect_path": true,
+                "trust_level": 0
+            }
+        },
+        "library": {
+            "data": {
+                "content": "",
+                "documents": []
+            },
+            "description": "",
+            "did": "06a6ce7d-34d8-773e-8000-7d75a5d33605",
+            "file_path": null,
+            "meta_data": {
+                "author": "",
+                "context": "",
+                "creon_dttm": "2026-07-31 18:22:54",
+                "editors": [],
+                "encoding": "utf-8",
+                "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "location": "internal",
+                "mod_dttm": "2026-07-31 18:22:54",
+                "path": "",
+                "syntax": "plain-text",
+                "tags": []
+            },
+            "name": "06a6ce7d-34d8-773e-8000-7d75a5d33605"
+        },
+        "profile_manager": {
+            "data": {
+                "content": {},
+                "documents": [],
+                "profiles": [
+                    {
+                        "data": {
+                            "channels": null,
+                            "content": {},
+                            "groups": [
+                                "default",
+                                "profile"
+                            ],
+                            "name_details": {
+                                "first": "",
+                                "full": "   ",
+                                "last": "",
+                                "middle": "",
+                                "preferred": "",
+                                "salutation": "",
+                                "suffix": "",
+                                "sur": ""
+                            },
+                            "nicknames": []
+                        },
+                        "description": "",
+                        "did": "06a6ce7d-3616-7cb1-8000-82871b84e71e",
+                        "file_path": null,
+                        "meta_data": {
+                            "author": "",
+                            "context": "",
+                            "creon_dttm": "2026-07-31 18:22:54",
+                            "editors": [],
+                            "encoding": "utf-8",
+                            "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                            "location": "internal",
+                            "mod_dttm": "2026-07-31 18:22:54",
+                            "path": "",
+                            "syntax": "plain-text",
+                            "tags": []
+                        },
+                        "name": "06a6ce7d-3616-7cb1-8000-82871b84e71e"
+                    }
+                ]
+            },
+            "description": "",
+            "did": "06a6ce7d-35a0-70be-8000-d816b233b083",
+            "document": {
+                "contacts": {
+                    "06a6ce7d-3616-7cb1-8000-82871b84e71e": {
+                        "data": {
+                            "channels": null,
+                            "content": {},
+                            "groups": [
+                                "default",
+                                "profile"
+                            ],
+                            "name_details": {
+                                "first": "",
+                                "full": "   ",
+                                "last": "",
+                                "middle": "",
+                                "preferred": "",
+                                "salutation": "",
+                                "suffix": "",
+                                "sur": ""
+                            },
+                            "nicknames": []
+                        },
+                        "description": "",
+                        "did": "06a6ce7d-3616-7cb1-8000-82871b84e71e",
+                        "file_path": null,
+                        "meta_data": {
+                            "author": "",
+                            "context": "",
+                            "creon_dttm": "2026-07-31 18:22:54",
+                            "editors": [],
+                            "encoding": "utf-8",
+                            "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                            "location": "internal",
+                            "mod_dttm": "2026-07-31 18:22:54",
+                            "path": "",
+                            "syntax": "plain-text",
+                            "tags": []
+                        },
+                        "name": "06a6ce7d-3616-7cb1-8000-82871b84e71e"
+                    }
+                },
+                "default_group": null,
+                "groups": [
+                    "default"
+                ]
+            },
+            "file_path": null,
+            "meta_data": {
+                "author": "",
+                "context": "",
+                "creon_dttm": "2026-07-31 18:22:54",
+                "editors": [],
+                "encoding": "utf-8",
+                "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "location": "internal",
+                "mod_dttm": "2026-07-31 18:22:54",
+                "path": "",
+                "syntax": "plain-text",
+                "tags": []
+            },
+            "name": "06a6ce7d-35a0-70be-8000-d816b233b083"
+        },
+        "unit": {
+            "active_url": "https://workspace.google.com/intl/en-US/gmail/",
+            "domain": "google.com",
+            "original_path": "https://workspace.google.com/intl/en-US/gmail/",
+            "qualified_path": null,
+            "redirect_path": true,
+            "trust_level": 0
+        }
+    },
+    "description": "",
+    "did": "0688e373-cf04-7182-8000-159202bf3191",
+    "file_path": null,
+    "meta_data": {
+        "author": "",
+        "context": "",
+        "creon_dttm": "2026-07-31 18:22:54",
+        "editors": [],
+        "encoding": "utf-8",
+        "hash": "",
+        "location": "internal",
+        "mod_dttm": "2026-07-31 18:22:54",
+        "path": "",
+        "syntax": "html",
+        "tags": []
+    },
+    "name": "Gmail"
+}

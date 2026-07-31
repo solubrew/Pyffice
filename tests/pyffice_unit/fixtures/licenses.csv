@@ -1,0 +1,407 @@
+Name,Version,License
+Automat,24.8.1,MIT License
+CairoSVG,2.7.1,GNU Lesser General Public License v3 or later (LGPLv3+)
+Deprecated,1.2.14,MIT License
+Flask,2.3.3,BSD License
+Flask-AppBuilder,4.8.0,BSD License
+Flask-Babel,2.0.0,BSD License
+Flask-Caching,2.3.1,BSD License
+Flask-JWT-Extended,4.6.0,MIT License
+Flask-Limiter,3.12,MIT License
+Flask-Login,0.6.3,MIT License
+Flask-Migrate,4.1.0,MIT License
+Flask-SQLAlchemy,2.5.1,BSD License
+Flask-WTF,1.2.2,BSD License
+Jinja2,3.1.4,BSD License
+Mako,1.3.6,MIT License
+MarkupSafe,3.0.2,BSD License
+Protego,0.4.0,BSD License
+PyDispatcher,2.0.7,BSD License
+PyJWT,2.9.0,MIT License
+PyMuPDF,1.25.3,Dual Licensed - GNU AFFERO GPL 3.0 or Artifex Commercial License
+PyMySQL,1.1.1,MIT License
+PyNaCl,1.5.0,Apache License 2.0
+PyOpenGL,3.1.9,BSD License
+PyOpenGL-accelerate,3.1.9,BSD License
+PyPDF2,3.0.1,BSD License
+PyQt5,5.15.11,GPL v3
+PyQt5-Qt5,5.15.15,LGPL v3
+PyQt5-stubs,5.15.6.0,GNU General Public License v3 (GPLv3)
+PyQt5_sip,12.15.0,SIP
+PyQtWebEngine,5.15.7,GPL v3
+PyQtWebEngine-Qt5,5.15.15,LGPL v3
+PySide6,6.9.1,LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+PySide6_Addons,6.9.1,LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+PySide6_Essentials,6.9.1,LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+PyYAML,6.0.2,MIT License
+Pygments,2.19.1,BSD License
+Pympler,1.1,Apache Software License
+Pyro4,4.82,MIT License
+QScintilla,2.14.1,GPL v3
+SQLAlchemy,2.0.43,MIT
+SQLAlchemy-Utils,0.41.2,BSD License
+Scrapy,2.12.0,BSD License
+SecretStorage,3.3.3,BSD License
+Send2Trash,1.8.3,BSD License
+Twisted,24.11.0,MIT License
+WTForms,3.2.1,BSD License
+Werkzeug,3.1.1,BSD License
+XlsxWriter,3.2.0,BSD License
+adafruit-ampy,1.1.0,MIT License
+aiohappyeyeballs,2.6.1,Python Software Foundation License
+aiohttp,3.12.15,Apache-2.0 AND MIT
+aiosignal,1.4.0,Apache Software License
+alembic,1.13.3,MIT License
+altgraph,0.17.4,MIT License
+annotated-types,0.7.0,MIT License
+anyio,4.6.2.post1,MIT License
+apispec,6.7.0,MIT License
+appdirs,1.4.4,MIT License
+argcomplete,3.5.3,Apache Software License
+argon2-cffi,23.1.0,MIT License
+argon2-cffi-bindings,21.2.0,MIT License
+arrow,1.3.0,Apache Software License
+asn1crypto,1.5.1,MIT License
+astor,0.8.1,BSD License
+asttokens,3.0.0,Apache 2.0
+async-lru,2.0.4,MIT License
+asyncpg,0.30.0,Apache Software License
+attrs,25.3.0,UNKNOWN
+babel,2.16.0,BSD License
+base58,2.1.1,MIT License
+bcrypt,4.2.1,Apache Software License
+beautifulsoup4,4.12.3,MIT License
+bitarray,3.0.0,Python Software Foundation License
+bitstring,4.3.0,MIT License
+black,24.10.0,MIT License
+bleach,6.2.0,Apache Software License
+blinker,1.8.2,MIT License
+bs4,0.0.2,MIT License
+build,1.2.2.post1,MIT License
+cachelib,0.13.0,BSD License
+cachetools,5.5.0,MIT License
+cairocffi,1.7.1,BSD License
+certifi,2025.8.3,Mozilla Public License 2.0 (MPL 2.0)
+cffi,1.17.1,MIT License
+chardet,4.0.0,GNU Library or Lesser General Public License (LGPL)
+charset-normalizer,3.4.2,MIT License
+ckzg,2.1.1,Apache-2.0
+click,8.1.7,BSD License
+cloudpickle,3.1.0,BSD License
+coincurve,20.0.0,Apache Software License; MIT License
+colorama,0.4.6,BSD License
+colormath,3.0.0,BSD License
+colorzero,2,BSD License
+comm,0.2.2,BSD License
+constantly,23.10.4,MIT License
+contourpy,1.3.0,BSD License
+cryptography,44.0.0,Apache Software License; BSD License
+cssselect,1.2.0,BSD License
+cssselect2,0.8.0,BSD License
+cycler,0.12.1,BSD License
+cytoolz,1.0.1,BSD License
+debugpy,1.8.9,MIT License
+decorator,5.2.1,BSD License
+defusedxml,0.7.1,Python Software Foundation License
+dill,0.4.0,BSD License
+diskcache,5.6.3,Apache Software License
+dnspython,2.7.0,ISC License (ISCL)
+docker,7.1.0,Apache Software License
+docutils,0.21.2,BSD License; GNU General Public License (GPL); Public Domain; Python Software Foundation License
+ecdsa,0.19.0,MIT
+email_validator,2.2.0,The Unlicense (Unlicense)
+emoji,2.14.1,BSD License
+esptool,4.8.1,GNU General Public License v2 or later (GPLv2+)
+et_xmlfile,2.0.0,MIT License
+eth-account,0.13.7,MIT License
+eth-hash,0.7.1,MIT License
+eth-keyfile,0.8.1,MIT License
+eth-keys,0.7.0,MIT License
+eth-rlp,2.2.0,MIT License
+eth-typing,5.2.1,MIT License
+eth-utils,5.3.0,MIT License
+eth_abi,5.2.0,MIT License
+euclid3,0.1,UNKNOWN
+executing,2.1.0,MIT License
+fabric,3.0.1,BSD License
+fastjsonschema,2.21.1,BSD License
+feedparser,6.0.11,BSD License
+ffmpeg,1.4,MIT Licence
+ffmpeg-python,0.2.0,Apache Software License
+filelock,3.16.1,The Unlicense (Unlicense)
+fonttools,4.54.1,MIT License
+fqdn,1.5.1,Mozilla Public License 2.0 (MPL 2.0)
+frozendict,2.4.6,GNU Lesser General Public License v3 (LGPLv3)
+frozenlist,1.7.0,Apache-2.0
+fsspec,2024.12.0,BSD License
+furl,2.1.4,Public Domain
+future,1.0.0,MIT License
+gevent,25.5.1,MIT
+google-ai-generativelanguage,0.6.10,Apache Software License
+google-api-core,2.24.0,Apache Software License
+google-api-python-client,2.156.0,Apache Software License
+google-auth,2.38.0,Apache Software License
+google-auth-httplib2,0.2.0,Apache Software License
+google-auth-oauthlib,1.2.1,Apache Software License
+google-generativeai,0.8.3,Apache Software License
+googleapis-common-protos,1.66.0,Apache Software License
+gpiozero,2.0.1,BSD License
+graphviz,0.20.3,MIT License
+greenlet,3.2.3,MIT AND Python-2.0
+grpcio,1.68.1,Apache Software License
+grpcio-status,1.68.1,Apache Software License
+gunicorn,23.0.0,MIT License
+guppy3,3.1.5,MIT License
+h11,0.14.0,MIT License
+h5py,3.14.0,UNKNOWN
+hexbytes,1.3.1,MIT License
+html5lib,1.1,MIT License
+httpcore,1.0.7,BSD License
+httplib2,0.22.0,MIT License
+httpx,0.27.2,BSD License
+hyperlink,21.0.0,MIT License
+hypothesis,6.116.0,Mozilla Public License 2.0 (MPL 2.0)
+id,1.5.0,Apache Software License
+idna,3.1,BSD License
+imageio,2.37.0,BSD License
+imageio-ffmpeg,0.6.0,BSD License
+importlib_resources,6.4.5,Apache Software License
+incremental,24.7.2,MIT License
+iniconfig,2.0.0,MIT License
+intelhex,2.3.0,BSD License
+invoke,2.2.0,BSD License
+ipydatawidgets,4.3.5,BSD License
+ipykernel,6.29.5,BSD License
+ipython,8.30.0,BSD License
+ipywidgets,8.1.5,BSD License
+isoduration,20.11.0,ISC License (ISCL)
+itemadapter,0.11.0,BSD License
+itemloaders,1.3.2,BSD License
+itsdangerous,2.2.0,BSD License
+jaraco.classes,3.4.0,MIT License
+jaraco.context,6.0.1,MIT License
+jaraco.functools,4.2.1,UNKNOWN
+jedi,0.19.2,MIT License
+jeepney,0.9.0,UNKNOWN
+jmespath,1.0.1,MIT License
+joblib,1.4.2,BSD License
+json5,0.10.0,Apache Software License
+jsonpointer,3.0.0,BSD License
+jsonschema,4.23.0,MIT License
+jsonschema-specifications,2024.10.1,MIT License
+jupyter,1.1.1,BSD License
+jupyter-console,6.6.3,BSD License
+jupyter-events,0.10.0,BSD License
+jupyter-lsp,2.2.5,BSD License
+jupyter_client,8.6.3,BSD License
+jupyter_core,5.7.2,BSD License
+jupyter_server,2.14.2,BSD License
+jupyter_server_terminals,0.5.3,BSD License
+jupyterlab,4.2.6,BSD License
+jupyterlab_pygments,0.3.0,BSD License
+jupyterlab_server,2.27.3,BSD License
+jupyterlab_widgets,3.0.13,BSD License
+keyring,25.5.0,MIT License
+kiwisolver,1.4.7,BSD License
+limits,3.13.0,MIT License
+lxml,6.0.0,BSD License
+markdown-it-py,3.0.0,MIT License
+marshmallow,3.23.1,MIT License
+marshmallow-sqlalchemy,0.28.2,MIT License
+matplotlib,3.9.2,Python Software Foundation License
+matplotlib-inline,0.1.7,BSD License
+mdurl,0.1.2,MIT License
+memory-profiler,0.61.0,BSD License
+mistune,3.0.2,BSD License
+more-itertools,10.7.0,MIT License
+moviepy,2.2.1,MIT License
+mplfinance,0.12.10b0,BSD License
+mpmath,1.3.0,BSD License
+multidict,6.6.3,Apache License 2.0
+multitasking,0.0.11,Apache Software License
+mypy-extensions,1.0.0,MIT License
+mysql-connector,2.2.9,GNU General Public License (GPL)
+mysql-connector-python,9.4.0,GNU General Public License (GPL)
+narwhals,1.33.0,MIT License
+nbclient,0.10.1,BSD License
+nbconvert,7.16.4,BSD License
+nbformat,5.10.4,BSD License
+nest-asyncio,1.6.0,BSD License
+networkx,2.6.3,BSD License
+nh3,0.2.21,MIT
+notebook,7.2.2,BSD License
+notebook_shim,0.2.4,BSD License
+notion-client,2.3.0,MIT License
+numpy,2.2.6,BSD License
+numpy-stl,3.2.0,BSD License
+nvidia-cublas-cu12,12.4.5.8,Other/Proprietary License
+nvidia-cuda-cupti-cu12,12.4.127,Other/Proprietary License
+nvidia-cuda-nvrtc-cu12,12.4.127,Other/Proprietary License
+nvidia-cuda-runtime-cu12,12.4.127,Other/Proprietary License
+nvidia-cudnn-cu12,9.1.0.70,Other/Proprietary License
+nvidia-cufft-cu12,11.2.1.3,Other/Proprietary License
+nvidia-curand-cu12,10.3.5.147,Other/Proprietary License
+nvidia-cusolver-cu12,11.6.1.9,Other/Proprietary License
+nvidia-cusparse-cu12,12.3.1.170,Other/Proprietary License
+nvidia-nccl-cu12,2.21.5,Other/Proprietary License
+nvidia-nvjitlink-cu12,12.4.127,Other/Proprietary License
+nvidia-nvtx-cu12,12.4.127,Other/Proprietary License
+oauthlib,3.2.2,BSD License
+opencv-python,4.12.0.88,Apache Software License
+openpyxl,3.1.5,MIT License
+opt_einsum,3.4.0,MIT License
+ordered-set,4.1.0,MIT License
+orderedmultidict,1.0.1,Freely Distributable
+osbrain,0.6.5,Apache Software License
+overrides,7.7.0,"Apache License, Version 2.0"
+packaging,24.1,Apache Software License; BSD License
+pandas,2.3.1,BSD License
+pandocfilters,1.5.1,BSD License
+paramiko,3.5.0,GNU Library or Lesser General Public License (LGPL)
+parsel,1.10.0,BSD License
+parsimonious,0.10.0,MIT License
+parso,0.8.4,MIT License
+pathspec,0.12.1,Mozilla Public License 2.0 (MPL 2.0)
+patsy,0.5.6,BSD License
+pdfkit,1.0.0,MIT
+peewee,3.17.8,MIT License
+pendulum,3.0.0,MIT License
+pexpect,4.9.0,ISC License (ISCL)
+pgmpy,0.1.26,MIT
+pika,1.3.2,BSD License
+pillow,11.3.0,UNKNOWN
+pkce,1.0.3,MIT License
+platformdirs,4.3.6,MIT License
+plotly,6.0.1,MIT License
+pluggy,1.5.0,MIT License
+ply,3.11,BSD
+prison,0.2.1,MIT License
+proglog,0.1.12,UNKNOWN
+prometheus_client,0.21.1,Apache Software License
+prometheus_flask_exporter,0.23.2,MIT License
+prompt_toolkit,3.0.48,BSD License
+propcache,0.3.2,Apache Software License
+proto-plus,1.25.0,Apache Software License
+protobuf,5.29.2,3-Clause BSD License
+psutil,7.0.0,BSD License
+psycopg2-binary,2.9.10,GNU Library or Lesser General Public License (LGPL)
+ptyprocess,0.7.0,ISC License (ISCL)
+pure_eval,0.2.3,MIT License
+py-spy,0.4.0,MIT License
+pyOpenSSL,25.0.0,Apache Software License
+pyarrow,18.1.0,Apache Software License
+pyasn1,0.6.1,BSD License
+pyasn1_modules,0.4.1,BSD License
+pycel,1.0b30,GNU General Public License v3 (GPLv3)
+pycparser,2.22,BSD License
+pycryptodome,3.21.0,BSD License; Public Domain
+pydantic,2.11.7,MIT License
+pydantic_core,2.33.2,MIT License
+pydot,3.0.3,MIT License
+pydub,0.25.1,MIT License
+pygame,2.6.1,GNU Library or Lesser General Public License (LGPL)
+pyinstaller,6.15.0,GNU General Public License v2 (GPLv2)
+pyinstaller-hooks-contrib,2025.8,Apache Software License; GNU General Public License v2 (GPLv2)
+pylnk,0.2,GNU Library or Lesser General Public License (LGPL)
+pyodbc,5.2.0,MIT No Attribution License (MIT-0)
+pyparsing,3.2.0,MIT License
+pypng,0.0.19,MIT License
+pyproject_hooks,1.2.0,MIT License
+pyqtgraph,0.13.7,MIT License
+pyserial,3.5,BSD License
+pyshark,0.6,MIT License
+pysqlite3-binary,0.5.4,zlib/libpng License
+pytest,8.4.1,MIT License
+python-dateutil,2.9.0.post0,Apache Software License; BSD License
+python-docx,1.2.0,MIT License
+python-dotenv,1.1.1,BSD License
+python-json-logger,2.0.7,BSD License
+python-pptx,1.0.2,MIT License
+python-utils,3.9.1,BSD License
+python-vlc,3.0.21203,GNU Lesser General Public License v2 or later (LGPLv2+)
+pythreejs,2.4.2,BSD License
+pytz,2025.2,MIT License
+pyunormalize,16.0.0,MIT License
+pyyaml-include,1.3,GNU General Public License v3 or later (GPLv3+)
+pyzmq,26.2.0,BSD License
+queuelib,1.7.0,BSD License
+readme_renderer,44,Apache Software License
+reedsolo,1.7.0,MIT No Attribution License (MIT-0); The Unlicense (Unlicense)
+referencing,0.35.1,MIT License
+regex,2025.7.34,UNKNOWN
+requests,2.32.5,Apache Software License
+requests-file,2.1.0,Apache Software License
+requests-oauthlib,2.0.0,BSD License
+requests-toolbelt,1.0.0,Apache Software License
+rfc3339-validator,0.1.4,MIT License
+rfc3986,2.0.0,Apache Software License
+rfc3986-validator,0.1.1,MIT License
+rich,13.9.4,MIT License
+rlp,4.1.0,MIT License
+rpds-py,0.20.1,MIT License
+rsa,4.9,Apache Software License
+ruamel.yaml,0.18.10,MIT License
+ruamel.yaml.clib,0.2.12,MIT License
+scapy,2.6.1,GNU General Public License v2 (GPLv2)
+schedule,1.2.2,MIT License
+scikit-learn,1.5.2,BSD License
+scipy,1.14.1,BSD License
+seaborn,0.13.2,BSD License
+serpent,1.41,MIT License
+service-identity,24.2.0,MIT License
+sgmllib3k,1.0.0,BSD License
+shiboken6,6.9.1,LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
+simplejson,3.20.1,Academic Free License (AFL); MIT License
+six,1.17.0,MIT License
+sniffio,1.3.1,Apache Software License; MIT License
+sortedcontainers,2.4.0,Apache Software License
+soupsieve,2.6,MIT License
+stack-data,0.6.3,MIT License
+statsmodels,0.14.4,BSD License
+stripe,12.4.0,MIT License
+sweetviz,2.3.1,MIT License
+sympy,1.13.1,BSD License
+tabulate,0.9.0,MIT License
+termcolor,2.5.0,MIT License
+terminado,0.18.1,BSD License
+threadpoolctl,3.5.0,BSD License
+time-machine,2.16.0,MIT License
+tinycss2,1.4.0,BSD License
+tldextract,5.1.3,BSD License
+toolz,1.0.0,BSD License
+torch,2.5.1,BSD License
+tornado,6.4.2,Apache Software License
+tqdm,4.67.1,MIT License; Mozilla Public License 2.0 (MPL 2.0)
+traitlets,5.14.3,BSD License
+traittypes,0.2.1,BSD License
+triton,3.1.0,MIT License
+twine,6.1.0,Apache Software License
+types-python-dateutil,2.9.0.20241003,Apache Software License
+types-requests,2.32.4.20250611,UNKNOWN
+typing-inspection,0.4.1,UNKNOWN
+typing_extensions,4.12.2,Python Software Foundation License
+tzdata,2025.2,Apache Software License
+ultimate-notion,0.7.1,MIT License
+uri-template,1.3.0,MIT License
+uritemplate,4.1.1,Apache Software License; BSD License
+urllib3,2.5.0,UNKNOWN
+uuid7,0.1.0,MIT License
+vtk,9.5.0,BSD License
+w3lib,2.3.1,BSD License
+web3,7.6.0,MIT License
+webcolors,24.11.1,BSD License
+webencodings,0.5.1,BSD License
+webp,0.4.0,MIT License
+websocket-client,1.8.0,Apache Software License
+websockets,15.0.1,BSD License
+widgetsnbextension,4.0.13,BSD License
+wordcloud,1.9.4,MIT License
+wormhole,0.1.0,MIT
+wrapt,1.16.0,BSD License
+xgboost,2.1.3,Apache Software License
+yamllint,1.37.1,GNU General Public License v3 (GPLv3)
+yarl,1.20.1,Apache Software License
+yfinance,0.2.51,Apache Software License
+zmq,0.0.0,BSD
+zope.event,5.1,Zope Public License
+zope.interface,7.2,Zope Public License
