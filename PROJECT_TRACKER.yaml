@@ -3,7 +3,7 @@ analysis:
   counts:
     files: 497
     python_files: 295
-    python_lines: 34971
+    python_lines: 36044
     test_files: 129
 audit_date: '1785470638.3677874'
 dimensions:
@@ -158,10 +158,10 @@ dimensions:
           project: kahndor
         internal_imports: 912
         internal_projects_used:
-        - pyffice
         - ogma
-        - condor
         - kahndor
+        - pyffice
+        - condor
         leverage_score: 29.71
         score: 100
         status: pass
@@ -199,7 +199,7 @@ dimensions:
   embedded_todos:
     details:
       details:
-        count: 20
+        count: 24
         examples:
         - file: pyffice/pyffice.py
           line: 134
@@ -210,6 +210,18 @@ dimensions:
         - file: pyffice/calendars/calendars.py
           line: 115
           text: '# TODO needs rewrite'
+        - file: pyffice/analytics/sources.py
+          line: 48
+          text: '# TODO implement method'
+        - file: pyffice/analytics/sources.py
+          line: 52
+          text: '# TODO implement method'
+        - file: pyffice/analytics/sources.py
+          line: 56
+          text: '# TODO implement method'
+        - file: pyffice/analytics/sources.py
+          line: 60
+          text: '# TODO implement method'
         - file: pyffice/contacts/contacts.py
           line: 153
           text: '# TODO implement method'
@@ -219,27 +231,15 @@ dimensions:
         - file: pyffice/contacts/contacts.py
           line: 163
           text: '# TODO implement method'
-        - file: pyffice/contacts/contacts.py
-          line: 168
-          text: '# TODO implement method'
-        - file: pyffice/contacts/contacts.py
-          line: 173
-          text: '# TODO implement method'
-        - file: pyffice/contacts/contacts.py
-          line: 178
-          text: '# TODO implement method'
-        - file: pyffice/contacts/contacts.py
-          line: 188
-          text: '# TODO implement method'
         issues:
         - dimension: embedded_todos
           rule: Inline TODOs need tracking
           severity: medium
-        score: 60
+        score: 52
         status: partial
-      score: 60
+      score: 52
       status: partial
-    score: 60
+    score: 52
     status: partial
   error_handling:
     details:
@@ -330,7 +330,7 @@ dimensions:
           branches:
             local: []
             remote: []
-          commit_count: 250
+          commit_count: 256
           commits: []
           contributors: []
           is_repo: true
@@ -363,12 +363,12 @@ dimensions:
   import_cycle:
     details:
       details:
-        bad_import_files: 11
+        bad_import_files: 10
         issues: []
-        score: 80
-      score: 80
+        score: 100
+      score: 100
       status: pass
-    score: 80
+    score: 100
     status: pass
   import_organization:
     details:
@@ -841,6 +841,126 @@ dimensions:
           line: 483
           pattern: setattr\(
           severity: 60
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/__init__.py
+          line: 44
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/__init__.py
+          line: 44
+          pattern: ast_call
+          severity: 80
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/filesystems/__init__.py
+          line: 14
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/filesystems/__init__.py
+          line: 14
+          pattern: ast_call
+          severity: 80
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/notebooks/__init__.py
+          line: 14
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/notebooks/__init__.py
+          line: 14
+          pattern: ast_call
+          severity: 80
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/databases/__init__.py
+          line: 16
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/databases/__init__.py
+          line: 16
+          pattern: ast_call
+          severity: 80
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/tags/__init__.py
+          line: 17
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/tags/__init__.py
+          line: 17
+          pattern: ast_call
+          severity: 80
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/charts/__init__.py
+          line: 15
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/charts/__init__.py
+          line: 15
+          pattern: ast_call
+          severity: 80
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/socials/__init__.py
+          line: 16
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/socials/__init__.py
+          line: 16
+          pattern: ast_call
+          severity: 80
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/email/__init__.py
+          line: 15
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/email/__init__.py
+          line: 15
+          pattern: ast_call
+          severity: 80
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/ebook/__init__.py
+          line: 24
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/ebook/__init__.py
+          line: 24
+          pattern: ast_call
+          severity: 80
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/cad/__init__.py
+          line: 66
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/cad/__init__.py
+          line: 66
+          pattern: ast_call
+          severity: 80
         - category: unicode_escape
           content: 'if header[:4] == b"\xd0\xcf\x11\xe0":'
           file: pyffice/projects/projects.py
@@ -913,6 +1033,78 @@ dimensions:
           line: 191
           pattern: \\x[0-9a-fA-F]{2}
           severity: 40
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/calendars/__init__.py
+          line: 16
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/calendars/__init__.py
+          line: 16
+          pattern: ast_call
+          severity: 80
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/presentation/__init__.py
+          line: 18
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/presentation/__init__.py
+          line: 18
+          pattern: ast_call
+          severity: 80
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/reports/__init__.py
+          line: 14
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/reports/__init__.py
+          line: 14
+          pattern: ast_call
+          severity: 80
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/updates/__init__.py
+          line: 17
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/updates/__init__.py
+          line: 17
+          pattern: ast_call
+          severity: 80
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/script/__init__.py
+          line: 15
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/script/__init__.py
+          line: 15
+          pattern: ast_call
+          severity: 80
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/analytics/__init__.py
+          line: 17
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/analytics/__init__.py
+          line: 17
+          pattern: ast_call
+          severity: 80
         - category: input_usage
           content: file_ = ffmpeg.input(self.path, start, end)
           file: pyffice/video/video_export.py
@@ -925,12 +1117,120 @@ dimensions:
           line: 61
           pattern: \binput\(
           severity: 20
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/video/__init__.py
+          line: 14
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/video/__init__.py
+          line: 14
+          pattern: ast_call
+          severity: 80
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/ports/__init__.py
+          line: 29
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/ports/__init__.py
+          line: 29
+          pattern: ast_call
+          severity: 80
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/contacts/__init__.py
+          line: 17
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/contacts/__init__.py
+          line: 17
+          pattern: ast_call
+          severity: 80
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/audio/__init__.py
+          line: 15
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/audio/__init__.py
+          line: 15
+          pattern: ast_call
+          severity: 80
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/images/__init__.py
+          line: 29
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/images/__init__.py
+          line: 29
+          pattern: ast_call
+          severity: 80
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/text/__init__.py
+          line: 16
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/text/__init__.py
+          line: 16
+          pattern: ast_call
+          severity: 80
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/workflows/__init__.py
+          line: 20
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/workflows/__init__.py
+          line: 20
+          pattern: ast_call
+          severity: 80
         - category: base64_decode
           content: return base64.b64decode(doc['data'])
           file: pyffice/container/binary.py
           line: 126
           pattern: base64\.b64decode\(
           severity: 70
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/forms/__init__.py
+          line: 16
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/forms/__init__.py
+          line: 16
+          pattern: ast_call
+          severity: 80
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/config/__init__.py
+          line: 17
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/config/__init__.py
+          line: 17
+          pattern: ast_call
+          severity: 80
         - category: getattr_dynamic
           content: setattr(self, attr, None)
           file: pyffice/web/url.py
@@ -943,6 +1243,30 @@ dimensions:
           line: 459
           pattern: setattr\(
           severity: 60
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/web/__init__.py
+          line: 24
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/web/__init__.py
+          line: 24
+          pattern: ast_call
+          severity: 80
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/matrix/__init__.py
+          line: 17
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/matrix/__init__.py
+          line: 17
+          pattern: ast_call
+          severity: 80
         - category: url_open
           content: 'with urllib.request.urlopen(self.source) as response:'
           file: pyffice/media/media.py
@@ -955,6 +1279,18 @@ dimensions:
           line: 49
           pattern: urlopen\(
           severity: 50
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/media/__init__.py
+          line: 27
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/media/__init__.py
+          line: 27
+          pattern: ast_call
+          severity: 80
         score: 85.0
         status: pass
       score: 85.0
@@ -1075,17 +1411,19 @@ dimensions:
   todo_tracking:
     details:
       details:
-        files_with_todos: 8
+        files_with_todos: 9
         issues:
         - dimension: todo_tracking
           rule: Embedded TODOs require resolution
           severity: high
-        score: 80
-        status: pass
-        total_todos: 20
+        score: 76
+        status: partial
+        total_todos: 24
         worst_offenders:
         - count: 9
           file: pyffice/contacts/contacts.py
+        - count: 4
+          file: pyffice/analytics/sources.py
         - count: 4
           file: pyffice/workflows/formulas.py
         - count: 2
@@ -1100,31 +1438,31 @@ dimensions:
           file: pyffice/matrix/matrix.py
         - count: 1
           file: pyffice/skills/skills.py
-      score: 80
-      status: pass
-    score: 80
-    status: pass
+      score: 76
+      status: partial
+    score: 76
+    status: partial
   type_annotations:
     details:
       details:
         issues:
         - rule: low_coverage
           severity: medium
-          total: 2106
+          total: 2168
           typed: 677
-        score: 32
+        score: 31
         status: partial
-        total_functions: 2106
+        total_functions: 2168
         typed_functions: 677
-        untyped_functions: 1429
-      score: 32
+        untyped_functions: 1491
+      score: 31
       status: partial
-    score: 32
+    score: 31
     status: partial
   unfinished_code:
     details:
       details:
-        empty_methods: 276
+        empty_methods: 280
         examples:
         - class: PyfficePlaylist
           file: zz-hist_work/playlists.py
@@ -1182,34 +1520,34 @@ dimensions:
         issues: []
         score: 100
         status: pass
-        wrapper_count: 5
+        wrapper_count: 33
       score: 100
       status: pass
     score: 100
     status: pass
-overall_score: 86.63
+overall_score: 86.43
 project: pyffice
 rubric:
-  audit_overall: 86.63
+  audit_overall: 86.43
   categories: []
   max_points: 0
   percentage: 0.0
-  rubric_name: 06a6cc23-ea74-7cd4-8000-6c80a32090a6
+  rubric_name: 06a6ccd6-3738-7613-8000-514e58d432d2
   rubric_score: 0
   rubric_version: '1.0'
-  score_difference: -86.63
+  score_difference: -86.43
   total_points: 0
   weighted_score: 0
 summary:
   failing: 3
-  partial: 6
-  passing: 43
-  tasks_created: 9
+  partial: 7
+  passing: 42
+  tasks_created: 10
   total_auditors: 11
   total_dimensions: 53
 test_execution:
-  duration_seconds: 17.73828649520874
-  project_score: 86.63
+  duration_seconds: 17.687251806259155
+  project_score: 86.43
   report_file: /home/solubrew/.hermes/projects/pyffice/FALCON_TEST.yaml
   results:
     tests_failed: 27
@@ -1224,7 +1562,7 @@ test_execution:
   status_message: no change (66/94 tests passed)
   timestamp: ''
 versions:
-  project: f7a2c25
+  project: 69e07a8
   project_status: dirty
-  project_uncommitted_changes: 4
+  project_uncommitted_changes: 31
   sasquatch: 4d9f66f
