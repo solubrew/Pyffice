@@ -1,1 +1,33 @@
-"""Calendars module for pyffice - Calendar operations."""
+"""
+Calendars module for pyffice.
+"""
+
+# T-NEW-051: lazy __getattr__ proxy to break circular imports
+# when subpkg modules are partially initialized (PEP 562).
+_LAZY_EXPORTS = {
+    "PyfficeCalendar": ("pyffice.calendars.calendars", "PyfficeCalendar"),
+    "PyfficeTimeUnit": ("pyffice.calendars.events", "PyfficeTimeUnit"),
+    "PyfficeEvent": ("pyffice.calendars.events", "PyfficeEvent"),
+}
+
+def __getattr__(name: str):
+    if name in _LAZY_EXPORTS:
+        import importlib
+        mod_path, attr = _LAZY_EXPORTS[name]
+        mod = importlib.import_module(mod_path)
+        value = getattr(mod, attr)
+        globals()[name] = value  # cache for next access
+        return value
+    raise AttributeError(
+        "module 'pyffice.calendars' has no attribute " + repr(name)
+    )
+
+
+def __dir__():
+    return sorted(list(globals().keys()) + list(_LAZY_EXPORTS.keys()))
+
+__all__ = [
+    "PyfficeCalendar",
+    "PyfficeTimeUnit",
+    "PyfficeEvent",
+]

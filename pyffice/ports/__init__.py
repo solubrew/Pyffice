@@ -1,24 +1,59 @@
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
 """
----
-<(META)>:
-        docid:
-        name: Pyffice Ports Module
-        description: >
-                Ports layer for converting between external file formats and Pyffice formats.
-                All external formats import/export to PyfficeXXX document types.
-        version: 0.0.1.0.1.0
-        authority: filesystem
-        security: seclvl2
-        <(WT)>: -32
+Ports module for pyffice.
 """
 
-# -*- coding: utf-8 -*
-# ======================================Standard Library Modules======================================================||
-# ======================================3rd Party Library Modules=====================================================||
-# ======================================Solutions Brewer Library Modules==============================================||
+# T-NEW-051: lazy __getattr__ proxy to break circular imports
+# when subpkg modules are partially initialized (PEP 562).
+_LAZY_EXPORTS = {
+    "PyfficePortGoogleDocs": ("pyffice.ports.gports", "PyfficePortGoogleDocs"),
+    "PyfficePortGoogleForms": ("pyffice.ports.gports", "PyfficePortGoogleForms"),
+    "PyfficePortGoogleSheets": ("pyffice.ports.gports", "PyfficePortGoogleSheets"),
+    "PyfficePortExcel": ("pyffice.ports.msports", "PyfficePortExcel"),
+    "PyfficePortWord": ("pyffice.ports.msports", "PyfficePortWord"),
+    "read_docx_tables": ("pyffice.ports.msports", "read_docx_tables"),
+    "PyfficePort": ("pyffice.ports.ports", "PyfficePort"),
+    "PyfficePortCherryTree": ("pyffice.ports.ports", "PyfficePortCherryTree"),
+    "PyfficePortOffice": ("pyffice.ports.ports", "PyfficePortOffice"),
+    "PyfficePortCSV": ("pyffice.ports.ports", "PyfficePortCSV"),
+    "PyfficePortDia": ("pyffice.ports.ports", "PyfficePortDia"),
+    "PyfficePortFileSystem": ("pyffice.ports.ports", "PyfficePortFileSystem"),
+    "PyfficePortImage": ("pyffice.ports.ports", "PyfficePortImage"),
+    "PyfficePortJupyter": ("pyffice.ports.ports", "PyfficePortJupyter"),
+    "PyfficePortText": ("pyffice.ports.ports", "PyfficePortText"),
+    "PyfficePortWebSession": ("pyffice.ports.ports", "PyfficePortWebSession"),
+}
+
+def __getattr__(name: str):
+    if name in _LAZY_EXPORTS:
+        import importlib
+        mod_path, attr = _LAZY_EXPORTS[name]
+        mod = importlib.import_module(mod_path)
+        value = getattr(mod, attr)
+        globals()[name] = value  # cache for next access
+        return value
+    raise AttributeError(
+        "module 'pyffice.ports' has no attribute " + repr(name)
+    )
 
 
-# ====================================================================================================================||
+def __dir__():
+    return sorted(list(globals().keys()) + list(_LAZY_EXPORTS.keys()))
 
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
+__all__ = [
+    "PyfficePortGoogleDocs",
+    "PyfficePortGoogleForms",
+    "PyfficePortGoogleSheets",
+    "PyfficePortExcel",
+    "PyfficePortWord",
+    "read_docx_tables",
+    "PyfficePort",
+    "PyfficePortCherryTree",
+    "PyfficePortOffice",
+    "PyfficePortCSV",
+    "PyfficePortDia",
+    "PyfficePortFileSystem",
+    "PyfficePortImage",
+    "PyfficePortJupyter",
+    "PyfficePortText",
+    "PyfficePortWebSession",
+]

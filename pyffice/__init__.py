@@ -25,12 +25,34 @@ PATCH)`` so callers can compare programmatically:
 # `from pyffice import PyfficeCodex` works. The README/cli's
 # historical reference to a bare `Pyffice` facade is not built;
 # callers should use `PyfficeCodex` directly.
-from pyffice.pyffice import (  # noqa: E402
-    PyfficeCodex,
-    PyfficeCodexError,
-    DocumentNotFoundError,
-    InitializationError,
-)
+#
+# Lazy import via __getattr__ (PEP 562) so the heavy import
+# chain (pyffice.pyffice -> pyffice.document -> pyffice.tags.tags
+# ...) doesn't trigger at package-load time. This avoids
+# circular-import issues when other pyffice.<sub>.<sub> modules
+# import from `pyffice` during their own initialization.
+_LAZY_EXPORTS = {
+    "PyfficeCodex": ("pyffice.pyffice", "PyfficeCodex"),
+    "PyfficeCodexError": ("pyffice.pyffice", "PyfficeCodexError"),
+    "DocumentNotFoundError": ("pyffice.pyffice", "DocumentNotFoundError"),
+    "InitializationError": ("pyffice.pyffice", "InitializationError"),
+}
+
+
+def __getattr__(name: str):
+    if name in _LAZY_EXPORTS:
+        mod_path, attr = _LAZY_EXPORTS[name]
+        import importlib
+        mod = importlib.import_module(mod_path)
+        value = getattr(mod, attr)
+        globals()[name] = value  # cache for next access
+        return value
+    raise AttributeError(f"module 'pyffice' has no attribute {name!r}")
+
+
+def __dir__():
+    return sorted(list(globals().keys()) + list(_LAZY_EXPORTS.keys()))
+
 
 __version_info__ = (0, 1, 0)
 __version__ = ".".join(str(p) for p in __version_info__)
