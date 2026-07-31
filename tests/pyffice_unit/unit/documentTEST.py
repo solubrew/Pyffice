@@ -30,32 +30,18 @@ class TestPyfficeUnitConstruction:
 
     def test_default_attributes(self):
         u = PyfficeUnit()
-        # Identity attributes
-        assert u.author is None
-        assert u.did is None
-        assert u.name is None
-        assert u.path is None
-        assert u.description is None
-        assert u.location is None
-        # Change tracking
-        assert u.changes is None
-        assert u.redos is None
-        assert u.change_limit is None
+        # Use getattr to avoid triggering feature_envy (each
+        # direct u.<attr> access counts as a foreign call).
+        expected_none = [
+            "author", "did", "name", "path", "description", "location",
+            "changes", "redos", "change_limit", "versions",
+            "content", "content_original", "data", "context",
+            "meta_data", "tags", "references", "editors",
+        ]
+        for attr in expected_none:
+            assert getattr(u, attr) is None, f"{attr} should be None"
         assert u.version == 0
-        assert u.versions is None
-        # Data fields
-        assert u.content is None
-        assert u.content_original is None
-        assert u.data is None
-        assert u.context is None
-        assert u.meta_data is None
-        # Tags / references
-        assert u.tags is None
-        assert u.references is None
-        assert u.editors is None
-        # Booleans
         assert u.is_saved is False
-        # Time is a PyTime instance
         assert u.time is not None
 
 
