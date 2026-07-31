@@ -4,7 +4,7 @@ Pyffice CSV Data Handler
 
 import csv
 from pathlib import Path
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Iterator
 
 
 def read(filepath: str, delimiter: str = ",", encoding: str = "utf-8") -> List[Dict[str, Any]]:
