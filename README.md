@@ -30,7 +30,7 @@ Pyffice provides a unified Python interface for document processing, CAD, media 
 ### Automation & Workflows
 - **Workflows**: Custom workflow creation and execution
 - **Scripts**: Python script execution framework
-- **CLI**: 72+ command-line operations
+- **CLI**: 22 command-line operations (see `python -m pyffice --help`)
 - **Ports**: Extensible architecture for custom integrations
 
 ### Data & Analytics
@@ -76,58 +76,30 @@ pip install pylint pytest bandit
 ### CLI Usage
 
 ```bash
-# Document operations
-pyffice document convert input.docx output.pdf
-pyffice document info input.docx
+# Show all 22 commands
+python -m pyffice --help
 
-# Spreadsheet operations
-pyffice spreadsheet convert data.xlsx data.csv
-pyffice spreadsheet info data.xlsx
-
-# Media operations
-pyffice image convert photo.png photo.jpg
-pyffice video convert video.mov video.mp4
-pyffice audio convert audio.wav audio.mp3
-
-# Email operations
-pyffice email send --to user@example.com --subject "Hello" --body "Message"
-
-# Calendar operations
-pyffice calendar list
-pyffice calendar add --title "Meeting" --date 2026-06-25
-
-# Workflow operations
-pyffice workflow run my-workflow
-pyffice workflow list
+# Example subcommands (verified working as of T-NEW-044):
+python -m pyffice document-info input.pdf
+python -m pyffice document-convert input.docx output.pdf
+python -m pyffice formats
 ```
 
 ### Python API
 
+The top-level class is `PyfficeCodex` (re-exported from
+`pyffice.pyffice`). Example (T-NEW-043):
+
 ```python
-from pyffice import Pyffice
+from pyffice import PyfficeCodex
 
 # Initialize
-app = Pyffice()
+codex = PyfficeCodex()
 
-# Document processing
-app.document.convert("input.docx", "output.pdf")
-
-# Media conversion
-app.image.convert("photo.png", "photo.jpg")
-app.video.convert("video.mov", "video.mp4")
-
-# Email
-app.email.send(
-    to="user@example.com",
-    subject="Hello",
-    body="Message"
-)
-
-# Calendar
-events = app.calendar.list()
-
-# Workflow
-app.workflow.run("my-workflow")
+# Add a document (real public method on PyfficeCodex /
+# PyfficeDocumentManager)
+codex.add_document(path="input.docx", doc_type="document")
+codex.add_change("created", None, "input.docx")
 ```
 
 ---
