@@ -153,6 +153,7 @@ line_length = 120
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+addopts = "--continue-on-collection-errors"
 
 [tool.mypy]
 python_version = "3.10"

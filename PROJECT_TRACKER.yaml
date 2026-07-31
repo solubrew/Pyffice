@@ -1,10 +1,10 @@
 agent: m3rl1n
 analysis:
   counts:
-    files: 515
-    python_files: 315
-    python_lines: 35169
-    test_files: 149
+    files: 497
+    python_files: 295
+    python_lines: 34971
+    test_files: 129
 audit_date: '1785470638.3677874'
 dimensions:
   base_class_duplication:
@@ -122,50 +122,50 @@ dimensions:
   dependency_strategy:
     details:
       details:
-        external_imports: 2180
+        external_imports: 2158
         info: 'Hint: 28 GitVein projects available but not used: eaglis, falcon, glain,
           goalt, hermes-agent-main...'
         internal_import_details:
-        - file: tests/test_pyffice/unit/documentTEST.py
+        - file: tests/pyffice_unit/unit/documentTEST.py
           module: pyffice.document
           project: pyffice
-        - file: tests/test_pyffice/unit/documentTEST.py
+        - file: tests/pyffice_unit/unit/documentTEST.py
           module: pyffice.document
           project: pyffice
-        - file: tests/test_pyffice/unit/documentTEST.py
+        - file: tests/pyffice_unit/unit/documentTEST.py
           module: pyffice.document
           project: pyffice
-        - file: tests/test_pyffice/unit/documentTEST.py
+        - file: tests/pyffice_unit/unit/documentTEST.py
           module: pyffice.document
           project: pyffice
-        - file: tests/test_pyffice/unit/documentTEST.py
+        - file: tests/pyffice_unit/unit/documentTEST.py
           module: kahndor.logma
           project: kahndor
-        - file: tests/test_pyffice/unit/documentTEST.py
+        - file: tests/pyffice_unit/unit/documentTEST.py
           module: pyffice.document
           project: pyffice
-        - file: tests/test_pyffice/unit/documentTEST.py
+        - file: tests/pyffice_unit/unit/documentTEST.py
           module: pyffice.document
           project: pyffice
-        - file: tests/test_pyffice/unit/documentTEST.py
+        - file: tests/pyffice_unit/unit/documentTEST.py
           module: pyffice.document
           project: pyffice
-        - file: tests/test_pyffice/unit/documentTEST.py
+        - file: tests/pyffice_unit/unit/documentTEST.py
           module: pyffice.document
           project: pyffice
-        - file: tests/test_pyffice/unit/documentTEST.py
+        - file: tests/pyffice_unit/unit/documentTEST.py
           module: kahndor.logma
           project: kahndor
-        internal_imports: 741
+        internal_imports: 912
         internal_projects_used:
-        - kahndor
-        - condor
-        - ogma
         - pyffice
-        leverage_score: 25.37
+        - ogma
+        - condor
+        - kahndor
+        leverage_score: 29.71
         score: 100
         status: pass
-        total_imports: 2921
+        total_imports: 3070
       score: 100
       status: pass
     score: 100
@@ -330,7 +330,7 @@ dimensions:
           branches:
             local: []
             remote: []
-          commit_count: 243
+          commit_count: 250
           commits: []
           contributors: []
           is_repo: true
@@ -363,12 +363,12 @@ dimensions:
   import_cycle:
     details:
       details:
-        bad_import_files: 10
+        bad_import_files: 11
         issues: []
-        score: 100
-      score: 100
+        score: 80
+      score: 80
       status: pass
-    score: 100
+    score: 80
     status: pass
   import_organization:
     details:
@@ -472,16 +472,16 @@ dimensions:
             logma_imported: true
           - file: zz-hist_work/surveys.py
             logma_imported: true
-          - file: pyffice/diagrams/diagrams.py
+          - file: tests/pyffice_unit/unit/documentTEST.py
             logma_imported: true
         issues:
         - dimension: logging_coverage
           rule: Add logging to silent modules/classes
           severity: medium
         score: 0
-        silent_classes: 74
+        silent_classes: 197
         status: fail
-        unused_logma_files: 32
+        unused_logma_files: 119
       score: 0
       status: fail
     score: 0
@@ -817,6 +817,18 @@ dimensions:
     details:
       details:
         findings:
+        - category: dynamic_import
+          content: mod = __import__(module_name, fromlist=[attr])
+          file: pyffice/cli.py
+          line: 26
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/cli.py
+          line: 26
+          pattern: ast_call
+          severity: 80
         - category: getattr_dynamic
           content: setattr(self, change["label"], change["new_value"])
           file: pyffice/document.py
@@ -1022,11 +1034,11 @@ dimensions:
             function: set_file_path
             var: file_path
           - count: 5
-            file: tests/test_pyffice/tests/tests/test_import_export.py
+            file: tests/pyffice_unit/tests/tests/test_import_export.py
             function: test_import_export
             var: category
           - count: 13
-            file: tests/test_pyffice/tests/tests/test_import_export.py
+            file: tests/pyffice_unit/tests/tests/test_import_export.py
             function: test_import_export
             var: doc_type
           - count: 5
@@ -1049,12 +1061,12 @@ dimensions:
   testing:
     details:
       details:
-        coverage: 74.74747474747475
-        files_with_tests: 74
+        coverage: 69.6969696969697
+        files_with_tests: 69
         score: 100
         status: pass
         test_dir: tests
-        test_file_count: 148
+        test_file_count: 128
         total_source_files: 99
       score: 100
       status: pass
@@ -1098,12 +1110,12 @@ dimensions:
         issues:
         - rule: low_coverage
           severity: medium
-          total: 2105
-          typed: 676
+          total: 2106
+          typed: 677
         score: 32
         status: partial
-        total_functions: 2105
-        typed_functions: 676
+        total_functions: 2106
+        typed_functions: 677
         untyped_functions: 1429
       score: 32
       status: partial
@@ -1112,7 +1124,7 @@ dimensions:
   unfinished_code:
     details:
       details:
-        empty_methods: 151
+        empty_methods: 276
         examples:
         - class: PyfficePlaylist
           file: zz-hist_work/playlists.py
@@ -1175,17 +1187,17 @@ dimensions:
       status: pass
     score: 100
     status: pass
-overall_score: 76.81
+overall_score: 86.63
 project: pyffice
 rubric:
-  audit_overall: 86.81
+  audit_overall: 86.63
   categories: []
   max_points: 0
   percentage: 0.0
-  rubric_name: 06a6cba6-5b9b-736e-8000-ba74ebbb33bb
+  rubric_name: 06a6cc23-ea74-7cd4-8000-6c80a32090a6
   rubric_score: 0
   rubric_version: '1.0'
-  score_difference: -86.81
+  score_difference: -86.63
   total_points: 0
   weighted_score: 0
 summary:
@@ -1196,23 +1208,23 @@ summary:
   total_auditors: 11
   total_dimensions: 53
 test_execution:
-  duration_seconds: 5.574170351028442
-  project_score: 86.81
+  duration_seconds: 17.73828649520874
+  project_score: 86.63
   report_file: /home/solubrew/.hermes/projects/pyffice/FALCON_TEST.yaml
   results:
-    tests_failed: 0
-    tests_passed: 0
-    tests_run: 0
+    tests_failed: 27
+    tests_passed: 66
+    tests_run: 94
     tests_skipped: 0
   runner: falcon
-  score_adjustment: -10
+  score_adjustment: 0
   score_threshold: 80.0
   should_run: true
-  status: skipped
-  status_message: -10% penalty (0 tests ran)
+  status: failed
+  status_message: no change (66/94 tests passed)
   timestamp: ''
 versions:
-  project: a717c32
+  project: f7a2c25
   project_status: dirty
-  project_uncommitted_changes: 2
+  project_uncommitted_changes: 4
   sasquatch: 4d9f66f
