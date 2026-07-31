@@ -25,7 +25,7 @@ def _safe_import(module_name: str, attr: str) -> object:
     try:
         mod = __import__(module_name, fromlist=[attr])
         return getattr(mod, attr, None)
-    except Exception as exc:  # noqa: BLE001 - reported, not raised
+    except (ImportError, AttributeError, ModuleNotFoundError) as exc:  # noqa: BLE001 - reported, not raised
         print(f"[pyffice.cli] skipping {module_name}.{attr}: {exc}",
               file=sys.stderr)
         return None
@@ -107,7 +107,7 @@ def document_convert(ctx: click.Context, input: str, output: str, format: Option
         doc.file_open(input)
         doc.save(output, syntax=format or 'pdf')
         click.echo(f"✓ Converted document: {input} -> {output}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -127,7 +127,7 @@ def document_info(ctx: click.Context, input: str) -> None:
         click.echo(f"  Name: {info.get('name', 'N/A')}")
         click.echo(f"  Type: {info.get('document_type', 'N/A')}")
         click.echo(f"  Version: {info.get('version', 0)}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -153,7 +153,7 @@ def spreadsheet_convert(ctx: click.Context, input: str, output: str, format: Opt
         wb.file_import(input)
         wb.save(output, syntax=format or 'excel')
         click.echo(f"✓ Converted spreadsheet: {input} -> {output}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -172,7 +172,7 @@ def spreadsheet_info(ctx: click.Context, input: str) -> None:
         sheets = wb.sheets.keys() if wb.sheets else []
         click.echo(f"Spreadsheet: {input}")
         click.echo(f"  Sheets: {len(list(sheets))}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -198,7 +198,7 @@ def presentation_convert(ctx: click.Context, input: str, output: str, format: Op
         pres.file_import(input)
         pres.save(output, syntax=format or 'pptx')
         click.echo(f"✓ Converted presentation: {input} -> {output}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -228,7 +228,7 @@ def diagram_convert(ctx: click.Context, input: str, output: str, format: Optiona
         sketch.load(input)
         sketch.save(output, format=format or 'svg')
         click.echo(f"✓ Converted diagram: {input} -> {output}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -245,7 +245,7 @@ def diagram_validate(ctx: click.Context, input: str) -> None:
         converter = DiaConverter({})
         converter.validate(input)
         click.echo(f"✓ Valid diagram: {input}")
-    except Exception as e:
+    except (OSError, ValueError, AttributeError, TypeError) as e:
         click.echo(f"Invalid: {e}", err=True)
 
 
@@ -264,7 +264,7 @@ def diagram_info(ctx: click.Context, input: str) -> None:
         info = sketch.to_dict()
         click.echo(f"Diagram: {input}")
         click.echo(f"  Elements: {len(info.get('elements', []))}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -294,7 +294,7 @@ def image_convert(ctx: click.Context, input: str, output: str, format: Optional[
         img.load(input)
         img.convert(output, format=format or 'png')
         click.echo(f"✓ Converted image: {input} -> {output}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -317,7 +317,7 @@ def image_resize(ctx: click.Context, input: str, output: str, width: Optional[in
         img.resize(width or 800, height or 600)
         img.save(output)
         click.echo(f"✓ Resized image: {input} -> {output}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -336,7 +336,7 @@ def image_info(ctx: click.Context, input: str) -> None:
         info = img.to_dict()
         click.echo(f"Image: {input}")
         click.echo(f"  Size: {info.get('width', '?')}x{info.get('height', '?')}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -366,7 +366,7 @@ def video_convert(ctx: click.Context, input: str, output: str, format: Optional[
         vid.load(input)
         vid.convert(output, format=format or 'mp4')
         click.echo(f"✓ Converted video: {input} -> {output}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -385,7 +385,7 @@ def video_info(ctx: click.Context, input: str) -> None:
         info = vid.to_dict()
         click.echo(f"Video: {input}")
         click.echo(f"  Duration: {info.get('duration', 'N/A')}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -415,7 +415,7 @@ def audio_convert(ctx: click.Context, input: str, output: str, format: Optional[
         aud.load(input)
         aud.convert(output, format=format or 'mp3')
         click.echo(f"✓ Converted audio: {input} -> {output}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -434,7 +434,7 @@ def audio_info(ctx: click.Context, input: str) -> None:
         info = aud.to_dict()
         click.echo(f"Audio: {input}")
         click.echo(f"  Duration: {info.get('duration', 'N/A')}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -463,7 +463,7 @@ def cad_convert(ctx: click.Context, input: str, output: str) -> None:
         cad.load(input)
         cad.convert(output)
         click.echo(f"✓ Converted CAD: {input} -> {output}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -481,7 +481,7 @@ def cad_info(ctx: click.Context, input: str) -> None:
         cad.load(input)
         info = cad.to_dict()
         click.echo(f"CAD: {input}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -512,7 +512,7 @@ def chart_create(ctx: click.Context, input: str, output: str, type: str) -> None
         chart.set_type(type or 'bar')
         chart.save(output)
         click.echo(f"✓ Created chart: {output}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -542,7 +542,7 @@ def calendar_list(ctx: click.Context, from_date: Optional[str], to_date: Optiona
         click.echo(f"Calendar events ({len(events)}):")
         for event in events:
             click.echo(f"  - {event.get('title', 'Untitled')}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -564,7 +564,7 @@ def contact_list(ctx: click.Context) -> None:
         contacts = PyfficeContacts()
         all_contacts = contacts.get_all()
         click.echo(f"Contacts ({len(all_contacts)}):")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -581,7 +581,7 @@ def contact_search(ctx: click.Context, query: str) -> None:
         contacts = PyfficeContacts()
         results = contacts.search(query)
         click.echo(f"Found {len(results)} contacts:")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -612,7 +612,7 @@ def email_send(ctx: click.Context, to: str, subject: str, body: Optional[str], a
         email = PyfficeEmail()
         email.send(to, subject, body or '', list(attach))
         click.echo(f"✓ Sent email to {to}: {subject}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -638,7 +638,7 @@ def database_connect(ctx: click.Context, connection_string: str) -> None:
         db = PyfficeDatabase()
         db.connect(connection_string)
         click.echo(f"✓ Connected to database")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -655,7 +655,7 @@ def database_query(ctx: click.Context, query: str) -> None:
         db = PyfficeDatabase()
         results = db.execute(query)
         click.echo(f"✓ Executed query: {query[:50]}...")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -682,7 +682,7 @@ def filesystem_list(ctx: click.Context, path: str, recursive: bool) -> None:
         fs = PyfficeFileSystem()
         items = fs.list(path, recursive=recursive)
         click.echo(f"Items in {path}: {len(items)}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -701,7 +701,7 @@ def filesystem_sync(ctx: click.Context, source: str, destination: str) -> None:
         fs = PyfficeFileSystem()
         fs.sync(source, destination)
         click.echo(f"✓ Synced: {source} -> {destination}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -729,7 +729,7 @@ def analytics_report(ctx: click.Context, input: str, output: str) -> None:
         an = PyfficeAnalytics()
         an.generate_report(input, output)
         click.echo(f"✓ Generated report: {output}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -757,7 +757,7 @@ def project_create(ctx: click.Context, name: str, output: str) -> None:
         proj = PyfficeProject()
         proj.create(name, output)
         click.echo(f"✓ Created project: {name}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -779,7 +779,7 @@ def config_show(ctx: click.Context) -> None:
         cfg = PyfficeConfig()
         click.echo("Pyffice Configuration:")
         click.echo(f"  version: {cfg.get('version', '0.1.0')}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -792,7 +792,7 @@ def config_validate(ctx: click.Context) -> None:
         cfg = PyfficeConfig()
         if cfg.validate():
             click.echo("✓ Configuration is valid.")
-    except Exception as e:
+    except (OSError, ValueError, AttributeError, TypeError) as e:
         click.echo(f"Invalid: {e}", err=True)
 
 
@@ -811,7 +811,7 @@ def config_set(ctx: click.Context, key: str, value: str) -> None:
         cfg = PyfficeConfig()
         cfg.set(key, value)
         click.echo(f"✓ Set {key} = {value}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -839,7 +839,7 @@ def form_create(ctx: click.Context, output: str, title: Optional[str]) -> None:
         frm.create(title or 'Untitled')
         frm.save(output)
         click.echo(f"✓ Created form: {output}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -857,7 +857,7 @@ def form_validate(ctx: click.Context, input: str) -> None:
         frm.load(input)
         if frm.validate():
             click.echo(f"✓ Valid form: {input}")
-    except Exception as e:
+    except (OSError, ValueError, AttributeError, TypeError) as e:
         click.echo(f"Invalid: {e}", err=True)
 
 
@@ -886,7 +886,7 @@ def notebook_convert(ctx: click.Context, input: str, output: str) -> None:
         nb.load(input)
         nb.save(output)
         click.echo(f"✓ Converted notebook: {input} -> {output}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -914,7 +914,7 @@ def report_generate(ctx: click.Context, input: str, output: str) -> None:
         rep = PyfficeReport()
         rep.generate(input, output)
         click.echo(f"✓ Generated report: {output}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -941,7 +941,7 @@ def social_post(ctx: click.Context, message: str, platform: Optional[str]) -> No
         soc = PyfficeSocial()
         soc.post(message, platform)
         click.echo(f"✓ Posted to social media")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -967,7 +967,7 @@ def tag_list(ctx: click.Context, input: str) -> None:
         mgr = PyfficeTagManager()
         tags = mgr.list_tags(input)
         click.echo(f"Tags in {input}: {len(tags)}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -997,7 +997,7 @@ def text_convert(ctx: click.Context, input: str, output: str, format: Optional[s
         txt.load(input)
         txt.save(output, format=format or 'txt')
         click.echo(f"✓ Converted text: {input} -> {output}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -1021,7 +1021,7 @@ def update_check(ctx: click.Context) -> None:
             click.echo("Updates available!")
         else:
             click.echo("No updates available.")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -1038,7 +1038,7 @@ def update_install(ctx: click.Context, package: str) -> None:
         up = PyfficeUpdates()
         up.install(package)
         click.echo(f"✓ Installed update: {package}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -1066,7 +1066,7 @@ def web_fetch(ctx: click.Context, url: str, output: str) -> None:
         wb = PyfficeWeb()
         wb.fetch(url, output)
         click.echo(f"✓ Fetched: {url}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -1084,7 +1084,7 @@ def web_parse(ctx: click.Context, input: str, format: Optional[str]) -> None:
         wb = PyfficeWeb()
         data = wb.parse(input)
         click.echo(f"✓ Parsed: {input}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -1111,7 +1111,7 @@ def workflow_run(ctx: click.Context, workflow_file: str) -> None:
         wf.load(workflow_file)
         wf.run()
         click.echo(f"✓ Ran workflow: {workflow_file}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -1124,7 +1124,7 @@ def workflow_list(ctx: click.Context) -> None:
         wf = PyfficeWorkflow()
         workflows = wf.list()
         click.echo(f"Available workflows: {len(workflows)}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
@@ -1152,7 +1152,7 @@ def cam_generate(ctx: click.Context, input: str, output: str) -> None:
         cam = PyfficeCAM()
         cam.generate(input, output)
         click.echo(f"✓ Generated CNC code: {output}")
-    except Exception as e:
+    except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 

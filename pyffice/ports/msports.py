@@ -127,20 +127,20 @@ class PyfficePortExcel(PyfficePort):
             target = cell.hyperlink.target
         try:
             formula = cell.formula if cell.data_type == "f" else None
-        except Exception as e:
+        except (AttributeError, TypeError) as e:
             logma.warning(e)
             formula = None
         try:
             color = cell.font.color
             rgb = color.rgb
-        except Exception as e:
+        except (AttributeError, TypeError) as e:
             logma.warning(e)
             color = None
             rgb = None
         try:
             fill_color = cell.font.color
             fill_rgb = fill_color.rgb
-        except Exception as e:
+        except (AttributeError, TypeError) as e:
             logma.warning(e)
             fill_color = None
             fill_rgb = None
@@ -413,7 +413,7 @@ def _write_table(self, ws, data):
             if default_sheet in self.wb.sheetnames:
                 sheet_to_remove = self.wb[default_sheet]
                 self.wb.remove(sheet_to_remove)
-        except Exception as e:
+        except (AttributeError, KeyError, ValueError) as e:
             logma.warning(f"Error removing default sheet: {e}")
         self.wb.save(filename=f"{path}/{name}.xlsx")
         return self

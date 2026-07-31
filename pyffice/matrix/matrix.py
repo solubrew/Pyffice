@@ -273,7 +273,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
                                 self.table.setColumnCount(col_idx + 1)
                             item = pyqt.QTableWidgetItem(str(cell_value))
                             self.table.setItem(row_idx, col_idx, item)
-            except Exception as e:
+            except (KeyError, ValueError, TypeError) as e:
                 logma.error(f"Error loading dataset {dataset_name}: {e}")
         return self
 
@@ -291,7 +291,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         self.set_compatibility(self.config.dikt.get("compatibility", "nchantdmatrix"))
         try:
             self.set_data(self.config.get("data", {}).get("content", {}).get("data", None))
-        except Exception as e:
+        except (KeyError, TypeError, AttributeError) as e:
             logma.warning(e)
             self.set_data(None)
         if self.documents == {}:
@@ -381,7 +381,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
 
         except ImportError:
             pyqt.QMessageBox.warning(self, "Error", "openpyxl not installed. Please install: pip install openpyxl")
-        except Exception as e:
+        except (OSError, KeyError, ValueError) as e:
             pyqt.QMessageBox.warning(self, "Error", f"Failed to load Excel: {e}")
 
     def load_from_config(self, cfg):
@@ -401,7 +401,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
                 self.load_excel(file_path)
             else:
                 pyqt.QMessageBox.warning(self, "Error", "Unsupported file format")
-        except Exception as e:
+        except (OSError, ValueError) as e:
             pyqt.QMessageBox.warning(self, "Error", f"Failed to load file: {e}")
 
     def open_file(self, file):
@@ -531,7 +531,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
                         ws.cell(row=row_idx, column=col_idx, value=cell_value)
                 wb.save(file_path)
             logma.info(f"Saved Excel file: {file_path}")
-        except Exception as e:
+        except (OSError, AttributeError) as e:
             logma.error(f"Error saving Excel file: {e}")
         return self
 
@@ -546,7 +546,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
                 self.document.save_as_ods()
             else:
                 logma.warning("ODS export requires PyfficeMatrix document")
-        except Exception as e:
+        except (AttributeError, OSError) as e:
             logma.error(f"Error saving ODS file: {e}")
         return self
 
@@ -560,7 +560,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
                 writer = csv.writer(f, delimiter=delimiter)
                 writer.writerows(data)
             logma.info(f"Saved CSV file: {file_path}")
-        except Exception as e:
+        except (OSError, ValueError) as e:
             logma.error(f"Error saving CSV file: {e}")
         return self
 
@@ -634,7 +634,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         doc["data"]["document_type"] = "matrix"
         try:
             doc["data"]["content"]["data"] = doc["data"]["content"]["data"].values.tolist()
-        except Exception as e:
+        except (AttributeError, TypeError) as e:
             logma.warning(e)
         logma.warning(f"Matrix Doc {doc}")
         return doc

@@ -139,7 +139,7 @@ class PyfficeCodex(PyfficeDocumentManager):
             self.imports: dict = {}
             # self.source_manager: Optional[PyfficeSources] = None
             self.source: Any = None
-        except Exception as e:
+        except (TypeError, AttributeError, KeyError) as e:
             raise InitializationError(f"Failed to initialize PyfficeCodex: {e}") from e
 
     @classmethod
@@ -160,7 +160,7 @@ class PyfficeCodex(PyfficeDocumentManager):
                 pydoc = self.load_pydocument(pydoc)
             self.documents.append(pydoc)
             return pydoc
-        except Exception as e:
+        except (AttributeError, OSError, ValueError) as e:
             raise PyfficeCodexError(f"Failed to add document: {e}") from e
 
     def add_url(self, url: str) -> Optional[str]:
@@ -169,7 +169,7 @@ class PyfficeCodex(PyfficeDocumentManager):
             raise PyfficeCodexError("URL library not initialized")
         try:
             return self.url_library.add_url(url)
-        except Exception as e:
+        except (ValueError, OSError, AttributeError) as e:
             raise PyfficeCodexError(f"Failed to add URL: {e}") from e
 
     def get_rolodex(self):
@@ -525,7 +525,7 @@ class PyfficeCodex(PyfficeDocumentManager):
                     data["documents"][doc_id] = doc.to_dict()
                 else:
                     data["documents"][doc_id] = {"type": type(doc).__name__}
-            except Exception as e:
+            except (AttributeError, TypeError) as e:
                 # Skip documents that can't be serialized
                 data["documents"][doc_id] = {
                     "type": type(doc).__name__,
@@ -536,7 +536,7 @@ class PyfficeCodex(PyfficeDocumentManager):
             try:
                 if hasattr(self.contacts, "to_dict"):
                     data["contacts"] = self.contacts.to_dict()
-            except Exception as e:
+            except (AttributeError, TypeError) as e:
                 data["contacts"] = {"type": "PyfficeRolodex", "_error": str(e)}
 
         return yaml.dump(data, default_flow_style=False)

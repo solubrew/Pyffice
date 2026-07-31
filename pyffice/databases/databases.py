@@ -15,6 +15,7 @@
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
 import datetime as dt
+import sqlite3
 
 # ======================================3rd Party Library Modules=====================================================||
 
@@ -104,7 +105,7 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
             try:
                 cursor = self.databases[name].execute("SELECT name FROM sqlite_master WHERE type='index'")
                 return [row[0] for row in cursor.fetchall()]
-            except:
+            except sqlite3.DatabaseError:
                 pass
         return []
 
@@ -119,7 +120,7 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
             try:
                 cursor = self.databases[name].execute("SELECT name FROM sqlite_master WHERE type='table'")
                 return [row[0] for row in cursor.fetchall()]
-            except:
+            except sqlite3.DatabaseError:
                 pass
         return []
 
@@ -134,7 +135,7 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
             try:
                 cursor = self.databases[name].execute("SELECT name FROM sqlite_master WHERE type='view'")
                 return [row[0] for row in cursor.fetchall()]
-            except:
+            except sqlite3.DatabaseError:
                 pass
         return []
 

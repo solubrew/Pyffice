@@ -408,7 +408,7 @@ class PyfficeURL(PyfficeUnit):
         """Parse URL into components."""
         try:
             parsed = urlparse(url)
-        except Exception as e:
+        except (ValueError, TypeError) as e:
             logma.warning(f"Failed to parse URL {url}: {e}")
             return self
 
@@ -419,7 +419,7 @@ class PyfficeURL(PyfficeUnit):
             domain, sub = self.get_domain_and_subdomain(self.netloc)
             self._safe_set_attribute("set_domain", domain)
             self._safe_set_attribute("set_sub_domain", sub)
-        except Exception as e:
+        except (ValueError, AttributeError) as e:
             logma.warning(f"Error parsing domain/subdomain: {e}")
 
         # Set all other URL components
@@ -445,7 +445,7 @@ class PyfficeURL(PyfficeUnit):
         """Safely set attribute with error handling."""
         try:
             getattr(self, setter_name)(value)
-        except Exception as e:
+        except (AttributeError, TypeError) as e:
             logma.warning(f"Error setting {setter_name}: {e}")
 
     def _set_attribute(self, attr_name, new_value, transform_func=None):

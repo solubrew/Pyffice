@@ -136,7 +136,7 @@ class PyfficeProject(PyfficeDocumentManager):
                     logma.info("Detected Microsoft Project OLE compound file")
                     # Basic parsing implemented - full format support pending
                     # Full implementation would require olefile library
-        except Exception as e:
+        except (OSError, KeyError, ValueError) as e:
             logma.warning(f"Could not parse MPP file: {e}")
 
         return project
