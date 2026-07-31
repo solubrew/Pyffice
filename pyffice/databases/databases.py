@@ -50,6 +50,7 @@ class PyfficeDatabaseConnection(sonql.Doc):
 
     def open_file(self, document):
         """"""
+        return self
 
 
 class PyfficeDatabaseManager(PyfficeDocumentManager):
@@ -119,6 +120,7 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
 
     def open_file(self, document):
         """"""
+        return self
 
 
 # ====================================================================================================================||

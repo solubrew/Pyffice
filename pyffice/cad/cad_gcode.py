@@ -49,6 +49,7 @@ class PyfficeGCode(PyfficeDocument):
 
     def open_file(self, document):
         """"""
+        return self
 
     def to_dict(self):
         """"""

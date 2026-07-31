@@ -66,6 +66,7 @@ class PyfficeCADAssembly(PyfficeDocumentManager):
 
     def add_part(self, part, position=None):
         """"""
+        return self
 
     def to_dict(self):
         """"""
@@ -88,6 +89,7 @@ class PyfficeCADManager(PyfficeDocumentManager):
 
     def add_part(self, assembly):
         """"""
+        return self
 
     def create_new_document(self, name, type_=None):
         """"""

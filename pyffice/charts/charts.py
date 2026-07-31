@@ -216,9 +216,11 @@ class PyfficeChart(PyfficeDocument):
 
     def save_html(self, path):
         """"""
+        return self
 
     def save_latex(self, path):
         """"""
+        return self
 
     def set_axes(self, axes):
         """"""

@@ -45,12 +45,15 @@ class PyfficeEmailMessage(PyfficeMessage):
 
     def add_bcc(self, bcc):
         """"""
+        return self
 
     def add_cc(self, cc):
         """"""
+        return self
 
     def add_recipient(self):
         """"""
+        return self
 
     def add_label(self):
         """"""
@@ -74,18 +77,23 @@ class PyfficeEmailMessage(PyfficeMessage):
 
     def get_body(self):
         """"""
+        return self
 
     def get_footer(self):
         """"""
+        return self
 
     def get_header(self):
         """"""
+        return self
 
     def get_recipient(self):
         """"""
+        return self
 
     def get_sender(self):
         """"""
+        return self
 
     def load_document(self, document):
         """"""
@@ -94,6 +102,7 @@ class PyfficeEmailMessage(PyfficeMessage):
 
     def open_file(self, document):
         """"""
+        return self
 
     def save_message(self):
         """"""
@@ -118,9 +127,11 @@ class PyfficeMailBox(PyfficeDocumentManager):
 
     def connect_service(self):
         """Subclass must implement this method."""
+        return self
 
     def create_label(self):
         """"""
+        return self
 
     def create_message(self):
         """"""
@@ -133,45 +144,59 @@ class PyfficeMailBox(PyfficeDocumentManager):
 
     def create_rule(self):
         """"""
+        return self
 
     def destroy_label(self):
         """"""
+        return self
 
     def delete_mail(self):
         """"""
+        return self
 
     def delete_rule(self):
         """"""
+        return self
 
     def disconnect_service(self):
         """"""
+        return self
 
     def get_mail(self):
         """"""
+        return self
 
     def get_message(self):
         """"""
+        return self
 
     def get_labels(self):
         """"""
+        return self
 
     def get_messages(self):
         """"""
+        return self
 
     def get_message(self):
         """"""
+        return self
 
     def get_rule(self):
         """"""
+        return self
 
     def get_rules(self):
         """"""
+        return self
 
     def process_rules(self):
         """"""
+        return self
 
     def send_mail(self):
         """"""
+        return self
 
     def send_message(self):
         """"""
@@ -179,6 +204,7 @@ class PyfficeMailBox(PyfficeDocumentManager):
 
     def store_mail(self):
         """"""
+        return self
 
     def write_message(self, subject, body, recipients=None):
         """"""

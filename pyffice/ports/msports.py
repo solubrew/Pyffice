@@ -271,9 +271,11 @@ class PyfficePortExcel(PyfficePort):
 
     def to_native(self):
         """"""
+        return self
 
     def to_xml(self):
         """"""
+        return self
 
     def _set_cell_value(self, cell, val):
         """

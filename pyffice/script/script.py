@@ -226,6 +226,7 @@ class PyfficeScript(PyfficeDocument):
 
     def format_select(self, text, paragraph):
         """"""
+        return self
 
     def get_size(self):
         """"""

@@ -73,6 +73,7 @@ class PyfficePort(PyfficeDocumentManager):
 
     def file_import(self, file_path=None):
         """"""
+        return self
 
     def file_open(self, file_path, open_=True):
         """"""
@@ -96,9 +97,11 @@ class PyfficePort(PyfficeDocumentManager):
 
     def to_native(self):
         """"""
+        return self
 
     def to_xml(self):
         """"""
+        return self
 
 
 class PyfficePortCherryTree(PyfficePort):
@@ -420,9 +423,11 @@ class PyfficePortOffice(PyfficePort):
 
     def parse_file(self):
         """"""
+        return self
 
     def parse_table(self):
         """"""
+        return self
 
 
 class PyfficePortCSV(PyfficePort):
@@ -536,9 +541,11 @@ class PyfficePortDia(PyfficePort):
 
     def to_native(self):
         """"""
+        return self
 
     def to_xml(self):
         """"""
+        return self
 
 
 class PyfficePortFileSystem(PyfficePort):
@@ -587,6 +594,7 @@ class PyfficePortImage(PyfficePort):
 
     def load_document(self):
         """"""
+        return self
         # logma.info(f"Load Image {path}")
         # if os.path.exists(path):
         #     if path.endswith(".svg"):

@@ -111,9 +111,11 @@ class PyfficeForm(PyfficeDocument):
 
     def del_field(self, field):
         """"""
+        return self
 
     def del_response(self, response):
         """"""
+        return self
 
     def del_section(self, section_id):
         """"""
@@ -258,12 +260,15 @@ class PyfficeSurvey(PyfficeDocument):
 
     def del_field_response(self, field, field_id, response_id):
         """"""
+        return self
 
     def del_form_response(self, response_id):
         """"""
+        return self
 
     def del_recipient(self, recipient):
         """"""
+        return self
 
     def get_form(self, form_id):
         """"""

@@ -3,7 +3,7 @@ analysis:
   counts:
     files: 419
     python_files: 217
-    python_lines: 24644
+    python_lines: 24794
     test_files: 51
 audit_date: '1785470638.3677874'
 dimensions:
@@ -122,7 +122,7 @@ dimensions:
   dependency_strategy:
     details:
       details:
-        external_imports: 484
+        external_imports: 397
         info: 'Hint: 29 GitVein projects available but not used: eaglis, falcon, glain,
           goalt, hermes-agent-main...'
         internal_import_details:
@@ -141,30 +141,30 @@ dimensions:
         - file: tests/pyffice_unit/unit/media/mediaTEST.py
           module: pyffice.media.heic
           project: pyffice
-        - file: zz-hist_work/automations.py
-          module: kahndor
-          project: kahndor
-        - file: zz-hist_work/automations.py
-          module: kahndor
-          project: kahndor
-        - file: zz-hist_work/contactsports.py
-          module: pyffice.contacts.contacts
+        - file: pyffice/cli.py
+          module: pyffice
           project: pyffice
-        - file: zz-hist_work/matrixports.py
-          module: pyffice.matrix.matrix
-          project: pyffice
-        - file: zz-hist_work/source_control.py
+        - file: pyffice/pyffice.py
+          module: kahndor.kahndor
+          project: kahndor
+        - file: pyffice/pyffice.py
+          module: kahndor.kahndor
+          project: kahndor
+        - file: pyffice/document.py
           module: kahndor
           project: kahndor
-        internal_imports: 172
+        - file: pyffice/document.py
+          module: kahndor
+          project: kahndor
+        internal_imports: 141
         internal_projects_used:
-        - pyffice
         - condor
+        - pyffice
         - kahndor
-        leverage_score: 26.22
+        leverage_score: 26.21
         score: 100
         status: pass
-        total_imports: 656
+        total_imports: 538
       score: 100
       status: pass
     score: 100
@@ -302,7 +302,7 @@ dimensions:
           branches:
             local: []
             remote: []
-          commit_count: 269
+          commit_count: 271
           commits: []
           contributors: []
           is_repo: true
@@ -373,7 +373,7 @@ dimensions:
         - fix: Use named functions instead of complex lambdas
           items:
           - file: pyffice/workflows/formulas.py
-            line: 141
+            line: 144
           rule: 'Lambda anti-patterns detected: 1 instances'
           severity: medium
         lambda_count: 1
@@ -426,44 +426,34 @@ dimensions:
       details:
         examples:
           silent_classes:
-          - class: PyfficeAutomationManager
-            file: zz-hist_work/automations.py
+          - class: PyfficeDeque
+            file: pyffice/document.py
             method_count: 5
-          - class: PyfficeENV
-            file: zz-hist_work/env.py
-            method_count: 7
-          - class: ICSPort
-            file: zz-hist_work/calendarsports.py
+          - class: TestPyfficeUnitAddChange
+            file: tests/pyffice_unit/unit/documentTEST.py
             method_count: 5
-          - class: DatabasePortsManager
-            file: zz-hist_work/databasesports.py
-            method_count: 8
-          - class: PresentationPortsManager
-            file: zz-hist_work/presentationports.py
-            method_count: 8
-          unused_logma:
-          - file: zz-hist_work/automations.py
-            logma_imported: true
-          - file: zz-hist_work/source_control.py
-            logma_imported: true
-          - file: zz-hist_work/playlists.py
-            logma_imported: true
-          - file: zz-hist_work/surveys.py
-            logma_imported: true
-          - file: pyffice/diagrams/diagrams.py
-            logma_imported: true
+          - class: TestPyfficeDocumentManager
+            file: tests/pyffice_unit/unit/documentTEST.py
+            method_count: 5
+          - class: TestCliGroup
+            file: tests/pyffice_unit/unit/cliTEST.py
+            method_count: 12
+          - class: TestPyfficeProjectConstruction
+            file: tests/pyffice_unit/unit/projects/projectsTEST.py
+            method_count: 5
+          unused_logma: []
         issues:
         - dimension: logging_coverage
           rule: Add logging to silent modules/classes
           severity: medium
-        score: 0
-        silent_classes: 84
-        status: fail
-        unused_logma_files: 32
-      score: 0
-      status: fail
-    score: 0
-    status: fail
+        score: 50
+        silent_classes: 64
+        status: partial
+        unused_logma_files: 0
+      score: 50
+      status: partial
+    score: 50
+    status: partial
   long_method:
     details:
       details:
@@ -527,23 +517,11 @@ dimensions:
   not_implemented:
     details:
       details:
-        count: 5
+        count: 2
         examples:
-        - class: DWGPort
-          file: zz-hist_work/cadports.py
-          line: 219
-          method: export_file
-        - class: FBXPort
-          file: zz-hist_work/cadports.py
-          line: 353
-          method: export_file
-        - class: BLENDPort
-          file: zz-hist_work/cadports.py
-          line: 470
-          method: export_file
         - class: PyfficeDeque
           file: pyffice/document.py
-          line: 824
+          line: 827
           method: appendleft
         - class: PyfficeDataBase
           file: pyffice/data/base.py
@@ -553,19 +531,19 @@ dimensions:
         - dimension: not_implemented
           rule: NotImplementedError stubs need implementation
           severity: high
-        score: 60
-        status: partial
-      score: 60
-      status: partial
-    score: 60
-    status: partial
+        score: 84
+        status: pass
+      score: 84
+      status: pass
+    score: 84
+    status: pass
   note_comments:
     details:
       details:
         count: 1
         examples:
         - file: pyffice/skills/skills.py
-          line: 37
+          line: 38
           text: '# NOTE: this skills framework is intentionally scoped to creating'
         issues: []
         score: 100
@@ -761,14 +739,14 @@ dimensions:
             or custom schemes is often unexpected.'
           severity: medium
         - file: /home/solubrew/.hermes/projects/pyffice/pyffice/ports/ports.py
-          line: 202
+          line: 205
           rule: 'Bandit: Using xml.etree.ElementTree.fromstring to parse untrusted
             XML data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.fromstring
             with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
             is called'
           severity: medium
         - file: /home/solubrew/.hermes/projects/pyffice/pyffice/ports/ports.py
-          line: 477
+          line: 482
           rule: 'Bandit: Using xml.etree.ElementTree.fromstring to parse untrusted
             XML data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.fromstring
             with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
@@ -789,7 +767,7 @@ dimensions:
             is called'
           severity: medium
         - file: /home/solubrew/.hermes/projects/pyffice/pyffice/workflows/formulas.py
-          line: 128
+          line: 131
           rule: 'Bandit: Use of possibly insecure function - consider using safer
             ast.literal_eval.'
           severity: medium
@@ -1094,13 +1072,13 @@ dimensions:
         - category: input_usage
           content: file_ = ffmpeg.input(self.path, start, end)
           file: pyffice/video/video_export.py
-          line: 57
+          line: 58
           pattern: \binput\(
           severity: 20
         - category: input_usage
           content: file_ = ffmpeg.input(self.path, start, end)
           file: pyffice/video/video_export.py
-          line: 61
+          line: 62
           pattern: \binput\(
           severity: 20
         - category: dynamic_import
@@ -1178,31 +1156,31 @@ dimensions:
         - category: exec_calls
           content: return eval(filled, safe_globals, {})
           file: pyffice/workflows/formulas.py
-          line: 128
+          line: 131
           pattern: \beval\(
           severity: 100
         - category: getattr_dynamic
           content: parent = getattr(self, "_library", None)
           file: pyffice/workflows/formulas.py
-          line: 253
+          line: 256
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: proto = self._resolve_protocol(getattr(self, "protocol_name", "builtin"))
           file: pyffice/workflows/formulas.py
-          line: 285
+          line: 288
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: proto = self._resolve_protocol(getattr(self, "protocol_name", "builtin"))
           file: pyffice/workflows/formulas.py
-          line: 295
+          line: 298
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: exec_calls_ast
           content: eval(...)
           file: pyffice/workflows/formulas.py
-          line: 128
+          line: 131
           pattern: ast_call
           severity: 100
         - category: dynamic_import
@@ -1448,72 +1426,36 @@ dimensions:
         issues:
         - rule: low_coverage
           severity: medium
-          total: 2172
-          typed: 682
-        score: 31
+          total: 1733
+          typed: 375
+        score: 21
         status: partial
-        total_functions: 2172
-        typed_functions: 682
-        untyped_functions: 1490
-      score: 31
+        total_functions: 1733
+        typed_functions: 375
+        untyped_functions: 1358
+      score: 21
       status: partial
-    score: 31
+    score: 21
     status: partial
   unfinished_code:
     details:
       details:
-        empty_methods: 149
+        empty_methods: 1
         examples:
-        - class: PyfficePlaylist
-          file: zz-hist_work/playlists.py
-          line: 47
-          method: add_content_service
-        - class: PyfficePlaylist
-          file: zz-hist_work/playlists.py
-          line: 55
-          method: add_content
-        - class: PyfficePlaylist
-          file: zz-hist_work/playlists.py
-          line: 62
-          method: random_schedule
-        - class: PyfficePlaylist
-          file: zz-hist_work/playlists.py
-          line: 68
-          method: ebbnflow_schedule
-        - class: PyfficePlaylist
-          file: zz-hist_work/playlists.py
-          line: 71
-          method: schedule
-        - class: PyfficePlaylist
-          file: zz-hist_work/playlists.py
-          line: 74
-          method: import_schedule
-        - class: PyfficePlaylist
-          file: zz-hist_work/playlists.py
-          line: 82
-          method: open_file
-        - class: PyfficeResponse
-          file: zz-hist_work/surveys.py
-          line: 55
-          method: add_answer
-        - class: PyfficeResponse
-          file: zz-hist_work/surveys.py
-          line: 63
-          method: open_file
-        - class: PyfficeSurveyManager
-          file: zz-hist_work/surveys.py
-          line: 99
-          method: add_question
+        - class: PyfficeDiagram
+          file: pyffice/diagrams/diagrams.py
+          line: 334
+          method: to_dict
         issues:
         - dimension: unfinished_code
           rule: Empty methods need implementation
-          severity: high
-        score: 0
-        status: fail
-      score: 0
-      status: fail
-    score: 0
-    status: fail
+          severity: medium
+        score: 95
+        status: pass
+      score: 95
+      status: pass
+    score: 95
+    status: pass
   wrapper_antipattern:
     details:
       details:
@@ -1525,29 +1467,29 @@ dimensions:
       status: pass
     score: 100
     status: pass
-overall_score: 88.15
+overall_score: 92.15
 project: pyffice
 rubric:
-  audit_overall: 88.15
+  audit_overall: 92.15
   categories: []
   max_points: 0
   percentage: 0.0
-  rubric_name: 06a6cee1-204b-78e4-8000-7a8e8d5469f6
+  rubric_name: 06a6cfbc-03a8-78d7-8000-06c0dfffa38c
   rubric_score: 0
   rubric_version: '1.0'
-  score_difference: -88.15
+  score_difference: -92.15
   total_points: 0
   weighted_score: 0
 summary:
-  failing: 3
+  failing: 1
   partial: 5
-  passing: 44
-  tasks_created: 8
+  passing: 46
+  tasks_created: 6
   total_auditors: 11
   total_dimensions: 53
 test_execution:
-  duration_seconds: 26.35095500946045
-  project_score: 88.15
+  duration_seconds: 26.37643074989319
+  project_score: 92.15
   report_file: /home/solubrew/.hermes/projects/pyffice/FALCON_TEST.yaml
   results:
     tests_failed: 27
@@ -1562,7 +1504,7 @@ test_execution:
   status_message: no change (283/310 tests passed)
   timestamp: ''
 versions:
-  project: 45baf8b
+  project: dcf3eb1
   project_status: dirty
-  project_uncommitted_changes: 2
+  project_uncommitted_changes: 36
   sasquatch: 4d9f66f

@@ -251,6 +251,7 @@ class PyfficeCell(PyfficeUnit):
 
     def set_format(self, format_):
         """"""
+        return self
 
     def set_formula(self, formula, inputs=None):
         """"""

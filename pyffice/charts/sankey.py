@@ -100,6 +100,7 @@ class SankeyChart:
 
     def open_file(self, document):
         """"""
+        return self
 
     def save_sankey_chart(self, filename="sankey_chart.html"):
         """

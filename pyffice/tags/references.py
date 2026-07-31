@@ -79,6 +79,7 @@ class PyfficeReference(PyfficeTag):
 
     def set_date(self, year, month=None, day=None):
         """"""
+        return self
 
     def set_doi(self, doi):
         """"""

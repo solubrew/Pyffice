@@ -100,9 +100,11 @@ class PyfficeAudio(PyfficeDocument):
 
     def increase_volume(self, percent):
         """"""
+        return self
 
     def decrease_volume(self, percent):
         """"""
+        return self
 
     def to_dict(self):
         """"""

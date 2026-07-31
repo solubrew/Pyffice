@@ -52,9 +52,11 @@ class PyfficePortGoogleDocs(PyfficePort):
 
     def to_native(self):
         """"""
+        return self
 
     def to_xml(self):
         """"""
+        return self
 
 
 class PyfficePortGoogleForms(PyfficePort):
@@ -69,9 +71,11 @@ class PyfficePortGoogleForms(PyfficePort):
 
     def to_native(self):
         """"""
+        return self
 
     def to_xml(self):
         """"""
+        return self
 
 
 class PyfficePortGoogleSheets(PyfficePort):
@@ -86,9 +90,11 @@ class PyfficePortGoogleSheets(PyfficePort):
 
     def to_native(self):
         """"""
+        return self
 
     def to_xml(self):
         """"""
+        return self
 
 
 # ====================================================================================================================||

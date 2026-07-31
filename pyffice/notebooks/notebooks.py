@@ -104,6 +104,7 @@ class PyfficeNotebook(PyfficeDocument):
 
     def set_pinned(self, pinned):
         """"""
+        return self
 
     def to_dict(self):
         """"""

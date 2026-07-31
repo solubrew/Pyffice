@@ -136,6 +136,7 @@ class PyfficeImage(PyfficeDocument):
 
     def add_tag(self, tag_name, tag_value):
         """"""
+        return self
 
     def add_text(self, text, position=(10, 10), font_size=20, color="black", font_path=None):
         """
@@ -167,15 +168,19 @@ class PyfficeImage(PyfficeDocument):
 
     def del_filter(self):
         """"""
+        return self
 
     def del_image(self):
         """"""
+        return self
 
     def del_layer(self):
         """"""
+        return self
 
     def del_shape(self):
         """"""
+        return self
 
     def del_tag(self, tag_name):
         """
@@ -387,12 +392,15 @@ class PyfficeScreenShot(PyfficeDocument):
 
     def set_image(self):
         """"""
+        return self
 
     def set_position(self, x, y):
         """"""
+        return self
 
     def set_size(self, width, height):
         """"""
+        return None
 
     def to_dict(self):
         """"""

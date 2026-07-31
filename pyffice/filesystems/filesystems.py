@@ -85,6 +85,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
 
     def get_files(self):
         """"""
+        return self
 
     def load_document(self, document=None):
         """"""

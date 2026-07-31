@@ -144,12 +144,15 @@ class PyfficeMatrix(PyfficeDocumentManager):
 
     def export_excel(self, format_=None):
         """"""
+        return self
 
     def export_csv(self, format_=None):
         """"""
+        return self
 
     def export_gsheet(self, format_=None):
         """"""
+        return self
 
     def file_import(self, file_=None, if_data_only=False, read_only=False, keep_vba=False):
         """"""
@@ -414,9 +417,11 @@ class PyfficeMatrix(PyfficeDocumentManager):
 
     def open_file_csv(self):
         """"""
+        return self
 
     def open_file_excel(self):
         """"""
+        return self
 
     def sanitize_sheet_name(self, sheet_name, compatibility="excel"):
         """
@@ -447,6 +452,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
 
     def save_csv(self, path):
         """"""
+        return self
 
     def save_excel(self, path):
         """"""

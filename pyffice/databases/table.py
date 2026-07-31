@@ -44,9 +44,11 @@ class PyfficeTable(PyfficeDocument):
 
     def add_column(self, column):
         """"""
+        return self
 
     def add_row(self, row):
         """"""
+        return self
 
     def load_document(self, document):
         """"""
@@ -55,6 +57,7 @@ class PyfficeTable(PyfficeDocument):
 
     def open_file(self, document):
         """"""
+        return self
 
 
 # ====================================================================================================================||

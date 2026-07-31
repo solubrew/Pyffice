@@ -68,15 +68,19 @@ class PyfficeVideo(PyfficeDocument):
 
     def find_pause(self):
         """"""
+        return self
 
     def find_unpause(self):
         """"""
+        return self
 
     def get_duration(self):
         """"""
+        return self
 
     def get_palette(self):
         """"""
+        return self
 
     def load_document(self, document):
         """"""
@@ -85,6 +89,7 @@ class PyfficeVideo(PyfficeDocument):
 
     def open_file(self, document):
         """"""
+        return self
 
     def to_dict(self):
         """"""

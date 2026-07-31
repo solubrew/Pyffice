@@ -251,6 +251,7 @@ class PyfficeColorPalette(PyfficeDocument):
 
     def set_palette(self):
         """"""
+        return self
 
     def set_palette_darker(self, factor):
         """"""

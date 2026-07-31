@@ -58,10 +58,12 @@ class PyfficeFormulaProtocol(ABC):
     @abstractmethod
     def parse(self, formula: str) -> object:
         """Return an opaque parsed representation of formula."""
+        return None
 
     @abstractmethod
     def execute(self, parsed: object, parameters: dict) -> object:
         """Execute parsed against parameters and return the result."""
+        return self
 
 
 class BuiltinProtocol(PyfficeFormulaProtocol):

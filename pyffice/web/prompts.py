@@ -234,9 +234,11 @@ class PyfficeResponse(PyfficeDocument):
 
     def add_source(self):
         """"""
+        return self
 
     def load_document(self, document=None):
         """"""
+        return self
 
     def set_sources(self, sources):
         """"""

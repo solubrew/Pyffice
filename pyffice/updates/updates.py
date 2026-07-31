@@ -46,9 +46,11 @@ class PyfficeUpdate(object):
 
     def check_extra(self):
         """Returns True if the document has extra fields not in the schema at the schema levels"""
+        return None
 
     def check_missing(self):
         """Returns True if the document is missing fields not in the schema at the schema levels"""
+        return None
 
     def create_temp_file(self):
         """"""
@@ -69,15 +71,19 @@ class PyfficeUnitUpdate(PyfficeUpdate):
 
     def check_extra(self):
         """Returns True if the document has extra fields not in the schema at the schema levels"""
+        return None
 
     def check_missing(self):
         """Returns True if the document is missing fields not in the schema at the schema levels"""
+        return None
 
     def create_temp_unit(self):
         """"""
+        return self
 
     def get_version_schema(self, version):
         """Get the version schema for a given version."""
+        return None
 
 
 class PyfficeDocumentUpdate(PyfficeUpdate):
@@ -96,12 +102,15 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
 
     def check_extra(self):
         """Returns True if the document has extra fields not in the schema at the schema levels"""
+        return None
 
     def check_missing(self):
         """Returns True if the document is missing fields not in the schema at the schema levels"""
+        return None
 
     def create_temp_document(self):
         """"""
+        return self
 
     def process(self, document=None):
         """"""
@@ -262,9 +271,11 @@ class PyfficeUpdater(object):
 
     def update_document(self):
         """"""
+        return self
 
     def update_unit(self):
         """"""
+        return self
 
 
 # ====================================================================================================================||

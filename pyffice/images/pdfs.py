@@ -153,9 +153,11 @@ class PyfficePDF(PyfficeDocument):
 
     def get_binary(self):
         """"""
+        return self
 
     def get_content(self):
         """"""
+        return self
 
     def get_page_size(self, page_n=0):
         """

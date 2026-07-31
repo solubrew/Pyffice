@@ -520,9 +520,11 @@ class PyfficeDocument(PyfficeUnit):
 
     def file_export(self, file_=None):
         """"""
+        return self
 
     def file_import(self, file_type):
         """"""
+        return self
 
     def file_open(self, file_path, open_=True):
         """"""
@@ -601,6 +603,7 @@ class PyfficeDocument(PyfficeUnit):
 
     def search_vector(self):
         """"""
+        return self
 
     def search_word(self, term):
         """"""

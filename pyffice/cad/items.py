@@ -55,9 +55,11 @@ class PyfficeShape(PyfficeDocument):
 
     def get_corner(self, corner_label="A"):
         """"""
+        return self
 
     def get_center(self):
         """"""
+        return self
 
     def get_envelope_corner(self, corner_label="A"):
         """"""
@@ -65,6 +67,7 @@ class PyfficeShape(PyfficeDocument):
 
     def get_envelope_center(self):
         """"""
+        return self
 
     def get_envelope(self):
         """"""
@@ -74,6 +77,7 @@ class PyfficeShape(PyfficeDocument):
 
     def get_origin(self):
         """"""
+        return self
 
     def peform_mirror(self, axis="x"):
         """"""

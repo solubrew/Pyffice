@@ -336,6 +336,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
 
     def to_md(self):
         """"""
+        return self
 
 
 class PyfficeDiagramLayer(PyfficeUnit):
