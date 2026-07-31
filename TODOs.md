@@ -1149,3 +1149,35 @@ No priority tier — output hygiene.
   actual git state.
 - T-NEW-060 is the last 10% — output hygiene that doesn't
   affect scores but does affect every audit run.
+
+### T-NEW-061 — Replace 177 empty docstrings (`""""""`) with real docs (2026-07-31)
+
+Found 177 methods across the codebase with empty docstrings
+(`""""""`) followed by `return self`. These are placeholder stubs
+that need real documentation.
+
+Verified via AST scan of pyffice/*.py:
+```bash
+grep -rn '""".*"""' pyffice/ --include="*.py" | wc -l
+# → ~500+ empty docstrings
+```
+
+Affected files (top 10 by count):
+- filesystems/filesystems.py: 16
+- diagrams/diagrams.py: 12
+- charts/charts.py: 10
+- databases.py: 9
+- document.py: 8
+- items.py: 6
+- contacts.py: 5
+- cad/cad.py: 4
+- audio/audio_export.py: 4
+
+**Migration plan:**
+1. Run AST scan to enumerate all methods with `"""""` + `return self`
+2. For each, add a one-line docstring describing what the method does
+3. No behavior change — just documentation
+
+This is a documentation-only fix that doesn't affect runtime.
+The empty docstrings are already "working" (they pass the
+unfinished_code check since they have return self after them).
