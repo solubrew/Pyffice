@@ -3,7 +3,7 @@ analysis:
   counts:
     files: 419
     python_files: 217
-    python_lines: 24784
+    python_lines: 24816
     test_files: 51
 audit_date: '1785470638.3677874'
 dimensions:
@@ -302,7 +302,7 @@ dimensions:
           branches:
             local: []
             remote: []
-          commit_count: 273
+          commit_count: 275
           commits: []
           contributors: []
           is_repo: true
@@ -885,6 +885,145 @@ dimensions:
           line: 16
           pattern: ast_call
           severity: 80
+        - category: getattr_dynamic
+          content: self.bcc = getattr(self, 'bcc', []) + [bcc]
+          file: pyffice/email/email.py
+          line: 48
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: self.cc = getattr(self, 'cc', []) + [cc]
+          file: pyffice/email/email.py
+          line: 53
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: self.recipients = getattr(self, 'recipients', []) + [recipient]
+          file: pyffice/email/email.py
+          line: 58
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: self.labels = getattr(self, 'labels', []) + [label]
+          file: pyffice/email/email.py
+          line: 63
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: return getattr(self, 'body', None)
+          file: pyffice/email/email.py
+          line: 84
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: return getattr(self, 'footer', None)
+          file: pyffice/email/email.py
+          line: 88
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: headers = getattr(self, 'headers', {})
+          file: pyffice/email/email.py
+          line: 92
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: recipients = getattr(self, 'recipients', [])
+          file: pyffice/email/email.py
+          line: 97
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: return getattr(self, 'from', None)
+          file: pyffice/email/email.py
+          line: 102
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: labels = getattr(self, 'labels', [])
+          file: pyffice/email/email.py
+          line: 121
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: self.labels = getattr(self, 'labels', {})
+          file: pyffice/email/email.py
+          line: 146
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: self.rules = getattr(self, 'rules', [])
+          file: pyffice/email/email.py
+          line: 157
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: labels = getattr(self, 'labels', {})
+          file: pyffice/email/email.py
+          line: 163
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: self.messages = [m for m in getattr(self, 'messages', []) if m.get('uid')
+            != uid]
+          file: pyffice/email/email.py
+          line: 170
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: rules = getattr(self, 'rules', [])
+          file: pyffice/email/email.py
+          line: 175
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: messages = getattr(self, 'messages', [])
+          file: pyffice/email/email.py
+          line: 185
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: messages = getattr(self, 'messages', [])
+          file: pyffice/email/email.py
+          line: 193
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: return getattr(self, 'labels', {})
+          file: pyffice/email/email.py
+          line: 198
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: return getattr(self, 'messages', [])
+          file: pyffice/email/email.py
+          line: 202
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: messages = getattr(self, 'messages', [])
+          file: pyffice/email/email.py
+          line: 206
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: rules = getattr(self, 'rules', [])
+          file: pyffice/email/email.py
+          line: 214
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: return getattr(self, 'rules', [])
+          file: pyffice/email/email.py
+          line: 219
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: self.messages = getattr(self, 'messages', [])
+          file: pyffice/email/email.py
+          line: 237
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
         - category: dynamic_import
           content: mod = __import__(mod_path, fromlist=[attr])
           file: pyffice/email/__init__.py
@@ -1422,13 +1561,13 @@ dimensions:
         issues:
         - rule: low_coverage
           severity: medium
-          total: 1733
+          total: 1732
           typed: 375
         score: 21
         status: partial
-        total_functions: 1733
+        total_functions: 1732
         typed_functions: 375
-        untyped_functions: 1358
+        untyped_functions: 1357
       score: 21
       status: partial
     score: 21
@@ -1436,15 +1575,58 @@ dimensions:
   unfinished_code:
     details:
       details:
-        empty_methods: 0
-        examples: []
-        issues: []
-        score: 100
-        status: pass
-      score: 100
-      status: pass
-    score: 100
-    status: pass
+        empty_methods: 161
+        examples:
+        - class: PyfficeUnit
+          file: pyffice/document.py
+          line: 132
+          method: add_editor
+        - class: PyfficeUnit
+          file: pyffice/document.py
+          line: 143
+          method: del_editor
+        - class: PyfficeUnit
+          file: pyffice/document.py
+          line: 147
+          method: del_reference
+        - class: PyfficeDocument
+          file: pyffice/document.py
+          line: 521
+          method: file_export
+        - class: PyfficeDocument
+          file: pyffice/document.py
+          line: 525
+          method: file_import
+        - class: PyfficeDocument
+          file: pyffice/document.py
+          line: 604
+          method: search_vector
+        - class: PyfficeFileSystem
+          file: pyffice/filesystems/filesystems.py
+          line: 86
+          method: get_files
+        - class: PyfficeDiagram
+          file: pyffice/diagrams/diagrams.py
+          line: 334
+          method: to_dict
+        - class: PyfficeDiagram
+          file: pyffice/diagrams/diagrams.py
+          line: 338
+          method: to_md
+        - class: PyfficeNotebook
+          file: pyffice/notebooks/notebooks.py
+          line: 105
+          method: set_pinned
+        issues:
+        - dimension: unfinished_code
+          rule: Empty methods need implementation
+          severity: high
+        score: 0
+        status: fail
+      score: 0
+      status: fail
+    score: 0
+    status: fail
   wrapper_antipattern:
     details:
       details:
@@ -1456,29 +1638,29 @@ dimensions:
       status: pass
     score: 100
     status: pass
-overall_score: 92.5
+overall_score: 89.76
 project: pyffice
 rubric:
-  audit_overall: 92.5
+  audit_overall: 89.76
   categories: []
   max_points: 0
   percentage: 0.0
-  rubric_name: 06a6cffc-75df-7819-8000-743ff81ee1bb
+  rubric_name: 06a6d020-8b90-785c-8000-d617a8b57a56
   rubric_score: 0
   rubric_version: '1.0'
-  score_difference: -92.5
+  score_difference: -89.76
   total_points: 0
   weighted_score: 0
 summary:
-  failing: 1
+  failing: 2
   partial: 5
-  passing: 46
-  tasks_created: 6
+  passing: 45
+  tasks_created: 7
   total_auditors: 11
   total_dimensions: 53
 test_execution:
-  duration_seconds: 26.70784044265747
-  project_score: 92.5
+  duration_seconds: 26.42663860321045
+  project_score: 89.76
   report_file: /home/solubrew/.hermes/projects/pyffice/FALCON_TEST.yaml
   results:
     tests_failed: 27
@@ -1493,7 +1675,7 @@ test_execution:
   status_message: no change (283/310 tests passed)
   timestamp: ''
 versions:
-  project: 8b40fcb
+  project: 5707b6f
   project_status: dirty
   project_uncommitted_changes: 5
-  sasquatch: 4d9f66f
+  sasquatch: a16c01c
