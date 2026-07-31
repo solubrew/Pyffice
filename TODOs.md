@@ -4,6 +4,8 @@
 - refactor data/base.py and other files in this directory as they are all covered by document types elsewhere in the package and any actual import/export work needs to be in the ports/ path
 - refactor all document types to maintain a consistent shape aligned with PyfficeImage, PyfficeScript, PyfficeMatrix duplicating keys as needed with deprication notes until all documents can be fully aligned
 - build out stubbed document types
+- implement e2e conversion of documents in the dir pyffice/tests/fixtures/ various office file types exists and need to be able to convert to pyffice versions of each and then export back to the native version
+- 
 
 
 
