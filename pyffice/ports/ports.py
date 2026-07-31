@@ -72,8 +72,19 @@ class PyfficePort(PyfficeDocumentManager):
         return self
 
     def file_import(self, file_path=None):
-        """"""
+        """Import from file path."""
+        self.file_open(file_path)
+        self.parse()
         return self
+
+    def to_native(self):
+        """Convert to native format."""
+        return self.document
+
+    def to_xml(self):
+        """Convert to XML format."""
+        import xml.etree.ElementTree as ET
+        return ET.tostring(self.document, encoding='unicode') if self.document else ""
 
     def file_open(self, file_path, open_=True):
         """"""
@@ -96,12 +107,12 @@ class PyfficePort(PyfficeDocumentManager):
         return doc
 
     def to_native(self):
-        """"""
-        return self
+        """Convert to native format."""
+        return self.document
 
     def to_xml(self):
-        """"""
-        return self
+        """Convert to XML format."""
+        return self.to_dict()
 
 
 class PyfficePortCherryTree(PyfficePort):
@@ -422,11 +433,23 @@ class PyfficePortOffice(PyfficePort):
         return self
 
     def parse_file(self):
-        """"""
+        """Parse the loaded file."""
+        # Placeholder - subclasses implement specific parsing
         return self
 
     def parse_table(self):
-        """"""
+        """Parse tables from document."""
+        # Placeholder - subclasses implement specific parsing
+        return self
+
+    def open_file_svg(self, file_):
+        """Open SVG file."""
+        # Placeholder - SVG requires special handling
+        return self
+
+    def load_document(self, document=None):
+        """Load document data."""
+        super().load_document(document)
         return self
 
 
@@ -540,12 +563,12 @@ class PyfficePortDia(PyfficePort):
         return doc
 
     def to_native(self):
-        """"""
-        return self
+        """Convert to native format."""
+        return self.document
 
     def to_xml(self):
-        """"""
-        return self
+        """Convert to XML format."""
+        return self.to_dict()
 
 
 class PyfficePortFileSystem(PyfficePort):
@@ -592,18 +615,10 @@ class PyfficePortImage(PyfficePort):
         self.image.save(buffer, format=format)
         return buffer.getvalue()
 
-    def load_document(self):
-        """"""
+    def load_document(self, document=None):
+        """Load document data."""
+        super().load_document(document)
         return self
-        # logma.info(f"Load Image {path}")
-        # if os.path.exists(path):
-        #     if path.endswith(".svg"):
-        #         self.image = self.load_svg(path)
-        #     else:
-        #         self.image = Image.open(path)
-        #         self.mode = self.image.mode
-        #         self.info = self.image.info
-        #         self.exif = self.image._getexif()  # Extract EXIF metadata (if available)
 
     def open_file(self, file_=None):
         """"""
@@ -635,25 +650,32 @@ class PyfficePortImage(PyfficePort):
         return self
 
     def open_file_bmp(self, file_):
-        """"""
+        """Open BMP file."""
+        from PIL import Image
+        self.image = Image.open(file_)
         return self
 
     def open_file_jpeg(self, file_):
-        """"""
-        image = Image.open(file_)
-        self.image = image
+        """Open JPEG file."""
+        from PIL import Image
+        self.image = Image.open(file_)
         return self
 
     def open_file_gif(self, file_):
-        """"""
+        """Open GIF file."""
+        from PIL import Image
+        self.image = Image.open(file_)
         return self
 
     def open_file_png(self, file_):
-        """"""
+        """Open PNG file."""
+        from PIL import Image
+        self.image = Image.open(file_)
         return self
 
     def open_file_svg(self, file_):
-        """"""
+        """Open SVG file."""
+        # Placeholder - SVG requires special handling
         return self
 
     def save(self, output_path, format_=None):
@@ -729,8 +751,9 @@ class PyfficePortJupyter(PyfficePort):
             self.notebook = nbformat.read(f, as_version=4)
         return self
 
-    def load_document(self):
-        """"""
+    def load_document(self, document=None):
+        """Load document data."""
+        super().load_document(document)
         return self
 
     def to_dict(self):
