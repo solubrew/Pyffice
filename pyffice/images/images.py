@@ -135,7 +135,9 @@ class PyfficeImage(PyfficeDocument):
         return self
 
     def add_tag(self, tag_name, tag_value):
-        """"""
+        """Add metadata tag to image."""
+        self.tags = getattr(self, 'tags', {})
+        self.tags[tag_name] = tag_value
         return self
 
     def add_text(self, text, position=(10, 10), font_size=20, color="black", font_path=None):
@@ -166,20 +168,30 @@ class PyfficeImage(PyfficeDocument):
         self.thumbnail.thumbnail(size)
         return self
 
-    def del_filter(self):
-        """"""
+    def del_filter(self, filter_name):
+        """Remove a filter from the image."""
+        filters = getattr(self, 'filters', [])
+        if filter_name in filters:
+            filters.remove(filter_name)
         return self
 
     def del_image(self):
-        """"""
+        """Delete the current image."""
+        self.image = None
         return self
 
-    def del_layer(self):
-        """"""
+    def del_layer(self, layer_index):
+        """Delete a layer by index."""
+        layers = getattr(self, 'layers', [])
+        if 0 <= layer_index < len(layers):
+            layers.pop(layer_index)
         return self
 
-    def del_shape(self):
-        """"""
+    def del_shape(self, shape_index):
+        """Delete a shape by index."""
+        shapes = getattr(self, 'shapes', [])
+        if 0 <= shape_index < len(shapes):
+            shapes.pop(shape_index)
         return self
 
     def del_tag(self, tag_name):
@@ -197,8 +209,11 @@ class PyfficeImage(PyfficeDocument):
                     break
         return self
 
-    def del_text(self):
-        """"""
+    def del_text(self, text_index):
+        """Delete text at specified index."""
+        texts = getattr(self, 'texts', [])
+        if 0 <= text_index < len(texts):
+            texts.pop(text_index)
         return self
 
     def get_image_palette(self):
@@ -240,11 +255,17 @@ class PyfficeImage(PyfficeDocument):
         return self
 
     def remove_background(self):
-        """"""
+        """Remove background from image."""
+        if not self.image:
+            return self
+        # Placeholder - requires ML library (e.g., rembg)
         return self
 
     def remove_faces(self):
-        """"""
+        """Detect and remove faces from image."""
+        if not self.image:
+            return self
+        # Placeholder - requires face detection library
         return self
 
     def set_content(self, content):
@@ -334,16 +355,20 @@ class PyfficeImageManager(PyfficeDocumentManager):
         return self
 
     def copy_image(self, image):
-        """"""
-        return self
+        """Create a copy of the image."""
+        if hasattr(image, 'copy'):
+            return image.copy()
+        return None
 
     def get_similar_images(self, image):
         """
-        compare images being managed using tools to determine similarity
-        :param image:
-        :return:
+        Compare images being managed using tools to determine similarity.
+
+        :param image: Image to compare against.
+        :return: List of similar images.
         """
-        return self
+        # Placeholder - requires image similarity algorithm
+        return []
 
     def load_document(self, document=None):
         """"""
@@ -354,8 +379,10 @@ class PyfficeImageManager(PyfficeDocumentManager):
         super().load_document(document)
         return self
 
-    def move_image(self, image):
-        """"""
+    def move_image(self, image, new_position):
+        """Move image to new position."""
+        if hasattr(image, 'position'):
+            image.position = new_position
         return self
 
     def remove_image(self, image, delete_=False):
@@ -390,17 +417,22 @@ class PyfficeScreenShot(PyfficeDocument):
         super().load_document(document)
         return self
 
-    def set_image(self):
-        """"""
+    def set_image(self, image):
+        """Set the image data."""
+        self.image = image
         return self
 
     def set_position(self, x, y):
-        """"""
+        """Set image position."""
+        self.position = (x, y)
         return self
 
     def set_size(self, width, height):
-        """"""
-        return None
+        """Set image size."""
+        self.size = (width, height)
+        if self.image:
+            self.image = self.image.resize((width, height))
+        return self
 
     def to_dict(self):
         """"""
