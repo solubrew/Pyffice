@@ -248,7 +248,7 @@ class PyfficeWebBrowser(PyfficeDocument):
             doc["data"]["active_profile"] = self.active_profile.to_dict()
         doc["data"]["page"] = self.active_page.to_dict()
         # doc["data"]["pages"] = [x.to_dict() for x in self.pages]
-        return doc
+        return self._canonicalize(doc)
 
 
 class PyfficeWebPage(PyfficeDocument):
@@ -401,7 +401,7 @@ class PyfficeWebPage(PyfficeDocument):
 
         # doc["data"]["profile"] = self.active_profile.to_dict()
         doc["data"]["source"] = None
-        return doc
+        return self._canonicalize(doc)
 
 
 class PyfficeWebProfile(PyfficeContact):
@@ -510,7 +510,7 @@ class PyfficeWebProfileManager(PyfficeRolodex):
         doc["data"]["profiles"] = [x.to_dict() for x in self.profiles]
         if self.active_profile is not None:
             doc["data"]["active_profile"] = self.active_profile.to_dict()
-        return doc
+        return self._canonicalize(doc)
 
 
 # ====================================================================================================================||

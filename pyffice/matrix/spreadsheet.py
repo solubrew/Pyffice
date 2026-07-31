@@ -287,7 +287,7 @@ class PyfficeSpreadSheet(PyfficeDocument):
         doc["data"]["columns"] = {"ranges": [], "counts": len(columns)}
         rows = self.get_rows()
         doc["data"]["rows"] = {"ranges": [], "counts": len(rows)}
-        return doc
+        return self._canonicalize(doc)
 
     def _sanitize_sheet_name(self, name):
         """"""

@@ -179,7 +179,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
                 "files": self.files,
             },
         }
-        return doc
+        return self._canonicalize(doc)
 
 
 # ====================================================================================================================||

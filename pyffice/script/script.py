@@ -459,7 +459,7 @@ class PyfficeScript(PyfficeDocument):
                         text = PyfficeText(text)
                         text.load_unit()
                     doc["data"]["pages"][str(i)]["entries"][str(entry)] = text.to_dict()
-        return doc
+        return self._canonicalize(doc)
 
     def to_html(self):
         """"""

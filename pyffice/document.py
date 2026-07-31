@@ -485,6 +485,84 @@ class PyfficeUnit(object):
         """"""
         return self.html
 
+    def _canonicalize(self, doc):
+        """Add the canonical, additive shape keys to a subclass's
+        to_dict() payload.
+
+        This helper is part of the T-NEW-005 additive-shape
+        normalization (Sprint 18, User NEW TODO #5). Existing
+        per-subclass keys (``table``, ``pages``, ``path``, etc.)
+        are PRESERVED — only missing canonical keys are filled in.
+        A ``pyffice_compat`` marker records which canonical keys
+        were added so downstream readers can identify the
+        normalized shape without breaking older payloads.
+
+        The canonical keys are:
+          - ``data["content"]``: dict — the primary payload. If a
+            subclass writes its payload under ``table``, ``pages``,
+            etc., that key is mirrored into ``content`` (without
+            overwriting an existing ``content`` key).
+          - ``data["path"]``: file_path string (mirrored from
+            ``meta_data["path"]`` if available, otherwise from
+            ``self.file_path``).
+          - ``data["schema_version"]``: list of
+            ``self.SERIALIZATION_VERSION`` (also lives in
+            ``meta_data``; mirrored for symmetry).
+          - ``pyffice_compat``: dict — the version of the
+            canonical-shape normalizer that produced this payload.
+            Older payloads without this key are still loadable.
+
+        Args:
+            doc: The dict built by ``to_dict()``. Mutated in place.
+
+        Returns:
+            The same ``doc`` (for chaining).
+        """
+        from pyffice import __version__
+
+        data = doc.setdefault("data", {})
+        if not isinstance(data, dict):
+            return doc
+
+        # Mirror a primary payload key into ``content`` if absent.
+        # Heuristic: the first key in ``data`` that's not a meta
+        # field is the primary payload. Subclasses that already set
+        # ``content`` are left alone.
+        if "content" not in data:
+            meta_keys = {
+                "document_type", "schema_version", "path", "tags",
+                "encoding", "syntax", "semver", "creon_dttm",
+                "mod_dttm", "compatibility", "documents",
+            }
+            for candidate_key, candidate_val in data.items():
+                if candidate_key in meta_keys:
+                    continue
+                # Only mirror dict/list/scalar payloads, not other
+                # nested structures.
+                if isinstance(candidate_val, (dict, list, str, int, float, bool)) \
+                        or candidate_val is None:
+                    data["content"] = candidate_val
+                    break
+
+        # Mirror ``path`` if missing.
+        if "path" not in data:
+            meta = doc.get("meta_data", {})
+            data["path"] = meta.get("path") or getattr(self, "file_path", None)
+
+        # Mirror schema_version for symmetry with meta_data.
+        if "schema_version" not in data:
+            data["schema_version"] = list(self.SERIALIZATION_VERSION)
+
+        # Stamp the compat marker. If a subclass already set one,
+        # leave it alone.
+        if "pyffice_compat" not in doc:
+            doc["pyffice_compat"] = {
+                "normalizer": "additive-canonical",
+                "package": __version__,
+                "schema_version": list(self.SERIALIZATION_VERSION),
+            }
+        return doc
+
     def to_string(self):
         """"""
         return j.dumps(self.to_dict())
@@ -837,7 +915,12 @@ class PyfficeDocument(PyfficeUnit):
         doc["file_path"] = self.file_path
         doc["data"] = deepcopy(doc["unit"])
         del doc["unit"]
-        return doc
+        # Normalize the canonical shape once at the base layer
+        # so every subclass gets ``data["content"]``,
+        # ``data["path"]``, and ``pyffice_compat`` automatically.
+        # The call is idempotent (subclasses that already added
+        # ``content`` are left alone).
+        return self._canonicalize(doc)
 
     def update_document_structure(self, document):
         """"""

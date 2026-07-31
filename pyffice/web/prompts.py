@@ -222,7 +222,7 @@ class PyfficePrompt(PyfficeDocument):
         doc["data"]["context"]["metrics"] = self.context.get_metrics()
         doc["data"]["prompt"]["metrics"] = self.prompt.get_metrics()
         doc["data"]["response"]["metrics"] = self.response.get_metrics()
-        return doc
+        return self._canonicalize(doc)
 
 
 class PyfficeResponse(PyfficeDocument):

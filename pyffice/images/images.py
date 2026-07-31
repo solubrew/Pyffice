@@ -338,7 +338,7 @@ class PyfficeImage(PyfficeDocument):
         doc = super().to_dict()
         doc["data"]["document_type"] = "image"
         doc["data"]["path"] = self.file_path
-        return doc
+        return self._canonicalize(doc)
 
 
 class PyfficeImageManager(PyfficeDocumentManager):

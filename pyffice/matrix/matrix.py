@@ -637,7 +637,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         except (AttributeError, TypeError) as e:
             logma.warning(e)
         logma.warning(f"Matrix Doc {doc}")
-        return doc
+        return self._canonicalize(doc)
 
     def to_json_schema(self) -> dict:
         """Convert the matrix (workbook) to JSON Schema format.

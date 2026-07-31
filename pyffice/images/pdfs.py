@@ -278,7 +278,7 @@ class PyfficePDF(PyfficeDocument):
         doc = super().to_dict()
         doc["data"]["path"] = self.file_path
         doc["data"]["content"] = self.content
-        return doc
+        return self._canonicalize(doc)
 
     def _get_bytes(self):
         """"""

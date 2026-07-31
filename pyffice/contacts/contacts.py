@@ -358,7 +358,7 @@ class PyfficeContact(PyfficeDocument):
         doc["data"]["nicknames"] = self.nicknames
         doc["data"]["channels"] = self.channels
         doc["data"]["groups"] = self.groups
-        return doc
+        return self._canonicalize(doc)
 
     def verify_phone_number(self, phone):
         """"""

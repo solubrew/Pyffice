@@ -467,7 +467,7 @@ class PyfficePortCherryTree(PyfficePort):
         doc = super().to_dict()
         for node in self.nodes:
             doc["data"]["documents"].append(node)
-        return doc
+        return self._canonicalize(doc)
 
 
 class PyfficePortOffice(PyfficePort):
