@@ -5,6 +5,7 @@ from typing import Any, Optional, List, Dict
 import io
 
 from pyffice.document import PyfficeDocument
+from pyffice.io_helpers import load_via_class, dump_via_class
 
 
 class PyfficeDXF(PyfficeDocument):
@@ -36,7 +37,7 @@ class PyfficeDXF(PyfficeDocument):
 # Module-level convenience functions
 def load(path: str) -> str:
     """Load DXF file contents."""
-    return PyfficeDXF(path).read()
+    return load_via_class(PyfficeDXF, path)
 
 
 def read(path: str) -> str:
@@ -46,7 +47,7 @@ def read(path: str) -> str:
 
 def write(data: str, path: str) -> None:
     """Write data to DXF file."""
-    PyfficeDXF(path).write(data)
+    dump_via_class(PyfficeDXF, data, path)
 
 
 def dump(data: str, path: str) -> None:

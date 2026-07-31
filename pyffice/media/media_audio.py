@@ -1,12 +1,16 @@
-"""Audio file format support."""
+"""Audio file format support.
+
+Thin wrappers around :mod:`pyffice.io_helpers` byte I/O.
+"""
 from typing import Any, Optional
 import io
+
+from pyffice.io_helpers import load_bytes, write_bytes
 
 
 def load(path: str) -> bytes:
     """Load audio file contents."""
-    with open(path, 'rb') as f:
-        return f.read()
+    return load_bytes(path)
 
 
 def read(path: str) -> bytes:
@@ -16,8 +20,7 @@ def read(path: str) -> bytes:
 
 def write(data: bytes, path: str) -> None:
     """Write data to audio file."""
-    with open(path, 'wb') as f:
-        f.write(data)
+    write_bytes(data, path)
 
 
 def dump(data: bytes, path: str) -> None:

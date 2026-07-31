@@ -5,6 +5,7 @@ from typing import Any, Optional, Dict, List
 import json
 
 from pyffice.document import PyfficeDocument
+from pyffice.io_helpers import load_via_class, dump_via_class
 
 
 class PyfficeGLTF(PyfficeDocument):
@@ -36,7 +37,7 @@ class PyfficeGLTF(PyfficeDocument):
 # Module-level convenience functions
 def load(path: str) -> Dict[str, Any]:
     """Load glTF model."""
-    return PyfficeGLTF(path).read()
+    return load_via_class(PyfficeGLTF, path)
 
 
 def read(path: str) -> Dict[str, Any]:
@@ -46,7 +47,7 @@ def read(path: str) -> Dict[str, Any]:
 
 def write(data: Dict[str, Any], path: str) -> None:
     """Write glTF model."""
-    PyfficeGLTF(path).write(data)
+    dump_via_class(PyfficeGLTF, data, path)
 
 
 def dump(data: Dict[str, Any], path: str) -> None:

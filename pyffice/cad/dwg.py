@@ -5,6 +5,7 @@ from typing import Any, Optional
 import io
 
 from pyffice.document import PyfficeDocument
+from pyffice.io_helpers import load_via_class, dump_via_class
 
 
 class PyfficeDWG(PyfficeDocument):
@@ -36,7 +37,7 @@ class PyfficeDWG(PyfficeDocument):
 # Module-level convenience functions
 def load(path: str) -> bytes:
     """Load DWG file contents."""
-    return PyfficeDWG(path).read()
+    return load_via_class(PyfficeDWG, path)
 
 
 def read(path: str) -> bytes:
@@ -46,7 +47,7 @@ def read(path: str) -> bytes:
 
 def write(data: bytes, path: str) -> None:
     """Write data to DWG file."""
-    PyfficeDWG(path).write(data)
+    dump_via_class(PyfficeDWG, data, path)
 
 
 def dump(data: bytes, path: str) -> None:

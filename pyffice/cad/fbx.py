@@ -5,6 +5,7 @@ from typing import Any, Optional
 import io
 
 from pyffice.document import PyfficeDocument
+from pyffice.io_helpers import load_via_class, dump_via_class
 
 
 class PyfficeFBX(PyfficeDocument):
@@ -36,7 +37,7 @@ class PyfficeFBX(PyfficeDocument):
 # Module-level convenience functions
 def load(path: str) -> bytes:
     """Load FBX file contents."""
-    return PyfficeFBX(path).read()
+    return load_via_class(PyfficeFBX, path)
 
 
 def read(path: str) -> bytes:
@@ -46,7 +47,7 @@ def read(path: str) -> bytes:
 
 def write(data: bytes, path: str) -> None:
     """Write data to FBX file."""
-    PyfficeFBX(path).write(data)
+    dump_via_class(PyfficeFBX, data, path)
 
 
 def dump(data: bytes, path: str) -> None:

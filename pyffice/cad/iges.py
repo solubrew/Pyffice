@@ -3,6 +3,7 @@ from typing import Any, Optional
 import io
 
 from pyffice.document import PyfficeDocument
+from pyffice.io_helpers import load_via_class, dump_via_class
 
 
 class PyfficeIGES(PyfficeDocument):
@@ -33,7 +34,7 @@ class PyfficeIGES(PyfficeDocument):
 
 def load(path: str) -> str:
     """Load IGES file contents."""
-    return PyfficeIGES(path).read()
+    return load_via_class(PyfficeIGES, path)
 
 
 def read(path: str) -> str:
@@ -43,7 +44,7 @@ def read(path: str) -> str:
 
 def write(data: str, path: str) -> None:
     """Write data to IGES file."""
-    PyfficeIGES(path).write(data)
+    dump_via_class(PyfficeIGES, data, path)
 
 
 def dump(data: str, path: str) -> None:
