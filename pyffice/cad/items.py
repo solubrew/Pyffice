@@ -54,20 +54,22 @@ class PyfficeShape(PyfficeDocument):
         self.envelope_corners = []
 
     def get_corner(self, corner_label="A"):
-        """"""
-        return self
+        """Get corner point by label."""
+        corners = getattr(self, 'corners', {})
+        return corners.get(corner_label)
 
     def get_center(self):
-        """"""
-        return self
-
-    def get_envelope_corner(self, corner_label="A"):
-        """"""
-        raise ValueError("Only 2D and 3D shapes are supported.")
+        """Get center point."""
+        return getattr(self, 'center', None)
 
     def get_envelope_center(self):
-        """"""
-        return self
+        """Get envelope center."""
+        corners = getattr(self, 'envelope_corners', [])
+        if len(corners) >= 2:
+            xs = [c[0] for c in corners]
+            ys = [c[1] for c in corners]
+            return ((min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2)
+        return None
 
     def get_envelope(self):
         """"""
@@ -80,8 +82,9 @@ class PyfficeShape(PyfficeDocument):
         return self
 
     def peform_mirror(self, axis="x"):
-        """"""
-        return
+        """Mirror shape along axis."""
+        # Placeholder - would perform geometric transformation
+        return self
 
     def perform_origin_offset(self, offset):
         """"""
@@ -90,8 +93,9 @@ class PyfficeShape(PyfficeDocument):
         return self
 
     def perform_rotate(self, axis="x"):
-        """"""
-        return
+        """Rotate shape around axis."""
+        # Placeholder - would perform geometric transformation
+        return self
 
     def set_center(self, center):
         """"""
