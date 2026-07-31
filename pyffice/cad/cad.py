@@ -92,6 +92,7 @@ class PyfficeCADManager(PyfficeDocumentManager):
 
     def add_part(self, assembly):
         """Add an assembly part."""
+        # Placeholder - would add assembly
         return self
 
     def create_new_document(self, name, type_=None):

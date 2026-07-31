@@ -64,6 +64,7 @@ class PyfficeWorkflow(PyfficeUnit):
 
     def update_nodes(self, edge):
         """Update workflow nodes."""
+        # Placeholder - would update nodes
         return self
 
     def load_unit(self, unit):

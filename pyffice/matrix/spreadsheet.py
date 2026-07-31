@@ -231,7 +231,8 @@ class PyfficeSpreadSheet(PyfficeDocument):
         return self
 
     def set_objects(self, objects):
-        """"""
+        """Set objects."""
+        # Placeholder - would set objects
         return self
 
     def set_row_labels(self, labels=None):

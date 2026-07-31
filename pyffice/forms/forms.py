@@ -267,10 +267,12 @@ class PyfficeSurvey(PyfficeDocument):
 
     def del_field_response(self, field, field_id, response_id):
         """Delete a field response."""
+        # Placeholder - would delete field response
         return self
 
     def del_form_response(self, response_id):
         """Delete a form response."""
+        # Placeholder - would delete form response
         return self
 
     def del_recipient(self, recipient):

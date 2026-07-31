@@ -83,10 +83,12 @@ class PyfficeWebBrowser(PyfficeDocument):
 
     def del_page(self):
         """Delete a page."""
+        # Placeholder - would delete page
         return self
 
     def del_profile(self, name):
         """Delete a profile."""
+        # Placeholder - would delete profile
         return self
 
     def get_active_profile(self):
