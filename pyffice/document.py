@@ -33,6 +33,10 @@ from pyffice.updates.updates import PyfficeUnitUpdate, PyfficeDocumentUpdate
 from pycurity.pyhash import text_hashing_function
 from squirl.objnql import txtonql
 
+# MissingPathError / InvalidConfigurationError imported locally inside
+# methods that raise them (T-NEW-055) to avoid the circular import
+# (document.py <-> pyffice.pyffice).
+
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True
@@ -425,6 +429,7 @@ class PyfficeUnit(object):
         return self
 
     def to_dict(self):
+        from pyffice.pyffice import InvalidConfigurationError
         """Each Docuement Subclass will need to implement this method
         add creation and mod dates
         add author information
@@ -464,7 +469,7 @@ class PyfficeUnit(object):
             elif isinstance(self.tags, (str, int, float)):
                 doc["meta_data"]["tags"] = [self.tags]
             else:
-                raise Exception(f"Tags not properly formated {self.tags}")
+                raise InvalidConfigurationError(f"Tags not properly formated {self.tags}")
         doc["unit"] = {"content": self.content}
         return doc
 
@@ -570,10 +575,11 @@ class PyfficeDocument(PyfficeUnit):
         return self
 
     def save_pyffice(self, path, syntax, encrypt_key=None):
+        from pyffice.pyffice import MissingPathError
         """ """
         # use syntax to select a template
         if path is None:
-            raise Exception(f"No path provided")
+            raise MissingPathError(f"No path provided")
         if encrypt_key:
             txtonql.Doc(path).write(encrypt256(self.to_string(), encrypt_key))
         else:
@@ -817,7 +823,7 @@ class PyfficeDeque(PyfficeDocument, deque):
 
     def appendleft(self, item):
         """"""
-        raise Exception("")
+        raise NotImplementedError("document.py:820 — empty raise site, behavior not specified")
 
     def set_max_items(self, max_items=None):
         """"""

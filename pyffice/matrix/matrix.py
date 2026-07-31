@@ -34,6 +34,7 @@ from pyffice.ports.ports import PyfficePortCSV
 from pyffice.document import PyfficeDocumentManager
 from pyffice.matrix.spreadsheet import PyfficeSpreadSheet
 
+
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True
@@ -139,6 +140,10 @@ class PyfficeMatrix(PyfficeDocumentManager):
 
     def file_import(self, file_=None, if_data_only=False, read_only=False, keep_vba=False):
         """"""
+        from pyffice.pyffice import (
+            MissingPathError,
+            UnknownFileTypeError,
+        )
         file_type = ""
         super().file_import(file_type)
         if file_ is None:
@@ -146,7 +151,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         else:
             self.file_path = file_
         if file_ is None:
-            raise Exception(f"No File Provided {file_}")
+            raise MissingPathError(f"No File Provided {file_}")
         if ".csv" == file_[-4:]:
             data = self.file_import_csv(file_, if_data_only=if_data_only, read_only=read_only, keep_vba=keep_vba)
         elif ".xlsx" == file_[-5:]:
@@ -154,7 +159,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         elif ".gsheet" == file_[-7:]:
             data = self.file_import_gsheet(file_, if_data_only=if_data_only, read_only=read_only, keep_vba=keep_vba)
         else:
-            raise Exception(f"File Type Unknown {file_}")
+            raise UnknownFileTypeError(f"File Type Unknown {file_}")
         name = file_.split("/")[-1].split(".")[0]
         cfg = {
             "name": name,
@@ -376,6 +381,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
 
     def open_file(self, file):
         """"""
+        from pyffice.pyffice import UnknownFileTypeError
         if file is None:
             file = self.file_path
         self.set_syntax("file")
@@ -389,7 +395,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         elif file.endswith(".gsheet"):
             data = self.file_import_gsheet(file)
         else:
-            raise Exception(f"Unknown File Type {file_type} for file {file}")
+            raise UnknownFileTypeError(f"Unknown File Type {file_type} for file {file}")
         self.data = data
         # super().file_open(path)
 

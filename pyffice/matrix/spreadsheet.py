@@ -43,6 +43,7 @@ from pyffice.document import PyfficeDocument
 from pyffice.items.cells import PyfficeCell
 from thingery.numbers.numerals import calcExtendedRomanNumerals, calcArabicNumerals
 
+
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True
@@ -84,13 +85,14 @@ class PyfficeSpreadSheet(PyfficeDocument):
 
     def convert_column(self, column, syntax="arabic"):
         """"""
+        from pyffice.pyffice import UnknownSyntaxError
         if syntax == "arabic":
             column = calcArabicNumerals(column)
         elif syntax == "roman":
             logma.info(f"Convert Column {column}")
             column = calcExtendedRomanNumerals(column)
         else:
-            raise Exception(f"Unknown Syntax {syntax}")
+            raise UnknownSyntaxError(f"Unknown Syntax {syntax}")
         return column
 
     def evaluate(self, address):
@@ -113,13 +115,14 @@ class PyfficeSpreadSheet(PyfficeDocument):
 
     def get_data(self, filters=None, return_format="table"):
         """return a dictionary or table of data"""
+        from pyffice.pyffice import UnknownReturnFormatError
         data = self.data
         if return_format == "table":
             return data
         elif return_format == "dict":
             return self.cells
         else:
-            raise Exception(f"Unknown Return Format {return_format}")
+            raise UnknownReturnFormatError(f"Unknown Return Format {return_format}")
 
     def get_end_column(self, plus=0, minus=0):
         """"""
@@ -180,8 +183,9 @@ class PyfficeSpreadSheet(PyfficeDocument):
 
     def set_column_width(self, column, width):
         """"""
+        from pyffice.pyffice import ColumnNotFoundError
         if column not in self.column_labels:
-            raise Exception(f"Column {column} not found")
+            raise ColumnNotFoundError(f"Column {column} not found")
         if int(width) != self.column_labels[column]:
             self.add_change(
                 "column_labels",

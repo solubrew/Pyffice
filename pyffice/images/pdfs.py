@@ -29,6 +29,7 @@ from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 
+
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = False
@@ -251,6 +252,7 @@ class PyfficePDF(PyfficeDocument):
 
     def set_content(self, content):
         """"""
+        from pyffice.pyffice import UnknownLocationError
         logma.info(f"Content {content}")
         if self.location is None:
             self.set_location(None)
@@ -261,7 +263,7 @@ class PyfficePDF(PyfficeDocument):
                 self.set_file_path(content.get("file_path", None))
                 content = {"file_path": self.file_path}
             else:
-                raise Exception(f"Unknown Location {self.location}")
+                raise UnknownLocationError(f"Unknown Location {self.location}")
         if content is None:
             content = {}
         if content != self.content:

@@ -34,6 +34,7 @@ from squirl.orgnql import fonql
 from pyffice.items.items import PyfficeTable
 from pycurity.pyhash import encode64, decode64
 
+
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = False
@@ -243,6 +244,7 @@ class PyfficeImage(PyfficeDocument):
 
     def set_content(self, content):
         """"""
+        from pyffice.pyffice import UnknownLocationError
         if content is None:
             return self
         logma.info(f"Content {content}")
@@ -254,7 +256,7 @@ class PyfficeImage(PyfficeDocument):
             self.set_file_path(content.get("file_path", None))
             content = {"file_path": self.file_path}
         else:
-            raise Exception(f"Unknown Location {self.location}")
+            raise UnknownLocationError(f"Unknown Location {self.location}")
         if content != self.content:
             self.add_change("content", self.content, content)
             self.content = content

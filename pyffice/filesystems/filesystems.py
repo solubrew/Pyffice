@@ -26,6 +26,7 @@ from kahndor.logma import Logma
 from pyffice.document import PyfficeDocumentManager
 from squirl.orgnql import fonql
 
+
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True
@@ -120,12 +121,13 @@ class PyfficeFileSystem(PyfficeDocumentManager):
 
     def set_content(self, content):
         """"""
+        from pyffice.pyffice import UnknownLocationError
         if self.location is None:
             self.set_location(None)
         if self.location == "external":
             content = {"file_path": self.file_path}
         else:
-            raise Exception(f"Unknown Location {self.location}")
+            raise UnknownLocationError(f"Unknown Location {self.location}")
         if content != self.content:
             self.add_change("content", self.content, content)
             self.content = content

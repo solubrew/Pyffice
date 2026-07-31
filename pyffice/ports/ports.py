@@ -47,6 +47,7 @@ from pycurity.pyhash import decode64
 from squirl.objnql import tblonql
 from squirl.orgnql import yonql
 
+
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 logma = Logma(__name__)
@@ -598,12 +599,16 @@ class PyfficePortImage(PyfficePort):
 
     def open_file(self, file_=None):
         """"""
+        from pyffice.pyffice import (
+            MissingPathError,
+            UnknownFileTypeError,
+        )
         if file_ is None:
             file_ = self.file_path
         else:
             self.file_path = file_
         if file_ is None:
-            raise Exception(f"No File Provided {file_}")
+            raise MissingPathError(f"No File Provided {file_}")
         match file_.lower():
             case s if s.endswith(".bmp"):
                 self.open_file_bmp(file_)
@@ -618,7 +623,7 @@ class PyfficePortImage(PyfficePort):
             case s if s.endswith(".svg"):
                 self.open_file_svg(file_)
             case _:
-                raise Exception(f"Unknown File Type {file_}")
+                raise UnknownFileTypeError(f"Unknown File Type {file_}")
         return self
 
     def open_file_bmp(self, file_):

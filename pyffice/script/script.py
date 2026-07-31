@@ -29,6 +29,7 @@ from squirl.objnql import txtonql
 from pyffice.items.text import PyfficeText
 from pycurity.pysan import Sanitized
 
+
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 logma = Logma(__name__)
@@ -270,6 +271,7 @@ class PyfficeScript(PyfficeDocument):
 
     def open_file(self, file_=None, if_text_only=True):
         """"""
+        from pyffice.pyffice import UnknownFileTypeError
         if file_ is None:
             file_ = self.file_path
         self.set_syntax("file")
@@ -291,7 +293,7 @@ class PyfficeScript(PyfficeDocument):
             self.syntax = "plaintext"
             self.open_file_txt()
             return self
-        raise Exception(f"File format not supported {file_}")
+        raise UnknownFileTypeError(f"File format not supported {file_}")
 
     def open_file_txt(self):
         """"""

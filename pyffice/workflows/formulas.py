@@ -39,6 +39,7 @@ from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.document import PyfficeDocumentManager, PyfficeUnit
 
+
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True
@@ -161,8 +162,9 @@ class PyfficeFormulaABS(PyfficeFormula):
 
     def validate(self):
         """"""
+        from pyffice.pyffice import TooManyParametersError
         if len(self.parameters.values()) > 1:
-            raise Exception("Too Many Parameters")
+            raise TooManyParametersError("Too Many Parameters")
 
 
 class PyfficeFormulaSUM(PyfficeFormula):
@@ -182,8 +184,9 @@ class PyfficeFormulaSUM(PyfficeFormula):
 
     def validate(self):
         """"""
+        from pyffice.pyffice import InvalidParameterTypeError
         if len([x for x in self.parameters.values() if not is_number(x)]) > 0:
-            raise Exception("Non Number Values in Parameters")
+            raise InvalidParameterTypeError("Non Number Values in Parameters")
 
 
 def is_number(value):

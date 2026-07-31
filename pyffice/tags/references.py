@@ -23,6 +23,7 @@ from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.tags.tags import PyfficeTag
 
+
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True
@@ -94,6 +95,7 @@ class PyfficeReference(PyfficeTag):
 
     def set_media_type(self, media_type):
         """"""
+        from pyffice.pyffice import UnknownMediaTypeError
         match media_type:
             case "book":
                 pass
@@ -110,7 +112,7 @@ class PyfficeReference(PyfficeTag):
             case "audio":
                 pass
             case _:
-                raise Exception(f"Media Type Unknown {media_type}")
+                raise UnknownMediaTypeError(f"Media Type Unknown {media_type}")
 
     def set_page_range(self, page_range=None):
         """"""

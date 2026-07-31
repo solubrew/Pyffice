@@ -72,6 +72,49 @@ class InitializationError(PyfficeCodexError):
     pass
 
 
+# T-NEW-055: domain-specific exceptions for the 18 sites that
+# previously raised bare Exception(...). All subclass
+# PyfficeCodexError so callers can catch the base class.
+class UnknownLocationError(PyfficeCodexError):
+    """Raised when a filesystem / image location cannot be resolved."""
+
+
+class UnknownFileTypeError(PyfficeCodexError):
+    """Raised when a file's format cannot be detected from its extension/path."""
+
+
+class UnknownMediaTypeError(PyfficeCodexError):
+    """Raised when a media type is not recognized."""
+
+
+class UnknownSyntaxError(PyfficeCodexError):
+    """Raised when a spreadsheet syntax cannot be parsed."""
+
+
+class UnknownReturnFormatError(PyfficeCodexError):
+    """Raised when a return format is not recognized."""
+
+
+class ColumnNotFoundError(PyfficeCodexError):
+    """Raised when a spreadsheet column is missing."""
+
+
+class TooManyParametersError(PyfficeCodexError):
+    """Raised when a formula receives more parameters than allowed."""
+
+
+class InvalidParameterTypeError(PyfficeCodexError):
+    """Raised when a formula parameter has the wrong type."""
+
+
+class InvalidConfigurationError(PyfficeCodexError):
+    """Raised when configuration is missing required fields or has invalid values."""
+
+
+class MissingPathError(PyfficeCodexError):
+    """Raised when a required path is None or empty."""
+
+
 class PyfficeCodex(PyfficeDocumentManager):
     """A Pyffice Book is a container that can hold multiple instances and types of Pyffice Top Level Documents
 
