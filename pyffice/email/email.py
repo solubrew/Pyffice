@@ -44,19 +44,23 @@ class PyfficeEmailMessage(PyfficeMessage):
         self.config.override(cfg)
 
     def add_bcc(self, bcc):
-        """"""
+        """Add BCC recipient to the message."""
+        self.bcc = getattr(self, 'bcc', []) + [bcc]
         return self
 
     def add_cc(self, cc):
-        """"""
+        """Add CC recipient to the message."""
+        self.cc = getattr(self, 'cc', []) + [cc]
         return self
 
-    def add_recipient(self):
-        """"""
+    def add_recipient(self, recipient):
+        """Add recipient to the message."""
+        self.recipients = getattr(self, 'recipients', []) + [recipient]
         return self
 
-    def add_label(self):
-        """"""
+    def add_label(self, label):
+        """Add label to the message."""
+        self.labels = getattr(self, 'labels', []) + [label]
         return self
 
     def create_new_document(self, name):
@@ -76,40 +80,47 @@ class PyfficeEmailMessage(PyfficeMessage):
         }
 
     def get_body(self):
-        """"""
-        return self
+        """Get the message body."""
+        return getattr(self, 'body', None)
 
     def get_footer(self):
-        """"""
-        return self
+        """Get the message footer."""
+        return getattr(self, 'footer', None)
 
-    def get_header(self):
-        """"""
-        return self
+    def get_header(self, key):
+        """Get a header value by key."""
+        headers = getattr(self, 'headers', {})
+        return headers.get(key)
 
-    def get_recipient(self):
-        """"""
-        return self
+    def get_recipient(self, index=0):
+        """Get recipient at index."""
+        recipients = getattr(self, 'recipients', [])
+        return recipients[index] if index < len(recipients) else None
 
     def get_sender(self):
-        """"""
-        return self
+        """Get the sender address."""
+        return getattr(self, 'from', None)
 
     def load_document(self, document):
         """"""
         super().load_document(document)
         return self
 
-    def open_file(self, document):
-        """"""
+    def open_file(self, file_path):
+        """Open an email file."""
+        # Placeholder - actual implementation would parse email file
         return self
 
     def save_message(self):
-        """"""
+        """Save the current message."""
+        # Placeholder - actual implementation would serialize to file
         return self
 
-    def remove_label(self):
-        """"""
+    def remove_label(self, label):
+        """Remove label from message."""
+        labels = getattr(self, 'labels', [])
+        if label in labels:
+            labels.remove(label)
         return self
 
 
@@ -126,84 +137,105 @@ class PyfficeMailBox(PyfficeDocumentManager):
         self.messages = []
 
     def connect_service(self):
-        """Subclass must implement this method."""
+        """Connect to email service (OAuth/imap)."""
+        # Placeholder - actual implementation would connect to IMAP/SMTP
         return self
 
-    def create_label(self):
-        """"""
+    def create_label(self, name):
+        """Create a new label."""
+        self.labels = getattr(self, 'labels', {})
+        self.labels[name] = []
         return self
 
     def create_message(self):
-        """"""
+        """Create a new email message."""
         self.active_message = PyfficeEmailMessage()
+        return self.active_message
 
-    def create_new_document(self, name):
-        """"""
-        super().create_new_document(name, "manager")
-        self.document["document"] = {"name": None, "address": None, "messages": []}
-
-    def create_rule(self):
-        """"""
+    def create_rule(self, condition, action):
+        """Create a new mail rule."""
+        self.rules = getattr(self, 'rules', [])
+        self.rules.append({'condition': condition, 'action': action})
         return self
 
-    def destroy_label(self):
-        """"""
+    def destroy_label(self, name):
+        """Delete a label."""
+        labels = getattr(self, 'labels', {})
+        if name in labels:
+            del labels[name]
         return self
 
-    def delete_mail(self):
-        """"""
+    def delete_mail(self, uid):
+        """Delete mail by UID."""
+        self.messages = [m for m in getattr(self, 'messages', []) if m.get('uid') != uid]
         return self
 
-    def delete_rule(self):
-        """"""
+    def delete_rule(self, rule_id):
+        """Delete a mail rule."""
+        rules = getattr(self, 'rules', [])
+        self.rules = [r for i, r in enumerate(rules) if i != rule_id]
         return self
 
     def disconnect_service(self):
-        """"""
+        """Disconnect from email service."""
         return self
 
-    def get_mail(self):
-        """"""
-        return self
+    def get_mail(self, uid):
+        """Get mail by UID."""
+        messages = getattr(self, 'messages', [])
+        for m in messages:
+            if m.get('uid') == uid:
+                return m
+        return None
 
-    def get_message(self):
-        """"""
-        return self
+    def get_message(self, index=0):
+        """Get message at index."""
+        messages = getattr(self, 'messages', [])
+        return messages[index] if index < len(messages) else None
 
     def get_labels(self):
-        """"""
-        return self
+        """Get all labels."""
+        return getattr(self, 'labels', {})
 
     def get_messages(self):
-        """"""
-        return self
+        """Get all messages."""
+        return getattr(self, 'messages', [])
 
-    def get_message(self):
-        """"""
-        return self
+    def get_message_by_id(self, msg_id):
+        """Get message by ID."""
+        messages = getattr(self, 'messages', [])
+        for m in messages:
+            if m.get('id') == msg_id:
+                return m
+        return None
 
-    def get_rule(self):
-        """"""
-        return self
+    def get_rule(self, index):
+        """Get rule at index."""
+        rules = getattr(self, 'rules', [])
+        return rules[index] if index < len(rules) else None
 
     def get_rules(self):
-        """"""
-        return self
+        """Get all rules."""
+        return getattr(self, 'rules', [])
 
     def process_rules(self):
-        """"""
+        """Apply all rules to inbox."""
+        # Placeholder - would iterate rules and apply actions
         return self
 
-    def send_mail(self):
-        """"""
+    def send_mail(self, message):
+        """Send an email message."""
+        # Placeholder - would use SMTP to send
         return self
 
     def send_message(self):
-        """"""
-        return self
+        """Send the current message."""
+        return self.send_mail(self.active_message) if self.active_message else self
 
-    def store_mail(self):
-        """"""
+    def store_mail(self, message):
+        """Store a message in the mailbox."""
+        self.messages = getattr(self, 'messages', [])
+        self.messages.append(message)
         return self
 
     def write_message(self, subject, body, recipients=None):
