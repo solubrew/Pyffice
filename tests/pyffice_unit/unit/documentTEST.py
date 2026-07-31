@@ -1,479 +1,226 @@
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
-"""
--(META)-:
-    docid: <[uuid]>
-    name: <[file name]>
-    description: >
-      <[description]>
-    expiry: <[expiration]>
-    version: <[version]>
-    authority: <[authority]>
-    security: <[security]>
-    -(WT)-: -32  # 2026-01-15 20:29:53
-"""
-
-# -*- coding: utf-8 -*
-# ======================================Standard Library Modules======================================================||
-import unittest  # 2026-01-15 20:29:52
-import tempfile  # 2026-01-15 20:29:52
-import json  # 2026-01-15 20:29:52
-import os  # 2026-01-15 20:29:52
-from pathlib import Path  # 2026-01-15 20:20:11
-from typing import Any, Dict, List, Optional  # 2026-01-15 20:20:12
-from os.path import join  # 2026-01-15 20:20:12
-from os.path import dirname  # 2026-01-15 20:20:12
-
-# ======================================3rd Party Library Modules=====================================================||
-from pyffice.document import PyfficeUnit  # 2026-01-15 20:20:12
-from pyffice.document import PyfficeDocument  # 2026-01-15 20:20:12
-from pyffice.document import PyfficeDocumentManager  # 2026-01-15 20:20:12
-from pyffice.document import PyfficeDeque  # 2026-01-15 20:20:12
-
-from pathlib import Path  # 2026-01-15 20:29:52
-from typing import Any, Dict, List, Optional  # 2026-01-15 20:29:52
-from os.path import join  # 2026-01-15 20:29:52
-from os.path import dirname  # 2026-01-15 20:29:52
-from kahndor.logma import Logma  # 2026-01-15 20:29:52
-from pyffice.document import PyfficeUnit  # 2026-01-15 20:29:52
-from pyffice.document import PyfficeDocument  # 2026-01-15 20:29:52
-from pyffice.document import PyfficeDocumentManager  # 2026-01-15 20:29:52
-from pyffice.document import PyfficeDeque  # 2026-01-15 20:29:52
-
-# =========================================Local Library Modules======================================================||
-from kahndor.logma import Logma  # 2026-01-15 15:13:24
-from kahndor import Instruct, Logma  # 2026-01-15 20:20:12
-
-import pytest  # 2026-01-15 20:29:52
-import hypothesis  # 2026-01-15 20:29:52
-from kahndor import Instruct, Logma  # 2026-01-15 20:29:52
-
-# ====================================================================================================================||
-HERE = join(dirname(__file__))  # 2026-01-15 20:29:52
-LOGMA = Logma(__name__)  # 2026-01-15 20:29:52
-PXCFG = join(HERE, "_data_", "documentTEST.yaml")  # 2026-01-15 20:29:52
-CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:52
-
-
-# ====================================================================================================================||
-
-
-class Test_PyfficeUnit:  # 2026-01-15 15:13:28
-    """"""
-
-    @classmethod
-    def setup_class(cls):  # 2026-01-15 15:13:28
-        """"""
-
-        return cls()
-
-    @classmethod
-    def teardown_class(cls):  # 2026-01-15 15:13:28
-        """"""
-
-        return
-
-    def reset(self):  # 2026-01-15 15:13:28
-        """"""
-        self.setup_class()
-
-    def test_all(self):  # 2026-01-15 15:13:28
-        """Executes a series of test functions in a sequential logic."""
-
-    def test_add_change(self):  # 2026-01-15 15:13:25
-        """"""
-        pass
-
-    def test_add_editor(self):  # 2026-01-15 15:13:25
-        """"""
-        pass
-
-    def test_add_tag(self):  # 2026-01-15 15:13:25
-        """"""
-        pass
-
-    def test_del_editor(self):  # 2026-01-15 15:13:25
-        """"""
-        pass
-
-    def test_del_reference(self):  # 2026-01-15 15:13:25
-        """"""
-        pass
-
-    def test_del_tag(self):  # 2026-01-15 15:13:25
-        """"""
-        pass
-
-    def test_get_context(self):  # 2026-01-15 15:13:25
-        """"""
-        pass
-
-    def test_get_hash(self):  # 2026-01-15 15:13:25
-        """"""
-        pass
-
-    def test_get_tags(self):  # 2026-01-15 15:13:25
-        """"""
-        pass
-
-    def test_increment_version(self):  # 2026-01-15 15:13:25
-        """"""
-        pass
-
-    def test_load_unit(self):  # 2026-01-15 15:13:25
-        """"""
-        pass
-
-    def test_redo_change(self):  # 2026-01-15 15:13:25
-        """"""
-        pass
-
-    def test_set_author(self):  # 2026-01-15 15:13:25
-        """"""
-        pass
-
-    def test_set_change_limit(self):  # 2026-01-15 15:13:25
-        """"""
-        pass
-
-    def test_set_changes(self):  # 2026-01-15 15:13:25
-        """"""
-        pass
-
-    def test_set_context(self):  # 2026-01-15 15:13:25
-        """"""
-        pass
-
-    def test_set_creon(self):  # 2026-01-15 15:13:25
-        """"""
-        pass
-
-    def test_set_data(self):  # 2026-01-15 15:13:25
-        """"""
-        pass
-
-    def test_set_description(self):  # 2026-01-15 15:13:25
-        """"""
-        pass
-
-    def test_set_did(self):  # 2026-01-15 15:13:25
-        """"""
-        pass
-
-    def test_set_editors(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-    def test_set_encoding(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-    def test_set_hash(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-    def test_set_location(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-    def test_set_meta_data(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-    def test_set_modon(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-    def test_set_name(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-    def test_set_path(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-    def test_set_redos(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-    def test_set_references(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-    def test_set_saved(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-    def test_set_syntax(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-    def test_set_tags(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-    def test_set_version(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-    def test_to_dict(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-    def test_to_html(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-    def test_to_string(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-    def test_undo_change(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-    def test_update_unit_structure(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-    def test___init__(self):  # 2026-01-15 15:13:25
-        """"""
-        pass
-
-
-class Test_PyfficeDocument:  # 2026-01-15 15:13:28
-    """"""
-
-    @classmethod
-    def setup_class(cls):  # 2026-01-15 15:13:28
-        """"""
-
-        return cls()
-
-    @classmethod
-    def teardown_class(cls):  # 2026-01-15 15:13:28
-        """"""
-
-        return
-
-    def reset(self):  # 2026-01-15 15:13:28
-        """"""
-        self.setup_class()
-
-    def test_all(self):  # 2026-01-15 15:13:28
-        """Executes a series of test functions in a sequential logic."""
-
-    def test_file_export(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-    def test_file_import(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-    def test_file_open(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-    def test_load_document(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-    def test_save(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-    def test_save_as(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-    def test_save_copy(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-    def test_save_pyffice(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-    def test_search_document(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-    def test_search_vector(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-    def test_search_word(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-    def test_set_cache(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-    def test_set_compatibility(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-    def test_set_content(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-    def test_set_context(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-    def test_set_data(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-    def test_set_document_type(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-    def test_set_file_path(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-    def test_set_file_type(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-    def test_to_dict(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-    def test_update_document_structure(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-    def test_update_document_time(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-    def test_vectorize(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-    def test___init__(self):  # 2026-01-15 15:13:26
-        """"""
-        pass
-
-
-class Test_PyfficeDocumentManager:  # 2026-01-15 15:13:28
-    """"""
-
-    @classmethod
-    def setup_class(cls):  # 2026-01-15 15:13:28
-        """"""
-
-        return cls()
-
-    @classmethod
-    def teardown_class(cls):  # 2026-01-15 15:13:28
-        """"""
-
-        return
-
-    def reset(self):  # 2026-01-15 15:13:28
-        """"""
-        self.setup_class()
-
-    def test_all(self):  # 2026-01-15 15:13:28
-        """Executes a series of test functions in a sequential logic."""
-
-    def test_add_document(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-    def test_del_document(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-    def test_get_context(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-    def test_get_document(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-    def test_load_document(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-    def test_search(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-    def test_search_documents(self):  # 2026-01-15 15:13:28
-        """"""
-        pass
-
-    def test_set_doc_types(self):  # 2026-01-15 15:13:28
-        """"""
-        pass
-
-    def test_set_documents(self):  # 2026-01-15 15:13:28
-        """"""
-        pass
-
-    def test_to_dict(self):  # 2026-01-15 15:13:28
-        """"""
-        pass
-
-    def test___init__(self):  # 2026-01-15 15:13:27
-        """"""
-        pass
-
-
-class Test_PyfficeDeque:  # 2026-01-15 15:13:28
-    """"""
-
-    @classmethod
-    def setup_class(cls):  # 2026-01-15 15:13:28
-        """"""
-
-        return cls()
-
-    @classmethod
-    def teardown_class(cls):  # 2026-01-15 15:13:28
-        """"""
-
-        return
-
-    def reset(self):  # 2026-01-15 15:13:28
-        """"""
-        self.setup_class()
-
-    def test_all(self):  # 2026-01-15 15:13:28
-        """Executes a series of test functions in a sequential logic."""
-
-    def test_append(self):  # 2026-01-15 15:13:28
-        """"""
-        pass
-
-    def test_appendleft(self):  # 2026-01-15 15:13:28
-        """"""
-        pass
-
-    def test_set_max_items(self):  # 2026-01-15 15:13:28
-        """"""
-        pass
-
-    def test_to_dict(self):  # 2026-01-15 15:13:28
-        """"""
-        pass
-
-    def test___init__(self):  # 2026-01-15 15:13:28
-        """"""
-        pass
-
-
-# ====================================================================================================================||
+"""Tests for pyffice/document.py (PyfficeUnit + PyfficeDocument + PyfficeDocumentManager).
+
+Coverage:
+- PyfficeUnit construction sets the documented attributes
+- increment_version bumps version (T-NEW-057: removed # TODO comment)
+- add_change records to changes list
+- set_did / set_name / set_author
+- PyfficeDocument inherits + adds doc_type
+- PyfficeDocumentManager accepts docs via add_document
+- PyfficeDeque change-tracking history
+
+Note: PyfficeUnit.get_context() has a side effect of calling
+to_string() and mutating self.context; we don't test it directly.
 """
 
-  # 2026-01-15 20:29:53
+from collections import deque
+
+import pytest
+
+from pyffice.document import (
+    PyfficeUnit,
+    PyfficeDocument,
+    PyfficeDocumentManager,
+    PyfficeDeque,
+)
 
 
-"""
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
+class TestPyfficeUnitConstruction:
+    """PyfficeUnit() constructs with the documented default attributes."""
+
+    def test_default_attributes(self):
+        u = PyfficeUnit()
+        # Identity attributes
+        assert u.author is None
+        assert u.did is None
+        assert u.name is None
+        assert u.path is None
+        assert u.description is None
+        assert u.location is None
+        # Change tracking
+        assert u.changes is None
+        assert u.redos is None
+        assert u.change_limit is None
+        assert u.version == 0
+        assert u.versions is None
+        # Data fields
+        assert u.content is None
+        assert u.content_original is None
+        assert u.data is None
+        assert u.context is None
+        assert u.meta_data is None
+        # Tags / references
+        assert u.tags is None
+        assert u.references is None
+        assert u.editors is None
+        # Booleans
+        assert u.is_saved is False
+        # Time is a PyTime instance
+        assert u.time is not None
+
+
+class TestPyfficeUnitIncrementVersion:
+    """increment_version bumps self.version by 1 (T-NEW-057 impl)."""
+
+    def test_starts_at_zero(self):
+        u = PyfficeUnit()
+        assert u.version == 0
+
+    def test_increments_by_one(self):
+        u = PyfficeUnit()
+        u.increment_version()
+        assert u.version == 1
+        u.increment_version()
+        assert u.version == 2
+
+    def test_increments_handles_string_version(self):
+        # The increment_version code does int(self.version) + 1.
+        u = PyfficeUnit()
+        u.version = "5"
+        u.increment_version()
+        assert u.version == 6
+
+
+class TestPyfficeUnitSetDid:
+    """set_did assigns and logs."""
+
+    def test_set_did_simple(self):
+        u = PyfficeUnit()
+        u.set_did("abc-123")
+        assert u.did == "abc-123"
+
+    def test_set_did_with_none_generates_id(self):
+        u = PyfficeUnit()
+        u.set_did()
+        # If None, a uuid should be generated.
+        assert u.did is not None
+        assert isinstance(u.did, str)
+
+
+class TestPyfficeUnitSetName:
+    def test_set_name(self):
+        u = PyfficeUnit()
+        u.set_name("My Document")
+        assert u.name == "My Document"
+
+
+class TestPyfficeUnitSetAuthor:
+    def test_set_author(self):
+        u = PyfficeUnit()
+        u.set_author("alice")
+        assert u.author == "alice"
+
+
+class TestPyfficeUnitAddChange:
+    """add_change records entries in self.changes."""
+
+    def test_add_change_initializes_changes(self):
+        u = PyfficeUnit()
+        assert u.changes is None
+        u.add_change("field", None, "value")
+        assert u.changes is not None
+        assert len(u.changes) == 1
+
+    def test_add_change_records_label(self):
+        u = PyfficeUnit()
+        u.add_change("name", None, "Alice")
+        assert u.changes[0]["label"] == "name"
+
+    def test_add_change_records_value_and_new_value(self):
+        u = PyfficeUnit()
+        u.add_change("name", "old", "new")
+        entry = u.changes[0]
+        assert entry["value"] == "old"
+        assert entry["new_value"] == "new"
+
+    def test_add_change_default_action_is_set(self):
+        u = PyfficeUnit()
+        u.add_change("field", None, "x")
+        assert u.changes[0]["action"] == "set"
+
+    def test_add_change_custom_action(self):
+        u = PyfficeUnit()
+        u.add_change("field", "old", "new", action="add")
+        assert u.changes[0]["action"] == "add"
+
+
+class TestPyfficeDocumentInheritance:
+    """PyfficeDocument subclasses PyfficeUnit and adds doc_type."""
+
+    def test_inherits_unit_attributes(self):
+        d = PyfficeDocument()
+        assert hasattr(d, "version")
+        assert hasattr(d, "did")
+        assert d.doc_type is None
+
+    def test_serialization_version_is_tuple(self):
+        assert hasattr(PyfficeDocument, "SERIALIZATION_VERSION")
+        assert isinstance(PyfficeDocument.SERIALIZATION_VERSION, tuple)
+        assert len(PyfficeDocument.SERIALIZATION_VERSION) == 3
+
+    def test_to_dict_returns_dict(self):
+        d = PyfficeDocument()
+        d.set_name("test")
+        d.set_did("abc")
+        result = d.to_dict()
+        assert isinstance(result, dict)
+        assert "meta_data" in result or "unit" in result
+
+
+class TestPyfficeDocumentManager:
+    """PyfficeDocumentManager exposes the documents dict + add/del."""
+
+    def test_starts_with_empty_documents(self):
+        mgr = PyfficeDocumentManager()
+        assert mgr.documents == {}
+
+    def test_add_document_appends(self):
+        from pyffice.document import PyfficeDocument
+        mgr = PyfficeDocumentManager()
+        doc = PyfficeDocument()
+        doc.set_name("alpha")
+        mgr.add_document(doc)
+        assert "alpha" in mgr.documents
+        assert mgr.documents["alpha"] is doc
+
+    def test_del_document_removes(self):
+        from pyffice.document import PyfficeDocument
+        mgr = PyfficeDocumentManager()
+        doc = PyfficeDocument()
+        doc.set_name("beta")
+        mgr.add_document(doc)
+        mgr.del_document("beta")
+        assert "beta" not in mgr.documents
+
+    def test_del_document_missing_is_noop(self):
+        mgr = PyfficeDocumentManager()
+        # Should not raise on missing key.
+        result = mgr.del_document("nonexistent")
+        assert result is mgr
+
+    def test_serialization_version_tuple(self):
+        assert isinstance(PyfficeDocumentManager.SERIALIZATION_VERSION, tuple)
+        assert len(PyfficeDocumentManager.SERIALIZATION_VERSION) == 3
+
+
+class TestPyfficeDeque:
+    """PyfficeDeque is a change-tracking deque (extends deque)."""
+
+    def test_constructs_with_no_args(self):
+        d = PyfficeDeque()
+        assert isinstance(d, deque)
+
+    def test_append_adds_item(self):
+        d = PyfficeDeque()
+        d.append("a")
+        d.append("b")
+        assert list(d) == ["a", "b"]
+
+    def test_max_items_tracks_history(self):
+        d = PyfficeDeque()
+        d.set_max_items(2)
+        d.append("a")
+        d.append("b")
+        d.append("c")  # triggers popleft -> history
+        assert "a" in d.history
+        assert list(d) == ["b", "c"]
