@@ -152,7 +152,7 @@ class PyfficeColorPalette(PyfficeDocument):
             Self for chaining.
         """
         new_color = PyfficeColor(color.to_dict())
-        h, s, l = new_color.get_hsl()
+        _h, _s, _l = new_color.get_hsl()
         return new_color
 
     def create_neutral_colors(self, color):
@@ -196,7 +196,7 @@ class PyfficeColorPalette(PyfficeDocument):
         """
         for i in range(num_tones - 1):
             new_color = PyfficeColor(color.to_dict())
-            h, s, l = new_color.get_hsl()
+            h, _s, _l = new_color.get_hsl()
             new_color.set_hsl((h + (i * 360 / num_tones)) % 1.0)
             self.add_color(new_color)
 
