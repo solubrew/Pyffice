@@ -1,10 +1,10 @@
 agent: m3rl1n
 analysis:
   counts:
-    files: 497
-    python_files: 295
-    python_lines: 36330
-    test_files: 129
+    files: 419
+    python_files: 217
+    python_lines: 24644
+    test_files: 51
 audit_date: '1785470638.3677874'
 dimensions:
   base_class_duplication:
@@ -122,50 +122,49 @@ dimensions:
   dependency_strategy:
     details:
       details:
-        external_imports: 2160
-        info: 'Hint: 28 GitVein projects available but not used: eaglis, falcon, glain,
+        external_imports: 484
+        info: 'Hint: 29 GitVein projects available but not used: eaglis, falcon, glain,
           goalt, hermes-agent-main...'
         internal_import_details:
-        - file: tests/pyffice_unit/unit/documentTEST.py
-          module: pyffice.document
+        - file: tests/pyffice_unit/unit/ebook/ebookTEST.py
+          module: pyffice.ebook.azw
           project: pyffice
-        - file: tests/pyffice_unit/unit/documentTEST.py
-          module: pyffice.document
+        - file: tests/pyffice_unit/unit/ports/portsTEST.py
+          module: pyffice.ports.msports
           project: pyffice
-        - file: tests/pyffice_unit/unit/documentTEST.py
-          module: pyffice.document
+        - file: tests/pyffice_unit/unit/ports/portsTEST.py
+          module: pyffice.ports.msports
           project: pyffice
-        - file: tests/pyffice_unit/unit/documentTEST.py
-          module: pyffice.document
+        - file: tests/pyffice_unit/unit/ports/portsTEST.py
+          module: pyffice.ports.msports
           project: pyffice
-        - file: tests/pyffice_unit/unit/documentTEST.py
-          module: kahndor.logma
+        - file: tests/pyffice_unit/unit/media/mediaTEST.py
+          module: pyffice.media.heic
+          project: pyffice
+        - file: zz-hist_work/automations.py
+          module: kahndor
           project: kahndor
-        - file: tests/pyffice_unit/unit/documentTEST.py
-          module: pyffice.document
-          project: pyffice
-        - file: tests/pyffice_unit/unit/documentTEST.py
-          module: pyffice.document
-          project: pyffice
-        - file: tests/pyffice_unit/unit/documentTEST.py
-          module: pyffice.document
-          project: pyffice
-        - file: tests/pyffice_unit/unit/documentTEST.py
-          module: pyffice.document
-          project: pyffice
-        - file: tests/pyffice_unit/unit/documentTEST.py
-          module: kahndor.logma
+        - file: zz-hist_work/automations.py
+          module: kahndor
           project: kahndor
-        internal_imports: 905
+        - file: zz-hist_work/contactsports.py
+          module: pyffice.contacts.contacts
+          project: pyffice
+        - file: zz-hist_work/matrixports.py
+          module: pyffice.matrix.matrix
+          project: pyffice
+        - file: zz-hist_work/source_control.py
+          module: kahndor
+          project: kahndor
+        internal_imports: 172
         internal_projects_used:
-        - ogma
         - pyffice
         - condor
         - kahndor
-        leverage_score: 29.53
+        leverage_score: 26.22
         score: 100
         status: pass
-        total_imports: 3065
+        total_imports: 656
       score: 100
       status: pass
     score: 100
@@ -199,14 +198,20 @@ dimensions:
   embedded_todos:
     details:
       details:
-        count: 0
-        examples: []
-        issues: []
-        score: 100
+        count: 1
+        examples:
+        - file: tests/pyffice_unit/unit/documentTEST.py
+          line: 5
+          text: '- increment_version bumps version (T-NEW-057: removed # TODO comment)'
+        issues:
+        - dimension: embedded_todos
+          rule: Inline TODOs need tracking
+          severity: medium
+        score: 98
         status: pass
-      score: 100
+      score: 98
       status: pass
-    score: 100
+    score: 98
     status: pass
   error_handling:
     details:
@@ -236,10 +241,16 @@ dimensions:
   feature_envy:
     details:
       details:
-        feature_envy_count: 13
+        feature_envy_count: 14
         issues:
         - fix: Move method to the class it uses most
           items:
+          - class: TestPyfficeUnitConstruction
+            envy_of: u
+            file: tests/pyffice_unit/unit/documentTEST.py
+            foreign_calls: 21
+            method: test_default_attributes
+            own_calls: 0
           - class: DiaConverter
             envy_of: lines
             file: pyffice/diagrams/formats.py
@@ -264,13 +275,7 @@ dimensions:
             foreign_calls: 10
             method: add_axis
             own_calls: 2
-          - class: PyfficeChart
-            envy_of: format_
-            file: pyffice/charts/charts.py
-            foreign_calls: 10
-            method: add_series
-            own_calls: 3
-          rule: 'Feature envy detected: 13 methods'
+          rule: 'Feature envy detected: 14 methods'
           severity: medium
         score: 0
         status: fail
@@ -297,7 +302,7 @@ dimensions:
           branches:
             local: []
             remote: []
-          commit_count: 262
+          commit_count: 269
           commits: []
           contributors: []
           is_repo: true
@@ -445,16 +450,16 @@ dimensions:
             logma_imported: true
           - file: zz-hist_work/surveys.py
             logma_imported: true
-          - file: tests/pyffice_unit/unit/documentTEST.py
+          - file: pyffice/diagrams/diagrams.py
             logma_imported: true
         issues:
         - dimension: logging_coverage
           rule: Add logging to silent modules/classes
           severity: medium
         score: 0
-        silent_classes: 197
+        silent_classes: 84
         status: fail
-        unused_logma_files: 119
+        unused_logma_files: 32
       score: 0
       status: fail
     score: 0
@@ -1381,14 +1386,6 @@ dimensions:
             function: set_file_path
             var: file_path
           - count: 5
-            file: tests/pyffice_unit/tests/tests/test_import_export.py
-            function: test_import_export
-            var: category
-          - count: 13
-            file: tests/pyffice_unit/tests/tests/test_import_export.py
-            function: test_import_export
-            var: doc_type
-          - count: 5
             file: pyffice/items/colors.py
             function: hsl_to_rgb
             var: t
@@ -1396,41 +1393,54 @@ dimensions:
             file: pyffice/items/colors.py
             function: hue_to_rgb
             var: t
-          rule: 'Switch abuse detected: 7 instances'
+          - count: 11
+            file: pyffice/ports/msports.py
+            function: set_chart_type
+            var: chart_type
+          - count: 7
+            file: pyffice/web/prompts.py
+            function: set_response_scope
+            var: scope
+          rule: 'Switch abuse detected: 5 instances'
           severity: medium
-        score: 30
+        score: 50
         status: partial
-        switch_abuse_count: 7
-      score: 30
+        switch_abuse_count: 5
+      score: 50
       status: partial
-    score: 30
+    score: 50
     status: partial
   testing:
     details:
       details:
-        coverage: 69.6969696969697
-        files_with_tests: 69
-        score: 100
+        coverage: 32.323232323232325
+        files_with_tests: 32
+        score: 90
         status: pass
         test_dir: tests
-        test_file_count: 128
+        test_file_count: 50
         total_source_files: 99
-      score: 100
+      score: 90
       status: pass
-    score: 100
+    score: 90
     status: pass
   todo_tracking:
     details:
       details:
-        files_with_todos: 0
-        issues: []
-        score: 100
+        files_with_todos: 1
+        issues:
+        - dimension: todo_tracking
+          rule: Embedded TODOs require resolution
+          severity: medium
+        score: 99
         status: pass
-        total_todos: 0
-        worst_offenders: []
-      score: 100
+        total_todos: 1
+        worst_offenders:
+        - count: 1
+          file: tests/pyffice_unit/unit/documentTEST.py
+      score: 99
       status: pass
-    score: 100
+    score: 99
     status: pass
   type_annotations:
     details:
@@ -1452,7 +1462,7 @@ dimensions:
   unfinished_code:
     details:
       details:
-        empty_methods: 274
+        empty_methods: 149
         examples:
         - class: PyfficePlaylist
           file: zz-hist_work/playlists.py
@@ -1515,17 +1525,17 @@ dimensions:
       status: pass
     score: 100
     status: pass
-overall_score: 88.43
+overall_score: 88.15
 project: pyffice
 rubric:
-  audit_overall: 88.43
+  audit_overall: 88.15
   categories: []
   max_points: 0
   percentage: 0.0
-  rubric_name: 06a6cdc8-f27b-7a10-8000-0c6c4ad888c1
+  rubric_name: 06a6cee1-204b-78e4-8000-7a8e8d5469f6
   rubric_score: 0
   rubric_version: '1.0'
-  score_difference: -88.43
+  score_difference: -88.15
   total_points: 0
   weighted_score: 0
 summary:
@@ -1536,23 +1546,23 @@ summary:
   total_auditors: 11
   total_dimensions: 53
 test_execution:
-  duration_seconds: 17.762173652648926
-  project_score: 88.43
+  duration_seconds: 26.35095500946045
+  project_score: 88.15
   report_file: /home/solubrew/.hermes/projects/pyffice/FALCON_TEST.yaml
   results:
     tests_failed: 27
-    tests_passed: 66
-    tests_run: 94
+    tests_passed: 283
+    tests_run: 310
     tests_skipped: 0
   runner: falcon
   score_adjustment: 0
   score_threshold: 80.0
   should_run: true
   status: failed
-  status_message: no change (66/94 tests passed)
+  status_message: no change (283/310 tests passed)
   timestamp: ''
 versions:
-  project: 8dc85b8
+  project: 45baf8b
   project_status: dirty
-  project_uncommitted_changes: 5
+  project_uncommitted_changes: 2
   sasquatch: 4d9f66f
