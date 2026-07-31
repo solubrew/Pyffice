@@ -99,7 +99,9 @@ class SankeyChart:
         return self
 
     def open_file(self, document):
-        """"""
+        """Open a file."""
+        if not document:
+            return self
         return self
 
     def save_sankey_chart(self, filename="sankey_chart.html"):

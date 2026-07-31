@@ -88,30 +88,33 @@ class PyfficeShape(PyfficeUnit):
         return self
 
     def mirror_text(self):
-        """Mirror text."""
+        """Mirror text horizontally."""
+        self.text_flipped = not getattr(self, 'text_flipped', False)
         return self
 
     def move_shape(self, x, y):
-        """"""
+        """Move shape by offset."""
         self.set_origin([self.origin[0] + x, self.origin[1] + y])
         return self
 
     def move_text(self, x, y):
-        """Move text."""
+        """Move text by offset."""
+        self.text_offset = (x, y)
         return self
 
     def rotate_shape(self, axis, angle):
-        """"""
+        """Rotate shape."""
         if axis == "x":
             self.set_origin([-self.origin[1], self.origin[0]])
             self.set_size([-self.size[1], self.size[0]])
         elif axis == "y":
-            self.set_origin([self.origin[0], self.origin[1]])
-            self.set_size([self.size[0], self.size[1]])
+            self.set_origin([self.origin[0], -self.origin[1]])
+            self.set_size([self.size[0], -self.size[1]])
         return self
 
     def rotate_text(self, axis, angle):
         """Rotate text."""
+        self.text_rotation = angle
         return self
 
     def set_background(self, background, item="0"):

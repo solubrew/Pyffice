@@ -78,11 +78,13 @@ class PyfficeReference(PyfficeTag):
         return self
 
     def set_date(self, year, month=None, day=None):
-        """"""
+        """Set publication date."""
+        self.date = (year, month, day)
         return self
 
     def set_doi(self, doi):
-        """"""
+        """Set DOI."""
+        self.doi = doi
         return self
 
     def set_edition(self, edition):

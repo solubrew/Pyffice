@@ -63,7 +63,8 @@ class PyfficeFormulaProtocol(ABC):
     @abstractmethod
     def execute(self, parsed: object, parameters: dict) -> object:
         """Execute parsed against parameters and return the result."""
-        return self
+        # Placeholder - subclass should implement
+        return None
 
 
 class BuiltinProtocol(PyfficeFormulaProtocol):

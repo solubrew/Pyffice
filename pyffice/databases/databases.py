@@ -150,6 +150,8 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
 
     def open_file(self, document):
         """Open a database file."""
+        if not document:
+            return self
         return self
 
 

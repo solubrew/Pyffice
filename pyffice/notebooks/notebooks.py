@@ -103,7 +103,8 @@ class PyfficeNotebook(PyfficeDocument):
         return self
 
     def set_pinned(self, pinned):
-        """"""
+        """Set pinned state."""
+        self.pinned = pinned
         return self
 
     def to_dict(self):

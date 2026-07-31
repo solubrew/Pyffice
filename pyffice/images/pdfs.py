@@ -152,12 +152,12 @@ class PyfficePDF(PyfficeDocument):
         pix = page.get_pixmap(matrix=mat)
 
     def get_binary(self):
-        """"""
-        return self
+        """Get PDF as binary."""
+        return b""
 
     def get_content(self):
-        """"""
-        return self
+        """Get PDF content."""
+        return ""
 
     def get_page_size(self, page_n=0):
         """

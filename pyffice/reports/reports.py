@@ -62,10 +62,12 @@ class PyfficeReport(PyfficeScript):
 
     def import_report(self):
         """Import a report from a file"""
+        # Placeholder - would import report
         return self
 
     def export_report(self):
         """Export the report to a file"""
+        # Placeholder - would export report
         return self
 
 

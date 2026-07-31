@@ -250,7 +250,7 @@ class PyfficeColorPalette(PyfficeDocument):
         return lambda r, g, b: (r * factor, g * factor, b * factor)
 
     def set_palette(self):
-        """"""
+        """Set color palette."""
         return self
 
     def set_palette_darker(self, factor):

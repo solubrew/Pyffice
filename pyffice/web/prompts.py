@@ -233,11 +233,11 @@ class PyfficeResponse(PyfficeDocument):
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeResponse")).override(cfg)
 
     def add_source(self):
-        """"""
+        """Add a source."""
         return self
 
     def load_document(self, document=None):
-        """"""
+        """Load document."""
         return self
 
     def set_sources(self, sources):

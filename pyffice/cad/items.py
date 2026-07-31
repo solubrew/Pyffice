@@ -78,8 +78,8 @@ class PyfficeShape(PyfficeDocument):
             self.envelope_corners.append(self.get_envelope_corner(corner))
 
     def get_origin(self):
-        """"""
-        return self
+        """Get origin point."""
+        return getattr(self, 'origin', None)
 
     def peform_mirror(self, axis="x"):
         """Mirror shape along axis."""

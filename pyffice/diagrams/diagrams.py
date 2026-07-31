@@ -332,12 +332,13 @@ class PyfficeDiagram(PyfficeDocumentManager):
         return self
 
     def to_dict(self):
-        """"""
-        return self
+        """Convert to dictionary."""
+        return {"name": getattr(self, 'name', None),
+                "type": getattr(self, 'type', None)}
 
     def to_md(self):
-        """"""
-        return self
+        """Convert to markdown."""
+        return ""
 
 
 class PyfficeDiagramLayer(PyfficeUnit):

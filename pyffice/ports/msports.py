@@ -270,12 +270,12 @@ class PyfficePortExcel(PyfficePort):
         return self
 
     def to_native(self):
-        """"""
-        return self
+        """Convert to native format."""
+        return self.document
 
     def to_xml(self):
-        """"""
-        return self
+        """Convert to XML format."""
+        return self.to_dict()
 
     def _set_cell_value(self, cell, val):
         """

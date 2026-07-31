@@ -65,7 +65,10 @@ class PyfficeCADAssembly(PyfficeDocumentManager):
         }
 
     def add_part(self, part, position=None):
-        """"""
+        """Add a part to the CAD document."""
+        parts = getattr(self, 'parts', [])
+        parts.append((part, position))
+        self.parts = parts
         return self
 
     def to_dict(self):
@@ -88,7 +91,7 @@ class PyfficeCADManager(PyfficeDocumentManager):
         super().add_document(document)
 
     def add_part(self, assembly):
-        """"""
+        """Add an assembly part."""
         return self
 
     def create_new_document(self, name, type_=None):
