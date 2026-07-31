@@ -210,7 +210,7 @@ def presentation_convert(ctx: click.Context, input: str, output: str, format: Op
 @cli.group()
 def diagram() -> None:
     """Diagram operations."""
-    pass
+    ...
 
 
 @diagram.command(name='convert')
@@ -278,7 +278,7 @@ def diagram_info(ctx: click.Context, input: str) -> None:
 @cli.group()
 def image() -> None:
     """Image operations."""
-    pass
+    ...
 
 
 @image.command(name='convert')
@@ -352,7 +352,7 @@ def image_info(ctx: click.Context, input: str) -> None:
 @cli.group()
 def video() -> None:
     """Video operations."""
-    pass
+    ...
 
 
 @video.command(name='convert')
@@ -403,7 +403,7 @@ def video_info(ctx: click.Context, input: str) -> None:
 @cli.group()
 def audio() -> None:
     """Audio operations."""
-    pass
+    ...
 
 
 @audio.command(name='convert')
@@ -454,7 +454,7 @@ def audio_info(ctx: click.Context, input: str) -> None:
 @cli.group()
 def cad() -> None:
     """CAD operations."""
-    pass
+    ...
 
 
 @cad.command(name='convert')
@@ -503,7 +503,7 @@ def cad_info(ctx: click.Context, input: str) -> None:
 @cli.group()
 def chart() -> None:
     """Chart operations."""
-    pass
+    ...
 
 
 @chart.command(name='create')
@@ -536,7 +536,7 @@ def chart_create(ctx: click.Context, input: str, output: str, type: str) -> None
 @cli.group()
 def calendar() -> None:
     """Calendar operations."""
-    pass
+    ...
 
 
 @calendar.command(name='list')
@@ -568,7 +568,7 @@ def calendar_list(ctx: click.Context, from_date: Optional[str], to_date: Optiona
 @cli.group()
 def contact() -> None:
     """Contact operations."""
-    pass
+    ...
 
 
 @contact.command(name='list')
@@ -609,7 +609,7 @@ def contact_search(ctx: click.Context, query: str) -> None:
 @cli.group()
 def email_cmd() -> None:
     """Email operations."""
-    pass
+    ...
 
 
 @email_cmd.command(name='send')
@@ -642,7 +642,7 @@ def email_send(ctx: click.Context, to: str, subject: str, body: Optional[str], a
 @cli.group()
 def database() -> None:
     """Database operations."""
-    pass
+    ...
 
 
 @database.command(name='connect')
@@ -687,7 +687,7 @@ def database_query(ctx: click.Context, query: str) -> None:
 @cli.group()
 def filesystem() -> None:
     """Filesystem operations."""
-    pass
+    ...
 
 
 @filesystem.command(name='list')
@@ -735,7 +735,7 @@ def filesystem_sync(ctx: click.Context, source: str, destination: str) -> None:
 @cli.group()
 def analytics() -> None:
     """Analytics operations."""
-    pass
+    ...
 
 
 @analytics.command(name='report')
@@ -765,7 +765,7 @@ def analytics_report(ctx: click.Context, input: str, output: str) -> None:
 @cli.group()
 def project() -> None:
     """Project operations."""
-    pass
+    ...
 
 
 @project.command(name='create')
@@ -795,7 +795,7 @@ def project_create(ctx: click.Context, name: str, output: str) -> None:
 @cli.group()
 def config() -> None:
     """Configuration operations."""
-    pass
+    ...
 
 
 @config.command(name='show')
@@ -851,7 +851,7 @@ def config_set(ctx: click.Context, key: str, value: str) -> None:
 @cli.group()
 def form() -> None:
     """Form operations."""
-    pass
+    ...
 
 
 @form.command(name='create')
@@ -899,7 +899,7 @@ def form_validate(ctx: click.Context, input: str) -> None:
 @cli.group()
 def notebook() -> None:
     """Notebook operations."""
-    pass
+    ...
 
 
 @notebook.command(name='convert')
@@ -930,7 +930,7 @@ def notebook_convert(ctx: click.Context, input: str, output: str) -> None:
 @cli.group()
 def report() -> None:
     """Report operations."""
-    pass
+    ...
 
 
 @report.command(name='generate')
@@ -960,7 +960,7 @@ def report_generate(ctx: click.Context, input: str, output: str) -> None:
 @cli.group()
 def social() -> None:
     """Social operations."""
-    pass
+    ...
 
 
 @social.command(name='post')
@@ -989,7 +989,7 @@ def social_post(ctx: click.Context, message: str, platform: Optional[str]) -> No
 @cli.group()
 def tag() -> None:
     """Tag operations."""
-    pass
+    ...
 
 
 @tag.command(name='list')
@@ -1017,7 +1017,7 @@ def tag_list(ctx: click.Context, input: str) -> None:
 @cli.group()
 def text() -> None:
     """Text operations."""
-    pass
+    ...
 
 
 @text.command(name='convert')
@@ -1049,7 +1049,7 @@ def text_convert(ctx: click.Context, input: str, output: str, format: Optional[s
 @cli.group()
 def update() -> None:
     """Update operations."""
-    pass
+    ...
 
 
 @update.command(name='check')
@@ -1092,7 +1092,7 @@ def update_install(ctx: click.Context, package: str) -> None:
 @cli.group()
 def web() -> None:
     """Web operations."""
-    pass
+    ...
 
 
 @web.command(name='fetch')
@@ -1140,7 +1140,7 @@ def web_parse(ctx: click.Context, input: str, format: Optional[str]) -> None:
 @cli.group()
 def workflow() -> None:
     """Workflow operations."""
-    pass
+    ...
 
 
 @workflow.command(name='run')
@@ -1182,7 +1182,7 @@ def workflow_list(ctx: click.Context) -> None:
 @cli.group()
 def cam() -> None:
     """CAM operations."""
-    pass
+    ...
 
 
 @cam.command(name='generate')
