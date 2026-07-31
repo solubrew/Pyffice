@@ -165,6 +165,11 @@ class PyfficeSpreadSheet(PyfficeDocument):
 
     def set_cell(self, address, value, format=None, formula=None):
         """"""
+        # T-NEW-058 follow-up: initialize self.cells on first use
+        # (was previously assumed non-None, breaking get_cell /
+        # get_rows on fresh instances).
+        if self.cells is None:
+            self.cells = {}
         if address not in self.cells:
             column = address.split("|")[0]
             if self.convert_column(column, "arabic") > self.end_column:
