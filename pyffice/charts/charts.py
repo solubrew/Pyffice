@@ -215,19 +215,26 @@ class PyfficeChart(PyfficeDocument):
         porter.file_export(self, path)
 
     def save_html(self, path):
-        """"""
+        """Save chart as HTML file."""
+        import os
+        # Placeholder - would use plotting library to generate HTML
         return self
 
     def save_latex(self, path):
-        """"""
+        """Save chart as LaTeX file."""
+        if not path:
+            return self
+        # Placeholder - would use plotting library to generate LaTeX
         return self
 
     def set_axes(self, axes):
-        """"""
+        """Set chart axes."""
+        self.axes = axes
         return self
 
-    def set_background(self):
-        """"""
+    def set_background(self, color=None):
+        """Set chart background."""
+        self.background = color or "white"
         return self
 
     def set_chart_type(self, chart_type):
@@ -245,7 +252,8 @@ class PyfficeChart(PyfficeDocument):
         return self
 
     def set_data(self, data):
-        """"""
+        """Set chart data."""
+        self.data = data
         return self
 
     def set_figsize(self, figsize):
@@ -305,11 +313,13 @@ class PyfficeChart(PyfficeDocument):
         return self
 
     def set_position_plotarea(self, position, plotarea=None):
-        """"""
+        """Set plot area position."""
+        self.plotarea_position = position
         return self
 
     def set_position_legend(self, position, legend=None):
-        """"""
+        """Set legend position."""
+        self.legend_position = position
         return self
 
     def set_series(self, series: list = None):
@@ -327,11 +337,13 @@ class PyfficeChart(PyfficeDocument):
         return self
 
     def set_size_plotarea(self, size, plotarea):
-        """"""
+        """Set plot area size."""
+        self.plotarea_size = size
         return self
 
     def set_size_legend(self, size, legend):
-        """"""
+        """Set legend size."""
+        self.legend_size = size
         return self
 
     def set_theme(self, theme="whitegrid"):
