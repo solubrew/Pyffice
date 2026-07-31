@@ -382,13 +382,13 @@ class PyfficeColor(PyfficeUnit):
 
     @staticmethod
     def hex_to_rgb(hex_color):
-        """Hex to rgb.
-        
+        """Hex to RGB.
+
         Args:
             hex_color: Parameter.
-        
+
         Returns:
-            Self for chaining.
+            RGB tuple (0-255 per channel).
         """
         hex_color = hex_color.lstrip("#")
         return tuple(int(hex_color[i : i + 2], 16) for i in (0, 2, 4))
@@ -396,10 +396,10 @@ class PyfficeColor(PyfficeUnit):
     @staticmethod
     def rgb_to_hsl(rgb):
         """Rgb to hsl.
-        
+
         Args:
             rgb: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -407,24 +407,25 @@ class PyfficeColor(PyfficeUnit):
 
     @staticmethod
     def hsl_to_rgb(h, s, l):
-        """
-        Convert HSL to RGB.
+        """Convert HSL to RGB.
+
         Args:
             h (float): Hue (0-1 range).
             s (float): Saturation (0-1 range).
             l (float): Lightness (0-1 range).
+
         Returns:
             tuple: RGB values (0-255 scale).
         """
 
         def hue_to_rgb(p, q, t):
             """Hue to rgb.
-            
+
             Args:
                 p: Parameter.
                 q: Parameter.
                 t: Parameter.
-            
+
             Returns:
                 Self for chaining.
             """
