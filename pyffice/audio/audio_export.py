@@ -87,23 +87,27 @@ class PyfficeAudio(PyfficeDocument):
         return self
 
     def find_pause(self):
-        """"""
-        return self
+        """Find pause points in audio."""
+        return []
 
     def find_unpause(self):
-        """"""
-        return self
+        """Find unpause points in audio."""
+        return []
 
     def get_duration(self):
-        """"""
-        return self
+        """Get audio duration."""
+        return getattr(self, 'duration', 0)
 
     def increase_volume(self, percent):
-        """"""
+        """Increase volume by percent."""
+        current = getattr(self, 'volume', 100)
+        self.volume = min(100, current + percent)
         return self
 
     def decrease_volume(self, percent):
-        """"""
+        """Decrease volume by percent."""
+        current = getattr(self, 'volume', 100)
+        self.volume = max(0, current - percent)
         return self
 
     def to_dict(self):

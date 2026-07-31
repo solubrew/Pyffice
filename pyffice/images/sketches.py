@@ -78,19 +78,23 @@ class PyfficeSketch(PyfficeDocument):
         return self
 
     def set_lock(self, lock):
-        """"""
+        """Set lock state."""
+        self.lock = lock
         return self
 
     def set_edges(self, edges):
-        """"""
+        """Set edges."""
+        self.edges = edges
         return self
 
     def set_endpoints(self, endpoints):
-        """"""
+        """Set endpoints."""
+        self.endpoints = endpoints
         return self
 
     def set_nodes(self, nodes):
-        """"""
+        """Set nodes."""
+        self.nodes = nodes
         return self
 
     def to_dict(self):
@@ -116,8 +120,9 @@ class PyfficeSketch(PyfficeDocument):
         return doc
 
     def to_md(self):
-        """"""
-        return self
+        """Convert to Markdown."""
+        # Placeholder - would generate markdown
+        return ""
 
 
 # ====================================================================================================================||

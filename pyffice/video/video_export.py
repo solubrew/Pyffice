@@ -67,20 +67,22 @@ class PyfficeVideo(PyfficeDocument):
         return self
 
     def find_pause(self):
-        """"""
-        return self
+        """Find pause points in video."""
+        # Placeholder - would analyze video for pauses
+        return []
 
     def find_unpause(self):
-        """"""
-        return self
+        """Find unpause points in video."""
+        # Placeholder - would analyze video for resumes
+        return []
 
     def get_duration(self):
-        """"""
-        return self
+        """Get video duration."""
+        return getattr(self, 'duration', 0)
 
     def get_palette(self):
-        """"""
-        return self
+        """Get color palette."""
+        return getattr(self, 'palette', [])
 
     def load_document(self, document):
         """"""
@@ -88,7 +90,10 @@ class PyfficeVideo(PyfficeDocument):
         return self
 
     def open_file(self, document):
-        """"""
+        """Open a video file."""
+        if not document:
+            return self
+        # Placeholder - would load video file
         return self
 
     def to_dict(self):

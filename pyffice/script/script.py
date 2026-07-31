@@ -70,7 +70,10 @@ class PyfficeScript(PyfficeDocument):
         return self
 
     def add_entry(self, text):
-        """"""
+        """Add an entry to script."""
+        entries = getattr(self, 'entries', [])
+        entries.append(text)
+        self.entries = entries
         return self
 
     def add_footer(self, text, to_document=False):
@@ -225,12 +228,12 @@ class PyfficeScript(PyfficeDocument):
         return self
 
     def format_select(self, text, paragraph):
-        """"""
+        """Format selected text."""
         return self
 
     def get_size(self):
-        """"""
-        return self
+        """Get script size."""
+        return len(getattr(self, 'entries', []))
 
     def get_entry(self, index=0):
         """
@@ -356,7 +359,7 @@ class PyfficeScript(PyfficeDocument):
         super().save(path, format_, encrypt)
 
     def set_alignment(self, start_pos, end_pos, alignment):
-        """"""
+        """Set text alignment."""
         return self
 
     def set_file_format(self, format_=None):
