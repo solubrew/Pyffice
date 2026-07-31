@@ -139,12 +139,6 @@ class PyfficeBOM(PyfficeDocumentManager):
         super().load_document(document)
         return self
 
-    def open_file(self, document):
-        """Open a file."""
-        if not document:
-            return self
-        return self
-
     def to_dict(self):
         """Convert this document to dict.
 
@@ -251,12 +245,6 @@ class PyfficeSoftwareBOM(PyfficeBOM):
             Self for chaining.
         """
         super().load_document(document)
-        return self
-
-    def open_file(self, document):
-        """Open a file."""
-        if not document:
-            return self
         return self
 
     def to_dict(self):

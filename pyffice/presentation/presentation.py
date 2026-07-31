@@ -55,12 +55,6 @@ class PyfficePresentation(PyfficeDocument):
         super().load_document(document)
         return self
 
-    def open_file(self, document):
-        """Open a file."""
-        if not document:
-            return self
-        return self
-
     def to_dict(self):
         """Convert this document to dict.
         

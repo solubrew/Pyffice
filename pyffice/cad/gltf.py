@@ -29,10 +29,6 @@ class PyfficeGLTF(PyfficeDocument):
         with open(self.file_path, 'w') as f:
             json.dump(data, f, indent=2)
     
-    def load(self) -> Dict[str, Any]:
-        """Alias for read()"""
-        return self.read()
-
 
 # Module-level convenience functions
 def load(path: str) -> Dict[str, Any]:

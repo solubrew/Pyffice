@@ -114,10 +114,6 @@ class PyfficeSTL(PyfficeDocument):
                 f.write("  endfacet\n")
             f.write("endsolid\n")
     
-    def load(self) -> Dict[str, Any]:
-        """Alias for read()"""
-        return self.read()
-
 
 # Module-level convenience functions
 def read(stl_path: str) -> Dict[str, Any]:

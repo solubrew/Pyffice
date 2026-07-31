@@ -3,38 +3,26 @@ from typing import Any, Optional, List, Dict
 import io
 import os
 
+from pyffice.io_helpers import ArchiveHandler
 
-class PyfficeRAR:
+
+class PyfficeRAR(ArchiveHandler):
     """RAR archive handler (stub implementation)."""
     EXTENSIONS = {'.rar', '.rar5'}
     DEFAULT_LIMIT = 256 * 1024 * 1024  # 256MB
-    
+
     def __init__(self, file_path: str, mode: str = 'r'):
         self.file_path = file_path
-    
-    @staticmethod
-    def size_limit(path: str) -> int:
-        """Size limit.
-        
-        Args:
-            path: Parameter.
-        
-        Returns:
-            Self for chaining.
-        """
-        return PyfficeRAR.DEFAULT_LIMIT
-    
-    @staticmethod
-    def inline(path: str) -> bool:
-        """Inline.
-        
-        Args:
-            path: Parameter.
-        
-        Returns:
-            Self for chaining.
-        """
-        return os.path.getsize(path) < PyfficeRAR.DEFAULT_LIMIT
+
+    @classmethod
+    def inline(cls, path: str) -> bool:
+        """Return whether the RAR file is small enough to load inline."""
+        return os.path.getsize(path) < cls.DEFAULT_LIMIT
+
+    # The RAR format is proprietary; this stub subclass leaves the
+    # archive-handler hooks unimplemented until a third-party RAR
+    # library (e.g. rarfile) is integrated. PyfficeRAR can still be
+    # used for size_limit / inline checks via the base class.
 
 
 def load(path: str) -> bytes:

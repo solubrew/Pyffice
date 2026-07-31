@@ -109,13 +109,6 @@ class PyfficeVideo(PyfficeDocument):
         super().load_document(document)
         return self
 
-    def open_file(self, document):
-        """Open a video file."""
-        if not document:
-            return self
-        # Placeholder - would load video file
-        return self
-
     def to_dict(self):
         """Convert this document to dict.
         

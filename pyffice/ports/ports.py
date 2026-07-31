@@ -182,14 +182,6 @@ class PyfficePort(PyfficeDocumentManager):
         doc = super().to_dict()
         return doc
 
-    def to_native(self):
-        """Convert to native format."""
-        return self.document
-
-    def to_xml(self):
-        """Convert to XML format."""
-        return self.to_dict()
-
 
 class PyfficePortCherryTree(PyfficePort):
     """"""
@@ -765,14 +757,6 @@ class PyfficePortDia(PyfficePort):
         for edge in self.edges:
             doc["document"]["edges"].append(edge)
         return doc
-
-    def to_native(self):
-        """Convert to native format."""
-        return self.document
-
-    def to_xml(self):
-        """Convert to XML format."""
-        return self.to_dict()
 
 
 class PyfficePortFileSystem(PyfficePort):

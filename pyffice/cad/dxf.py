@@ -29,10 +29,6 @@ class PyfficeDXF(PyfficeDocument):
         with open(self.file_path, 'w', encoding='utf-8') as f:
             f.write(data)
     
-    def load(self) -> str:
-        """Alias for read()"""
-        return self.read()
-
 
 # Module-level convenience functions
 def load(path: str) -> str:

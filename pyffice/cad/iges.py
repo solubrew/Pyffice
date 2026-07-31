@@ -27,10 +27,6 @@ class PyfficeIGES(PyfficeDocument):
         with open(self.file_path, 'w', encoding='utf-8') as f:
             f.write(data)
     
-    def load(self) -> str:
-        """Alias for read()"""
-        return self.read()
-
 
 def load(path: str) -> str:
     """Load IGES file contents."""

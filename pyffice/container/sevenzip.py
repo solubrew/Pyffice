@@ -2,6 +2,8 @@
 from typing import Any, Optional
 import io
 
+from pyffice.io_helpers import ArchiveHandler, load_bytes, write_bytes
+
 
 def load(path: str) -> bytes:
     """Load 7-Zip archive contents."""
@@ -25,33 +27,27 @@ def dump(data: bytes, path: str) -> None:
     write(data, path)
 
 
-class Pyffice7Z:
+class Pyffice7Z(ArchiveHandler):
     """7-Zip archive handler (stub implementation)."""
     EXTENSIONS = {'.7z', '.7zip'}
     DEFAULT_LIMIT = 256 * 1024 * 1024  # 256MB
-    
+
     def __init__(self, file_path: str, mode: str = 'r'):
         self.file_path = file_path
         self.mode = mode
-    
-    def read(self) -> bytes:
-        """Read.
-        
-        Returns:
-            Self for chaining.
-        """
+
+    def read_bytes(self) -> bytes:
+        """Read the entire 7z archive as bytes."""
         return load(self.file_path)
-    
-    def write(self, data: bytes) -> None:
-        """Write.
-        
-        Args:
-            data: Parameter.
-        
-        Returns:
-            Self for chaining.
-        """
+
+    def write_bytes_to(self, data: bytes) -> None:
+        """Write data to the 7z archive."""
         write(data, self.file_path)
+
+    # The 7z format requires a third-party library (e.g. py7zr);
+    # this stub subclass leaves the archive-handler hooks unimplemented
+    # until then. Pyffice7Z still supports size_limit / inline checks
+    # via the base class and the bytes-level read/write helpers.
 
 
 def compress_7z(source_path: str, archive_path: str) -> None:

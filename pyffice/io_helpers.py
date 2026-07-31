@@ -39,7 +39,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import annotations
 
-from typing import Any, Callable
+from pathlib import Path
+from typing import Any, Callable, List, Dict, Optional
 
 
 def load_bytes(path: str) -> bytes:
@@ -95,6 +96,180 @@ read = load_bytes
 dump = write_bytes
 
 
+class ArchiveHandler:
+    """Base class for archive file handlers (ZIP, TAR, etc.).
+
+    Subclasses override the private ``_open_read``, ``_list_members``,
+    ``_extract``, ``_extractall``, ``_read_member``, ``_write_member``,
+    ``_write_data``, and ``_create`` hooks with the archive-specific
+    implementation. The public ``read`` / ``extract`` / ``extract_all``
+    / ``read_file`` / ``write`` / ``write_data`` / ``create`` methods
+    here provide the shared structure and the ``size_limit`` /
+    ``inline`` static helpers.
+
+    Consolidates what was duplicated across ``zip.py``, ``tar.py``,
+    ``rar.py``, ``sevenzip.py``, etc. Each subclass only implements
+    the format-specific hooks instead of re-implementing the same
+    control flow.
+    """
+
+    #: Subclasses override this with their file extension set.
+    EXTENSIONS: set[str] = set()
+    #: Subclasses override this with their default size limit.
+    DEFAULT_LIMIT: int = 256 * 1024 * 1024  # 256MB
+
+    def __init__(self, file_path: str, mode: str = "r") -> None:
+        """Initialize the archive handler.
+
+        Args:
+            file_path: Path to the archive file.
+            mode: Open mode (read/write/append).
+        """
+        self.file_path = Path(file_path)
+        self.mode = mode
+
+    @classmethod
+    def size_limit(cls, path: str) -> int:
+        """Return the size limit for the archive.
+
+        Args:
+            path: Parameter (path to the archive).
+
+        Returns:
+            The handler's DEFAULT_LIMIT.
+        """
+        return cls.DEFAULT_LIMIT
+
+    @classmethod
+    def inline(cls, path: str) -> bool:
+        """Return whether the archive is small enough to load inline.
+
+        Args:
+            path: Parameter (path to the archive).
+
+        Returns:
+            ``True`` if the file size is below ``DEFAULT_LIMIT``.
+        """
+        try:
+            return Path(path).stat().st_size < cls.DEFAULT_LIMIT
+        except OSError:
+            return False
+
+    def read(self) -> List[Dict[str, Any]]:
+        """List contents of the archive.
+
+        Returns:
+            List of member metadata dicts (``name``, ``size``, ...).
+        """
+        with self._open_read() as handle:
+            return self._list_members(handle)
+
+    def extract(self, member: str, path: str = ".") -> None:
+        """Extract a single member to ``path``.
+
+        Args:
+            member: Name of the member to extract.
+            path: Destination directory.
+        """
+        with self._open_read() as handle:
+            self._extract(handle, member, path)
+
+    def extract_all(self, path: str = ".") -> None:
+        """Extract all members to ``path``.
+
+        Args:
+            path: Destination directory.
+        """
+        with self._open_read() as handle:
+            self._extractall(handle, path)
+
+    def read_file(self, member: str) -> bytes:
+        """Read the bytes of a single member.
+
+        Args:
+            member: Name of the member to read.
+
+        Returns:
+            The member's bytes.
+        """
+        with self._open_read() as handle:
+            return self._read_member(handle, member)
+
+    def write(
+        self, file_path: str, arcname: Optional[str] = None
+    ) -> None:
+        """Add a file to the archive.
+
+        Args:
+            file_path: Path of the file to add.
+            arcname: Name to use inside the archive. Defaults to
+                the file's basename.
+        """
+        with self._open_read(mode="a") as handle:
+            self._write_member(handle, file_path, arcname)
+
+    def write_data(self, name: str, data: bytes) -> None:
+        """Add in-memory bytes as a member named ``name``.
+
+        Args:
+            name: Archive member name.
+            data: Bytes to write.
+        """
+        with self._open_read(mode="a") as handle:
+            self._write_data(handle, name, data)
+
+    @classmethod
+    def create(cls, archive_path: str, files: Dict[str, str], **kwargs) -> None:
+        """Create an archive from a dict of arcname -> file_path.
+
+        Args:
+            archive_path: Destination archive path.
+            files: Mapping of arcname (in archive) to file_path (on disk).
+            **kwargs: Format-specific options (e.g. compression).
+        """
+        cls._create(archive_path, files, **kwargs)
+
+    # ------------------------------------------------------------------
+    # Hooks subclasses override with format-specific implementations.
+    # ------------------------------------------------------------------
+    def _open_read(self, mode: str = "r") -> Any:  # pragma: no cover
+        """Return an open archive handle. Override in subclass."""
+        raise NotImplementedError
+
+    def _list_members(self, handle: Any) -> List[Dict[str, Any]]:  # pragma: no cover
+        """Return member metadata. Override in subclass."""
+        raise NotImplementedError
+
+    def _extract(self, handle: Any, member: str, path: str) -> None:  # pragma: no cover
+        """Extract a single member. Override in subclass."""
+        raise NotImplementedError
+
+    def _extractall(self, handle: Any, path: str) -> None:  # pragma: no cover
+        """Extract all members. Override in subclass."""
+        raise NotImplementedError
+
+    def _read_member(self, handle: Any, member: str) -> bytes:  # pragma: no cover
+        """Read one member's bytes. Override in subclass."""
+        raise NotImplementedError
+
+    def _write_member(
+        self, handle: Any, file_path: str, arcname: Optional[str]
+    ) -> None:  # pragma: no cover
+        """Write a file into the archive. Override in subclass."""
+        raise NotImplementedError
+
+    def _write_data(self, handle: Any, name: str, data: bytes) -> None:  # pragma: no cover
+        """Write in-memory bytes as a member. Override in subclass."""
+        raise NotImplementedError
+
+    @classmethod
+    def _create(
+        cls, archive_path: str, files: Dict[str, str], **kwargs
+    ) -> None:  # pragma: no cover
+        """Create a new archive from a files mapping. Override in subclass."""
+        raise NotImplementedError
+
+
 __all__ = [
     "load_bytes",
     "write_bytes",
@@ -104,4 +279,5 @@ __all__ = [
     "dump_via_class",
     "read",
     "dump",
+    "ArchiveHandler",
 ]

@@ -29,10 +29,6 @@ class PyfficeDWG(PyfficeDocument):
         with open(self.file_path, 'wb') as f:
             f.write(data)
     
-    def load(self) -> bytes:
-        """Alias for read()"""
-        return self.read()
-
 
 # Module-level convenience functions
 def load(path: str) -> bytes:
