@@ -3,7 +3,7 @@ analysis:
   counts:
     files: 419
     python_files: 217
-    python_lines: 24816
+    python_lines: 24871
     test_files: 51
 audit_date: '1785470638.3677874'
 dimensions:
@@ -158,8 +158,8 @@ dimensions:
           project: kahndor
         internal_imports: 141
         internal_projects_used:
-        - pyffice
         - condor
+        - pyffice
         - kahndor
         leverage_score: 26.21
         score: 100
@@ -302,7 +302,7 @@ dimensions:
           branches:
             local: []
             remote: []
-          commit_count: 275
+          commit_count: 278
           commits: []
           contributors: []
           is_repo: true
@@ -447,7 +447,7 @@ dimensions:
           rule: Add logging to silent modules/classes
           severity: medium
         score: 50
-        silent_classes: 64
+        silent_classes: 66
         status: partial
         unused_logma_files: 0
       score: 50
@@ -735,14 +735,14 @@ dimensions:
             or custom schemes is often unexpected.'
           severity: medium
         - file: /home/solubrew/.hermes/projects/pyffice/pyffice/ports/ports.py
-          line: 205
+          line: 216
           rule: 'Bandit: Using xml.etree.ElementTree.fromstring to parse untrusted
             XML data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.fromstring
             with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
             is called'
           severity: medium
         - file: /home/solubrew/.hermes/projects/pyffice/pyffice/ports/ports.py
-          line: 482
+          line: 505
           rule: 'Bandit: Using xml.etree.ElementTree.fromstring to parse untrusted
             XML data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.fromstring
             with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
@@ -1264,6 +1264,36 @@ dimensions:
           line: 15
           pattern: ast_call
           severity: 80
+        - category: getattr_dynamic
+          content: self.tags = getattr(self, 'tags', {})
+          file: pyffice/images/images.py
+          line: 139
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: filters = getattr(self, 'filters', [])
+          file: pyffice/images/images.py
+          line: 173
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: layers = getattr(self, 'layers', [])
+          file: pyffice/images/images.py
+          line: 185
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: shapes = getattr(self, 'shapes', [])
+          file: pyffice/images/images.py
+          line: 192
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: texts = getattr(self, 'texts', [])
+          file: pyffice/images/images.py
+          line: 214
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
         - category: dynamic_import
           content: mod = __import__(mod_path, fromlist=[attr])
           file: pyffice/images/__init__.py
@@ -1561,13 +1591,13 @@ dimensions:
         issues:
         - rule: low_coverage
           severity: medium
-          total: 1732
+          total: 1736
           typed: 375
         score: 21
         status: partial
-        total_functions: 1732
+        total_functions: 1736
         typed_functions: 375
-        untyped_functions: 1357
+        untyped_functions: 1361
       score: 21
       status: partial
     score: 21
@@ -1575,7 +1605,7 @@ dimensions:
   unfinished_code:
     details:
       details:
-        empty_methods: 161
+        empty_methods: 139
         examples:
         - class: PyfficeUnit
           file: pyffice/document.py
@@ -1645,7 +1675,7 @@ rubric:
   categories: []
   max_points: 0
   percentage: 0.0
-  rubric_name: 06a6d020-8b90-785c-8000-d617a8b57a56
+  rubric_name: 06a6d05b-a801-7ca5-8000-10b2910bb5f4
   rubric_score: 0
   rubric_version: '1.0'
   score_difference: -89.76
@@ -1659,7 +1689,7 @@ summary:
   total_auditors: 11
   total_dimensions: 53
 test_execution:
-  duration_seconds: 26.42663860321045
+  duration_seconds: 26.925709009170532
   project_score: 89.76
   report_file: /home/solubrew/.hermes/projects/pyffice/FALCON_TEST.yaml
   results:
@@ -1675,7 +1705,7 @@ test_execution:
   status_message: no change (283/310 tests passed)
   timestamp: ''
 versions:
-  project: 5707b6f
+  project: da6c40d
   project_status: dirty
-  project_uncommitted_changes: 5
+  project_uncommitted_changes: 4
   sasquatch: a16c01c

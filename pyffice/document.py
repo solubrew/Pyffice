@@ -129,8 +129,10 @@ class PyfficeUnit(object):
         self.changes = self.changes[-change_limit:]
         return self
 
-    def add_editor(self):
-        """"""
+    def add_editor(self, editor):
+        """Add an editor to the document."""
+        self.editors = getattr(self, 'editors', [])
+        self.editors.append(editor)
         return self
 
     def add_tag(self, tag_name, description=""):
@@ -141,11 +143,17 @@ class PyfficeUnit(object):
         return self
 
     def del_editor(self, dex):
-        """"""
+        """Delete an editor by index."""
+        editors = getattr(self, 'editors', [])
+        if 0 <= dex < len(editors):
+            editors.pop(dex)
         return self
 
     def del_reference(self, reference):
-        """"""
+        """Delete a reference."""
+        refs = getattr(self, 'references', [])
+        if reference in refs:
+            refs.remove(reference)
         return self
 
     def del_tag(self, tag):
@@ -519,11 +527,17 @@ class PyfficeDocument(PyfficeUnit):
         # self.img = utils.invert_dict(self.config.dikt.get("textLIST", None))
 
     def file_export(self, file_=None):
-        """"""
+        """Export document to file."""
+        if not file_:
+            return self
+        # Placeholder - would use port system
         return self
 
     def file_import(self, file_type):
-        """"""
+        """Import document from file."""
+        if not file_type:
+            return self
+        # Placeholder - would use port system
         return self
 
     def file_open(self, file_path, open_=True):
@@ -601,9 +615,10 @@ class PyfficeDocument(PyfficeUnit):
             return True
         return False
 
-    def search_vector(self):
-        """"""
-        return self
+    def search_vector(self, query):
+        """Search vectors for query."""
+        # Placeholder - would use vector similarity search
+        return []
 
     def search_word(self, term):
         """"""

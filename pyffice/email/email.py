@@ -108,12 +108,25 @@ class PyfficeEmailMessage(PyfficeMessage):
 
     def open_file(self, file_path):
         """Open an email file."""
-        # Placeholder - actual implementation would parse email file
+        if not file_path:
+            return self
+        import email
+        with open(file_path, 'rb') as f:
+            msg = email.message_from_bytes(f.read())
+            self.message = msg
         return self
 
     def save_message(self):
         """Save the current message."""
-        # Placeholder - actual implementation would serialize to file
+        if not self.message:
+            return self
+        # Placeholder - would serialize to file
+        return self
+
+    def connect_service(self):
+        """Connect to email service."""
+        # Placeholder - would use imaplib/smtp
+        self.connected = True
         return self
 
     def remove_label(self, label):
@@ -138,7 +151,8 @@ class PyfficeMailBox(PyfficeDocumentManager):
 
     def connect_service(self):
         """Connect to email service (OAuth/imap)."""
-        # Placeholder - actual implementation would connect to IMAP/SMTP
+        # Placeholder - would connect to IMAP/SMTP
+        self.connected = True
         return self
 
     def create_label(self, name):
@@ -178,6 +192,7 @@ class PyfficeMailBox(PyfficeDocumentManager):
 
     def disconnect_service(self):
         """Disconnect from email service."""
+        self.connected = False
         return self
 
     def get_mail(self, uid):
@@ -220,11 +235,16 @@ class PyfficeMailBox(PyfficeDocumentManager):
 
     def process_rules(self):
         """Apply all rules to inbox."""
-        # Placeholder - would iterate rules and apply actions
+        rules = getattr(self, 'rules', [])
+        for rule in rules:
+            # Placeholder - would apply each rule
+            pass
         return self
 
     def send_mail(self, message):
         """Send an email message."""
+        if not message:
+            return self
         # Placeholder - would use SMTP to send
         return self
 

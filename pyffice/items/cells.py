@@ -84,7 +84,8 @@ class PyfficeBackground(PyfficeUnit):
         return self
 
     def set_pattern(self, pattern):
-        """"""
+        """Set cell pattern."""
+        self.pattern = pattern
         return self
 
     def set_transparency(self, transparency):
@@ -177,16 +178,16 @@ class PyfficeCell(PyfficeUnit):
         return format_
 
     def get_formula(self):
-        """"""
-        return self
+        """Get cell formula."""
+        return getattr(self, 'formula', None)
 
     def get_inputs(self):
         """"""
         return self.formula_inputs
 
     def get_value(self):
-        """"""
-        return self
+        """Get cell value."""
+        return getattr(self, 'value', None)
 
     def load_unit(self, unit):
         """"""
@@ -250,7 +251,8 @@ class PyfficeCell(PyfficeUnit):
         return self
 
     def set_format(self, format_):
-        """"""
+        """Set cell format."""
+        self.format = format_
         return self
 
     def set_formula(self, formula, inputs=None):
@@ -264,7 +266,8 @@ class PyfficeCell(PyfficeUnit):
         return self
 
     def set_object(self, object_):
-        """"""
+        """Set cell object."""
+        self.object = object_
         return self
 
     def set_value(self, value, font=None):

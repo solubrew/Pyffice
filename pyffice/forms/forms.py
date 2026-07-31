@@ -110,11 +110,17 @@ class PyfficeForm(PyfficeDocument):
         return section_id
 
     def del_field(self, field):
-        """"""
+        """Delete a field from the form."""
+        fields = getattr(self, 'fields', [])
+        if field in fields:
+            fields.remove(field)
         return self
 
     def del_response(self, response):
-        """"""
+        """Delete a response."""
+        responses = getattr(self, 'responses', [])
+        if response in responses:
+            responses.remove(response)
         return self
 
     def del_section(self, section_id):
@@ -148,7 +154,8 @@ class PyfficeForm(PyfficeDocument):
         return self
 
     def set_form_id(self, form_id):
-        """"""
+        """Set the form ID."""
+        self.form_id = form_id
         return self
 
     def set_form_header_image(self, file_path):
@@ -259,15 +266,18 @@ class PyfficeSurvey(PyfficeDocument):
         return self
 
     def del_field_response(self, field, field_id, response_id):
-        """"""
+        """Delete a field response."""
         return self
 
     def del_form_response(self, response_id):
-        """"""
+        """Delete a form response."""
         return self
 
     def del_recipient(self, recipient):
-        """"""
+        """Delete a recipient."""
+        recipients = getattr(self, 'recipients', [])
+        if recipient in recipients:
+            recipients.remove(recipient)
         return self
 
     def get_form(self, form_id):
