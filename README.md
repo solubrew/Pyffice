@@ -30,7 +30,7 @@ Pyffice provides a unified Python interface for document processing, CAD, media 
 ### Automation & Workflows
 - **Workflows**: Custom workflow creation and execution
 - **Scripts**: Python script execution framework
-- **CLI**: 22 command-line operations (see `python -m pyffice --help`)
+- **CLI**: 46 command-line operations (see `python -m pyffice --help`)
 - **Ports**: Extensible architecture for custom integrations
 
 ### Data & Analytics
@@ -157,7 +157,7 @@ pyffice/
 ├── updates/        # Update management
 ├── web/            # Web utilities
 ├── workflows/      # Workflow automation
-├── cli.py          # CLI interface (72 commands)
+├── cli.py          # CLI interface (46 commands)
 ├── document.py     # Document processing
 └── pyffice.py      # Main entry point
 ```
