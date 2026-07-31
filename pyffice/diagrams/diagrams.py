@@ -333,6 +333,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
 
     def to_dict(self):
         """"""
+        return self
 
     def to_md(self):
         """"""

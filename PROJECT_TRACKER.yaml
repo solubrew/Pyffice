@@ -3,7 +3,7 @@ analysis:
   counts:
     files: 419
     python_files: 217
-    python_lines: 24780
+    python_lines: 24784
     test_files: 51
 audit_date: '1785470638.3677874'
 dimensions:
@@ -159,8 +159,8 @@ dimensions:
         internal_imports: 141
         internal_projects_used:
         - pyffice
-        - kahndor
         - condor
+        - kahndor
         leverage_score: 26.21
         score: 100
         status: pass
@@ -302,7 +302,7 @@ dimensions:
           branches:
             local: []
             remote: []
-          commit_count: 272
+          commit_count: 273
           commits: []
           contributors: []
           is_repo: true
@@ -517,12 +517,8 @@ dimensions:
   not_implemented:
     details:
       details:
-        count: 2
+        count: 1
         examples:
-        - class: PyfficeDeque
-          file: pyffice/document.py
-          line: 827
-          method: appendleft
         - class: PyfficeDataBase
           file: pyffice/data/base.py
           line: 166
@@ -531,11 +527,11 @@ dimensions:
         - dimension: not_implemented
           rule: NotImplementedError stubs need implementation
           severity: high
-        score: 84
+        score: 92
         status: pass
-      score: 84
+      score: 92
       status: pass
-    score: 84
+    score: 92
     status: pass
   note_comments:
     details:
@@ -1440,21 +1436,14 @@ dimensions:
   unfinished_code:
     details:
       details:
-        empty_methods: 1
-        examples:
-        - class: PyfficeDiagram
-          file: pyffice/diagrams/diagrams.py
-          line: 334
-          method: to_dict
-        issues:
-        - dimension: unfinished_code
-          rule: Empty methods need implementation
-          severity: medium
-        score: 95
+        empty_methods: 0
+        examples: []
+        issues: []
+        score: 100
         status: pass
-      score: 95
+      score: 100
       status: pass
-    score: 95
+    score: 100
     status: pass
   wrapper_antipattern:
     details:
@@ -1467,17 +1456,17 @@ dimensions:
       status: pass
     score: 100
     status: pass
-overall_score: 92.15
+overall_score: 92.5
 project: pyffice
 rubric:
-  audit_overall: 92.15
+  audit_overall: 92.5
   categories: []
   max_points: 0
   percentage: 0.0
-  rubric_name: 06a6cfd2-dc83-7af7-8000-4989ec3cc4d1
+  rubric_name: 06a6cffc-75df-7819-8000-743ff81ee1bb
   rubric_score: 0
   rubric_version: '1.0'
-  score_difference: -92.15
+  score_difference: -92.5
   total_points: 0
   weighted_score: 0
 summary:
@@ -1488,8 +1477,8 @@ summary:
   total_auditors: 11
   total_dimensions: 53
 test_execution:
-  duration_seconds: 26.627238273620605
-  project_score: 92.15
+  duration_seconds: 26.70784044265747
+  project_score: 92.5
   report_file: /home/solubrew/.hermes/projects/pyffice/FALCON_TEST.yaml
   results:
     tests_failed: 27
@@ -1504,7 +1493,7 @@ test_execution:
   status_message: no change (283/310 tests passed)
   timestamp: ''
 versions:
-  project: 6bcd7e7
+  project: 8b40fcb
   project_status: dirty
-  project_uncommitted_changes: 4
+  project_uncommitted_changes: 5
   sasquatch: 4d9f66f

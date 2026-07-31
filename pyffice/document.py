@@ -825,8 +825,11 @@ class PyfficeDeque(PyfficeDocument, deque):
         super().append(item)
 
     def appendleft(self, item):
-        """"""
-        raise NotImplementedError("document.py:820 — empty raise site, behavior not specified")
+        """Add item to the left side of the deque."""
+        if self.max_items is not None:
+            if len(self) >= self.max_items:
+                self.history.append(self.pop())
+        super().appendleft(item)
 
     def set_max_items(self, max_items=None):
         """"""
