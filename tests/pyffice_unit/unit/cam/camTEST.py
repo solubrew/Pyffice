@@ -37,17 +37,17 @@ from pyffice.cam.cam import PyfficeCAMManager  # 2026-01-15 20:29:22
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:12:51
-from kahndor import kahndor  # 2026-01-15 20:19:43
+from kahndor import Instruct, Logma  # 2026-01-15 20:19:43
 
 import pytest  # 2026-01-15 20:29:22
 import hypothesis  # 2026-01-15 20:29:22
-from kahndor import kahndor  # 2026-01-15 20:29:22
+from kahndor import Instruct, Logma  # 2026-01-15 20:29:22
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:29:22
 LOGMA = Logma(__name__)  # 2026-01-15 20:29:22
 PXCFG = join(HERE, "_data_", "camTEST.yaml")  # 2026-01-15 20:29:22
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:22
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:22
 
 
 # ====================================================================================================================||

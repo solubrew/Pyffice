@@ -43,17 +43,17 @@ from pyffice.diagrams.diagrams import PyfficeDiagramConnection  # 2026-01-15 20:
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:13:20
-from kahndor import kahndor  # 2026-01-15 20:20:08
+from kahndor import Instruct, Logma  # 2026-01-15 20:20:08
 
 import pytest  # 2026-01-15 20:29:49
 import hypothesis  # 2026-01-15 20:29:49
-from kahndor import kahndor  # 2026-01-15 20:29:49
+from kahndor import Instruct, Logma  # 2026-01-15 20:29:49
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:29:49
 LOGMA = Logma(__name__)  # 2026-01-15 20:29:49
 PXCFG = join(HERE, "_data_", "diagramsTEST.yaml")  # 2026-01-15 20:29:49
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:49
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:49
 
 
 # ====================================================================================================================||

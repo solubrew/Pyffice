@@ -36,17 +36,17 @@ from pyffice.tags.ratings import PyfficeRating  # 2026-01-15 20:30:43
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:14:20
-from kahndor import kahndor  # 2026-01-15 20:20:59
+from kahndor import Instruct, Logma  # 2026-01-15 20:20:59
 
 import pytest  # 2026-01-15 20:30:43
 import hypothesis  # 2026-01-15 20:30:43
-from kahndor import kahndor  # 2026-01-15 20:30:43
+from kahndor import Instruct, Logma  # 2026-01-15 20:30:43
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:30:43
 LOGMA = Logma(__name__)  # 2026-01-15 20:30:43
 PXCFG = join(HERE, "_data_", "ratingsTEST.yaml")  # 2026-01-15 20:30:43
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:43
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:43
 
 
 # ====================================================================================================================||

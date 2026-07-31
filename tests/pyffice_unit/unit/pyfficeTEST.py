@@ -35,17 +35,17 @@ from pyffice.pyffice import PyfficeCodex  # 2026-01-15 20:30:31
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:14:09
-from kahndor import kahndor  # 2026-01-15 20:20:48
+from kahndor import Instruct, Logma  # 2026-01-15 20:20:48
 
 import pytest  # 2026-01-15 20:30:31
 import hypothesis  # 2026-01-15 20:30:31
-from kahndor import kahndor  # 2026-01-15 20:30:31
+from kahndor import Instruct, Logma  # 2026-01-15 20:30:31
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:30:31
 LOGMA = Logma(__name__)  # 2026-01-15 20:30:31
 PXCFG = join(HERE, "_data_", "pyfficeTEST.yaml")  # 2026-01-15 20:30:31
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:31
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:31
 
 
 # ====================================================================================================================||

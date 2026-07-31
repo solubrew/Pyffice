@@ -35,17 +35,17 @@ from pyffice.calendars.calendars import PyfficeCalendar  # 2026-01-15 20:29:15
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:12:44
-from kahndor import kahndor  # 2026-01-15 20:19:36
+from kahndor import Instruct, Logma  # 2026-01-15 20:19:36
 
 import pytest  # 2026-01-15 20:29:15
 import hypothesis  # 2026-01-15 20:29:15
-from kahndor import kahndor  # 2026-01-15 20:29:15
+from kahndor import Instruct, Logma  # 2026-01-15 20:29:15
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:29:15
 LOGMA = Logma(__name__)  # 2026-01-15 20:29:15
 PXCFG = join(HERE, "_data_", "calendarsTEST.yaml")  # 2026-01-15 20:29:15
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:15
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:15
 
 
 # ====================================================================================================================||

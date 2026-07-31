@@ -35,17 +35,17 @@ from pyffice.config.policies import PyfficePolicy  # 2026-01-15 20:29:35
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:13:04
-from kahndor import kahndor  # 2026-01-15 20:19:55
+from kahndor import Instruct, Logma  # 2026-01-15 20:19:55
 
 import pytest  # 2026-01-15 20:29:35
 import hypothesis  # 2026-01-15 20:29:35
-from kahndor import kahndor  # 2026-01-15 20:29:35
+from kahndor import Instruct, Logma  # 2026-01-15 20:29:35
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:29:35
 LOGMA = Logma(__name__)  # 2026-01-15 20:29:35
 PXCFG = join(HERE, "_data_", "policiesTEST.yaml")  # 2026-01-15 20:29:35
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:35
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:35
 
 
 # ====================================================================================================================||

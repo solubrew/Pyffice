@@ -37,17 +37,17 @@ from pyffice.email.email import PyfficeMailBox  # 2026-01-15 20:29:55
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:13:29
-from kahndor import kahndor  # 2026-01-15 20:20:14
+from kahndor import Instruct, Logma  # 2026-01-15 20:20:14
 
 import pytest  # 2026-01-15 20:29:55
 import hypothesis  # 2026-01-15 20:29:55
-from kahndor import kahndor  # 2026-01-15 20:29:55
+from kahndor import Instruct, Logma  # 2026-01-15 20:29:55
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:29:55
 LOGMA = Logma(__name__)  # 2026-01-15 20:29:55
 PXCFG = join(HERE, "_data_", "emailTEST.yaml")  # 2026-01-15 20:29:55
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:55
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:55
 
 
 # ====================================================================================================================||

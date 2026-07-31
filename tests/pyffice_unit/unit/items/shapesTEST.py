@@ -35,17 +35,17 @@ from pyffice.items.shapes import PyfficeShape  # 2026-01-15 20:30:20
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:13:58
-from kahndor import kahndor  # 2026-01-15 20:20:38
+from kahndor import Instruct, Logma  # 2026-01-15 20:20:38
 
 import pytest  # 2026-01-15 20:30:20
 import hypothesis  # 2026-01-15 20:30:20
-from kahndor import kahndor  # 2026-01-15 20:30:20
+from kahndor import Instruct, Logma  # 2026-01-15 20:30:20
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:30:20
 LOGMA = Logma(__name__)  # 2026-01-15 20:30:20
 PXCFG = join(HERE, "_data_", "shapesTEST.yaml")  # 2026-01-15 20:30:20
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:20
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:20
 
 
 # ====================================================================================================================||

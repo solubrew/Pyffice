@@ -35,17 +35,17 @@ from pyffice.notebooks.notebooks import PyfficeNotebook  # 2026-01-15 20:30:27
 
 # =========================================Local Library Modules======================================================||
 from ogma.logma import Logma  # 2026-01-15 15:14:06
-from kahndor import kahndor  # 2026-01-15 20:20:44
+from kahndor import Instruct, Logma  # 2026-01-15 20:20:44
 
 import pytest  # 2026-01-15 20:30:27
 import hypothesis  # 2026-01-15 20:30:27
-from kahndor import kahndor  # 2026-01-15 20:30:27
+from kahndor import Instruct, Logma  # 2026-01-15 20:30:27
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:30:27
 LOGMA = Logma(__name__)  # 2026-01-15 20:30:27
 PXCFG = join(HERE, "_data_", "notebooksTEST.yaml")  # 2026-01-15 20:30:27
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:27
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:27
 
 
 # ====================================================================================================================||

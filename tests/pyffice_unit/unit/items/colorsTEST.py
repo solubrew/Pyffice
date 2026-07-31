@@ -42,17 +42,17 @@ from pyffice.items.colors import PyfficeColorPalette  # 2026-01-15 20:30:15
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:13:51
-from kahndor import kahndor  # 2026-01-15 20:20:33
+from kahndor import Instruct, Logma  # 2026-01-15 20:20:33
 
 import pytest  # 2026-01-15 20:30:15
 import hypothesis  # 2026-01-15 20:30:15
-from kahndor import kahndor  # 2026-01-15 20:30:15
+from kahndor import Instruct, Logma  # 2026-01-15 20:30:15
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:30:16
 LOGMA = Logma(__name__)  # 2026-01-15 20:30:16
 PXCFG = join(HERE, "_data_", "colorsTEST.yaml")  # 2026-01-15 20:30:16
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:16
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:16
 
 
 # ====================================================================================================================||

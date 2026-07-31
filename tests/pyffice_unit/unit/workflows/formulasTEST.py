@@ -37,17 +37,17 @@ from pyffice.workflows.formulas import PyfficeFormula  # 2026-01-15 20:31:34
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:15:19
-from kahndor import kahndor  # 2026-01-15 20:21:49
+from kahndor import Instruct, Logma  # 2026-01-15 20:21:49
 
 import pytest  # 2026-01-15 20:31:34
 import hypothesis  # 2026-01-15 20:31:34
-from kahndor import kahndor  # 2026-01-15 20:31:34
+from kahndor import Instruct, Logma  # 2026-01-15 20:31:34
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:31:34
 LOGMA = Logma(__name__)  # 2026-01-15 20:31:34
 PXCFG = join(HERE, "_data_", "formulasTEST.yaml")  # 2026-01-15 20:31:34
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:31:34
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:31:34
 
 
 # ====================================================================================================================||

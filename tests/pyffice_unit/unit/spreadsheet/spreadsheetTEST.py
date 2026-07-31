@@ -38,17 +38,17 @@ from pyffice.spreadsheet.spreadsheet import PyfficeMatrix  # 2026-01-15 20:30:39
 
 # =========================================Local Library Modules======================================================||
 from ogma.logma import Logma  # 2026-01-15 15:14:16
-from kahndor import kahndor  # 2026-01-15 20:20:56
+from kahndor import Instruct, Logma  # 2026-01-15 20:20:56
 
 import pytest  # 2026-01-15 20:30:39
 import hypothesis  # 2026-01-15 20:30:39
-from kahndor import kahndor  # 2026-01-15 20:30:39
+from kahndor import Instruct, Logma  # 2026-01-15 20:30:39
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:30:39
 LOGMA = Logma(__name__)  # 2026-01-15 20:30:39
 PXCFG = join(HERE, "_data_", "spreadsheetTEST.yaml")  # 2026-01-15 20:30:39
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:39
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:39
 
 
 # ====================================================================================================================||

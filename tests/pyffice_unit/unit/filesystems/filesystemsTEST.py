@@ -35,17 +35,17 @@ from pyffice.filesystems.filesystems import PyfficeFileSystem  # 2026-01-15 20:2
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:13:32
-from kahndor import kahndor  # 2026-01-15 20:20:17
+from kahndor import Instruct, Logma  # 2026-01-15 20:20:17
 
 import pytest  # 2026-01-15 20:29:58
 import hypothesis  # 2026-01-15 20:29:58
-from kahndor import kahndor  # 2026-01-15 20:29:58
+from kahndor import Instruct, Logma  # 2026-01-15 20:29:58
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:29:58
 LOGMA = Logma(__name__)  # 2026-01-15 20:29:58
 PXCFG = join(HERE, "_data_", "filesystemsTEST.yaml")  # 2026-01-15 20:29:58
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:58
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:58
 
 
 # ====================================================================================================================||

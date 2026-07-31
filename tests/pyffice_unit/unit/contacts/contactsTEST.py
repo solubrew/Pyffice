@@ -37,17 +37,17 @@ from pyffice.contacts.contacts import PyfficeRolodex  # 2026-01-15 20:29:42
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:13:12
-from kahndor import kahndor  # 2026-01-15 20:20:02
+from kahndor import Instruct, Logma  # 2026-01-15 20:20:02
 
 import pytest  # 2026-01-15 20:29:42
 import hypothesis  # 2026-01-15 20:29:42
-from kahndor import kahndor  # 2026-01-15 20:29:42
+from kahndor import Instruct, Logma  # 2026-01-15 20:29:42
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:29:42
 LOGMA = Logma(__name__)  # 2026-01-15 20:29:42
 PXCFG = join(HERE, "_data_", "contactsTEST.yaml")  # 2026-01-15 20:29:42
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:42
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:42
 
 
 # ====================================================================================================================||

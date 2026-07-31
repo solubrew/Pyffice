@@ -35,17 +35,17 @@ from pyffice.text.bibliographies import PyfficeBibliography  # 2026-01-15 20:30:
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:14:24
-from kahndor import kahndor  # 2026-01-15 20:21:03
+from kahndor import Instruct, Logma  # 2026-01-15 20:21:03
 
 import pytest  # 2026-01-15 20:30:48
 import hypothesis  # 2026-01-15 20:30:48
-from kahndor import kahndor  # 2026-01-15 20:30:48
+from kahndor import Instruct, Logma  # 2026-01-15 20:30:48
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:30:48
 LOGMA = Logma(__name__)  # 2026-01-15 20:30:48
 PXCFG = join(HERE, "_data_", "bibliographiesTEST.yaml")  # 2026-01-15 20:30:48
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:48
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:48
 
 
 # ====================================================================================================================||

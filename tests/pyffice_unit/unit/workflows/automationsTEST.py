@@ -35,17 +35,17 @@ from pyffice.workflows.automations import PyfficeAutomationManager  # 2026-01-15
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:15:18
-from kahndor import kahndor  # 2026-01-15 20:21:47
+from kahndor import Instruct, Logma  # 2026-01-15 20:21:47
 
 import pytest  # 2026-01-15 20:31:33
 import hypothesis  # 2026-01-15 20:31:33
-from kahndor import kahndor  # 2026-01-15 20:31:32
+from kahndor import Instruct, Logma  # 2026-01-15 20:31:32
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:31:33
 LOGMA = Logma(__name__)  # 2026-01-15 20:31:33
 PXCFG = join(HERE, "_data_", "automationsTEST.yaml")  # 2026-01-15 20:31:33
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:31:33
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:31:33
 
 
 # ====================================================================================================================||

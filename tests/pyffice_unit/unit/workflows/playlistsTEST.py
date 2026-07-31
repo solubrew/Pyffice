@@ -35,17 +35,17 @@ from pyffice.workflows.playlists import PyfficePlaylist  # 2026-01-15 20:31:35
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:15:21
-from kahndor import kahndor  # 2026-01-15 20:21:50
+from kahndor import Instruct, Logma  # 2026-01-15 20:21:50
 
 import pytest  # 2026-01-15 20:31:35
 import hypothesis  # 2026-01-15 20:31:35
-from kahndor import kahndor  # 2026-01-15 20:31:35
+from kahndor import Instruct, Logma  # 2026-01-15 20:31:35
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:31:35
 LOGMA = Logma(__name__)  # 2026-01-15 20:31:35
 PXCFG = join(HERE, "_data_", "playlistsTEST.yaml")  # 2026-01-15 20:31:35
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:31:36
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:31:36
 
 
 # ====================================================================================================================||

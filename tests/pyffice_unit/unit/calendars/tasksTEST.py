@@ -39,17 +39,17 @@ from pyffice.calendars.tasks import PyfficeTask  # 2026-01-15 20:29:18
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:12:47
-from kahndor import kahndor  # 2026-01-15 20:19:39
+from kahndor import Instruct, Logma  # 2026-01-15 20:19:39
 
 import pytest  # 2026-01-15 20:29:18
 import hypothesis  # 2026-01-15 20:29:18
-from kahndor import kahndor  # 2026-01-15 20:29:18
+from kahndor import Instruct, Logma  # 2026-01-15 20:29:18
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:29:18
 LOGMA = Logma(__name__)  # 2026-01-15 20:29:18
 PXCFG = join(HERE, "_data_", "tasksTEST.yaml")  # 2026-01-15 20:29:18
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:18
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:18
 
 
 # ====================================================================================================================||

@@ -41,17 +41,17 @@ from pyffice.items.text import PyfficeParagraph  # 2026-01-15 20:30:25
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:14:04
-from kahndor import kahndor  # 2026-01-15 20:20:42
+from kahndor import Instruct, Logma  # 2026-01-15 20:20:42
 
 import pytest  # 2026-01-15 20:30:25
 import hypothesis  # 2026-01-15 20:30:25
-from kahndor import kahndor  # 2026-01-15 20:30:25
+from kahndor import Instruct, Logma  # 2026-01-15 20:30:25
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:30:25
 LOGMA = Logma(__name__)  # 2026-01-15 20:30:25
 PXCFG = join(HERE, "_data_", "textTEST.yaml")  # 2026-01-15 20:30:25
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:25
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:25
 
 
 # ====================================================================================================================||

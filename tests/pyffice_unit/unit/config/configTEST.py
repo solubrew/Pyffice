@@ -39,17 +39,17 @@ from pyffice.config.config import PyfficeHelp  # 2026-01-15 20:29:29
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:12:58
-from kahndor import kahndor  # 2026-01-15 20:19:50
+from kahndor import Instruct, Logma  # 2026-01-15 20:19:50
 
 import pytest  # 2026-01-15 20:29:29
 import hypothesis  # 2026-01-15 20:29:29
-from kahndor import kahndor  # 2026-01-15 20:29:29
+from kahndor import Instruct, Logma  # 2026-01-15 20:29:29
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:29:29
 LOGMA = Logma(__name__)  # 2026-01-15 20:29:29
 PXCFG = join(HERE, "_data_", "configTEST.yaml")  # 2026-01-15 20:29:29
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:29
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:29
 
 
 # ====================================================================================================================||

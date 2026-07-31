@@ -33,16 +33,16 @@ from kahndor.logma import Logma  # 2026-01-15 20:30:37
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 20:20:53
 
-from kahndor import kahndor  # 2026-01-15 20:20:53
+from kahndor import Instruct, Logma  # 2026-01-15 20:20:53
 import pytest  # 2026-01-15 20:30:37
 import hypothesis  # 2026-01-15 20:30:37
-from kahndor import kahndor  # 2026-01-15 20:30:37
+from kahndor import Instruct, Logma  # 2026-01-15 20:30:37
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:30:37
 LOGMA = Logma(__name__)  # 2026-01-15 20:30:37
 PXCFG = join(HERE, "_data_", "__init__TEST.yaml")  # 2026-01-15 20:30:37
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:37
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:37
 
 
 # ====================================================================================================================||

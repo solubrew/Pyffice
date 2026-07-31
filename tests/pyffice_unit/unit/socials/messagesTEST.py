@@ -39,17 +39,17 @@ from pyffice.socials.messages import PyfficePostalMail  # 2026-01-15 20:30:35
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:14:13
-from kahndor import kahndor  # 2026-01-15 20:20:51
+from kahndor import Instruct, Logma  # 2026-01-15 20:20:51
 
 import pytest  # 2026-01-15 20:30:35
 import hypothesis  # 2026-01-15 20:30:35
-from kahndor import kahndor  # 2026-01-15 20:30:35
+from kahndor import Instruct, Logma  # 2026-01-15 20:30:35
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:30:35
 LOGMA = Logma(__name__)  # 2026-01-15 20:30:35
 PXCFG = join(HERE, "_data_", "messagesTEST.yaml")  # 2026-01-15 20:30:35
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:35
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:35
 
 
 # ====================================================================================================================||

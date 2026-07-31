@@ -35,17 +35,17 @@ from pyffice.calendars.gantt import PyfficeGanttChart  # 2026-01-15 20:29:16
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:12:45
-from kahndor import kahndor  # 2026-01-15 20:19:37
+from kahndor import Instruct, Logma  # 2026-01-15 20:19:37
 
 import pytest  # 2026-01-15 20:29:16
 import hypothesis  # 2026-01-15 20:29:16
-from kahndor import kahndor  # 2026-01-15 20:29:16
+from kahndor import Instruct, Logma  # 2026-01-15 20:29:16
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:29:16
 LOGMA = Logma(__name__)  # 2026-01-15 20:29:16
 PXCFG = join(HERE, "_data_", "ganttTEST.yaml")  # 2026-01-15 20:29:16
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:16
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:16
 
 
 # ====================================================================================================================||

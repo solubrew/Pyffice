@@ -37,17 +37,17 @@ from pyffice.web.url import PyfficeURLLibrary  # 2026-01-15 20:31:26
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:15:08
-from kahndor import kahndor  # 2026-01-15 20:21:41
+from kahndor import Instruct, Logma  # 2026-01-15 20:21:41
 
 import pytest  # 2026-01-15 20:31:26
 import hypothesis  # 2026-01-15 20:31:26
-from kahndor import kahndor  # 2026-01-15 20:31:26
+from kahndor import Instruct, Logma  # 2026-01-15 20:31:26
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:31:26
 LOGMA = Logma(__name__)  # 2026-01-15 20:31:26
 PXCFG = join(HERE, "_data_", "urlTEST.yaml")  # 2026-01-15 20:31:26
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:31:26
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:31:26
 
 
 # ====================================================================================================================||

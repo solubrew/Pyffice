@@ -39,17 +39,17 @@ from pyffice.images.images import PyfficeScreenShot  # 2026-01-15 20:30:06
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:13:40
-from kahndor import kahndor  # 2026-01-15 20:20:24
+from kahndor import Instruct, Logma  # 2026-01-15 20:20:24
 
 import pytest  # 2026-01-15 20:30:06
 import hypothesis  # 2026-01-15 20:30:06
-from kahndor import kahndor  # 2026-01-15 20:30:06
+from kahndor import Instruct, Logma  # 2026-01-15 20:30:06
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:30:06
 LOGMA = Logma(__name__)  # 2026-01-15 20:30:06
 PXCFG = join(HERE, "_data_", "imagesTEST.yaml")  # 2026-01-15 20:30:06
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:06
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:06
 
 
 # ====================================================================================================================||

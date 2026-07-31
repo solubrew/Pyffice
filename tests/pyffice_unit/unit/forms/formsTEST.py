@@ -39,17 +39,17 @@ from pyffice.forms.forms import PyfficeSurvey  # 2026-01-15 20:30:01
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:13:34
-from kahndor import kahndor  # 2026-01-15 20:20:19
+from kahndor import Instruct, Logma  # 2026-01-15 20:20:19
 
 import pytest  # 2026-01-15 20:30:01
 import hypothesis  # 2026-01-15 20:30:01
-from kahndor import kahndor  # 2026-01-15 20:30:01
+from kahndor import Instruct, Logma  # 2026-01-15 20:30:01
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:30:01
 LOGMA = Logma(__name__)  # 2026-01-15 20:30:01
 PXCFG = join(HERE, "_data_", "formsTEST.yaml")  # 2026-01-15 20:30:01
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:01
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:01
 
 
 # ====================================================================================================================||

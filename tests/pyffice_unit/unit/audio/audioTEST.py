@@ -37,17 +37,17 @@ from pyffice.audio.audio import PyfficePlayList  # 2026-01-15 20:29:09
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:12:38
-from kahndor import kahndor  # 2026-01-15 20:19:30
+from kahndor import Instruct, Logma  # 2026-01-15 20:19:30
 
 import pytest  # 2026-01-15 20:29:09
 import hypothesis  # 2026-01-15 20:29:09
-from kahndor import kahndor  # 2026-01-15 20:29:09
+from kahndor import Instruct, Logma  # 2026-01-15 20:29:09
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:29:09
 LOGMA = Logma(__name__)  # 2026-01-15 20:29:09
 PXCFG = join(HERE, "_data_", "audioTEST.yaml")  # 2026-01-15 20:29:09
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:09
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:29:09
 
 
 # ====================================================================================================================||

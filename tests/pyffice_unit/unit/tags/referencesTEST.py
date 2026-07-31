@@ -35,17 +35,17 @@ from pyffice.tags.references import PyfficeReference  # 2026-01-15 20:30:44
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:14:21
-from kahndor import kahndor  # 2026-01-15 20:21:00
+from kahndor import Instruct, Logma  # 2026-01-15 20:21:00
 
 import pytest  # 2026-01-15 20:30:44
 import hypothesis  # 2026-01-15 20:30:44
-from kahndor import kahndor  # 2026-01-15 20:30:44
+from kahndor import Instruct, Logma  # 2026-01-15 20:30:44
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:30:44
 LOGMA = Logma(__name__)  # 2026-01-15 20:30:44
 PXCFG = join(HERE, "_data_", "referencesTEST.yaml")  # 2026-01-15 20:30:44
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:44
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:44
 
 
 # ====================================================================================================================||

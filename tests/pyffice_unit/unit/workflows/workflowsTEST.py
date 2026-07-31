@@ -35,17 +35,17 @@ from pyffice.workflows.workflows import PyfficeWorkflow  # 2026-01-15 20:31:38
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:15:23
-from kahndor import kahndor  # 2026-01-15 20:21:52
+from kahndor import Instruct, Logma  # 2026-01-15 20:21:52
 
 import pytest  # 2026-01-15 20:31:38
 import hypothesis  # 2026-01-15 20:31:38
-from kahndor import kahndor  # 2026-01-15 20:31:38
+from kahndor import Instruct, Logma  # 2026-01-15 20:31:38
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:31:38
 LOGMA = Logma(__name__)  # 2026-01-15 20:31:38
 PXCFG = join(HERE, "_data_", "workflowsTEST.yaml")  # 2026-01-15 20:31:38
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:31:38
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:31:38
 
 
 # ====================================================================================================================||

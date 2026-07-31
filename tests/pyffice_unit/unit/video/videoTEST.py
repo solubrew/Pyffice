@@ -35,17 +35,17 @@ from pyffice.video.video import PyfficeVideo  # 2026-01-15 20:30:56
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:14:32
-from kahndor import kahndor  # 2026-01-15 20:21:11
+from kahndor import Instruct, Logma  # 2026-01-15 20:21:11
 
 import pytest  # 2026-01-15 20:30:56
 import hypothesis  # 2026-01-15 20:30:56
-from kahndor import kahndor  # 2026-01-15 20:30:56
+from kahndor import Instruct, Logma  # 2026-01-15 20:30:56
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:30:56
 LOGMA = Logma(__name__)  # 2026-01-15 20:30:56
 PXCFG = join(HERE, "_data_", "videoTEST.yaml")  # 2026-01-15 20:30:56
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:56
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:56
 
 
 # ====================================================================================================================||

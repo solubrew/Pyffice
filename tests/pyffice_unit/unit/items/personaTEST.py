@@ -35,17 +35,17 @@ from pyffice.items.persona import PyfficePersona  # 2026-01-15 20:30:18
 
 # =========================================Local Library Modules======================================================||
 from kahndor.logma import Logma  # 2026-01-15 15:13:56
-from kahndor import kahndor  # 2026-01-15 20:20:36
+from kahndor import Instruct, Logma  # 2026-01-15 20:20:36
 
 import pytest  # 2026-01-15 20:30:18
 import hypothesis  # 2026-01-15 20:30:18
-from kahndor import kahndor  # 2026-01-15 20:30:18
+from kahndor import Instruct, Logma  # 2026-01-15 20:30:18
 
 # ====================================================================================================================||
 HERE = join(dirname(__file__))  # 2026-01-15 20:30:18
 LOGMA = Logma(__name__)  # 2026-01-15 20:30:18
 PXCFG = join(HERE, "_data_", "personaTEST.yaml")  # 2026-01-15 20:30:18
-CFG = kahndor.Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:18
+CFG = Instruct(PXCFG).load().dikt  # 2026-01-15 20:30:18
 
 
 # ====================================================================================================================||
