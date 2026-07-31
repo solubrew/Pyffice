@@ -50,13 +50,28 @@ class PyfficeShape(PyfficeUnit):
         self.texts = None
 
     def add_shape(self, shape):
-        """"""
+        """Add a shape.
+        
+        Args:
+            shape: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {}
         self.shapes[shape] = PyfficeShape(cfg)
         return self
 
     def add_text(self, text, position=None):
-        """"""
+        """Add a text.
+        
+        Args:
+            text: Parameter.
+            position: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if position is None:
             position = self.origin
         text = PyfficeText({"text": text, "position": position})
@@ -66,7 +81,14 @@ class PyfficeShape(PyfficeUnit):
         return self
 
     def load_unit(self, unit=None):
-        """"""
+        """Load a unit dict into this document.
+        
+        Args:
+            unit: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Unit {unit}")
         if unit is None:
             unit = self.config.dikt.get("unit", {})
@@ -78,7 +100,14 @@ class PyfficeShape(PyfficeUnit):
         return self
 
     def mirror_shape(self, axis):
-        """"""
+        """Mirror shape.
+        
+        Args:
+            axis: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if axis == "x":
             self.set_origin([-self.origin[0], self.origin[1]])
             self.set_size([-self.size[0], self.size[1]])
@@ -118,7 +147,15 @@ class PyfficeShape(PyfficeUnit):
         return self
 
     def set_background(self, background, item="0"):
-        """"""
+        """Set the background.
+        
+        Args:
+            background: Parameter.
+            item: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"color": background}
         background_color = PyfficeColor(cfg)
         if item == "0":
@@ -134,7 +171,14 @@ class PyfficeShape(PyfficeUnit):
         return self
 
     def set_origin(self, origin):
-        """"""
+        """Set the origin.
+        
+        Args:
+            origin: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if origin != self.origin:
             self.add_change("origin", self.origin, origin)
         self.origin = origin
@@ -143,7 +187,14 @@ class PyfficeShape(PyfficeUnit):
         return self
 
     def set_shapes(self, shapes):
-        """"""
+        """Set the shapes.
+        
+        Args:
+            shapes: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         for shape in shapes:
             match shape:
                 case "rectangle":
@@ -170,7 +221,14 @@ class PyfficeShape(PyfficeUnit):
         return self
 
     def set_size(self, size):
-        """"""
+        """Set the size.
+        
+        Args:
+            size: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if size != self.size:
             self.add_change("size", self.size, size)
         self.size = size
@@ -179,7 +237,11 @@ class PyfficeShape(PyfficeUnit):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["unit"] = {
             "background": self.background_color.to_dict() if self.background is not None else None,
@@ -192,7 +254,11 @@ class PyfficeShape(PyfficeUnit):
         return doc
 
     def to_html(self):
-        """"""
+        """Convert this document to html.
+        
+        Returns:
+            Self for chaining.
+        """
         return self.html
 
     def _set_envelope(self, top_left, bottom_right):

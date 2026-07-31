@@ -47,11 +47,26 @@ class PyfficeCADAssembly(PyfficeDocumentManager):
         self.config.override(cfg)
 
     def add_document(self, document):
-        """"""
+        """Add a child document to this manager.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         super().add_document(document)
 
     def create_new_document(self, name, type_=None):
-        """"""
+        """Create a new document.
+        
+        Args:
+            name: Parameter.
+            type_: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         super().create_new_document(name, "manager")
         self.document["document"] = {
             "material": None,
@@ -72,7 +87,11 @@ class PyfficeCADAssembly(PyfficeDocumentManager):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         return doc
 
@@ -88,7 +107,14 @@ class PyfficeCADManager(PyfficeDocumentManager):
         self.config.override(cfg)
 
     def add_document(self, document):
-        """"""
+        """Add a child document to this manager.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         super().add_document(document)
 
     def add_part(self, assembly):
@@ -97,11 +123,23 @@ class PyfficeCADManager(PyfficeDocumentManager):
         return self
 
     def create_new_document(self, name, type_=None):
-        """"""
+        """Create a new document.
+        
+        Args:
+            name: Parameter.
+            type_: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         super().create_new_document(name, "manager")
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         return doc
 
@@ -118,11 +156,22 @@ class PyfficeCADPart(PyfficePart):
         self.config.override(cfg)
 
     def create_new_document(self, name):
-        """"""
+        """Create a new document.
+        
+        Args:
+            name: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         super().create_new_document(name, "cadpart")
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         return doc
 

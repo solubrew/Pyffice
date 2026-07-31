@@ -178,7 +178,14 @@ class PyfficeText(PyfficeUnit):
         self.vertical = None
 
     def load_unit(self, unit=None):
-        """"""
+        """Load a unit dict into this document.
+        
+        Args:
+            unit: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Unit {unit}")
         if unit is None:
             unit = self.config.dikt.get("unit", {})
@@ -195,7 +202,15 @@ class PyfficeText(PyfficeUnit):
         return self
 
     def set_alignment(self, horizontal=None, vertical=None):
-        """"""
+        """Set the alignment.
+        
+        Args:
+            horizontal: Parameter.
+            vertical: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if horizontal is None:
             horizontal = self.config.dikt.get("alignment", {}).get("horizontal", None)
         self.horizontal = horizontal
@@ -205,7 +220,14 @@ class PyfficeText(PyfficeUnit):
         return self
 
     def set_data_format(self, data_format):
-        """"""
+        """Set the data format.
+        
+        Args:
+            data_format: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if data_format != self.data_format:
             self.add_change("data_format", self.data_format, data_format)
             self.data_format = data_format
@@ -235,7 +257,14 @@ class PyfficeText(PyfficeUnit):
         return self
 
     def set_font_color(self, font=None):
-        """"""
+        """Set the font color.
+        
+        Args:
+            font: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"color": font.get("color", self.config.dikt.get("font", {}).get("color", None))}
         color = PyfficeColor(cfg)
         color.load_unit()
@@ -245,7 +274,14 @@ class PyfficeText(PyfficeUnit):
         return self
 
     def set_color_background(self, font):
-        """"""
+        """Set the color background.
+        
+        Args:
+            font: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"color": font.get("color", self.config.dikt.get("font", {}).get("color", None))}
         color = PyfficeColor(cfg)
         color.load_unit()
@@ -255,7 +291,14 @@ class PyfficeText(PyfficeUnit):
         return self
 
     def set_color_foreground(self, font):
-        """"""
+        """Set the color foreground.
+        
+        Args:
+            font: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"color": font.get("color", self.config.dikt.get("font", {}).get("color", None))}
         color = PyfficeColor(cfg)
         color.load_unit()
@@ -265,21 +308,39 @@ class PyfficeText(PyfficeUnit):
         return self
 
     def set_html(self, value):
-        """"""
+        """Set the html.
+        
+        Args:
+            value: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if value != self.html:
             self.add_change("html", self.html, value)
             self.html = value
         return self
 
     def set_text(self, text):
-        """"""
+        """Set the text.
+        
+        Args:
+            text: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if text != self.value:
             self.add_change("value", self.value, text)
             self.value = text
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         if self.color is None:
             self.color = PyfficeColor("black")
@@ -305,7 +366,11 @@ class PyfficeText(PyfficeUnit):
         return doc
 
     def to_html(self):
-        """"""
+        """Convert this document to html.
+        
+        Returns:
+            Self for chaining.
+        """
         text = f"<font size={self.font['size']} color={self.font['color'].to_html()} " + ">" + self.value + "</font>"
         self.html = text
         return self.html

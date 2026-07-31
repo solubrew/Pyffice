@@ -71,7 +71,14 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
         self.connections = {}
 
     def load_database(self, database):
-        """"""
+        """Load database into this document.
+        
+        Args:
+            database: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.databases[database] = self.notion.search_db(database)
         if self.databases[database] is not None and self.databases[database] != []:
             self.databases[database] = self.databases[database].item()
@@ -145,7 +152,14 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
         return views[view] if 0 <= view < len(views) else None
 
     def load_document(self, document):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         super().load_document(document)
         return self
 

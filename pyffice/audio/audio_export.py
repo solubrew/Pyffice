@@ -56,7 +56,17 @@ class PyfficeAudio(PyfficeDocument):
         # self.audio = pydub.AudioSegment.from_file(path)
 
     def add_fade(self, inn=False, out=False, in_duration=None, out_duration=None):
-        """"""
+        """Add a fade.
+        
+        Args:
+            inn: Parameter.
+            out: Parameter.
+            in_duration: Parameter.
+            out_duration: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if inn:
             if in_duration is None:
                 in_duration = 2000
@@ -68,20 +78,43 @@ class PyfficeAudio(PyfficeDocument):
         return self
 
     def convert_mp3_to_wave(self, new_path):
-        """"""
+        """Convert mp3 to wave.
+        
+        Args:
+            new_path: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if not has_ffmpeg:
             logma.warning(f"MP3 Not Supported without FFMPEG.")
         return self
 
     def convert_wav_to_mp3(self, new_path):
-        """"""
+        """Convert wav to mp3.
+        
+        Args:
+            new_path: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if not has_ffmpeg:
             logma.warning(f"MP3 Not Supported without FFMPEG.")
         self.audio.export(new_path, format="mp3")
         return self
 
     def cut_section(self, start, end, keep=False):
-        """"""
+        """Cut section.
+        
+        Args:
+            start: Parameter.
+            end: Parameter.
+            keep: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         trimmed_audio = self.audio[start:end]
         trimmed_audio.export(self.path, format="mp3")
         return self
@@ -111,7 +144,11 @@ class PyfficeAudio(PyfficeDocument):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         return doc
 
@@ -127,7 +164,11 @@ class PyfficePlayList(PyfficeDocumentManager):
         self.config.override(cfg)
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         return doc
 

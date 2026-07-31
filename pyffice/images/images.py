@@ -168,7 +168,14 @@ class PyfficeImage(PyfficeDocument):
         self.thumbnail.thumbnail(size)
         return self
     def convert_to(self, format):
-        """"""
+        """Convert to.
+        
+        Args:
+            format: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         match format:
             case ".png":
                 self._convert_to_png()
@@ -250,7 +257,15 @@ class PyfficeImage(PyfficeDocument):
         return self
 
     def open_file(self, file=None, if_text_only=True):
-        """"""
+        """Open file.
+        
+        Args:
+            file: Parameter.
+            if_text_only: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if file is None:
             file = self.file_path
         self.set_syntax("file")
@@ -273,7 +288,14 @@ class PyfficeImage(PyfficeDocument):
         return self
 
     def set_content(self, content):
-        """"""
+        """Set the content.
+        
+        Args:
+            content: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         from pyffice.pyffice import UnknownLocationError
         if content is None:
             return self
@@ -305,14 +327,28 @@ class PyfficeImage(PyfficeDocument):
         return self
 
     def set_objects(self, objects):
-        """"""
+        """Set the objects.
+        
+        Args:
+            objects: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if objects != self.objects:
             self.add_change("objects", self.objects, objects)
             self.objects = objects
         return self
 
     def set_palette(self, palette):
-        """"""
+        """Set the palette.
+        
+        Args:
+            palette: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if palette != self.palette:
             self.add_change("palette", self.palette, palette)
             self.palette = palette
@@ -334,7 +370,11 @@ class PyfficeImage(PyfficeDocument):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["data"]["document_type"] = "image"
         doc["data"]["path"] = self.file_path
@@ -354,7 +394,14 @@ class PyfficeImageManager(PyfficeDocumentManager):
             self.load_document(self.config.dikt.get("document", {}))
 
     def add_image(self, image):
-        """"""
+        """Add a image.
+        
+        Args:
+            image: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         image = PyfficeImage(image)
         self.images.append(image)
         return self
@@ -376,7 +423,14 @@ class PyfficeImageManager(PyfficeDocumentManager):
         return []
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if document is None:
             document = self.config.dikt.get("document", {})
             if document is None:
@@ -391,7 +445,15 @@ class PyfficeImageManager(PyfficeDocumentManager):
         return self
 
     def remove_image(self, image, delete_=False):
-        """"""
+        """Remove the image.
+        
+        Args:
+            image: Parameter.
+            delete_: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if isinstance(image, str):
             image = PyfficeImage(image)
         self.images.pop(self.images.index(image.finger_print))
@@ -399,7 +461,11 @@ class PyfficeImageManager(PyfficeDocumentManager):
             fonql.remove_file(image.path)
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         return doc
 
@@ -415,7 +481,14 @@ class PyfficeScreenShot(PyfficeDocument):
         self.image = None
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if document is None:
             document = self.config.dikt.get("document", {})
             if document is None:
@@ -441,7 +514,11 @@ class PyfficeScreenShot(PyfficeDocument):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         return doc
 

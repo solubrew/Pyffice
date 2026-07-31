@@ -109,7 +109,14 @@ class PyfficeColorPalette(PyfficeDocument):
         return transformed_palette
 
     def create_analogous_colors(self, color):
-        """"""
+        """Create a analogous colors.
+        
+        Args:
+            color: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         new_color = PyfficeColor(color.to_dict())
         h, s, l = new_color.get_hsl()
         h = (h + (-30 / 360)) % 1.0
@@ -119,7 +126,14 @@ class PyfficeColorPalette(PyfficeDocument):
         return new_color
 
     def create_clash_colors(self, color):
-        """"""
+        """Create a clash colors.
+        
+        Args:
+            color: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         new_color = PyfficeColor(color.to_dict())
         h, s, l = new_color.get_hsl()
         h = ((h + (-30 / 360)) % 1.0, s, l)
@@ -129,13 +143,27 @@ class PyfficeColorPalette(PyfficeDocument):
         return new_color
 
     def create_complimentary_colors(self, color):
-        """"""
+        """Create a complimentary colors.
+        
+        Args:
+            color: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         new_color = PyfficeColor(color.to_dict())
         h, s, l = new_color.get_hsl()
         return new_color
 
     def create_neutral_colors(self, color):
-        """"""
+        """Create a neutral colors.
+        
+        Args:
+            color: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         new_color = PyfficeColor(color.to_dict())
         h, s, l = new_color.get_hsl()
         h = (h, s * 0.5, l)
@@ -145,12 +173,27 @@ class PyfficeColorPalette(PyfficeDocument):
         return new_color
 
     def create_square_colors(self, color):
-        """"""
+        """Create a square colors.
+        
+        Args:
+            color: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.create_tone_colors(color, num_tones=4)
         return self
 
     def create_tone_colors(self, color, num_tones=5):
-        """"""
+        """Create a tone colors.
+        
+        Args:
+            color: Parameter.
+            num_tones: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         for i in range(num_tones - 1):
             new_color = PyfficeColor(color.to_dict())
             h, s, l = new_color.get_hsl()
@@ -158,17 +201,38 @@ class PyfficeColorPalette(PyfficeDocument):
             self.add_color(new_color)
 
     def create_tetradic_colors(self, color):
-        """"""
+        """Create a tetradic colors.
+        
+        Args:
+            color: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.create_tone_colors(color, num_tones=4)
         return self
 
     def create_triadic_colors(self, color):
-        """"""
+        """Create a triadic colors.
+        
+        Args:
+            color: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.create_tone_colors(color, num_tones=3)
         return self
 
     def del_color(self, color):
-        """"""
+        """Remove the color.
+        
+        Args:
+            color: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.colors.remove(color)
         self.hex_colors.remove(color.get_hex())
         self.add_change("colors", self.colors, color, "del")
@@ -209,7 +273,14 @@ class PyfficeColorPalette(PyfficeDocument):
         raise ValueError(f"Color with name '{color_name}' not found in the palette.")
 
     def get_palette(self, format_="table"):
-        """"""
+        """Return the palette.
+        
+        Args:
+            format_: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.extract_colors(self.parent)
         cfg = {"columns": [], "records": [[x.name, x.hex, self.get_usage(x)] for x in self.colors]}
         palette_table = PyfficeTable(cfg)
@@ -223,7 +294,14 @@ class PyfficeColorPalette(PyfficeDocument):
         return self.palette_table.to_dict("records-only")
 
     def get_usage(self, color):
-        """"""
+        """Return the usage.
+        
+        Args:
+            color: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if self.parent is None:
             return None
         usage = 0
@@ -246,7 +324,14 @@ class PyfficeColorPalette(PyfficeDocument):
         return self
 
     def scale_fx(self, factor):
-        """"""
+        """Scale fx.
+        
+        Args:
+            factor: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         return lambda r, g, b: (r * factor, g * factor, b * factor)
 
     def set_palette(self):
@@ -255,20 +340,42 @@ class PyfficeColorPalette(PyfficeDocument):
         return self
 
     def set_palette_darker(self, factor):
-        """"""
+        """Set the palette darker.
+        
+        Args:
+            factor: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.scale_fx(factor)
 
     def set_palette_grayscale(self):
-        """"""
+        """Set the palette grayscale.
+        
+        Returns:
+            Self for chaining.
+        """
         grayscale_fx = lambda r, g, b: (r * 0.2126 + g * 0.7152 + b * 0.0722) / 255.0
         self.convert_color_palette(grayscale_fx, grayscale_fx, grayscale_fx)
 
     def set_palette_lighter(self, factor):
-        """"""
+        """Set the palette lighter.
+        
+        Args:
+            factor: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.scale_fx(1 - factor)
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         return doc
 

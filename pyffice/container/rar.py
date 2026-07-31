@@ -14,10 +14,26 @@ class PyfficeRAR:
     
     @staticmethod
     def size_limit(path: str) -> int:
+        """Size limit.
+        
+        Args:
+            path: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         return PyfficeRAR.DEFAULT_LIMIT
     
     @staticmethod
     def inline(path: str) -> bool:
+        """Inline.
+        
+        Args:
+            path: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         return os.path.getsize(path) < PyfficeRAR.DEFAULT_LIMIT
 
 

@@ -16,10 +16,26 @@ class PyfficeZip:
     
     @staticmethod
     def size_limit(path: str) -> int:
+        """Size limit.
+        
+        Args:
+            path: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         return PyfficeZip.DEFAULT_LIMIT
     
     @staticmethod
     def inline(path: str) -> bool:
+        """Inline.
+        
+        Args:
+            path: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         return Path(path).stat().st_size < PyfficeZip.DEFAULT_LIMIT
     
     def read(self) -> List[Dict[str, Any]]:

@@ -94,7 +94,18 @@ class PyfficeUnit(object):
         self.versions = None
 
     def add_change(self, label, value, new_value, action="set", params=None):
-        """"""
+        """Record a change entry for this document.
+        
+        Args:
+            label: Parameter.
+            value: Parameter.
+            new_value: Parameter.
+            action: Parameter.
+            params: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         # logma.info(f"Add Change {label} {action}")
         change_limit = CHANGE_LIMIT if self.change_limit is None else self.change_limit
         if self.changes is None:
@@ -136,7 +147,15 @@ class PyfficeUnit(object):
         return self
 
     def add_tag(self, tag_name, description=""):
-        """"""
+        """Attach a tag to this document.
+        
+        Args:
+            tag_name: Parameter.
+            description: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {}
         tag = PyfficeTag(cfg)
         self.tags.append(tag)
@@ -157,28 +176,51 @@ class PyfficeUnit(object):
         return self
 
     def del_tag(self, tag):
-        """"""
+        """Remove a tag from this document.
+        
+        Args:
+            tag: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         tags = self.tags
         self.tags.remove(tag)
         self.add_change("tags", tags, self.tags)
         return self
 
     def get_context(self):
-        """"""
+        """Return the current document context as a string.
+        
+        Returns:
+            Self for chaining.
+        """
         self.context = self.to_string()
         return self.context
 
     def get_hash(self):
-        """"""
+        """Return a hash of the current document context.
+        
+        Returns:
+            Self for chaining.
+        """
         self.hash = text_hashing_function(self.context)
         return self.hash
 
     def get_tags(self):
-        """"""
+        """Return the list of tags attached to this document.
+        
+        Returns:
+            Self for chaining.
+        """
         return self.tags
 
     def increment_version(self):
-        """"""
+        """Increment the document version counter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Increment Version {self.version}")
         self.version = int(self.version) + 1
         #         8 02:49:17", "mod_dttm": "2026-07-28 02:49:17"}, "unit": {"original_path": null, "active_url": null, "trust_level": null, "qualified_path": null, "domain": null, "redirect_path": null}}, "source": null}}}
@@ -209,7 +251,14 @@ class PyfficeUnit(object):
         return self
 
     def load_unit(self, unit=None):
-        """"""
+        """Load a unit dict into this document.
+        
+        Args:
+            unit: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         # logma.inspect_caller()
         logma.info(f"Load Unit {unit}")
         if isinstance(unit, str):
@@ -239,7 +288,11 @@ class PyfficeUnit(object):
         return self
 
     def redo_change(self):
-        """"""
+        """Redo the last undone change.
+        
+        Returns:
+            Self for chaining.
+        """
         change = self.redos.pop()
         setattr(self, change["label"], change["new_value"])
         if change["action"] == "set":
@@ -247,7 +300,14 @@ class PyfficeUnit(object):
         return self
 
     def set_author(self, author):
-        """"""
+        """Set the document author.
+        
+        Args:
+            author: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if author is None:
             author = ""
         if author != self.author:
@@ -256,14 +316,28 @@ class PyfficeUnit(object):
         return self
 
     def set_change_limit(self, limit=None):
-        """"""
+        """Set the change limit.
+        
+        Args:
+            limit: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if limit != self.change_limit:
             self.add_change("change_limit", self.change_limit, limit)
             self.change_limit = limit
         return self
 
     def set_changes(self, changes):
-        """"""
+        """Set the changes.
+        
+        Args:
+            changes: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if changes is None:
             changes = []
         if changes != self.changes:
@@ -272,7 +346,14 @@ class PyfficeUnit(object):
         return self
 
     def set_context(self, context):
-        """"""
+        """Set the context.
+        
+        Args:
+            context: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if context is None:
             context = ""
         if context != self.context:
@@ -281,7 +362,14 @@ class PyfficeUnit(object):
         return self
 
     def set_creon(self, creon=None):
-        """"""
+        """Set the creon.
+        
+        Args:
+            creon: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if creon is None:
             creon = self.time.get_current_datetime_str()
         if creon != self.creon:
@@ -290,14 +378,28 @@ class PyfficeUnit(object):
         return self
 
     def set_data(self, data):
-        """"""
+        """Set the data.
+        
+        Args:
+            data: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if data != self.data:
             self.add_change("data", self.data, data)
             self.data = data
         return self
 
     def set_description(self, description):
-        """"""
+        """Set the description.
+        
+        Args:
+            description: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if description is None:
             description = ""
         if description != self.description:
@@ -306,7 +408,14 @@ class PyfficeUnit(object):
         return self
 
     def set_did(self, did=None):
-        """"""
+        """Set the did.
+        
+        Args:
+            did: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if did is None:
             did = uuid()
         if did != self.did:
@@ -315,7 +424,14 @@ class PyfficeUnit(object):
         return self
 
     def set_editors(self, editors):
-        """"""
+        """Set the editors.
+        
+        Args:
+            editors: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if editors is None:
             editors = []
         if editors != self.editors:
@@ -324,7 +440,14 @@ class PyfficeUnit(object):
         return self
 
     def set_encoding(self, encoding=None):
-        """"""
+        """Set the encoding.
+        
+        Args:
+            encoding: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if encoding is None:
             encoding = "utf-8"
         if encoding != self.encoding:
@@ -333,7 +456,14 @@ class PyfficeUnit(object):
         return self
 
     def set_hash(self, hash_):
-        """"""
+        """Set the hash.
+        
+        Args:
+            hash_: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if hash_ is None:
             hash_ = text_hashing_function(self.context)
         logma.info(f"Hash {hash_}")
@@ -344,7 +474,14 @@ class PyfficeUnit(object):
         return self
 
     def set_location(self, location):
-        """"""
+        """Set the location.
+        
+        Args:
+            location: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if location is None:
             location = "internal"
         if location != self.location:
@@ -353,14 +490,28 @@ class PyfficeUnit(object):
         return self
 
     def set_meta_data(self, meta_data):
-        """"""
+        """Set the meta data.
+        
+        Args:
+            meta_data: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if meta_data != self.meta_data:
             self.add_change("meta_data", self.meta_data, meta_data)
             self.meta_data = meta_data
         return self
 
     def set_modon(self, modon=None):
-        """"""
+        """Set the modon.
+        
+        Args:
+            modon: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if modon is None:
             modon = self.time.get_current_datetime_str()
         if modon != self.modon:
@@ -369,7 +520,14 @@ class PyfficeUnit(object):
         return self
 
     def set_name(self, name):
-        """"""
+        """Set the name.
+        
+        Args:
+            name: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if name is None:
             name = self.did
         if name != self.name:
@@ -378,7 +536,14 @@ class PyfficeUnit(object):
         return self
 
     def set_path(self, path):
-        """"""
+        """Set the path.
+        
+        Args:
+            path: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if path is None:
             path = ""
         if path != self.path:
@@ -387,14 +552,28 @@ class PyfficeUnit(object):
         return self
 
     def set_redos(self, redos):
-        """"""
+        """Set the redos.
+        
+        Args:
+            redos: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if redos != self.redos:
             self.add_change("redos", self.redos, redos)
             self.redos = redos
         return self
 
     def set_references(self, references):
-        """"""
+        """Set the references.
+        
+        Args:
+            references: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if references is None:
             references = []
         if references != self.references:
@@ -403,14 +582,28 @@ class PyfficeUnit(object):
         return self
 
     def set_saved(self, saved):
-        """"""
+        """Set the saved.
+        
+        Args:
+            saved: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if saved != self.is_saved:
             self.add_change("saved", self.is_saved, saved)
             self.is_saved = saved
         return self
 
     def set_syntax(self, syntax):
-        """"""
+        """Set the syntax.
+        
+        Args:
+            syntax: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if syntax is None:
             syntax = "plain-text"
         if syntax != self.syntax:
@@ -419,7 +612,14 @@ class PyfficeUnit(object):
         return self
 
     def set_tags(self, tags):
-        """"""
+        """Set the tags.
+        
+        Args:
+            tags: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if tags is None:
             tags = []
         if tags != self.tags:
@@ -428,7 +628,14 @@ class PyfficeUnit(object):
         return self
 
     def set_version(self, version):
-        """"""
+        """Set the version.
+        
+        Args:
+            version: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if version is None:
             version = 0
         if version != self.version:
@@ -437,6 +644,11 @@ class PyfficeUnit(object):
         return self
 
     def to_dict(self):
+        """Serialize this object to a dict.
+        
+        Returns:
+            Self for chaining.
+        """
         from pyffice.pyffice import InvalidConfigurationError
         """Each Docuement Subclass will need to implement this method
         add creation and mod dates
@@ -482,7 +694,11 @@ class PyfficeUnit(object):
         return doc
 
     def to_html(self):
-        """"""
+        """Convert this document to html.
+        
+        Returns:
+            Self for chaining.
+        """
         return self.html
 
     def _canonicalize(self, doc):
@@ -564,18 +780,33 @@ class PyfficeUnit(object):
         return doc
 
     def to_string(self):
-        """"""
+        """Convert this document to string.
+        
+        Returns:
+            Self for chaining.
+        """
         return j.dumps(self.to_dict())
 
     def undo_change(self):
-        """"""
+        """Undo change.
+        
+        Returns:
+            Self for chaining.
+        """
         last_change = self.changes.pop()
         self.redos.append(last_change)
         setattr(self, last_change["label"], last_change["value"])
         return self
 
     def update_unit_structure(self, unit):
-        """"""
+        """Update unit structure.
+        
+        Args:
+            unit: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         unit = PyfficeUnitUpdate(unit).process()
         return unit
 
@@ -739,7 +970,14 @@ class PyfficeDocument(PyfficeUnit):
         return text
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if isinstance(document, str):
             document = j.loads(document)
         document = self.document.override(document).dikt
@@ -756,12 +994,25 @@ class PyfficeDocument(PyfficeUnit):
         return self
 
     def update_document_time(self):
-        """"""
+        """Update document time.
+        
+        Returns:
+            Self for chaining.
+        """
         self.set_modon(self.time.get_current_datetime_str())
         return self
 
     def save(self, path=None, syntax=None, encrypt_key=None):
-        """"""
+        """Save the document.
+        
+        Args:
+            path: Parameter.
+            syntax: Parameter.
+            encrypt_key: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         # if path is None:
         #     path = self.file_path
         # if syntax is None:
@@ -773,13 +1024,31 @@ class PyfficeDocument(PyfficeUnit):
         return self
 
     def save_copy(self, path, syntax=None, encrypt_key=None):
-        """"""
+        """Save a copy of the document at the given path.
+
+        Args:
+            path: Destination path for the copy.
+            syntax: Optional syntax/format identifier.
+            encrypt_key: Optional encryption key.
+
+        Returns:
+            Self for chaining.
+        """
         self.save_as(path, False, syntax, encrypt_key)
         return self
 
     def save_pyffice(self, path, syntax, encrypt_key=None):
+        """Save the document to a .pyof file in Pyffice native format.
+
+        Args:
+            path: Destination path.
+            syntax: Format/syntax identifier.
+            encrypt_key: Optional encryption key.
+
+        Returns:
+            Self for chaining.
+        """
         from pyffice.pyffice import MissingPathError
-        """ """
         # use syntax to select a template
         if path is None:
             raise MissingPathError(f"No path provided")
@@ -790,14 +1059,31 @@ class PyfficeDocument(PyfficeUnit):
         return self
 
     def save_as(self, path, set_file_active=True, syntax=None, encrypt_key=None):
-        """"""
+        """Save the document.
+        
+        Args:
+            path: Parameter.
+            set_file_active: Parameter.
+            syntax: Parameter.
+            encrypt_key: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if set_file_active:
             self.file_path = path
         self.save(path, syntax, encrypt_key)
         return self
 
     def search_document(self, term):
-        """"""
+        """Search document.
+        
+        Args:
+            term: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if term in self.get_context():
             return True
         return False
@@ -808,24 +1094,52 @@ class PyfficeDocument(PyfficeUnit):
         return []
 
     def search_word(self, term):
-        """"""
+        """Search word.
+        
+        Args:
+            term: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         return self.search_document(term)
 
     def set_cache(self, cache):
-        """"""
+        """Set the cache.
+        
+        Args:
+            cache: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.cache = conql.Doc()
         self.cache.load(cache)
         return self
 
     def set_compatibility(self, compatibility):
-        """"""
+        """Set the compatibility.
+        
+        Args:
+            compatibility: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if compatibility != self.compatibility:
             self.add_change("compatibility", self.compatibility, compatibility)
             self.compatibility = compatibility
         return self
 
     def set_content(self, content):
-        """"""
+        """Set the content.
+        
+        Args:
+            content: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if content is None:
             content = ""
         if self.content_original is None:
@@ -837,7 +1151,14 @@ class PyfficeDocument(PyfficeUnit):
         return self
 
     def set_context(self, context):
-        """"""
+        """Set the context.
+        
+        Args:
+            context: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if context is None:
             context = ""
         if context != self.context:
@@ -847,7 +1168,14 @@ class PyfficeDocument(PyfficeUnit):
         return self
 
     def set_data(self, data):
-        """"""
+        """Set the data.
+        
+        Args:
+            data: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Data {data}")
         data = data or {}
         if isinstance(data, str):
@@ -856,14 +1184,28 @@ class PyfficeDocument(PyfficeUnit):
         return self
 
     def set_document_type(self, document_type):
-        """"""
+        """Set the document type.
+        
+        Args:
+            document_type: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if document_type != self.document_type:
             self.add_change("document_type", self.document_type, document_type)
             self.document_type = document_type
         return self
 
     def set_file_path(self, file_path):
-        """"""
+        """Set the file path.
+        
+        Args:
+            file_path: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if file_path is None:
             file_path = self.config.dikt.get("file_path", None)
         if file_path is None:  # PyfficePDF
@@ -903,14 +1245,25 @@ class PyfficeDocument(PyfficeUnit):
         return self
 
     def set_file_type(self, file_type):
-        """"""
+        """Set the file type.
+        
+        Args:
+            file_type: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if file_type != self.file_type:
             self.add_change("file_type", self.file_type, file_type)
             self.file_type = file_type
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["file_path"] = self.file_path
         doc["data"] = deepcopy(doc["unit"])
@@ -923,7 +1276,14 @@ class PyfficeDocument(PyfficeUnit):
         return self._canonicalize(doc)
 
     def update_document_structure(self, document):
-        """"""
+        """Update document structure.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         update = PyfficeDocumentUpdate(document)
         document = update.process()
         return document
@@ -950,27 +1310,59 @@ class PyfficeDocumentManager(PyfficeDocument):
         self.documents = {}
 
     def add_document(self, document):
-        """"""
+        """Add a child document to this manager.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.documents[document.name] = document
         return self
 
     def del_document(self, name):
-        """"""
+        """Remove the document.
+        
+        Args:
+            name: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if name not in self.documents:
             return self
         del self.documents[name]
         return self
 
     def get_context(self):
-        """"""
+        """Return the current document context as a string.
+        
+        Returns:
+            Self for chaining.
+        """
         return super().get_context()
 
     def get_document(self, name):
-        """"""
+        """Return the document.
+        
+        Args:
+            name: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         return self.documents[name]
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Document {document}")
         if document is None:
             document = self.config.dikt.get("document", {})
@@ -982,33 +1374,65 @@ class PyfficeDocumentManager(PyfficeDocument):
         return self
 
     def search(self, term):
-        """"""
+        """Search.
+        
+        Args:
+            term: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         result = self.search_documents(term)
         if result is None:
             return None
         return self.documents[result]
 
     def search_documents(self, term):
-        """"""
+        """Search documents.
+        
+        Args:
+            term: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         for name, document in self.documents.items():
             if document.search(term):
                 return name
         return None
 
     def set_documents(self, documents):
-        """"""
+        """Set the documents.
+        
+        Args:
+            documents: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.documents = documents
         return self
 
     def set_doc_types(self, doc_types):
-        """"""
+        """Set the doc types.
+        
+        Args:
+            doc_types: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if doc_types is None:
             doc_types = []
         self.doc_types = doc_types
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict() or {}
         if "data" not in doc.keys():
             doc["data"] = {}
@@ -1035,7 +1459,14 @@ class PyfficeDeque(PyfficeDocument, deque):
         self.history = deque()
 
     def append(self, item):
-        """"""
+        """Append.
+        
+        Args:
+            item: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if self.max_items is not None:
             if len(self) >= self.max_items:
                 self.history.append(self.popleft())
@@ -1049,14 +1480,25 @@ class PyfficeDeque(PyfficeDocument, deque):
         super().appendleft(item)
 
     def set_max_items(self, max_items=None):
-        """"""
+        """Set the max items.
+        
+        Args:
+            max_items: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if max_items is None:
             max_items = self.config.dikt.get("max_items", 10)
         self.max_items = max_items
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["data"]["history"] = [x for x in self.history]
         doc["data"]["max_items"] = self.max_items

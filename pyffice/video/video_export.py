@@ -47,13 +47,26 @@ class PyfficeVideo(PyfficeDocument):
         self.audio = None
 
     def check_audio(self):
-        """"""
+        """Check audio.
+        
+        Returns:
+            Self for chaining.
+        """
         if self.audio is None:
             self.audio = PyfficeAudio()
         return self
 
     def cut_section(self, start, end, keep=False):
-        """"""
+        """Cut section.
+        
+        Args:
+            start: Parameter.
+            end: Parameter.
+            keep: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if keep:
             file_ = ffmpeg.input(self.path, start, end)
         else:
@@ -85,7 +98,14 @@ class PyfficeVideo(PyfficeDocument):
         return getattr(self, 'palette', [])
 
     def load_document(self, document):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         super().load_document(document)
         return self
 
@@ -97,7 +117,11 @@ class PyfficeVideo(PyfficeDocument):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         return doc
 

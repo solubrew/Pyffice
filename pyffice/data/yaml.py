@@ -144,6 +144,16 @@ class PyfficeYAML(PyfficeDictBase):
         errors = []
         
         def validate(value: Any, path: str, schema_def: dict) -> None:
+            """Validate a value or configuration against the schema.
+            
+            Args:
+                value: Parameter.
+                path: Parameter.
+                schema_def: Parameter.
+            
+            Returns:
+                Self for chaining.
+            """
             required_type = schema_def.get("type")
             required_fields = schema_def.get("fields", {})
             

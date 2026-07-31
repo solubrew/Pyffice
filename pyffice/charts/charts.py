@@ -74,7 +74,14 @@ class PyfficeChart(PyfficeDocument):
         self.ylabel = None
 
     def add_axis(self, axis):
-        """"""
+        """Add a axis.
+        
+        Args:
+            axis: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         default_axis = self.config.dikt.get("axis", {})
         axis = {
             "dimension": axis.get("dimension", default_axis.get("dimension", None)),
@@ -92,7 +99,14 @@ class PyfficeChart(PyfficeDocument):
         return self
 
     def add_legend(self, legend):
-        """"""
+        """Add a legend.
+        
+        Args:
+            legend: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         default_legend = self.config.dikt.get("legend", {})
         legend = {
             "position": legend.get("position", default_legend.get("position", None)),
@@ -106,7 +120,14 @@ class PyfficeChart(PyfficeDocument):
         return self
 
     def add_plotarea(self, plotarea):
-        """"""
+        """Add a plotarea.
+        
+        Args:
+            plotarea: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         default_plotarea = self.config.dikt.get("plotarea", {})
         plotarea = {
             "position": plotarea.get("position", default_plotarea.get("position", None)),
@@ -146,31 +167,66 @@ class PyfficeChart(PyfficeDocument):
         return self
 
     def del_axis(self, axis):
-        """"""
+        """Remove the axis.
+        
+        Args:
+            axis: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.add_change("axes", deepcopy(self.axes), axis)
         del self.axes[axis]
         return self
 
     def del_legend(self, legend):
-        """"""
+        """Remove the legend.
+        
+        Args:
+            legend: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.add_change("legends", deepcopy(self.legends), legend)
         del self.legends[legend]
         return self
 
     def del_plotarea(self, plotarea):
-        """"""
+        """Remove the plotarea.
+        
+        Args:
+            plotarea: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.add_change("plotareas", deepcopy(self.plotareas), plotarea)
         del self.plotareas[plotarea]
         return self
 
     def del_series(self, series):
-        """"""
+        """Remove the series.
+        
+        Args:
+            series: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.add_change("series", deepcopy(self.series), series)
         del self.series[series]
         return self
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Document {document}")
         if document is None:
             document = self.config.dikt.get("document", {})
@@ -192,7 +248,16 @@ class PyfficeChart(PyfficeDocument):
         return self
 
     def save(self, path=None, syntax=None, encrypt_key=None):
-        """"""
+        """Save the document.
+        
+        Args:
+            path: Parameter.
+            syntax: Parameter.
+            encrypt_key: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if syntax is None:
             syntax = self.compatibility
         super().save(path, syntax, encrypt_key)
@@ -210,7 +275,14 @@ class PyfficeChart(PyfficeDocument):
         return self
 
     def save_excel(self, path):
-        """"""
+        """Save the document.
+        
+        Args:
+            path: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         porter = PyfficePortExcel({"parent": self})
         porter.file_export(self, path)
 
@@ -238,14 +310,28 @@ class PyfficeChart(PyfficeDocument):
         return self
 
     def set_chart_type(self, chart_type):
-        """"""
+        """Set the chart type.
+        
+        Args:
+            chart_type: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if chart_type != self.type:
             self.add_change("type", self.type, chart_type)
             self.type = chart_type
         return self
 
     def set_compatibility(self, compatibility):
-        """"""
+        """Set the compatibility.
+        
+        Args:
+            compatibility: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if compatibility != self.compatibility:
             self.add_change("compatibility", self.compatibility, compatibility)
             self.compatibility = compatibility
@@ -257,56 +343,112 @@ class PyfficeChart(PyfficeDocument):
         return self
 
     def set_figsize(self, figsize):
-        """"""
+        """Set the figsize.
+        
+        Args:
+            figsize: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if figsize != self.figsize:
             self.add_change("figsize", self.figsize, figsize)
             self.figsize = figsize
         return self
 
     def set_label_xaxis(self, label):
-        """"""
+        """Set the label xaxis.
+        
+        Args:
+            label: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if label != self.xlabel:
             self.add_change("xlabel", self.xlabel, label)
             self.xlabel = label
         return self
 
     def set_label_yaxis(self, label):
-        """"""
+        """Set the label yaxis.
+        
+        Args:
+            label: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if label != self.ylabel:
             self.add_change("ylabel", self.ylabel, label)
             self.ylabel = label
         return self
 
     def set_legends(self, legends: list = None):
-        """"""
+        """Set the legends.
+        
+        Args:
+            legends: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if legends != self.legends:
             self.add_change("legends", self.legends, legends)
             self.legends = legends
         return self
 
     def set_orientation(self, orientation):
-        """"""
+        """Set the orientation.
+        
+        Args:
+            orientation: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if orientation != self.orientation:
             self.add_change("orientation", self.orientation, orientation)
             self.orientation = orientation
         return self
 
     def set_origin(self, origin: list = None):
-        """"""
+        """Set the origin.
+        
+        Args:
+            origin: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if origin != self.origin:
             self.add_change("origin", self.origin, origin)
             self.origin = origin
         return self
 
     def set_plotareas(self, plotareas):
-        """"""
+        """Set the plotareas.
+        
+        Args:
+            plotareas: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if plotareas != self.plotareas:
             self.add_change("plotareas", self.plotareas, plotareas)
             self.plotareas = plotareas
         return self
 
     def set_position(self, position):
-        """"""
+        """Set the position.
+        
+        Args:
+            position: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if position != self.position:
             self.add_change("position", self.position, position)
             self.position = position
@@ -323,14 +465,28 @@ class PyfficeChart(PyfficeDocument):
         return self
 
     def set_series(self, series: list = None):
-        """"""
+        """Set the series.
+        
+        Args:
+            series: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if series != self.series:
             self.add_change("series", self.series, series)
             self.series = series
         return self
 
     def set_size(self, size):
-        """"""
+        """Set the size.
+        
+        Args:
+            size: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if size != self.size:
             self.add_change("size", self.size, size)
             self.size = size
@@ -347,14 +503,30 @@ class PyfficeChart(PyfficeDocument):
         return self
 
     def set_theme(self, theme="whitegrid"):
-        """"""
+        """Set the theme.
+        
+        Args:
+            theme: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if theme != self.theme:
             self.add_change("style", self.theme, theme)
             self.theme = theme
         return self
 
     def set_title(self, title, size: int = 12, color: str = "black"):
-        """"""
+        """Set the title.
+        
+        Args:
+            title: Parameter.
+            size: Parameter.
+            color: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {
             "value": title,
             "alignment": {"horizontal": "center", "vertical": "center", "wrap": True},
@@ -367,7 +539,11 @@ class PyfficeChart(PyfficeDocument):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         if "document" not in doc.keys():
             doc["document"] = {}

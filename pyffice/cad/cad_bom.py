@@ -45,11 +45,25 @@ class PyfficeBOM(PyfficeDocumentManager):
         self.config.override(cfg)
 
     def add_part(self, part):
-        """"""
+        """Add a part.
+        
+        Args:
+            part: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         super().add_document(part)
 
     def load_document(self, document):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         super().load_document(document)
         return self
 
@@ -60,7 +74,11 @@ class PyfficeBOM(PyfficeDocumentManager):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         return doc
 
@@ -77,11 +95,25 @@ class PyfficeSoftwareBOM(PyfficeBOM):
         self.config.override(cfg)
 
     def add_part(self, part):
-        """"""
+        """Add a part.
+        
+        Args:
+            part: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         super().add_part(part)
 
     def load_document(self, document):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         super().load_document(document)
         return self
 
@@ -92,7 +124,11 @@ class PyfficeSoftwareBOM(PyfficeBOM):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         return doc
 

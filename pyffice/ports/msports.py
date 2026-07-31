@@ -104,15 +104,36 @@ class PyfficePortExcel(PyfficePort):
         return self
 
     def get_column_width(self, column):
-        """"""
+        """Return the column width.
+        
+        Args:
+            column: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         return self.ws.column_dimensions[column].width
 
     def get_row_height(self, row):
-        """"""
+        """Return the row height.
+        
+        Args:
+            row: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         return self.ws.row_dimensions[row].height
 
     def parse_content(self, content):
-        """"""
+        """Parse content.
+        
+        Args:
+            content: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         super().parse_content(content)
         rows = content["rows"]
         for row in rows:
@@ -121,7 +142,14 @@ class PyfficePortExcel(PyfficePort):
         return self
 
     def read_cell(self, cell):
-        """"""
+        """Read cell.
+        
+        Args:
+            cell: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         target = None
         if cell.hyperlink is not None:
             target = cell.hyperlink.target
@@ -179,7 +207,14 @@ class PyfficePortExcel(PyfficePort):
         return cell_
 
     def read_charts(self, sheet=None):
-        """"""
+        """Read charts.
+        
+        Args:
+            sheet: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         charts = []
         if hasattr(sheet, "_charts"):
             for chart in sheet._charts:
@@ -188,7 +223,14 @@ class PyfficePortExcel(PyfficePort):
         return charts
 
     def read_images(self, sheet):
-        """"""
+        """Read images.
+        
+        Args:
+            sheet: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         images = []
         if hasattr(sheet, "_images"):
             for image in sheet._images:
@@ -199,7 +241,11 @@ class PyfficePortExcel(PyfficePort):
         return images
 
     def read_styles(self):
-        """"""
+        """Read styles.
+        
+        Returns:
+            Self for chaining.
+        """
         return styles
 
     def scan_sheet(self, sheet_name):
@@ -223,7 +269,14 @@ class PyfficePortExcel(PyfficePort):
         return self
 
     def set_chart_type(self, chart_type):
-        """"""
+        """Set the chart type.
+        
+        Args:
+            chart_type: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if chart_type == "scatter":
             self.chart = xl.chart.ScatterChart()
         elif chart_type == "line":
@@ -307,7 +360,17 @@ class PyfficePortExcel(PyfficePort):
         return self
 
     def open_file(self, file, if_data_only=False, read_only=False, keep_vba=False):
-        """"""
+        """Open file.
+        
+        Args:
+            file: Parameter.
+            if_data_only: Parameter.
+            read_only: Parameter.
+            keep_vba: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         workbook = load_workbook(filename=file)
         data = {}
         for name in workbook.sheetnames:
@@ -357,6 +420,14 @@ class PyfficePortWord(PyfficePort):
 
 
 def read_docx_tables(file_path):
+    """Read tables from a docx file into Python data.
+    
+    Args:
+        file_path: Parameter.
+    
+    Returns:
+        Self for chaining.
+    """
     document = Document(file_path)
     table_data = []
     for table in document.tables:

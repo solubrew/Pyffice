@@ -68,12 +68,23 @@ class PyfficePrompt(PyfficeDocument):
         self.topic = None
 
     def get_metrics(self):
-        """"""
+        """Return the metrics.
+        
+        Returns:
+            Self for chaining.
+        """
         metrics = {}
         return metrics
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Document {document}")
         if document is None:
             document = self.config.dikt.get("document", {})
@@ -85,7 +96,14 @@ class PyfficePrompt(PyfficeDocument):
         return self
 
     def set_context(self, context):
-        """"""
+        """Set the context.
+        
+        Args:
+            context: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"text": context}
         context = PyfficeText(cfg)
         if context != self.context:
@@ -95,7 +113,14 @@ class PyfficePrompt(PyfficeDocument):
         return self
 
     def set_input(self, input):
-        """"""
+        """Set the input.
+        
+        Args:
+            input: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"text": input}
         input = PyfficeText(cfg)
         if input != self.input:
@@ -145,7 +170,14 @@ class PyfficePrompt(PyfficeDocument):
         return self
 
     def set_prompt(self, prompt):
-        """"""
+        """Set the prompt.
+        
+        Args:
+            prompt: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"text": prompt}
         prompt = PyfficeText(cfg)
         if prompt != self.prompt:
@@ -154,7 +186,14 @@ class PyfficePrompt(PyfficeDocument):
         return self
 
     def set_response(self, response):
-        """"""
+        """Set the response.
+        
+        Args:
+            response: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"text": response}
         response = PyfficeText(cfg)
         if response != self.response:
@@ -163,7 +202,14 @@ class PyfficePrompt(PyfficeDocument):
         return self
 
     def set_response_scope(self, scope):
-        """"""
+        """Set the response scope.
+        
+        Args:
+            scope: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if scope != self.scope:
             self.scope = scope
             self.add_change("scope", self.scope, scope)
@@ -205,14 +251,25 @@ class PyfficePrompt(PyfficeDocument):
         return self
 
     def set_topic(self, topic):
-        """"""
+        """Set the topic.
+        
+        Args:
+            topic: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if topic != self.topic:
             self.add_change("topic", self.topic, topic)
             self.topic = topic
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["data"] = {
             "context": {},
@@ -245,7 +302,14 @@ class PyfficeResponse(PyfficeDocument):
         return self
 
     def set_sources(self, sources):
-        """"""
+        """Set the sources.
+        
+        Args:
+            sources: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if sources != self.sources:
             self.add_change("sources", self.sources, sources)
             self.sources = sources
@@ -268,7 +332,16 @@ class PyfficePromptsManager(PyfficeDocumentManager):
         self.responses = None
 
     def add_prompt(self, input=None, context=None, tags=None):
-        """"""
+        """Add a prompt.
+        
+        Args:
+            input: Parameter.
+            context: Parameter.
+            tags: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         now = dt.datetime.now()
         prompt = {
             "datetime": now,
@@ -282,7 +355,17 @@ class PyfficePromptsManager(PyfficeDocumentManager):
         return self
 
     def add_prompt_response(self, text, service, metrics=None, prompt=None):
-        """"""
+        """Add a prompt response.
+        
+        Args:
+            text: Parameter.
+            service: Parameter.
+            metrics: Parameter.
+            prompt: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         now = dt.datetime.now()
         response = {
             "text": text,
@@ -299,7 +382,14 @@ class PyfficePromptsManager(PyfficeDocumentManager):
         return self
 
     def add_prompt(self, prompt):
-        """"""
+        """Add a prompt.
+        
+        Args:
+            prompt: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"prompt": prompt}
         prompt = PyfficePrompt(cfg)
         self.add_change("prompts", self.prompts, prompt)
@@ -307,14 +397,30 @@ class PyfficePromptsManager(PyfficeDocumentManager):
         return self
 
     def add_service(self, service, metrics, model):
-        """"""
+        """Add a service.
+        
+        Args:
+            service: Parameter.
+            metrics: Parameter.
+            model: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         service = {"service": service, "metrics": metrics, "model": model}
         self.active_service = service
         self.document["document"]["services"].append(service)
         return self
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if document is None:
             document = self.config.dikt.get("document", {})
             if document is None:
@@ -326,19 +432,40 @@ class PyfficePromptsManager(PyfficeDocumentManager):
         return self
 
     def set_browser_left(self, browser):
-        """"""
+        """Set the browser left.
+        
+        Args:
+            browser: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"browser": browser}
         self.browser_left = PyfficeWebBrowser(cfg)
         return self
 
     def set_browser_right(self, browser):
-        """"""
+        """Set the browser right.
+        
+        Args:
+            browser: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"browser": browser}
         self.browser_right = PyfficeWebBrowser(cfg)
         return self
 
     def set_service_active(self, service):
-        """"""
+        """Set the service active.
+        
+        Args:
+            service: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if service != self.active_service:
             self.add_change("active_service", self.active_service, service)
             self.active_service = service
@@ -347,7 +474,14 @@ class PyfficePromptsManager(PyfficeDocumentManager):
         return self
 
     def set_services(self, services):
-        """"""
+        """Set the services.
+        
+        Args:
+            services: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if services is None:
             services = []
         if services != self.services:
@@ -356,7 +490,14 @@ class PyfficePromptsManager(PyfficeDocumentManager):
         return self
 
     def set_prompts(self, prompts):
-        """"""
+        """Set the prompts.
+        
+        Args:
+            prompts: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if prompts is None:
             prompts = []
         if prompts != self.prompts:
@@ -365,7 +506,11 @@ class PyfficePromptsManager(PyfficeDocumentManager):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["documents"] = {"services": self.services, "prompts": [x.to_dict() for x in self.prompts]}
         return doc

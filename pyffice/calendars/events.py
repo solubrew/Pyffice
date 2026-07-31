@@ -54,7 +54,11 @@ class PyfficeTimeUnit(PyfficeUnit):
         self.centuries = None
 
     def get_centuries(self):
-        """"""
+        """Return the centuries.
+        
+        Returns:
+            Self for chaining.
+        """
         if self.start_time is None or self.end_time is None:
             return None
         centuries = self.end_time - self.start_time
@@ -64,7 +68,11 @@ class PyfficeTimeUnit(PyfficeUnit):
         return self.centuries
 
     def get_days(self):
-        """"""
+        """Return the days.
+        
+        Returns:
+            Self for chaining.
+        """
         if self.start_time is None or self.end_time is None:
             return None
         days = self.end_time - self.start_time
@@ -74,7 +82,11 @@ class PyfficeTimeUnit(PyfficeUnit):
         return self.days
 
     def get_decades(self):
-        """"""
+        """Return the decades.
+        
+        Returns:
+            Self for chaining.
+        """
         if self.start_time is None or self.end_time is None:
             return None
         decades = self.end_time - self.start_time
@@ -84,7 +96,11 @@ class PyfficeTimeUnit(PyfficeUnit):
         return self.decades
 
     def get_hours(self):
-        """"""
+        """Return the hours.
+        
+        Returns:
+            Self for chaining.
+        """
         if self.start_time is None or self.end_time is None:
             return None
         hours = self.end_time - self.start_time
@@ -94,7 +110,11 @@ class PyfficeTimeUnit(PyfficeUnit):
         return self.hours
 
     def get_minutes(self):
-        """"""
+        """Return the minutes.
+        
+        Returns:
+            Self for chaining.
+        """
         if self.start_time is None or self.end_time is None:
             return None
         minutes = self.end_time - self.start_time
@@ -104,7 +124,11 @@ class PyfficeTimeUnit(PyfficeUnit):
         return self.minutes
 
     def get_months(self):
-        """"""
+        """Return the months.
+        
+        Returns:
+            Self for chaining.
+        """
         if self.start_time is None or self.end_time is None:
             return None
         months = self.end_time - self.start_time
@@ -114,7 +138,11 @@ class PyfficeTimeUnit(PyfficeUnit):
         return self.months
 
     def get_seconds(self):
-        """"""
+        """Return the seconds.
+        
+        Returns:
+            Self for chaining.
+        """
         if self.start_time is None or self.end_time is None:
             return None
         seconds = self.end_time - self.start_time
@@ -124,7 +152,11 @@ class PyfficeTimeUnit(PyfficeUnit):
         return self.seconds
 
     def get_weeks(self):
-        """"""
+        """Return the weeks.
+        
+        Returns:
+            Self for chaining.
+        """
         if self.start_time is None or self.end_time is None:
             return None
         weeks = self.end_time - self.start_time
@@ -134,7 +166,11 @@ class PyfficeTimeUnit(PyfficeUnit):
         return self.weeks
 
     def get_years(self):
-        """"""
+        """Return the years.
+        
+        Returns:
+            Self for chaining.
+        """
         if self.start_time is None or self.end_time is None:
             return None
         years = self.end_time - self.start_time
@@ -144,7 +180,14 @@ class PyfficeTimeUnit(PyfficeUnit):
         return self.years
 
     def load_unit(self, unit):
-        """"""
+        """Load a unit dict into this document.
+        
+        Args:
+            unit: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Unit {unit}")
         if unit is None:
             unit = self.config.dikt.get("unit", {})
@@ -164,7 +207,14 @@ class PyfficeTimeUnit(PyfficeUnit):
         return self
 
     def set_scale_unit(self, scale_unit):
-        """"""
+        """Set the scale unit.
+        
+        Args:
+            scale_unit: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {}
         match scale_unit:
             case "day":
@@ -188,21 +238,39 @@ class PyfficeTimeUnit(PyfficeUnit):
         return self
 
     def set_time_end(self, end_time):
-        """"""
+        """Set the time end.
+        
+        Args:
+            end_time: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if end_time != self.end_time:
             self.add_change("end_time", self.end_time, end_time)
             self.end_time = end_time
         return self
 
     def set_time_start(self, start_time):
-        """"""
+        """Set the time start.
+        
+        Args:
+            start_time: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if start_time != self.start_time:
             self.add_change("start_time", self.start_time, start_time)
             self.start_time = start_time
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["document"] = {
             "scale_unit": self.scale_unit,
@@ -226,7 +294,14 @@ class PyfficeEvent(PyfficeUnit):
         self.start_dttm = None
 
     def load_unit(self, unit):
-        """"""
+        """Load a unit dict into this document.
+        
+        Args:
+            unit: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if unit is None:
             unit = {}
         super().load_unit(unit)
@@ -237,35 +312,67 @@ class PyfficeEvent(PyfficeUnit):
         return self
 
     def set_end_dttm(self, end_dttm):
-        """"""
+        """Set the end dttm.
+        
+        Args:
+            end_dttm: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if end_dttm != self.end_dttm:
             self.add_change("start_dttm", self.end_dttm, end_dttm)
             self.end_dttm = end_dttm
         return self
 
     def set_event(self, event):
-        """"""
+        """Set the event.
+        
+        Args:
+            event: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if event != self.event:
             self.add_change("event", self.event, event)
             self.event = event
         return self
 
     def set_attendance_location(self, location):
-        """"""
+        """Set the attendance location.
+        
+        Args:
+            location: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if location != self.location:
             self.add_change("location", self.location, location)
             self.location_attendance = location
         return self
 
     def set_start_dttm(self, start_dttm):
-        """"""
+        """Set the start dttm.
+        
+        Args:
+            start_dttm: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if start_dttm != self.start_dttm:
             self.add_change("start_dttm", self.start_dttm, start_dttm)
             self.start_dttm = start_dttm
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["unit"] = {
             "event": self.event,

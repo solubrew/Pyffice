@@ -67,7 +67,15 @@ class PyfficeSpreadSheet(PyfficeDocument):
         self.tables = None
 
     def add_cell(self, address, cfg):
-        """"""
+        """Add a cell.
+        
+        Args:
+            address: Parameter.
+            cfg: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if address in self.cells:
             self.set_cell(address, cfg["value"], cfg["format"], cfg["formula"])
         self.add_change("cells", None, cfg, "assign", {"address": address})
@@ -75,7 +83,15 @@ class PyfficeSpreadSheet(PyfficeDocument):
         return self
 
     def convert_column(self, column, syntax="arabic"):
-        """"""
+        """Convert column.
+        
+        Args:
+            column: Parameter.
+            syntax: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         from pyffice.pyffice import UnknownSyntaxError
         if syntax == "arabic":
             column = calcArabicNumerals(column)
@@ -87,16 +103,37 @@ class PyfficeSpreadSheet(PyfficeDocument):
         return column
 
     def evaluate(self, address):
-        """"""
+        """Evaluate.
+        
+        Args:
+            address: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.cells[address] = self.cells[address].evaluate()
         return self
 
     def get_cell(self, address):
-        """"""
+        """Return the cell.
+        
+        Args:
+            address: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         return self.cells.get(address, None)
 
     def get_columns(self, count=None):
-        """"""
+        """Return the columns.
+        
+        Args:
+            count: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if count is None:
             count = 0
         columns = []
@@ -116,16 +153,39 @@ class PyfficeSpreadSheet(PyfficeDocument):
             raise UnknownReturnFormatError(f"Unknown Return Format {return_format}")
 
     def get_end_column(self, plus=0, minus=0):
-        """"""
+        """Return the end column.
+        
+        Args:
+            plus: Parameter.
+            minus: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         end_column = self.convert_column(self.end_column, "arabic")
         return self.convert_column(end_column + plus - minus, "roman")
 
     def get_end_row(self, plus=0, minus=0):
-        """"""
+        """Return the end row.
+        
+        Args:
+            plus: Parameter.
+            minus: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         return self.end_row + plus - minus
 
     def get_formula(self, address):
-        """"""
+        """Return the formula.
+        
+        Args:
+            address: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         return self.cells[address].get_formula()
 
     def get_rows(self):
@@ -151,7 +211,14 @@ class PyfficeSpreadSheet(PyfficeDocument):
                 for idx, cells in sorted(rows.items())]
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Document {document}")
         if document is None:
             document = self.config.dikt.get("document", {})
@@ -164,7 +231,17 @@ class PyfficeSpreadSheet(PyfficeDocument):
         return self
 
     def set_cell(self, address, value, format=None, formula=None):
-        """"""
+        """Set the cell.
+        
+        Args:
+            address: Parameter.
+            value: Parameter.
+            format: Parameter.
+            formula: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         # T-NEW-058 follow-up: initialize self.cells on first use
         # (was previously assumed non-None, breaking get_cell /
         # get_rows on fresh instances).
@@ -186,7 +263,15 @@ class PyfficeSpreadSheet(PyfficeDocument):
         return self
 
     def set_column_labels(self, labels=None, widths=None):
-        """"""
+        """Set the column labels.
+        
+        Args:
+            labels: Parameter.
+            widths: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if widths is None:
             widths = {}
         if labels != self.column_labels:
@@ -195,7 +280,15 @@ class PyfficeSpreadSheet(PyfficeDocument):
         return self
 
     def set_column_width(self, column, width):
-        """"""
+        """Set the column width.
+        
+        Args:
+            column: Parameter.
+            width: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         from pyffice.pyffice import ColumnNotFoundError
         if column not in self.column_labels:
             raise ColumnNotFoundError(f"Column {column} not found")
@@ -211,7 +304,14 @@ class PyfficeSpreadSheet(PyfficeDocument):
         return self
 
     def set_data(self, data):
-        """"""
+        """Set the data.
+        
+        Args:
+            data: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if data is None:
             data = {}
         row = 0
@@ -236,14 +336,28 @@ class PyfficeSpreadSheet(PyfficeDocument):
         return self
 
     def set_row_labels(self, labels=None):
-        """"""
+        """Set the row labels.
+        
+        Args:
+            labels: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if labels != self.row_labels:
             self.add_change("row_labels", self.row_labels, labels)
         self.row_labels = labels
         return self
 
     def set_size(self, size):
-        """"""
+        """Set the size.
+        
+        Args:
+            size: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if size is None:
             size = (50, 20)
         num_rows = size[0]
@@ -263,7 +377,11 @@ class PyfficeSpreadSheet(PyfficeDocument):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["data"]["document_type"] = "sheet"
         if self.cells is None:

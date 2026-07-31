@@ -44,7 +44,16 @@ class PyfficeTagsManager(PyfficeDocumentManager):
         self.tags = []
 
     def add_tag(self, name, description="", group=None):
-        """"""
+        """Attach a tag to this document.
+        
+        Args:
+            name: Parameter.
+            description: Parameter.
+            group: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"tag": {"name": name, "description": description, "group": group}}
         tag = PyfficeTag(cfg)
         tag.load_tag()
@@ -52,7 +61,14 @@ class PyfficeTagsManager(PyfficeDocumentManager):
         return self
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Document {document}")
         if document is None:
             document = self.config.dikt.get("document", {})
@@ -61,7 +77,11 @@ class PyfficeTagsManager(PyfficeDocumentManager):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["document"] = {"tags": self.tags}
         return doc

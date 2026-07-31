@@ -57,7 +57,14 @@ class PyfficeTable(PyfficeDocument):
         return self
 
     def load_document(self, document):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         super().load_document(document)
         return self
 

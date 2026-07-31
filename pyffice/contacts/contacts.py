@@ -51,7 +51,15 @@ class PyfficeAddress(PyfficeDocument):
 
     @classmethod
     def from_dict(cls, dikt):
-        """"""
+        """From dict.
+        
+        Args:
+            cls: Parameter.
+            dikt: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"street_name": dikt}
         return cls(cfg)
 
@@ -92,7 +100,14 @@ class PyfficeContact(PyfficeDocument):
         self.salutation = None
 
     def add_address(self, address):
-        """"""
+        """Add a address.
+        
+        Args:
+            address: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if isinstance(address, dict):
             address = PyfficeAddress.from_dict(address)
         if self.addresses == []:
@@ -105,7 +120,14 @@ class PyfficeContact(PyfficeDocument):
         return self
 
     def add_email_address(self, email):
-        """"""
+        """Add a email address.
+        
+        Args:
+            email: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         email = {"type": "email", "contact": email}
         self.add_change("channels", self.channels, email)
         if self.verify_email(email["contact"]):
@@ -113,18 +135,39 @@ class PyfficeContact(PyfficeDocument):
         return self
 
     def add_emergency_contact(self, contact: "PyfficeContact"):
-        """"""
+        """Add a emergency contact.
+        
+        Args:
+            contact: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.emergency_contact = contact
 
     def add_group(self, group):
-        """"""
+        """Add a group.
+        
+        Args:
+            group: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if group not in self.groups:
             self.add_change("groups", self.groups, group, "add")
             self.groups.append(group)
         return self
 
     def add_phone_address(self, phone):
-        """"""
+        """Add a phone address.
+        
+        Args:
+            phone: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         phone = {"type": "phone", "contact": phone}
         if self.phone is None:
             self.phone = phone
@@ -134,7 +177,14 @@ class PyfficeContact(PyfficeDocument):
         return self
 
     def add_postal_address(self, postal):
-        """"""
+        """Add a postal address.
+        
+        Args:
+            postal: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         postal = {"type": "postal_address", "contact": postal}
         self.add_change("channels", self.channels, postal)
         if self.verify_postal_address(postal["contact"]):
@@ -142,7 +192,15 @@ class PyfficeContact(PyfficeDocument):
         return self
 
     def add_social_contact(self, handle, social_network):
-        """"""
+        """Add a social contact.
+        
+        Args:
+            handle: Parameter.
+            social_network: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         social_network = {"type": "social", "contact": handle, "network": social_network}
         self.add_change("channels", self.channels, social_network)
         if self.verify_social(handle, social_network["contact"]):
@@ -199,7 +257,11 @@ class PyfficeContact(PyfficeDocument):
         return self
 
     def connect_contact(self):
-        """"""
+        """Connect contact.
+        
+        Returns:
+            Self for chaining.
+        """
         contact = {"id": self.did, "name": self.name, "channels": self.channels, "type": "contact"}
         return contact
 
@@ -218,7 +280,14 @@ class PyfficeContact(PyfficeDocument):
         return None
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if document is None:
             document = {}
         super().load_document(document)
@@ -229,7 +298,14 @@ class PyfficeContact(PyfficeDocument):
         return self
 
     def set_channels(self, document):
-        """"""
+        """Set the channels.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         for channel in document:
             if channel["type"] == "phone":
                 self.add_phone_address(channel["contact"])
@@ -242,7 +318,14 @@ class PyfficeContact(PyfficeDocument):
         return self
 
     def set_groups(self, groups):
-        """"""
+        """Set the groups.
+        
+        Args:
+            groups: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if groups is None:
             groups = ["default"]
         if groups != self.groups:
@@ -251,49 +334,98 @@ class PyfficeContact(PyfficeDocument):
         return self
 
     def set_name_first(self, name):
-        """"""
+        """Set the name first.
+        
+        Args:
+            name: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if name != self.first_name:
             self.add_change("first_name", self.first_name, name)
             self.first_name = name
         return self
 
     def set_name_full(self, name):
-        """"""
+        """Set the name full.
+        
+        Args:
+            name: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if name != self.full_name:
             self.add_change("full_name", self.full_name, name)
             self.full_name = name
         return self
 
     def set_name_middle(self, name):
-        """"""
+        """Set the name middle.
+        
+        Args:
+            name: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if name != self.middle_name:
             self.add_change("middle_name", self.middle_name, name)
             self.middle_name = name
         return self
 
     def set_name_nicknames(self, nicknames):
-        """"""
+        """Set the name nicknames.
+        
+        Args:
+            nicknames: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if nicknames != self.nicknames:
             self.add_change("nicknames", self.nicknames, nicknames)
             self.nicknames = nicknames
         return self
 
     def set_name_last(self, name):
-        """"""
+        """Set the name last.
+        
+        Args:
+            name: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if name != self.last_name:
             self.add_change("last_name", self.last_name, name)
             self.last_name = name
         return self
 
     def set_name_preferred(self, name):
-        """"""
+        """Set the name preferred.
+        
+        Args:
+            name: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if name != self.preferred_name:
             self.add_change("preferred_name", self.preferred_name, name)
             self.preferred_name = name
         return self
 
     def set_name_sur(self, name):
-        """"""
+        """Set the name sur.
+        
+        Args:
+            name: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if name != self.surname:
             self.add_change("surname", self.surname, name)
             self.surname = name
@@ -307,14 +439,28 @@ class PyfficeContact(PyfficeDocument):
         return self
 
     def set_name_suffix(self, name):
-        """"""
+        """Set the name suffix.
+        
+        Args:
+            name: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if name != self.suffix:
             self.add_change("suffix", self.suffix, name)
             self.suffix = name
         return self
 
     def set_names(self, names):
-        """"""
+        """Set the names.
+        
+        Args:
+            names: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if names is None:
             names = {}
         if names != self.names:
@@ -334,14 +480,25 @@ class PyfficeContact(PyfficeDocument):
         return self
 
     def set_preferred_channel(self, channel):
-        """"""
+        """Set the preferred channel.
+        
+        Args:
+            channel: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if channel != self.preferred_channel:
             self.add_change("preferred_channel", self.preferred_channel, channel)
             self.preferred_channel = channel
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict() or {}
         if "data" not in doc.keys():
             doc["data"] = {}
@@ -361,21 +518,42 @@ class PyfficeContact(PyfficeDocument):
         return self._canonicalize(doc)
 
     def verify_phone_number(self, phone):
-        """"""
+        """Verify phone number.
+        
+        Args:
+            phone: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         valid = validate_phone_number(phone)
         if valid["valid"]:
             self.channels = [{"type": "phone", "contact": phone}]
         return self
 
     def verify_email(self, email):
-        """"""
+        """Verify email.
+        
+        Args:
+            email: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         valid = validate_email_address(email)
         if valid["valid"]:
             self.channels = [{"type": "email", "contact": email}]
         return self
 
     def verify_postal_address(self, address):
-        """"""
+        """Verify postal address.
+        
+        Args:
+            address: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         valid = validate_postal_address(address)
         if valid["valid"]:
             self.channels = [{"type": "postal_address", "contact": address}]
@@ -399,7 +577,15 @@ class PyfficeRolodex(PyfficeDocumentManager):
         self.contacts = {}
 
     def add_contact(self, contact, group=None):
-        """"""
+        """Add a contact.
+        
+        Args:
+            contact: Parameter.
+            group: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if group is None:
             group = self.default_group
         self.add_change("group", self.default_group, group)
@@ -410,13 +596,27 @@ class PyfficeRolodex(PyfficeDocumentManager):
         return self
 
     def add_group(self, group):
-        """"""
+        """Add a group.
+        
+        Args:
+            group: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if group not in self.groups:
             self.groups.append(group)
         return self
 
     def del_contact(self, name):
-        """"""
+        """Remove the contact.
+        
+        Args:
+            name: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         del self.contacts[name]
         return self
 
@@ -433,16 +633,34 @@ class PyfficeRolodex(PyfficeDocumentManager):
         return None
 
     def get_count(self):
-        """"""
+        """Return the count.
+        
+        Returns:
+            Self for chaining.
+        """
         return len(self.contacts)
 
     def get_group_by_name(self, name):
-        """"""
+        """Return the group by name.
+        
+        Args:
+            name: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         group = [self.contacts[contact] for contact in self.contacts if name in self.contacts[contact].groups]
         return group
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Document {document}")
         if document is None:
             document = self.config.dikt.get("document", {})
@@ -455,7 +673,14 @@ class PyfficeRolodex(PyfficeDocumentManager):
         return self
 
     def set_contacts(self, contacts):
-        """"""
+        """Set the contacts.
+        
+        Args:
+            contacts: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if contacts is None:
             contacts = {}
         if self.contacts != contacts:
@@ -468,7 +693,14 @@ class PyfficeRolodex(PyfficeDocumentManager):
         return self
 
     def set_group_default(self, group=None):
-        """"""
+        """Set the group default.
+        
+        Args:
+            group: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if group is None:
             group = self.config.dikt.get("default_group", None)
         if group != self.default_group:
@@ -477,7 +709,14 @@ class PyfficeRolodex(PyfficeDocumentManager):
         return self
 
     def set_groups(self, groups):
-        """"""
+        """Set the groups.
+        
+        Args:
+            groups: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if groups is None:
             groups = ["default"]
         if groups != self.groups:
@@ -486,7 +725,11 @@ class PyfficeRolodex(PyfficeDocumentManager):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["document"] = {
             "contacts": {name: x.to_dict() for name, x in self.contacts.items()},

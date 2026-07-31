@@ -43,7 +43,14 @@ class PyfficeTable(PyfficeUnit):
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDataFrame")).override(cfg)
 
     def load_unit(self, unit=None):
-        """"""
+        """Load a unit dict into this document.
+        
+        Args:
+            unit: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Unit {unit}")
         if unit is None:
             unit = self.config.dikt.get("unit", {})
@@ -52,7 +59,15 @@ class PyfficeTable(PyfficeUnit):
         return self
 
     def set_dataframe(self, data, columns=None):
-        """"""
+        """Set the dataframe.
+        
+        Args:
+            data: Parameter.
+            columns: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if not isinstance(data, DataFrame):
             if columns is None:
                 if len(data) > 0:
@@ -64,13 +79,21 @@ class PyfficeTable(PyfficeUnit):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["unit"] = {"columns": list(self.data.columns), "records": self.data.values.tolist()}
         return doc
 
     def to_html(self):
-        """"""
+        """Convert this document to html.
+        
+        Returns:
+            Self for chaining.
+        """
         return self.html
 
 

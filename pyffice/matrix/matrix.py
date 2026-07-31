@@ -61,7 +61,14 @@ class PyfficeMatrix(PyfficeDocumentManager):
         self.sheets = {}
 
     def add_chart(self, chart):
-        """"""
+        """Add a chart.
+        
+        Args:
+            chart: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {}
         chart = PyfficeChart(cfg)
         self.add_change("charts", self.charts, chart, "add")
@@ -69,7 +76,16 @@ class PyfficeMatrix(PyfficeDocumentManager):
         return self
 
     def add_object(self, object_type, data=None, cfg=None):
-        """"""
+        """Add a object.
+        
+        Args:
+            object_type: Parameter.
+            data: Parameter.
+            cfg: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         match object_type:
             case "shape":
                 object_ = PyfficeShape(cfg)
@@ -82,19 +98,42 @@ class PyfficeMatrix(PyfficeDocumentManager):
         return self
 
     def add_charts(self, charts):
-        """"""
+        """Add a charts.
+        
+        Args:
+            charts: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         for chart in charts:
             self.add_chart(chart)
         return self
 
     def add_objects(self, objects):
-        """"""
+        """Add a objects.
+        
+        Args:
+            objects: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         for object_ in objects:
             self.add_object(object_["type"], object_["data"], object_["cfg"])
         return self
 
     def add_worksheet(self, name=None, cfg=None, tabn=None):
-        """"""
+        """Add a worksheet.
+        
+        Args:
+            name: Parameter.
+            cfg: Parameter.
+            tabn: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if tabn is None:
             tabn = len(self.sheets) + 1
         if name is None:
@@ -108,7 +147,14 @@ class PyfficeMatrix(PyfficeDocumentManager):
         return self
 
     def add_worksheets(self, sheets):
-        """"""
+        """Add a worksheets.
+        
+        Args:
+            sheets: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         for sheet in sheets:
             self.add_worksheet(sheet["name"], sheet)
         return self
@@ -132,7 +178,14 @@ class PyfficeMatrix(PyfficeDocumentManager):
         return "excel"
 
     def export(self, format_=None):
-        """"""
+        """Export .
+        
+        Args:
+            format_: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         super().export()
         if format_ == "excel":
             self.export_excel()
@@ -164,7 +217,17 @@ class PyfficeMatrix(PyfficeDocumentManager):
         return self
 
     def file_import(self, file_=None, if_data_only=False, read_only=False, keep_vba=False):
-        """"""
+        """File import.
+        
+        Args:
+            file_: Parameter.
+            if_data_only: Parameter.
+            read_only: Parameter.
+            keep_vba: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         from pyffice.pyffice import (
             MissingPathError,
             UnknownFileTypeError,
@@ -196,7 +259,17 @@ class PyfficeMatrix(PyfficeDocumentManager):
         return self
 
     def file_import_csv(self, path, if_data_only=False, read_only=False, keep_vba=False):
-        """"""
+        """File import csv.
+        
+        Args:
+            path: Parameter.
+            if_data_only: Parameter.
+            read_only: Parameter.
+            keep_vba: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.file_format = ".csv"
         cfg = {}
         importer = PyfficePortCSV(cfg)
@@ -205,7 +278,17 @@ class PyfficeMatrix(PyfficeDocumentManager):
         return data
 
     def file_import_excel(self, path, if_data_only=False, read_only=False, keep_vba=False):
-        """"""
+        """File import excel.
+        
+        Args:
+            path: Parameter.
+            if_data_only: Parameter.
+            read_only: Parameter.
+            keep_vba: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.file_format = ".xlsx"
         cfg = {}
         importer = PyfficePortExcel(cfg)
@@ -213,7 +296,17 @@ class PyfficeMatrix(PyfficeDocumentManager):
         return data
 
     def file_import_gsheet(self, path, if_data_only=False, read_only=False, keep_vba=False):
-        """"""
+        """File import gsheet.
+        
+        Args:
+            path: Parameter.
+            if_data_only: Parameter.
+            read_only: Parameter.
+            keep_vba: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.file_format = ".gsheet"
         cfg = {}
         importer = PyfficePortGoogleSheets(cfg)
@@ -278,7 +371,14 @@ class PyfficeMatrix(PyfficeDocumentManager):
         return self
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if document is None:
             document = self.config.dikt.get("document", {}) or {}
         logma.json(document)
@@ -405,7 +505,14 @@ class PyfficeMatrix(PyfficeDocumentManager):
             pyqt.QMessageBox.warning(self, "Error", f"Failed to load file: {e}")
 
     def open_file(self, file):
-        """"""
+        """Open file.
+        
+        Args:
+            file: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         from pyffice.pyffice import UnknownFileTypeError
         if file is None:
             file = self.file_path
@@ -454,7 +561,16 @@ class PyfficeMatrix(PyfficeDocumentManager):
         return sanitized_name
 
     def save(self, path=None, syntax=None, encrypt_key=None):
-        """"""
+        """Save the document.
+        
+        Args:
+            path: Parameter.
+            syntax: Parameter.
+            encrypt_key: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         super().save(path, syntax, encrypt_key)
         match syntax:
             case "excel":
@@ -583,7 +699,14 @@ class PyfficeMatrix(PyfficeDocumentManager):
         return self
 
     def set_formula_library(self, library=None):
-        """"""
+        """Set the formula library.
+        
+        Args:
+            library: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.formulas_library = PyfficeFormulasLibrary(library)
         return self
 
@@ -593,7 +716,14 @@ class PyfficeMatrix(PyfficeDocumentManager):
         return self
 
     def set_porter(self, porter):
-        """"""
+        """Set the porter.
+        
+        Args:
+            porter: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {}
         porter = PyfficePortExcel(cfg)
         if porter != self.porter:
@@ -602,28 +732,62 @@ class PyfficeMatrix(PyfficeDocumentManager):
         return self
 
     def set_sheets(self, sheets):
-        """"""
+        """Set the sheets.
+        
+        Args:
+            sheets: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         for sheet in sheets.get("sheets", []):
             self.sheets[sheet["name"]] = PyfficeSpreadSheet(sheet)
         return self
 
     def save_as(self, name, path):
-        """"""
+        """Save the document.
+        
+        Args:
+            name: Parameter.
+            path: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         super().save_as(path)
         return self
 
     def save_copy_as(self, name, path=None):
-        """"""
+        """Save the document.
+        
+        Args:
+            name: Parameter.
+            path: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         super().save_copy_as(name, path)
         return self
 
     def set_compatibility(self, compatibility):
-        """"""
+        """Set the compatibility.
+        
+        Args:
+            compatibility: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.compatibility = compatibility
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         if isinstance(self.data, DataFrame):
             doc["data"]["table"] = self.data.values.tolist()

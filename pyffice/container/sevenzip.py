@@ -35,9 +35,22 @@ class Pyffice7Z:
         self.mode = mode
     
     def read(self) -> bytes:
+        """Read.
+        
+        Returns:
+            Self for chaining.
+        """
         return load(self.file_path)
     
     def write(self, data: bytes) -> None:
+        """Write.
+        
+        Args:
+            data: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         write(data, self.file_path)
 
 

@@ -51,7 +51,14 @@ class PyfficeBackground(PyfficeUnit):
         self.transparency = None
 
     def load_unit(self, unit):
-        """"""
+        """Load a unit dict into this document.
+        
+        Args:
+            unit: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Unit {unit}")
         if unit is None:
             unit = self.config.dikt.get("unit", {})
@@ -63,7 +70,14 @@ class PyfficeBackground(PyfficeUnit):
         return self
 
     def set_color(self, color):
-        """"""
+        """Set the color.
+        
+        Args:
+            color: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"color": color}
         color = PyfficeColor(cfg)
         if color != self.color:
@@ -72,7 +86,14 @@ class PyfficeBackground(PyfficeUnit):
         return self
 
     def set_image(self, path):
-        """"""
+        """Set the image.
+        
+        Args:
+            path: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         image = None
         if exists(path):
             cfg = {"file_path": path}
@@ -89,14 +110,25 @@ class PyfficeBackground(PyfficeUnit):
         return self
 
     def set_transparency(self, transparency):
-        """"""
+        """Set the transparency.
+        
+        Args:
+            transparency: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if transparency != self.transparency:
             self.add_change("transparency", self.transparency, transparency)
         self.transparency = transparency
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["unit"] = {
             "color": self.color.to_dict() if self.color is not None else None,
@@ -134,7 +166,11 @@ class PyfficeCell(PyfficeUnit):
         self.transparency = None
 
     def evaluate(self):
-        """"""
+        """Evaluate.
+        
+        Returns:
+            Self for chaining.
+        """
         formula = self.get_formula()
         inputs = self.get_inputs()
         self.parent.compiler.evaluate(formula, inputs)
@@ -183,7 +219,11 @@ class PyfficeCell(PyfficeUnit):
         return getattr(self, 'formula', None)
 
     def get_inputs(self):
-        """"""
+        """Return the inputs.
+        
+        Returns:
+            Self for chaining.
+        """
         return self.formula_inputs
 
     def get_value(self):
@@ -191,7 +231,14 @@ class PyfficeCell(PyfficeUnit):
         return getattr(self, 'value', None)
 
     def load_unit(self, unit):
-        """"""
+        """Load a unit dict into this document.
+        
+        Args:
+            unit: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Unit {unit}")
         if unit is None:
             unit = self.config.dikt.get("unit", {})
@@ -210,7 +257,14 @@ class PyfficeCell(PyfficeUnit):
         return self
 
     def set_address(self, address):
-        """"""
+        """Set the address.
+        
+        Args:
+            address: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(self)
         logma.info(f"{self.__dir__()})")
         if address != self.address:
@@ -219,7 +273,14 @@ class PyfficeCell(PyfficeUnit):
         return self
 
     def set_background(self, background):
-        """"""
+        """Set the background.
+        
+        Args:
+            background: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"background": background}
         background = PyfficeUnit(cfg)
         if background != self.background:
@@ -228,7 +289,15 @@ class PyfficeCell(PyfficeUnit):
         return self
 
     def set_border_size(self, size, position="top"):
-        """"""
+        """Set the border size.
+        
+        Args:
+            size: Parameter.
+            position: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if self.border_size is None:
             self.border_size = {}
         self.add_change("border_size", self.border_size, size, "assign")
@@ -236,7 +305,15 @@ class PyfficeCell(PyfficeUnit):
         return self
 
     def set_border_color(self, color, position="top"):
-        """"""
+        """Set the border color.
+        
+        Args:
+            color: Parameter.
+            position: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if self.border_color is None:
             self.border_color = {}
         self.add_change("border_color", self.border_color, color, "assign")
@@ -244,7 +321,15 @@ class PyfficeCell(PyfficeUnit):
         return self
 
     def set_border_style(self, style, position="top"):
-        """"""
+        """Set the border style.
+        
+        Args:
+            style: Parameter.
+            position: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if self.border_style is None:
             self.border_style = {}
         self.add_change("border_size", self.border_style, style, "assign")
@@ -257,7 +342,15 @@ class PyfficeCell(PyfficeUnit):
         return self
 
     def set_formula(self, formula, inputs=None):
-        """"""
+        """Set the formula.
+        
+        Args:
+            formula: Parameter.
+            inputs: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if formula != self.formula:
             self.add_change("formula", self.formula, formula)
         self.formula = formula
@@ -272,7 +365,15 @@ class PyfficeCell(PyfficeUnit):
         return self
 
     def set_value(self, value, font=None):
-        """"""
+        """Set the value.
+        
+        Args:
+            value: Parameter.
+            font: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         value = PyfficeText({"text": value, "font": font})
         if value != self.value:
             self.add_change("value", self.value, value)
@@ -280,14 +381,25 @@ class PyfficeCell(PyfficeUnit):
         return self
 
     def set_transparency(self, transparency):
-        """"""
+        """Set the transparency.
+        
+        Args:
+            transparency: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if transparency != self.transparency:
             self.add_change("transparency", self.transparency, transparency)
         self.transparency = transparency
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["unit"]["address"] = self.address
         doc["unit"]["background"] = self.background.to_dict()

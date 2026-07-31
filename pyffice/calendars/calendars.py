@@ -52,7 +52,14 @@ class PyfficeCalendar(PyfficeDocumentManager):
         self.time_unit = None
 
     def add_event(self, event):
-        """"""
+        """Add a event.
+        
+        Args:
+            event: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"event": event}
         event = PyfficeEvent(cfg)
         self.add_change("events", deepcopy(self.events), event)
@@ -68,7 +75,14 @@ class PyfficeCalendar(PyfficeDocumentManager):
     #     return self
 
     def del_event(self, event):
-        """"""
+        """Remove the event.
+        
+        Args:
+            event: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if event in self.events:
             self.events.remove(event)
             self.add_change("events", deepcopy(self.events), self.events, "del")
@@ -80,7 +94,14 @@ class PyfficeCalendar(PyfficeDocumentManager):
     #         self.add_change("tasks", deepcopy(self.tasks), self.tasks, "del")
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Document {document}")
         if document is None:
             document = self.config.dikt.get("document", {})
@@ -97,14 +118,28 @@ class PyfficeCalendar(PyfficeDocumentManager):
         return self
 
     def set_date_end(self, date):
-        """"""
+        """Set the date end.
+        
+        Args:
+            date: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if date != self.end_date:
             self.add_change("end_date", self.end_date, date)
             self.end_date = date
         return self
 
     def set_date_start(self, date):
-        """"""
+        """Set the date start.
+        
+        Args:
+            date: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if date != self.start_date:
             self.add_change("start_date", self.start_date, date)
             self.start_date = date
@@ -116,11 +151,25 @@ class PyfficeCalendar(PyfficeDocumentManager):
         return self
 
     def set_tasks(self, tasks):
-        """"""
+        """Set the tasks.
+        
+        Args:
+            tasks: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.tasks += tasks
 
     def set_time_unit(self, time_unit):
-        """"""
+        """Set the time unit.
+        
+        Args:
+            time_unit: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"time_unit": time_unit, "scale": self.time_scale}
         time_unit = PyfficeTimeUnit(cfg)
         if time_unit != self.time_unit:
@@ -136,7 +185,14 @@ class PyfficeCalendar(PyfficeDocumentManager):
     #     return self
 
     def set_time_scale(self, time_scale):
-        """"""
+        """Set the time scale.
+        
+        Args:
+            time_scale: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"time_scale": time_scale}
         time_scale = PyfficeTimeUnit(cfg)
         if time_scale != self.time_scale:
@@ -145,7 +201,11 @@ class PyfficeCalendar(PyfficeDocumentManager):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         if "document" not in doc.keys():
             doc["document"] = {}

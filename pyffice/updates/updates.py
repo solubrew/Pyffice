@@ -120,7 +120,14 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
         return self
 
     def process(self, document=None):
-        """"""
+        """Process .
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if document is None:
             document = self.config.dikt.get("document", {})
         if document == {}:
@@ -141,14 +148,26 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
         return document
 
     def rebuild(self):
-        """"""
+        """Rebuild.
+        
+        Returns:
+            Self for chaining.
+        """
         document = self.document
         document["data"] = self.data
         document["meta_data"] = self.meta_data
         return document
 
     def run_adds(self, target, update_data):
-        """"""
+        """Run adds.
+        
+        Args:
+            target: Parameter.
+            update_data: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if not update_data:
             return
         if isinstance(update_data, dict):
@@ -160,7 +179,15 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
                     target.update(item)
 
     def run_deletes(self, target, update_data):
-        """"""
+        """Run deletes.
+        
+        Args:
+            target: Parameter.
+            update_data: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if not update_data:
             return
         if isinstance(update_data, dict):
@@ -176,7 +203,15 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
                 del target[update_data]
 
     def run_updates(self, target, update_data):
-        """"""
+        """Run updates.
+        
+        Args:
+            target: Parameter.
+            update_data: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if not update_data:
             return
         for key, value in update_data.items():
@@ -195,7 +230,14 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
                     target[key] = value
 
     def update_data(self, update):
-        """"""
+        """Update data.
+        
+        Args:
+            update: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if update.get("add") is not None:
             self.run_adds(self.data, update["add"])
         if update.get("delete") is not None:
@@ -205,7 +247,14 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
         return self
 
     def update_document(self, update):
-        """"""
+        """Update document.
+        
+        Args:
+            update: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if update.get("add") is not None:
             self.run_adds(self.document, update["add"])
         if update.get("delete") is not None:
@@ -215,7 +264,14 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
         return self
 
     def update_meta_data(self, update):
-        """"""
+        """Update meta data.
+        
+        Args:
+            update: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if update.get("add") is not None:
             self.run_adds(self.meta_data, update["add"])
         if update.get("delete") is not None:
@@ -225,7 +281,15 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
         return self
 
     def update_versions(self, version, document_type):
-        """"""
+        """Update versions.
+        
+        Args:
+            version: Parameter.
+            document_type: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         # Map document_type to YAML keys if necessary
         # The YAML uses keys like pyffice_web_browser, pyffice_web_page etc.
         # But document_type might be 'browser', 'page', etc.

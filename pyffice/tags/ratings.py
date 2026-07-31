@@ -44,7 +44,14 @@ class PyfficeRating(PyfficeTag):
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeRating")).override(cfg)
 
     def load_tag(self, tag):
-        """"""
+        """Load tag into this document.
+        
+        Args:
+            tag: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if tag is None:
             tag = self.config.dikt.get("tag", {})
         super().load_tag(tag)

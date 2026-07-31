@@ -176,7 +176,14 @@ class PyfficeColor(PyfficeUnit):
         return self.yiq
 
     def load_unit(self, unit=None):
-        """"""
+        """Load a unit dict into this document.
+        
+        Args:
+            unit: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Unit {unit}")
         if unit is None:
             unit = self.config.dikt.get("unit", {})
@@ -237,7 +244,14 @@ class PyfficeColor(PyfficeUnit):
         self.set_rgb(self.hex_to_rgb(value))
 
     def set_hsl(self, value):
-        """"""
+        """Set the hsl.
+        
+        Args:
+            value: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.hsl = value
         self.set_rgb(self.hsl_to_rgb(value))
         self.set_hex(self.rgb_to_hex(self.get_rgb()))
@@ -275,7 +289,14 @@ class PyfficeColor(PyfficeUnit):
         # LMS is typically derived from XYZ; no direct conversion provided here.
 
     def set_color_name(self, value):
-        """"""
+        """Set the color name.
+        
+        Args:
+            value: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.color_name = value
         if self.color_name in CSS4_COLORS:
             self.set_hex(CSS4_COLORS[self.color_name])
@@ -328,6 +349,14 @@ class PyfficeColor(PyfficeUnit):
 
     @staticmethod
     def rgb_to_cmyk(rgb):
+        """Rgb to cmyk.
+        
+        Args:
+            rgb: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         r, g, b = [v / 255.0 for v in rgb]
         k = 1 - max(r, g, b)
         if k == 1:
@@ -339,17 +368,41 @@ class PyfficeColor(PyfficeUnit):
 
     @staticmethod
     def rgb_to_hex(rgb):
+        """Rgb to hex.
+        
+        Args:
+            rgb: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if rgb is None:
             return None
         return "#{:02X}{:02X}{:02X}".format(*rgb)
 
     @staticmethod
     def hex_to_rgb(hex_color):
+        """Hex to rgb.
+        
+        Args:
+            hex_color: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         hex_color = hex_color.lstrip("#")
         return tuple(int(hex_color[i : i + 2], 16) for i in (0, 2, 4))
 
     @staticmethod
     def rgb_to_hsl(rgb):
+        """Rgb to hsl.
+        
+        Args:
+            rgb: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         return colorsys.rgb_to_hls(*[v / 255.0 for v in rgb])
 
     @staticmethod
@@ -365,6 +418,16 @@ class PyfficeColor(PyfficeUnit):
         """
 
         def hue_to_rgb(p, q, t):
+            """Hue to rgb.
+            
+            Args:
+                p: Parameter.
+                q: Parameter.
+                t: Parameter.
+            
+            Returns:
+                Self for chaining.
+            """
             if t < 0:
                 t += 1
             if t > 1:
@@ -391,11 +454,27 @@ class PyfficeColor(PyfficeUnit):
 
     @staticmethod
     def hsv_to_rgb(hsv):
+        """Hsv to rgb.
+        
+        Args:
+            hsv: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         r, g, b = colorsys.hsv_to_rgb(*hsv)
         return int(r * 255), int(g * 255), int(b * 255)
 
     @staticmethod
     def xyz_to_lab(xyz):
+        """Xyz to lab.
+        
+        Args:
+            xyz: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         xyz_color = XYZColor(*xyz)
         lab_color = convert_color(xyz_color, LabColor)
         return lab_color.lab_l, lab_color.lab_a, lab_color.lab_b
@@ -403,6 +482,14 @@ class PyfficeColor(PyfficeUnit):
     @staticmethod
     def xyz_to_rgb(xyz):
         # Use colormath to convert XYZ → sRGB
+        """Xyz to rgb.
+        
+        Args:
+            xyz: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         xyz_color = XYZColor(*xyz)
         srgb_color = convert_color(xyz_color, sRGBColor)
         return tuple(
@@ -415,7 +502,11 @@ class PyfficeColor(PyfficeUnit):
         )
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["unit"] = {
             "color_name": self.color_name,
@@ -427,7 +518,11 @@ class PyfficeColor(PyfficeUnit):
         return doc
 
     def to_html(self):
-        """"""
+        """Convert this document to html.
+        
+        Returns:
+            Self for chaining.
+        """
         return self.html
 
 

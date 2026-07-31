@@ -54,7 +54,17 @@ class PyfficeForm(PyfficeDocument):
         self.responses = None
 
     def add_answer(self, question_id, text, branch=None, sequence=None):
-        """"""
+        """Add a answer.
+        
+        Args:
+            question_id: Parameter.
+            text: Parameter.
+            branch: Parameter.
+            sequence: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         answer = {
             "answer": text,
             "branch": branch,
@@ -72,7 +82,20 @@ class PyfficeForm(PyfficeDocument):
     def add_field(
         self, section_id, field, sequence=-1, response_scope="text", style="normal", required=False, always_show=False
     ):
-        """"""
+        """Add a form field.
+        
+        Args:
+            section_id: Parameter.
+            field: Parameter.
+            sequence: Parameter.
+            response_scope: Parameter.
+            style: Parameter.
+            required: Parameter.
+            always_show: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         sequence += 1
         # RESOLVED: Section ordering controlled via config
         self.sections[section_id]["questions"][sequence] = {
@@ -84,7 +107,14 @@ class PyfficeForm(PyfficeDocument):
         return sequence
 
     def add_response(self, response):
-        """"""
+        """Add a response.
+        
+        Args:
+            response: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.responses.append(response)
         return self
 
@@ -124,7 +154,14 @@ class PyfficeForm(PyfficeDocument):
         return self
 
     def del_section(self, section_id):
-        """"""
+        """Remove the section.
+        
+        Args:
+            section_id: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if section_id not in self.sections:
             return self
         self.add_change("sections", self.sections, section_id, "del")
@@ -132,7 +169,14 @@ class PyfficeForm(PyfficeDocument):
         return self
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if document is None:
             document = self.config.dikt.get("document", {})
             if document is None:
@@ -145,7 +189,14 @@ class PyfficeForm(PyfficeDocument):
         return self
 
     def set_form_footer_image(self, file_path):
-        """"""
+        """Set the form footer image.
+        
+        Args:
+            file_path: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"file_path": file_path}
         image = PyfficeImage(cfg)
         if image.path != self.footer_image_path:
@@ -159,7 +210,14 @@ class PyfficeForm(PyfficeDocument):
         return self
 
     def set_form_header_image(self, file_path):
-        """"""
+        """Set the form header image.
+        
+        Args:
+            file_path: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"file_path": file_path}
         image = PyfficeImage(cfg)
         if image.path != self.header_image_path:
@@ -168,14 +226,25 @@ class PyfficeForm(PyfficeDocument):
         return self
 
     def set_sections(self, sections):
-        """"""
+        """Set the sections.
+        
+        Args:
+            sections: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if sections != self.sections:
             self.add_change("sections", self.sections, sections)
         self.sections = sections
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["document"] = {
             "header_image": self.header_image.to_dict(),
@@ -197,7 +266,14 @@ class PyfficeFormsManager(PyfficeDocumentManager):
         self.forms = None
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if document is None:
             document = self.config.dikt.get("document", {})
             if document is None:
@@ -207,7 +283,14 @@ class PyfficeFormsManager(PyfficeDocumentManager):
         return self
 
     def set_forms(self, forms):
-        """"""
+        """Set the forms.
+        
+        Args:
+            forms: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if forms is None:
             forms = []
         if forms != self.forms:
@@ -216,7 +299,11 @@ class PyfficeFormsManager(PyfficeDocumentManager):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["document"] = {"forms": [x.to_dict() for x in self.forms]}
         return doc
@@ -244,14 +331,31 @@ class PyfficeSurvey(PyfficeDocument):
         self.schedule = None
 
     def add_field_response(self, field, field_id, response_id):
-        """"""
+        """Add a field response.
+        
+        Args:
+            field: Parameter.
+            field_id: Parameter.
+            response_id: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         response = {response_id: {field_id: field}}
         self.add_change("responses", self.responses, response, "add")
         self.responses[response_id][field_id] = field
         return self
 
     def add_form_response(self, response, response_id=None):
-        """"""
+        """Add a form response.
+        
+        Args:
+            response: Parameter.
+            response_id: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if response_id is None:
             response_id = uuid()
         response = {response_id: response}
@@ -260,7 +364,14 @@ class PyfficeSurvey(PyfficeDocument):
         return self
 
     def add_recipient(self, recipient):
-        """"""
+        """Add a recipient for this document.
+        
+        Args:
+            recipient: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if recipient in self.distribution["recipients"]:
             return self
         self.add_change("recipients", self.distribution["recipients"], recipient, "add")
@@ -285,13 +396,27 @@ class PyfficeSurvey(PyfficeDocument):
         return self
 
     def get_form(self, form_id):
-        """"""
+        """Return the form.
+        
+        Args:
+            form_id: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         # need to connect with the integrated PyfficeBook
         form = PyfficeForm()
         return form
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Document {document}")
         if document is None:
             document = self.config.dikt.get("document", {})
@@ -305,7 +430,14 @@ class PyfficeSurvey(PyfficeDocument):
         return self
 
     def set_channel(self, channel):
-        """"""
+        """Set the channel.
+        
+        Args:
+            channel: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if self.distribution["channel"] != channel:
             self.add_change("distribution", self.distribution, channel, "set", "channel")
             self.distribution["channel"] = channel
@@ -320,14 +452,28 @@ class PyfficeSurvey(PyfficeDocument):
         return self
 
     def set_end_date(self, end_datetime):
-        """"""
+        """Set the end date.
+        
+        Args:
+            end_datetime: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if self.schedule["end"] != end_datetime:
             self.add_change("schedule", self.schedule, end_datetime)
             self.schedule["end"] = end_datetime
         return self
 
     def set_form(self, form):
-        """"""
+        """Set the form.
+        
+        Args:
+            form: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if form != self.form:
             self.add_change("form", self.form, form)
             self.form = form
@@ -335,7 +481,14 @@ class PyfficeSurvey(PyfficeDocument):
         return self
 
     def set_form_id(self, form_id):
-        """"""
+        """Set the form id.
+        
+        Args:
+            form_id: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if self.form_id != form_id:
             self.add_change("form_id", self.form_id, form_id)
             self.form_id = form_id
@@ -344,28 +497,53 @@ class PyfficeSurvey(PyfficeDocument):
         return self
 
     def set_responses(self, responses=None):
-        """"""
+        """Set the responses.
+        
+        Args:
+            responses: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if responses != self.responses:
             self.add_change("responses", self.responses, responses)
             self.responses = responses
         return self
 
     def set_schedule(self, schedule=None):
-        """"""
+        """Set the schedule.
+        
+        Args:
+            schedule: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if schedule != self.schedule:
             self.add_change("schedule", self.schedule, schedule)
             self.schedule = schedule
         return self
 
     def set_start_date(self, start_datetime):
-        """"""
+        """Set the start date.
+        
+        Args:
+            start_datetime: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if self.schedule["start"] != start_datetime:
             self.add_change("schedule", self.schedule, start_datetime)
             self.schedule["start"] = start_datetime
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["document"] = {
             "form_id": self.form_id,

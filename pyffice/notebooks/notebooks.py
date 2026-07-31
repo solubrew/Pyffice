@@ -45,28 +45,60 @@ class PyfficeNotebook(PyfficeDocument):
         self.notebook = None
 
     def add_cell(self, cell):
-        """"""
+        """Add a cell.
+        
+        Args:
+            cell: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.cells.append(cell)
         return self
 
     def clear_cell(self, dex):
-        """"""
+        """Clear cell.
+        
+        Args:
+            dex: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.cells[dex]["outputs"] = []
         return self
 
     def clear_cells(self):
-        """"""
+        """Clear cells.
+        
+        Returns:
+            Self for chaining.
+        """
         for cell in self.cells:
             cell["outputs"] = []
         return self
 
     def del_cell(self, dex):
-        """"""
+        """Remove the cell.
+        
+        Args:
+            dex: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.cells.pop(dex)
         return self
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Document {document}")
         if document is None:
             document = self.config.dikt.get("document", {})
@@ -78,21 +110,43 @@ class PyfficeNotebook(PyfficeDocument):
         return self
 
     def set_cells(self, cells):
-        """"""
+        """Set the cells.
+        
+        Args:
+            cells: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if cells != self.cells:
             self.add_change("cells", self.cells, cells)
             self.cells = cells
         return self
 
     def set_cell_source(self, text, position=0):
-        """"""
+        """Set the cell source.
+        
+        Args:
+            text: Parameter.
+            position: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"text": text}
         text = PyfficeText(cfg)
         self.cells[position]["source"] = text
         return self
 
     def set_notebook(self, notebook=None):
-        """"""
+        """Set the notebook.
+        
+        Args:
+            notebook: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if notebook is None:
             notebook = {
                 "cells": [],
@@ -108,7 +162,11 @@ class PyfficeNotebook(PyfficeDocument):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["document"] = {"notebook": self.notebook}
         if self.cells is None:
@@ -118,7 +176,11 @@ class PyfficeNotebook(PyfficeDocument):
         return doc
 
     def to_html(self):
-        """"""
+        """Convert this document to html.
+        
+        Returns:
+            Self for chaining.
+        """
         return self.to_html()
 
 

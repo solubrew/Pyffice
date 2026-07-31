@@ -67,7 +67,14 @@ class PyfficePort(PyfficeDocumentManager):
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePort")).override(cfg)
 
     def file_export(self, file_=None):
-        """"""
+        """File export.
+        
+        Args:
+            file_: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.file_write(file_, self.to_dict())
         return self
 
@@ -140,12 +147,28 @@ class PyfficePort(PyfficeDocumentManager):
         return ET.tostring(self.document, encoding='unicode') if self.document else ""
 
     def file_open(self, file_path, open_=True):
-        """"""
+        """File open.
+        
+        Args:
+            file_path: Parameter.
+            open_: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         text = super().file_open(file_path, open_)
         return text
 
     def file_write(self, path, dikt):
-        """"""
+        """File write.
+        
+        Args:
+            path: Parameter.
+            dikt: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         # with open(path, "w") as f:
         #     f.write(text)
         yonql.Doc(path).write(dikt)
@@ -188,7 +211,14 @@ class PyfficePortCherryTree(PyfficePort):
         self.images = None
 
     def extract_codeboxes(self, node):
-        """"""
+        """Extract codeboxes.
+        
+        Args:
+            node: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         codeboxes = node.findall("codebox")
         self.codeboxes = []
         for code in codeboxes:
@@ -199,7 +229,14 @@ class PyfficePortCherryTree(PyfficePort):
         return self
 
     def extract_images(self, node):
-        """"""
+        """Extract images.
+        
+        Args:
+            node: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         images = node.findall("encoded_png")
         self.images = []
         for image in images:
@@ -218,7 +255,14 @@ class PyfficePortCherryTree(PyfficePort):
         return self
 
     def extract_tables(self, node):
-        """"""
+        """Extract tables.
+        
+        Args:
+            node: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         tables = node.findall("table")
         tables_ = []
         for table in tables:
@@ -241,7 +285,14 @@ class PyfficePortCherryTree(PyfficePort):
         return tables_
 
     def extract_text(self, node):
-        """"""
+        """Extract text.
+        
+        Args:
+            node: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         full_text = ""
         script = None
         if node.text is not None:
@@ -254,12 +305,26 @@ class PyfficePortCherryTree(PyfficePort):
         return script
 
     def file_import(self, file_path=None):
-        """"""
+        """File import.
+        
+        Args:
+            file_path: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.file_open(file_path)
         return self.to_dict()
 
     def file_open(self, file_path):
-        """"""
+        """File open.
+        
+        Args:
+            file_path: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         # logma.info(f"Open Cherry Tree {self.config.dikt["file_path"]}")
         self.load_document(self.config.dikt.get("document", {}))
         if file_path is None:
@@ -272,7 +337,14 @@ class PyfficePortCherryTree(PyfficePort):
         return self
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Cherry Tree {document}")
         super().load_document(document)
         return self
@@ -288,6 +360,14 @@ class PyfficePortCherryTree(PyfficePort):
 
     def parse_links(self, text):
         # extract urls
+        """Parse URL links from the document content.
+        
+        Args:
+            text: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         links = extract_urls(text)
         logma.info(f"Links: {links}")
         self.links = []
@@ -439,7 +519,14 @@ class PyfficePortCherryTree(PyfficePort):
         return node_
 
     def parse_tables(self, node):
-        """"""
+        """Parse tables.
+        
+        Args:
+            node: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         # extract tables
         tables = node.findall("table")
         for table in tables:
@@ -449,7 +536,14 @@ class PyfficePortCherryTree(PyfficePort):
         return self
 
     def parse_text(self, node):
-        """"""
+        """Parse text.
+        
+        Args:
+            node: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         text = node.findall("rich_text")
         all_combined_text = []
         if len(text) > 0:
@@ -463,7 +557,11 @@ class PyfficePortCherryTree(PyfficePort):
         return combined_text
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         for node in self.nodes:
             doc["data"]["documents"].append(node)
@@ -481,7 +579,14 @@ class PyfficePortOffice(PyfficePort):
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortOffice")).override(cfg)
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         super().load_document(document)
         return self
 
@@ -523,13 +628,27 @@ class PyfficePortCSV(PyfficePort):
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortCSV")).override(cfg)
 
     def open_file(self, file, if_data_only=False, read_only=False, keep_vba=False):
-        """"""
+        """Open file.
+        
+        Args:
+            file: Parameter.
+            if_data_only: Parameter.
+            read_only: Parameter.
+            keep_vba: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         rdr = tblonql.Doc(file)
         data = next(rdr.read(), None)
         return data
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         return doc
 
@@ -551,13 +670,27 @@ class PyfficePortDia(PyfficePort):
         self.edges = None
 
     def import_file(self, file_path=None):
-        """"""
+        """Import file.
+        
+        Args:
+            file_path: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.open_file(file_path)
         self.parse()
         return self.to_dict()
 
     def open_file(self, file_path):
-        """"""
+        """Open file.
+        
+        Args:
+            file_path: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         super().open_file(file_path)
         with open(str(self.file_path), "r") as f:
             xml_string = f.read()
@@ -570,7 +703,11 @@ class PyfficePortDia(PyfficePort):
             self.diagram = dia.open(file_path)
 
     def parse(self):
-        """"""
+        """Parse .
+        
+        Returns:
+            Self for chaining.
+        """
         if self.is_dia_installed:
             self.parse_dia()
         else:
@@ -591,7 +728,11 @@ class PyfficePortDia(PyfficePort):
         return self
 
     def parse_xml(self):
-        """"""
+        """Parse xml.
+        
+        Returns:
+            Self for chaining.
+        """
         # Open and parse the .dia file (it's an XML file)
         # Dia's XML namespaces
         namespace = {"dia": "http://www.lysator.liu.se/~alla/dia/"}
@@ -613,7 +754,11 @@ class PyfficePortDia(PyfficePort):
                 attr_name = attr.get("name", "Unknown")
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         for node in self.nodes:
             doc["document"]["documents"].append(node)
@@ -641,7 +786,11 @@ class PyfficePortFileSystem(PyfficePort):
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortFileSystem")).override(cfg)
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         return doc
 
@@ -657,7 +806,15 @@ class PyfficePortImage(PyfficePort):
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortImage")).override(cfg)
 
     def convert_svg_color(self, input_color, output_color):
-        """"""
+        """Convert svg color.
+        
+        Args:
+            input_color: Parameter.
+            output_color: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if self.content is None:
             self.read()
         self.content = re.sub(input_color, output_color, self.content, flags=re.IGNORECASE)
@@ -680,7 +837,14 @@ class PyfficePortImage(PyfficePort):
         return self
 
     def open_file(self, file_=None):
-        """"""
+        """Open file.
+        
+        Args:
+            file_: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         from pyffice.pyffice import (
             MissingPathError,
             UnknownFileTypeError,
@@ -776,7 +940,11 @@ class PyfficePortImage(PyfficePort):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         return doc
 
@@ -793,7 +961,14 @@ class PyfficePortJupyter(PyfficePort):
         self.notebook = None
 
     def file_export(self, file_=None):
-        """"""
+        """File export.
+        
+        Args:
+            file_: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if self.notebook is None:
             self.load_document()
         with open(file_, "w", encoding="utf-8") as f:
@@ -801,12 +976,26 @@ class PyfficePortJupyter(PyfficePort):
         return self
 
     def file_import(self, file_path=None):
-        """"""
+        """File import.
+        
+        Args:
+            file_path: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.file_open(file_path)
         return self.to_dict()
 
     def file_open(self, file_path):
-        """"""
+        """File open.
+        
+        Args:
+            file_path: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         super().file_open(file_path, False)
         with open(self.file_path, "r", encoding="utf-8") as f:
             self.notebook = nbformat.read(f, as_version=4)
@@ -818,7 +1007,11 @@ class PyfficePortJupyter(PyfficePort):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["document"] = {"notebook": self.notebook}
         return doc
@@ -835,7 +1028,11 @@ class PyfficePortText(PyfficePort):
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortWebSession")).override(cfg)
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         return doc
 
@@ -853,12 +1050,26 @@ class PyfficePortWebSession(PyfficePort):
         self.sessions = None
 
     def file_import(self, file_path=None):
-        """"""
+        """File import.
+        
+        Args:
+            file_path: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.file_open(file_path)
         return self.to_dict()
 
     def file_open(self, file_path):
-        """"""
+        """File open.
+        
+        Args:
+            file_path: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         # logma.info(f"Open Cherry Tree {self.config.dikt["file_path"]}")
         self.load_document(self.config.dikt.get("document", {}))
         self.sessions = j.loads(super().file_open(file_path))
@@ -866,14 +1077,25 @@ class PyfficePortWebSession(PyfficePort):
         return self
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Web Session Tree {document}")
         super().load_document(document)
         self.nodes = []
         return self
 
     def parse_session(self):
-        """"""
+        """Parse session.
+        
+        Returns:
+            Self for chaining.
+        """
         for window in self.sessions.get("windows", []):
             node = self.parse_window(window)
             self.nodes.append(node)
@@ -888,7 +1110,14 @@ class PyfficePortWebSession(PyfficePort):
         return node
 
     def parse_tab(self, tab):
-        """"""
+        """Parse tab.
+        
+        Args:
+            tab: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         # extract url, favicon, metadata
         url = tab["url"]
         favicon = tab["favIconUrl"]
@@ -896,7 +1125,11 @@ class PyfficePortWebSession(PyfficePort):
         return {"url": url, "favicon": favicon, "metadata": metadata}
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["document"] = self.nodes
         return doc

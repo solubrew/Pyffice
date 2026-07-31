@@ -141,7 +141,11 @@ class PyfficeScript(PyfficeDocument):
         return self
 
     def add_page(self):
-        """"""
+        """Add a page.
+        
+        Returns:
+            Self for chaining.
+        """
         page = len(self.pages.keys())
         page_size = self.pages[page]["page_size"]
         top = self.pages[page]["margins"]["top"]
@@ -261,7 +265,14 @@ class PyfficeScript(PyfficeDocument):
         return self.self.active_page[str(index)].value
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         document = document or self.config.dikt.get("document", {}) or {}
         logma.json(document)
         super().load_document(document)
@@ -275,7 +286,15 @@ class PyfficeScript(PyfficeDocument):
         return self
 
     def open_file(self, file_=None, if_text_only=True):
-        """"""
+        """Open file.
+        
+        Args:
+            file_: Parameter.
+            if_text_only: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         from pyffice.pyffice import UnknownFileTypeError
         if file_ is None:
             file_ = self.file_path
@@ -301,7 +320,11 @@ class PyfficeScript(PyfficeDocument):
         raise UnknownFileTypeError(f"File format not supported {file_}")
 
     def open_file_txt(self):
-        """"""
+        """Open file txt.
+        
+        Returns:
+            Self for chaining.
+        """
         text = next(txtonql.Doc(self.file_path).read()).text
         self.set_file_type(None)
         logma.info(f"Text {text}")
@@ -309,7 +332,11 @@ class PyfficeScript(PyfficeDocument):
         return self
 
     def open_file_doc(self):
-        """"""
+        """Open file doc.
+        
+        Returns:
+            Self for chaining.
+        """
         document = Document(self.file_path)
         text = ""
         for para in document.paragraphs:
@@ -319,7 +346,16 @@ class PyfficeScript(PyfficeDocument):
         return self
 
     def parse_content(self, content=None, page_size=100000, entry_size=10000):
-        """"""
+        """Parse content.
+        
+        Args:
+            content: Parameter.
+            page_size: Parameter.
+            entry_size: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if content is None:
             content = ""
         self.pages = {}
@@ -351,12 +387,25 @@ class PyfficeScript(PyfficeDocument):
         return self
 
     def parse_document(self):
-        """"""
+        """Parse document.
+        
+        Returns:
+            Self for chaining.
+        """
         doc_media, doc_media_content = super().parse_document()
         return doc_media, doc_media_content
 
     def save(self, path=None, format_=None, encrypt=None):
-        """"""
+        """Save the document.
+        
+        Args:
+            path: Parameter.
+            format_: Parameter.
+            encrypt: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         super().save(path, format_, encrypt)
 
     def set_alignment(self, start_pos, end_pos, alignment):
@@ -365,7 +414,14 @@ class PyfficeScript(PyfficeDocument):
         return self
 
     def set_file_format(self, format_=None):
-        """"""
+        """Set the file format.
+        
+        Args:
+            format_: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if format_ is None:
             if self.file_path is None:
                 return self
@@ -383,18 +439,36 @@ class PyfficeScript(PyfficeDocument):
         return self
 
     def set_file_format_options(self):
-        """"""
+        """Set the file format options.
+        
+        Returns:
+            Self for chaining.
+        """
         formats = self.config.dikt.get("file_formats", {})
         self.file_formats = {ext: key for key, extensions in formats.items() for ext in extensions}
         return self
 
     def set_full_text(self, text=None):
-        """"""
+        """Set the full text.
+        
+        Args:
+            text: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.full_text = text
         return self
 
     def set_pages(self, pages):
-        """"""
+        """Set the pages.
+        
+        Args:
+            pages: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if "0" not in pages:
             pages["0"] = {}
         if "entries" not in pages["0"]:
@@ -405,7 +479,14 @@ class PyfficeScript(PyfficeDocument):
         return self
 
     def set_text(self, text=None):
-        """"""
+        """Set the text.
+        
+        Args:
+            text: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Text {text}")
         if text is None:
             text = ""
@@ -436,7 +517,11 @@ class PyfficeScript(PyfficeDocument):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         # logma.inspect_caller()
         doc = super().to_dict()
         doc["data"]["document_type"] = "script"
@@ -462,7 +547,11 @@ class PyfficeScript(PyfficeDocument):
         return self._canonicalize(doc)
 
     def to_html(self):
-        """"""
+        """Convert this document to html.
+        
+        Returns:
+            Self for chaining.
+        """
         html = Sanitized(self.text.text).sanitize_html()
         # html = ""
         return html

@@ -73,7 +73,18 @@ def is_similar_hue(hue1, hue2, hue_tolerance):
 
 
 def convert_shades_of_color(input_path, output_path, source_color, target_color, hue_tolerance):
-    """"""
+    """Convert shades of color.
+    
+    Args:
+        input_path: Parameter.
+        output_path: Parameter.
+        source_color: Parameter.
+        target_color: Parameter.
+        hue_tolerance: Parameter.
+    
+    Returns:
+        Self for chaining.
+    """
     image_type = check_image_type(input_path)
     if image_type == "svg":
         convert_shades_of_color_in_svg(input_path, output_path, source_color, target_color, hue_tolerance)
@@ -128,7 +139,18 @@ def convert_shades_of_color_in_svg(input_path, output_path, source_color, target
 
 
 def convert_shades_of_color_in_jpg(image_path, output_path, source_color, target_color, tolerance=40):
-    """"""
+    """Convert shades of color in jpg.
+    
+    Args:
+        image_path: Parameter.
+        output_path: Parameter.
+        source_color: Parameter.
+        target_color: Parameter.
+        tolerance: Parameter.
+    
+    Returns:
+        Self for chaining.
+    """
     convert_shades_of_color_in_png(image_path, output_path, source_color, target_color, tolerance)
 
 
@@ -185,7 +207,14 @@ def convert_shades_of_color_in_png(image_path, output_path, source_color, target
 
 
 def check_image_type(input_path):
-    """"""
+    """Check image type.
+    
+    Args:
+        input_path: Parameter.
+    
+    Returns:
+        Self for chaining.
+    """
     image_type = input_path.split(".")[-1]
 
 

@@ -72,7 +72,11 @@ class PyfficeShape(PyfficeDocument):
         return None
 
     def get_envelope(self):
-        """"""
+        """Return the envelope.
+        
+        Returns:
+            Self for chaining.
+        """
         envelope_corners = ["A", "B", "C", "D", "E", "F"][: self.dimensions]
         for corner in envelope_corners:
             self.envelope_corners.append(self.get_envelope_corner(corner))
@@ -87,7 +91,14 @@ class PyfficeShape(PyfficeDocument):
         return self
 
     def perform_origin_offset(self, offset):
-        """"""
+        """Perform origin offset.
+        
+        Args:
+            offset: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.offset = offset
         self.origin = (self.center[x] + offset[x] for x in range(len(self.center)))
         return self
@@ -98,22 +109,47 @@ class PyfficeShape(PyfficeDocument):
         return self
 
     def set_center(self, center):
-        """"""
+        """Set the center.
+        
+        Args:
+            center: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.center = center
         self.perform_origin_offset(self.offset)
         return self
 
     def set_color(self, color):
-        """"""
+        """Set the color.
+        
+        Args:
+            color: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.color = color
         return self
 
     def set_origin_to_envelope_corner(self, corner):
-        """"""
+        """Set the origin to envelope corner.
+        
+        Args:
+            corner: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.origin = self.get_envelope_corner(corner)
 
     def set_origin_to_envelope_center(self):
-        """"""
+        """Set the origin to envelope center.
+        
+        Returns:
+            Self for chaining.
+        """
         self.origin = self.get_envelope_center()
 
 

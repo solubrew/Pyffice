@@ -50,7 +50,14 @@ class PyfficeSketch(PyfficeDocument):
         self.lock = None
 
     def add_layer(self, layer):
-        """"""
+        """Add a layer.
+        
+        Args:
+            layer: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"layer": layer}
         layer = PyfficeLayer(cfg)
         self.add_change("layers", self.layers, layer, "add")
@@ -58,13 +65,27 @@ class PyfficeSketch(PyfficeDocument):
         return self
 
     def del_layer(self, layer):
-        """"""
+        """Remove the layer.
+        
+        Args:
+            layer: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.add_change("layers", self.layers, layer, "del")
         del self.layers[layer.name]
         return self
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Document {document}")
         if document is None:
             document = self.config.dikt.get("document", {})
@@ -98,7 +119,11 @@ class PyfficeSketch(PyfficeDocument):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         if self.connections is None:
             self.connections = {}

@@ -68,14 +68,25 @@ class PyfficeWorkflow(PyfficeUnit):
         return self
 
     def load_unit(self, unit):
-        """"""
+        """Load a unit dict into this document.
+        
+        Args:
+            unit: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if unit is None:
             unit = self.config.dikt.get("unit", {})
         super().load_unit(unit)
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         return doc
 

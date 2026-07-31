@@ -54,7 +54,14 @@ class PyfficeReference(PyfficeTag):
         self.style = None
 
     def load_tag(self, tag):
-        """"""
+        """Load tag into this document.
+        
+        Args:
+            tag: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if tag is None:
             tag = self.config.dikt.get("tag", {})
         super().load_tag(tag)
@@ -73,7 +80,14 @@ class PyfficeReference(PyfficeTag):
         return self
 
     def set_author(self, author):
-        """"""
+        """Set the document author.
+        
+        Args:
+            author: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.author = author
         return self
 
@@ -88,17 +102,38 @@ class PyfficeReference(PyfficeTag):
         return self
 
     def set_edition(self, edition):
-        """"""
+        """Set the edition.
+        
+        Args:
+            edition: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.edition = edition
         return self
 
     def set_issue(self, issue):
-        """"""
+        """Set the issue.
+        
+        Args:
+            issue: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.issue = issue
         return self
 
     def set_media_type(self, media_type):
-        """"""
+        """Set the media type.
+        
+        Args:
+            media_type: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         from pyffice.pyffice import UnknownMediaTypeError
         match media_type:
             case "book":
@@ -119,37 +154,83 @@ class PyfficeReference(PyfficeTag):
                 raise UnknownMediaTypeError(f"Media Type Unknown {media_type}")
 
     def set_page_range(self, page_range=None):
-        """"""
+        """Set the page range.
+        
+        Args:
+            page_range: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.page_range = page_range
         return self
 
     def set_publisher(self, publisher):
-        """"""
+        """Set the publisher.
+        
+        Args:
+            publisher: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.publisher = publisher
         return self
 
     def set_style(self, style):
-        """"""
+        """Set the style.
+        
+        Args:
+            style: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.style = style
         return self
 
     def set_title(self, title):
-        """"""
+        """Set the title.
+        
+        Args:
+            title: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.title = title
         return self
 
     def set_volume(self, volume):
-        """"""
+        """Set the volume.
+        
+        Args:
+            volume: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.volume = volume
         return self
 
     def set_url(self, url):
-        """"""
+        """Set the url.
+        
+        Args:
+            url: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.url = url
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["unit"]["author"] = self.author
         doc["unit"]["title"] = self.title

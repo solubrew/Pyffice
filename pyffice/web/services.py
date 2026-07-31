@@ -44,7 +44,14 @@ class PyfficeService(PyfficeDocument):
         self.service = None
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Document {document}")
         if document is None:
             document = self.config.dikt.get("document", {})
@@ -55,21 +62,39 @@ class PyfficeService(PyfficeDocument):
         return self
 
     def set_key(self, key):
-        """"""
+        """Set the key.
+        
+        Args:
+            key: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if key != self.key:
             self.add_change("key", self.key, key)
             self.key = key
         return self
 
     def set_service(self, service):
-        """"""
+        """Set the service.
+        
+        Args:
+            service: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if service != self.service:
             self.add_change("service", self.service, service)
             self.service = service
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         self.document["document"] = {"service": self.service}
         return doc

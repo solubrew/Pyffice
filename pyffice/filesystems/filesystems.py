@@ -54,31 +54,66 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.tree = None
 
     def add_directory(self, directory):
-        """"""
+        """Add a directory.
+        
+        Args:
+            directory: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.add_change("directories", self.directories, directory)
         self.directories.append(directory)
         return self
 
     def add_file(self, file_):
-        """"""
+        """Add a file.
+        
+        Args:
+            file_: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.add_change("files", self.files, file_)
         self.files.append(file_)
         return self
 
     def add_root(self, root):
-        """"""
+        """Add a root.
+        
+        Args:
+            root: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.add_change("root", self.root, root)
         self.roots.append(root)
         return self
 
     def del_directory(self, index):
-        """"""
+        """Remove the directory.
+        
+        Args:
+            index: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.add_change("directories", self.directories, index, "del")
         self.directories.pop(index)
         return self
 
     def del_file(self, index):
-        """"""
+        """Remove the file.
+        
+        Args:
+            index: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.add_change("files", self.files, index, "del")
         self.files.pop(index)
         return self
@@ -88,7 +123,14 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         return []
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Document {document}")
         if document is None:
             document = self.config.dikt.get("document", {})
@@ -101,19 +143,40 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         return self
 
     def set_tree(self, tree):
-        """"""
+        """Set the tree.
+        
+        Args:
+            tree: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.set_root(tree.get("root", None))
         self.tree = tree.get("children", None)
         return self
 
     def set_table(self, table):
-        """"""
+        """Set the table.
+        
+        Args:
+            table: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.set_directories(table.get("directories", []))
         self.set_files(table.get("files", []))
         return self
 
     def open_file(self, file=None):
-        """"""
+        """Open file.
+        
+        Args:
+            file: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.set_file_path(file)
         self.set_root(file)
         self.set_directories()
@@ -121,7 +184,14 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         return self
 
     def set_content(self, content):
-        """"""
+        """Set the content.
+        
+        Args:
+            content: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         from pyffice.pyffice import UnknownLocationError
         if self.location is None:
             self.set_location(None)
@@ -135,7 +205,14 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         return self
 
     def set_directories(self, directories=[]):
-        """"""
+        """Set the directories.
+        
+        Args:
+            directories: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if directories == []:
             logma.info(f"Root {self.root}")
             if self.root is None:
@@ -148,7 +225,14 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         return self
 
     def set_files(self, files=[]):
-        """"""
+        """Set the files.
+        
+        Args:
+            files: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if files == []:
             if exists(self.root):
                 files = [x for x in listdir(self.root) if isfile(x)]
@@ -158,7 +242,14 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         return self
 
     def set_root(self, root=None):
-        """"""
+        """Set the root.
+        
+        Args:
+            root: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if root is None:
             # root = join(expanduser("~"), "Documents")
             root = expanduser("~")
@@ -169,7 +260,11 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["data"] = {
             "path": self.path,

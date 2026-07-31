@@ -66,7 +66,17 @@ class PyfficeEdge(PyfficeUnit):
         self.width = None
 
     def add_endpoint(self, position, connection, style="solid", color="black"):
-        """"""
+        """Add a endpoint.
+        
+        Args:
+            position: Parameter.
+            connection: Parameter.
+            style: Parameter.
+            color: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         uid = uuid()
         cfg = {"color": color}
         color = PyfficeColor(cfg)
@@ -81,7 +91,18 @@ class PyfficeEdge(PyfficeUnit):
         return self
 
     def add_text(self, value, postion, size=12, color="black", style="courier-new"):
-        """"""
+        """Add a text.
+        
+        Args:
+            value: Parameter.
+            postion: Parameter.
+            size: Parameter.
+            color: Parameter.
+            style: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {
             "value": value,
             "position": postion,
@@ -96,19 +117,40 @@ class PyfficeEdge(PyfficeUnit):
         return self
 
     def del_endpoint(self, endpoint):
-        """"""
+        """Remove the endpoint.
+        
+        Args:
+            endpoint: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.add_change("endpoints", self.endpoints, endpoint, "del")
         del self.endpoints[endpoint]
         return self
 
     def del_text(self, index):
-        """"""
+        """Remove the text.
+        
+        Args:
+            index: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.add_change("text", self.texts, index, "del")
         del self.texts[index]
         return self
 
     def load_unit(self, unit):
-        """"""
+        """Load a unit dict into this document.
+        
+        Args:
+            unit: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if unit is None:
             unit = {}
         super().load_unit(unit)
@@ -123,7 +165,14 @@ class PyfficeEdge(PyfficeUnit):
         return self
 
     def set_color(self, color):
-        """"""
+        """Set the color.
+        
+        Args:
+            color: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"color": color}
         color = PyfficeColor(cfg)
         if color != self.color:
@@ -132,14 +181,28 @@ class PyfficeEdge(PyfficeUnit):
         return self
 
     def set_endpoints(self, endpoints):
-        """"""
+        """Set the endpoints.
+        
+        Args:
+            endpoints: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if endpoints != self.endpoints:
             self.add_change("endpoints", self.endpoints, endpoints, "set")
             self.endpoints = endpoints
         return self
 
     def set_envelope_size(self, envelope_size=None):
-        """"""
+        """Set the envelope size.
+        
+        Args:
+            envelope_size: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if envelope_size != [self.width, self.height]:
             self.add_change("envelope_size", self.envelope_size, envelope_size, "set")
         if envelope_size is not None:
@@ -148,21 +211,43 @@ class PyfficeEdge(PyfficeUnit):
         return self
 
     def set_line_width(self, line_width):
-        """"""
+        """Set the line width.
+        
+        Args:
+            line_width: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if line_width != self.line_width:
             self.add_change("line_width", self.line_width, line_width, "set")
         self.line_width = line_width
         return self
 
     def set_lock(self, lock=True, absolute=True):
-        """"""
+        """Set the lock.
+        
+        Args:
+            lock: Parameter.
+            absolute: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if lock != self.lock:
             self.add_change("lock", self.lock, lock)
         self.lock = lock
         return self
 
     def set_position(self, position):
-        """"""
+        """Set the position.
+        
+        Args:
+            position: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if self.lock:
             return self
         if position != self.position:
@@ -171,28 +256,54 @@ class PyfficeEdge(PyfficeUnit):
         return self
 
     def set_position_endpoint(self, endpoint, position):
-        """"""
+        """Set the position endpoint.
+        
+        Args:
+            endpoint: Parameter.
+            position: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if position != self.endpoints[endpoint]["position"]:
             self.add_change("position", self.endpoints[endpoint]["position"], position, "set")
         self.endpoints[endpoint]["position"] = position
         return self
 
     def set_style(self, style):
-        """"""
+        """Set the style.
+        
+        Args:
+            style: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if style != self.style:
             self.add_change("style", self.style, style, "set")
         self.style = style
         return self
 
     def set_texts(self, texts):
-        """"""
+        """Set the texts.
+        
+        Args:
+            texts: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if texts != self.texts:
             self.add_change("texts", self.texts, texts, "set")
         self.texts = texts
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["unit"] = {
             "texts": [x.to_dict for x in self.texts],
@@ -217,7 +328,14 @@ class PyfficeDiagram(PyfficeDocumentManager):
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDiagram").override(cfg))
 
     def add_connection(self, connection):
-        """"""
+        """Add a connection.
+        
+        Args:
+            connection: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"connection": connection}
         connection = PyfficeDiagramConnection(cfg)
         self.add_change("connections", self.connections, connection, "add")
@@ -234,7 +352,20 @@ class PyfficeDiagram(PyfficeDocumentManager):
         visible=None,
         active=None,
     ):
-        """"""
+        """Add a edge.
+        
+        Args:
+            connections: Parameter.
+            end: Parameter.
+            start: Parameter.
+            type: Parameter.
+            version: Parameter.
+            visible: Parameter.
+            active: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {}
         edge = PyfficeEdge(cfg)
         self.add_layer(edge.did)
@@ -245,7 +376,14 @@ class PyfficeDiagram(PyfficeDocumentManager):
         return self
 
     def add_layer(self, layer):
-        """"""
+        """Add a layer.
+        
+        Args:
+            layer: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"layer": layer}
         layer = PyfficeDiagramLayer(cfg)
         self.add_change("layers", self.layers, layer, "add")
@@ -253,7 +391,11 @@ class PyfficeDiagram(PyfficeDocumentManager):
         return self
 
     def add_node(self):
-        """"""
+        """Add a node.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {}
         node = PyfficeNode(cfg)
         self.add_change("nodes", self.nodes, node, "add")
@@ -261,37 +403,81 @@ class PyfficeDiagram(PyfficeDocumentManager):
         return self
 
     def del_connection(self, connection):
-        """"""
+        """Remove the connection.
+        
+        Args:
+            connection: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.add_change("connections", self.connections, connection, "del")
         del self.connections[connection.did]
         return self
 
     def del_edge(self, edge):
-        """"""
+        """Remove the edge.
+        
+        Args:
+            edge: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.add_change("edges", self.edges, edge, "del")
         del self.edges[edge.did]
         return self
 
     def del_layer(self, layer):
-        """"""
+        """Remove the layer.
+        
+        Args:
+            layer: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.add_change("layers", self.layers, layer, "del")
         del self.layers[layer.name]
         return self
 
     def del_node(self, node):
-        """"""
+        """Remove the node.
+        
+        Args:
+            node: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.add_change("nodes", self.nodes, node, "del")
         del self.nodes[node.did]
         return self
 
     def set_lock(self, lock):
-        """"""
+        """Set the lock.
+        
+        Args:
+            lock: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if lock != self.lock:
             self.add_change("lock", self.lock, lock)
         return self
 
     def set_edge_position(self, edge, position, maintain_connection=True):
-        """"""
+        """Set the edge position.
+        
+        Args:
+            edge: Parameter.
+            position: Parameter.
+            maintain_connection: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.edges[edge].set_position(position)
         if maintain_connection:
             for connection in self.connections.values():
@@ -299,26 +485,58 @@ class PyfficeDiagram(PyfficeDocumentManager):
         return self
 
     def set_edges(self, edges):
-        """"""
+        """Set the edges.
+        
+        Args:
+            edges: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if edges != self.edges:
             self.add_change("edges", self.edges, edges, "set")
         self.edges = edges
         return self
 
     def set_endpoint_position(self, endpoint, position, maintain_connection=True):
-        """"""
+        """Set the endpoint position.
+        
+        Args:
+            endpoint: Parameter.
+            position: Parameter.
+            maintain_connection: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.endpoints[endpoint].set_position(position)
         return self
 
     def set_endpoints(self, endpoints):
-        """"""
+        """Set the endpoints.
+        
+        Args:
+            endpoints: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if endpoints != self.endpoints:
             self.add_change("endpoints", self.endpoints, endpoints)
             self.endpoints = endpoints
         return self
 
     def set_node_position(self, node, position, maintain_connections=True):
-        """"""
+        """Set the node position.
+        
+        Args:
+            node: Parameter.
+            position: Parameter.
+            maintain_connections: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.nodes[node].set_position(position)
         if maintain_connections:
             for connection in self.connections.values():
@@ -326,7 +544,14 @@ class PyfficeDiagram(PyfficeDocumentManager):
         return self
 
     def set_nodes(self, nodes):
-        """"""
+        """Set the nodes.
+        
+        Args:
+            nodes: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if nodes != self.nodes:
             self.add_change("nodes", self.nodes, nodes, "set")
             self.nodes = nodes
@@ -353,7 +578,14 @@ class PyfficeDiagramLayer(PyfficeUnit):
         self.objects = None
 
     def load_unit(self, unit):
-        """"""
+        """Load a unit dict into this document.
+        
+        Args:
+            unit: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if unit is None:
             unit = {}
         super().load_unit(unit)
@@ -361,7 +593,14 @@ class PyfficeDiagramLayer(PyfficeUnit):
         return self
 
     def set_objects(self, objects):
-        """"""
+        """Set the objects.
+        
+        Args:
+            objects: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if objects is None:
             objects = []
         if objects != self.objects:
@@ -370,7 +609,11 @@ class PyfficeDiagramLayer(PyfficeUnit):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["unit"] = {"objects": [x.to_dict() for x in self.objects]}
         return doc
@@ -398,13 +641,27 @@ class PyfficeNode(PyfficeUnit):
         return self
 
     def del_cell(self, index):
-        """"""
+        """Remove the cell.
+        
+        Args:
+            index: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.add_change("cells", self.cells, index, "del")
         del self.cells[index]
         return self
 
     def load_unit(self, unit):
-        """"""
+        """Load a unit dict into this document.
+        
+        Args:
+            unit: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if unit is None:
             unit = {}
         super().load_unit(unit)
@@ -414,21 +671,42 @@ class PyfficeNode(PyfficeUnit):
         return self
 
     def set_cells(self, cells):
-        """"""
+        """Set the cells.
+        
+        Args:
+            cells: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if cells != self.cells:
             self.add_change("cells", self.cells, cells, "set")
         self.cells = cells
         return self
 
     def set_lock(self, lock=True):
-        """"""
+        """Set the lock.
+        
+        Args:
+            lock: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if lock != self.lock:
             self.add_change("lock", self.lock, lock)
         self.lock = lock
         return self
 
     def set_position(self, position):
-        """"""
+        """Set the position.
+        
+        Args:
+            position: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if self.lock:
             return self
         if position != self.position:
@@ -437,14 +715,26 @@ class PyfficeNode(PyfficeUnit):
         return self
 
     def set_position_cell(self, cell, position):
-        """"""
+        """Set the position cell.
+        
+        Args:
+            cell: Parameter.
+            position: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if position != self.cells[cell]["position"]:
             self.add_change("position", self.cells[cell]["position"], position, "set")
         self.cells[cell]["position"] = position
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["unit"] = {
             "cells": [x.to_dict() for x in self.cells],
@@ -467,12 +757,27 @@ class PyfficeDiagramConnection(PyfficeUnit):
         self.position = None
 
     def connect(self, object_, endpoint):
-        """"""
+        """Connect.
+        
+        Args:
+            object_: Parameter.
+            endpoint: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.endpoints.append(object_.connect(self, endpoint))
         return self
 
     def load_unit(self, unit):
-        """"""
+        """Load a unit dict into this document.
+        
+        Args:
+            unit: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if unit is None:
             unit = {}
         super().load_unit(unit)
@@ -481,22 +786,47 @@ class PyfficeDiagramConnection(PyfficeUnit):
         return self
 
     def set_lock(self, lock=True):
-        """"""
+        """Set the lock.
+        
+        Args:
+            lock: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.lock = lock
         return self
 
     def set_endpoints(self, endpoints):
-        """"""
+        """Set the endpoints.
+        
+        Args:
+            endpoints: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.endpoints = endpoints
         return self
 
     def set_position(self, position):
-        """"""
+        """Set the position.
+        
+        Args:
+            position: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.position = position
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["unit"] = {
             "endpoints": self.endpoints,

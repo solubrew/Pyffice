@@ -230,7 +230,15 @@ class PyfficeFormula(PyfficeUnit):
         self.protocol_name = "builtin"
 
     def add_parameter(self, parameter, value):
-        """"""
+        """Add a parameter.
+        
+        Args:
+            parameter: Parameter.
+            value: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.parameters[parameter] = value
 
     def convert(self, protocol_name: str = "builtin"):
@@ -272,7 +280,14 @@ class PyfficeFormula(PyfficeUnit):
         )
 
     def load_unit(self, unit):
-        """"""
+        """Load a unit dict into this document.
+        
+        Args:
+            unit: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if unit is None:
             unit = self.config.dikt.get("unit", {})
         super().load_unit(unit)
@@ -312,7 +327,11 @@ class PyfficeFormula(PyfficeUnit):
         return proto.execute(self.parsed, dict(self.parameters))
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         return doc
 
@@ -328,12 +347,20 @@ class PyfficeFormulaABS(PyfficeFormula):
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeFormula").override(cfg))
 
     def execute(self):
-        """"""
+        """Execute.
+        
+        Returns:
+            Self for chaining.
+        """
         result = abs(list(self.parameters.values())[0])
         return result
 
     def validate(self):
-        """"""
+        """Validate .
+        
+        Returns:
+            Self for chaining.
+        """
         from pyffice.pyffice import TooManyParametersError
         if len(self.parameters.values()) > 1:
             raise TooManyParametersError("Too Many Parameters")
@@ -350,19 +377,34 @@ class PyfficeFormulaSUM(PyfficeFormula):
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeFormula").override(cfg))
 
     def execute(self):
-        """"""
+        """Execute.
+        
+        Returns:
+            Self for chaining.
+        """
         result = sum(self.parameters.values())
         return result
 
     def validate(self):
-        """"""
+        """Validate .
+        
+        Returns:
+            Self for chaining.
+        """
         from pyffice.pyffice import InvalidParameterTypeError
         if len([x for x in self.parameters.values() if not is_number(x)]) > 0:
             raise InvalidParameterTypeError("Non Number Values in Parameters")
 
 
 def is_number(value):
-    """"""
+    """Return whether this document is number.
+    
+    Args:
+        value: Parameter.
+    
+    Returns:
+        Self for chaining.
+    """
     if isinstance(value, (int, float)):
         return True
     return False

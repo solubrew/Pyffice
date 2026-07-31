@@ -46,7 +46,14 @@ class PyfficeTag(object):
         self.doc_type = "tags"
 
     def load_tag(self, tag=None):
-        """"""
+        """Load tag into this document.
+        
+        Args:
+            tag: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if tag is None:
             tag = self.config.dikt.get("tag", {})
         self.set_description(tag.get("description", None))
@@ -55,22 +62,47 @@ class PyfficeTag(object):
         return self
 
     def set_description(self, description):
-        """"""
+        """Set the description.
+        
+        Args:
+            description: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.description = description
         return self
 
     def set_label(self, label):
-        """"""
+        """Set the label.
+        
+        Args:
+            label: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.label = label
         return self
 
     def set_value(self, value):
-        """"""
+        """Set the value.
+        
+        Args:
+            value: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.value = value
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = {
             "label": self.label,
             "description": self.description,

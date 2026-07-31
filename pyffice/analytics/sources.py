@@ -65,14 +65,25 @@ class PyfficeSource(PyfficeDocumentManager):
         return self
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Document {document}")
         document = document or self.config.dikt.get("document", {}) or {}
         super().load_document(document)
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         return doc
 
@@ -88,14 +99,29 @@ class PyfficeSourceManager(PyfficeDocumentManager):
         self.sources = []
 
     def add_source(self, source, type_="file"):
-        """"""
+        """Add a source reference.
+        
+        Args:
+            source: Parameter.
+            type_: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         source = PyfficeSource({"name": source.name, "type": type_, "path": source.path})
         self.add_change("sources", self.sources, source, "add")
         self.sources.append(source)
         return self
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Document {document}")
         document = document or self.config.dikt.get("document", {}) or {}
         super().load_document(document)
@@ -103,7 +129,14 @@ class PyfficeSourceManager(PyfficeDocumentManager):
         return self
 
     def set_sources(self, sources):
-        """"""
+        """Set the sources.
+        
+        Args:
+            sources: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if sources is None:
             sources = []
         if self.sources != sources:
@@ -112,7 +145,11 @@ class PyfficeSourceManager(PyfficeDocumentManager):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["document"] = {"sources": [source.to_dict() for source in self.sources]}
         return doc
@@ -132,7 +169,17 @@ class PyfficeDataSet(PyfficeDocument):
         self.views = set()
 
     def add_relationship(self, left_view, right_view, relationship_type=None, relationship_name=None):
-        """"""
+        """Add a relationship.
+        
+        Args:
+            left_view: Parameter.
+            right_view: Parameter.
+            relationship_type: Parameter.
+            relationship_name: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if relationship_name is None:
             relationship_name = f"{left_view.name}-{right_view.name}"
         if relationship_type is None:
@@ -143,7 +190,15 @@ class PyfficeDataSet(PyfficeDocument):
         return self
 
     def add_view(self, datatable, name=None):
-        """"""
+        """Add a view.
+        
+        Args:
+            datatable: Parameter.
+            name: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"table": datatable, "filters": {}, "name": name}
         view = PyfficeDataView(cfg)
         self.add_change("views", self.views, view, "add")
@@ -151,25 +206,53 @@ class PyfficeDataSet(PyfficeDocument):
         return self
 
     def del_source(self, source):
-        """"""
+        """Remove the source.
+        
+        Args:
+            source: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.add_change("sources", self.sources, source, "del")
         self.sources.remove(source)
         return self
 
     def del_relationship(self, relationship):
-        """"""
+        """Remove the relationship.
+        
+        Args:
+            relationship: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.add_change("relationships", self.relationships, relationship, "del")
         self.relationships.remove(relationship)
         return self
 
     def del_view(self, view):
-        """"""
+        """Remove the view.
+        
+        Args:
+            view: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.add_change("views", self.views, view, "del")
         self.views.remove(view)
         return self
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Document {document}")
         if document is None:
             document = self.config.dikt.get("document", {})
@@ -182,7 +265,14 @@ class PyfficeDataSet(PyfficeDocument):
         return self
 
     def set_relationships(self, relationships):
-        """"""
+        """Set the relationships.
+        
+        Args:
+            relationships: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         relationships = set(relationships)
         if relationships != self.relationships:
             self.add_change("relationships", self.relationships, relationships)
@@ -190,7 +280,14 @@ class PyfficeDataSet(PyfficeDocument):
         return self
 
     def set_sources(self, sources):
-        """"""
+        """Set the sources.
+        
+        Args:
+            sources: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         sources = set(sources)
         if sources != self.sources:
             self.add_change("sources", self.sources, sources)
@@ -198,7 +295,14 @@ class PyfficeDataSet(PyfficeDocument):
         return self
 
     def set_views(self, views):
-        """"""
+        """Set the views.
+        
+        Args:
+            views: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         views = set(views)
         if views != self.views:
             self.add_change("views", self.views, views)
@@ -206,7 +310,11 @@ class PyfficeDataSet(PyfficeDocument):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["document"] = {
             "sources": self.sources,
@@ -231,21 +339,46 @@ class PyfficeDataView(PyfficeDocument):
         self.type = None
 
     def add_filter(self, column, operator, value):
-        """"""
+        """Add a filter.
+        
+        Args:
+            column: Parameter.
+            operator: Parameter.
+            value: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         filter_ = {"operator": operator, "column": column, "value": value}
         self.add_change("filters", self.filters, filter_, "add")
         self.filters.add(filter_)
         return self
 
     def add_summarization(self, column, formula, name=None):
-        """"""
+        """Add a summarization.
+        
+        Args:
+            column: Parameter.
+            formula: Parameter.
+            name: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         summarization = {"column": column, "formula": formula, "name": name}
         self.add_change("summarizations", self.summarizations, summarization, "add")
         self.summarizations.add(summarization)
         return self
 
     def apply_filters(self, df):
-        """"""
+        """Apply filters.
+        
+        Args:
+            df: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         for filter_ in self.filters:
             match filter_["operator"]:
                 case "equal":
@@ -297,31 +430,67 @@ class PyfficeDataView(PyfficeDocument):
         return df
 
     def apply_summarizations(self, df):
-        """"""
+        """Apply summarizations.
+        
+        Args:
+            df: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         return df
 
     def del_filter(self, column, operator, value):
-        """"""
+        """Remove the filter.
+        
+        Args:
+            column: Parameter.
+            operator: Parameter.
+            value: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         filter_ = {"operator": operator, "column": column, "value": value}
         self.add_change("filters", self.filters, filter_, "del")
         self.filters.remove(filter_)
         return self
 
     def del_summarization(self, column, formula, name=None):
-        """"""
+        """Remove the summarization.
+        
+        Args:
+            column: Parameter.
+            formula: Parameter.
+            name: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         summarization = {"column": column, "formula": formula, "name": name}
         self.add_change("summarizations", self.summarizations, summarization, "del")
         self.summarizations.remove(summarization)
         return self
 
     def get_data(self):
-        """"""
+        """Return the data.
+        
+        Returns:
+            Self for chaining.
+        """
         df = self.apply_filters(self.data)
         df = self.apply_summarizations(df)
         return df
 
     def load_document(self, document):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Document {document}")
         if document is None:
             document = self.config.dikt.get("document", {})
@@ -335,14 +504,28 @@ class PyfficeDataView(PyfficeDocument):
         return self
 
     def set_columns(self, columns):
-        """"""
+        """Set the columns.
+        
+        Args:
+            columns: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if columns != self.columns:
             self.add_change("columns", self.columns, columns)
         self.columns = columns
         return self
 
     def set_data(self, data):
-        """"""
+        """Set the data.
+        
+        Args:
+            data: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"data": data}
         data = PyfficeTable(cfg)
         if data != self.data:
@@ -351,7 +534,14 @@ class PyfficeDataView(PyfficeDocument):
         return self
 
     def set_filters(self, filters):
-        """"""
+        """Set the filters.
+        
+        Args:
+            filters: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         filters = set(filters)
         if filters != self.filters:
             self.add_change("filters", self.filters, filters)
@@ -359,7 +549,14 @@ class PyfficeDataView(PyfficeDocument):
         return self
 
     def set_summarizations(self, summarizations):
-        """"""
+        """Set the summarizations.
+        
+        Args:
+            summarizations: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         summarizations = set(summarizations)
         if summarizations != self.summarizations:
             self.add_change("summarizations", self.summarizations, summarizations)
@@ -367,7 +564,11 @@ class PyfficeDataView(PyfficeDocument):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["document"] = {
             "filters": self.filters,

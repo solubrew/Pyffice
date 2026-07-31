@@ -98,7 +98,11 @@ class PyfficePDF(PyfficeDocument):
         return self
 
     def edit(self):
-        """"""
+        """Edit.
+        
+        Returns:
+            Self for chaining.
+        """
 
         # Initialize writer with all existing PDF pages
         for page in self.reader.pages:
@@ -181,13 +185,24 @@ class PyfficePDF(PyfficeDocument):
         return page.extract_text()
 
     def initialize_writer(self):
-        """"""
+        """Initialize writer.
+        
+        Returns:
+            Self for chaining.
+        """
         if self.writer is None:
             self.writer = PdfWriter()  # For writing to new PDFs
         return self
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         logma.info(f"Load Document {document}")
         if document is None:
             document = self.config.get("document", {}) or {}
@@ -206,7 +221,14 @@ class PyfficePDF(PyfficeDocument):
         return self
 
     def open_file(self, file_=None):
-        """"""
+        """Open file.
+        
+        Args:
+            file_: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if file_ is None:
             file_ = self.file_path
         if exists(file_):
@@ -219,12 +241,26 @@ class PyfficePDF(PyfficeDocument):
         return self
 
     def open_file_full_feature(self, file_):
-        """"""
+        """Open file full feature.
+        
+        Args:
+            file_: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.reader = PdfReader(file_)  # For reading PDF content
         return self
 
     def open_file_no_javascript(self, file_):
-        """"""
+        """Open file no javascript.
+        
+        Args:
+            file_: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.reader = fitz.open(file_)
         self.load_pdf_pages()
         return self
@@ -253,7 +289,14 @@ class PyfficePDF(PyfficeDocument):
         return self
 
     def set_content(self, content):
-        """"""
+        """Set the content.
+        
+        Args:
+            content: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         from pyffice.pyffice import UnknownLocationError
         logma.info(f"Content {content}")
         if self.location is None:
@@ -274,7 +317,11 @@ class PyfficePDF(PyfficeDocument):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["data"]["path"] = self.file_path
         doc["data"]["content"] = self.content

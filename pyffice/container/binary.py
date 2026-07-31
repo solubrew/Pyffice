@@ -80,10 +80,27 @@ class PyfficeBinaryContainer:
         self._documents: dict = {}
     
     def get_limit(self, ext: str) -> int:
+        """Return the limit.
+        
+        Args:
+            ext: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         ext = ext.lower().lstrip('.')
         return self.limits.get(ext, self.limits['default'])
     
     def set_limit(self, ext: str, limit: int) -> None:
+        """Set the limit.
+        
+        Args:
+            ext: Parameter.
+            limit: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         ext = ext.lower().lstrip('.')
         self.limits[ext] = limit
     
@@ -129,12 +146,33 @@ class PyfficeBinaryContainer:
                 return f.read()
     
     def list(self) -> list[str]:
+        """List.
+        
+        Returns:
+            Self for chaining.
+        """
         return list(self._documents.keys())
     
     def info(self, name: str) -> Optional[dict]:
+        """Info.
+        
+        Args:
+            name: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         return self._documents.get(name)
     
     def remove(self, name: str) -> bool:
+        """Remove.
+        
+        Args:
+            name: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if name in self._documents:
             del self._documents[name]
             return True

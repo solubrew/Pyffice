@@ -35,10 +35,23 @@ class Item:
     
     @property
     def parent(self) -> "Item | None":
+        """Parent.
+        
+        Returns:
+            Self for chaining.
+        """
         return self._parent
     
     @parent.setter
     def parent(self, value: "Item | None"):
+        """Parent.
+        
+        Args:
+            value: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self._parent = value
     
     def to_dict(self) -> dict:

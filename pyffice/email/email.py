@@ -64,7 +64,14 @@ class PyfficeEmailMessage(PyfficeMessage):
         return self
 
     def create_new_document(self, name):
-        """"""
+        """Create a new document.
+        
+        Args:
+            name: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         super().create_new_document(name, "mail")
         self.document["document"] = {
             "from": [],
@@ -102,7 +109,14 @@ class PyfficeEmailMessage(PyfficeMessage):
         return getattr(self, 'from', None)
 
     def load_document(self, document):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         super().load_document(document)
         return self
 
@@ -260,7 +274,16 @@ class PyfficeMailBox(PyfficeDocumentManager):
         return self
 
     def write_message(self, subject, body, recipients=None):
-        """"""
+        """Write message.
+        
+        Args:
+            subject: Parameter.
+            body: Parameter.
+            recipients: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.active_message.add_subject(subject)
         self.active_message.add_body(body)
         if recipients:

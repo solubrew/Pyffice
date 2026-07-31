@@ -44,7 +44,14 @@ class PyfficeConfig(PyfficeDocument):
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeConfig").override(cfg))
 
     def load_document(self, document=None):
-        """"""
+        """Load document into this document.
+        
+        Args:
+            document: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if document is None:
             document = self.config.dikt.get("document", {})
             if document is None:

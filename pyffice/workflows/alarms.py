@@ -52,12 +52,26 @@ class PyfficeAlarm(PyfficeEvent):
         self.tasks = None
 
     def add_postpone(self, postpone):
-        """"""
+        """Add a postpone.
+        
+        Args:
+            postpone: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.postpones.append(PyfficeTask(postpone))
         return self
 
     def load_unit(self, unit):
-        """"""
+        """Load a unit dict into this document.
+        
+        Args:
+            unit: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if unit is None:
             unit = self.config.dikt.get("unit", {})
         super().load_unit(unit)
@@ -65,32 +79,67 @@ class PyfficeAlarm(PyfficeEvent):
         return self
 
     def set_acknowledge(self, acknowledge):
-        """"""
+        """Set the acknowledge.
+        
+        Args:
+            acknowledge: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"acknowledge": acknowledge}
         self.acknowledge_task = PyfficeTask(cfg)
         return self
 
     def set_limit(self, limit):
-        """"""
+        """Set the limit.
+        
+        Args:
+            limit: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         if limit != self.limit:
             self.add_change("limit", self.limit, limit)
             self.limit = limit
         return self
 
     def set_notify(self, notify):
-        """"""
+        """Set the notify.
+        
+        Args:
+            notify: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"notify": notify}
         self.notify_task = PyfficeTask(cfg)
         return self
 
     def set_postpone(self, postpone):
-        """"""
+        """Set the postpone.
+        
+        Args:
+            postpone: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         cfg = {"postpone": postpone}
         self.postpone_task = PyfficeTask(cfg)
         return self
 
     def set_tasks(self, tasks):
-        """"""
+        """Set the tasks.
+        
+        Args:
+            tasks: Parameter.
+        
+        Returns:
+            Self for chaining.
+        """
         self.set_notify(tasks["notify"])
         self.set_acknowledge(tasks["acknowledge"])
         self.set_postpone(tasks["postpone"])
@@ -101,7 +150,11 @@ class PyfficeAlarm(PyfficeEvent):
         return self
 
     def to_dict(self):
-        """"""
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         doc = super().to_dict()
         doc["document"] = {
             "tasks": {"notify": self.tasks["notify"].to_dict(), "acknowledge": self.tasks["acknowledge"].to_dict()}

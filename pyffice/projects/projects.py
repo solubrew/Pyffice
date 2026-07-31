@@ -269,6 +269,11 @@ class PyfficeProjectTask(PyfficeUnit):
         self.assignee = cfg.get("assignee") if cfg else None
 
     def to_dict(self) -> dict:
+        """Serialize this object to a dict.
+        
+        Returns:
+            Self for chaining.
+        """
         return {
             "name": self.name,
             "start_date": self.start_date,
@@ -285,11 +290,21 @@ class PyfficeProjectResource(PyfficeUnit):
 
     def __init__(self, cfg: Optional[dict] = None):
         super().__init__(cfg)
+        """Serialize this object to a dict.
+        
+        Returns:
+            Self for chaining.
+        """
         self.name = cfg.get("name") if cfg else None
         self.type = cfg.get("type", "work") if cfg else "work"
         self.email = cfg.get("email") if cfg else None
 
     def to_dict(self) -> dict:
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         return {
             "name": self.name,
             "type": self.type,
@@ -297,6 +312,11 @@ class PyfficeProjectResource(PyfficeUnit):
         }
 
 
+"""Serialize this object to a dict.
+
+Returns:
+    Self for chaining.
+"""
 class PyfficeProjectMilestone(PyfficeUnit):
     """Represents a milestone in a project."""
     SERIALIZATION_VERSION = (1, 0, 0)
@@ -307,6 +327,11 @@ class PyfficeProjectMilestone(PyfficeUnit):
         self.date = cfg.get("date") if cfg else None
 
     def to_dict(self) -> dict:
+        """Convert this document to dict.
+        
+        Returns:
+            Self for chaining.
+        """
         return {
             "name": self.name,
             "date": self.date,
