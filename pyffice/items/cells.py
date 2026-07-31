@@ -183,26 +183,12 @@ class PyfficeCell(PyfficeUnit):
             "font": {"size": self.value.font_size, "color": self.value.font_color, "style": self.value.font_style},
             "selections": self.selections,
             "border": {
-                "top": {
-                    "style": self.border_style.get("top", None),
-                    "size": self.border_size.get("top", None),
-                    "color": self.border_color.get("top", None),
-                },
-                "bottom": {
-                    "style": self.border_style.get("bottom", None),
-                    "size": self.border_size.get("bottom", None),
-                    "color": self.border_color.get("bottom", None),
-                },
-                "left": {
-                    "style": self.border_style.get("left", None),
-                    "size": self.border_size.get("left", None),
-                    "color": self.border_color.get("left", None),
-                },
-                "right": {
-                    "style": self.border_style.get("right", None),
-                    "size": self.border_size.get("right", None),
-                    "color": self.border_color.get("right", None),
-                },
+                side: {
+                    "style": self.border_style.get(side, None),
+                    "size": self.border_size.get(side, None),
+                    "color": self.border_color.get(side, None),
+                }
+                for side in ("top", "bottom", "left", "right")
             },
             "background": {
                 "color": self.background.color,
