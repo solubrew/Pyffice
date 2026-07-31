@@ -143,15 +143,24 @@ class PyfficeMatrix(PyfficeDocumentManager):
             self.export_gsheet()
 
     def export_excel(self, format_=None):
-        """"""
+        """Export to Excel format."""
+        if not self.data:
+            return self
+        # Placeholder - would use openpyxl
         return self
 
     def export_csv(self, format_=None):
-        """"""
+        """Export to CSV format."""
+        if not self.data:
+            return self
+        # Placeholder - would use csv module
         return self
 
     def export_gsheet(self, format_=None):
-        """"""
+        """Export to Google Sheets."""
+        if not self.data:
+            return self
+        # Placeholder - would use gspread
         return self
 
     def file_import(self, file_=None, if_data_only=False, read_only=False, keep_vba=False):
@@ -416,11 +425,18 @@ class PyfficeMatrix(PyfficeDocumentManager):
         # super().file_open(path)
 
     def open_file_csv(self):
-        """"""
+        """Open a CSV file."""
+        if not self.file_path:
+            return self
+        import csv
+        # Placeholder - would read CSV
         return self
 
     def open_file_excel(self):
-        """"""
+        """Open an Excel file."""
+        if not self.file_path:
+            return self
+        # Placeholder - would use openpyxl
         return self
 
     def sanitize_sheet_name(self, sheet_name, compatibility="excel"):
@@ -451,16 +467,22 @@ class PyfficeMatrix(PyfficeDocumentManager):
         return self
 
     def save_csv(self, path):
-        """"""
+        """Save as CSV file."""
+        if not path:
+            return self
+        # Placeholder - would write CSV
         return self
 
     def save_excel(self, path):
-        """"""
+        """Save as Excel file."""
         porter = PyfficePortExcel({"parent": self})
         porter.file_export(self, path)
 
     def save_gsheet(self, path):
-        """"""
+        """Save to Google Sheets."""
+        if not path:
+            return self
+        # Placeholder - would use gspread
         return self
 
     def save_document(self, file_path=None):
@@ -556,7 +578,8 @@ class PyfficeMatrix(PyfficeDocumentManager):
             self.save_to_file(file_path)
 
     def set_charts(self, charts):
-        """"""
+        """Set chart objects."""
+        self.charts = charts
         return self
 
     def set_formula_library(self, library=None):
@@ -565,7 +588,8 @@ class PyfficeMatrix(PyfficeDocumentManager):
         return self
 
     def set_objects(self, objects):
-        """"""
+        """Set objects."""
+        self.objects = objects
         return self
 
     def set_porter(self, porter):
