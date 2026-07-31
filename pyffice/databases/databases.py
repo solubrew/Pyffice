@@ -55,6 +55,7 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
     """"""
 
     VERSION = "0.0.1.0.1.0"
+    SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None):
         """"""
