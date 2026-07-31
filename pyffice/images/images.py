@@ -167,7 +167,11 @@ class PyfficeImage(PyfficeDocument):
         self.thumbnail = self.image.copy()
         self.thumbnail.thumbnail(size)
         return self
-
+    def convert_to(self, format):
+        """"""
+        match format:
+            case ".png":
+                self._convert_to_png()
     def del_filter(self, filter_name):
         """Remove a filter from the image."""
         filters = getattr(self, 'filters', [])

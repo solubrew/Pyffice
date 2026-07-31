@@ -678,20 +678,30 @@ class PyfficeDocument(PyfficeUnit):
     def set_file_path(self, file_path):
         """"""
         if file_path is None:
-            file_path = self.config.get("file_path", None)
+            file_path = self.config.dikt.get("file_path", None)
         if file_path is None:  # PyfficePDF
-            file_path = self.config.dikt.get("document", {}).get("content", {}).get("file_path", None)
+            data = self.config.dikt.get("data", {}) or {}
+            content = data.get("content", {}) or {}
+            file_path = content.get("file_path", None)
+        if file_path is None:
+            document = self.config.dikt.get("document", {}) or {}
+            content = document.get("content", {}) or {}
+            file_path = content.get("file_path", None)
         if file_path is None:  # PyfficeImage
-            file_path = self.config.dikt.get("document", {}).get("data", {}).get("content", {}).get("file_path", None)
+            document = self.config.dikt.get("document", {}) or {}
+            data = document.get("data", {}) or {}
+            content = data.get("content", {}) or {}
+            file_path = content.get("file_path", None)
         if file_path is None:  # PyfficeScript
-            file_path = (
-                self.config.dikt.get("document", {})
-                .get("data", {})
-                .get("content", {})
-                .get("content", {})
-                .get("file_path", None)
-            )
-        logma.info(f"\n[PyfficeDocument] Document {self.config.get("document", None)}\n")
+            document = self.config.dikt.get("document", {}) or {}
+            data = document.get("data", {}) or {}
+            content = data.get("content", {}) or {}
+            content = content.get("content", {}) or {}
+            file_path = content.get("file_path", None)
+        if file_path is None:
+            document = self.config.dikt.get("document", {}) or {}
+            file_path = document.get("path", None)
+        logma.info(f"\n[PyfficeDocument] Document {self.config.dikt}\n")
         logma.info(f"\n[PyfficeDocument] File Path {file_path}\n")
         if file_path is None:
             return self
