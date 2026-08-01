@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/container/.
 
 Coverage:
@@ -28,6 +30,7 @@ class TestPyfficeBinaryContainerConstruction:
     """PyfficeBinaryContainer() constructs with default attributes."""
 
     def test_constructs_no_args(self):
+        logma.debug("TestPyfficeBinaryContainerConstruction test class")
         c = PyfficeBinaryContainer()
         assert c is not None
         assert c.mode == "auto"
@@ -89,6 +92,7 @@ class TestPyfficeBinaryContainerListInfoRemove:
     """list / info / remove operate on the _documents dict."""
 
     def test_list_empty(self):
+        logma.debug("TestPyfficeBinaryContainerListInfoRemove test class")
         c = PyfficeBinaryContainer()
         assert c.list() == []
 
@@ -115,6 +119,7 @@ class TestPyfficeBinaryContainerAdd:
     """add() reads a real file from disk."""
 
     def test_add_missing_file_returns_false(self, tmp_path):
+        logma.debug("TestPyfficeBinaryContainerAdd test class")
         c = PyfficeBinaryContainer()
         missing = str(tmp_path / "nope.png")
         assert c.add("doc", missing) is False
@@ -177,6 +182,7 @@ class TestPyfficeZip:
     """PyfficeZip subclasses ArchiveHandler and has format metadata."""
 
     def test_subclasses_archive_handler(self):
+        logma.debug("TestPyfficeZip test class")
         assert issubclass(PyfficeZip, ArchiveHandler)
 
     def test_extensions(self):

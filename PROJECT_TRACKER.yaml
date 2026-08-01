@@ -3,7 +3,7 @@ analysis:
   counts:
     files: 447
     python_files: 234
-    python_lines: 33747
+    python_lines: 33812
     test_files: 78
 audit_date: '1785470638.3677874'
 dimensions:
@@ -156,14 +156,14 @@ dimensions:
         - file: tests/pyffice_unit/unit/ports/portsTEST.py
           module: pyffice.ports.msports
           project: pyffice
-        internal_imports: 142
+        internal_imports: 143
         internal_projects_used:
         - kahndor
         - pyffice
-        leverage_score: 23.71
+        leverage_score: 23.83
         score: 100
         status: pass
-        total_imports: 599
+        total_imports: 600
       score: 100
       status: pass
     score: 100
@@ -262,7 +262,7 @@ dimensions:
           branches:
             local: []
             remote: []
-          commit_count: 345
+          commit_count: 346
           commits: []
           contributors: []
           is_repo: true
@@ -386,9 +386,6 @@ dimensions:
       details:
         examples:
           silent_classes:
-          - class: ArchiveHandler
-            file: pyffice/io_helpers.py
-            method_count: 18
           - class: TestPyfficeUnitAddChange
             file: tests/pyffice_unit/unit/documentTEST.py
             method_count: 5
@@ -401,13 +398,16 @@ dimensions:
           - class: TestCliGroup
             file: tests/pyffice_unit/unit/cliTEST.py
             method_count: 12
+          - class: TestPyfficeDiagram
+            file: tests/pyffice_unit/unit/diagrams/diagramsTEST.py
+            method_count: 7
           unused_logma: []
         issues:
         - dimension: logging_coverage
           rule: Add logging to silent modules/classes
           severity: medium
         score: 50
-        silent_classes: 68
+        silent_classes: 57
         status: partial
         unused_logma_files: 0
       score: 50
@@ -637,7 +637,7 @@ dimensions:
       details:
         issues:
         - file: /home/solubrew/.hermes/projects/pyffice/pyffice/container/tar.py
-          line: 33
+          line: 39
           rule: 'Bandit: tarfile.extractall used without any validation. Please check
             and discard dangerous members.'
           severity: high
@@ -705,7 +705,7 @@ dimensions:
             is called'
           severity: medium
         - file: /home/solubrew/.hermes/projects/pyffice/pyffice/media/media.py
-          line: 49
+          line: 54
           rule: 'Bandit: Audit url open for permitted schemes. Allowing use of file:/
             or custom schemes is often unexpected.'
           severity: medium
@@ -1530,7 +1530,7 @@ dimensions:
         - category: base64_decode
           content: return base64.b64decode(doc['data'])
           file: pyffice/container/binary.py
-          line: 143
+          line: 149
           pattern: base64\.b64decode\(
           severity: 70
         - category: getattr_dynamic
@@ -1614,13 +1614,13 @@ dimensions:
         - category: url_open
           content: 'with urllib.request.urlopen(self.source) as response:'
           file: pyffice/media/media.py
-          line: 49
+          line: 54
           pattern: urllib\.request\.urlopen\(
           severity: 50
         - category: open_url
           content: 'with urllib.request.urlopen(self.source) as response:'
           file: pyffice/media/media.py
-          line: 49
+          line: 54
           pattern: urlopen\(
           severity: 50
         - category: dynamic_import
@@ -1817,7 +1817,7 @@ rubric:
   categories: []
   max_points: 0
   percentage: 0.0
-  rubric_name: 06a6d9c8-13ce-7a56-8000-9d3656ed606f
+  rubric_name: 06a6da09-d157-7e63-8000-e84d8e76367b
   rubric_score: 0
   rubric_version: '1.0'
   score_difference: -91.96
@@ -1831,7 +1831,7 @@ summary:
   total_auditors: 11
   total_dimensions: 53
 test_execution:
-  duration_seconds: 45.98516297340393
+  duration_seconds: 45.85648703575134
   project_score: 91.96
   report_file: /home/solubrew/.hermes/projects/pyffice/FALCON_TEST.yaml
   results:
@@ -1847,7 +1847,7 @@ test_execution:
   status_message: no change (849/882 tests passed)
   timestamp: ''
 versions:
-  project: 98aac9a
+  project: '3523357'
   project_status: dirty
-  project_uncommitted_changes: 2
+  project_uncommitted_changes: 3
   sasquatch: a16c01c

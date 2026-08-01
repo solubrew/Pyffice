@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/forms/forms.py.
 
 Coverage:
@@ -61,6 +63,7 @@ class TestPyfficeFormSetters:
     """Fluent setters return self for chaining."""
 
     def test_set_form_id_returns_self(self):
+        logma.debug("TestPyfficeFormSetters test class")
         f = PyfficeForm()
         assert f.set_form_id("abc123") is f
         assert f.form_id == "abc123"
@@ -198,6 +201,7 @@ class TestPyfficeSurveySetters:
     """Fluent setters return self for chaining."""
 
     def test_set_responses_returns_self(self):
+        logma.debug("TestPyfficeSurveySetters test class")
         s = PyfficeSurvey()
         assert s.set_responses({"r": 1}) is s
         assert s.responses == {"r": 1}

@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/text/.
 
 Coverage:
@@ -103,6 +105,7 @@ class TestPyfficeMessageSetters:
     """The set_X methods are fluent (return self) and store values."""
 
     def test_set_body_returns_self(self):
+        logma.debug("TestPyfficeMessageSetters test class")
         m = PyfficeMessage()
         assert m.set_body("hello") is m
         assert m.body == "hello"

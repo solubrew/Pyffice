@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/audio/.
 
 Coverage:
@@ -50,6 +52,7 @@ class TestPyfficeAudioMethods:
     """Volume, duration, and pause-finding methods."""
 
     def test_get_duration_default_zero(self):
+        logma.debug("TestPyfficeAudioMethods test class")
         a = PyfficeAudio("/tmp/x.mp3")
         assert a.get_duration() == 0
 

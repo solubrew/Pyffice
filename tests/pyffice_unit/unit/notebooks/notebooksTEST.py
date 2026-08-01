@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/notebooks/.
 
 Coverage:
@@ -48,6 +50,7 @@ class TestPyfficeNotebookCellManagement:
     """add_cell / clear_cell / clear_cells / del_cell are fluent."""
 
     def test_add_cell_returns_self(self):
+        logma.debug("TestPyfficeNotebookCellManagement test class")
         nb = PyfficeNotebook()
         cell = {"cell_type": "code", "outputs": []}
         assert nb.add_cell(cell) is nb
@@ -85,6 +88,7 @@ class TestPyfficeNotebookSetters:
     """set_notebook / set_cells / set_pinned are fluent and track changes."""
 
     def test_set_pinned_returns_self(self):
+        logma.debug("TestPyfficeNotebookSetters test class")
         nb = PyfficeNotebook()
         assert nb.set_pinned(True) is nb
         assert nb.pinned is True

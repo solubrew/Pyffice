@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/media/.
 
 Coverage:
@@ -26,6 +28,7 @@ class TestMediaType:
     """MediaType enum has the documented values."""
 
     def test_four_values(self):
+        logma.debug("TestMediaType test class")
         assert len(list(MediaType)) == 4
 
     def test_audio_value(self):
@@ -112,6 +115,7 @@ class TestMediaProcessorRegistration:
     """register_handler + process dispatch."""
 
     def test_constructs_with_empty_handlers(self):
+        logma.debug("TestMediaProcessorRegistration test class")
         p = MediaProcessor()
         assert p._handlers == {}
 
@@ -149,6 +153,7 @@ class TestMediaProcessorExtracts:
     """extract_audio / extract_thumbnail happy + error paths."""
 
     def test_extract_audio_happy(self, tmp_path):
+        logma.debug("TestMediaProcessorExtracts test class")
         f = tmp_path / "audio.mp3"
         f.write_bytes(b"audio bytes")
         p = MediaProcessor()

@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/updates/updates.py.
 
 Coverage:
@@ -79,6 +81,7 @@ class TestPyfficeDocumentUpdate:
     """PyfficeDocumentUpdate subclasses PyfficeUpdate."""
 
     def test_is_instance_of_pyffice_update(self):
+        logma.debug("TestPyfficeDocumentUpdate test class")
         u = PyfficeDocumentUpdate()
         assert isinstance(u, PyfficeUpdate)
 

@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/document.py (PyfficeUnit + PyfficeDocument + PyfficeDocumentManager).
 
 Coverage:
@@ -101,6 +103,7 @@ class TestPyfficeUnitAddChange:
     """add_change records entries in self.changes."""
 
     def test_add_change_initializes_changes(self):
+        logma.debug("TestPyfficeUnitAddChange test class")
         u = PyfficeUnit()
         assert u.changes is None
         u.add_change("field", None, "value")
@@ -157,6 +160,7 @@ class TestPyfficeDocumentManager:
     """PyfficeDocumentManager exposes the documents dict + add/del."""
 
     def test_starts_with_empty_documents(self):
+        logma.debug("TestPyfficeDocumentManager test class")
         mgr = PyfficeDocumentManager()
         assert mgr.documents == {}
 
@@ -223,6 +227,7 @@ class TestPyfficeUnitEnsureInitState:
     """
 
     def test_initializes_none_attrs(self):
+        logma.debug("TestPyfficeUnitEnsureInitState test class")
         u = PyfficeUnit()
         u.x = None
         u.y = None

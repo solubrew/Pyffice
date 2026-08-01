@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/ports/cloud_ports.py (T-NEW-070).
 
 Tests cover construction, inheritance, auth surface, and the
@@ -32,6 +34,7 @@ class TestPyfficeCloudPortConstruction:
     """PyfficeCloudPort is the base for all cloud storage ports."""
 
     def test_constructs_with_no_args(self):
+        logma.debug("TestPyfficeCloudPortConstruction test class")
         cp = PyfficeCloudPort()
         assert cp is not None
         assert cp.authenticated is False
@@ -77,6 +80,7 @@ class TestPyfficeCloudPortNotImplemented:
     """The base class methods raise NotImplementedError."""
 
     def test_list_files_raises(self):
+        logma.debug("TestPyfficeCloudPortNotImplemented test class")
         cp = PyfficeCloudPort()
         with pytest.raises(NotImplementedError):
             cp.list_files()
@@ -110,6 +114,7 @@ class TestPyfficePortGoogleDriveConstruction:
     """Google Drive port construction + inheritance."""
 
     def test_constructs_with_no_args(self):
+        logma.debug("TestPyfficePortGoogleDriveConstruction test class")
         gd = PyfficePortGoogleDrive()
         assert gd is not None
         assert gd.authenticated is False
@@ -158,6 +163,7 @@ class TestPyfficePortGoogleDriveWithoutDeps:
 
     @pytest.mark.skipif(HAS_GOOGLE, reason="google-auth installed; test the missing-dep path")
     def test_list_files_raises_not_authenticated(self):
+        logma.debug("TestPyfficePortGoogleDriveWithoutDeps test class")
         gd = PyfficePortGoogleDrive()
         with pytest.raises(RuntimeError, match="Not authenticated"):
             gd.list_files()
@@ -195,6 +201,7 @@ class TestPyfficePortDropboxConstruction:
     """Dropbox port construction + inheritance."""
 
     def test_constructs_with_no_args(self):
+        logma.debug("TestPyfficePortDropboxConstruction test class")
         dbx = PyfficePortDropbox()
         assert dbx is not None
         assert dbx.authenticated is False
@@ -241,6 +248,7 @@ class TestPyfficePortDropboxWithoutDeps:
 
     @pytest.mark.skipif(HAS_DROPBOX, reason="dropbox installed; test the missing-dep path")
     def test_list_files_raises_not_authenticated(self):
+        logma.debug("TestPyfficePortDropboxWithoutDeps test class")
         dbx = PyfficePortDropbox()
         with pytest.raises(RuntimeError, match="Not authenticated"):
             dbx.list_files()

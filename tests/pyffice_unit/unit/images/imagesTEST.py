@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/images/.
 
 Coverage:
@@ -30,6 +32,7 @@ class TestPyfficeImageConstruction:
     """PyfficeImage() constructs with default None attributes."""
 
     def test_constructs_with_no_args(self):
+        logma.debug("TestPyfficeImageConstruction test class")
         img = PyfficeImage()
         assert img is not None
 
@@ -66,6 +69,7 @@ class TestPyfficeImageDelMethods:
     """
 
     def test_del_filter_returns_self(self):
+        logma.debug("TestPyfficeImageDelMethods test class")
         img = PyfficeImage()
         assert img.del_filter("nonexistent") is img
 

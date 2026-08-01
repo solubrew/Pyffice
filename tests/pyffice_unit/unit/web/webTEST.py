@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/web/.
 
 Coverage:
@@ -129,6 +131,7 @@ class TestPyfficeURL:
     """PyfficeURL is a PyfficeUnit with URL parsing + scheme constants."""
 
     def test_constructs_with_no_args(self):
+        logma.debug("TestPyfficeURL test class")
         u = PyfficeURL()
         assert u is not None
 
@@ -228,6 +231,7 @@ class TestPyfficePrompt:
     """PyfficePrompt is a PyfficeDocument with payload + metrics."""
 
     def test_constructs(self):
+        logma.debug("TestPyfficePrompt test class")
         p = PyfficePrompt()
         assert p is not None
 

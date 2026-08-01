@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/ports/csv_handler.py.
 
 Migrated from pyffice/data/csv.py (T-NEW-069). Behavior is
@@ -26,6 +28,7 @@ class TestPyfficeCSVModuleFunctions:
     """The module-level CSV helpers (read, write, append, ...)."""
 
     def test_read_returns_list_of_dicts(self, tmp_path):
+        logma.debug("TestPyfficeCSVModuleFunctions test class")
         p = tmp_path / "test.csv"
         p.write_text("name,age\nalice,30\nbob,25\n")
         result = read(str(p))
@@ -92,6 +95,7 @@ class TestPyfficeCSVClass:
     """The PyfficeCSV class — load, save, append, filter, etc."""
 
     def test_constructs_with_no_args(self):
+        logma.debug("TestPyfficeCSVClass test class")
         h = PyfficeCSV()
         assert h.file_path is None
         assert h.headers == []

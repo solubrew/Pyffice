@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/charts/.
 
 Coverage:
@@ -20,6 +22,7 @@ class TestPyfficeChart:
     """PyfficeChart extends PyfficeDocument."""
 
     def test_inherits_pyffice_document(self):
+        logma.debug("TestPyfficeChart test class")
         assert issubclass(PyfficeChart, PyfficeDocument)
 
     def test_inherits_pyffice_unit(self):

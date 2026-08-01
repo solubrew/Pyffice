@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/items/.
 
 Coverage:
@@ -32,6 +34,7 @@ class TestPyfficeFont:
     """PyfficeFont is a dataclass with to_dict + from_dict round-trip."""
 
     def test_default_construction(self):
+        logma.debug("TestPyfficeFont test class")
         f = PyfficeFont()
         assert f.name == "Arial"
         assert f.size == 11.0
@@ -100,6 +103,7 @@ class TestPyfficeTable:
     """PyfficeTable wraps a pandas DataFrame."""
 
     def test_constructs_with_no_args(self):
+        logma.debug("TestPyfficeTable test class")
         t = PyfficeTable()
         assert t is not None
 

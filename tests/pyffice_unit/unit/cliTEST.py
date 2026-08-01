@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/cli.py.
 
 Coverage:
@@ -19,6 +21,7 @@ class TestCliGroup:
     """The top-level click group is well-formed."""
 
     def test_pyffice_alias_is_pyffice_codex(self):
+        logma.debug("TestCliGroup test class")
         # T-NEW-044: pyffice/cli.py aliases `Pyffice = PyfficeCodex`
         # so legacy bare 'Pyffice()' calls still work.
         from pyffice.cli import Pyffice

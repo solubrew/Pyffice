@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/calendars/.
 
 Coverage:
@@ -23,6 +25,7 @@ class TestPyfficeCalendar:
     """PyfficeCalendar extends PyfficeDocumentManager."""
 
     def test_inherits_document_manager(self):
+        logma.debug("TestPyfficeCalendar test class")
         assert issubclass(PyfficeCalendar, PyfficeDocumentManager)
 
     def test_inherits_pyffice_document(self):
@@ -64,6 +67,7 @@ class TestPyfficeEvent:
     """PyfficeEvent extends PyfficeUnit."""
 
     def test_inherits_pyffice_unit(self):
+        logma.debug("TestPyfficeEvent test class")
         assert issubclass(PyfficeEvent, PyfficeUnit)
 
     def test_constructs_no_args(self):

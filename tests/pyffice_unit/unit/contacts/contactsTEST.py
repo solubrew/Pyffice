@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/contacts/.
 
 Coverage:
@@ -25,6 +27,7 @@ class TestPyfficeContact:
     """PyfficeContact extends PyfficeDocument."""
 
     def test_inherits_pyffice_document(self):
+        logma.debug("TestPyfficeContact test class")
         assert issubclass(PyfficeContact, PyfficeDocument)
 
     def test_inherits_pyffice_unit(self):
@@ -69,6 +72,7 @@ class TestPyfficeRolodex:
     """PyfficeRolodex extends PyfficeDocumentManager."""
 
     def test_inherits_document_manager(self):
+        logma.debug("TestPyfficeRolodex test class")
         assert issubclass(PyfficeRolodex, PyfficeDocumentManager)
 
     def test_inherits_pyffice_document(self):
@@ -110,6 +114,7 @@ class TestPyfficePersona:
     """PyfficePersona extends PyfficeDocument."""
 
     def test_inherits_pyffice_document(self):
+        logma.debug("TestPyfficePersona test class")
         assert issubclass(PyfficePersona, PyfficeDocument)
 
     def test_inherits_pyffice_unit(self):

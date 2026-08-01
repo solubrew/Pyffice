@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/databases/.
 
 Coverage:
@@ -57,6 +59,7 @@ class TestPyfficeDatabaseManagerMethods:
     """add_connection / add_database / create_database are fluent."""
 
     def test_add_connection_returns_self(self):
+        logma.debug("TestPyfficeDatabaseManagerMethods test class")
         m = PyfficeDatabaseManager()
         conn = object()
         assert m.add_connection("main", conn) is m

@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/ports/json_handler.py.
 
 Migrated from pyffice/data/json.py (T-NEW-069). The migration drops
@@ -25,6 +27,7 @@ class TestPyfficeJSONModuleFunctions:
     """The module-level JSON helpers."""
 
     def test_read_returns_dict(self, tmp_path):
+        logma.debug("TestPyfficeJSONModuleFunctions test class")
         p = tmp_path / "test.json"
         p.write_text('{"name": "alice", "age": 30}')
         result = read(str(p))
@@ -69,6 +72,7 @@ class TestPyfficeJSONClass:
     """The PyfficeJSON class — load, save, get, set."""
 
     def test_constructs_with_no_args(self):
+        logma.debug("TestPyfficeJSONClass test class")
         j = PyfficeJSON()
         assert j.file_path is None
         assert j._data is None
@@ -130,6 +134,7 @@ class TestPyfficeJSONDottedAccess:
     """The get/set methods that replaced PyfficeDataMixin."""
 
     def test_get_simple_key(self):
+        logma.debug("TestPyfficeJSONDottedAccess test class")
         j = PyfficeJSON()
         j._data = {"name": "alice"}
         assert j.get("name") == "alice"

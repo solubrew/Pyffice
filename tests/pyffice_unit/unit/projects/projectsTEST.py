@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/projects/.
 
 Coverage:
@@ -32,6 +34,7 @@ class TestPyfficeProjectConstruction:
     """PyfficeProject() constructs with empty collections."""
 
     def test_default_attributes(self):
+        logma.debug("TestPyfficeProjectConstruction test class")
         p = PyfficeProject()
         assert p.tasks == []
         assert p.resources == []
@@ -162,6 +165,7 @@ class TestCanonicalToDictShape:
     """
 
     def test_pyffice_project_to_dict_has_canonical_shape(self):
+        logma.debug("TestCanonicalToDictShape test class")
         p = PyfficeProject()
         p.tasks = [PyfficeProjectTask({'name': 'T1'})]
         d = p.to_dict()

@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/ports/gports.py — Google Workspace ports.
 
 T-NEW-070: Tests the 4 Google Workspace ports (Sheets, Docs, Slides,
@@ -28,6 +30,7 @@ from pyffice.ports.ports import PyfficePort
 
 class TestPyfficePortGoogleSheets:
     def test_constructs(self):
+        logma.debug("TestPyfficePortGoogleSheets test class")
         s = PyfficePortGoogleSheets()
         assert s is not None
         assert s.authenticated is False
@@ -75,6 +78,7 @@ class TestPyfficePortGoogleSheets:
 
 class TestPyfficePortGoogleDocs:
     def test_constructs(self):
+        logma.debug("TestPyfficePortGoogleDocs test class")
         d = PyfficePortGoogleDocs()
         assert d is not None
 
@@ -121,6 +125,7 @@ class TestPyfficePortGoogleDocs:
 
 class TestPyfficePortGoogleSlides:
     def test_constructs(self):
+        logma.debug("TestPyfficePortGoogleSlides test class")
         s = PyfficePortGoogleSlides()
         assert s is not None
 
@@ -161,6 +166,7 @@ class TestPyfficePortGoogleSlides:
 
 class TestPyfficePortGoogleForms:
     def test_constructs(self):
+        logma.debug("TestPyfficePortGoogleForms test class")
         f = PyfficePortGoogleForms()
         assert f is not None
 

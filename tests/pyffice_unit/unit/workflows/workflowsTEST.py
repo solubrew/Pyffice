@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/workflows/.
 
 Coverage:
@@ -42,6 +44,7 @@ class TestPyfficeWorkflowGraphOps:
     """The graph mutation methods are fluent (return self)."""
 
     def test_add_node_returns_self(self):
+        logma.debug("TestPyfficeWorkflowGraphOps test class")
         w = PyfficeWorkflow()
         assert w.add_node("n1") is w
 
@@ -163,6 +166,7 @@ class TestIsNumber:
     """is_number() returns True for int/float, False otherwise."""
 
     def test_int_is_number(self):
+        logma.debug("TestIsNumber test class")
         assert is_number(42) is True
 
     def test_float_is_number(self):

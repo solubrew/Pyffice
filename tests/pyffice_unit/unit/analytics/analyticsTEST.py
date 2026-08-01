@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/analytics/sources.py.
 
 Coverage:
@@ -61,6 +63,7 @@ class TestPyfficeSourceSetters:
     """Fluent setters return self for chaining."""
 
     def test_add_data_set_returns_self(self):
+        logma.debug("TestPyfficeSourceSetters test class")
         s = PyfficeSource({"name": "src1"})
         assert s.add_data_set({"a": 1}) is s
         assert s.data_sets == [{"a": 1}]

@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/ports/.
 
 Coverage:
@@ -99,6 +101,7 @@ class TestMicrosoftPorts:
     """Microsoft Office format ports (Excel, Word)."""
 
     def test_pyffice_port_excel_subclasses(self):
+        logma.debug("TestMicrosoftPorts test class")
         assert issubclass(PyfficePortExcel, PyfficePort)
 
     def test_pyffice_port_word_subclasses(self):

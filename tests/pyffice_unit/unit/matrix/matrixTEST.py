@@ -1,3 +1,5 @@
+from kahndor.logma import Logma
+logma = Logma(__name__)
 """Tests for pyffice/matrix/.
 
 Coverage:
@@ -23,6 +25,7 @@ class TestPyfficeMatrixDetermineFileType:
     """T-NEW-057: determine_file_type infers type from extension."""
 
     def test_excel_extensions(self):
+        logma.debug("TestPyfficeMatrixDetermineFileType test class")
         m = PyfficeMatrix()
         assert m.determine_file_type("report.xlsx") == "excel"
         assert m.determine_file_type("report.xls") == "excel"
