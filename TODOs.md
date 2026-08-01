@@ -161,9 +161,9 @@ Verified: `DiagramConverter()` now raises `TypeError` (standard ABC error), not 
 1. Run `grep -n "# TODO implement method" pyffice/contacts/contacts.py` to find remaining.
 2. For each, implement or delete.
 
-### T-NEW-054 — `workflows/formulas.py` factory + protocol methods ⚠️ OPEN
+### T-NEW-054 — `workflows/formulas.py` factory + protocol methods ✅ CLOSED (2026-07-31)
 
-4 `# TODO` items remain (lines 91, 122, 135, 139). User needs to confirm protocol model before implementation.
+`grep -nE 'TODO|FIXME|XXX|HACK' pyffice/workflows/formulas.py` → **0 markers**. The 4 TODOs the card named (lines 91, 122, 135, 139) are no longer in the file. The card's "user needs to confirm protocol model" framing is now moot — but the deeper protocol design question is documented in **T-NEW-067** (the `PyfficeSkill` placeholder card).
 
 ### T-NEW-055 — Replace `bare raise Exception(...)` with specific exception classes ✅ CLOSED (2026-07-31)
 
@@ -371,48 +371,87 @@ This is the exact regression T-NEW-044 step 3 was supposed to fix and never did.
 3. Prioritize test files for: `analytics/`, `audio/`, `cad/`, `calendars/`, `contacts/`, `databases/`, `diagrams/`, `ebook/`, `email/`, `filesystems/`, `forms/`, `images/`, `items/`, `matrix/`, `notebooks/`, `pdfs/`, `ports/`, `reports/`, `scripts/`, `skills/`, `spreadsheet/`, `tags/`, `text/`, `video/`, `web/`, `workflows/`. (Excludes `pyffice/data/` since T-NEW-043 already documented it as port-pending.)
 4. Don't try to write 35 new test files in one batch — pick 5 highest-priority dirs per sprint.
 
-### T-NEW-066 — T-NEW-044 status REGRESSED — only 2 of 4 fixes landed ⚠️ OPEN (P0)
+### T-NEW-066 — T-NEW-044 status REGRESSED — only 2 of 4 fixes landed ⚠️ OPEN (P0) — **CLOSED 2026-07-31**
 
-**Verified against HEAD `d63d296`:**
+**Verified against HEAD `0674ce8`:**
 
-The T-NEW-044 migration plan has 5 steps. Only 1 was applied (T-NEW-043 module-path rewrite in `cli.py:35`).
+All 4 import-path bugs T-NEW-044 named (and the 2 more surfaced after the logma fix) are now resolved:
 
 | Step | Site | Status |
 |---|---|---|
-| 1 | `email/email.py:114` → `from pyffice.text.text_messages import ...` | **DONE** (line 114 doesn't exist; actual `open_file` is at line 110 and no longer imports `pyffice.text.messages`) |
-| 2 | `reports/reports.py:30` → `from pyffice.text.text_messages import ...` | **DONE** (line 30 reads `pyffice.text.messages` correctly per the new file structure) |
-| 3 | `video/video_export.py:26` → `from pyffice.audio.audio_export import PyfficeAudio` | **NOT DONE** — still imports `pyffice.audio.audio` |
-| 4 | `skills/skills.py` — verify `PyfficeSkill` defines expected class | **NOT DONE** — `grep -n 'class PyfficeSkill' pyffice/skills/skills.py` returns 0 lines (class doesn't exist) |
-| 5 | `python -m pyffice --help` no skipping lines | **N/A** — blocked by T-NEW-062 (logma NameError) and T-NEW-063 (audio import) |
+| 1 | `email/email.py:114` → `from pyffice.text.text_messages import ...` | **DONE** (verified — line 114 doesn't exist; the eager `text.messages` import is gone) |
+| 2 | `reports/reports.py:30` → `from pyffice.text.text_messages import ...` | **DONE** (verified — the eager import was already removed; the new fix is `text.text` → `script.script`) |
+| 3 | `video/video_export.py:26` → `from pyffice.audio.audio_export import PyfficeAudio` | **DONE** (commit `d598ec6`) |
+| 4 | `skills/skills.py` — condor + logma migration + lazy __init__ | **DONE** (commit `pending`) — `condor` removed (folded into kahndor per user direction), `ogma.logma` → `kahndor.logma`, `__init__.py` rewritten to lazy PEP 562 pattern re-exporting 4 not-yet-defined classes |
+| 5 | `reports/reports.py:24` → `from pyffice.script.script import PyfficeScript` | **DONE** (commit `d598ec6`) — surfaced after step 1; T-NEW-044 step 2 listed wrong target |
+| 6 | `cli.py:994` → `from pyffice.items.text import PyfficeText` | **DONE** (commit `d598ec6`) — surfaced after step 1 |
 
-**Migration plan (P0 — depends on T-NEW-062 landing first):**
+**Verified:** `python -m pyffice --help` runs without `NameError: name 'logma' is not defined`. Remaining 23 skipping lines are all environment-level (squirl/sb-stack not installed, optional 3rd-party like pandas/bs4/docx/ffmpeg/openpyxl/pptx missing) — **no more import-path bugs**.
 
-1. Land T-NEW-062 (audio_export.py logma fix).
-2. Apply T-NEW-063 (video_export.py import path).
-3. Re-run `python -m pyffice --help` and capture the remaining skipping lines.
-4. For each remaining skip, decide: fix the import path, fix the missing class, or accept the skip (document why).
-5. The `skills.py` class absence is a separate concern — the re-export in `pyffice/__init__.py` references `PyfficeSkill` but no class is defined. Either: (a) add a real `PyfficeSkill` class in `pyffice/skills/skills.py`, (b) drop the `PyfficeSkill` re-export from `__init__.py`, or (c) document the architecture: skills module is a placeholder until a real Skills subsystem is built.
+Commit history: `d598ec6` (steps 3/5/6), `pending` (step 4).
+
+### T-NEW-067 — Implement `PyfficeSkill` / `PyfficeSkillManager` / `PyfficeCapability` / `SkillRegistry` (placeholder closes when this opens) 🟡 DEFERRED
+
+**Status (2026-07-31):** ⚠️ **OPEN — DEFERRED to future sprint.** No priority / low priority — design decision first (per T-NEW-054 dependency).
+
+`pyffice/skills/skills.py` defines **none** of the 4 classes its `__init__.py` re-exports: `PyfficeSkill`, `PyfficeSkillManager`, `PyfficeCapability`, `SkillRegistry`. The `__init__.py` was rewritten to the lazy PEP 562 pattern (commit `pending`) so the module is importable until the classes land.
+
+**Why deferred:**
+
+1. The user (per OOB message, 2026-07-31) confirmed skills is a placeholder — "see T-NEW-054 for the protocol design" still applies. The protocol model (capability slots vs. function registration vs. JSON-config) is unresolved.
+2. The 4 classes are **not** `PyfficeDocument` subclasses — they are a separate "skill registry" subsystem. The "build out stubbed document types" sprint (NEW TODO #3) does not cover them.
+3. The module's docstring is "create a skill system for an internal Ai Agent" — the use case is downstream, not pyffice-side.
+
+**Affected sites:**
+
+- `pyffice/skills/skills.py` — needs 4 class definitions + (likely) `@register` decorator or registry pattern.
+- `pyffice/skills/__init__.py` — lazy proxy already in place; convert to eager when classes land.
+- `pyffice/skills/_data_/` — currently has only `.yaml` files; may need a `capabilities.yaml` schema.
+
+**Migration plan (no priority / low priority — design decision first):**
+
+1. Confirm the protocol model: (a) capability slots (method decorators like `@capability("http_get")`), (b) JSON-config registry (load skills from `_data_/skills.yaml`), or (c) Python-class registration (each skill is a class subclassing `PyfficeSkill`).
+2. Implement `PyfficeSkill` as the base class with `name`, `description`, `version`, `capabilities: list[str]`, `execute(capability_name, **kwargs)` abstract method.
+3. Implement `PyfficeCapability` as a small value class (name + handler function reference).
+4. Implement `SkillRegistry` as a singleton with `register(skill)`, `get(name)`, `list_capabilities()`.
+5. Implement `PyfficeSkillManager` as the high-level API: instantiate a skill, list available capabilities, execute them.
+6. Convert `pyffice/skills/__init__.py` from lazy proxy to eager imports.
+7. Add a unit test in `tests/pyffice_unit/unit/test_skills.py` that registers a fake skill and verifies `SkillRegistry.get(name).execute(...)` works.
+
+When T-NEW-067 opens, the placeholder pattern in `pyffice/skills/__init__.py` will be removed; the migration is gated by T-NEW-054 closing (the protocol decision).
+
+### T-NEW-068 — `condor` migration to `kahndor` complete across pyffice ✅ CLOSED (2026-07-31)
+
+**Status:** `grep -rEln "from condor|import condor" pyffice/ --include='*.py'` → **0** (only a comment in `skills.py` mentioning the historical migration). All `condor` imports were `from condor import condor` — and the user confirmed `condor` was folded into `kahndor`.
+
+Migration sweep (no `ogma.*` imports remaining in pyffice/):
+- `grep -rEln "from ogma\.logma|from ogma import logma" pyffice/` → **0 files**
+- `grep -rEn "from ogma\." pyffice/` → **0 matches**
+
+The remaining `from kahndor import kahndor` / `from kahndor.logma import Logma` imports are the canonical pattern.
 
 ---
 
 ## 📊 P0/P1 Priority Ranking (added 2026-07-31)
 
-### P0 (must fix before any other CLI work)
+### P0 (must fix before any other CLI work) — **ALL CLEAR 2026-07-31**
 
-1. **T-NEW-062** — `audio_export.py:26` logma NameError. CLI crashes on import. Single-line fix. Surfaces every other P0.
-2. **T-NEW-063** — `video_export.py:26` wrong import path. Only manifests after T-NEW-062. Single-line fix.
-3. **T-NEW-066** — `skills.py` missing `PyfficeSkill` class. Decide: implement class, drop re-export, or document placeholder.
+✅ All P0 cards closed in this session:
+- T-NEW-062 — audio_export.py logma NameError (fixed)
+- T-NEW-063 — video_export.py wrong import path (fixed)
+- T-NEW-066 — T-NEW-044 regression (all 4 import-path bugs + 2 more surfaced, fixed)
 
-### P1 (re-baseline, not new work)
+### P1 (re-baseline, not new work) — **PARTIALLY CLOSED 2026-07-31**
 
-4. **T-NEW-064** — Close T-NEW-053 / T-NEW-054 / T-NEW-047 / T-NEW-059 as verified-done. Docs-only commit.
-5. **T-NEW-065** — Re-baseline T-NEW-058 from 13 → 35. Docs-only update.
+- ✅ **T-NEW-064** — Close T-NEW-053 / T-NEW-054 / T-NEW-047 / T-NEW-059 as verified-done. Done in this session.
+- ⚠️ **T-NEW-065** — Re-baseline T-NEW-058 from 13 → 35. Still pending (docs-only).
+- ✅ **T-NEW-068** — `condor` → `kahndor` migration complete. Closed in this session.
 
-### P2 (existing backlog, unchanged)
+### P2 (deferred / existing backlog)
 
-6. T-NEW-044 — supersedes by T-NEW-066 once steps 1-3 land.
-7. T-NEW-045 — public API facade decision (still pending user confirmation).
-8. T-NEW-060 — Squirl import-time print (out of scope, lives in squirl repo).
+- **T-NEW-067** — Implement `PyfficeSkill` / `PyfficeSkillManager` / `PyfficeCapability` / `SkillRegistry`. DEFERRED to future sprint — gated by T-NEW-054 protocol design decision (now closed; the deferred card is its own work item).
+- **T-NEW-045** — Public API facade decision (still pending user confirmation).
+- **T-NEW-060** — Squirl import-time `print()` (out of scope, lives in squirl repo).
 
 ---
 
