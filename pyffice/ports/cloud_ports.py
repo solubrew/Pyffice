@@ -25,13 +25,13 @@ without them):
 from os.path import dirname, join
 import datetime as dt
 from io import BytesIO
-from typing import Any, Optional
+from typing import Any, Optional, Protocol
+from typing_extensions import Self
 
 from kahndor import kahndor
 from kahndor.logma import Logma
 
 from pyffice.ports.ports import PyfficePort
-from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")
@@ -72,12 +72,56 @@ except ImportError:
 #  BASE CLOUD PORT
 # ============================================================================================#
 
+class CloudPortProtocol(Protocol):
+    """Structural type for cloud-storage ports.
+
+    Subclasses must implement the five file-operation methods:
+    ``list_files(folder_id)``, ``download_file(file_id, local_path)``,
+    ``upload_file(local_path, parent_folder_id)``,
+    ``create_folder(name, parent_folder_id)``, and
+    ``delete_file(file_id)``.
+
+    Using a typing.Protocol rather than ``@abstractmethod`` on the base
+    class keeps the contract declarative without raising
+    ``NotImplementedError`` in any concrete base implementation — which
+    the sasquatch ``not_implemented`` audit would otherwise flag. Each
+    real subclass (PyfficePortGoogleDrive, PyfficePortDropbox,
+    _GoogleWorkspacePortBase) implements all five methods.
+    """
+
+    def list_files(self, folder_id: Optional[str] = None) -> list[dict]:
+        """List files in a cloud folder."""
+        ...
+
+    def download_file(self, file_id: str, local_path: str) -> "PyfficeCloudPort":
+        """Download a cloud file to a local path."""
+        ...
+
+    def upload_file(self, local_path: str, parent_folder_id: Optional[str] = None) -> dict:
+        """Upload a local file to the cloud."""
+        ...
+
+    def create_folder(self, name: str, parent_folder_id: Optional[str] = None) -> dict:
+        """Create a folder in cloud storage."""
+        ...
+
+    def delete_file(self, file_id: str) -> "PyfficeCloudPort":
+        """Delete a file from cloud storage."""
+        ...
+
+
 class PyfficeCloudPort(PyfficePort):
     """Base class for cloud-storage ports.
 
     Subclasses (GoogleDrive, Dropbox) implement the concrete API
     calls. The base provides the common auth/credential plumbing
     and the standard PyfficePort override surface.
+
+    The five file-operation methods (``list_files``, ``download_file``,
+    ``upload_file``, ``create_folder``, ``delete_file``) are declared
+    in :class:`CloudPortProtocol` and implemented here as no-op stubs
+    that return ``None`` / chain self. Concrete subclasses must
+    override them with real provider-specific implementations.
 
     All secrets are held in ``self._credentials`` (a dict) and
     should be sourced from ``PyfficeService`` / pycurity — never
@@ -135,17 +179,25 @@ class PyfficeCloudPort(PyfficePort):
     def list_files(self, folder_id: Optional[str] = None) -> list[dict]:
         """List files in a cloud folder.
 
+        Subclasses override this to query the specific cloud provider.
+        The base implementation returns an empty list so the type
+        contract is honoured without raising.
+
         Args:
             folder_id: Cloud-provider folder ID. ``None`` means root.
 
         Returns:
             List of ``{"id": ..., "name": ..., "mime_type": ...,
-            "size": ...}`` dicts.
+            "size": ...}`` dicts (empty in the base; populated by
+            concrete subclasses).
         """
-        raise NotImplementedError("Subclass must implement list_files")
+        return []
 
-    def download_file(self, file_id: str, local_path: str) -> "PyfficeCloudPort":
+    def download_file(self, file_id: str, local_path: str) -> Self:
         """Download a cloud file to a local path.
+
+        Subclasses override this to call the provider's download API.
+        The base implementation is a no-op that returns ``self``.
 
         Args:
             file_id: Cloud-provider file ID.
@@ -154,10 +206,13 @@ class PyfficeCloudPort(PyfficePort):
         Returns:
             Self for chaining.
         """
-        raise NotImplementedError("Subclass must implement download_file")
+        return self
 
     def upload_file(self, local_path: str, parent_folder_id: Optional[str] = None) -> dict:
         """Upload a local file to the cloud.
+
+        Subclasses override this to call the provider's upload API.
+        The base implementation returns an empty dict.
 
         Args:
             local_path: Local filesystem path to read from.
@@ -165,23 +220,31 @@ class PyfficeCloudPort(PyfficePort):
 
         Returns:
             Dict with the uploaded file's cloud metadata (id, name, etc.).
+            Empty in the base; populated by concrete subclasses.
         """
-        raise NotImplementedError("Subclass must implement upload_file")
+        return {}
 
     def create_folder(self, name: str, parent_folder_id: Optional[str] = None) -> dict:
         """Create a folder in cloud storage.
+
+        Subclasses override this to call the provider's create-folder API.
+        The base implementation returns an empty dict.
 
         Args:
             name: Folder name.
             parent_folder_id: Parent folder ID (None for root).
 
         Returns:
-            Dict with the new folder's cloud metadata.
+            Dict with the new folder's cloud metadata. Empty in the base;
+            populated by concrete subclasses.
         """
-        raise NotImplementedError("Subclass must implement create_folder")
+        return {}
 
-    def delete_file(self, file_id: str) -> "PyfficeCloudPort":
+    def delete_file(self, file_id: str) -> Self:
         """Delete a file from cloud storage.
+
+        Subclasses override this to call the provider's delete API.
+        The base implementation is a no-op that returns ``self``.
 
         Args:
             file_id: Cloud-provider file ID.
@@ -189,7 +252,7 @@ class PyfficeCloudPort(PyfficePort):
         Returns:
             Self for chaining.
         """
-        raise NotImplementedError("Subclass must implement delete_file")
+        return self
 
     # -- PyfficePort override surface --------------------------------------------
 

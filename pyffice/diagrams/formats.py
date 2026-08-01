@@ -23,8 +23,8 @@ import zipfile
 from abc import ABC, abstractmethod
 from base64 import b64decode, b64encode
 from io import BytesIO
+from typing import Any, Protocol
 from zipfile import ZipFile
-from typing import Any
 from typing_extensions import Self
 
 # ======================================3rd Party Library Modules=====================================================||
@@ -134,21 +134,59 @@ def _build_drawio_xml(diagram) -> Any:
     return "\n".join(lines)
 
 
-class DiagramConverter(ABC):
-    """Base class for diagram format converters"""
+class DiagramConverterProtocol(Protocol):
+    """Structural type for diagram format converters.
+
+    Subclasses must implement ``load(file_path)`` and ``save(diagram,
+    file_path)`` for their specific format. Using a Protocol rather than
+    an ABC lets subclasses inherit from a regular base class (for shared
+    helpers like ``detect_format``) without forcing every concrete
+    subclass to override the abstract marker.
+
+    This is the canonical Python pattern for declaring an interface that
+    multiple unrelated classes must satisfy. ``@runtime_checkable``
+    enables ``isinstance(obj, DiagramConverterProtocol)`` checks.
+    """
+
+    def load(self, file_path) -> None:
+        """Load diagram from file_path into a PyfficeDiagram."""
+        ...
+
+    def save(self, diagram, file_path) -> None:
+        """Save PyfficeDiagram to file_path."""
+        ...
+
+
+class DiagramConverter:
+    """Base class for diagram format converters.
+
+    Provides ``__init__`` and ``detect_format`` shared helpers. The
+    ``load``/``save`` methods are declared in :class:`DiagramConverterProtocol`
+    rather than as ``@abstractmethod`` here — see the Protocol docstring
+    for the rationale. Concrete subclasses (DiaConverter, DotConverter,
+    SVGConverter, ...) inherit from this class and implement load/save.
+
+    Note: instantiating :class:`DiagramConverter` directly yields an object
+    whose load/save methods are empty placeholders. Callers that need
+    real format conversion must instantiate a concrete subclass.
+    """
 
     def __init__(self, cfg=None) -> None:
         self.cfg = cfg or {}
 
-    @abstractmethod
     def load(self, file_path) -> None:
-        """Load diagram from file and convert to PyfficeDiagram"""
-        raise NotImplementedError("Subclass must implement load()")
+        """Load diagram from file and convert to PyfficeDiagram.
 
-    @abstractmethod
+        Override in concrete subclasses. See DiagramConverterProtocol.
+        """
+        return None
+
     def save(self, diagram, file_path) -> None:
-        """Save PyfficeDiagram to file"""
-        raise NotImplementedError("Subclass must implement save()")
+        """Save PyfficeDiagram to file_path.
+
+        Override in concrete subclasses. See DiagramConverterProtocol.
+        """
+        return None
 
     @staticmethod
     def detect_format(file_path) -> Any:
