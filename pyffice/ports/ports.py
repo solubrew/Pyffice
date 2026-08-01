@@ -25,6 +25,8 @@ import nbformat
 import html
 from pyffice.items.items import PyfficeTable
 from pyffice.web.web import PyfficeWebBrowser
+from typing import Any
+from typing_extensions import Self
 
 try:
     import dia
@@ -61,13 +63,13 @@ class PyfficePort(PyfficeDocumentManager):
     SERIALIZATION_VERSION = (1, 0, 0)
     """"""
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         logma.debug(f"PyfficePort.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePort")).override(cfg)
 
-    def file_export(self, file_=None):
+    def file_export(self, file_=None) -> Self:
         """File export.
         
         Args:
@@ -79,13 +81,13 @@ class PyfficePort(PyfficeDocumentManager):
         self.file_write(file_, self.to_dict())
         return self
 
-    def file_import(self, file_path=None):
+    def file_import(self, file_path=None) -> Self:
         """Import from file path."""
         self.file_open(file_path)
         self.parse()
         return self
 
-    def export(self, document=None):
+    def export(self, document=None) -> Self:
         """Export a Pyffice document out to the port's native format.
 
         Subclasses override this for format-specific writers (xlsx,
@@ -109,7 +111,7 @@ class PyfficePort(PyfficeDocumentManager):
             self.file_write(self.file_path, payload)
         return self
 
-    def import_data(self):
+    def import_data(self) -> Any:
         """Read the port's ``file_path`` and return the loaded payload.
 
         Subclasses override this for format-specific readers (xlsx,
@@ -138,16 +140,16 @@ class PyfficePort(PyfficeDocumentManager):
         except (ValueError, TypeError):
             return {"text": text}
 
-    def to_native(self):
+    def to_native(self) -> Any:
         """Convert to native format."""
         return self.document
 
-    def to_xml(self):
+    def to_xml(self) -> Any:
         """Convert to XML format."""
         import xml.etree.ElementTree as ET
         return ET.tostring(self.document, encoding='unicode') if self.document else ""
 
-    def file_open(self, file_path, open_=True):
+    def file_open(self, file_path, open_=True) -> Any:
         """File open.
         
         Args:
@@ -160,7 +162,7 @@ class PyfficePort(PyfficeDocumentManager):
         text = super().file_open(file_path, open_)
         return text
 
-    def file_write(self, path, dikt):
+    def file_write(self, path, dikt) -> Self:
         """File write.
         
         Args:
@@ -180,7 +182,7 @@ class PyfficePortCherryTree(PyfficePort):
 
     VERSION = "0.0.1.0.1.0"
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         logma.info(f"Init Cherry Tree {cfg}")
         super().__init__(cfg)
@@ -194,7 +196,7 @@ class PyfficePortCherryTree(PyfficePort):
         self.tables = None
         self.images = None
 
-    def extract_codeboxes(self, node):
+    def extract_codeboxes(self, node) -> Self:
         """Extract codeboxes.
         
         Args:
@@ -212,7 +214,7 @@ class PyfficePortCherryTree(PyfficePort):
             self.codeboxes.append(box)
         return self
 
-    def extract_images(self, node):
+    def extract_images(self, node) -> Self:
         """Extract images.
         
         Args:
@@ -238,7 +240,7 @@ class PyfficePortCherryTree(PyfficePort):
             self.images.append(image_)
         return self
 
-    def extract_tables(self, node):
+    def extract_tables(self, node) -> Any:
         """Extract tables.
         
         Args:
@@ -268,7 +270,7 @@ class PyfficePortCherryTree(PyfficePort):
             tables_.append(table_)
         return tables_
 
-    def extract_text(self, node):
+    def extract_text(self, node) -> Any:
         """Extract text.
         
         Args:
@@ -288,7 +290,7 @@ class PyfficePortCherryTree(PyfficePort):
         logma.info(f"Full Text {full_text}")
         return script
 
-    def file_import(self, file_path=None):
+    def file_import(self, file_path=None) -> Self:
         """File import.
         
         Args:
@@ -300,7 +302,7 @@ class PyfficePortCherryTree(PyfficePort):
         self.file_open(file_path)
         return self.to_dict()
 
-    def file_open(self, file_path):
+    def file_open(self, file_path) -> Self:
         """File open.
         
         Args:
@@ -320,7 +322,7 @@ class PyfficePortCherryTree(PyfficePort):
         self.parse()
         return self
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> Self:
         """Load document into this document.
         
         Args:
@@ -333,7 +335,7 @@ class PyfficePortCherryTree(PyfficePort):
         super().load_document(document)
         return self
 
-    def parse(self):
+    def parse(self) -> Self:
         """
         Parse the entire XML structure starting from the root.
 
@@ -342,7 +344,7 @@ class PyfficePortCherryTree(PyfficePort):
         self.nodes = [self.parse_node(node) for node in self.root.findall("node")]
         return self
 
-    def parse_links(self, text):
+    def parse_links(self, text) -> Self:
         # extract urls
         """Parse URL links from the document content.
         
@@ -384,7 +386,7 @@ class PyfficePortCherryTree(PyfficePort):
                 self.links.append(browser)
         return self
 
-    def parse_node(self, node):
+    def parse_node(self, node) -> Any:
         """
         Parse a single node and its children recursively.
 
@@ -502,7 +504,7 @@ class PyfficePortCherryTree(PyfficePort):
         node_["nodes"] = [self.parse_node(child) for child in node.findall("node")]
         return node_
 
-    def parse_tables(self, node):
+    def parse_tables(self, node) -> Self:
         """Parse tables.
         
         Args:
@@ -519,7 +521,7 @@ class PyfficePortCherryTree(PyfficePort):
             table_.load_document()
         return self
 
-    def parse_text(self, node):
+    def parse_text(self, node) -> Any:
         """Parse text.
         
         Args:
@@ -540,7 +542,7 @@ class PyfficePortCherryTree(PyfficePort):
         combined_text = " ".join(filter(None, all_combined_text))
         return combined_text
 
-    def to_dict(self):
+    def to_dict(self) -> Self:
         """Convert this document to dict.
         
         Returns:
@@ -557,25 +559,25 @@ class PyfficePortOffice(PyfficePort):
 
     VERSION = "0.0.1.0.1.0"
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortOffice")).override(cfg)
-    def parse_file(self):
+    def parse_file(self) -> Self:
         """Parse the loaded file."""
         # Placeholder - subclasses implement specific parsing
         if not hasattr(self, 'file_path'):
             return self
         return self
 
-    def parse_table(self):
+    def parse_table(self) -> Self:
         """Parse tables from document."""
         # Placeholder - subclasses implement specific parsing
         if not hasattr(self, 'document'):
             return self
         return self
 
-    def open_file_svg(self, file_):
+    def open_file_svg(self, file_) -> Self:
         """Open SVG file."""
         # Placeholder - SVG requires special handling
         if not file_:
@@ -587,12 +589,12 @@ class PyfficePortCSV(PyfficePort):
 
     VERSION = "0.0.1.0.1.0"
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortCSV")).override(cfg)
 
-    def open_file(self, file, if_data_only=False, read_only=False, keep_vba=False):
+    def open_file(self, file, if_data_only=False, read_only=False, keep_vba=False) -> Any:
         """Open file.
         
         Args:
@@ -613,7 +615,7 @@ class PyfficePortDia(PyfficePort):
 
     VERSION = "0.0.1.0.1.0"
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         logma.debug(f"PyfficePortDia.__init__ called")
         super().__init__(cfg)
@@ -625,7 +627,7 @@ class PyfficePortDia(PyfficePort):
         self.tree = None
         self.edges = None
 
-    def import_file(self, file_path=None):
+    def import_file(self, file_path=None) -> Self:
         """Import file.
         
         Args:
@@ -638,7 +640,7 @@ class PyfficePortDia(PyfficePort):
         self.parse()
         return self.to_dict()
 
-    def open_file(self, file_path):
+    def open_file(self, file_path) -> None:
         """Open file.
         
         Args:
@@ -658,7 +660,7 @@ class PyfficePortDia(PyfficePort):
         if self.is_dia_installed:
             self.diagram = dia.open(file_path)
 
-    def parse(self):
+    def parse(self) -> Self:
         """Parse .
         
         Returns:
@@ -670,7 +672,7 @@ class PyfficePortDia(PyfficePort):
             self.parse_xml()
         return self
 
-    def parse_dia(self):
+    def parse_dia(self) -> Self:
         """
         Parse the entire XML structure starting from the root.
 
@@ -683,7 +685,7 @@ class PyfficePortDia(PyfficePort):
                         obj.name = attr_value
         return self
 
-    def parse_xml(self):
+    def parse_xml(self) -> None:
         """Parse xml.
         
         Returns:
@@ -714,7 +716,7 @@ class PyfficePortFileSystem(PyfficePort):
 
     VERSION = "0.0.1.0.1.0"
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortFileSystem")).override(cfg)
@@ -724,13 +726,13 @@ class PyfficePortImage(PyfficePort):
 
     VERSION = "0.0.1.0.1.0"
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         logma.debug(f"PyfficePortImage.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortImage")).override(cfg)
 
-    def convert_svg_color(self, input_color, output_color):
+    def convert_svg_color(self, input_color, output_color) -> Self:
         """Convert svg color.
         
         Args:
@@ -745,7 +747,7 @@ class PyfficePortImage(PyfficePort):
         self.content = re.sub(input_color, output_color, self.content, flags=re.IGNORECASE)
         return self
 
-    def encode(self, format="JPEG"):
+    def encode(self, format="JPEG") -> Any:
         """
         Encode the image to a specific format and return bytes.
 
@@ -755,7 +757,7 @@ class PyfficePortImage(PyfficePort):
         buffer = BytesIO()
         self.image.save(buffer, format=format)
         return buffer.getvalue()
-    def open_file(self, file_=None):
+    def open_file(self, file_=None) -> Self:
         """Open file.
         
         Args:
@@ -791,38 +793,38 @@ class PyfficePortImage(PyfficePort):
                 raise UnknownFileTypeError(f"Unknown File Type {file_}")
         return self
 
-    def open_file_bmp(self, file_):
+    def open_file_bmp(self, file_) -> Self:
         """Open BMP file."""
         from PIL import Image
         self.image = Image.open(file_)
         return self
 
-    def open_file_jpeg(self, file_):
+    def open_file_jpeg(self, file_) -> Self:
         """Open JPEG file."""
         from PIL import Image
         self.image = Image.open(file_)
         return self
 
-    def open_file_gif(self, file_):
+    def open_file_gif(self, file_) -> Self:
         """Open GIF file."""
         from PIL import Image
         self.image = Image.open(file_)
         return self
 
-    def open_file_png(self, file_):
+    def open_file_png(self, file_) -> Self:
         """Open PNG file."""
         from PIL import Image
         self.image = Image.open(file_)
         return self
 
-    def open_file_svg(self, file_):
+    def open_file_svg(self, file_) -> Self:
         """Open SVG file."""
         # Placeholder - SVG requires special handling
         if not file_:
             return self
         return self
 
-    def save(self, output_path, format_=None):
+    def save(self, output_path, format_=None) -> Self:
         """
         Save the current image to a file.
 
@@ -835,7 +837,7 @@ class PyfficePortImage(PyfficePort):
             self.image.save(output_path, format=format_ or self.image.format)
         return self
 
-    def set_layers(self, method="flatten"):
+    def set_layers(self, method="flatten") -> Self:
         """
         Merge all layers with the base image.
 
@@ -847,7 +849,7 @@ class PyfficePortImage(PyfficePort):
         self.layers = []  # Clear layers after merging
         return self
 
-    def set_size(self, width, height):
+    def set_size(self, width, height) -> Self:
         """
         Resize the image.
 
@@ -863,13 +865,13 @@ class PyfficePortJupyter(PyfficePort):
 
     VERSION = "0.0.1.0.1.0"
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortJupyter")).override(cfg)
         self.notebook = None
 
-    def file_export(self, file_=None):
+    def file_export(self, file_=None) -> Self:
         """File export.
         
         Args:
@@ -884,7 +886,7 @@ class PyfficePortJupyter(PyfficePort):
             nbformat.write(self.notebook, f)
         return self
 
-    def file_import(self, file_path=None):
+    def file_import(self, file_path=None) -> Self:
         """File import.
         
         Args:
@@ -896,7 +898,7 @@ class PyfficePortJupyter(PyfficePort):
         self.file_open(file_path)
         return self.to_dict()
 
-    def file_open(self, file_path):
+    def file_open(self, file_path) -> Self:
         """File open.
         
         Args:
@@ -914,7 +916,7 @@ class PyfficePortText(PyfficePort):
 
     VERSION = "0.0.1.0.1.0"
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortWebSession")).override(cfg)
@@ -924,14 +926,14 @@ class PyfficePortWebSession(PyfficePort):
 
     VERSION = "0.0.1.0.1.0"
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortWebSession")).override(cfg)
         self.nodes = None
         self.sessions = None
 
-    def file_import(self, file_path=None):
+    def file_import(self, file_path=None) -> Self:
         """File import.
         
         Args:
@@ -943,7 +945,7 @@ class PyfficePortWebSession(PyfficePort):
         self.file_open(file_path)
         return self.to_dict()
 
-    def file_open(self, file_path):
+    def file_open(self, file_path) -> Self:
         """File open.
         
         Args:
@@ -958,7 +960,7 @@ class PyfficePortWebSession(PyfficePort):
         self.parse_session()
         return self
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> Self:
         """Load document into this document.
         
         Args:
@@ -972,7 +974,7 @@ class PyfficePortWebSession(PyfficePort):
         self.nodes = []
         return self
 
-    def parse_session(self):
+    def parse_session(self) -> Self:
         """Parse session.
         
         Returns:
@@ -983,7 +985,7 @@ class PyfficePortWebSession(PyfficePort):
             self.nodes.append(node)
         return self
 
-    def parse_window(self, window):
+    def parse_window(self, window) -> Any:
         """Each window is a Node"""
         tabs = []
         for tab in window:
@@ -991,7 +993,7 @@ class PyfficePortWebSession(PyfficePort):
         node = {"tabs": tabs}
         return node
 
-    def parse_tab(self, tab):
+    def parse_tab(self, tab) -> Any:
         """Parse tab.
         
         Args:

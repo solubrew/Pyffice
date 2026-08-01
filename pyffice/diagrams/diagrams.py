@@ -28,6 +28,8 @@ from pyffice.items.cells import PyfficeCell
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager, PyfficeUnit
 from pyffice.items.colors import PyfficeColor
 from pyffice.items.text import PyfficeText
+from typing import Any
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -43,7 +45,7 @@ class PyfficeEdge(PyfficeUnit):
     SERIALIZATION_VERSION = (1, 0, 0)
     """"""
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         logma.debug(f"PyfficeEdge.__init__ called")
         super().__init__(cfg)
@@ -66,7 +68,7 @@ class PyfficeEdge(PyfficeUnit):
         self.visible = None
         self.width = None
 
-    def add_endpoint(self, position, connection, style="solid", color="black"):
+    def add_endpoint(self, position, connection, style="solid", color="black") -> Self:
         """Add a endpoint.
         
         Args:
@@ -91,7 +93,7 @@ class PyfficeEdge(PyfficeUnit):
         self.endpoints[uid] = endpoint
         return self
 
-    def add_text(self, value, postion, size=12, color="black", style="courier-new"):
+    def add_text(self, value, postion, size=12, color="black", style="courier-new") -> Self:
         """Add a text.
         
         Args:
@@ -117,7 +119,7 @@ class PyfficeEdge(PyfficeUnit):
         self.texts.append(text)
         return self
 
-    def del_endpoint(self, endpoint):
+    def del_endpoint(self, endpoint) -> Self:
         """Remove the endpoint.
         
         Args:
@@ -130,7 +132,7 @@ class PyfficeEdge(PyfficeUnit):
         del self.endpoints[endpoint]
         return self
 
-    def del_text(self, index):
+    def del_text(self, index) -> Self:
         """Remove the text.
         
         Args:
@@ -143,7 +145,7 @@ class PyfficeEdge(PyfficeUnit):
         del self.texts[index]
         return self
 
-    def load_unit(self, unit):
+    def load_unit(self, unit) -> Self:
         """Load a unit dict into this document.
         
         Args:
@@ -165,7 +167,7 @@ class PyfficeEdge(PyfficeUnit):
         self.set_texts(unit.get("texts", []))
         return self
 
-    def set_color(self, color):
+    def set_color(self, color) -> Self:
         """Set the color.
         
         Args:
@@ -181,7 +183,7 @@ class PyfficeEdge(PyfficeUnit):
             self.color = color
         return self
 
-    def set_endpoints(self, endpoints):
+    def set_endpoints(self, endpoints) -> Self:
         """Set the endpoints.
         
         Args:
@@ -192,7 +194,7 @@ class PyfficeEdge(PyfficeUnit):
         """
         return self._set_with_change("endpoints", endpoints)
 
-    def set_envelope_size(self, envelope_size=None):
+    def set_envelope_size(self, envelope_size=None) -> Self:
         """Set the envelope size.
         
         Args:
@@ -208,7 +210,7 @@ class PyfficeEdge(PyfficeUnit):
             self.height = envelope_size[1]
         return self
 
-    def set_line_width(self, line_width):
+    def set_line_width(self, line_width) -> Self:
         """Set the line width.
         
         Args:
@@ -219,7 +221,7 @@ class PyfficeEdge(PyfficeUnit):
         """
         return self._set_with_change("line_width", line_width)
 
-    def set_lock(self, lock=True, absolute=True):
+    def set_lock(self, lock=True, absolute=True) -> Self:
         """Set the lock.
         
         Args:
@@ -231,7 +233,7 @@ class PyfficeEdge(PyfficeUnit):
         """
         return self._set_with_change("lock", lock)
 
-    def set_position(self, position):
+    def set_position(self, position) -> Self:
         """Set the position.
         
         Args:
@@ -247,7 +249,7 @@ class PyfficeEdge(PyfficeUnit):
         self.position = position
         return self
 
-    def set_position_endpoint(self, endpoint, position):
+    def set_position_endpoint(self, endpoint, position) -> Self:
         """Set the position endpoint.
         
         Args:
@@ -262,7 +264,7 @@ class PyfficeEdge(PyfficeUnit):
         self.endpoints[endpoint]["position"] = position
         return self
 
-    def set_style(self, style):
+    def set_style(self, style) -> Self:
         """Set the style.
 
         Args:
@@ -273,7 +275,7 @@ class PyfficeEdge(PyfficeUnit):
         """
         return self._set_with_change("style", style)
 
-    def set_texts(self, texts):
+    def set_texts(self, texts) -> Self:
         """Set the texts.
         
         Args:
@@ -288,13 +290,13 @@ class PyfficeDiagram(PyfficeDocumentManager):
     """"""
     SERIALIZATION_VERSION = (1, 0, 0)
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         logma.debug(f"PyfficeDiagram.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDiagram").override(cfg))
 
-    def add_connection(self, connection):
+    def add_connection(self, connection) -> Self:
         """Add a connection.
         
         Args:
@@ -318,7 +320,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
         version=None,
         visible=None,
         active=None,
-    ):
+    ) -> Self:
         """Add a edge.
         
         Args:
@@ -342,7 +344,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
             self.add_connection(connections[endpoint])
         return self
 
-    def add_layer(self, layer):
+    def add_layer(self, layer) -> Self:
         """Add a layer.
         
         Args:
@@ -357,7 +359,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
         self.layers[layer.name] = layer
         return self
 
-    def add_node(self):
+    def add_node(self) -> Self:
         """Add a node.
         
         Returns:
@@ -369,7 +371,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
         self.nodes[node.did] = node
         return self
 
-    def del_connection(self, connection):
+    def del_connection(self, connection) -> Self:
         """Remove the connection.
         
         Args:
@@ -382,7 +384,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
         del self.connections[connection.did]
         return self
 
-    def del_edge(self, edge):
+    def del_edge(self, edge) -> Self:
         """Remove the edge.
         
         Args:
@@ -395,7 +397,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
         del self.edges[edge.did]
         return self
 
-    def del_layer(self, layer):
+    def del_layer(self, layer) -> Self:
         """Remove the layer.
 
         Args:
@@ -406,7 +408,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
         """
         return self._del_from_dict("layers", layer.name, "layers")
 
-    def del_node(self, node):
+    def del_node(self, node) -> Self:
         """Remove the node.
         
         Args:
@@ -419,7 +421,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
         del self.nodes[node.did]
         return self
 
-    def set_lock(self, lock):
+    def set_lock(self, lock) -> Self:
         """Set the lock.
         
         Args:
@@ -432,7 +434,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
             self.add_change("lock", self.lock, lock)
         return self
 
-    def set_edge_position(self, edge, position, maintain_connection=True):
+    def set_edge_position(self, edge, position, maintain_connection=True) -> Self:
         """Set the edge position.
         
         Args:
@@ -449,7 +451,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
                 connection.set_position(position)
         return self
 
-    def set_edges(self, edges):
+    def set_edges(self, edges) -> Self:
         """Set the edges.
         
         Args:
@@ -460,7 +462,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
         """
         return self._set_with_change("edges", edges)
 
-    def set_endpoint_position(self, endpoint, position, maintain_connection=True):
+    def set_endpoint_position(self, endpoint, position, maintain_connection=True) -> Self:
         """Set the endpoint position.
         
         Args:
@@ -474,7 +476,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
         self.endpoints[endpoint].set_position(position)
         return self
 
-    def set_endpoints(self, endpoints):
+    def set_endpoints(self, endpoints) -> Self:
         """Set the endpoints.
         
         Args:
@@ -485,7 +487,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
         """
         return self._set_with_change("endpoints", endpoints)
 
-    def set_node_position(self, node, position, maintain_connections=True):
+    def set_node_position(self, node, position, maintain_connections=True) -> Self:
         """Set the node position.
         
         Args:
@@ -502,7 +504,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
                 connection.set_position(position)
         return self
 
-    def set_nodes(self, nodes):
+    def set_nodes(self, nodes) -> Self:
         """Set the nodes.
         
         Args:
@@ -513,12 +515,12 @@ class PyfficeDiagram(PyfficeDocumentManager):
         """
         return self._set_with_change("nodes", nodes)
 
-    def to_dict(self):
+    def to_dict(self) -> Any:
         """Convert to dictionary."""
         return {"name": getattr(self, 'name', None),
                 "type": getattr(self, 'type', None)}
 
-    def to_md(self):
+    def to_md(self) -> Any:
         """Convert to markdown."""
         return ""
 
@@ -527,13 +529,13 @@ class PyfficeDiagramLayer(PyfficeUnit):
     """"""
     SERIALIZATION_VERSION = (1, 0, 0)
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDiagramLayer")).override(cfg)
         self.objects = None
 
-    def load_unit(self, unit):
+    def load_unit(self, unit) -> Self:
         """Load a unit dict into this document.
         
         Args:
@@ -548,7 +550,7 @@ class PyfficeDiagramLayer(PyfficeUnit):
         self.set_objects(unit.get("objects", []))
         return self
 
-    def set_objects(self, objects):
+    def set_objects(self, objects) -> Self:
         """Set the objects.
         
         Args:
@@ -563,7 +565,7 @@ class PyfficeNode(PyfficeUnit):
     """"""
     SERIALIZATION_VERSION = (1, 0, 0)
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         logma.debug(f"PyfficeNode.__init__ called")
         super().__init__(cfg)
@@ -572,7 +574,7 @@ class PyfficeNode(PyfficeUnit):
         self.lock = None
         self.position = None
 
-    def add_cell(self, object_=PyfficeCell, cfg=None, lock=True, position=[0, 0]):
+    def add_cell(self, object_=PyfficeCell, cfg=None, lock=True, position=[0, 0]) -> Self:
         """The cell object is default to an individual pyffice cell but can be replaced with any PyfficeDocument"""
         if cfg is None:
             cfg = {"position": position, "lock": lock, "object": object_}
@@ -581,7 +583,7 @@ class PyfficeNode(PyfficeUnit):
         self.cells.append(cell)
         return self
 
-    def del_cell(self, index):
+    def del_cell(self, index) -> Self:
         """Remove the cell.
         
         Args:
@@ -594,7 +596,7 @@ class PyfficeNode(PyfficeUnit):
         del self.cells[index]
         return self
 
-    def load_unit(self, unit):
+    def load_unit(self, unit) -> Self:
         """Load a unit dict into this document.
         
         Args:
@@ -611,7 +613,7 @@ class PyfficeNode(PyfficeUnit):
         self.set_position(unit.get("position", [0, 0]))
         return self
 
-    def set_cells(self, cells):
+    def set_cells(self, cells) -> Self:
         """Set the cells.
         
         Args:
@@ -622,7 +624,7 @@ class PyfficeNode(PyfficeUnit):
         """
         return self._set_with_change("cells", cells)
 
-    def set_lock(self, lock=True):
+    def set_lock(self, lock=True) -> Self:
         """Set the lock.
         
         Args:
@@ -633,7 +635,7 @@ class PyfficeNode(PyfficeUnit):
         """
         return self._set_with_change("lock", lock)
 
-    def set_position(self, position):
+    def set_position(self, position) -> Self:
         """Set the position.
         
         Args:
@@ -649,7 +651,7 @@ class PyfficeNode(PyfficeUnit):
         self.position = position
         return self
 
-    def set_position_cell(self, cell, position):
+    def set_position_cell(self, cell, position) -> Self:
         """Set the position cell.
         
         Args:
@@ -668,7 +670,7 @@ class PyfficeDiagramConnection(PyfficeUnit):
     """"""
     SERIALIZATION_VERSION = (1, 0, 0)
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         logma.debug(f"PyfficeDiagramConnection.__init__ called")
         super().__init__(cfg)
@@ -677,7 +679,7 @@ class PyfficeDiagramConnection(PyfficeUnit):
         self.lock = None
         self.position = None
 
-    def connect(self, object_, endpoint):
+    def connect(self, object_, endpoint) -> Self:
         """Connect.
         
         Args:
@@ -690,7 +692,7 @@ class PyfficeDiagramConnection(PyfficeUnit):
         self.endpoints.append(object_.connect(self, endpoint))
         return self
 
-    def load_unit(self, unit):
+    def load_unit(self, unit) -> Self:
         """Load a unit dict into this document.
         
         Args:
@@ -706,7 +708,7 @@ class PyfficeDiagramConnection(PyfficeUnit):
         self.set_position(unit.get("position", [0, 0]))
         return self
 
-    def set_lock(self, lock=True):
+    def set_lock(self, lock=True) -> Self:
         """Set the lock.
         
         Args:
@@ -718,7 +720,7 @@ class PyfficeDiagramConnection(PyfficeUnit):
         self.lock = lock
         return self
 
-    def set_endpoints(self, endpoints):
+    def set_endpoints(self, endpoints) -> Self:
         """Set the endpoints.
         
         Args:
@@ -730,7 +732,7 @@ class PyfficeDiagramConnection(PyfficeUnit):
         self.endpoints = endpoints
         return self
 
-    def set_position(self, position):
+    def set_position(self, position) -> Self:
         """Set the position.
         
         Args:
