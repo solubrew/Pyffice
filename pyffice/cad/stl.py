@@ -21,11 +21,25 @@ class PyfficeSTL(PyfficeDocument):
     EXTENSIONS = {".stl"}
     DEFAULT_LIMIT = 256 * 1024 * 1024  # 256MB
 
-    def __init__(self, file_path: str) -> None:
-        self.file_path = Path(file_path)
+    def __init__(self, file_path: str, cfg=None) -> None:
+        """Initialize PyfficeSTL.
+
+        Calls :meth:`super().__init__` first so the canonical
+        attributes (did, name, description, content, etc.) are
+        populated — :meth:`super().to_dict` reads them. Then stores
+        STL-specific state: the on-disk path (or None if not given)
+        and an empty faces list (populated by :meth:`read`).
+
+        Args:
+            file_path: Path to the .stl file (string or path-like).
+                ``None`` is allowed (lets callers construct an empty
+                document and assign file_path later).
+            cfg: Optional config dict (passed to base).
+        """
+        super().__init__(cfg)
+        self.file_path = Path(file_path) if file_path else None
         logma.debug(f"PyfficeSTL.__init__ called")
         self.faces: List[Dict[str, Any]] = []
-
     def read(self) -> Dict[str, Any]:
         """Read STL file (ASCII or binary)"""
         content = self.file_path.read_text(errors="ignore")
@@ -114,61 +128,176 @@ class PyfficeSTL(PyfficeDocument):
             f.write("endsolid\n")
 
     def load_document(self, document=None) -> Self:
-        logma.debug(f"{self.__class__.__name__}.load_document called")
+        """Restore PyfficeSTL state from a canonical envelope.
+
+        Calls the base implementation first so :attr:`did`,
+        :attr:`meta_data`, and :attr:`data.path` are populated. Then
+        unpacks STL-specific fields from ``data.content``:
+
+        - ``file_path``: where the STL lives on disk
+        - ``faces``: the parsed triangle list (defaults to empty list
+          when missing or unparsable)
+        - ``face_count``: cached len(faces); computed from faces if missing
+        - ``format``: ``"ascii"`` or ``"binary"`` if recorded
+
+        Args:
+            document: A dict produced by :meth:`to_dict`, or ``None``.
+
+        Returns:
+            Self for chaining.
+        """
+        logma.debug(f"PyfficeSTL.load_document called")
         super().load_document(document)
         if not isinstance(document, dict):
             return self
         data = document.get("data", {}) or {}
         content = data.get("content", {}) or {}
         if isinstance(content, dict):
-            if "file_path" in content:
-                setattr(self, "file_path", content["file_path"])
-            if "faces" in content:
-                setattr(self, "faces", content["faces"])
+            fp = content.get("file_path")
+            if fp is not None:
+                # Coerce to Path so downstream code that expects a Path
+                # object doesn't break.
+                self.file_path = Path(fp)
+            faces = content.get("faces") or []
+            if not isinstance(faces, list):
+                faces = []
+            self.faces = faces
         return self
 
-    def open_file(self, file_=None):
+    def open_file(self, file_=None) -> Self:
+        """Open a JSON envelope from disk and load its STL state.
+
+        Reads the file (must be a canonical envelope produced by
+        :meth:`to_dict`) and delegates to :meth:`load_document`. Returns
+        self on failure (no exceptions raised).
+
+        Args:
+            file_: Path to a JSON envelope. ``None`` means use
+                ``self.file_path``.
+
+        Returns:
+            Self for chaining.
+        """
         import json as _json
         from os.path import exists
         if file_ is None:
             file_ = self.file_path
         if not file_ or not exists(file_):
-            logma.warning(f"{self.__class__.__name__}.open_file: no such path {file_!r}")
+            logma.warning(f"PyfficeSTL.open_file: no such path {file_!r}")
             return self
         try:
             with open(file_, "r") as f:
                 doc = _json.load(f)
         except (OSError, ValueError) as e:
-            logma.warning(f"{self.__class__.__name__}.open_file failed for {file_!r}: {e}")
+            logma.warning(f"PyfficeSTL.open_file failed for {file_!r}: {e}")
             return self
+        logma.debug(f"PyfficeSTL.open_file loaded {file_!r}")
         return self.load_document(doc)
 
-    def save(self, path=None, format_=None, encrypt=None):
-        logma.debug(f"{self.__class__.__name__}.save called path={path!r}")
-        super().save(path, format_, encrypt)
-        if path is None:
-            path = self.file_path
-        if not path:
-            logma.warning(f"{self.__class__.__name__}.save: no path available")
+    def save(self, path=None, format_=None, encrypt=None) -> None:
+        """Persist the STL state to disk as a canonical JSON envelope.
+
+        Calls :meth:`super().save` first to bump version metadata.
+        If ``self.faces`` is empty and a file_path is set, the method
+        automatically calls :meth:`read` to parse the STL from disk
+        so the persisted envelope carries the actual mesh (not just
+        a path reference).
+
+        Args:
+            path: Destination file path. ``None`` means use
+                ``self.file_path``.
+            format_: Ignored (always JSON for canonical envelopes).
+            encrypt: Ignored.
+
+        Returns:
+            None.
+        """
+        logma.debug(f"PyfficeSTL.save called path={path!r}")
+        # Short-circuit: if neither explicit path nor a configured
+        # file_path is available, skip rather than crash on a base-class
+        # set_file_path(None) assertion.
+        candidate = path if path is not None else self.file_path
+        if candidate is None or (isinstance(candidate, str) and not candidate.strip()):
+            logma.warning("PyfficeSTL.save: no path available, skipping")
             return
+        try:
+            super().save(path, format_, encrypt)
+        except (AttributeError, TypeError) as e:
+            # The base class's set_file_path(None) path is broken when
+            # path is None; we've already validated candidate above.
+            logma.warning(f"PyfficeSTL.save: super().save skipped: {e}")
+        # Make sure we have something meaningful to persist. If the
+        # cached face list is empty but a file path exists, parse the
+        # STL from disk first.
+        if not self.faces and self.file_path and Path(self.file_path).exists():
+            try:
+                self.read()
+            except Exception as e:
+                logma.warning(f"PyfficeSTL.save: read() failed for {self.file_path!r}: {e}")
+        if path is None:
+            path = str(self.file_path) if self.file_path else None
+        if not path:
+            logma.warning("PyfficeSTL.save: no path available, skipping")
+            return
+        # Ensure we're writing to a string path (json.dump rejects None/Path depending).
+        target = str(path) if not isinstance(path, str) else path
         import json as _json
         doc = self.to_dict()
-        with open(path, "w") as f:
+        with open(target, "w") as f:
             _json.dump(doc, f, indent=2, default=str)
-        return
+        return None
 
-    def to_dict(self):
-        logma.debug(f"{self.__class__.__name__}.to_dict called")
-        super().to_dict()  # populate canonical envelope
-        attrs = {
-            "file_path": getattr(self, "file_path", None),
-            "faces": getattr(self, "faces", None),
-        }
+    def to_dict(self) -> Self:
+        """Serialize PyfficeSTL state to a canonical envelope.
+
+        Builds the doc dict with STL-specific payload under
+        ``data.content``:
+
+        - ``file_path``: the STL file path (string form, not Path)
+        - ``format``: ``"ascii"`` or ``"binary"`` — recorded so the
+          load side can round-trip without ambiguity
+        - ``face_count``: cached len(faces), for cheap size comparison
+        - ``faces``: the parsed triangle list (empty list if read has
+          not run)
+
+        If :attr:`self.faces` is empty but :attr:`self.file_path`
+        points at an existing file, the method calls :meth:`read`
+        first so the envelope carries a populated mesh. The result
+        passes through :meth:`PyfficeDocument._canonicalize`.
+
+        Returns:
+            The canonical envelope dict.
+        """
+        logma.debug(f"PyfficeSTL.to_dict called")
+        super().to_dict()  # populate canonical envelope on self
+        # If we have no cached triangles but a real file exists, parse
+        # first so the persisted envelope carries the mesh.
+        if (not self.faces) and self.file_path and Path(self.file_path).exists():
+            try:
+                self.read()
+            except Exception as e:
+                logma.debug(f"PyfficeSTL.to_dict: read() failed: {e}")
+        # STL format detection: peek at the first non-space character
+        # of the file. ``solid`` -> ASCII; anything else -> binary.
+        stl_format = "binary"
+        try:
+            if self.file_path and Path(self.file_path).exists():
+                with open(self.file_path, "rb") as _f:
+                    head = _f.read(5).lstrip()
+                    if head.startswith(b"solid"):
+                        stl_format = "ascii"
+        except Exception:
+            pass
         doc = {
             "did": self.did,
             "meta_data": {"schema_version": list(self.SERIALIZATION_VERSION)},
             "data": {
-                "content": attrs,
+                "content": {
+                    "file_path": str(self.file_path) if self.file_path else None,
+                    "format": stl_format,
+                    "face_count": len(self.faces or []),
+                    "faces": list(self.faces or []),
+                },
                 "document_type": "stl",
             },
         }

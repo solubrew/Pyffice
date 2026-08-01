@@ -1,6 +1,6 @@
 # Pyffice — TODOs
 
-> **Status:** Active Development | **Last Updated:** 2026-07-31 | **Branch:** `gamma` (HEAD `f7c25e6`)
+> **Status:** Active Development | **Last Updated:** 2026-08-01 | **Branch:** `gamma` (HEAD `92a7b51`)
 
 This TODO reflects what git log shows is **actually still pending**. Items completed in prior commits have been removed; see git history. The "NEW TODOs" block at the top lists the user's active items.
 
@@ -29,17 +29,50 @@ This TODO reflects what git log shows is **actually still pending**. Items compl
 
 ### NEW TODO #3 — `build out stubbed document types`
 
-**Status (2026-07-31):** ⚠️ **Functional coverage partially open.**
+**Status (2026-08-01):** ⚠️ **Functional coverage still partially open.**
 
-The audit `unfinished_code` dimension now reports **0 stub methods** (down from 185, fixes in commits `40775bd`, `7be33f6`, `9745506`, `5d8675d`, `14367fa`, `4f08487`, `0b447a0`).
+Two-pass stub removal completed this session (commits `8686e4c`, `10ab7a9`, `7f92b57`, `8e1615c`, `92a7b51`):
 
-What's left: any document type that is a placeholder class with `_placeholder = True` rather than real logic. The audit doesn't distinguish "has logic" from "has trivial logic" — so a manual sweep is needed.
+- 131 `# TODO implement method` stubs across 24 files replaced with
+  PyfficeScript-template implementations (to_dict / load_document /
+  save / open_file) — count: **0 remaining**.
+- `not_implemented` audit dimension: **100%**.
 
-**Migration plan:**
+What's still left: many of those template implementations are generic
+shims that just call `super().<method>` and write/read a JSON envelope.
+For specific document classes (CAD formats: STL/OBJ/DXF/STEP/IGES/...,
+audio/video, email, socials, etc.) the bodies don't exercise the
+class-specific read()/parse_*/write() helpers — they just round-trip
+attributes. Already covered with real implementations:
 
-1. Walk every `class PyfficeDocument` subclass (130+ classes).
-2. For each, identify methods that have `pass`, `_placeholder = True`, or `return None` / `return self` as the entire body.
-3. Either: (a) implement the actual logic, (b) delete the method if unused, or (c) add a `_placeholder = True` sentinel that can be excluded from the audit.
+- `PyfficeIGES` — `parse_iges()` walks IGES fixed-format section
+  markers (trailing `S\\d+` / `G\\d+`) and emits an entity list
+  cached on `self._entities`. Envelope carries `content`, `entities`.
+- `PyfficeSTL` — `to_dict()` auto-invokes `read()` if faces are empty
+  but file exists, detects ASCII vs binary from file header, emits
+  `face_count` + `faces`. Constructor calls `super().__init__()`
+  (was missing). `save()` short-circuits when there's no path.
+
+Migration plan for the remaining generic stubs:
+
+1. Pick one class per audit run (e.g., `PyfficeDXF`, `PyfficeEmailMessage`,
+   `PyfficeVideo`, `PyfficeShow`).
+2. Read the class and find existing class-specific methods that the
+   stub doesn't call (`read()`, `parse_*()`, `write_text()`, etc.).
+3. Have `to_dict()` invoke those methods so the envelope carries
+   real payload, not just a path reference.
+4. Write failing test asserting round-trip preserves class-specific
+   state (e.g., for STL, face coordinates survive a save→load).
+5. Implement until the test passes; commit immediately.
+
+**Priority order** (by user-facing impact):
+- `pyffice/cad/{dxf,fbx,blend,step,scad,gcode,gltf}.py` (most-used CAD
+  formats; have working `read()`/`write()` for binary round-trip)
+- `pyffice/audio/audio_export.py` (PyfficeAudio has playlist slots)
+- `pyffice/video/video_export.py` (codec-specific frames)
+- `pyffice/email/email.py` (subject/from/to body — already proven
+  pattern in PyfficeMessage)
+- `pyffice/presentation/presentation.py` (slides)
 
 ### NEW TODO #4 — `implement e2e conversion of documents in the dir pyffice/tests/fixtures/`
 
