@@ -127,17 +127,14 @@ class PyfficeBibliography(PyfficeDocument):
 
     def set_style(self, style):
         """Set the style.
-        
+
         Args:
             style: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
-        if style != self.style:
-            self.add_change("style", self.style, style, "set")
-        self.style = style
-        return self
+        return self._set_with_change("style", style)
 
     def to_dict(self):
         """Convert this document to dict.

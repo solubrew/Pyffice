@@ -325,17 +325,14 @@ class PyfficeChart(PyfficeDocument):
 
     def set_compatibility(self, compatibility):
         """Set the compatibility.
-        
+
         Args:
             compatibility: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
-        if compatibility != self.compatibility:
-            self.add_change("compatibility", self.compatibility, compatibility)
-            self.compatibility = compatibility
-        return self
+        return self._set_with_change("compatibility", compatibility)
 
     def set_data(self, data):
         """Set chart data."""

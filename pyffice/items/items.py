@@ -80,21 +80,13 @@ class PyfficeTable(PyfficeUnit):
 
     def to_dict(self):
         """Convert this document to dict.
-        
+
         Returns:
             Self for chaining.
         """
         doc = super().to_dict()
         doc["unit"] = {"columns": list(self.data.columns), "records": self.data.values.tolist()}
         return doc
-
-    def to_html(self):
-        """Convert this document to html.
-        
-        Returns:
-            Self for chaining.
-        """
-        return self.html
 
 
 class PyfficePart(PyfficeUnit):

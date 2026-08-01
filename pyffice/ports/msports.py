@@ -322,14 +322,6 @@ class PyfficePortExcel(PyfficePort):
         self.ws.row_dimensions[row].height = height
         return self
 
-    def to_native(self):
-        """Convert to native format."""
-        return self.document
-
-    def to_xml(self):
-        """Convert to XML format."""
-        return self.to_dict()
-
     def _set_cell_value(self, cell, val):
         """
         Set the value of a cell with appropriate formatting.

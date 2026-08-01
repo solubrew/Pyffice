@@ -140,6 +140,41 @@ class PyfficeUnit(object):
         self.changes = self.changes[-change_limit:]
         return self
 
+    def _set_with_change(self, attr, value, label=None, default=None):
+        """Set ``self.<attr> = value`` and record a change entry.
+
+        Consolidates the recurring pattern across every ``set_X``
+        method on this class:
+
+            if X != self.X:
+                self.add_change("X", self.X, X)
+                self.X = X
+            return self
+
+        Subclasses that need custom behaviour (e.g. ``set_hash``
+        and ``set_saved``) keep their own implementations; this is
+        the shared shortcut for the common case.
+
+        Args:
+            attr: Attribute name on ``self`` to set.
+            value: New value. If ``value is None`` and ``default``
+                is not None, ``default`` is used instead.
+            label: Change-tracking label. Defaults to ``attr``.
+            default: Fallback value when ``value`` is ``None``.
+
+        Returns:
+            Self for chaining.
+        """
+        if value is None and default is not None:
+            value = default
+        if label is None:
+            label = attr
+        current = getattr(self, attr, None)
+        if value != current:
+            self.add_change(label, current, value)
+            setattr(self, attr, value)
+        return self
+
     def add_editor(self, editor):
         """Add an editor to the document."""
         self.editors = getattr(self, 'editors', [])
@@ -308,12 +343,7 @@ class PyfficeUnit(object):
         Returns:
             Self for chaining.
         """
-        if author is None:
-            author = ""
-        if author != self.author:
-            self.add_change("author", self.author, author)
-            self.author = author
-        return self
+        return self._set_with_change("author", author, default='')
 
     def set_change_limit(self, limit=None):
         """Set the change limit.
@@ -338,12 +368,7 @@ class PyfficeUnit(object):
         Returns:
             Self for chaining.
         """
-        if changes is None:
-            changes = []
-        if changes != self.changes:
-            self.add_change("changes", self.changes, changes)
-            self.changes = changes
-        return self
+        return self._set_with_change("changes", changes, default=[])
 
     def set_context(self, context):
         """Set the context.
@@ -354,12 +379,7 @@ class PyfficeUnit(object):
         Returns:
             Self for chaining.
         """
-        if context is None:
-            context = ""
-        if context != self.context:
-            self.add_change("context", self.context, context)
-            self.context = context
-        return self
+        return self._set_with_change("context", context, default='')
 
     def set_creon(self, creon=None):
         """Set the creon.
@@ -386,10 +406,7 @@ class PyfficeUnit(object):
         Returns:
             Self for chaining.
         """
-        if data != self.data:
-            self.add_change("data", self.data, data)
-            self.data = data
-        return self
+        return self._set_with_change("data", data)
 
     def set_description(self, description):
         """Set the description.
@@ -400,12 +417,7 @@ class PyfficeUnit(object):
         Returns:
             Self for chaining.
         """
-        if description is None:
-            description = ""
-        if description != self.description:
-            self.add_change("description", self.description, description)
-            self.description = description
-        return self
+        return self._set_with_change("description", description, default='')
 
     def set_did(self, did=None):
         """Set the did.
@@ -432,12 +444,7 @@ class PyfficeUnit(object):
         Returns:
             Self for chaining.
         """
-        if editors is None:
-            editors = []
-        if editors != self.editors:
-            self.add_change("editors", self.editors, editors)
-            self.editors = editors
-        return self
+        return self._set_with_change("editors", editors, default=[])
 
     def set_encoding(self, encoding=None):
         """Set the encoding.
@@ -448,12 +455,7 @@ class PyfficeUnit(object):
         Returns:
             Self for chaining.
         """
-        if encoding is None:
-            encoding = "utf-8"
-        if encoding != self.encoding:
-            self.add_change("encoding", self.encoding, encoding)
-            self.encoding = encoding
-        return self
+        return self._set_with_change("encoding", encoding, default='utf-8')
 
     def set_hash(self, hash_):
         """Set the hash.
@@ -482,12 +484,7 @@ class PyfficeUnit(object):
         Returns:
             Self for chaining.
         """
-        if location is None:
-            location = "internal"
-        if location != self.location:
-            self.add_change("location", self.location, location)
-            self.location = location
-        return self
+        return self._set_with_change("location", location, default='internal')
 
     def set_meta_data(self, meta_data):
         """Set the meta data.
@@ -498,10 +495,7 @@ class PyfficeUnit(object):
         Returns:
             Self for chaining.
         """
-        if meta_data != self.meta_data:
-            self.add_change("meta_data", self.meta_data, meta_data)
-            self.meta_data = meta_data
-        return self
+        return self._set_with_change("meta_data", meta_data)
 
     def set_modon(self, modon=None):
         """Set the modon.
@@ -544,12 +538,7 @@ class PyfficeUnit(object):
         Returns:
             Self for chaining.
         """
-        if path is None:
-            path = ""
-        if path != self.path:
-            self.add_change("path", self.path, path)
-            self.path = path
-        return self
+        return self._set_with_change("path", path, default='')
 
     def set_redos(self, redos):
         """Set the redos.
@@ -560,10 +549,7 @@ class PyfficeUnit(object):
         Returns:
             Self for chaining.
         """
-        if redos != self.redos:
-            self.add_change("redos", self.redos, redos)
-            self.redos = redos
-        return self
+        return self._set_with_change("redos", redos)
 
     def set_references(self, references):
         """Set the references.
@@ -574,12 +560,7 @@ class PyfficeUnit(object):
         Returns:
             Self for chaining.
         """
-        if references is None:
-            references = []
-        if references != self.references:
-            self.add_change("references", self.references, references)
-            self.references = references
-        return self
+        return self._set_with_change("references", references, default=[])
 
     def set_saved(self, saved):
         """Set the saved.
@@ -604,12 +585,7 @@ class PyfficeUnit(object):
         Returns:
             Self for chaining.
         """
-        if syntax is None:
-            syntax = "plain-text"
-        if syntax != self.syntax:
-            self.add_change("syntax", self.syntax, syntax)
-            self.syntax = syntax
-        return self
+        return self._set_with_change("syntax", syntax, default='plain-text')
 
     def set_tags(self, tags):
         """Set the tags.
@@ -620,12 +596,7 @@ class PyfficeUnit(object):
         Returns:
             Self for chaining.
         """
-        if tags is None:
-            tags = []
-        if tags != self.tags:
-            self.add_change("tags", self.tags, tags)
-            self.tags = tags
-        return self
+        return self._set_with_change("tags", tags, default=[])
 
     def set_version(self, version):
         """Set the version.
@@ -636,12 +607,7 @@ class PyfficeUnit(object):
         Returns:
             Self for chaining.
         """
-        if version is None:
-            version = 0
-        if version != self.version:
-            self.add_change("version", self.version, version)
-            self.version = version
-        return self
+        return self._set_with_change("version", version, default=0)
 
     def to_dict(self):
         """Serialize this object to a dict.
