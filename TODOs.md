@@ -93,14 +93,11 @@ Conversion routes through `PyfficeDocumentManager.file_import` / `file_export`, 
 3. In `video/video_export.py:26` — `from pyffice.audio.audio import PyfficeAudio` → `from pyffice.audio.audio_export import PyfficeAudio`.
 4. Verify `python -m pyffice --help` no longer shows skipping lines for any subpackage.
 
-### T-NEW-045 — Decide public API model: facade `Pyffice` vs `PyfficeCodex` direct ⚠️ DECISION STILL PENDING
+### T-NEW-045 — Decide public API model: facade `Pyffice` vs `PyfficeCodex` direct ✅ CLOSED (2026-07-31) — Option B confirmed
 
-**Current state:** Option B (no facade) is the active choice. `PyfficeCodex` is the only public class; README is being incrementally corrected.
+**Status:** Per user confirmation (2026-07-31), users use `PyfficeCodex` directly. No facade. The README was updated to use `from pyffice import PyfficeCodex` (README.md:94). The legacy `Pyffice = PyfficeCodex` alias in `pyffice/cli.py:69` is the only remaining reference, kept for backwards compatibility within the CLI layer.
 
-**Migration plan:**
-
-1. Get explicit user confirmation: stick with Option B or switch to Option A (facade).
-2. Update README quick-start accordingly.
+The "PyfficeSkill" placeholder card (T-NEW-067) was already closed by the `pyffice/skills/` directory deletion in commit `d9d4fa9`.
 
 ### T-NEW-046 — `tests/test_pyffice.py` vs `tests/test_pyffice/` name collision ✅ CLOSED (2026-07-31)
 
@@ -271,7 +268,7 @@ All 185 stub methods were implemented across commits `40775bd`, `7be33f6`, `9745
 ### P2 — Defer until P1 done
 
 - **T-NEW-054** — Decide protocol model for `workflows/formulas.py`.
-- **T-NEW-045** — Confirm Option A (facade) vs Option B (no facade) public API decision.
+- **T-NEW-045** — Confirm Option A (facade) vs Option B (no facade) public API decision. ✅ CLOSED (Option B).
 
 ### P3 — Out of scope
 
@@ -486,10 +483,10 @@ The remaining `from kahndor import kahndor` / `from kahndor.logma import Logma` 
 
 ### P2 (deferred / existing backlog)
 
-- **T-NEW-045** — Public API facade decision (still pending user confirmation).
+- **T-NEW-045** — Public API facade decision. ✅ CLOSED (Option B, no facade).
 - **T-NEW-060** — Squirl import-time `print()` (out of scope, lives in squirl repo).
 - **T-NEW-CANDIDATE** — Test coverage for 18 under-tested subpackages (top 5 by source LOC: `web` 2592 / `items` 1852 / `images` 1631 / `workflows` 679 / `tags` 524). See T-NEW-065 migration plan step 4. No priority — coverage is a marathon, not a sprint.
 
 ---
 
-*File last edited: 2026-07-31 (reconsolidation + 5 new P0/P1 cards T-NEW-062..066; skills/ placeholder deleted in commit `d9d4fa9`; verified against HEAD `d9d4fa9`)*
+*File last edited: 2026-07-31 (reconsolidation + 5 new P0/P1 cards T-NEW-062..066; skills/ placeholder deleted in commit `d9d4fa9`; T-NEW-045 closed (Option B, no facade); verified against HEAD `ed8e3d6`)*
