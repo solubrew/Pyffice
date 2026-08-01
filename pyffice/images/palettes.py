@@ -113,10 +113,10 @@ class PyfficeColorPalette(PyfficeDocument):
 
     def create_analogous_colors(self, color) -> Any:
         """Create a analogous colors.
-        
+
         Args:
             color: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -130,10 +130,10 @@ class PyfficeColorPalette(PyfficeDocument):
 
     def create_clash_colors(self, color) -> Any:
         """Create a clash colors.
-        
+
         Args:
             color: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -147,10 +147,10 @@ class PyfficeColorPalette(PyfficeDocument):
 
     def create_complimentary_colors(self, color) -> Any:
         """Create a complimentary colors.
-        
+
         Args:
             color: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -160,10 +160,10 @@ class PyfficeColorPalette(PyfficeDocument):
 
     def create_neutral_colors(self, color) -> Any:
         """Create a neutral colors.
-        
+
         Args:
             color: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -177,10 +177,10 @@ class PyfficeColorPalette(PyfficeDocument):
 
     def create_square_colors(self, color) -> Self:
         """Create a square colors.
-        
+
         Args:
             color: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -189,11 +189,11 @@ class PyfficeColorPalette(PyfficeDocument):
 
     def create_tone_colors(self, color, num_tones=5) -> None:
         """Create a tone colors.
-        
+
         Args:
             color: Parameter.
             num_tones: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -205,10 +205,10 @@ class PyfficeColorPalette(PyfficeDocument):
 
     def create_tetradic_colors(self, color) -> Self:
         """Create a tetradic colors.
-        
+
         Args:
             color: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -217,10 +217,10 @@ class PyfficeColorPalette(PyfficeDocument):
 
     def create_triadic_colors(self, color) -> Self:
         """Create a triadic colors.
-        
+
         Args:
             color: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -229,10 +229,10 @@ class PyfficeColorPalette(PyfficeDocument):
 
     def del_color(self, color) -> Self:
         """Remove the color.
-        
+
         Args:
             color: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -277,10 +277,10 @@ class PyfficeColorPalette(PyfficeDocument):
 
     def get_palette(self, format_="table") -> Any:
         """Return the palette.
-        
+
         Args:
             format_: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -298,10 +298,10 @@ class PyfficeColorPalette(PyfficeDocument):
 
     def get_usage(self, color) -> Any:
         """Return the usage.
-        
+
         Args:
             color: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -328,10 +328,10 @@ class PyfficeColorPalette(PyfficeDocument):
 
     def scale_fx(self, factor) -> Any:
         """Scale fx.
-        
+
         Args:
             factor: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -344,10 +344,10 @@ class PyfficeColorPalette(PyfficeDocument):
 
     def set_palette_darker(self, factor) -> None:
         """Set the palette darker.
-        
+
         Args:
             factor: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -355,7 +355,7 @@ class PyfficeColorPalette(PyfficeDocument):
 
     def set_palette_grayscale(self) -> None:
         """Set the palette grayscale.
-        
+
         Returns:
             Self for chaining.
         """
@@ -364,14 +364,63 @@ class PyfficeColorPalette(PyfficeDocument):
 
     def set_palette_lighter(self, factor) -> None:
         """Set the palette lighter.
-        
+
         Args:
             factor: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
         self.scale_fx(1 - factor)
+
+    def open_file(self, file_=None):
+        import json as _json
+        from os.path import exists
+
+        if file_ is None:
+            file_ = self.file_path
+        if not file_ or not exists(file_):
+            logma.warning(f"{self.__class__.__name__}.open_file: no such path {file_!r}")
+            return self
+        try:
+            with open(file_, "r") as f:
+                doc = _json.load(f)
+        except (OSError, ValueError) as e:
+            logma.warning(f"{self.__class__.__name__}.open_file failed for {file_!r}: {e}")
+            return self
+        return self.load_document(doc)
+
+    def save(self, path=None, format_=None, encrypt=None):
+        logma.debug(f"{self.__class__.__name__}.save called path={path!r}")
+        super().save(path, format_, encrypt)
+        if path is None:
+            path = self.file_path
+        if not path:
+            logma.warning(f"{self.__class__.__name__}.save: no path available")
+            return
+        import json as _json
+
+        doc = self.to_dict()
+        with open(path, "w") as f:
+            _json.dump(doc, f, indent=2, default=str)
+        return
+
+    def to_dict(self):
+        logma.debug(f"{self.__class__.__name__}.to_dict called")
+        super().to_dict()  # populate canonical envelope
+        attrs = {
+            "config": getattr(self, "config", None),
+        }
+        doc = {
+            "did": self.did,
+            "meta_data": {"schema_version": list(self.SERIALIZATION_VERSION)},
+            "data": {
+                "content": attrs,
+                "document_type": "slide",
+            },
+        }
+        return self._canonicalize(doc)
+
 
 # ====================================================================================================================||
 

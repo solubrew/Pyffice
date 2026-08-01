@@ -1,6 +1,7 @@
 """
 Pyffice ZIP Handler - Read/Write ZIP archives
 """
+
 import zipfile
 from pathlib import Path
 from typing import List, Dict, Any, Optional
@@ -8,25 +9,62 @@ from typing import List, Dict, Any, Optional
 from kahndor.logma import Logma
 from pyffice.io_helpers import ArchiveHandler
 
+#!/usr/bin/env python3
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
+"""
+---
+<(META)>:
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
+"""
+
+# -*- coding: utf-8 -*
+# ======================================Standard Library Modules======================================================||
+from os.path import abspath, dirname, join
+from datetime import datetime, timezone
+from typing import Any, Dict, List, Optional, Union
+
+# ======================================3rd Party Library Modules=====================================================||
+
+
+# ======================================Solutions Brewer Library Modules==============================================||
+from kahndor import kahndor
+from kahndor.logma import Logma
+
+# ====================================================================================================================||
+HERE = join(dirname(__file__), "")  # ||
+log = True
+logma = Logma(__name__)
+if not log:
+    logma.off()
+# ====================================================================================================================||
+PXCFG = join(HERE, "_data_", ".yaml")
+
+# ====================================================================================================================||
+
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
+
 logma = Logma(__name__)
 logma.off()
 
 
 class PyfficeZip(ArchiveHandler):
-    EXTENSIONS = {'.zip', '.zipx'}
+    EXTENSIONS = {".zip", ".zipx"}
     DEFAULT_LIMIT = 256 * 1024 * 1024  # 256MB
 
-    def _open_read(self, mode: str = 'r') -> Any:
+    def _open_read(self, mode: str = "r") -> Any:
         """Open the underlying ZIP file for reading."""
         logma.debug(f"PyfficeZip._open_read called")
         return zipfile.ZipFile(self.file_path, mode)
 
     def _list_members(self, handle: Any) -> List[Dict[str, Any]]:
         """Return metadata for each ZIP member."""
-        return [
-            {'name': n, 'size': handle.getinfo(n).file_size}
-            for n in handle.namelist()
-        ]
+        return [{"name": n, "size": handle.getinfo(n).file_size} for n in handle.namelist()]
 
     def _extract(self, handle: Any, member: str, path: str) -> None:
         """Extract a single ZIP member to ``path``."""
@@ -51,7 +89,7 @@ class PyfficeZip(ArchiveHandler):
     @classmethod
     def _create(cls, archive_path: str, files: Dict[str, str], **kwargs) -> None:
         """Create ZIP from dict of arcname -> file_path."""
-        with zipfile.ZipFile(archive_path, 'w') as zf:
+        with zipfile.ZipFile(archive_path, "w") as zf:
             for arcname, file_path in files.items():
                 zf.write(file_path, arcname)
 
@@ -72,12 +110,12 @@ def write(zip_path: str, files: Dict[str, str]) -> None:
     PyfficeZip.create(zip_path, files)
 
 
-def extract(zip_path: str, path: str = '.') -> None:
+def extract(zip_path: str, path: str = ".") -> None:
     """Extract ZIP to directory"""
     PyfficeZip(zip_path).extract_all(path)
 
 
-def extract_file(zip_path: str, member: str, path: str = '.') -> None:
+def extract_file(zip_path: str, member: str, path: str = ".") -> None:
     """Extract specific file from ZIP"""
     PyfficeZip(zip_path).extract(member, path)
 
@@ -85,6 +123,7 @@ def extract_file(zip_path: str, member: str, path: str = '.') -> None:
 def compress(source_dir: str, archive_path: str) -> None:
     """Compress a directory into a ZIP file"""
     import os
+
     files = {}
     for root, dirs, filenames in os.walk(source_dir):
         for fname in filenames:
@@ -104,4 +143,4 @@ def create(archive_path: str, files) -> None:
     PyfficeZip.create(archive_path, files)
 
 
-__all__ = ['PyfficeZip', 'read', 'write', 'load', 'extract', 'extract_file', 'create', 'compress']
+__all__ = ["PyfficeZip", "read", "write", "load", "extract", "extract_file", "create", "compress"]

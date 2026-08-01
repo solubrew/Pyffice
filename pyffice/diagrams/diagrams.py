@@ -70,13 +70,13 @@ class PyfficeEdge(PyfficeUnit):
 
     def add_endpoint(self, position, connection, style="solid", color="black") -> Self:
         """Add a endpoint.
-        
+
         Args:
             position: Parameter.
             connection: Parameter.
             style: Parameter.
             color: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -95,14 +95,14 @@ class PyfficeEdge(PyfficeUnit):
 
     def add_text(self, value, postion, size=12, color="black", style="courier-new") -> Self:
         """Add a text.
-        
+
         Args:
             value: Parameter.
             postion: Parameter.
             size: Parameter.
             color: Parameter.
             style: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -121,10 +121,10 @@ class PyfficeEdge(PyfficeUnit):
 
     def del_endpoint(self, endpoint) -> Self:
         """Remove the endpoint.
-        
+
         Args:
             endpoint: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -134,10 +134,10 @@ class PyfficeEdge(PyfficeUnit):
 
     def del_text(self, index) -> Self:
         """Remove the text.
-        
+
         Args:
             index: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -147,10 +147,10 @@ class PyfficeEdge(PyfficeUnit):
 
     def load_unit(self, unit) -> Self:
         """Load a unit dict into this document.
-        
+
         Args:
             unit: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -169,10 +169,10 @@ class PyfficeEdge(PyfficeUnit):
 
     def set_color(self, color) -> Self:
         """Set the color.
-        
+
         Args:
             color: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -185,10 +185,10 @@ class PyfficeEdge(PyfficeUnit):
 
     def set_endpoints(self, endpoints) -> Self:
         """Set the endpoints.
-        
+
         Args:
             endpoints: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -196,10 +196,10 @@ class PyfficeEdge(PyfficeUnit):
 
     def set_envelope_size(self, envelope_size=None) -> Self:
         """Set the envelope size.
-        
+
         Args:
             envelope_size: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -212,10 +212,10 @@ class PyfficeEdge(PyfficeUnit):
 
     def set_line_width(self, line_width) -> Self:
         """Set the line width.
-        
+
         Args:
             line_width: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -223,11 +223,11 @@ class PyfficeEdge(PyfficeUnit):
 
     def set_lock(self, lock=True, absolute=True) -> Self:
         """Set the lock.
-        
+
         Args:
             lock: Parameter.
             absolute: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -235,10 +235,10 @@ class PyfficeEdge(PyfficeUnit):
 
     def set_position(self, position) -> Self:
         """Set the position.
-        
+
         Args:
             position: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -251,11 +251,11 @@ class PyfficeEdge(PyfficeUnit):
 
     def set_position_endpoint(self, endpoint, position) -> Self:
         """Set the position endpoint.
-        
+
         Args:
             endpoint: Parameter.
             position: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -277,17 +277,19 @@ class PyfficeEdge(PyfficeUnit):
 
     def set_texts(self, texts) -> Self:
         """Set the texts.
-        
+
         Args:
             texts: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
         return self._set_with_change("texts", texts)
 
+
 class PyfficeDiagram(PyfficeDocumentManager):
     """"""
+
     SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None) -> None:
@@ -298,10 +300,10 @@ class PyfficeDiagram(PyfficeDocumentManager):
 
     def add_connection(self, connection) -> Self:
         """Add a connection.
-        
+
         Args:
             connection: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -322,7 +324,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
         active=None,
     ) -> Self:
         """Add a edge.
-        
+
         Args:
             connections: Parameter.
             end: Parameter.
@@ -331,7 +333,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
             version: Parameter.
             visible: Parameter.
             active: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -346,10 +348,10 @@ class PyfficeDiagram(PyfficeDocumentManager):
 
     def add_layer(self, layer) -> Self:
         """Add a layer.
-        
+
         Args:
             layer: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -361,7 +363,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
 
     def add_node(self) -> Self:
         """Add a node.
-        
+
         Returns:
             Self for chaining.
         """
@@ -373,10 +375,10 @@ class PyfficeDiagram(PyfficeDocumentManager):
 
     def del_connection(self, connection) -> Self:
         """Remove the connection.
-        
+
         Args:
             connection: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -386,10 +388,10 @@ class PyfficeDiagram(PyfficeDocumentManager):
 
     def del_edge(self, edge) -> Self:
         """Remove the edge.
-        
+
         Args:
             edge: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -410,10 +412,10 @@ class PyfficeDiagram(PyfficeDocumentManager):
 
     def del_node(self, node) -> Self:
         """Remove the node.
-        
+
         Args:
             node: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -421,12 +423,56 @@ class PyfficeDiagram(PyfficeDocumentManager):
         del self.nodes[node.did]
         return self
 
+    def load_document(self, document=None) -> Self:
+        logma.debug(f"{self.__class__.__name__}.load_document called")
+        super().load_document(document)
+        if not isinstance(document, dict):
+            return self
+        data = document.get("data", {}) or {}
+        content = data.get("content", {}) or {}
+        if isinstance(content, dict):
+            if "config" in content:
+                setattr(self, "config", content["config"])
+        return self
+
+    def open_file(self, file_=None):
+        import json as _json
+        from os.path import exists
+
+        if file_ is None:
+            file_ = self.file_path
+        if not file_ or not exists(file_):
+            logma.warning(f"{self.__class__.__name__}.open_file: no such path {file_!r}")
+            return self
+        try:
+            with open(file_, "r") as f:
+                doc = _json.load(f)
+        except (OSError, ValueError) as e:
+            logma.warning(f"{self.__class__.__name__}.open_file failed for {file_!r}: {e}")
+            return self
+        return self.load_document(doc)
+
+    def save(self, path=None, format_=None, encrypt=None):
+        logma.debug(f"{self.__class__.__name__}.save called path={path!r}")
+        super().save(path, format_, encrypt)
+        if path is None:
+            path = self.file_path
+        if not path:
+            logma.warning(f"{self.__class__.__name__}.save: no path available")
+            return
+        import json as _json
+
+        doc = self.to_dict()
+        with open(path, "w") as f:
+            _json.dump(doc, f, indent=2, default=str)
+        return
+
     def set_lock(self, lock) -> Self:
         """Set the lock.
-        
+
         Args:
             lock: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -436,12 +482,12 @@ class PyfficeDiagram(PyfficeDocumentManager):
 
     def set_edge_position(self, edge, position, maintain_connection=True) -> Self:
         """Set the edge position.
-        
+
         Args:
             edge: Parameter.
             position: Parameter.
             maintain_connection: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -453,10 +499,10 @@ class PyfficeDiagram(PyfficeDocumentManager):
 
     def set_edges(self, edges) -> Self:
         """Set the edges.
-        
+
         Args:
             edges: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -464,12 +510,12 @@ class PyfficeDiagram(PyfficeDocumentManager):
 
     def set_endpoint_position(self, endpoint, position, maintain_connection=True) -> Self:
         """Set the endpoint position.
-        
+
         Args:
             endpoint: Parameter.
             position: Parameter.
             maintain_connection: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -478,10 +524,10 @@ class PyfficeDiagram(PyfficeDocumentManager):
 
     def set_endpoints(self, endpoints) -> Self:
         """Set the endpoints.
-        
+
         Args:
             endpoints: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -489,12 +535,12 @@ class PyfficeDiagram(PyfficeDocumentManager):
 
     def set_node_position(self, node, position, maintain_connections=True) -> Self:
         """Set the node position.
-        
+
         Args:
             node: Parameter.
             position: Parameter.
             maintain_connections: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -506,10 +552,10 @@ class PyfficeDiagram(PyfficeDocumentManager):
 
     def set_nodes(self, nodes) -> Self:
         """Set the nodes.
-        
+
         Args:
             nodes: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -517,8 +563,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
 
     def to_dict(self) -> Any:
         """Convert to dictionary."""
-        return {"name": getattr(self, 'name', None),
-                "type": getattr(self, 'type', None)}
+        return {"name": getattr(self, "name", None), "type": getattr(self, "type", None)}
 
     def to_md(self) -> Any:
         """Convert to markdown."""
@@ -527,6 +572,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
 
 class PyfficeDiagramLayer(PyfficeUnit):
     """"""
+
     SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None) -> None:
@@ -537,10 +583,10 @@ class PyfficeDiagramLayer(PyfficeUnit):
 
     def load_unit(self, unit) -> Self:
         """Load a unit dict into this document.
-        
+
         Args:
             unit: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -552,17 +598,19 @@ class PyfficeDiagramLayer(PyfficeUnit):
 
     def set_objects(self, objects) -> Self:
         """Set the objects.
-        
+
         Args:
             objects: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
         return self._set_with_change("objects", objects)
 
+
 class PyfficeNode(PyfficeUnit):
     """"""
+
     SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None) -> None:
@@ -585,10 +633,10 @@ class PyfficeNode(PyfficeUnit):
 
     def del_cell(self, index) -> Self:
         """Remove the cell.
-        
+
         Args:
             index: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -598,10 +646,10 @@ class PyfficeNode(PyfficeUnit):
 
     def load_unit(self, unit) -> Self:
         """Load a unit dict into this document.
-        
+
         Args:
             unit: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -615,10 +663,10 @@ class PyfficeNode(PyfficeUnit):
 
     def set_cells(self, cells) -> Self:
         """Set the cells.
-        
+
         Args:
             cells: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -626,10 +674,10 @@ class PyfficeNode(PyfficeUnit):
 
     def set_lock(self, lock=True) -> Self:
         """Set the lock.
-        
+
         Args:
             lock: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -637,10 +685,10 @@ class PyfficeNode(PyfficeUnit):
 
     def set_position(self, position) -> Self:
         """Set the position.
-        
+
         Args:
             position: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -653,11 +701,11 @@ class PyfficeNode(PyfficeUnit):
 
     def set_position_cell(self, cell, position) -> Self:
         """Set the position cell.
-        
+
         Args:
             cell: Parameter.
             position: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -666,8 +714,10 @@ class PyfficeNode(PyfficeUnit):
         self.cells[cell]["position"] = position
         return self
 
+
 class PyfficeDiagramConnection(PyfficeUnit):
     """"""
+
     SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None) -> None:
@@ -681,11 +731,11 @@ class PyfficeDiagramConnection(PyfficeUnit):
 
     def connect(self, object_, endpoint) -> Self:
         """Connect.
-        
+
         Args:
             object_: Parameter.
             endpoint: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -694,10 +744,10 @@ class PyfficeDiagramConnection(PyfficeUnit):
 
     def load_unit(self, unit) -> Self:
         """Load a unit dict into this document.
-        
+
         Args:
             unit: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -710,10 +760,10 @@ class PyfficeDiagramConnection(PyfficeUnit):
 
     def set_lock(self, lock=True) -> Self:
         """Set the lock.
-        
+
         Args:
             lock: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -722,10 +772,10 @@ class PyfficeDiagramConnection(PyfficeUnit):
 
     def set_endpoints(self, endpoints) -> Self:
         """Set the endpoints.
-        
+
         Args:
             endpoints: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -734,15 +784,16 @@ class PyfficeDiagramConnection(PyfficeUnit):
 
     def set_position(self, position) -> Self:
         """Set the position.
-        
+
         Args:
             position: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
         self.position = position
         return self
+
 
 # ====================================================================================================================||
 

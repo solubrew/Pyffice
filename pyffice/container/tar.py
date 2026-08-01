@@ -1,6 +1,7 @@
 """
 Pyffice TAR Handler - Read/Write TAR archives
 """
+
 import io
 import tarfile
 from pathlib import Path
@@ -12,23 +13,59 @@ from kahndor.logma import Logma
 
 logma = Logma(__name__)
 logma.off()
+#!/usr/bin/env python3
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
+"""
+---
+<(META)>:
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
+"""
+
+# -*- coding: utf-8 -*
+# ======================================Standard Library Modules======================================================||
+from os.path import abspath, dirname, join
+from datetime import datetime, timezone
+from typing import Any, Dict, List, Optional, Union
+
+# ======================================3rd Party Library Modules=====================================================||
+
+
+# ======================================Solutions Brewer Library Modules==============================================||
+from kahndor import kahndor
+from kahndor.logma import Logma
+
+# ====================================================================================================================||
+HERE = join(dirname(__file__), "")  # ||
+log = True
+logma = Logma(__name__)
+if not log:
+    logma.off()
+# ====================================================================================================================||
+PXCFG = join(HERE, "_data_", ".yaml")
+
+# ====================================================================================================================||
+
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
 
 
 class PyfficeTar(ArchiveHandler):
-    EXTENSIONS = {'.tar', '.tar.gz', '.tgz', '.tar.bz2', '.tbz2', '.tar.xz', '.txz'}
+    EXTENSIONS = {".tar", ".tar.gz", ".tgz", ".tar.bz2", ".tbz2", ".tar.xz", ".txz"}
     DEFAULT_LIMIT = 256 * 1024 * 1024  # 256MB
 
-    def _open_read(self, mode: str = 'r') -> Any:
+    def _open_read(self, mode: str = "r") -> Any:
         """Open the underlying TAR file. Read-mode auto-detects compression."""
         logma.debug(f"PyfficeTar._open_read called")
-        return tarfile.open(self.file_path, 'r:*' if mode == 'r' else mode)
+        return tarfile.open(self.file_path, "r:*" if mode == "r" else mode)
 
     def _list_members(self, handle: Any) -> List[Dict[str, Any]]:
         """Return metadata for each TAR member."""
-        return [
-            {'name': m.name, 'size': m.size, 'type': m.type}
-            for m in handle.getmembers()
-        ]
+        return [{"name": m.name, "size": m.size, "type": m.type} for m in handle.getmembers()]
 
     def _extract(self, handle: Any, member: str, path: str) -> None:
         """Extract a single TAR member to ``path``."""
@@ -80,22 +117,22 @@ def load(tar_path: str) -> List[Dict[str, Any]]:
     return read(tar_path)
 
 
-def write(tar_path: str, files: Dict[str, str], compression: str = 'gz') -> None:
+def write(tar_path: str, files: Dict[str, str], compression: str = "gz") -> None:
     """Create TAR from dict of arcname -> file_path"""
     PyfficeTar.create(tar_path, files, compression=compression)
 
 
-def extract(tar_path: str, path: str = '.') -> None:
+def extract(tar_path: str, path: str = ".") -> None:
     """Extract TAR to directory"""
     PyfficeTar(tar_path).extract_all(path)
 
 
-def extract_file(tar_path: str, member: str, path: str = '.') -> None:
+def extract_file(tar_path: str, member: str, path: str = ".") -> None:
     """Extract specific file from TAR"""
     PyfficeTar(tar_path).extract(member, path)
 
 
-__all__ = ['PyfficeTar', 'read', 'write', 'load', 'extract', 'extract_file', 'create', 'compress']
+__all__ = ["PyfficeTar", "read", "write", "load", "extract", "extract_file", "create", "compress"]
 
 # Aliases for test compatibility
 read_tar = read
