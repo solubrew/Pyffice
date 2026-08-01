@@ -39,6 +39,7 @@ class PyfficeWorkflow(PyfficeUnit):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficeWorkflow.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).override("PyfficeWorkflow")).override(cfg)
         self.workflows = None

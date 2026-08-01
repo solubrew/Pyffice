@@ -41,6 +41,7 @@ class PyfficeReport(PyfficeScript):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficeReport.__init__ called")
         super().__init__(cfg)
         self.config.override(pxcfg).select("Report").override(cfg)
         self.summary = None

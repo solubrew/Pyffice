@@ -44,6 +44,7 @@ class PyfficeForm(PyfficeDocument):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficeForm.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeForm")).override(cfg)
         self.form_id = None

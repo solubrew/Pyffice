@@ -39,6 +39,7 @@ class PyfficeTag(object):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficeTag.__init__ called")
         self.config = kahndor.Instruct(pxcfg).select("PyfficeTag").override(cfg)
         self.description = None
         self.label = None

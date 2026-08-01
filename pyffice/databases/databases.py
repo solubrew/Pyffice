@@ -60,6 +60,7 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficeDatabaseManager.__init__ called")
         self.config = kahndor.Instruct(pxcfg).select("").override(cfg)
         self.databases = {}
         self.connections = {}

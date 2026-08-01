@@ -41,6 +41,7 @@ class PyfficeReference(PyfficeTag):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficeReference.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeReference")).override(cfg)
         self.author = None

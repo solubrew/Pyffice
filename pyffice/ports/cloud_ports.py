@@ -96,6 +96,7 @@ class PyfficeCloudPort(PyfficePort):
                 - ``access_token``: raw OAuth2 access token.
                 - ``credentials``: pre-loaded credential dict.
         """
+        logma.debug(f"PyfficeCloudPort.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeCloudPort")).override(cfg)
         self._credentials = None

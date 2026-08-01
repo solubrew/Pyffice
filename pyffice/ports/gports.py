@@ -263,6 +263,7 @@ class PyfficePortGoogleDocs(_GoogleWorkspacePortBase):
         Returns:
             Full document JSON (body, inlineObjects, etc.).
         """
+        logma.debug(f"PyfficePortGoogleDocs.get_document called")
         if not self.authenticated:
             raise RuntimeError("Not authenticated. Call authenticate() first.")
         return self._service.documents().get(documentId=document_id).execute()

@@ -51,6 +51,7 @@ class PyfficeBOM(PyfficeDocumentManager):
 
     def __init__(self, cfg=None):
         """Initialize the BOM handler."""
+        logma.debug(f"PyfficeBOM.__init__ called")
         self.config = kahndor.Instruct(pxcfg).override("PyfficeBOM")
         super().__init__(self)
         self.config.override(cfg)
@@ -139,6 +140,7 @@ class PyfficeSoftwareBOM(PyfficeBOM):
 
     def __init__(self, cfg=None):
         """Initialize the Software BOM handler."""
+        logma.debug(f"PyfficeSoftwareBOM.__init__ called")
         self.config = kahndor.Instruct(pxcfg).override("PyfficeSoftwareBOM")
         super().__init__(self)
         self.config.override(cfg)

@@ -70,6 +70,7 @@ class PyfficeContact(PyfficeDocument):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficeContact.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeContact").override(cfg))
         self.address = None

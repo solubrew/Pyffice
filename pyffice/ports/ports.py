@@ -63,6 +63,7 @@ class PyfficePort(PyfficeDocumentManager):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficePort.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePort")).override(cfg)
 
@@ -614,6 +615,7 @@ class PyfficePortDia(PyfficePort):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficePortDia.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortDia")).override(cfg)
         self.is_dia_installed = HAS_DIA
@@ -724,6 +726,7 @@ class PyfficePortImage(PyfficePort):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficePortImage.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortImage")).override(cfg)
 

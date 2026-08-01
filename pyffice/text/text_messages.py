@@ -42,6 +42,7 @@ class PyfficeMessage(PyfficeDocument):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficeMessage.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeMessage")).override(cfg)
 

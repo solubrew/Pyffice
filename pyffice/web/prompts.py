@@ -322,6 +322,7 @@ class PyfficePromptsManager(PyfficeDocumentManager):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficePromptsManager.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePromptsManager")).override(cfg)
         self.active_service = None

@@ -38,6 +38,7 @@ class PyfficeGCode(PyfficeDocument):
 
     def __init__(self, cfg=None):
         """Initialize the G-code generator."""
+        logma.debug(f"PyfficeGCode.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("GCodeDocument")).override(cfg)
         # G-code generation state. Merged from the deleted

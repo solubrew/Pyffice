@@ -39,6 +39,7 @@ class PyfficeCAM(PyfficeDocument):
 
     def __init__(self, cfg=None):
         """Initialize the CAM handler."""
+        logma.debug(f"PyfficeCAM.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeCAM")).override(cfg)
         # CAM project state. Merged from the deleted
@@ -116,6 +117,7 @@ class PyfficeCAMManager(PyfficeDocumentManager):
 
     def __init__(self, cfg=None):
         """Initialize the CAM manager."""
+        logma.debug(f"PyfficeCAMManager.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeCAMManager")).override(cfg)
         # Project registry. Merged from the deleted

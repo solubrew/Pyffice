@@ -347,6 +347,7 @@ class PyfficeWebPage(PyfficeDocument):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficeWebPage.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeWebPage")).override(cfg)
         self.active_url = None
@@ -616,6 +617,7 @@ class PyfficeWebProfileManager(PyfficeRolodex):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficeWebProfileManager.__init__ called")
         if cfg is None:
             cfg = {}
         cfg["group"] = "profile"

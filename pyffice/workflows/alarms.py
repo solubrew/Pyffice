@@ -42,6 +42,7 @@ class PyfficeAlarm(PyfficeEvent):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficeAlarm.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeAlarm")).override(cfg)
         self.acknowledge_task = None

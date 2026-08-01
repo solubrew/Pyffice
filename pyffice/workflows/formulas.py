@@ -154,6 +154,7 @@ class PyfficeFormulasLibrary(PyfficeDocumentManager):
 
     def __init__(self, cfg=None):
         """Initialize the formulas library and register default protocols."""
+        logma.debug(f"PyfficeFormulasLibrary.__init__ called")
         super().__init__(cfg)
 
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeFormulasLibrary")).override(cfg)
@@ -210,6 +211,7 @@ class PyfficeFormula(PyfficeUnit):
 
     def __init__(self, cfg=None, _library=None):
         """"""
+        logma.debug(f"PyfficeFormula.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeFormula").override(cfg))
         self.formula = self.config.dikt.get("formula", None)

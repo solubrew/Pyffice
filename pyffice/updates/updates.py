@@ -37,6 +37,7 @@ class PyfficeUpdate(object):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficeUpdate.__init__ called")
         self.config = kahndor.Instruct(pxcfg).select("PyfficeUpdate").override(cfg)
         self.document = None
 
@@ -67,6 +68,7 @@ class PyfficeUnitUpdate(PyfficeUpdate):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficeUnitUpdate.__init__ called")
         super().__init__(cfg)
         self.config.override(pxcfg).select("PyfficeUnitUpdate").override(cfg)
 

@@ -43,6 +43,7 @@ class PyfficeTextDocument(PyfficeDocument):
 
     def __init__(self):
         self.text = PyfficeText()
+        logma.debug(f"PyfficeTextDocument.__init__ called")
         self.metadata: Dict[str, Any] = {}
 
     def add_heading(

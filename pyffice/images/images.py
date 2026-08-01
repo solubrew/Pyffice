@@ -387,6 +387,7 @@ class PyfficeImageManager(PyfficeDocumentManager):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficeImageManager.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeImageManager").override(cfg))
         self.images = None
@@ -466,6 +467,7 @@ class PyfficeScreenShot(PyfficeDocument):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficeScreenShot.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).override("PyfficeScreenShot")).override(cfg)
         self.image = None

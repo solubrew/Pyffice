@@ -48,6 +48,7 @@ class PyfficeColorPalette(PyfficeDocument):
         Args:
             cfg (dict, optional): Configuration dictionary.
         """
+        logma.debug(f"PyfficeColorPalette.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeColorPalette")).override(cfg)
         self.parent = self.config.dikt.get("parent", None)

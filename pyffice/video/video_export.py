@@ -42,6 +42,7 @@ class PyfficeVideo(PyfficeDocument):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficeVideo.__init__ called")
         self.config = kahndor.Instruct(pxcfg).select("PyfficeVideo").override(cfg)
         self.has_audio = False
         self.audio = None

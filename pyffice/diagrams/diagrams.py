@@ -45,6 +45,7 @@ class PyfficeEdge(PyfficeUnit):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficeEdge.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeEdge")).override(cfg)
         self.active = None
@@ -289,6 +290,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficeDiagram.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDiagram").override(cfg))
 
@@ -563,6 +565,7 @@ class PyfficeNode(PyfficeUnit):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficeNode.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeNode")).override(cfg)
         self.cells = None
@@ -667,6 +670,7 @@ class PyfficeDiagramConnection(PyfficeUnit):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficeDiagramConnection.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDiagramConnection")).override(cfg)
         self.endpoints = None

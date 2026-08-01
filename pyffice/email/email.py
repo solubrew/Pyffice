@@ -39,6 +39,7 @@ class PyfficeEmailMessage(PyfficeMessage):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficeEmailMessage.__init__ called")
         self.config = kahndor.Instruct(pxcfg).select("PyfficeEmailDocument")
         super().__init__()
         self.config.override(cfg)
@@ -146,6 +147,7 @@ class PyfficeMailBox(PyfficeDocumentManager):
 
     def __init__(self, cfg=None):
         """"""
+        logma.debug(f"PyfficeMailBox.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeMailBoxAccount")).override(cfg)
         self.active_message = None
