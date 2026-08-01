@@ -23,7 +23,7 @@ import datetime as dt
 # ======================================Solutions Brewer Library Modules==============================================||
 from kahndor import kahndor
 from kahndor.logma import Logma
-from pyffice.calendars.tasks import PyfficeEvent, PyfficeTask
+from pyffice.calendars.events import PyfficeEvent, PyfficeTask
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||

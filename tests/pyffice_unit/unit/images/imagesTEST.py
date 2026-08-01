@@ -12,7 +12,9 @@ Coverage:
 
 Skipped:
 - images.pdfs (PyfficePDF) — requires PyPDF2 which is not installed
-- images.utilities (hex_to_rgb etc.) — requires thingery
+- images.utilities (hex_to_rgb etc.) — tested separately in
+  utilities_importTEST.py (import chain + hex↔rgb↔hsl round-trips).
+  Does NOT require thingery; the original skip note was wrong.
 
 Note: many PyfficeImage glyph methods (add_filter, add_image) require
 PIL/Pillow operations at runtime. The tests below cover the safe

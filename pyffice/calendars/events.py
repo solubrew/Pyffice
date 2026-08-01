@@ -353,6 +353,35 @@ class PyfficeEvent(PyfficeUnit):
             self.start_dttm = start_dttm
         return self
 
+
+class PyfficeTask(PyfficeUnit):
+    """A single task attached to an alarm or event.
+
+    Holds a dict-shaped payload (cfg) and tracks its own change history.
+    Constructed as ``PyfficeTask(payload)`` — used by PyfficeAlarm to
+    wrap acknowledge / notify / postpone / postpone-list payloads.
+    """
+    SERIALIZATION_VERSION = (1, 0, 0)
+
+    def __init__(self, cfg=None):
+        """Initialize a task with an optional dict-shaped payload."""
+        logma.debug(f"PyfficeTask.__init__ called")
+        super().__init__(cfg)
+        self.config.override(kahndor.Instruct(pxcfg).select("PyfficeTask")).override(cfg)
+        self.payload = cfg
+
+    def get_payload(self):
+        """Return the stored payload dict (or None if constructed empty)."""
+        return self.payload
+
+    def set_payload(self, payload) -> "PyfficeTask":
+        """Replace the stored payload, returning self for chaining."""
+        if payload != self.payload:
+            self.add_change("payload", self.payload, payload)
+            self.payload = payload
+        return self
+
+
 # ====================================================================================================================||
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||

@@ -27,7 +27,7 @@ from kahndor import kahndor
 from squirl.objnql import imgonql
 from kahndor.logma import Logma
 
-from pyffice.pyffice import PyfficeDocument
+from pyffice.document import PyfficeDocument
 
 from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
 

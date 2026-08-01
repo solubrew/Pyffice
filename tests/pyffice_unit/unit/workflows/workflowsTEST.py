@@ -7,13 +7,9 @@ Coverage:
 - PyfficeFormulasLibrary: construction as PyfficeDocumentManager
 - PyfficeFormula + ABS + SUM: execute produces correct results
 - is_number utility: int/float → True, anything else → False
-
-Skipped:
-- pyffice.workflows.alarms (PyfficeAlarm) — module fails to import
-  in this env (transitive `from pyffice.calendars.tasks import
-  PyfficeEvent, PyfficeTask` — `pyffice.calendars.tasks` doesn't exist
-  on disk; the reference is stale). Tests will land when the import
-  is fixed.
+- pyffice.workflows.alarms (PyfficeAlarm + PyfficeTask) — separate
+  file alarms_importTEST.py exercises the import chain and chainable
+  setters since the canonical PyfficeWorkflow tests don't need them.
 """
 
 import pytest
