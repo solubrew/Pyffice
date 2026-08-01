@@ -77,7 +77,6 @@ Conversion routes through `PyfficeDocumentManager.file_import` / `file_export`, 
 ```
 [pyffice.cli] skipping pyffice.email.email: No module named 'pyffice.text.messages'
 [pyffice.cli] skipping pyffice.reports.reports: No module named 'pyffice.text.text'
-[pyffice.cli] skipping pyffice.skills.skills: cannot import name 'PyfficeSkill' from 'pyffice.skills.skills'
 [pyffice.cli] skipping pyffice.video.video_export: No module named 'pyffice.audio.audio'
 ```
 
@@ -86,15 +85,13 @@ Conversion routes through `PyfficeDocumentManager.file_import` / `file_export`, 
 - `pyffice/text/messages.py` — referenced by `email/email.py:114`, doesn't exist (the module is `text/text_messages.py`)
 - `pyffice/text/text.py` — referenced by `reports/reports.py:30`, doesn't exist (the module is `text/text_messages.py`)
 - `pyffice/audio/audio.py` — referenced by `video/video_export.py:26`, doesn't exist (the module is `audio/audio_export.py`)
-- `pyffice/skills/skills.py` — defines a different `PyfficeSkill` class than the one expected by `__init__.py`
 
 **Migration plan:**
 
 1. In `email/email.py:114` — `from pyffice.text.messages import ...` → `from pyffice.text.text_messages import ...`.
 2. In `reports/reports.py:30` — same fix.
 3. In `video/video_export.py:26` — `from pyffice.audio.audio import PyfficeAudio` → `from pyffice.audio.audio_export import PyfficeAudio`.
-4. In `skills/skills.py` — verify the actual class is the one re-exported by `__init__.py`. If not, fix the mismatch.
-5. Verify `python -m pyffice --help` no longer shows skipping lines for any subpackage.
+4. Verify `python -m pyffice --help` no longer shows skipping lines for any subpackage.
 
 ### T-NEW-045 — Decide public API model: facade `Pyffice` vs `PyfficeCodex` direct ⚠️ DECISION STILL PENDING
 
@@ -163,7 +160,7 @@ Verified: `DiagramConverter()` now raises `TypeError` (standard ABC error), not 
 
 ### T-NEW-054 — `workflows/formulas.py` factory + protocol methods ✅ CLOSED (2026-07-31)
 
-`grep -nE 'TODO|FIXME|XXX|HACK' pyffice/workflows/formulas.py` → **0 markers**. The 4 TODOs the card named (lines 91, 122, 135, 139) are no longer in the file. The card's "user needs to confirm protocol model" framing is now moot — but the deeper protocol design question is documented in **T-NEW-067** (the `PyfficeSkill` placeholder card).
+`grep -nE 'TODO|FIXME|XXX|HACK' pyffice/workflows/formulas.py` → **0 markers**. The 4 TODOs the card named (lines 91, 122, 135, 139) are no longer in the file. The card's "user needs to confirm protocol model" framing is now moot — the skills subscript was removed entirely (commit `d9d4fa9`).
 
 ### T-NEW-055 — Replace `bare raise Exception(...)` with specific exception classes ✅ CLOSED (2026-07-31)
 
@@ -266,7 +263,7 @@ All 185 stub methods were implemented across commits `40775bd`, `7be33f6`, `9745
 
 ### P1 — Open work items from this audit
 
-1. **T-NEW-044** — Fix 4 pre-existing import bugs in `email/`, `reports/`, `video/`, `skills/` that crash CLI subpackage imports. **(P1 audit blocker; -10% test penalty cascades.)**
+1. **T-NEW-044** — Fix 3 pre-existing import bugs in `email/`, `reports/`, `video/` that crash CLI subpackage imports. **(P1 audit blocker; -10% test penalty cascades.)**
 2. **T-NEW-053** — Re-audit `contacts.py` for remaining `# TODO implement method` stubs.
 3. **T-NEW-058** — Fill 13 missing test files (one per subpackage).
 4. **T-NEW-059** — Fix `__version__` docstring snippet.
@@ -291,7 +288,7 @@ All 185 stub methods were implemented across commits `40775bd`, `7be33f6`, `9745
 | ✅ Has `SERIALIZATION_VERSION` | 97 | Per-class semver triple |
 | ✅ Has docstring | 100% of public methods | No empty or missing |
 | ✅ Has implementation | 100% | 0 stubs |
-| ⚠️ Pre-existing import bugs | 4 subpackages | email, reports, video, skills |
+| ⚠️ Pre-existing import bugs | 3 subpackages | email, reports, video |
 
 ---
 
@@ -403,7 +400,7 @@ But the real coverage is more nuanced. The project uses two test-file naming con
 | `pyffice/projects` | 1 | 3 | ✅ tested |
 | `pyffice/reports` | 0 | 1 | ⚠️ minimal |
 | `pyffice/script` | 1 | 8 | ✅ tested |
-| `pyffice/skills` | 0 | 0 | ❌ untested (placeholder per T-NEW-067) |
+| `pyffice/skills` | — | — | ❌ **DELETED** (commit `d9d4fa9`) |
 | `pyffice/socials` | 0 | 1 | ⚠️ minimal |
 | `pyffice/tags` | 0 | 4 | ⚠️ minimal |
 | `pyffice/text` | 0 | 3 | ⚠️ minimal |
@@ -416,7 +413,7 @@ But the real coverage is more nuanced. The project uses two test-file naming con
 - 8 subpackages have a dedicated test file matching their name (`*TEST*.py` or `test_<name>.py`).
 - 7 subpackages have `grep` references but no name-matched test file (light coverage).
 - 18 subpackages have BOTH `0` name matches AND `≤ 2` grep refs — these are the real "missing test" candidates.
-- `pyffice/skills` is the only subpackage with **zero** test coverage (and is a placeholder per T-NEW-067).
+- `pyffice/skills` was the only subpackage with **zero** test coverage — module deleted entirely (commit `d9d4fa9`). 33 subpackages remain.
 
 **Migration plan (re-baselined, no priority / low priority — coverage is a marathon, not a sprint):**
 
@@ -447,47 +444,21 @@ All 4 import-path bugs T-NEW-044 named (and the 2 more surfaced after the logma 
 | 1 | `email/email.py:114` → `from pyffice.text.text_messages import ...` | **DONE** (verified — line 114 doesn't exist; the eager `text.messages` import is gone) |
 | 2 | `reports/reports.py:30` → `from pyffice.text.text_messages import ...` | **DONE** (verified — the eager import was already removed; the new fix is `text.text` → `script.script`) |
 | 3 | `video/video_export.py:26` → `from pyffice.audio.audio_export import PyfficeAudio` | **DONE** (commit `d598ec6`) |
-| 4 | `skills/skills.py` — condor + logma migration + lazy __init__ | **DONE** (commit `pending`) — `condor` removed (folded into kahndor per user direction), `ogma.logma` → `kahndor.logma`, `__init__.py` rewritten to lazy PEP 562 pattern re-exporting 4 not-yet-defined classes |
+| 4 | `skills/skills.py` — condor + logma migration + lazy __init__ | **DELETED** (commit `d9d4fa9`) — per user direction, the placeholder module was removed entirely (`git rm -r pyffice/skills/`); 109 lines removed across 4 files |
 | 5 | `reports/reports.py:24` → `from pyffice.script.script import PyfficeScript` | **DONE** (commit `d598ec6`) — surfaced after step 1; T-NEW-044 step 2 listed wrong target |
 | 6 | `cli.py:994` → `from pyffice.items.text import PyfficeText` | **DONE** (commit `d598ec6`) — surfaced after step 1 |
 
 **Verified:** `python -m pyffice --help` runs without `NameError: name 'logma' is not defined`. Remaining 23 skipping lines are all environment-level (squirl/sb-stack not installed, optional 3rd-party like pandas/bs4/docx/ffmpeg/openpyxl/pptx missing) — **no more import-path bugs**.
 
-Commit history: `d598ec6` (steps 3/5/6), `pending` (step 4).
+Commit history: `d598ec6` (steps 3/5/6), `e898c06` (step 4 placeholder), `d9d4fa9` (step 4 finalized by deletion).
 
-### T-NEW-067 — Implement `PyfficeSkill` / `PyfficeSkillManager` / `PyfficeCapability` / `SkillRegistry` (placeholder closes when this opens) 🟡 DEFERRED
+### T-NEW-067 — `PyfficeSkill` / `PyfficeSkillManager` / `PyfficeCapability` / `SkillRegistry` ✅ CLOSED (2026-07-31) — closed by deletion (commit `d9d4fa9`)
 
-**Status (2026-07-31):** ⚠️ **OPEN — DEFERRED to future sprint.** No priority / low priority — design decision first (per T-NEW-054 dependency).
-
-`pyffice/skills/skills.py` defines **none** of the 4 classes its `__init__.py` re-exports: `PyfficeSkill`, `PyfficeSkillManager`, `PyfficeCapability`, `SkillRegistry`. The `__init__.py` was rewritten to the lazy PEP 562 pattern (commit `pending`) so the module is importable until the classes land.
-
-**Why deferred:**
-
-1. The user (per OOB message, 2026-07-31) confirmed skills is a placeholder — "see T-NEW-054 for the protocol design" still applies. The protocol model (capability slots vs. function registration vs. JSON-config) is unresolved.
-2. The 4 classes are **not** `PyfficeDocument` subclasses — they are a separate "skill registry" subsystem. The "build out stubbed document types" sprint (NEW TODO #3) does not cover them.
-3. The module's docstring is "create a skill system for an internal Ai Agent" — the use case is downstream, not pyffice-side.
-
-**Affected sites:**
-
-- `pyffice/skills/skills.py` — needs 4 class definitions + (likely) `@register` decorator or registry pattern.
-- `pyffice/skills/__init__.py` — lazy proxy already in place; convert to eager when classes land.
-- `pyffice/skills/_data_/` — currently has only `.yaml` files; may need a `capabilities.yaml` schema.
-
-**Migration plan (no priority / low priority — design decision first):**
-
-1. Confirm the protocol model: (a) capability slots (method decorators like `@capability("http_get")`), (b) JSON-config registry (load skills from `_data_/skills.yaml`), or (c) Python-class registration (each skill is a class subclassing `PyfficeSkill`).
-2. Implement `PyfficeSkill` as the base class with `name`, `description`, `version`, `capabilities: list[str]`, `execute(capability_name, **kwargs)` abstract method.
-3. Implement `PyfficeCapability` as a small value class (name + handler function reference).
-4. Implement `SkillRegistry` as a singleton with `register(skill)`, `get(name)`, `list_capabilities()`.
-5. Implement `PyfficeSkillManager` as the high-level API: instantiate a skill, list available capabilities, execute them.
-6. Convert `pyffice/skills/__init__.py` from lazy proxy to eager imports.
-7. Add a unit test in `tests/pyffice_unit/unit/test_skills.py` that registers a fake skill and verifies `SkillRegistry.get(name).execute(...)` works.
-
-When T-NEW-067 opens, the placeholder pattern in `pyffice/skills/__init__.py` will be removed; the migration is gated by T-NEW-054 closing (the protocol decision).
+The full implementation plan (capability slots vs JSON-config vs Python-class registration) is no longer applicable — the user directed the entire `pyffice/skills/` placeholder to be removed rather than refactored. The 4 classes that were deferred for implementation are now superseded by the absence of the module. If skills re-enter the codebase, it will be a fresh design decision.
 
 ### T-NEW-068 — `condor` migration to `kahndor` complete across pyffice ✅ CLOSED (2026-07-31)
 
-**Status:** `grep -rEln "from condor|import condor" pyffice/ --include='*.py'` → **0** (only a comment in `skills.py` mentioning the historical migration). All `condor` imports were `from condor import condor` — and the user confirmed `condor` was folded into `kahndor`.
+**Status:** `grep -rEln "from condor|import condor" pyffice/ --include='*.py'` → **0** (the `pyffice/skills/` placeholder was deleted entirely in commit `d9d4fa9`, so the historical comment is gone too). All `condor` imports were `from condor import condor` — and the user confirmed `condor` was folded into `kahndor`.
 
 Migration sweep (no `ogma.*` imports remaining in pyffice/):
 - `grep -rEln "from ogma\.logma|from ogma import logma" pyffice/` → **0 files**
@@ -511,13 +482,14 @@ The remaining `from kahndor import kahndor` / `from kahndor.logma import Logma` 
 - ✅ **T-NEW-064** — Close T-NEW-053 / T-NEW-054 / T-NEW-047 / T-NEW-059 as verified-done. Done earlier this session.
 - ✅ **T-NEW-065** — Re-baseline T-NEW-058 from 13 → 35. Done in this session. Also closes T-NEW-058.
 - ✅ **T-NEW-068** — `condor` → `kahndor` migration complete. Closed earlier this session.
+- ✅ **T-NEW-067** — `PyfficeSkill` etc. placeholder. Closed by deletion (commit `d9d4fa9`).
 
 ### P2 (deferred / existing backlog)
 
-- **T-NEW-067** — Implement `PyfficeSkill` / `PyfficeSkillManager` / `PyfficeCapability` / `SkillRegistry`. DEFERRED to future sprint — gated by T-NEW-054 protocol design decision (now closed; the deferred card is its own work item).
 - **T-NEW-045** — Public API facade decision (still pending user confirmation).
 - **T-NEW-060** — Squirl import-time `print()` (out of scope, lives in squirl repo).
+- **T-NEW-CANDIDATE** — Test coverage for 18 under-tested subpackages (top 5 by source LOC: `web` 2592 / `items` 1852 / `images` 1631 / `workflows` 679 / `tags` 524). See T-NEW-065 migration plan step 4. No priority — coverage is a marathon, not a sprint.
 
 ---
 
-*File last edited: 2026-07-31 (reconsolidation + 5 new P0/P1 cards T-NEW-062..066; verified against HEAD `d63d296`)*
+*File last edited: 2026-07-31 (reconsolidation + 5 new P0/P1 cards T-NEW-062..066; skills/ placeholder deleted in commit `d9d4fa9`; verified against HEAD `d9d4fa9`)*
