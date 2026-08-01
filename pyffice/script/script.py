@@ -498,9 +498,9 @@ class PyfficeScript(PyfficeDocument):
                 for j, entry in enumerate(self.pages[page]["entries"]):
                     logma.info(f"Entry {j}")
                     # logma.info(f"Entry {self.pages[page]["entries"][entry]}")
-                    entry_text = self.pages[page]["entries"][entry]
+                    entry_text = self.pages.get(page, {}).get("entries", {}).get(entry, None)
                     if isinstance(entry_text, dict):
-                        entry_text = entry_text["unit"]["value"]
+                        entry_text = entry_text.get("unit", {}).get("value", None)
                     elif isinstance(entry_text, PyfficeText):
                         entry_text = entry_text.value
                     # logma.info(f"Entry Text {entry_text}")
