@@ -65,11 +65,26 @@ class PyfficeMessage(PyfficeDocument):
         return self
 
     def to_dict(self):
-        """Convert to dictionary."""
-        return {"body": getattr(self, 'body', None),
+        """Convert to dictionary (additive canonical shape).
+
+        The class-specific payload is wrapped under ``doc["data"]``;
+        the canonical envelope (did, meta_data, schema_version,
+        pyffice_compat) is built inline here and finalized by
+        ``_canonicalize``. We avoid ``super().to_dict()`` for the
+        reason in PyfficeProject.to_dict — the import chain is
+        not available in the test environment.
+        """
+        doc = {
+            "did": self.did,
+            "meta_data": {"schema_version": list(self.SERIALIZATION_VERSION)},
+            "data": {
+                "body": getattr(self, 'body', None),
                 "from": getattr(self, 'from_', None),
                 "subject": getattr(self, 'subject', None),
-                "to": getattr(self, 'to', None)}
+                "to": getattr(self, 'to', None),
+            },
+        }
+        return self._canonicalize(doc)
 
 
 # ====================================================================================================================||

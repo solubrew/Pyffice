@@ -150,3 +150,78 @@ class TestLoadPaxn:
     def test_missing_file_raises(self, tmp_path):
         with pytest.raises((FileNotFoundError, OSError, Exception)):
             load_paxn(str(tmp_path / "nonexistent.paxn"))
+
+class TestCanonicalToDictShape:
+    """The 4 to_dict() overrides in projects.py produce the canonical
+    additive envelope (data, did, meta_data, pyffice_compat) and
+    preserve the original class-specific keys under doc["data"].
+
+    See R4 in TODOs.md. The PAXNTask/PAXNProject classes are
+    intentionally NOT converted — their flat shape is the YAML
+    contract for load_paxn (see paxn.py:188, 199).
+    """
+
+    def test_pyffice_project_to_dict_has_canonical_shape(self):
+        p = PyfficeProject()
+        p.tasks = [PyfficeProjectTask({'name': 'T1'})]
+        d = p.to_dict()
+        # Canonical envelope keys are present.
+        assert 'data' in d
+        assert 'did' in d
+        assert 'meta_data' in d
+        assert 'pyffice_compat' in d
+        # schema_version is mirrored.
+        assert d['meta_data']['schema_version'] == [1, 0, 0]
+        # Original keys preserved under data.
+        assert 'version' in d['data']
+        assert 'tasks' in d['data']
+        assert 'resources' in d['data']
+        assert 'milestones' in d['data']
+        assert 'dependencies' in d['data']
+
+    def test_pyffice_project_task_to_dict_has_canonical_shape(self):
+        t = PyfficeProjectTask({'name': 'T1', 'progress': 50})
+        d = t.to_dict()
+        assert 'data' in d
+        assert 'did' in d
+        assert 'meta_data' in d
+        assert 'pyffice_compat' in d
+        # Original keys preserved under data.
+        assert d['data']['name'] == 'T1'
+        assert d['data']['progress'] == 50
+        for k in ('name', 'start_date', 'end_date', 'duration',
+                  'progress', 'assignee'):
+            assert k in d['data']
+
+    def test_pyffice_project_resource_to_dict_has_canonical_shape(self):
+        r = PyfficeProjectResource({'name': 'R1', 'type': 'human'})
+        d = r.to_dict()
+        assert 'data' in d
+        assert 'pyffice_compat' in d
+        assert d['data']['name'] == 'R1'
+        assert d['data']['type'] == 'human'
+        for k in ('name', 'type', 'email'):
+            assert k in d['data']
+
+    def test_pyffice_project_milestone_to_dict_has_canonical_shape(self):
+        m = PyfficeProjectMilestone({'name': 'M1', 'date': '2026-08-01'})
+        d = m.to_dict()
+        assert 'data' in d
+        assert 'pyffice_compat' in d
+        assert d['data']['name'] == 'M1'
+        assert d['data']['date'] == '2026-08-01'
+        for k in ('name', 'date'):
+            assert k in d['data']
+
+    def test_to_dict_is_additive_at_nested_level(self):
+        """Tasks called from PyfficeProject.to_dict() also carry
+        the canonical shape — the additive contract applies to
+        nested objects, not just the top level."""
+        task = PyfficeProjectTask({'name': 'N', 'progress': 25})
+        p = PyfficeProject()
+        p.tasks.append(task)
+        d = p.to_dict()
+        nested = d['data']['tasks'][0]
+        assert 'data' in nested
+        assert 'pyffice_compat' in nested
+        assert nested['data']['name'] == 'N'

@@ -110,14 +110,29 @@ class PyfficeProject(PyfficeDocumentManager):
         return self
 
     def to_dict(self) -> dict:
-        """Convert project to dictionary."""
-        return {
-            "version": self.VERSION,
-            "tasks": [t.to_dict() for t in self.tasks],
-            "resources": [r.to_dict() for r in self.resources],
-            "milestones": [m.to_dict() for m in self.milestones],
-            "dependencies": self.dependencies,
+        """Convert project to dictionary (additive canonical shape).
+
+        The class-specific payload is wrapped under ``doc["data"]``;
+        the canonical envelope (did, meta_data, schema_version,
+        pyffice_compat) is built inline here and finalized by
+        ``_canonicalize``. We deliberately avoid ``super().to_dict()``
+        because the PyfficeDocument → PyfficeUnit chain triggers a
+        lazy import of ``pyffice.pyffice`` (which needs ``thingery``)
+        that is not available in the test environment. The envelope
+        fields produced here are identical to the canonical shape.
+        """
+        doc = {
+            "did": self.did,
+            "meta_data": {"schema_version": list(self.SERIALIZATION_VERSION)},
+            "data": {
+                "version": getattr(self, "VERSION", None),
+                "tasks": [t.to_dict() for t in self.tasks],
+                "resources": [r.to_dict() for r in self.resources],
+                "milestones": [m.to_dict() for m in self.milestones],
+                "dependencies": self.dependencies,
+            },
         }
+        return self._canonicalize(doc)
 
     @classmethod
     def from_microsoft_project(cls, file_path: str, cfg: Optional[dict] = None) -> "PyfficeProject":
@@ -269,19 +284,28 @@ class PyfficeProjectTask(PyfficeUnit):
         self.assignee = cfg.get("assignee") if cfg else None
 
     def to_dict(self) -> dict:
-        """Serialize this object to a dict.
-        
-        Returns:
-            Self for chaining.
+        """Serialize this object to a dict (additive canonical shape).
+
+        The class-specific payload is wrapped under ``doc["data"]``;
+        the canonical envelope (did, meta_data, schema_version,
+        pyffice_compat) is built inline here and finalized by
+        ``_canonicalize``. We avoid ``super().to_dict()`` for the
+        reason in PyfficeProject.to_dict — the import chain is
+        not available in the test environment.
         """
-        return {
-            "name": self.name,
-            "start_date": self.start_date,
-            "end_date": self.end_date,
-            "duration": self.duration,
-            "progress": self.progress,
-            "assignee": self.assignee,
+        doc = {
+            "did": self.did,
+            "meta_data": {"schema_version": list(self.SERIALIZATION_VERSION)},
+            "data": {
+                "name": self.name,
+                "start_date": self.start_date,
+                "end_date": self.end_date,
+                "duration": self.duration,
+                "progress": self.progress,
+                "assignee": self.assignee,
+            },
         }
+        return self._canonicalize(doc)
 
 
 class PyfficeProjectResource(PyfficeUnit):
@@ -300,16 +324,25 @@ class PyfficeProjectResource(PyfficeUnit):
         self.email = cfg.get("email") if cfg else None
 
     def to_dict(self) -> dict:
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
+        """Convert this document to dict (additive canonical shape).
+
+        The class-specific payload is wrapped under ``doc["data"]``;
+        the canonical envelope (did, meta_data, schema_version,
+        pyffice_compat) is built inline here and finalized by
+        ``_canonicalize``. We avoid ``super().to_dict()`` for the
+        reason in PyfficeProject.to_dict — the import chain is
+        not available in the test environment.
         """
-        return {
-            "name": self.name,
-            "type": self.type,
-            "email": self.email,
+        doc = {
+            "did": self.did,
+            "meta_data": {"schema_version": list(self.SERIALIZATION_VERSION)},
+            "data": {
+                "name": self.name,
+                "type": self.type,
+                "email": self.email,
+            },
         }
+        return self._canonicalize(doc)
 
 
 """Serialize this object to a dict.
@@ -327,15 +360,24 @@ class PyfficeProjectMilestone(PyfficeUnit):
         self.date = cfg.get("date") if cfg else None
 
     def to_dict(self) -> dict:
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
+        """Convert this document to dict (additive canonical shape).
+
+        The class-specific payload is wrapped under ``doc["data"]``;
+        the canonical envelope (did, meta_data, schema_version,
+        pyffice_compat) is built inline here and finalized by
+        ``_canonicalize``. We avoid ``super().to_dict()`` for the
+        reason in PyfficeProject.to_dict — the import chain is
+        not available in the test environment.
         """
-        return {
-            "name": self.name,
-            "date": self.date,
+        doc = {
+            "did": self.did,
+            "meta_data": {"schema_version": list(self.SERIALIZATION_VERSION)},
+            "data": {
+                "name": self.name,
+                "date": self.date,
+            },
         }
+        return self._canonicalize(doc)
 
 
 # Factory function for bidirectional conversion

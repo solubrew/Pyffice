@@ -96,19 +96,6 @@ class PyfficeTag(object):
         self.value = value
         return self
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = {
-            "label": self.label,
-            "description": self.description,
-            "value": self.value,
-        }
-        return doc
-
 
 # ====================================================================================================================||
 
