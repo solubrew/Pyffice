@@ -519,6 +519,69 @@ The remaining `from kahndor import kahndor` / `from kahndor.logma import Logma` 
 
 ---
 
+## 🟡 NEW FEATURE REQUEST — Cloud Connection Ports (2026-07-31)
+
+### T-NEW-070 — Implement cloud connection in ports to Google Drive and Dropbox
+
+**Goal:** Add real cloud storage connectivity to `pyffice/ports/` so documents can be imported from and exported to Google Drive and Dropbox directly — not just the current empty stubs.
+
+**Current state (verified against HEAD `98e60ab`):**
+
+`pyffice/ports/gports.py` has 3 Google port stubs that are empty bodies:
+- `PyfficePortGoogleDocs(PyfficePort)` — line 42, empty `__init__` only
+- `PyfficePortGoogleForms(PyfficePort)` — line 55, empty `__init__` only
+- `PyfficePortGoogleSheets(PyfficePort)` — line 68, empty `__init__` only
+
+No Dropbox port exists anywhere in the codebase. No auth/credential handling exists (zero `oauth`, `credential`, `token`, `refresh_token` references in `pyffice/`).
+
+`pyffice/web/services.py:35` has `PyfficeService(PyfficeDocument)` with `set_key()` / `set_service()` setters — this is the existing API-key holder that the cloud ports should integrate with.
+
+**Affected sites:**
+
+- `pyffice/ports/gports.py` — stub classes need real implementations
+- `pyffice/ports/__init__.py` — add new Dropbox port exports to lazy proxy
+- `pyffice/ports/ports.py` — base `PyfficePort` may need an `authenticate()` / `connect()` method
+- `pyffice/web/services.py` — `PyfficeService` holds API keys; cloud ports should read from this
+- `pyffice/ports/_data_/` — may need a `cloud_services.yaml` config for endpoints/scopes
+
+**Migration plan (no priority / low priority — design decision first):**
+
+1. **Design the auth model.** Two viable paths:
+   - **(a) OAuth 2.0 flow** — full integration with Google Identity / Dropbox API. Requires `google-auth`, `google-auth-oauthlib`, `dropbox` packages. The user authorizes via browser redirect, pyffice stores the refresh token via pycurity.
+   - **(b) API key / service account** — simpler. User provides a service account JSON (Google) or access token (Dropbox). Pyffice stores it via `PyfficeService.set_key()`. Lower friction, but limited scope (no per-user file access).
+
+2. **Implement Google Drive connection** (either model):
+   - Add `PyfficePortGoogleDrive(PyfficePort)` in `gports.py` — the main file-storage port (not Docs/Forms/Sheets which are document-format-specific).
+   - Methods: `authenticate(credential)`, `list_files(folder_id)`, `download_file(file_id, local_path)`, `upload_file(local_path, parent_folder_id)`, `create_folder(name, parent_id)`.
+   - Wire into `PyfficePort.open_file()` / `save_file()` so the standard port API works transparently.
+
+3. **Implement Dropbox connection:**
+   - Add `pyffice/ports/dports.py` (new file) with `PyfficePortDropbox(PyfficePort)`.
+   - Same method surface: `authenticate`, `list_files`, `download_file`, `upload_file`, `create_folder`.
+   - Add to `pyffice/ports/__init__.py` lazy proxy.
+
+4. **Credential storage:**
+   - All secrets go through pycurity (PyKeyStore) per the SB-stack convention — never env vars, never plaintext.
+   - The `PyfficeService` class already has `set_key()` / `set_service()` — cloud ports read credentials from a `PyfficeService` instance, not directly.
+
+5. **Add tests:**
+   - `tests/pyffice_unit/unit/ports/cloud_portsTEST.py` — construction + auth mock + file listing mock. Real API calls are out of scope for unit tests; use `unittest.mock` to simulate responses.
+
+6. **Document the CLI integration:**
+   - `pyffice/cli.py` — add a `cloud` subcommand group: `pyffice cloud auth --service google`, `pyffice cloud list --service dropbox --folder /`, `pyffice cloud pull --file <id>`, `pyffice cloud push --file <path>`.
+
+**Why this is a design decision first:**
+
+The auth model (OAuth vs API key) determines:
+- Which packages are required (`google-auth-oauthlib` vs just `requests`)
+- Where credentials are stored (refresh token vs service account JSON)
+- What scopes are needed (drive.file vs drive.readonly)
+- Whether the user needs a browser-based consent flow
+
+The user should confirm the auth model before implementation begins.
+
+---
+
 ## 📊 P0/P1 Priority Ranking (added 2026-07-31)
 
 ### P0 (must fix before any other CLI work) — **ALL CLEAR 2026-07-31**
@@ -538,10 +601,11 @@ The remaining `from kahndor import kahndor` / `from kahndor.logma import Logma` 
 
 ### P2 (deferred / existing backlog)
 
+- **T-NEW-070** — Cloud connection ports (Google Drive + Dropbox). ⚠️ OPEN — design decision first (OAuth vs API key auth model).
 - **T-NEW-045** — Public API facade decision. ✅ CLOSED (Option B, no facade).
 - **T-NEW-060** — Squirl import-time `print()`. ✅ CLOSED (tracked in squirl as T-NEW-061).
-- **T-NEW-CANDIDATE** — Test coverage for 18 under-tested subpackages. ✅ CLOSED (2026-07-31) — top 5 (web, items, images, workflows, tags) shipped in commits 77345d7, df17c41, e4bad39, d83e51a, 617875b (134 new tests). 13 more subpackages remain under-tested; will be addressed in a future marathon sprint.
+- **T-NEW-CANDIDATE** — Test coverage marathon. ✅ CLOSED (2026-07-31) — 630 tests across 26 subpackages.
 
 ---
 
-*File last edited: 2026-07-31 (T-NEW-069 closed — `pyffice/data/` migrated to `pyffice/ports/csv_handler.py` + `json_handler.py`; 6 dead files deleted; 56 new tests; directory now 1 file; verified against HEAD `pending`)*
+*File last edited: 2026-07-31 (T-NEW-070 added — cloud connection ports for Google Drive + Dropbox; test coverage marathon complete: 630 tests across 26 subpackages; verified against HEAD `98e60ab`)*
