@@ -35,7 +35,7 @@ log = True
 logma = Logma(__name__)
 
 # ====================================================================================================================||
-pxcfg = join(here, "../config/_data_", "exports.yaml")
+pxcfg = join(here, "_data_", "msports.yaml")
 
 
 def _extract_cell_attrs(cell) -> Any:
@@ -172,10 +172,10 @@ class PyfficePortExcel(PyfficePort):
 
     def get_column_width(self, column) -> Any:
         """Return the column width.
-        
+
         Args:
             column: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -183,10 +183,10 @@ class PyfficePortExcel(PyfficePort):
 
     def get_row_height(self, row) -> Any:
         """Return the row height.
-        
+
         Args:
             row: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -194,10 +194,10 @@ class PyfficePortExcel(PyfficePort):
 
     def parse_content(self, content) -> Self:
         """Parse content.
-        
+
         Args:
             content: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -221,10 +221,10 @@ class PyfficePortExcel(PyfficePort):
 
     def read_charts(self, sheet=None) -> Any:
         """Read charts.
-        
+
         Args:
             sheet: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -237,10 +237,10 @@ class PyfficePortExcel(PyfficePort):
 
     def read_images(self, sheet) -> Any:
         """Read images.
-        
+
         Args:
             sheet: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -255,7 +255,7 @@ class PyfficePortExcel(PyfficePort):
 
     def read_styles(self) -> Any:
         """Read styles.
-        
+
         Returns:
             Self for chaining.
         """
@@ -283,10 +283,10 @@ class PyfficePortExcel(PyfficePort):
 
     def set_chart_type(self, chart_type) -> None:
         """Set the chart type.
-        
+
         Args:
             chart_type: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -366,13 +366,13 @@ class PyfficePortExcel(PyfficePort):
 
     def open_file(self, file, if_data_only=False, read_only=False, keep_vba=False) -> Any:
         """Open file.
-        
+
         Args:
             file: Parameter.
             if_data_only: Parameter.
             read_only: Parameter.
             keep_vba: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -426,10 +426,10 @@ class PyfficePortWord(PyfficePort):
 
 def read_docx_tables(file_path) -> Any:
     """Read tables from a docx file into Python data.
-    
+
     Args:
         file_path: Parameter.
-    
+
     Returns:
         Self for chaining.
     """
