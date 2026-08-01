@@ -149,10 +149,12 @@ class TestPyfficeMessageToDict:
         m = PyfficeMessage()
         m.set_body("hello").set_from("a").set_to("b").set_subject("s")
         d = m.to_dict()
-        assert d["data"]["body"] == "hello"
-        assert d["data"]["from"] == "a"
-        assert d["data"]["to"] == "b"
-        assert d["data"]["subject"] == "s"
+        # Message fields live under data.content (canonical slot) so the
+        # _canonicalize mirror doesn't promote a string into content.
+        assert d["data"]["content"]["body"] == "hello"
+        assert d["data"]["content"]["from"] == "a"
+        assert d["data"]["content"]["to"] == "b"
+        assert d["data"]["content"]["subject"] == "s"
 
     def test_to_dict_schema_version(self):
         m = PyfficeMessage()

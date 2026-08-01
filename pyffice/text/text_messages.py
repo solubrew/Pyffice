@@ -81,10 +81,19 @@ class PyfficeMessage(PyfficeDocument):
             "did": self.did,
             "meta_data": {"schema_version": list(self.SERIALIZATION_VERSION)},
             "data": {
-                "body": getattr(self, "body", None),
-                "from": getattr(self, "from_", None),
-                "subject": getattr(self, "subject", None),
-                "to": getattr(self, "to", None),
+                # content must come BEFORE the message fields so the
+                # _canonicalize mirror doesn't promote body/from/...
+                # (strings) into content; content is the canonical
+                # payload slot and holds the structured message.
+                "content": {
+                    "body": getattr(self, "body", None),
+                    "from": getattr(self, "from_", None),
+                    "subject": getattr(self, "subject", None),
+                    "to": getattr(self, "to", None),
+                },
+                # document_type must come before message keys too
+                # (document_type is in meta_keys set so it's safe).
+                "document_type": "message",
             },
         }
         return self._canonicalize(doc)
@@ -96,7 +105,7 @@ class PyfficeMessage(PyfficeDocument):
         :meth:`to_dict`. Calls the canonical base implementation first so
         common fields (did, content, paths, schema_version, etc.) are
         populated, then unpacks the message-specific payload from
-        ``document["data"]`` back onto the instance attributes
+        ``document["data"]["content"]`` back onto the instance attributes
         ``body``, ``from_``, ``subject``, ``to``.
 
         Args:
@@ -109,10 +118,19 @@ class PyfficeMessage(PyfficeDocument):
         logma.debug(f"PyfficeMessage.load_document called for {document.get('did', '?')}")
         super().load_document(document)
         data = document.get("data", {}) or {}
-        self.set_body(data.get("body"))
-        self.set_from(data.get("from"))
-        self.set_subject(data.get("subject"))
-        self.set_to(data.get("to"))
+        # Message payload lives under data["content"] (canonical slot).
+        content = data.get("content", {}) or {}
+        if isinstance(content, dict):
+            self.set_body(content.get("body"))
+            self.set_from(content.get("from"))
+            self.set_subject(content.get("subject"))
+            self.set_to(content.get("to"))
+        else:
+            # Fallback for legacy envelopes where fields were direct children.
+            self.set_body(data.get("body"))
+            self.set_from(data.get("from"))
+            self.set_subject(data.get("subject"))
+            self.set_to(data.get("to"))
         return self
 
     def open_file(self, file_=None) -> Self:
