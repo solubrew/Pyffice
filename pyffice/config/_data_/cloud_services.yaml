@@ -1,0 +1,27 @@
+# Cloud Services Configuration for Pyffice
+# T-NEW-070: Cloud connection ports (Google Drive + Dropbox)
+#
+# Credentials are NOT stored here. This file defines endpoint metadata,
+# scopes, and default folder mappings only. All secrets go through
+# pycurity (PyKeyStore) per SB-stack convention.
+
+PyfficeCloudPort:
+  template:
+    provider: base
+    authenticated: false
+
+PyfficePortGoogleDrive:
+  template:
+    provider: google_drive
+    scopes:
+      - "https://www.googleapis.com/auth/drive.file"
+    base_url: "https://www.googleapis.com/drive/v3"
+    upload_url: "https://www.googleapis.com/upload/drive/v3"
+    root_folder: "root"
+
+PyfficePortDropbox:
+  template:
+    provider: dropbox
+    api_url: "https://api.dropboxapi.com/2"
+    content_url: "https://content.dropboxapi.com/2"
+    root_folder: ""

@@ -24,6 +24,10 @@ _LAZY_EXPORTS = {
     # T-NEW-069: file format handlers migrated from pyffice/data/
     "PyfficeCSV": ("pyffice.ports.csv_handler", "PyfficeCSV"),
     "PyfficeJSON": ("pyffice.ports.json_handler", "PyfficeJSON"),
+    # T-NEW-070: cloud storage ports
+    "PyfficeCloudPort": ("pyffice.ports.cloud_ports", "PyfficeCloudPort"),
+    "PyfficePortGoogleDrive": ("pyffice.ports.cloud_ports", "PyfficePortGoogleDrive"),
+    "PyfficePortDropbox": ("pyffice.ports.cloud_ports", "PyfficePortDropbox"),
     "csv_read": ("pyffice.ports.csv_handler", "read"),
     "csv_write": ("pyffice.ports.csv_handler", "write"),
     "csv_read_rows": ("pyffice.ports.csv_handler", "read_rows"),
@@ -71,6 +75,10 @@ __all__ = [
     # T-NEW-069: file format handlers (migrated from pyffice/data/)
     "PyfficeCSV",
     "PyfficeJSON",
+    # T-NEW-070: cloud storage ports
+    "PyfficeCloudPort",
+    "PyfficePortGoogleDrive",
+    "PyfficePortDropbox",
     "csv_read",
     "csv_write",
     "csv_read_rows",
