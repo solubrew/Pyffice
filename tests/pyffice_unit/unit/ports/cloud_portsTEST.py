@@ -76,34 +76,48 @@ class TestPyfficeCloudPortAuth:
             cp.authenticate(None)
 
 
-class TestPyfficeCloudPortNotImplemented:
-    """The base class methods raise NotImplementedError."""
+class TestPyfficeCloudPortBaseDefaults:
+    """The base class methods are chainable no-op defaults.
 
-    def test_list_files_raises(self):
-        logma.debug("TestPyfficeCloudPortNotImplemented test class")
-        cp = PyfficeCloudPort()
-        with pytest.raises(NotImplementedError):
-            cp.list_files()
+    The contract for these methods lives in CloudPortProtocol — concrete
+    subclasses (PyfficePortGoogleDrive, PyfficePortDropbox,
+    _GoogleWorkspacePortBase) override all five with real implementations.
+    The base class implementations return safe defaults (empty list,
+    empty dict, or self) instead of raising NotImplementedError, so the
+    type contract is honoured without forcing every code path to handle
+    an exception.
+    """
 
-    def test_download_file_raises(self):
+    def test_list_files_returns_empty_list(self):
+        """Base list_files returns [] (not raise)."""
+        logma.debug("TestPyfficeCloudPortBaseDefaults test class")
         cp = PyfficeCloudPort()
-        with pytest.raises(NotImplementedError):
-            cp.download_file("id", "/tmp/test")
+        result = cp.list_files()
+        assert result == []
 
-    def test_upload_file_raises(self):
+    def test_download_file_returns_self(self):
+        """Base download_file returns self (chainable)."""
         cp = PyfficeCloudPort()
-        with pytest.raises(NotImplementedError):
-            cp.upload_file("/tmp/test")
+        result = cp.download_file("id", "/tmp/test")
+        assert result is cp
 
-    def test_create_folder_raises(self):
+    def test_upload_file_returns_empty_dict(self):
+        """Base upload_file returns {} (not raise)."""
         cp = PyfficeCloudPort()
-        with pytest.raises(NotImplementedError):
-            cp.create_folder("test")
+        result = cp.upload_file("/tmp/test")
+        assert result == {}
 
-    def test_delete_file_raises(self):
+    def test_create_folder_returns_empty_dict(self):
+        """Base create_folder returns {} (not raise)."""
         cp = PyfficeCloudPort()
-        with pytest.raises(NotImplementedError):
-            cp.delete_file("id")
+        result = cp.create_folder("test")
+        assert result == {}
+
+    def test_delete_file_returns_self(self):
+        """Base delete_file returns self (chainable)."""
+        cp = PyfficeCloudPort()
+        result = cp.delete_file("id")
+        assert result is cp
 
 
 # ============================================================================================#
