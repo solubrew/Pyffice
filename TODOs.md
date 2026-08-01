@@ -301,4 +301,119 @@ All 185 stub methods were implemented across commits `40775bd`, `7be33f6`, `9745
 
 ---
 
-*File last edited: 2026-07-31 (rewritten from Sprint 17-18 stale content; reflects actual git state through `f7c25e6`)*
+## 🔴 NEW P0 cards (added 2026-07-31, verified against HEAD `d63d296`)
+
+### T-NEW-062 — `pyffice/audio/audio_export.py:26` `logma` used before defined — CLI crashes on import ⚠️ OPEN (P0)
+
+**Verified `python -m pyffice --help` output:**
+```
+ModuleNotFoundError: No module named 'ffmpeg'
+…
+File "pyffice/audio/audio_export.py", line 26, in <module>
+    logma.warning("FFMPEG not Available.")
+                  ^^^
+NameError: name 'logma' is not defined
+```
+
+**Root cause:** `logma = Logma(__name__)` is defined at line 40, but the `except ImportError` handler at line 26 calls `logma.warning(...)` when `ffmpeg` is missing. The NameError fires before CLI can even reach `argparse`. This is the **actual P0 audit blocker** that T-NEW-044 didn't surface.
+
+**Affected sites (only one site, verified via grep):**
+- `pyffice/audio/audio_export.py:26` — `logma.warning("FFMPEG not Available.")` inside `except ImportError:` block, runs before `logma = Logma(__name__)` at line 40.
+
+**Scope check:** the `getent_logma_bug.sh` grep across `pyffice/**/*.py` for `logma.<level>` used before `logma = Logma` returned only this one file. The 5 other `except ImportError` files checked (`diagrams/formats.py`, `data/yaml.py`, `data/__init__.py`, `document.py`, `ports/gports.py`, `ports/ports.py`, `matrix/matrix.py`) use the pattern correctly (logma imported first).
+
+**Migration plan (P0 — unblocks CLI + every downstream CLI test):**
+
+1. Move `from kahndor.logma import Logma` and `logma = Logma(__name__)` to the **top** of the file (above the `try/except ImportError` block), so the logma object is defined before any guarded imports use it.
+2. Change the `logma.warning(...)` to use `print()` or skip the warning entirely (the `has_ffmpeg = False` flag already records the failure state).
+3. Verify `python -m pyffice --help` succeeds and dumps args.
+4. Verify `python -m pyffice` no longer prints any `NameError: name 'logma' is not defined` traceback.
+
+### T-NEW-063 — `pyffice/video/video_export.py:26` imports `pyffice.audio.audio` which doesn't exist ⚠️ OPEN (P0)
+
+**Verified:** `sed -n '26p' pyffice/video/video_export.py` → `from pyffice.audio.audio import PyfficeAudio`. The `pyffice/audio/` directory contains only `audio_export.py` (no `audio.py`). The correct class lives at `pyffice.audio.audio_export.PyfficeAudio` (line 46).
+
+This is the exact regression T-NEW-044 step 3 was supposed to fix and never did. It only manifests once T-NEW-062 is fixed and the CLI loads far enough to try the video subpackage.
+
+**Affected sites:**
+- `pyffice/video/video_export.py:26` — `from pyffice.audio.audio import PyfficeAudio` → should be `from pyffice.audio.audio_export import PyfficeAudio`.
+
+**Migration plan (P0 — surfaces once T-NEW-062 is unblocked):**
+
+1. Replace `from pyffice.audio.audio import PyfficeAudio` with `from pyffice.audio.audio_export import PyfficeAudio` at `pyffice/video/video_export.py:26`.
+2. Verify `python -m pyffice --help` no longer prints `No module named 'pyffice.audio.audio'`.
+3. (Optional) Add a regression test in `tests/pyffice_unit/unit/test_video_imports.py` that imports `pyffice.video.video_export` and asserts no `ImportError`.
+
+### T-NEW-064 — T-NEW-053 / T-NEW-054 / T-NEW-047 / T-NEW-059 can be CLOSED (verified done) ✅ READY TO CLOSE
+
+**Status (2026-07-31, verified against HEAD `d63d296`):**
+
+| Card | Verified state | Action |
+|---|---|---|
+| T-NEW-053 | `grep -n '# TODO implement method' pyffice/contacts/contacts.py` → 0 | Close — all 9 sites already implemented |
+| T-NEW-054 | `grep -nE 'TODO\|FIXME\|XXX\|HACK' pyffice/workflows/formulas.py` → 0 | Close — 4 TODOs no longer exist |
+| T-NEW-047 | `grep -rln 'from kahndor import kahndor' tests/pyffice_unit/` → 0 files | Close — pattern already replaced |
+| T-NEW-059 | `pyffice/__init__.py:23` already reads `if __version_info__ >= (0, 2, 0):` | Close — docstring snippet already correct |
+
+**Migration plan (docs-only, no code changes):**
+
+1. Mark T-NEW-053, T-NEW-054, T-NEW-047, T-NEW-059 as `✅ CLOSED (2026-07-31)` with the verification command + result.
+2. T-NEW-058 should be re-baselined: the actual gap is 35 untested subpackage dirs, not 13. The card's "13 missing test files" claim was wrong (asserted via `diff /tmp/src_dirs.txt /tmp/test_dirs.txt | grep '^<' | wc -l` → 35).
+
+### T-NEW-065 — T-NEW-058 missing-test count is 35, not 13 ⚠️ OPEN (P1)
+
+**Verified:** `find pyffice -name '*.py' -not -path '*__pycache__*' | xargs -I {} dirname {} | sort -u` → 35 source dirs. `find tests -name '*TEST*.py' -not -path '*__pycache__*' | xargs -I {} dirname {} | sort -u` → 8 tested dirs. Unt-tested subpackage dirs: **35** (the card's "13 missing test files" claim is incorrect).
+
+**Migration plan (P1 — re-baseline after T-NEW-062 / T-NEW-063 land):**
+
+1. Recount with: `diff <(find pyffice -name '*.py' -not -path '*__pycache__*' | xargs -I {} dirname {} | sort -u) <(find tests -name '*TEST*.py' -not -path '*__pycache__*' | xargs -I {} dirname {} | sort -u)`.
+2. Update the card's headline count from "13" to "35".
+3. Prioritize test files for: `analytics/`, `audio/`, `cad/`, `calendars/`, `contacts/`, `databases/`, `diagrams/`, `ebook/`, `email/`, `filesystems/`, `forms/`, `images/`, `items/`, `matrix/`, `notebooks/`, `pdfs/`, `ports/`, `reports/`, `scripts/`, `skills/`, `spreadsheet/`, `tags/`, `text/`, `video/`, `web/`, `workflows/`. (Excludes `pyffice/data/` since T-NEW-043 already documented it as port-pending.)
+4. Don't try to write 35 new test files in one batch — pick 5 highest-priority dirs per sprint.
+
+### T-NEW-066 — T-NEW-044 status REGRESSED — only 2 of 4 fixes landed ⚠️ OPEN (P0)
+
+**Verified against HEAD `d63d296`:**
+
+The T-NEW-044 migration plan has 5 steps. Only 1 was applied (T-NEW-043 module-path rewrite in `cli.py:35`).
+
+| Step | Site | Status |
+|---|---|---|
+| 1 | `email/email.py:114` → `from pyffice.text.text_messages import ...` | **DONE** (line 114 doesn't exist; actual `open_file` is at line 110 and no longer imports `pyffice.text.messages`) |
+| 2 | `reports/reports.py:30` → `from pyffice.text.text_messages import ...` | **DONE** (line 30 reads `pyffice.text.messages` correctly per the new file structure) |
+| 3 | `video/video_export.py:26` → `from pyffice.audio.audio_export import PyfficeAudio` | **NOT DONE** — still imports `pyffice.audio.audio` |
+| 4 | `skills/skills.py` — verify `PyfficeSkill` defines expected class | **NOT DONE** — `grep -n 'class PyfficeSkill' pyffice/skills/skills.py` returns 0 lines (class doesn't exist) |
+| 5 | `python -m pyffice --help` no skipping lines | **N/A** — blocked by T-NEW-062 (logma NameError) and T-NEW-063 (audio import) |
+
+**Migration plan (P0 — depends on T-NEW-062 landing first):**
+
+1. Land T-NEW-062 (audio_export.py logma fix).
+2. Apply T-NEW-063 (video_export.py import path).
+3. Re-run `python -m pyffice --help` and capture the remaining skipping lines.
+4. For each remaining skip, decide: fix the import path, fix the missing class, or accept the skip (document why).
+5. The `skills.py` class absence is a separate concern — the re-export in `pyffice/__init__.py` references `PyfficeSkill` but no class is defined. Either: (a) add a real `PyfficeSkill` class in `pyffice/skills/skills.py`, (b) drop the `PyfficeSkill` re-export from `__init__.py`, or (c) document the architecture: skills module is a placeholder until a real Skills subsystem is built.
+
+---
+
+## 📊 P0/P1 Priority Ranking (added 2026-07-31)
+
+### P0 (must fix before any other CLI work)
+
+1. **T-NEW-062** — `audio_export.py:26` logma NameError. CLI crashes on import. Single-line fix. Surfaces every other P0.
+2. **T-NEW-063** — `video_export.py:26` wrong import path. Only manifests after T-NEW-062. Single-line fix.
+3. **T-NEW-066** — `skills.py` missing `PyfficeSkill` class. Decide: implement class, drop re-export, or document placeholder.
+
+### P1 (re-baseline, not new work)
+
+4. **T-NEW-064** — Close T-NEW-053 / T-NEW-054 / T-NEW-047 / T-NEW-059 as verified-done. Docs-only commit.
+5. **T-NEW-065** — Re-baseline T-NEW-058 from 13 → 35. Docs-only update.
+
+### P2 (existing backlog, unchanged)
+
+6. T-NEW-044 — supersedes by T-NEW-066 once steps 1-3 land.
+7. T-NEW-045 — public API facade decision (still pending user confirmation).
+8. T-NEW-060 — Squirl import-time print (out of scope, lives in squirl repo).
+
+---
+
+*File last edited: 2026-07-31 (reconsolidation + 5 new P0/P1 cards T-NEW-062..066; verified against HEAD `d63d296`)*
