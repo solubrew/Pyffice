@@ -25,6 +25,8 @@ from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.document import PyfficeDocumentManager
 from squirl.orgnql import fonql
+from typing import Any
+from typing_extensions import Self
 
 
 # ====================================================================================================================||
@@ -40,7 +42,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
     SERIALIZATION_VERSION = (1, 0, 0)
     """"""
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeFileSystem")).override(cfg)
@@ -53,7 +55,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.content = None
         self.tree = None
 
-    def add_directory(self, directory):
+    def add_directory(self, directory) -> Self:
         """Add a directory.
         
         Args:
@@ -66,7 +68,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.directories.append(directory)
         return self
 
-    def add_file(self, file_):
+    def add_file(self, file_) -> Self:
         """Add a file.
         
         Args:
@@ -79,7 +81,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.files.append(file_)
         return self
 
-    def add_root(self, root):
+    def add_root(self, root) -> Self:
         """Add a root.
         
         Args:
@@ -92,7 +94,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.roots.append(root)
         return self
 
-    def del_directory(self, index):
+    def del_directory(self, index) -> Self:
         """Remove the directory.
         
         Args:
@@ -105,7 +107,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.directories.pop(index)
         return self
 
-    def del_file(self, index):
+    def del_file(self, index) -> Self:
         """Remove the file.
         
         Args:
@@ -118,11 +120,11 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.files.pop(index)
         return self
 
-    def get_files(self):
+    def get_files(self) -> Any:
         """Get list of files."""
         return []
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> Self:
         """Load document into this document.
         
         Args:
@@ -142,7 +144,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.set_table(document.get("table", {}))
         return self
 
-    def set_tree(self, tree):
+    def set_tree(self, tree) -> Self:
         """Set the tree.
         
         Args:
@@ -155,7 +157,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.tree = tree.get("children", None)
         return self
 
-    def set_table(self, table):
+    def set_table(self, table) -> Self:
         """Set the table.
         
         Args:
@@ -168,7 +170,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.set_files(table.get("files", []))
         return self
 
-    def open_file(self, file=None):
+    def open_file(self, file=None) -> Self:
         """Open file.
         
         Args:
@@ -183,7 +185,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.set_files()
         return self
 
-    def set_content(self, content):
+    def set_content(self, content) -> Self:
         """Set the content.
         
         Args:
@@ -204,7 +206,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
             self.content = content
         return self
 
-    def set_directories(self, directories=[]):
+    def set_directories(self, directories=[]) -> Self:
         """Set the directories.
         
         Args:
@@ -224,7 +226,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
             self.directories = directories
         return self
 
-    def set_files(self, files=[]):
+    def set_files(self, files=[]) -> Self:
         """Set the files.
         
         Args:
@@ -241,7 +243,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
             self.files = files
         return self
 
-    def set_root(self, root=None):
+    def set_root(self, root=None) -> Self:
         """Set the root.
         
         Args:
@@ -259,7 +261,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
             self.root = root
         return self
 
-    def to_dict(self):
+    def to_dict(self) -> Self:
         """Convert this document to dict.
         
         Returns:

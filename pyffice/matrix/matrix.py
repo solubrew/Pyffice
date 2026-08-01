@@ -33,6 +33,7 @@ from pyffice.ports.msports import PyfficePortExcel
 from pyffice.ports.ports import PyfficePortCSV
 from pyffice.document import PyfficeDocumentManager
 from pyffice.matrix.spreadsheet import PyfficeSpreadSheet
+from typing_extensions import Self
 
 
 # ====================================================================================================================||
@@ -60,7 +61,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         self.objects = []
         self.sheets = {}
 
-    def add_chart(self, chart) -> "PyfficeMatrix":
+    def add_chart(self, chart) -> Self:
         """Add a chart.
         
         Args:
@@ -75,7 +76,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         self.charts.append(chart)
         return self
 
-    def add_object(self, object_type, data=None, cfg=None) -> "PyfficeMatrix":
+    def add_object(self, object_type, data=None, cfg=None) -> Self:
         """Add a object.
         
         Args:
@@ -97,7 +98,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         self.objects.append(object_)
         return self
 
-    def add_charts(self, charts) -> "PyfficeMatrix":
+    def add_charts(self, charts) -> Self:
         """Add a charts.
         
         Args:
@@ -110,7 +111,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
             self.add_chart(chart)
         return self
 
-    def add_objects(self, objects) -> "PyfficeMatrix":
+    def add_objects(self, objects) -> Self:
         """Add a objects.
         
         Args:
@@ -123,7 +124,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
             self.add_object(object_["type"], object_["data"], object_["cfg"])
         return self
 
-    def add_worksheet(self, name=None, cfg=None, tabn=None) -> "PyfficeMatrix":
+    def add_worksheet(self, name=None, cfg=None, tabn=None) -> Self:
         """Add a worksheet.
         
         Args:
@@ -146,7 +147,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         self.sheets[name] = sheet
         return self
 
-    def add_worksheets(self, sheets) -> "PyfficeMatrix":
+    def add_worksheets(self, sheets) -> Self:
         """Add a worksheets.
         
         Args:
@@ -195,28 +196,28 @@ class PyfficeMatrix(PyfficeDocumentManager):
         elif format_ == "gsheet":
             self.export_gsheet()
 
-    def export_excel(self, format_=None) -> "PyfficeMatrix":
+    def export_excel(self, format_=None) -> Self:
         """Export to Excel format."""
         if not self.data:
             return self
         # Placeholder - would use openpyxl
         return self
 
-    def export_csv(self, format_=None) -> "PyfficeMatrix":
+    def export_csv(self, format_=None) -> Self:
         """Export to CSV format."""
         if not self.data:
             return self
         # Placeholder - would use csv module
         return self
 
-    def export_gsheet(self, format_=None) -> "PyfficeMatrix":
+    def export_gsheet(self, format_=None) -> Self:
         """Export to Google Sheets."""
         if not self.data:
             return self
         # Placeholder - would use gspread
         return self
 
-    def file_import(self, file_=None, if_data_only=False, read_only=False, keep_vba=False) -> "PyfficeMatrix":
+    def file_import(self, file_=None, if_data_only=False, read_only=False, keep_vba=False) -> Self:
         """File import.
         
         Args:
@@ -344,7 +345,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
                     address = f"{chr(65 + col_idx)}{row_idx + 1}"
                     self.set_cell_value(address, value)
 
-    def load_dataset(self, dataset_name) -> "PyfficeMatrix":
+    def load_dataset(self, dataset_name) -> Self:
         """Load data from a named dataset into the table"""
         if self.app and hasattr(self.app, "model"):
             try:
@@ -370,7 +371,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
                 logma.error(f"Error loading dataset {dataset_name}: {e}")
         return self
 
-    def load_document(self, document=None) -> "PyfficeMatrix":
+    def load_document(self, document=None) -> Self:
         """Load document into this document.
         
         Args:
@@ -531,7 +532,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         self.data = data
         # super().file_open(path)
 
-    def open_file_csv(self) -> "PyfficeMatrix":
+    def open_file_csv(self) -> Self:
         """Open a CSV file."""
         if not self.file_path:
             return self
@@ -539,7 +540,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         # Placeholder - would read CSV
         return self
 
-    def open_file_excel(self) -> "PyfficeMatrix":
+    def open_file_excel(self) -> Self:
         """Open an Excel file."""
         if not self.file_path:
             return self
@@ -560,7 +561,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         sanitized_name = sheet_name
         return sanitized_name
 
-    def save(self, path=None, syntax=None, encrypt_key=None) -> "PyfficeMatrix":
+    def save(self, path=None, syntax=None, encrypt_key=None) -> Self:
         """Save the document.
         
         Args:
@@ -582,7 +583,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         # if i store always at the manager level then is that the right thing to do?
         return self
 
-    def save_csv(self, path) -> "PyfficeMatrix":
+    def save_csv(self, path) -> Self:
         """Save as CSV file."""
         if not path:
             return self
@@ -594,14 +595,14 @@ class PyfficeMatrix(PyfficeDocumentManager):
         porter = PyfficePortExcel({"parent": self})
         porter.file_export(self, path)
 
-    def save_gsheet(self, path) -> "PyfficeMatrix":
+    def save_gsheet(self, path) -> Self:
         """Save to Google Sheets."""
         if not path:
             return self
         # Placeholder - would use gspread
         return self
 
-    def save_document(self, file_path=None) -> "PyfficeMatrix":
+    def save_document(self, file_path=None) -> Self:
         """Save the current spreadsheet to a file"""
         if file_path is None:
             file_path = self.file_path
@@ -626,7 +627,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
 
         return self
 
-    def save_as_excel(self, file_path) -> "PyfficeMatrix":
+    def save_as_excel(self, file_path) -> Self:
         """Save as Excel file (.xlsx)"""
         try:
             if self.document:
@@ -651,7 +652,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
             logma.error(f"Error saving Excel file: {e}")
         return self
 
-    def save_as_ods(self, file_path) -> "PyfficeMatrix":
+    def save_as_ods(self, file_path) -> Self:
         """Save as OpenDocument Spreadsheet (.ods)"""
         try:
             if self.document:
@@ -666,7 +667,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
             logma.error(f"Error saving ODS file: {e}")
         return self
 
-    def save_as_csv(self, file_path, delimiter=",") -> "PyfficeMatrix":
+    def save_as_csv(self, file_path, delimiter=",") -> Self:
         """Save as CSV file"""
         try:
             import csv
@@ -693,12 +694,12 @@ class PyfficeMatrix(PyfficeDocumentManager):
         if file_path:
             self.save_to_file(file_path)
 
-    def set_charts(self, charts) -> "PyfficeMatrix":
+    def set_charts(self, charts) -> Self:
         """Set chart objects."""
         self.charts = charts
         return self
 
-    def set_formula_library(self, library=None) -> "PyfficeMatrix":
+    def set_formula_library(self, library=None) -> Self:
         """Set the formula library.
         
         Args:
@@ -710,12 +711,12 @@ class PyfficeMatrix(PyfficeDocumentManager):
         self.formulas_library = PyfficeFormulasLibrary(library)
         return self
 
-    def set_objects(self, objects) -> "PyfficeMatrix":
+    def set_objects(self, objects) -> Self:
         """Set objects."""
         self.objects = objects
         return self
 
-    def set_porter(self, porter) -> "PyfficeMatrix":
+    def set_porter(self, porter) -> Self:
         """Set the porter.
         
         Args:
@@ -731,7 +732,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
             self.porter = porter
         return self
 
-    def set_sheets(self, sheets) -> "PyfficeMatrix":
+    def set_sheets(self, sheets) -> Self:
         """Set the sheets.
         
         Args:
@@ -744,7 +745,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
             self.sheets[sheet["name"]] = PyfficeSpreadSheet(sheet)
         return self
 
-    def save_as(self, name, path) -> "PyfficeMatrix":
+    def save_as(self, name, path) -> Self:
         """Save the document.
         
         Args:
@@ -757,7 +758,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         super().save_as(path)
         return self
 
-    def save_copy_as(self, name, path=None) -> "PyfficeMatrix":
+    def save_copy_as(self, name, path=None) -> Self:
         """Save the document.
         
         Args:
@@ -770,7 +771,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         super().save_copy_as(name, path)
         return self
 
-    def set_compatibility(self, compatibility) -> "PyfficeMatrix":
+    def set_compatibility(self, compatibility) -> Self:
         """Set the compatibility.
         
         Args:

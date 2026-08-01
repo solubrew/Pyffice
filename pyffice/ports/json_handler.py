@@ -22,6 +22,7 @@ from pathlib import Path
 from typing import Any, Optional
 
 from kahndor.logma import Logma
+from typing_extensions import Self
 
 logma = Logma(__name__)
 logma.off()
@@ -66,7 +67,7 @@ def add_child(parent: dict, key: str, value: Any) -> dict:
 class PyfficeJSON:
     """Handler for JSON file operations."""
 
-    def __init__(self, file_path: Optional[str] = None):
+    def __init__(self, file_path: Optional[str] = None) -> None:
         """
         Initialize PyfficeJSON handler.
 
@@ -77,7 +78,7 @@ class PyfficeJSON:
         self.file_path = Path(file_path) if file_path else None
         self._data: Any = None
 
-    def load(self, file_path: Optional[str] = None) -> "PyfficeJSON":
+    def load(self, file_path: Optional[str] = None) -> Self:
         """
         Load JSON from file.
 
@@ -96,7 +97,7 @@ class PyfficeJSON:
 
         return self
 
-    def save(self, file_path: Optional[str] = None, indent: int = 2) -> "PyfficeJSON":
+    def save(self, file_path: Optional[str] = None, indent: int = 2) -> Self:
         """
         Save data to JSON file.
 
@@ -162,7 +163,7 @@ class PyfficeJSON:
                 return default
         return value
 
-    def set(self, key: str, value: Any) -> "PyfficeJSON":
+    def set(self, key: str, value: Any) -> Self:
         """Set a value by dotted key (e.g. 'user.profile.name').
 
         Replaces the PyfficeDataMixin.set() method that was dropped.

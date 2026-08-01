@@ -20,6 +20,8 @@ import datetime as dt
 from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
+from typing import Any
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -47,7 +49,7 @@ class PyfficeAudio(PyfficeDocument):
     SERIALIZATION_VERSION = (1, 0, 0)
     """"""
 
-    def __init__(self, path, cfg=None):
+    def __init__(self, path, cfg=None) -> None:
         """"""
         self.config = kahndor.Instruct(pxcfg).select("PyfficeAudio")
         super().__init__()
@@ -55,7 +57,7 @@ class PyfficeAudio(PyfficeDocument):
         self.path = path
         # self.audio = pydub.AudioSegment.from_file(path)
 
-    def add_fade(self, inn=False, out=False, in_duration=None, out_duration=None):
+    def add_fade(self, inn=False, out=False, in_duration=None, out_duration=None) -> Self:
         """Add a fade.
         
         Args:
@@ -77,7 +79,7 @@ class PyfficeAudio(PyfficeDocument):
             self.audio = self.audio.fade_out(out_duration)
         return self
 
-    def convert_mp3_to_wave(self, new_path):
+    def convert_mp3_to_wave(self, new_path) -> Self:
         """Convert mp3 to wave.
         
         Args:
@@ -90,7 +92,7 @@ class PyfficeAudio(PyfficeDocument):
             logma.warning(f"MP3 Not Supported without FFMPEG.")
         return self
 
-    def convert_wav_to_mp3(self, new_path):
+    def convert_wav_to_mp3(self, new_path) -> Self:
         """Convert wav to mp3.
         
         Args:
@@ -104,7 +106,7 @@ class PyfficeAudio(PyfficeDocument):
         self.audio.export(new_path, format="mp3")
         return self
 
-    def cut_section(self, start, end, keep=False):
+    def cut_section(self, start, end, keep=False) -> Self:
         """Cut section.
         
         Args:
@@ -119,25 +121,25 @@ class PyfficeAudio(PyfficeDocument):
         trimmed_audio.export(self.path, format="mp3")
         return self
 
-    def find_pause(self):
+    def find_pause(self) -> Any:
         """Find pause points in audio."""
         return []
 
-    def find_unpause(self):
+    def find_unpause(self) -> Any:
         """Find unpause points in audio."""
         return []
 
-    def get_duration(self):
+    def get_duration(self) -> Any:
         """Get audio duration."""
         return getattr(self, 'duration', 0)
 
-    def increase_volume(self, percent):
+    def increase_volume(self, percent) -> Self:
         """Increase volume by percent."""
         current = getattr(self, 'volume', 100)
         self.volume = min(100, current + percent)
         return self
 
-    def decrease_volume(self, percent):
+    def decrease_volume(self, percent) -> Self:
         """Decrease volume by percent."""
         current = getattr(self, 'volume', 100)
         self.volume = max(0, current - percent)
@@ -147,7 +149,7 @@ class PyfficePlayList(PyfficeDocumentManager):
     """"""
     SERIALIZATION_VERSION = (1, 0, 0)
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         self.config = kahndor.Instruct(pxcfg).override("")
         super().__init__(self)

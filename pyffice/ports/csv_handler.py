@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any, Iterator, List, Dict, Optional
 
 from kahndor.logma import Logma
+from typing_extensions import Self
 
 logma = Logma(__name__)
 logma.off()
@@ -73,7 +74,7 @@ def append_row(filepath: str, row: List[str], delimiter: str = ",", encoding: st
 class PyfficeCSV:
     """Handler for CSV file operations."""
 
-    def __init__(self, file_path: Optional[str] = None):
+    def __init__(self, file_path: Optional[str] = None) -> None:
         """
         Initialize PyfficeCSV handler.
 
@@ -85,7 +86,7 @@ class PyfficeCSV:
         self.headers: list[str] = []
         self._data: list[dict[str, Any]] = []
 
-    def load(self, file_path: str) -> "PyfficeCSV":
+    def load(self, file_path: str) -> Self:
         """
         Load CSV file from path.
 
@@ -105,7 +106,7 @@ class PyfficeCSV:
 
         return self
 
-    def save(self, file_path: Optional[str] = None) -> "PyfficeCSV":
+    def save(self, file_path: Optional[str] = None) -> Self:
         """
         Save data to CSV file.
 
@@ -135,7 +136,7 @@ class PyfficeCSV:
         for row in self._data:
             yield row
 
-    def append(self, row: dict[str, Any]) -> "PyfficeCSV":
+    def append(self, row: dict[str, Any]) -> Self:
         """
         Append a row to the data.
 
@@ -150,7 +151,7 @@ class PyfficeCSV:
         self._data.append(row)
         return self
 
-    def extend(self, rows: list[dict[str, Any]]) -> "PyfficeCSV":
+    def extend(self, rows: list[dict[str, Any]]) -> Self:
         """
         Extend data with multiple rows.
 
@@ -210,7 +211,7 @@ class PyfficeCSV:
         """Return number of rows."""
         return len(self._data)
 
-    def clear(self) -> "PyfficeCSV":
+    def clear(self) -> Self:
         """Clear all data."""
         self._data = []
         return self

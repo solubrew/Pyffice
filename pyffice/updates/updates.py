@@ -22,6 +22,7 @@ from copy import deepcopy
 # ======================================Solutions Brewer Library Modules==============================================||
 from kahndor import kahndor
 from kahndor.logma import Logma
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -35,7 +36,7 @@ pxcfg = join(here, "_data_", "updates.yaml")
 class PyfficeUpdate(object):
     """"""
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         logma.debug(f"PyfficeUpdate.__init__ called")
         self.config = kahndor.Instruct(pxcfg).select("PyfficeUpdate").override(cfg)
@@ -65,7 +66,7 @@ class PyfficeUpdate(object):
 class PyfficeUnitUpdate(PyfficeUpdate):
     """"""
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         logma.debug(f"PyfficeUnitUpdate.__init__ called")
         super().__init__(cfg)
@@ -83,7 +84,7 @@ class PyfficeUnitUpdate(PyfficeUpdate):
         """Returns True if the document is missing fields not in the schema at the schema levels"""
         return None
 
-    def create_temp_unit(self) -> "PyfficeUnitUpdate":
+    def create_temp_unit(self) -> Self:
         """Create a temporary unit."""
         self.temp_unit = {}
         return self
@@ -96,7 +97,7 @@ class PyfficeUnitUpdate(PyfficeUpdate):
 class PyfficeDocumentUpdate(PyfficeUpdate):
     """"""
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(pxcfg).select("PyfficeDocumentUpdate").override(cfg)
@@ -115,7 +116,7 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
         """Returns True if the document is missing fields not in the schema at the schema levels"""
         return None
 
-    def create_temp_document(self) -> "PyfficeDocumentUpdate":
+    def create_temp_document(self) -> Self:
         """Create a temporary document."""
         self.temp_document = {}
         return self
@@ -230,7 +231,7 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
                 else:
                     target[key] = value
 
-    def update_data(self, update) -> "PyfficeDocumentUpdate":
+    def update_data(self, update) -> Self:
         """Update data.
         
         Args:
@@ -247,7 +248,7 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
             self.run_updates(self.data, update["update"])
         return self
 
-    def update_document(self, update) -> "PyfficeDocumentUpdate":
+    def update_document(self, update) -> Self:
         """Update document.
         
         Args:
@@ -264,7 +265,7 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
             self.run_updates(self.document, update["update"])
         return self
 
-    def update_meta_data(self, update) -> "PyfficeDocumentUpdate":
+    def update_meta_data(self, update) -> Self:
         """Update meta data.
         
         Args:
@@ -337,18 +338,18 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
 class PyfficeUpdater(object):
     """"""
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         self.config = kahndor.Instruct(pxcfg).select("PyfficeUpdater").override(cfg)
 
-    def update_document(self) -> "PyfficeUpdater":
+    def update_document(self) -> Self:
         """Update the document."""
         # Placeholder - would apply updates to document
         if not hasattr(self, 'document'):
             return self
         return self
 
-    def update_unit(self) -> "PyfficeUpdater":
+    def update_unit(self) -> Self:
         """Update the unit."""
         # Placeholder - would apply updates to unit
         if not hasattr(self, 'unit'):

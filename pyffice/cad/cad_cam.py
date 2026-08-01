@@ -23,6 +23,7 @@ from typing import Any
 from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -37,7 +38,7 @@ pxcfg = join(here, "_data_", "cam.yaml")
 class PyfficeCAM(PyfficeDocument):
     SERIALIZATION_VERSION = (1, 0, 0)
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """Initialize the CAM handler."""
         logma.debug(f"PyfficeCAM.__init__ called")
         super().__init__(cfg)
@@ -51,7 +52,7 @@ class PyfficeCAM(PyfficeDocument):
         self.units: str = "mm"
         self._tools: list[dict[str, Any]] = []
 
-    def load(self, file_path) -> "PyfficeCAM":
+    def load(self, file_path) -> Self:
         """Load CAM file.
 
         Args:
@@ -63,7 +64,7 @@ class PyfficeCAM(PyfficeDocument):
         self.file_path = file_path
         return self
 
-    def save_cam(self, file_path=None) -> "PyfficeCAM":
+    def save_cam(self, file_path=None) -> Self:
         """Save CAM file.
 
         Args:
@@ -79,7 +80,7 @@ class PyfficeCAM(PyfficeDocument):
         self.file_path = target
         return self
 
-    def add_tool(self, tool) -> "PyfficeCAM":
+    def add_tool(self, tool) -> Self:
         """Add a tool to the tool list.
 
         Args:
@@ -99,7 +100,7 @@ class PyfficeCAM(PyfficeDocument):
         """
         return list(self._tools)
 
-    def set_units(self, units) -> "PyfficeCAM":
+    def set_units(self, units) -> Self:
         """Set measurement units.
 
         Args:
@@ -115,7 +116,7 @@ class PyfficeCAM(PyfficeDocument):
 class PyfficeCAMManager(PyfficeDocumentManager):
     SERIALIZATION_VERSION = (1, 0, 0)
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """Initialize the CAM manager."""
         logma.debug(f"PyfficeCAMManager.__init__ called")
         super().__init__(cfg)

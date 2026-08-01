@@ -21,6 +21,7 @@ from typing import Optional, Any
 from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.document import PyfficeDocumentManager, PyfficeUnit
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -81,7 +82,7 @@ class PyfficeProject(PyfficeDocumentManager):
         "yaml": [".yaml", ".yml"],
     }
 
-    def __init__(self, cfg: Optional[dict] = None):
+    def __init__(self, cfg: Optional[dict] = None) -> None:
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeProject")).override(cfg)
         self.tasks = []
@@ -89,22 +90,22 @@ class PyfficeProject(PyfficeDocumentManager):
         self.milestones = []
         self.dependencies = []
 
-    def add_task(self, task: "ProjectTask") -> "PyfficeProject":
+    def add_task(self, task: Self) -> "PyfficeProject":
         """Add a task to the project."""
         self.tasks.append(task)
         return self
 
-    def add_resource(self, resource: "ProjectResource") -> "PyfficeProject":
+    def add_resource(self, resource: Self) -> "PyfficeProject":
         """Add a resource to the project."""
         self.resources.append(resource)
         return self
 
-    def add_milestone(self, milestone: "ProjectMilestone") -> "PyfficeProject":
+    def add_milestone(self, milestone: Self) -> "PyfficeProject":
         """Add a milestone to the project."""
         self.milestones.append(milestone)
         return self
 
-    def add_dependency(self, from_task: str, to_task: str, dependency_type: str = "FS") -> "PyfficeProject":
+    def add_dependency(self, from_task: str, to_task: str, dependency_type: str = Self) -> "PyfficeProject":
         """Add a task dependency (Finish-to-Start by default)."""
         self.dependencies.append({"from": from_task, "to": to_task, "type": dependency_type})
         return self
@@ -264,7 +265,7 @@ class PyfficeProjectAssignment(PyfficeUnit):
     """"""
     SERIALIZATION_VERSION = (1, 0, 0)
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(pxcfg).select("").override(cfg)
@@ -274,7 +275,7 @@ class PyfficeProjectTask(PyfficeUnit):
     """Represents a task in a project."""
     SERIALIZATION_VERSION = (1, 0, 0)
 
-    def __init__(self, cfg: Optional[dict] = None):
+    def __init__(self, cfg: Optional[dict] = None) -> None:
         super().__init__(cfg)
         self.name = cfg.get("name") if cfg else None
         self.start_date = cfg.get("start_date") if cfg else None
@@ -312,7 +313,7 @@ class PyfficeProjectResource(PyfficeUnit):
     """Represents a resource in a project."""
     SERIALIZATION_VERSION = (1, 0, 0)
 
-    def __init__(self, cfg: Optional[dict] = None):
+    def __init__(self, cfg: Optional[dict] = None) -> None:
         super().__init__(cfg)
         """Serialize this object to a dict.
         
@@ -354,7 +355,7 @@ class PyfficeProjectMilestone(PyfficeUnit):
     """Represents a milestone in a project."""
     SERIALIZATION_VERSION = (1, 0, 0)
 
-    def __init__(self, cfg: Optional[dict] = None):
+    def __init__(self, cfg: Optional[dict] = None) -> None:
         super().__init__(cfg)
         self.name = cfg.get("name") if cfg else None
         self.date = cfg.get("date") if cfg else None

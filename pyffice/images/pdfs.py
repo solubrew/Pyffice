@@ -28,6 +28,8 @@ import fitz
 from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
+from typing import Any
+from typing_extensions import Self
 
 
 # ====================================================================================================================||
@@ -47,7 +49,7 @@ class PyfficePDF(PyfficeDocument):
     annotations, embedded media, and encryption.
     """
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """
         Initialize with a given PDF file path and optional configuration.
 
@@ -65,7 +67,7 @@ class PyfficePDF(PyfficeDocument):
         self.storage = "external"
         self.writer = None
 
-    def add_page(self, new_page=None):
+    def add_page(self, new_page=None) -> Self:
         """
         Add a blank page or an existing page to the PDF.
 
@@ -78,7 +80,7 @@ class PyfficePDF(PyfficeDocument):
             self.writer.add_blank_page(width=8.5 * 72, height=11 * 72)  # Default 8.5x11 inches
         return self
 
-    def add_annotation(self, page_n, annotation_text, coords):
+    def add_annotation(self, page_n, annotation_text, coords) -> Self:
         """
         Add an annotation (like a comment or text highlight) to a specific page.
 
@@ -97,7 +99,7 @@ class PyfficePDF(PyfficeDocument):
         page.add_annotation(annotation)
         return self
 
-    def edit(self):
+    def edit(self) -> Self:
         """Edit.
         
         Returns:
@@ -109,7 +111,7 @@ class PyfficePDF(PyfficeDocument):
             self.writer.add_page(page)
         return self
 
-    def embed_media(self, media_path, page_n=0, rect=(100, 500, 200, 600)):
+    def embed_media(self, media_path, page_n=0, rect=(100, 500, 200, 600)) -> Self:
         """
         Embed media (like audio or video) into a specific page.
 
@@ -138,7 +140,7 @@ class PyfficePDF(PyfficeDocument):
         page.add_annotation(annotation)
         return self
 
-    def encrypt(self, owner_password, user_password=None):
+    def encrypt(self, owner_password, user_password=None) -> Self:
         """
         Encrypt the PDF with a password, allowing controlled access.
 
@@ -150,20 +152,20 @@ class PyfficePDF(PyfficeDocument):
         self.writer.encrypt(user_password=user_password, owner_password=owner_password)
         return self
 
-    def extract_text(self, page_n=0):
+    def extract_text(self, page_n=0) -> None:
         """Extract the text from a specific page."""
         mat = fitz.Matrix(self.scale, self.scale)
         pix = page.get_pixmap(matrix=mat)
 
-    def get_binary(self):
+    def get_binary(self) -> Any:
         """Get PDF as binary."""
         return b""
 
-    def get_content(self):
+    def get_content(self) -> Any:
         """Get PDF content."""
         return ""
 
-    def get_page_size(self, page_n=0):
+    def get_page_size(self, page_n=0) -> Any:
         """
         Get the size (width and height) of a specific page.
 
@@ -174,7 +176,7 @@ class PyfficePDF(PyfficeDocument):
         media_box = page.mediabox
         return float(media_box.width), float(media_box.height)
 
-    def get_page_text(self, page_n=0):
+    def get_page_text(self, page_n=0) -> Any:
         """
         Extract the text from a specific page.
 
@@ -184,7 +186,7 @@ class PyfficePDF(PyfficeDocument):
         page = self.reader.pages[page_n]
         return page.extract_text()
 
-    def initialize_writer(self):
+    def initialize_writer(self) -> Self:
         """Initialize writer.
         
         Returns:
@@ -194,7 +196,7 @@ class PyfficePDF(PyfficeDocument):
             self.writer = PdfWriter()  # For writing to new PDFs
         return self
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> Self:
         """Load document into this document.
         
         Args:
@@ -213,14 +215,14 @@ class PyfficePDF(PyfficeDocument):
         self.set_file_path(content.get("file_path", None))
         return self
 
-    def load_pdf_pages(self):
+    def load_pdf_pages(self) -> Self:
         """Render PDF pages as images to display."""
         for page_num in range(len(self.reader)):
             page = self.reader.load_page(page_num)  # Load page securely
             pix = page.get_pixmap()  # Render the page into a pixmap
         return self
 
-    def open_file(self, file_=None):
+    def open_file(self, file_=None) -> Self:
         """Open file.
         
         Args:
@@ -240,7 +242,7 @@ class PyfficePDF(PyfficeDocument):
         self.pdf_fitz = fitz.open(file_)
         return self
 
-    def open_file_full_feature(self, file_):
+    def open_file_full_feature(self, file_) -> Self:
         """Open file full feature.
         
         Args:
@@ -252,7 +254,7 @@ class PyfficePDF(PyfficeDocument):
         self.reader = PdfReader(file_)  # For reading PDF content
         return self
 
-    def open_file_no_javascript(self, file_):
+    def open_file_no_javascript(self, file_) -> Self:
         """Open file no javascript.
         
         Args:
@@ -265,7 +267,7 @@ class PyfficePDF(PyfficeDocument):
         self.load_pdf_pages()
         return self
 
-    def remove_page(self, page_n):
+    def remove_page(self, page_n) -> Self:
         """
         Remove a specific page from the PDF.
 
@@ -278,7 +280,7 @@ class PyfficePDF(PyfficeDocument):
                 self.writer.add_page(page)
         return self
 
-    def save(self, path=None, syntax=None, encrypt_key=None):
+    def save(self, path=None, syntax=None, encrypt_key=None) -> Self:
         """
         Save changes to a new file.
 
@@ -288,7 +290,7 @@ class PyfficePDF(PyfficeDocument):
         super().save(path, syntax, encrypt_key)
         return self
 
-    def set_content(self, content):
+    def set_content(self, content) -> Self:
         """Set the content.
         
         Args:
@@ -316,7 +318,7 @@ class PyfficePDF(PyfficeDocument):
             self.content = content
         return self
 
-    def to_dict(self):
+    def to_dict(self) -> Self:
         """Convert this document to dict.
         
         Returns:
@@ -327,7 +329,7 @@ class PyfficePDF(PyfficeDocument):
         doc["data"]["content"] = self.content
         return self._canonicalize(doc)
 
-    def _get_bytes(self):
+    def _get_bytes(self) -> Any:
         """"""
         if self.file_path is not None and self.file_path != "":
             with open(self.file_path, "rb") as pdf_file:

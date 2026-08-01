@@ -25,6 +25,8 @@ from kahndor.logma import Logma
 
 from pyffice.audio.audio_export import PyfficeAudio
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
+from typing import Any
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -40,14 +42,14 @@ class PyfficeVideo(PyfficeDocument):
     SERIALIZATION_VERSION = (1, 0, 0)
     """"""
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         logma.debug(f"PyfficeVideo.__init__ called")
         self.config = kahndor.Instruct(pxcfg).select("PyfficeVideo").override(cfg)
         self.has_audio = False
         self.audio = None
 
-    def check_audio(self):
+    def check_audio(self) -> Self:
         """Check audio.
         
         Returns:
@@ -57,7 +59,7 @@ class PyfficeVideo(PyfficeDocument):
             self.audio = PyfficeAudio()
         return self
 
-    def cut_section(self, start, end, keep=False):
+    def cut_section(self, start, end, keep=False) -> Self:
         """Cut section.
         
         Args:
@@ -80,21 +82,21 @@ class PyfficeVideo(PyfficeDocument):
 
         return self
 
-    def find_pause(self):
+    def find_pause(self) -> Any:
         """Find pause points in video."""
         # Placeholder - would analyze video for pauses
         return []
 
-    def find_unpause(self):
+    def find_unpause(self) -> Any:
         """Find unpause points in video."""
         # Placeholder - would analyze video for resumes
         return []
 
-    def get_duration(self):
+    def get_duration(self) -> Any:
         """Get video duration."""
         return getattr(self, 'duration', 0)
 
-    def get_palette(self):
+    def get_palette(self) -> Any:
         """Get color palette."""
         return getattr(self, 'palette', [])
 # ====================================================================================================================||

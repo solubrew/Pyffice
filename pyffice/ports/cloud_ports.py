@@ -31,6 +31,7 @@ from kahndor import kahndor
 from kahndor.logma import Logma
 
 from pyffice.ports.ports import PyfficePort
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")
@@ -87,7 +88,7 @@ class PyfficeCloudPort(PyfficePort):
 
     PROVIDER = "base"
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """Initialize cloud port.
 
         Args:
@@ -105,7 +106,7 @@ class PyfficeCloudPort(PyfficePort):
 
     # -- Auth surface -------------------------------------------------------------
 
-    def authenticate(self, credentials: Optional[dict] = None) -> "PyfficeCloudPort":
+    def authenticate(self, credentials: Optional[dict] = None) -> Self:
         """Authenticate with the cloud provider.
 
         Subclasses override this to build their specific client
@@ -249,7 +250,7 @@ class PyfficePortGoogleDrive(PyfficeCloudPort):
     SERIALIZATION_VERSION = (1, 0, 0)
     PROVIDER = "google_drive"
 
-    def authenticate(self, credentials: Optional[dict] = None) -> "PyfficePortGoogleDrive":
+    def authenticate(self, credentials: Optional[dict] = None) -> Self:
         """Build the googleapiclient client.
 
         Args:
@@ -320,7 +321,7 @@ class PyfficePortGoogleDrive(PyfficeCloudPort):
             for f in results.get("files", [])
         ]
 
-    def download_file(self, file_id: str, local_path: str) -> "PyfficePortGoogleDrive":
+    def download_file(self, file_id: str, local_path: str) -> Self:
         """Download a file from Google Drive.
 
         Args:
@@ -383,7 +384,7 @@ class PyfficePortGoogleDrive(PyfficeCloudPort):
         logma.info(f"Created folder '{name}' -> {result.get('id')}")
         return {"id": result.get("id"), "name": result.get("name")}
 
-    def delete_file(self, file_id: str) -> "PyfficePortGoogleDrive":
+    def delete_file(self, file_id: str) -> Self:
         """Delete a file from Google Drive.
 
         Args:
@@ -418,7 +419,7 @@ class PyfficePortDropbox(PyfficeCloudPort):
     SERIALIZATION_VERSION = (1, 0, 0)
     PROVIDER = "dropbox"
 
-    def authenticate(self, credentials: Optional[dict] = None) -> "PyfficePortDropbox":
+    def authenticate(self, credentials: Optional[dict] = None) -> Self:
         """Build the Dropbox client.
 
         Args:
@@ -483,7 +484,7 @@ class PyfficePortDropbox(PyfficeCloudPort):
                 })
         return files
 
-    def download_file(self, file_id: str, local_path: str) -> "PyfficePortDropbox":
+    def download_file(self, file_id: str, local_path: str) -> Self:
         """Download a file from Dropbox.
 
         Args:
@@ -543,7 +544,7 @@ class PyfficePortDropbox(PyfficeCloudPort):
             "path": result.metadata.path_display,
         }
 
-    def delete_file(self, file_id: str) -> "PyfficePortDropbox":
+    def delete_file(self, file_id: str) -> Self:
         """Delete a file from Dropbox.
 
         Args:

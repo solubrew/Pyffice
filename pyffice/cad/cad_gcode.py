@@ -22,6 +22,8 @@ import datetime as dt
 from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
+from typing import Any
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -36,7 +38,7 @@ pxcfg = join(here, "_data_", ".yaml")
 class PyfficeGCode(PyfficeDocument):
     SERIALIZATION_VERSION = (1, 0, 0)
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """Initialize the G-code generator."""
         logma.debug(f"PyfficeGCode.__init__ called")
         super().__init__(cfg)
@@ -67,7 +69,7 @@ class PyfficeGCode(PyfficeDocument):
         """Add a G-code line."""
         self._code_lines.append(code)
 
-    def rapid_move(self, x=None, y=None, z=None):
+    def rapid_move(self, x=None, y=None, z=None) -> Self:
         """Generate rapid move (G0).
 
         Args:
@@ -88,7 +90,7 @@ class PyfficeGCode(PyfficeDocument):
         self._add(cmd)
         return self
 
-    def linear_move(self, x=None, y=None, z=None):
+    def linear_move(self, x=None, y=None, z=None) -> Self:
         """Generate linear move (G1).
 
         Args:
@@ -110,7 +112,7 @@ class PyfficeGCode(PyfficeDocument):
         self._add(cmd)
         return self
 
-    def arc_cw(self, x, y, i, j):
+    def arc_cw(self, x, y, i, j) -> Self:
         """Generate clockwise arc (G2).
 
         Args:
@@ -125,7 +127,7 @@ class PyfficeGCode(PyfficeDocument):
         self._add(f"G2 X{x} Y{y} I{i} J{j} F{self.feed_rate}")
         return self
 
-    def arc_ccw(self, x, y, i, j):
+    def arc_ccw(self, x, y, i, j) -> Self:
         """Generate counter-clockwise arc (G3).
 
         Args:
@@ -140,7 +142,7 @@ class PyfficeGCode(PyfficeDocument):
         self._add(f"G3 X{x} Y{y} I{i} J{j} F{self.feed_rate}")
         return self
 
-    def set_feed_rate(self, rate):
+    def set_feed_rate(self, rate) -> Self:
         """Set feed rate.
 
         Args:
@@ -152,7 +154,7 @@ class PyfficeGCode(PyfficeDocument):
         self.feed_rate = rate
         return self
 
-    def set_spindle_speed(self, rpm):
+    def set_spindle_speed(self, rpm) -> Self:
         """Set spindle speed.
 
         Args:
@@ -165,7 +167,7 @@ class PyfficeGCode(PyfficeDocument):
         self._add(f"S{rpm}")
         return self
 
-    def tool_change(self, tool):
+    def tool_change(self, tool) -> Self:
         """Change tool.
 
         Args:
@@ -178,7 +180,7 @@ class PyfficeGCode(PyfficeDocument):
         self._add(f"M6 T{tool}")
         return self
 
-    def pause(self):
+    def pause(self) -> Self:
         """Add program pause.
 
         Returns:
@@ -187,7 +189,7 @@ class PyfficeGCode(PyfficeDocument):
         self._add("M0")
         return self
 
-    def end(self):
+    def end(self) -> Self:
         """End program.
 
         Returns:
@@ -197,7 +199,7 @@ class PyfficeGCode(PyfficeDocument):
         self._add("M30")  # End program
         return self
 
-    def to_string(self):
+    def to_string(self) -> Any:
         """Return G-code as a single string.
 
         Returns:
@@ -205,7 +207,7 @@ class PyfficeGCode(PyfficeDocument):
         """
         return "\n".join(self._code_lines)
 
-    def save_gcode(self, filepath=None):
+    def save_gcode(self, filepath=None) -> Self:
         """Save G-code to file.
 
         Args:

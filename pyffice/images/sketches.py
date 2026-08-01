@@ -23,6 +23,8 @@ from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument
 from pyffice.items.layers import PyfficeLayer
+from typing import Any
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -37,7 +39,7 @@ class PyfficeSketch(PyfficeDocument):
     SERIALIZATION_VERSION = (1, 0, 0)
     """A Sketch overlay custom components ontop of a standard image"""
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeSketch").override(cfg))
@@ -49,7 +51,7 @@ class PyfficeSketch(PyfficeDocument):
         self.layers = None
         self.lock = None
 
-    def add_layer(self, layer):
+    def add_layer(self, layer) -> Self:
         """Add a layer.
         
         Args:
@@ -64,7 +66,7 @@ class PyfficeSketch(PyfficeDocument):
         self.layers[layer.name] = layer
         return self
 
-    def del_layer(self, layer):
+    def del_layer(self, layer) -> Self:
         """Remove the layer.
 
         Args:
@@ -75,7 +77,7 @@ class PyfficeSketch(PyfficeDocument):
         """
         return self._del_from_dict("layers", layer.name, "layers")
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> Self:
         """Load document into this document.
         
         Args:
@@ -96,26 +98,26 @@ class PyfficeSketch(PyfficeDocument):
         self.set_nodes(document.get("nodes", {}))
         return self
 
-    def set_lock(self, lock):
+    def set_lock(self, lock) -> Self:
         """Set lock state."""
         self.lock = lock
         return self
 
-    def set_edges(self, edges):
+    def set_edges(self, edges) -> Self:
         """Set edges."""
         self.edges = edges
         return self
 
-    def set_endpoints(self, endpoints):
+    def set_endpoints(self, endpoints) -> Self:
         """Set endpoints."""
         self.endpoints = endpoints
         return self
 
-    def set_nodes(self, nodes):
+    def set_nodes(self, nodes) -> Self:
         """Set nodes."""
         self.nodes = nodes
         return self
-    def to_md(self):
+    def to_md(self) -> Any:
         """Convert to Markdown."""
         # Placeholder - would generate markdown
         return ""

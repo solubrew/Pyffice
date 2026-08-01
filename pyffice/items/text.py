@@ -26,6 +26,7 @@ from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.document import PyfficeUnit
 from pyffice.items.colors import PyfficeColor
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -104,7 +105,7 @@ class PyfficeRun:
     font: Optional[PyfficeFont] = None
     style: Optional[str] = None
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         if self.font is None:
             self.font = PyfficeFont()
 
@@ -160,7 +161,7 @@ class PyfficeText(PyfficeUnit):
     SERIALIZATION_VERSION = (1, 0, 0)
     """Pyffice Text object consists of one string of text that can be formated in various ways by setting the selections"""
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeText")).override(cfg)
@@ -177,7 +178,7 @@ class PyfficeText(PyfficeUnit):
         self.value = None
         self.vertical = None
 
-    def load_unit(self, unit=None) -> "PyfficeText":
+    def load_unit(self, unit=None) -> Self:
         """Load a unit dict into this document.
         
         Args:
@@ -201,7 +202,7 @@ class PyfficeText(PyfficeUnit):
         self.set_text(text)
         return self
 
-    def set_alignment(self, horizontal=None, vertical=None) -> "PyfficeText":
+    def set_alignment(self, horizontal=None, vertical=None) -> Self:
         """Set the alignment.
         
         Args:
@@ -219,7 +220,7 @@ class PyfficeText(PyfficeUnit):
         self.vertical = vertical
         return self
 
-    def set_data_format(self, data_format) -> "PyfficeText":
+    def set_data_format(self, data_format) -> Self:
         """Set the data format.
         
         Args:
@@ -233,7 +234,7 @@ class PyfficeText(PyfficeUnit):
             self.data_format = data_format
         return self
 
-    def set_font(self, font) -> "PyfficeText":
+    def set_font(self, font) -> Self:
         """Set the Default font for the Text"""
         self.set_font_color(font)
         self.set_color_background(font)
@@ -256,7 +257,7 @@ class PyfficeText(PyfficeUnit):
             self.font = font if font is not None else self.config.dikt.get("font", {})
         return self
 
-    def set_font_color(self, font=None) -> "PyfficeText":
+    def set_font_color(self, font=None) -> Self:
         """Set the font color.
         
         Args:
@@ -273,7 +274,7 @@ class PyfficeText(PyfficeUnit):
             self.color = color
         return self
 
-    def set_color_background(self, font) -> "PyfficeText":
+    def set_color_background(self, font) -> Self:
         """Set the color background.
         
         Args:
@@ -290,7 +291,7 @@ class PyfficeText(PyfficeUnit):
             self.color_background = color
         return self
 
-    def set_color_foreground(self, font) -> "PyfficeText":
+    def set_color_foreground(self, font) -> Self:
         """Set the color foreground.
         
         Args:
@@ -307,7 +308,7 @@ class PyfficeText(PyfficeUnit):
             self.color_foreground = color
         return self
 
-    def set_html(self, value) -> "PyfficeText":
+    def set_html(self, value) -> Self:
         """Set the html.
         
         Args:
@@ -321,7 +322,7 @@ class PyfficeText(PyfficeUnit):
             self.html = value
         return self
 
-    def set_text(self, text) -> "PyfficeText":
+    def set_text(self, text) -> Self:
         """Set the text.
         
         Args:
@@ -376,7 +377,7 @@ class PyfficeText(PyfficeUnit):
 class PyfficeHTML(PyfficeText):
     """"""
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("")).override(cfg)
@@ -388,7 +389,7 @@ class PyfficePage(PyfficeUnit):
 
     VERSION = "0.0.1.0.1.0"
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(pxcfg).select("PyfficePage").override(cfg)

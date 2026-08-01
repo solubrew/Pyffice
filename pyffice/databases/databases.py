@@ -24,6 +24,8 @@ from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 from squirl.orgnql import sonql
+from typing import Any
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -38,12 +40,12 @@ pxcfg = join(here, "_data_", ".yaml")
 class PyfficeDatabaseConnection(sonql.Doc):
     """Manages database connections."""
 
-    def __init__(self, path=None, cfg=None):
+    def __init__(self, path=None, cfg=None) -> None:
         """Initialize the database connection."""
         self.config = kahndor.Instruct(pxcfg).select("PyfficeDatabaseConnection")
         super().__init__(path)
         self.config.override(cfg)
-    def open_file(self, document):
+    def open_file(self, document) -> Self:
         """Open a database file."""
         if isinstance(document, str):
             import sqlite3
@@ -58,14 +60,14 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
     VERSION = "0.0.1.0.1.0"
     SERIALIZATION_VERSION = (1, 0, 0)
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         logma.debug(f"PyfficeDatabaseManager.__init__ called")
         self.config = kahndor.Instruct(pxcfg).select("").override(cfg)
         self.databases = {}
         self.connections = {}
 
-    def load_database(self, database):
+    def load_database(self, database) -> Any:
         """Load database into this document.
         
         Args:
@@ -80,28 +82,28 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
             return self.databases[database]
         return None
 
-    def add_connection(self, name, connection):
+    def add_connection(self, name, connection) -> Self:
         """Add a database connection."""
         self.connections[name] = connection
         return self
 
-    def add_server(self, name, server):
+    def add_server(self, name, server) -> Self:
         """Add a database server."""
         self.servers = getattr(self, 'servers', {})
         self.servers[name] = server
         return self
 
-    def add_database(self, name, database):
+    def add_database(self, name, database) -> Self:
         """Add a database."""
         self.databases[name] = database
         return self
 
-    def create_database(self, name, server, database):
+    def create_database(self, name, server, database) -> Self:
         """Create a new database."""
         self.databases[name] = {"server": server, "database": database}
         return self
 
-    def get_indexes(self, name):
+    def get_indexes(self, name) -> Any:
         """Get indexes for a database."""
         if name in self.databases and hasattr(self.databases[name], 'execute'):
             try:
@@ -111,12 +113,12 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
                 pass
         return []
 
-    def get_index(self, name, index):
+    def get_index(self, name, index) -> Any:
         """Get a specific index."""
         indexes = self.get_indexes(name)
         return indexes[index] if 0 <= index < len(indexes) else None
 
-    def get_tables(self, name):
+    def get_tables(self, name) -> Any:
         """Get tables for a database."""
         if name in self.databases and hasattr(self.databases[name], 'execute'):
             try:
@@ -126,12 +128,12 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
                 pass
         return []
 
-    def get_table(self, name, table):
+    def get_table(self, name, table) -> Any:
         """Get a specific table."""
         tables = self.get_tables(name)
         return tables[table] if 0 <= table < len(tables) else None
 
-    def get_views(self, name):
+    def get_views(self, name) -> Any:
         """Get views for a database."""
         if name in self.databases and hasattr(self.databases[name], 'execute'):
             try:
@@ -141,7 +143,7 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
                 pass
         return []
 
-    def get_view(self, name, view):
+    def get_view(self, name, view) -> Any:
         """Get a specific view."""
         views = self.get_views(name)
         return views[view] if 0 <= view < len(views) else None

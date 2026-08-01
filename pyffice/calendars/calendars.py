@@ -25,6 +25,7 @@ from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.document import PyfficeDocumentManager, PyfficeUnit
 from pyffice.calendars.events import PyfficeEvent, PyfficeTimeUnit  # , PyfficeTask
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -39,7 +40,7 @@ class PyfficeCalendar(PyfficeDocumentManager):
     SERIALIZATION_VERSION = (1, 0, 0)
     """"""
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).override("PyfficeCalendar")).override(cfg)
@@ -51,7 +52,7 @@ class PyfficeCalendar(PyfficeDocumentManager):
         self.end_date = None
         self.time_unit = None
 
-    def add_event(self, event) -> "PyfficeCalendar":
+    def add_event(self, event) -> Self:
         """Add a event.
         
         Args:
@@ -93,7 +94,7 @@ class PyfficeCalendar(PyfficeDocumentManager):
     #         self.tasks.remove(task)
     #         self.add_change("tasks", deepcopy(self.tasks), self.tasks, "del")
 
-    def load_document(self, document=None) -> "PyfficeCalendar":
+    def load_document(self, document=None) -> Self:
         """Load document into this document.
         
         Args:
@@ -117,7 +118,7 @@ class PyfficeCalendar(PyfficeDocumentManager):
         self.set_tasks(document.get("tasks", []))
         return self
 
-    def set_date_end(self, date) -> "PyfficeCalendar":
+    def set_date_end(self, date) -> Self:
         """Set the date end.
         
         Args:
@@ -131,7 +132,7 @@ class PyfficeCalendar(PyfficeDocumentManager):
             self.end_date = date
         return self
 
-    def set_date_start(self, date) -> "PyfficeCalendar":
+    def set_date_start(self, date) -> Self:
         """Set the date start.
         
         Args:
@@ -145,7 +146,7 @@ class PyfficeCalendar(PyfficeDocumentManager):
             self.start_date = date
         return self
 
-    def set_events(self, events) -> "PyfficeCalendar":
+    def set_events(self, events) -> Self:
         """Replace self.events with [PyfficeEvent(e) for e in events]."""
         self.events = [PyfficeEvent({"event": x}) for x in events]
         return self
@@ -161,7 +162,7 @@ class PyfficeCalendar(PyfficeDocumentManager):
         """
         self.tasks += tasks
 
-    def set_time_unit(self, time_unit) -> "PyfficeCalendar":
+    def set_time_unit(self, time_unit) -> Self:
         """Set the time unit.
         
         Args:
@@ -184,7 +185,7 @@ class PyfficeCalendar(PyfficeDocumentManager):
     #     self.tasks.append(task)
     #     return self
 
-    def set_time_scale(self, time_scale) -> "PyfficeCalendar":
+    def set_time_scale(self, time_scale) -> Self:
         """Set the time scale.
         
         Args:

@@ -24,6 +24,7 @@ from kahndor.logma import Logma
 from pyffice.document import PyfficeUnit
 from pyffice.items.colors import PyfficeColor
 from pyffice.items.text import PyfficeText
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -38,7 +39,7 @@ class PyfficeShape(PyfficeUnit):
     SERIALIZATION_VERSION = (1, 0, 0)
     """"""
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeShape")).override(cfg)
@@ -49,7 +50,7 @@ class PyfficeShape(PyfficeUnit):
         self.size = None
         self.texts = None
 
-    def add_shape(self, shape) -> "PyfficeShape":
+    def add_shape(self, shape) -> Self:
         """Add a shape.
         
         Args:
@@ -62,7 +63,7 @@ class PyfficeShape(PyfficeUnit):
         self.shapes[shape] = PyfficeShape(cfg)
         return self
 
-    def add_text(self, text, position=None) -> "PyfficeShape":
+    def add_text(self, text, position=None) -> Self:
         """Add a text.
         
         Args:
@@ -80,7 +81,7 @@ class PyfficeShape(PyfficeUnit):
         self.texts[str(position)] = text
         return self
 
-    def load_unit(self, unit=None) -> "PyfficeShape":
+    def load_unit(self, unit=None) -> Self:
         """Load a unit dict into this document.
         
         Args:
@@ -99,7 +100,7 @@ class PyfficeShape(PyfficeUnit):
         self.set_shapes(unit.get("shapes", []))
         return self
 
-    def mirror_shape(self, axis) -> "PyfficeShape":
+    def mirror_shape(self, axis) -> Self:
         """Mirror shape.
         
         Args:
@@ -116,22 +117,22 @@ class PyfficeShape(PyfficeUnit):
             self.set_size([self.size[0], -self.size[1]])
         return self
 
-    def mirror_text(self) -> "PyfficeShape":
+    def mirror_text(self) -> Self:
         """Mirror text horizontally."""
         self.text_flipped = not getattr(self, 'text_flipped', False)
         return self
 
-    def move_shape(self, x, y) -> "PyfficeShape":
+    def move_shape(self, x, y) -> Self:
         """Move shape by offset."""
         self.set_origin([self.origin[0] + x, self.origin[1] + y])
         return self
 
-    def move_text(self, x, y) -> "PyfficeShape":
+    def move_text(self, x, y) -> Self:
         """Move text by offset."""
         self.text_offset = (x, y)
         return self
 
-    def rotate_shape(self, axis, angle) -> "PyfficeShape":
+    def rotate_shape(self, axis, angle) -> Self:
         """Rotate shape."""
         if axis == "x":
             self.set_origin([-self.origin[1], self.origin[0]])
@@ -141,12 +142,12 @@ class PyfficeShape(PyfficeUnit):
             self.set_size([self.size[0], -self.size[1]])
         return self
 
-    def rotate_text(self, axis, angle) -> "PyfficeShape":
+    def rotate_text(self, axis, angle) -> Self:
         """Rotate text."""
         self.text_rotation = angle
         return self
 
-    def set_background(self, background, item="0") -> "PyfficeShape":
+    def set_background(self, background, item=Self) -> "PyfficeShape":
         """Set the background.
         
         Args:
@@ -170,7 +171,7 @@ class PyfficeShape(PyfficeUnit):
             self.shapes[item].background_color = background_color
         return self
 
-    def set_origin(self, origin) -> "PyfficeShape":
+    def set_origin(self, origin) -> Self:
         """Set the origin.
         
         Args:
@@ -186,7 +187,7 @@ class PyfficeShape(PyfficeUnit):
         self._set_envelope(self.origin, corner)
         return self
 
-    def set_shapes(self, shapes) -> "PyfficeShape":
+    def set_shapes(self, shapes) -> Self:
         """Set the shapes.
         
         Args:
@@ -220,7 +221,7 @@ class PyfficeShape(PyfficeUnit):
                     self.shape_size = self.corner[0] - self.shape_origin[0]
         return self
 
-    def set_size(self, size) -> "PyfficeShape":
+    def set_size(self, size) -> Self:
         """Set the size.
         
         Args:
@@ -235,14 +236,14 @@ class PyfficeShape(PyfficeUnit):
         corner = [self.origin[0] + self.size[0], self.origin[1] + self.size[1]]
         self._set_envelope(self.origin, corner)
         return self
-    def _set_envelope(self, top_left, bottom_right):
+    def _set_envelope(self, top_left, bottom_right) -> Self:
         """"""
         self.origin = top_left
         self.corner = bottom_right
         self._update_shape_sizes()
         return self
 
-    def _update_shape_sizes(self):
+    def _update_shape_sizes(self) -> None:
         """"""
 
 

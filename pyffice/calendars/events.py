@@ -22,6 +22,8 @@ import datetime as dt
 from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.document import PyfficeUnit
+from typing import Any
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -36,7 +38,7 @@ class PyfficeTimeUnit(PyfficeUnit):
     SERIALIZATION_VERSION = (1, 0, 0)
     """"""
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeScaleUnit")).override(cfg)
@@ -53,7 +55,7 @@ class PyfficeTimeUnit(PyfficeUnit):
         self.decades = None
         self.centuries = None
 
-    def get_centuries(self):
+    def get_centuries(self) -> Any:
         """Return the centuries.
         
         Returns:
@@ -67,7 +69,7 @@ class PyfficeTimeUnit(PyfficeUnit):
             self.centuries = centuries
         return self.centuries
 
-    def get_days(self):
+    def get_days(self) -> Any:
         """Return the days.
         
         Returns:
@@ -81,7 +83,7 @@ class PyfficeTimeUnit(PyfficeUnit):
             self.days = days
         return self.days
 
-    def get_decades(self):
+    def get_decades(self) -> Any:
         """Return the decades.
         
         Returns:
@@ -95,7 +97,7 @@ class PyfficeTimeUnit(PyfficeUnit):
             self.decades = decades
         return self.decades
 
-    def get_hours(self):
+    def get_hours(self) -> Any:
         """Return the hours.
         
         Returns:
@@ -109,7 +111,7 @@ class PyfficeTimeUnit(PyfficeUnit):
             self.hours = hours
         return self.hours
 
-    def get_minutes(self):
+    def get_minutes(self) -> Any:
         """Return the minutes.
         
         Returns:
@@ -123,7 +125,7 @@ class PyfficeTimeUnit(PyfficeUnit):
             self.minutes = minutes
         return self.minutes
 
-    def get_months(self):
+    def get_months(self) -> Any:
         """Return the months.
         
         Returns:
@@ -137,7 +139,7 @@ class PyfficeTimeUnit(PyfficeUnit):
             self.months = months
         return self.months
 
-    def get_seconds(self):
+    def get_seconds(self) -> Any:
         """Return the seconds.
         
         Returns:
@@ -151,7 +153,7 @@ class PyfficeTimeUnit(PyfficeUnit):
             self.seconds = seconds
         return self.seconds
 
-    def get_weeks(self):
+    def get_weeks(self) -> Any:
         """Return the weeks.
         
         Returns:
@@ -165,7 +167,7 @@ class PyfficeTimeUnit(PyfficeUnit):
             self.weeks = weeks
         return self.weeks
 
-    def get_years(self):
+    def get_years(self) -> Any:
         """Return the years.
         
         Returns:
@@ -179,7 +181,7 @@ class PyfficeTimeUnit(PyfficeUnit):
             self.years = years
         return self.years
 
-    def load_unit(self, unit):
+    def load_unit(self, unit) -> Self:
         """Load a unit dict into this document.
         
         Args:
@@ -206,7 +208,7 @@ class PyfficeTimeUnit(PyfficeUnit):
         self.get_centuries()
         return self
 
-    def set_scale_unit(self, scale_unit):
+    def set_scale_unit(self, scale_unit) -> Self:
         """Set the scale unit.
         
         Args:
@@ -237,7 +239,7 @@ class PyfficeTimeUnit(PyfficeUnit):
                 raise ValueError(f"tframe {scale_unit} is not supported")
         return self
 
-    def set_time_end(self, end_time):
+    def set_time_end(self, end_time) -> Self:
         """Set the time end.
         
         Args:
@@ -251,7 +253,7 @@ class PyfficeTimeUnit(PyfficeUnit):
             self.end_time = end_time
         return self
 
-    def set_time_start(self, start_time):
+    def set_time_start(self, start_time) -> Self:
         """Set the time start.
         
         Args:
@@ -269,7 +271,7 @@ class PyfficeEvent(PyfficeUnit):
     """"""
     SERIALIZATION_VERSION = (1, 0, 0)
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         logma.debug(f"PyfficeEvent.__init__ called")
         super().__init__(cfg)
@@ -279,7 +281,7 @@ class PyfficeEvent(PyfficeUnit):
         self.location_attendance = None
         self.start_dttm = None
 
-    def load_unit(self, unit):
+    def load_unit(self, unit) -> Self:
         """Load a unit dict into this document.
         
         Args:
@@ -297,7 +299,7 @@ class PyfficeEvent(PyfficeUnit):
         self.set_location(unit.get("location", None))
         return self
 
-    def set_end_dttm(self, end_dttm):
+    def set_end_dttm(self, end_dttm) -> Self:
         """Set the end dttm.
         
         Args:
@@ -311,7 +313,7 @@ class PyfficeEvent(PyfficeUnit):
             self.end_dttm = end_dttm
         return self
 
-    def set_event(self, event):
+    def set_event(self, event) -> Self:
         """Set the event.
         
         Args:
@@ -325,7 +327,7 @@ class PyfficeEvent(PyfficeUnit):
             self.event = event
         return self
 
-    def set_attendance_location(self, location):
+    def set_attendance_location(self, location) -> Self:
         """Set the attendance location.
         
         Args:
@@ -339,7 +341,7 @@ class PyfficeEvent(PyfficeUnit):
             self.location_attendance = location
         return self
 
-    def set_start_dttm(self, start_dttm):
+    def set_start_dttm(self, start_dttm) -> Self:
         """Set the start dttm.
         
         Args:
@@ -363,14 +365,14 @@ class PyfficeTask(PyfficeUnit):
     """
     SERIALIZATION_VERSION = (1, 0, 0)
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """Initialize a task with an optional dict-shaped payload."""
         logma.debug(f"PyfficeTask.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeTask")).override(cfg)
         self.payload = cfg
 
-    def get_payload(self):
+    def get_payload(self) -> Any:
         """Return the stored payload dict (or None if constructed empty)."""
         return self.payload
 

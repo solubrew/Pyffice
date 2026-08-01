@@ -25,6 +25,8 @@ from pyffice.document import PyfficeUnit
 from pyffice.items.text import PyfficeText
 from pyffice.items.colors import PyfficeColor
 from pyffice.images.images import PyfficeImage
+from typing import Any
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -40,7 +42,7 @@ class PyfficeBackground(PyfficeUnit):
     SERIALIZATION_VERSION = (1, 0, 0)
     """"""
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeBackground")).override(cfg)
@@ -50,7 +52,7 @@ class PyfficeBackground(PyfficeUnit):
         self.pattern = None
         self.transparency = None
 
-    def load_unit(self, unit):
+    def load_unit(self, unit) -> Self:
         """Load a unit dict into this document.
         
         Args:
@@ -69,7 +71,7 @@ class PyfficeBackground(PyfficeUnit):
         self.set_transparency(unit.get("transparency", None))
         return self
 
-    def set_color(self, color):
+    def set_color(self, color) -> Self:
         """Set the color.
         
         Args:
@@ -85,7 +87,7 @@ class PyfficeBackground(PyfficeUnit):
         self.color = color
         return self
 
-    def set_image(self, path):
+    def set_image(self, path) -> Self:
         """Set the image.
         
         Args:
@@ -104,12 +106,12 @@ class PyfficeBackground(PyfficeUnit):
         self.file_path = self.image.file_path
         return self
 
-    def set_pattern(self, pattern):
+    def set_pattern(self, pattern) -> Self:
         """Set cell pattern."""
         self.pattern = pattern
         return self
 
-    def set_transparency(self, transparency):
+    def set_transparency(self, transparency) -> Self:
         """Set the transparency.
         
         Args:
@@ -127,7 +129,7 @@ class PyfficeCell(PyfficeUnit):
     """"""
     SERIALIZATION_VERSION = (1, 0, 0)
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         logma.info(f"Address Initiated")
         super().__init__(cfg)
@@ -149,7 +151,7 @@ class PyfficeCell(PyfficeUnit):
         self.selections = None
         self.transparency = None
 
-    def evaluate(self):
+    def evaluate(self) -> None:
         """Evaluate.
         
         Returns:
@@ -159,7 +161,7 @@ class PyfficeCell(PyfficeUnit):
         inputs = self.get_inputs()
         self.parent.compiler.evaluate(formula, inputs)
 
-    def get_format(self):
+    def get_format(self) -> Any:
         """
         :return:
         """
@@ -184,11 +186,11 @@ class PyfficeCell(PyfficeUnit):
         }
         return format_
 
-    def get_formula(self):
+    def get_formula(self) -> Any:
         """Get cell formula."""
         return getattr(self, 'formula', None)
 
-    def get_inputs(self):
+    def get_inputs(self) -> Any:
         """Return the inputs.
         
         Returns:
@@ -196,11 +198,11 @@ class PyfficeCell(PyfficeUnit):
         """
         return self.formula_inputs
 
-    def get_value(self):
+    def get_value(self) -> Any:
         """Get cell value."""
         return getattr(self, 'value', None)
 
-    def load_unit(self, unit):
+    def load_unit(self, unit) -> Self:
         """Load a unit dict into this document.
         
         Args:
@@ -226,7 +228,7 @@ class PyfficeCell(PyfficeUnit):
         logma.info("Pyffice Cell Loaded")
         return self
 
-    def set_address(self, address):
+    def set_address(self, address) -> Self:
         """Set the address.
         
         Args:
@@ -242,7 +244,7 @@ class PyfficeCell(PyfficeUnit):
             self.address = address
         return self
 
-    def set_background(self, background):
+    def set_background(self, background) -> Self:
         """Set the background.
         
         Args:
@@ -258,7 +260,7 @@ class PyfficeCell(PyfficeUnit):
         self.background = background
         return self
 
-    def set_border_size(self, size, position="top"):
+    def set_border_size(self, size, position="top") -> Self:
         """Set the border size.
         
         Args:
@@ -274,7 +276,7 @@ class PyfficeCell(PyfficeUnit):
         self.border_size[position] = size
         return self
 
-    def set_border_color(self, color, position="top"):
+    def set_border_color(self, color, position="top") -> Self:
         """Set the border color.
         
         Args:
@@ -290,7 +292,7 @@ class PyfficeCell(PyfficeUnit):
         self.border_color[position] = color
         return self
 
-    def set_border_style(self, style, position="top"):
+    def set_border_style(self, style, position="top") -> Self:
         """Set the border style.
         
         Args:
@@ -306,12 +308,12 @@ class PyfficeCell(PyfficeUnit):
         self.border_style[position] = style
         return self
 
-    def set_format(self, format_):
+    def set_format(self, format_) -> Self:
         """Set cell format."""
         self.format = format_
         return self
 
-    def set_formula(self, formula, inputs=None):
+    def set_formula(self, formula, inputs=None) -> Self:
         """Set the formula.
         
         Args:
@@ -329,12 +331,12 @@ class PyfficeCell(PyfficeUnit):
         self.formula_inputs = inputs
         return self
 
-    def set_object(self, object_):
+    def set_object(self, object_) -> Self:
         """Set cell object."""
         self.object = object_
         return self
 
-    def set_value(self, value, font=None):
+    def set_value(self, value, font=None) -> Self:
         """Set the value.
         
         Args:
@@ -350,7 +352,7 @@ class PyfficeCell(PyfficeUnit):
         self.value = value
         return self
 
-    def set_transparency(self, transparency):
+    def set_transparency(self, transparency) -> Self:
         """Set the transparency.
         
         Args:

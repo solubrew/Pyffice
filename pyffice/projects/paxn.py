@@ -45,7 +45,7 @@ PAXN_PRIORITY_MAP = {
 REVERSE_PRIORITY_MAP = {v: k for k, v in PAXN_PRIORITY_MAP.items()}
 
 
-def _extract_fields(obj, fields):
+def _extract_fields(obj, fields) -> Any:
     """Extract named attributes from an object into a dict.
 
     Module-level helper. The audit's feature_envy check walks the
@@ -67,7 +67,7 @@ def _paxn_kwargs(data: dict, defaults: dict) -> dict:
 
 
 def _build_pyffice_project_dict(pid, name, description, status, priority, tags,
-                               created, start, target, completed, owner, members):
+                               created, start, target, completed, owner, members) -> Any:
     """Build a Pyffice project dict from primitive fields.
 
     Module-level helper so PAXNConverter.convert_to_pyffice's foreign
@@ -94,7 +94,7 @@ def _build_pyffice_project_dict(pid, name, description, status, priority, tags,
 
 def _build_pyffice_task_dict(tid, title, description, status, priority, tags,
                              assignee, created, due, start, completed,
-                             dependencies, notes, effort_estimate, time_spent):
+                             dependencies, notes, effort_estimate, time_spent) -> Any:
     """Build a Pyffice task dict from primitive fields.
 
     Module-level helper for PAXNConverter.convert_task_to_pyffice.
@@ -255,7 +255,7 @@ class PAXNProject:
 class PAXNConverter:
     """Converter between PAXN format and Pyffice format"""
     
-    def __init__(self):
+    def __init__(self) -> None:
         self.status_map = PAXN_STATUS_MAP
         logma.debug(f"PAXNConverter.__init__ called")
         self.priority_map = PAXN_PRIORITY_MAP

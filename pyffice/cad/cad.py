@@ -25,6 +25,7 @@ from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 from pyffice.items.items import PyfficePart
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -40,7 +41,7 @@ class PyfficeCADAssembly(PyfficeDocumentManager):
     SERIALIZATION_VERSION = (1, 0, 0)
     """"""
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         self.config = kahndor.Instruct(pxcfg).select("PyfficeCADAssembly")
         super().__init__(self.config)
@@ -79,7 +80,7 @@ class PyfficeCADAssembly(PyfficeDocumentManager):
             "build": {},
         }
 
-    def add_part(self, part, position=None) -> "PyfficeCADAssembly":
+    def add_part(self, part, position=None) -> Self:
         """Add a part to the CAD document."""
         parts = getattr(self, 'parts', [])
         parts.append((part, position))
@@ -91,7 +92,7 @@ class PyfficeCADManager(PyfficeDocumentManager):
     """Manage all cad related items inlcuding assmeblys, objects, libraries, etc"""
     SERIALIZATION_VERSION = (1, 0, 0)
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         self.config = kahndor.Instruct(pxcfg).select("PyfficeCADManager")
         super().__init__(self)
@@ -108,7 +109,7 @@ class PyfficeCADManager(PyfficeDocumentManager):
         """
         super().add_document(document)
 
-    def add_part(self, assembly) -> "PyfficeCADManager":
+    def add_part(self, assembly) -> Self:
         """Add an assembly part."""
         _p = True  # placeholder
         return self
@@ -130,13 +131,13 @@ class PyfficeCADPart(PyfficePart):
 
     VERSION = "0.0.1.0.1.0"
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         self.config = kahndor.Instruct(pxcfg).override("PyfficeCADPart")
         super().__init__(cfg)
         self.config.override(cfg)
 
-    def create_new_document(self, name) -> "PyfficeCADPart":
+    def create_new_document(self, name) -> Self:
         """Create a new document.
 
         Args:

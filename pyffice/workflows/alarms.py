@@ -24,6 +24,7 @@ import datetime as dt
 from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.calendars.events import PyfficeEvent, PyfficeTask
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -40,7 +41,7 @@ class PyfficeAlarm(PyfficeEvent):
 
     VERSION = "0.0.1.0.1.0"
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         logma.debug(f"PyfficeAlarm.__init__ called")
         super().__init__(cfg)
@@ -52,7 +53,7 @@ class PyfficeAlarm(PyfficeEvent):
         self.postpones = []
         self.tasks = None
 
-    def add_postpone(self, postpone) -> "PyfficeAlarm":
+    def add_postpone(self, postpone) -> Self:
         """Add a postpone.
         
         Args:
@@ -64,7 +65,7 @@ class PyfficeAlarm(PyfficeEvent):
         self.postpones.append(PyfficeTask(postpone))
         return self
 
-    def load_unit(self, unit) -> "PyfficeAlarm":
+    def load_unit(self, unit) -> Self:
         """Load a unit dict into this document.
         
         Args:
@@ -79,7 +80,7 @@ class PyfficeAlarm(PyfficeEvent):
         self.set_tasks(unit.get("tasks", None))
         return self
 
-    def set_acknowledge(self, acknowledge) -> "PyfficeAlarm":
+    def set_acknowledge(self, acknowledge) -> Self:
         """Set the acknowledge.
         
         Args:
@@ -92,7 +93,7 @@ class PyfficeAlarm(PyfficeEvent):
         self.acknowledge_task = PyfficeTask(cfg)
         return self
 
-    def set_limit(self, limit) -> "PyfficeAlarm":
+    def set_limit(self, limit) -> Self:
         """Set the limit.
         
         Args:
@@ -106,7 +107,7 @@ class PyfficeAlarm(PyfficeEvent):
             self.limit = limit
         return self
 
-    def set_notify(self, notify) -> "PyfficeAlarm":
+    def set_notify(self, notify) -> Self:
         """Set the notify.
         
         Args:
@@ -119,7 +120,7 @@ class PyfficeAlarm(PyfficeEvent):
         self.notify_task = PyfficeTask(cfg)
         return self
 
-    def set_postpone(self, postpone) -> "PyfficeAlarm":
+    def set_postpone(self, postpone) -> Self:
         """Set the postpone.
         
         Args:
@@ -132,7 +133,7 @@ class PyfficeAlarm(PyfficeEvent):
         self.postpone_task = PyfficeTask(cfg)
         return self
 
-    def set_tasks(self, tasks) -> "PyfficeAlarm":
+    def set_tasks(self, tasks) -> Self:
         """Set the tasks.
         
         Args:
