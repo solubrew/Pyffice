@@ -175,6 +175,69 @@ class PyfficeUnit(object):
             setattr(self, attr, value)
         return self
 
+    def _del_from_dict(self, attr, key, label):
+        """Delete an entry from a dict-typed attribute and record the change.
+
+        Used by ``del_layer`` (and similar) on classes that store
+        collections in a ``self.<attr>`` dict. Tracks the change so
+        undo/redo works.
+
+        Args:
+            attr: Name of the dict attribute on ``self``
+                (e.g. ``"layers"``).
+            key: Dict key to delete.
+            label: Change-tracking label (e.g. ``"layers"``).
+
+        Returns:
+            Self for chaining.
+        """
+        collection = getattr(self, attr)
+        self.add_change(label, collection, collection.get(key), "del")
+        del collection[key]
+        return self
+
+    def _add_to_collection(self, attr, value, label):
+        """Append ``value`` to a list-typed attribute and record the change.
+
+        Used by ``add_source``, ``add_view``, etc. on classes that
+        store collections in a ``self.<attr>`` list/set. Tracks the
+        change so undo/redo works.
+
+        Args:
+            attr: Name of the collection attribute on ``self``
+                (e.g. ``"sources"``).
+            value: Value to add.
+            label: Change-tracking label.
+
+        Returns:
+            Self for chaining.
+        """
+        collection = getattr(self, attr)
+        self.add_change(label, collection, value, "add")
+        if isinstance(collection, set):
+            collection.add(value)
+        else:
+            collection.append(value)
+        return self
+
+    def _del_from_collection(self, attr, value, label):
+        """Remove ``value`` from a list-typed attribute and record the change.
+
+        Used by ``del_source``, ``del_view``, etc.
+
+        Args:
+            attr: Name of the collection attribute on ``self``.
+            value: Value to remove.
+            label: Change-tracking label.
+
+        Returns:
+            Self for chaining.
+        """
+        collection = getattr(self, attr)
+        self.add_change(label, collection, value, "del")
+        collection.remove(value)
+        return self
+
     def add_editor(self, editor):
         """Add an editor to the document."""
         self.editors = getattr(self, 'editors', [])

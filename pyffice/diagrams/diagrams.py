@@ -427,16 +427,14 @@ class PyfficeDiagram(PyfficeDocumentManager):
 
     def del_layer(self, layer):
         """Remove the layer.
-        
+
         Args:
             layer: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
-        self.add_change("layers", self.layers, layer, "del")
-        del self.layers[layer.name]
-        return self
+        return self._del_from_dict("layers", layer.name, "layers")
 
     def del_node(self, node):
         """Remove the node.

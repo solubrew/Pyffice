@@ -109,9 +109,7 @@ class PyfficeSourceManager(PyfficeDocumentManager):
             Self for chaining.
         """
         source = PyfficeSource({"name": source.name, "type": type_, "path": source.path})
-        self.add_change("sources", self.sources, source, "add")
-        self.sources.append(source)
-        return self
+        return self._add_to_collection("sources", source, "sources")
 
     def load_document(self, document=None):
         """Load document into this document.
@@ -201,9 +199,7 @@ class PyfficeDataSet(PyfficeDocument):
         """
         cfg = {"table": datatable, "filters": {}, "name": name}
         view = PyfficeDataView(cfg)
-        self.add_change("views", self.views, view, "add")
-        self.views.add(view)
-        return self
+        return self._add_to_collection("views", view, "views")
 
     def del_source(self, source):
         """Remove the source.
@@ -214,9 +210,7 @@ class PyfficeDataSet(PyfficeDocument):
         Returns:
             Self for chaining.
         """
-        self.add_change("sources", self.sources, source, "del")
-        self.sources.remove(source)
-        return self
+        return self._del_from_collection("sources", source, "sources")
 
     def del_relationship(self, relationship):
         """Remove the relationship.
@@ -227,9 +221,7 @@ class PyfficeDataSet(PyfficeDocument):
         Returns:
             Self for chaining.
         """
-        self.add_change("relationships", self.relationships, relationship, "del")
-        self.relationships.remove(relationship)
-        return self
+        return self._del_from_collection("relationships", relationship, "relationships")
 
     def del_view(self, view):
         """Remove the view.
@@ -240,9 +232,7 @@ class PyfficeDataSet(PyfficeDocument):
         Returns:
             Self for chaining.
         """
-        self.add_change("views", self.views, view, "del")
-        self.views.remove(view)
-        return self
+        return self._del_from_collection("views", view, "views")
 
     def load_document(self, document=None):
         """Load document into this document.
@@ -350,9 +340,7 @@ class PyfficeDataView(PyfficeDocument):
             Self for chaining.
         """
         filter_ = {"operator": operator, "column": column, "value": value}
-        self.add_change("filters", self.filters, filter_, "add")
-        self.filters.add(filter_)
-        return self
+        return self._add_to_collection("filters", filter_, "filters")
 
     def add_summarization(self, column, formula, name=None):
         """Add a summarization.
@@ -366,9 +354,7 @@ class PyfficeDataView(PyfficeDocument):
             Self for chaining.
         """
         summarization = {"column": column, "formula": formula, "name": name}
-        self.add_change("summarizations", self.summarizations, summarization, "add")
-        self.summarizations.add(summarization)
-        return self
+        return self._add_to_collection("summarizations", summarization, "summarizations")
 
     def apply_filters(self, df):
         """Apply filters.
@@ -452,9 +438,7 @@ class PyfficeDataView(PyfficeDocument):
             Self for chaining.
         """
         filter_ = {"operator": operator, "column": column, "value": value}
-        self.add_change("filters", self.filters, filter_, "del")
-        self.filters.remove(filter_)
-        return self
+        return self._del_from_collection("filters", filter_, "filters")
 
     def del_summarization(self, column, formula, name=None):
         """Remove the summarization.
@@ -468,9 +452,7 @@ class PyfficeDataView(PyfficeDocument):
             Self for chaining.
         """
         summarization = {"column": column, "formula": formula, "name": name}
-        self.add_change("summarizations", self.summarizations, summarization, "del")
-        self.summarizations.remove(summarization)
-        return self
+        return self._del_from_collection("summarizations", summarization, "summarizations")
 
     def get_data(self):
         """Return the data.
