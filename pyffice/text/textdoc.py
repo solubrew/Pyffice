@@ -31,7 +31,6 @@ from pyffice.items.text import PyfficeText, PyfficeParagraph, PyfficeFont
 HERE = join(dirname(__file__), "")  # ||
 log = True
 logma = Logma(__name__)
-logma.info(f"Module {__name__} loaded")
 if not log:
     logma.off()
 # ====================================================================================================================||

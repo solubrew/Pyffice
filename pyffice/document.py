@@ -1296,12 +1296,15 @@ class PyfficeDocument(PyfficeUnit):
         doc = super().to_dict()
         doc["file_path"] = self.file_path
         doc["data"] = deepcopy(doc["unit"])
+        # The base ``to_dict()`` stores the primary payload under
+        # ``doc["unit"]`` (legacy envelope). We mirror it into
+        # ``doc["data"]`` here so the canonical-shape normalizer
+        # can fill in ``data["content"]``, ``data["path"]``, and
+        # ``pyffice_compat`` without per-subclass overrides. The
+        # ``del doc["unit"]`` is a no-op loss of legacy info — the
+        # payload is preserved in ``doc["data"]`` (see _canonicalize
+        # for the schema_version / path mirror).
         del doc["unit"]
-        # Normalize the canonical shape once at the base layer
-        # so every subclass gets ``data["content"]``,
-        # ``data["path"]``, and ``pyffice_compat`` automatically.
-        # The call is idempotent (subclasses that already added
-        # ``content`` are left alone).
         return self._canonicalize(doc)
 
     def update_document_structure(self, document):

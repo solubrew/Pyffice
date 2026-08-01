@@ -359,12 +359,6 @@ class PyfficeText(PyfficeUnit):
     #     """Get full text content."""
     #     return "\n".join(para.text for para in self.paragraphs)
     #
-    # def to_dict(self) -> Dict[str, Any]:
-    #     """Convert text to dictionary."""
-    #     return {
-    #         "paragraphs": [p.to_dict() for p in self.paragraphs],
-    #         "default_font": self.default_font.to_dict(),
-    #     }
 
     def to_markdown(self) -> str:
         """Convert to Markdown format."""

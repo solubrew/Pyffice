@@ -34,7 +34,6 @@ here = join(dirname(__file__), "")  # ||
 log = True
 logma = Logma(__name__)
 
-logma.info(f"Module {__name__} loaded")
 # ====================================================================================================================||
 pxcfg = join(here, "_data_", "formulas.yaml")
 
