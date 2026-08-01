@@ -489,8 +489,8 @@ The remaining `from kahndor import kahndor` / `from kahndor.logma import Logma` 
 
 - **T-NEW-045** — Public API facade decision. ✅ CLOSED (Option B, no facade).
 - **T-NEW-060** — Squirl import-time `print()`. ✅ CLOSED (tracked in squirl as T-NEW-061).
-- **T-NEW-CANDIDATE** — Test coverage for 18 under-tested subpackages (top 5 by source LOC: `web` 2592 / `items` 1852 / `images` 1631 / `workflows` 679 / `tags` 524). See T-NEW-065 migration plan step 4. No priority — coverage is a marathon, not a sprint.
+- **T-NEW-CANDIDATE** — Test coverage for 18 under-tested subpackages. ✅ CLOSED (2026-07-31) — top 5 (web, items, images, workflows, tags) shipped in commits 77345d7, df17c41, e4bad39, d83e51a, 617875b (134 new tests). 13 more subpackages remain under-tested; will be addressed in a future marathon sprint.
 
 ---
 
-*File last edited: 2026-07-31 (P0/P1/P2 all clear; T-NEW-045 closed — users use PyfficeCodex directly, no facade; T-NEW-060 closed — squirl import-time prints tracked in squirl repo as T-NEW-061; pyffice/skills/ deleted in commit `d9d4fa9`; verified against HEAD `da63413`)*
+*File last edited: 2026-07-31 (T-NEW-CANDIDATE closed — top 5 test-coverage marathon shipped: web+items+images+workflows+tags = 134 new tests; T-NEW-045 closed; T-NEW-060 closed; P0/P1/P2 all clear; verified against HEAD `617875b`)*
