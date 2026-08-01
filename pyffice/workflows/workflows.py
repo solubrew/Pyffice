@@ -81,16 +81,6 @@ class PyfficeWorkflow(PyfficeUnit):
         super().load_unit(unit)
         return self
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        return doc
-
-
 # ====================================================================================================================||
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||

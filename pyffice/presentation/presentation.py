@@ -42,29 +42,6 @@ class PyfficePresentation(PyfficeDocument):
     def __init__(self, cfg=None):
         """"""
         self.config = kahndor.Instruct(pxcfg).select("PyfficeSlideShow").override(cfg)
-
-    def load_document(self, document):
-        """Load document into this document.
-        
-        Args:
-            document: Parameter.
-        
-        Returns:
-            Self for chaining.
-        """
-        super().load_document(document)
-        return self
-
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        return doc
-
-
 # ====================================================================================================================||
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||

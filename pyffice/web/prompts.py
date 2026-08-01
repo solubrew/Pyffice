@@ -505,17 +505,6 @@ class PyfficePromptsManager(PyfficeDocumentManager):
             self.prompts = prompts
         return self
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["documents"] = {"services": self.services, "prompts": [x.to_dict() for x in self.prompts]}
-        return doc
-
-
 # ====================================================================================================================||
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||

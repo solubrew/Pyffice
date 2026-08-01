@@ -89,17 +89,6 @@ class PyfficeService(PyfficeDocument):
             self.service = service
         return self
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        self.document["document"] = {"service": self.service}
-        return doc
-
-
 # ====================================================================================================================||
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||

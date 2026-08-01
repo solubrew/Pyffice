@@ -225,24 +225,6 @@ class PyfficeReference(PyfficeTag):
         self.url = url
         return self
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["unit"]["author"] = self.author
-        doc["unit"]["title"] = self.title
-        doc["unit"]["volume"] = self.volume
-        doc["unit"]["page_range"] = self.page_range
-        doc["unit"]["issue"] = self.issue
-        doc["unit"]["edition"] = self.edition
-        doc["unit"]["publisher"] = self.publisher
-        doc["unit"]["style"] = self.style
-        return doc
-
-
 # ====================================================================================================================||
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||

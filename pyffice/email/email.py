@@ -107,19 +107,6 @@ class PyfficeEmailMessage(PyfficeMessage):
     def get_sender(self):
         """Get the sender address."""
         return getattr(self, 'from', None)
-
-    def load_document(self, document):
-        """Load document into this document.
-        
-        Args:
-            document: Parameter.
-        
-        Returns:
-            Self for chaining.
-        """
-        super().load_document(document)
-        return self
-
     def open_file(self, file_path):
         """Open an email file."""
         if not file_path:

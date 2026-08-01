@@ -136,20 +136,6 @@ class PyfficeBibliography(PyfficeDocument):
         """
         return self._set_with_change("style", style)
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["document"]["style"] = self.style.to_dict() if self.style is not None else None
-        doc["document"]["references"] = (
-            [ref.to_dict() for ref in self.references] if self.references is not None else None
-        )
-        return doc
-
-
 # ====================================================================================================================||
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||

@@ -43,12 +43,6 @@ class PyfficeDatabaseConnection(sonql.Doc):
         self.config = kahndor.Instruct(pxcfg).select("PyfficeDatabaseConnection")
         super().__init__(path)
         self.config.override(cfg)
-
-    def load_document(self, document):
-        """Load document data."""
-        super().load_document(document)
-        return self
-
     def open_file(self, document):
         """Open a database file."""
         if isinstance(document, str):
@@ -150,19 +144,6 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
         """Get a specific view."""
         views = self.get_views(name)
         return views[view] if 0 <= view < len(views) else None
-
-    def load_document(self, document):
-        """Load document into this document.
-        
-        Args:
-            document: Parameter.
-        
-        Returns:
-            Self for chaining.
-        """
-        super().load_document(document)
-        return self
-
 # ====================================================================================================================||
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||

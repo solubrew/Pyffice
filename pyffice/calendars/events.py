@@ -265,21 +265,6 @@ class PyfficeTimeUnit(PyfficeUnit):
             self.start_time = start_time
         return self
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["document"] = {
-            "scale_unit": self.scale_unit,
-            "start_time": self.start_time,
-            "end_time": self.end_time,
-        }
-        return doc
-
-
 class PyfficeEvent(PyfficeUnit):
     """"""
     SERIALIZATION_VERSION = (1, 0, 0)
@@ -366,22 +351,6 @@ class PyfficeEvent(PyfficeUnit):
             self.add_change("start_dttm", self.start_dttm, start_dttm)
             self.start_dttm = start_dttm
         return self
-
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["unit"] = {
-            "event": self.event,
-            "start_dttm": self.start_dttm,
-            "end_dttm": self.end_dttm,
-            "location_attendance": self.location_attendance,
-        }
-        return doc
-
 
 # ====================================================================================================================||
 

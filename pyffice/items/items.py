@@ -78,17 +78,6 @@ class PyfficeTable(PyfficeUnit):
         self.data = data
         return self
 
-    def to_dict(self):
-        """Convert this document to dict.
-
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["unit"] = {"columns": list(self.data.columns), "records": self.data.values.tolist()}
-        return doc
-
-
 class PyfficePart(PyfficeUnit):
     """"""
     SERIALIZATION_VERSION = (1, 0, 0)

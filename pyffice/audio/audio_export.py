@@ -143,16 +143,6 @@ class PyfficeAudio(PyfficeDocument):
         self.volume = max(0, current - percent)
         return self
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        return doc
-
-
 class PyfficePlayList(PyfficeDocumentManager):
     """"""
     SERIALIZATION_VERSION = (1, 0, 0)
@@ -162,16 +152,6 @@ class PyfficePlayList(PyfficeDocumentManager):
         self.config = kahndor.Instruct(pxcfg).override("")
         super().__init__(self)
         self.config.override(cfg)
-
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        return doc
-
 
 # ====================================================================================================================||
 

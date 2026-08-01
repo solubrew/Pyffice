@@ -200,24 +200,6 @@ class PyfficeCalendar(PyfficeDocumentManager):
             self.time_scale = time_scale
         return self
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        if "document" not in doc.keys():
-            doc["document"] = {}
-        doc["document"]["start_date"] = self.start_date
-        doc["document"]["end_date"] = self.end_date
-        doc["document"]["time_scale"] = self.time_scale.to_dict()
-        #doc["document"]["scale_unit"] = self.scale_unit.to_dict()
-        doc["document"]["events"] = [x.to_dict() for x in self.events]
-        doc["document"]["tasks"] = [x.to_dict() for x in self.tasks]
-        return doc
-
-
 # ====================================================================================================================||
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||

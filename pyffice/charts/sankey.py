@@ -92,19 +92,6 @@ class SankeyChart:
         # Create the figure and render it
         fig = go.Figure(data=[sankey_data], layout=layout)
         fig.show()
-
-    def load_document(self, document):
-        """Load document into this document.
-        
-        Args:
-            document: Parameter.
-        
-        Returns:
-            Self for chaining.
-        """
-        super().load_document(document)
-        return self
-
     def save_sankey_chart(self, filename="sankey_chart.html"):
         """
         Save the Sankey diagram to an HTML file.

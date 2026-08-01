@@ -499,32 +499,6 @@ class PyfficeChart(PyfficeDocument):
             self.title = title
         return self
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        if "document" not in doc.keys():
-            doc["document"] = {}
-        doc["document"]["title"] = self.title.to_dict()
-        doc["document"]["axes"] = {"xlabel": self.xlabel, "ylabel": self.ylabel}
-        doc["document"]["theme"] = self.theme
-        doc["document"]["type"] = self.type
-        doc["document"]["position"] = self.position
-        doc["document"]["size"] = self.size
-        doc["document"]["orientation"] = self.orientation
-        doc["document"]["origin"] = self.origin
-        doc["document"]["background"] = self.background
-        doc["document"]["plotareas"] = self.plotareas
-        doc["document"]["legends"] = self.legends
-        if self.data is None:
-            self.data = PyfficeDataSet()
-        doc["document"]["data"] = self.data.to_dict()
-        return doc
-
-
 # ====================================================================================================================||
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||

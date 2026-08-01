@@ -111,29 +111,6 @@ class PyfficeCAM(PyfficeDocument):
             return self
         self.units = units
         return self
-
-    def load_document(self, document):
-        """Load document into this document.
-
-        Args:
-            document: Parameter.
-
-        Returns:
-            Self for chaining.
-        """
-        super().load_document(document)
-        return self
-
-    def to_dict(self):
-        """Convert this document to dict.
-
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        return doc
-
-
 class PyfficeCAMManager(PyfficeDocumentManager):
     SERIALIZATION_VERSION = (1, 0, 0)
 
@@ -196,29 +173,6 @@ class PyfficeCAMManager(PyfficeDocumentManager):
     def clear(self):
         """Clear all projects."""
         self._projects.clear()
-
-    def load_document(self, document):
-        """Load document into this document.
-
-        Args:
-            document: Parameter.
-
-        Returns:
-            Self for chaining.
-        """
-        super().load_document(document)
-        return self
-
-    def to_dict(self):
-        """Convert this document to dict.
-
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        return doc
-
-
 # ====================================================================================================================||
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||

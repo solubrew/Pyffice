@@ -235,24 +235,6 @@ class PyfficeShape(PyfficeUnit):
         corner = [self.origin[0] + self.size[0], self.origin[1] + self.size[1]]
         self._set_envelope(self.origin, corner)
         return self
-
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["unit"] = {
-            "background": self.background_color.to_dict() if self.background is not None else None,
-            "shapes": {x: x.to_dict() for x in self.shapes} if self.shapes is not None else None,
-            "size": self.size,
-            "texts": {x: x.to_dict() for x in self.texts} if self.texts is not None else None,
-            "corner": self.corner,
-            "origin": self.origin,
-        }
-        return doc
-
     def _set_envelope(self, top_left, bottom_right):
         """"""
         self.origin = top_left

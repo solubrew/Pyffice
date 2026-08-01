@@ -724,21 +724,6 @@ class PyfficeRolodex(PyfficeDocumentManager):
             self.groups = groups
         return self
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["document"] = {
-            "contacts": {name: x.to_dict() for name, x in self.contacts.items()},
-            "groups": self.groups,
-            "default_group": self.default_group,
-        }
-        return doc
-
-
 # ====================================================================================================================||
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||

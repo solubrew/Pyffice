@@ -149,19 +149,6 @@ class PyfficeAlarm(PyfficeEvent):
             self.tasks = tasks
         return self
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["document"] = {
-            "tasks": {"notify": self.tasks["notify"].to_dict(), "acknowledge": self.tasks["acknowledge"].to_dict()}
-        }
-        return doc
-
-
 # ====================================================================================================================||
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||

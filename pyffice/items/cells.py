@@ -123,22 +123,6 @@ class PyfficeBackground(PyfficeUnit):
         self.transparency = transparency
         return self
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["unit"] = {
-            "color": self.color.to_dict() if self.color is not None else None,
-            "image": self.image.to_dict() if self.image is not None else None,
-            "pattern": self.pattern,
-            "transparency": self.transparency,
-        }
-        return doc
-
-
 class PyfficeCell(PyfficeUnit):
     """"""
     SERIALIZATION_VERSION = (1, 0, 0)
@@ -379,23 +363,6 @@ class PyfficeCell(PyfficeUnit):
             self.add_change("transparency", self.transparency, transparency)
         self.transparency = transparency
         return self
-
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["unit"]["address"] = self.address
-        doc["unit"]["background"] = self.background.to_dict()
-        doc["unit"]["format"] = self.format
-        doc["unit"]["formula"] = self.formula
-        doc["unit"]["object"] = self.object
-        if self.value is not None:
-            doc["unit"]["value"] = self.value.to_dict()
-        return doc
-
 
 # ====================================================================================================================||
 

@@ -160,21 +160,6 @@ class PyfficeNotebook(PyfficeDocument):
         """Set pinned state."""
         self.pinned = pinned
         return self
-
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["document"] = {"notebook": self.notebook}
-        if self.cells is None:
-            doc["document"]["notebook"]["cells"] = []
-        else:
-            doc["document"]["notebook"]["cells"] = [x.to_dict() for x in self.cells if x is not None]
-        return doc
-
     def to_html(self):
         """Convert this document to html.
         

@@ -501,23 +501,6 @@ class PyfficeColor(PyfficeUnit):
                 srgb_color.clamped_rgb_b,
             )
         )
-
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["unit"] = {
-            "color_name": self.color_name,
-            "hex": self.hex,
-            "rgb": self.rgb,
-            "rgba": self.rgba,
-            "xyz": self.xyz,
-        }
-        return doc
-
 def calculate_hsl_complementary(h, s, l):
     """
     Calculate complementary color using HSL model.

@@ -126,35 +126,6 @@ class PyfficeBOM(PyfficeDocumentManager):
             Sum of all item quantities.
         """
         return sum(item.get("quantity", 1) for item in self.items)
-
-    def load_document(self, document):
-        """Load document into this document.
-
-        Args:
-            document: Parameter.
-
-        Returns:
-            Self for chaining.
-        """
-        super().load_document(document)
-        return self
-
-    def to_dict(self):
-        """Convert this document to dict.
-
-        Returns:
-            BOM data as a dictionary.
-        """
-        doc = super().to_dict()
-        doc["data"]["bom"] = {
-            "project_name": self.project_name,
-            "revision": self.revision,
-            "items": self.items,
-            "total_quantity": self.total_quantity(),
-        }
-        return doc
-
-
 class PyfficeSoftwareBOM(PyfficeBOM):
     """Software Bill of Materials handler.
 
@@ -234,34 +205,6 @@ class PyfficeSoftwareBOM(PyfficeBOM):
             if pkg.get("name") == name:
                 return pkg
         return None
-
-    def load_document(self, document):
-        """Load document into this document.
-
-        Args:
-            document: Parameter.
-
-        Returns:
-            Self for chaining.
-        """
-        super().load_document(document)
-        return self
-
-    def to_dict(self):
-        """Convert this document to dict.
-
-        Returns:
-            SBOM data as a dictionary.
-        """
-        doc = super().to_dict()
-        doc["data"]["sbom"] = {
-            "project_name": self.project_name,
-            "version": self.version,
-            "packages": self.packages,
-        }
-        return doc
-
-
 # ====================================================================================================================||
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||

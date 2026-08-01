@@ -334,37 +334,6 @@ class PyfficeText(PyfficeUnit):
             self.add_change("value", self.value, text)
             self.value = text
         return self
-
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        if self.color is None:
-            self.color = PyfficeColor("black")
-        if self.font is None:
-            self.font = {}
-        self.font["color"] = self.color.to_dict()
-        if self.color_background is None:
-            self.color_background = PyfficeColor("white")
-        self.font["background"] = self.color_background.to_dict()
-        if self.color_foreground is None:
-            self.color_foreground = PyfficeColor("white")
-        self.font["highlight"] = self.color_foreground.to_dict()
-        doc["unit"] = {
-            "data_format": self.data_format,
-            "font": self.font,
-            "html": "",  # self.to_html(),
-            "value": self.value,
-            "alignment": {
-                "horizontal": self.horizontal,
-                "vertical": self.vertical,
-            },
-        }
-        return doc
-
     def to_html(self):
         """Convert this document to html.
         

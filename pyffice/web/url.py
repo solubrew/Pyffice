@@ -308,20 +308,6 @@ class PyfficeURL(PyfficeUnit):
         elif self.active_url.startswith("https://www."):
             self.no_www = f"https://{self.active_url[12:]}"
         return self
-
-    def to_dict(self):
-        """Convert to dictionary representation."""
-        doc = super().to_dict()
-        doc["unit"] = {
-            "original_path": self.given_url,
-            "active_url": self.active_url,
-            "trust_level": self.level_of_trust,
-            "qualified_path": self.found_url,
-            "domain": self.domain,
-            "redirect_path": self.redirect_affiliates,
-        }
-        return doc
-
     def validate(self):
         """Ensure that URL is validly constructed."""
         pass
@@ -1036,12 +1022,6 @@ class PyfficeURLLibrary(PyfficeDocumentManager):
             self.add_change("urls", self.urls, urls)
             self.urls = urls
         return self
-
-    def to_dict(self):
-        """Convert to dictionary representation."""
-        doc = super().to_dict()
-        return doc
-
     def update_from_service(self, service_name):
         """Update URL data from external service."""
         stone = self.get_stone(service_name)

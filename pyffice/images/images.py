@@ -460,16 +460,6 @@ class PyfficeImageManager(PyfficeDocumentManager):
         if delete_:
             fonql.remove_file(image.path)
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        return doc
-
-
 class PyfficeScreenShot(PyfficeDocument):
     """"""
     SERIALIZATION_VERSION = (1, 0, 0)
@@ -512,16 +502,6 @@ class PyfficeScreenShot(PyfficeDocument):
         if self.image:
             self.image = self.image.resize((width, height))
         return self
-
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        return doc
-
 
 # ====================================================================================================================||
 

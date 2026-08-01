@@ -204,12 +204,6 @@ class PyfficeFormulasLibrary(PyfficeDocumentManager):
             self.formulas = {}
         return self
 
-    def to_dict(self):
-        """Serialize the formulas library to a dict."""
-        doc = super().to_dict() or {}
-        return doc
-
-
 class PyfficeFormula(PyfficeUnit):
     """A Functional Formula object for use in various Pyffice Documents"""
     SERIALIZATION_VERSION = (1, 0, 0)
@@ -325,16 +319,6 @@ class PyfficeFormula(PyfficeUnit):
                         f"{proto.__class__.__name__}: {v!r}"
                     )
         return proto.execute(self.parsed, dict(self.parameters))
-
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        return doc
-
 
 class PyfficeFormulaABS(PyfficeFormula):
     """A Functional Formula object for use in various Pyffice Documents"""

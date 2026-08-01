@@ -609,16 +609,6 @@ class PyfficeWebProfile(PyfficeContact):
         self.add_group("profile")
         return self
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        return doc
-
-
 class PyfficeWebProfileManager(PyfficeRolodex):
     """"""
 

@@ -283,26 +283,6 @@ class PyfficeEdge(PyfficeUnit):
         """
         return self._set_with_change("texts", texts)
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["unit"] = {
-            "texts": [x.to_dict for x in self.texts],
-            "endpoints": self.endpoints,
-            "color": self.color.to_dict(),
-            "lock": self.lock,
-            "position": self.position,
-            "size": self.envelope_size,
-            "line_width": self.line_width,
-            "style": style,
-        }
-        return doc
-
-
 class PyfficeDiagram(PyfficeDocumentManager):
     """"""
     SERIALIZATION_VERSION = (1, 0, 0)
@@ -577,17 +557,6 @@ class PyfficeDiagramLayer(PyfficeUnit):
         """
         return self._set_with_change("objects", objects)
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["unit"] = {"objects": [x.to_dict() for x in self.objects]}
-        return doc
-
-
 class PyfficeNode(PyfficeUnit):
     """"""
     SERIALIZATION_VERSION = (1, 0, 0)
@@ -692,21 +661,6 @@ class PyfficeNode(PyfficeUnit):
         self.cells[cell]["position"] = position
         return self
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["unit"] = {
-            "cells": [x.to_dict() for x in self.cells],
-            "lock": self.lock,
-            "position": self.position,
-        }
-        return doc
-
-
 class PyfficeDiagramConnection(PyfficeUnit):
     """"""
     SERIALIZATION_VERSION = (1, 0, 0)
@@ -783,21 +737,6 @@ class PyfficeDiagramConnection(PyfficeUnit):
         """
         self.position = position
         return self
-
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["unit"] = {
-            "endpoints": self.endpoints,
-            "position": self.position,
-            "lock": self.lock,
-        }
-        return doc
-
 
 # ====================================================================================================================||
 

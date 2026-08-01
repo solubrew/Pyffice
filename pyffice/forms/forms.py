@@ -239,22 +239,6 @@ class PyfficeForm(PyfficeDocument):
         self.sections = sections
         return self
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["document"] = {
-            "header_image": self.header_image.to_dict(),
-            "footer_image": self.footer_image.to_dict(),
-            "form_id": None,
-            "sections": self.sections,
-        }
-        return doc
-
-
 class PyfficeFormsManager(PyfficeDocumentManager):
     """"""
     SERIALIZATION_VERSION = (1, 0, 0)
@@ -297,17 +281,6 @@ class PyfficeFormsManager(PyfficeDocumentManager):
             self.add_change("forms", self.forms, forms)
             self.forms = forms
         return self
-
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["document"] = {"forms": [x.to_dict() for x in self.forms]}
-        return doc
-
 
 class PyfficeSurvey(PyfficeDocument):
     """
@@ -537,23 +510,6 @@ class PyfficeSurvey(PyfficeDocument):
             self.add_change("schedule", self.schedule, start_datetime)
             self.schedule["start"] = start_datetime
         return self
-
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["document"] = {
-            "form_id": self.form_id,
-            "schedule": self.schedule,
-            "responses": self.responses,
-            "distribution": self.distribution,
-            "form": self.form,
-        }
-        return doc
-
 
 # ====================================================================================================================||
 

@@ -174,15 +174,6 @@ class PyfficePort(PyfficeDocumentManager):
         yonql.Doc(path).write(dikt)
         return self
 
-    def to_dict(self):
-        """
-        This outputs a structure that is compatibile with Pyffice Documents and can be rebuilt as the
-        Native Document Syntax
-        """
-        doc = super().to_dict()
-        return doc
-
-
 class PyfficePortCherryTree(PyfficePort):
     """"""
 
@@ -569,19 +560,6 @@ class PyfficePortOffice(PyfficePort):
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortOffice")).override(cfg)
-
-    def load_document(self, document=None):
-        """Load document into this document.
-        
-        Args:
-            document: Parameter.
-        
-        Returns:
-            Self for chaining.
-        """
-        super().load_document(document)
-        return self
-
     def parse_file(self):
         """Parse the loaded file."""
         # Placeholder - subclasses implement specific parsing
@@ -602,12 +580,6 @@ class PyfficePortOffice(PyfficePort):
         if not file_:
             return self
         return self
-
-    def load_document(self, document=None):
-        """Load document data."""
-        super().load_document(document)
-        return self
-
 
 class PyfficePortCSV(PyfficePort):
     """"""
@@ -634,16 +606,6 @@ class PyfficePortCSV(PyfficePort):
         rdr = tblonql.Doc(file)
         data = next(rdr.read(), None)
         return data
-
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        return doc
-
 
 class PyfficePortDia(PyfficePort):
     """Port Dia File and convert to Pyffice Sketch Document"""
@@ -745,20 +707,6 @@ class PyfficePortDia(PyfficePort):
             for attr in obj.findall("dia:attribute", namespace):
                 attr_name = attr.get("name", "Unknown")
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        for node in self.nodes:
-            doc["document"]["documents"].append(node)
-        for edge in self.edges:
-            doc["document"]["edges"].append(edge)
-        return doc
-
-
 class PyfficePortFileSystem(PyfficePort):
     """"""
 
@@ -768,16 +716,6 @@ class PyfficePortFileSystem(PyfficePort):
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortFileSystem")).override(cfg)
-
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        return doc
-
 
 class PyfficePortImage(PyfficePort):
     """"""
@@ -814,12 +752,6 @@ class PyfficePortImage(PyfficePort):
         buffer = BytesIO()
         self.image.save(buffer, format=format)
         return buffer.getvalue()
-
-    def load_document(self, document=None):
-        """Load document data."""
-        super().load_document(document)
-        return self
-
     def open_file(self, file_=None):
         """Open file.
         
@@ -923,16 +855,6 @@ class PyfficePortImage(PyfficePort):
         self.image = self.image.resize((width, height))
         return self
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        return doc
-
-
 class PyfficePortJupyter(PyfficePort):
     """"""
 
@@ -984,23 +906,6 @@ class PyfficePortJupyter(PyfficePort):
         with open(self.file_path, "r", encoding="utf-8") as f:
             self.notebook = nbformat.read(f, as_version=4)
         return self
-
-    def load_document(self, document=None):
-        """Load document data."""
-        super().load_document(document)
-        return self
-
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["document"] = {"notebook": self.notebook}
-        return doc
-
-
 class PyfficePortText(PyfficePort):
     """"""
 
@@ -1010,16 +915,6 @@ class PyfficePortText(PyfficePort):
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortWebSession")).override(cfg)
-
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        return doc
-
 
 class PyfficePortWebSession(PyfficePort):
     """"""
@@ -1107,17 +1002,6 @@ class PyfficePortWebSession(PyfficePort):
         favicon = tab["favIconUrl"]
         metadata = tab
         return {"url": url, "favicon": favicon, "metadata": metadata}
-
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["document"] = self.nodes
-        return doc
-
 
 # ====================================================================================================================||
 

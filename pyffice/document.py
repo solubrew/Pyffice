@@ -1456,23 +1456,6 @@ class PyfficeDocumentManager(PyfficeDocument):
         self.doc_types = doc_types
         return self
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict() or {}
-        if "data" not in doc.keys():
-            doc["data"] = {}
-        doc["data"]["documents"] = []
-        if self.documents is None:
-            return doc
-        for name, document in self.documents.items():
-            doc["data"]["documents"].append({name: document.to_dict()})
-        return doc
-
-
 class PyfficeDeque(PyfficeDocument, deque):
     """"""
 
@@ -1521,18 +1504,6 @@ class PyfficeDeque(PyfficeDocument, deque):
             max_items = self.config.dikt.get("max_items", 10)
         self.max_items = max_items
         return self
-
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["data"]["history"] = [x for x in self.history]
-        doc["data"]["max_items"] = self.max_items
-        return doc
-
 
 # ====================================================================================================================||
 

@@ -78,16 +78,6 @@ class PyfficeSource(PyfficeDocumentManager):
         super().load_document(document)
         return self
 
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        return doc
-
-
 class PyfficeSourceManager(PyfficeDocumentManager):
     SERIALIZATION_VERSION = (1, 0, 0)
     """"""
@@ -141,17 +131,6 @@ class PyfficeSourceManager(PyfficeDocumentManager):
             self.add_change("sources", self.sources, sources)
             self.sources = sources
         return self
-
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["document"] = {"sources": [source.to_dict() for source in self.sources]}
-        return doc
-
 
 class PyfficeDataSet(PyfficeDocument):
     """"""
@@ -298,21 +277,6 @@ class PyfficeDataSet(PyfficeDocument):
             self.add_change("views", self.views, views)
             self.views = views
         return self
-
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["document"] = {
-            "sources": self.sources,
-            "relationships": self.relationships,
-            "views": [x.to_dict() for x in self.views],
-        }
-        return doc
-
 
 class PyfficeDataView(PyfficeDocument):
     """"""
@@ -544,23 +508,6 @@ class PyfficeDataView(PyfficeDocument):
             self.add_change("summarizations", self.summarizations, summarizations)
             self.summarizations = summarizations
         return self
-
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        doc["document"] = {
-            "filters": self.filters,
-            "summarizations": self.summarizations,
-            "columns": self.columns,
-            "type": self.type,
-            "data": self.data.to_dict(),
-        }
-        return doc
-
 
 # ====================================================================================================================||
 

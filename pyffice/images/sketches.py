@@ -115,33 +115,6 @@ class PyfficeSketch(PyfficeDocument):
         """Set nodes."""
         self.nodes = nodes
         return self
-
-    def to_dict(self):
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        if self.connections is None:
-            self.connections = {}
-        if self.edges is None:
-            self.edges = {}
-        if self.endpoints is None:
-            self.endpoints = {}
-        if self.nodes is None:
-            self.nodes = {}
-        if self.layers is None:
-            self.layers = {}
-        doc["document"] = {
-            "canvas": self.canvas,
-            "edges": {x.did: x.to_dict() for x in self.edges},
-            "layers": self.layers,
-            "nodes": {x.did: x.to_dict() for x in self.nodes},
-            "connections": {x.did: x.to_dict() for x in self.connections},
-        }
-        return doc
-
     def to_md(self):
         """Convert to Markdown."""
         # Placeholder - would generate markdown
