@@ -53,7 +53,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.content = None
         self.tree = None
 
-    def add_directory(self, directory):
+    def add_directory(self, directory) -> "PyfficeFileSystem":
         """Add a directory.
         
         Args:
@@ -66,7 +66,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.directories.append(directory)
         return self
 
-    def add_file(self, file_):
+    def add_file(self, file_) -> "PyfficeFileSystem":
         """Add a file.
         
         Args:
@@ -79,7 +79,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.files.append(file_)
         return self
 
-    def add_root(self, root):
+    def add_root(self, root) -> "PyfficeFileSystem":
         """Add a root.
         
         Args:
@@ -92,7 +92,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.roots.append(root)
         return self
 
-    def del_directory(self, index):
+    def del_directory(self, index) -> "PyfficeFileSystem":
         """Remove the directory.
         
         Args:
@@ -105,7 +105,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.directories.pop(index)
         return self
 
-    def del_file(self, index):
+    def del_file(self, index) -> "PyfficeFileSystem":
         """Remove the file.
         
         Args:
@@ -118,11 +118,11 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.files.pop(index)
         return self
 
-    def get_files(self):
+    def get_files(self) -> list:
         """Get list of files."""
         return []
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> "PyfficeFileSystem":
         """Load document into this document.
         
         Args:
@@ -142,7 +142,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.set_table(document.get("table", {}))
         return self
 
-    def set_tree(self, tree):
+    def set_tree(self, tree) -> "PyfficeFileSystem":
         """Set the tree.
         
         Args:
@@ -155,7 +155,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.tree = tree.get("children", None)
         return self
 
-    def set_table(self, table):
+    def set_table(self, table) -> "PyfficeFileSystem":
         """Set the table.
         
         Args:
@@ -168,7 +168,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.set_files(table.get("files", []))
         return self
 
-    def open_file(self, file=None):
+    def open_file(self, file=None) -> "PyfficeFileSystem":
         """Open file.
         
         Args:
@@ -183,7 +183,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.set_files()
         return self
 
-    def set_content(self, content):
+    def set_content(self, content) -> "PyfficeFileSystem":
         """Set the content.
         
         Args:
@@ -204,7 +204,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
             self.content = content
         return self
 
-    def set_directories(self, directories=[]):
+    def set_directories(self, directories=[]) -> "PyfficeFileSystem":
         """Set the directories.
         
         Args:
@@ -224,7 +224,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
             self.directories = directories
         return self
 
-    def set_files(self, files=[]):
+    def set_files(self, files=[]) -> "PyfficeFileSystem":
         """Set the files.
         
         Args:
@@ -241,7 +241,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
             self.files = files
         return self
 
-    def set_root(self, root=None):
+    def set_root(self, root=None) -> "PyfficeFileSystem":
         """Set the root.
         
         Args:
@@ -259,7 +259,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
             self.root = root
         return self
 
-    def to_dict(self):
+    def to_dict(self) -> Any:
         """Convert this document to dict.
         
         Returns:

@@ -46,27 +46,27 @@ class PyfficeMessage(PyfficeDocument):
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeMessage")).override(cfg)
 
-    def set_body(self, body):
+    def set_body(self, body) -> "PyfficeMessage":
         """Set message body."""
         self.body = body
         return self
 
-    def set_from(self, from_):
+    def set_from(self, from_) -> "PyfficeMessage":
         """Set sender."""
         self.from_ = from_
         return self
 
-    def set_subject(self, subject):
+    def set_subject(self, subject) -> "PyfficeMessage":
         """Set subject."""
         self.subject = subject
         return self
 
-    def set_to(self, to):
+    def set_to(self, to) -> "PyfficeMessage":
         """Set recipient."""
         self.to = to
         return self
 
-    def to_dict(self):
+    def to_dict(self) -> Any:
         """Convert to dictionary (additive canonical shape).
 
         The class-specific payload is wrapped under ``doc["data"]``;

@@ -41,19 +41,19 @@ class PyfficeUpdate(object):
         self.config = kahndor.Instruct(pxcfg).select("PyfficeUpdate").override(cfg)
         self.document = None
 
-    def check_schema(self, schema):
+    def check_schema(self, schema) -> bool:
         """Returns True if the document matches the schema"""
         return True
 
-    def check_extra(self):
+    def check_extra(self) -> None:
         """Returns True if the document has extra fields not in the schema at the schema levels"""
         return None
 
-    def check_missing(self):
+    def check_missing(self) -> None:
         """Returns True if the document is missing fields not in the schema at the schema levels"""
         return None
 
-    def create_temp_file(self):
+    def create_temp_file(self) -> "PyfficeUpdate":
         """Create a temporary file."""
         import tempfile
         import os
@@ -72,24 +72,24 @@ class PyfficeUnitUpdate(PyfficeUpdate):
         super().__init__(cfg)
         self.config.override(pxcfg).select("PyfficeUnitUpdate").override(cfg)
 
-    def check_schema(self, schema):
+    def check_schema(self, schema) -> bool:
         """Returns True if the document matches the schema"""
         return True
 
-    def check_extra(self):
+    def check_extra(self) -> None:
         """Returns True if the document has extra fields not in the schema at the schema levels"""
         return None
 
-    def check_missing(self):
+    def check_missing(self) -> None:
         """Returns True if the document is missing fields not in the schema at the schema levels"""
         return None
 
-    def create_temp_unit(self):
+    def create_temp_unit(self) -> "PyfficeUnitUpdate":
         """Create a temporary unit."""
         self.temp_unit = {}
         return self
 
-    def get_version_schema(self, version):
+    def get_version_schema(self, version) -> None:
         """Get the version schema for a given version."""
         return None
 
@@ -104,24 +104,24 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
         self.data = None
         self.meta_data = None
 
-    def check_schema(self, schema):
+    def check_schema(self, schema) -> bool:
         """Returns True if the document matches the schema"""
         return True
 
-    def check_extra(self):
+    def check_extra(self) -> None:
         """Returns True if the document has extra fields not in the schema at the schema levels"""
         return None
 
-    def check_missing(self):
+    def check_missing(self) -> None:
         """Returns True if the document is missing fields not in the schema at the schema levels"""
         return None
 
-    def create_temp_document(self):
+    def create_temp_document(self) -> "PyfficeDocumentUpdate":
         """Create a temporary document."""
         self.temp_document = {}
         return self
 
-    def process(self, document=None):
+    def process(self, document=None) -> None:
         """Process .
         
         Args:
@@ -149,7 +149,7 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
         document = self.rebuild()
         return document
 
-    def rebuild(self):
+    def rebuild(self) -> None:
         """Rebuild.
         
         Returns:
@@ -160,7 +160,7 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
         document["meta_data"] = self.meta_data
         return document
 
-    def run_adds(self, target, update_data):
+    def run_adds(self, target, update_data) -> None:
         """Run adds.
         
         Args:
@@ -180,7 +180,7 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
                 if isinstance(item, dict):
                     target.update(item)
 
-    def run_deletes(self, target, update_data):
+    def run_deletes(self, target, update_data) -> None:
         """Run deletes.
         
         Args:
@@ -204,7 +204,7 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
             if update_data in target:
                 del target[update_data]
 
-    def run_updates(self, target, update_data):
+    def run_updates(self, target, update_data) -> None:
         """Run updates.
         
         Args:
@@ -231,7 +231,7 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
                 else:
                     target[key] = value
 
-    def update_data(self, update):
+    def update_data(self, update) -> "PyfficeDocumentUpdate":
         """Update data.
         
         Args:
@@ -248,7 +248,7 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
             self.run_updates(self.data, update["update"])
         return self
 
-    def update_document(self, update):
+    def update_document(self, update) -> "PyfficeDocumentUpdate":
         """Update document.
         
         Args:
@@ -265,7 +265,7 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
             self.run_updates(self.document, update["update"])
         return self
 
-    def update_meta_data(self, update):
+    def update_meta_data(self, update) -> "PyfficeDocumentUpdate":
         """Update meta data.
         
         Args:
@@ -282,7 +282,7 @@ class PyfficeDocumentUpdate(PyfficeUpdate):
             self.run_updates(self.meta_data, update["update"])
         return self
 
-    def update_versions(self, version, document_type):
+    def update_versions(self, version, document_type) -> None:
         """Update versions.
         
         Args:
@@ -342,14 +342,14 @@ class PyfficeUpdater(object):
         """"""
         self.config = kahndor.Instruct(pxcfg).select("PyfficeUpdater").override(cfg)
 
-    def update_document(self):
+    def update_document(self) -> "PyfficeUpdater":
         """Update the document."""
         # Placeholder - would apply updates to document
         if not hasattr(self, 'document'):
             return self
         return self
 
-    def update_unit(self):
+    def update_unit(self) -> "PyfficeUpdater":
         """Update the unit."""
         # Placeholder - would apply updates to unit
         if not hasattr(self, 'unit'):

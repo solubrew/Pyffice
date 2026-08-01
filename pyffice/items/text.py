@@ -177,7 +177,7 @@ class PyfficeText(PyfficeUnit):
         self.value = None
         self.vertical = None
 
-    def load_unit(self, unit=None):
+    def load_unit(self, unit=None) -> "PyfficeText":
         """Load a unit dict into this document.
         
         Args:
@@ -201,7 +201,7 @@ class PyfficeText(PyfficeUnit):
         self.set_text(text)
         return self
 
-    def set_alignment(self, horizontal=None, vertical=None):
+    def set_alignment(self, horizontal=None, vertical=None) -> "PyfficeText":
         """Set the alignment.
         
         Args:
@@ -219,7 +219,7 @@ class PyfficeText(PyfficeUnit):
         self.vertical = vertical
         return self
 
-    def set_data_format(self, data_format):
+    def set_data_format(self, data_format) -> "PyfficeText":
         """Set the data format.
         
         Args:
@@ -233,7 +233,7 @@ class PyfficeText(PyfficeUnit):
             self.data_format = data_format
         return self
 
-    def set_font(self, font):
+    def set_font(self, font) -> "PyfficeText":
         """Set the Default font for the Text"""
         self.set_font_color(font)
         self.set_color_background(font)
@@ -256,7 +256,7 @@ class PyfficeText(PyfficeUnit):
             self.font = font if font is not None else self.config.dikt.get("font", {})
         return self
 
-    def set_font_color(self, font=None):
+    def set_font_color(self, font=None) -> "PyfficeText":
         """Set the font color.
         
         Args:
@@ -273,7 +273,7 @@ class PyfficeText(PyfficeUnit):
             self.color = color
         return self
 
-    def set_color_background(self, font):
+    def set_color_background(self, font) -> "PyfficeText":
         """Set the color background.
         
         Args:
@@ -290,7 +290,7 @@ class PyfficeText(PyfficeUnit):
             self.color_background = color
         return self
 
-    def set_color_foreground(self, font):
+    def set_color_foreground(self, font) -> "PyfficeText":
         """Set the color foreground.
         
         Args:
@@ -307,7 +307,7 @@ class PyfficeText(PyfficeUnit):
             self.color_foreground = color
         return self
 
-    def set_html(self, value):
+    def set_html(self, value) -> "PyfficeText":
         """Set the html.
         
         Args:
@@ -321,7 +321,7 @@ class PyfficeText(PyfficeUnit):
             self.html = value
         return self
 
-    def set_text(self, text):
+    def set_text(self, text) -> "PyfficeText":
         """Set the text.
         
         Args:
@@ -334,7 +334,7 @@ class PyfficeText(PyfficeUnit):
             self.add_change("value", self.value, text)
             self.value = text
         return self
-    def to_html(self):
+    def to_html(self) -> Any:
         """Convert this document to html.
         
         Returns:

@@ -66,7 +66,7 @@ class PyfficeSpreadSheet(PyfficeDocument):
         self.shapes = None
         self.tables = None
 
-    def add_cell(self, address, cfg):
+    def add_cell(self, address, cfg) -> "PyfficeSpreadSheet":
         """Add a cell.
         
         Args:
@@ -82,7 +82,7 @@ class PyfficeSpreadSheet(PyfficeDocument):
         self.cells[address] = PyfficeCell(cfg)
         return self
 
-    def convert_column(self, column, syntax="arabic"):
+    def convert_column(self, column, syntax="arabic") -> None:
         """Convert column.
         
         Args:
@@ -102,7 +102,7 @@ class PyfficeSpreadSheet(PyfficeDocument):
             raise UnknownSyntaxError(f"Unknown Syntax {syntax}")
         return column
 
-    def evaluate(self, address):
+    def evaluate(self, address) -> "PyfficeSpreadSheet":
         """Evaluate.
         
         Args:
@@ -114,7 +114,7 @@ class PyfficeSpreadSheet(PyfficeDocument):
         self.cells[address] = self.cells[address].evaluate()
         return self
 
-    def get_cell(self, address):
+    def get_cell(self, address) -> Any:
         """Return the cell.
         
         Args:
@@ -125,7 +125,7 @@ class PyfficeSpreadSheet(PyfficeDocument):
         """
         return self.cells.get(address, None)
 
-    def get_columns(self, count=None):
+    def get_columns(self, count=None) -> None:
         """Return the columns.
         
         Args:
@@ -141,7 +141,7 @@ class PyfficeSpreadSheet(PyfficeDocument):
             columns.append(self.convert_column(column))
         return columns
 
-    def get_data(self, filters=None, return_format="table"):
+    def get_data(self, filters=None, return_format="table") -> Any:
         """return a dictionary or table of data"""
         from pyffice.pyffice import UnknownReturnFormatError
         data = self.data
@@ -152,7 +152,7 @@ class PyfficeSpreadSheet(PyfficeDocument):
         else:
             raise UnknownReturnFormatError(f"Unknown Return Format {return_format}")
 
-    def get_end_column(self, plus=0, minus=0):
+    def get_end_column(self, plus=0, minus=0) -> Any:
         """Return the end column.
         
         Args:
@@ -165,7 +165,7 @@ class PyfficeSpreadSheet(PyfficeDocument):
         end_column = self.convert_column(self.end_column, "arabic")
         return self.convert_column(end_column + plus - minus, "roman")
 
-    def get_end_row(self, plus=0, minus=0):
+    def get_end_row(self, plus=0, minus=0) -> int:
         """Return the end row.
         
         Args:
@@ -177,7 +177,7 @@ class PyfficeSpreadSheet(PyfficeDocument):
         """
         return self.end_row + plus - minus
 
-    def get_formula(self, address):
+    def get_formula(self, address) -> Any:
         """Return the formula.
         
         Args:
@@ -188,7 +188,7 @@ class PyfficeSpreadSheet(PyfficeDocument):
         """
         return self.cells[address].get_formula()
 
-    def get_rows(self):
+    def get_rows(self) -> list:
         """Group cells by row index and return a list of row dicts.
 
         Each row dict maps column-letter to the cell at that
@@ -210,7 +210,7 @@ class PyfficeSpreadSheet(PyfficeDocument):
         return [{"row": idx, "cells": cells}
                 for idx, cells in sorted(rows.items())]
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> "PyfficeSpreadSheet":
         """Load document into this document.
         
         Args:
@@ -230,7 +230,7 @@ class PyfficeSpreadSheet(PyfficeDocument):
         self.set_size(document.get("size", None))
         return self
 
-    def set_cell(self, address, value, format=None, formula=None):
+    def set_cell(self, address, value, format=None, formula=None) -> "PyfficeSpreadSheet":
         """Set the cell.
         
         Args:
@@ -262,7 +262,7 @@ class PyfficeSpreadSheet(PyfficeDocument):
         self.cells[address] = cell
         return self
 
-    def set_column_labels(self, labels=None, widths=None):
+    def set_column_labels(self, labels=None, widths=None) -> "PyfficeSpreadSheet":
         """Set the column labels.
         
         Args:
@@ -279,7 +279,7 @@ class PyfficeSpreadSheet(PyfficeDocument):
         self.column_labels = {x: widths.get(x, 30) for x in labels}
         return self
 
-    def set_column_width(self, column, width):
+    def set_column_width(self, column, width) -> "PyfficeSpreadSheet":
         """Set the column width.
         
         Args:
@@ -303,7 +303,7 @@ class PyfficeSpreadSheet(PyfficeDocument):
         self.column_labels[column] = int(width)
         return self
 
-    def set_data(self, data):
+    def set_data(self, data) -> "PyfficeSpreadSheet":
         """Set the data.
         
         Args:
@@ -330,12 +330,12 @@ class PyfficeSpreadSheet(PyfficeDocument):
         self.data = DataFrame(data_, columns=self.get_columns())
         return self
 
-    def set_objects(self, objects):
+    def set_objects(self, objects) -> "PyfficeSpreadSheet":
         """Set objects."""
         _p = True  # placeholder
         return self
 
-    def set_row_labels(self, labels=None):
+    def set_row_labels(self, labels=None) -> "PyfficeSpreadSheet":
         """Set the row labels.
         
         Args:
@@ -349,7 +349,7 @@ class PyfficeSpreadSheet(PyfficeDocument):
         self.row_labels = labels
         return self
 
-    def set_size(self, size):
+    def set_size(self, size) -> "PyfficeSpreadSheet":
         """Set the size.
         
         Args:
@@ -376,7 +376,7 @@ class PyfficeSpreadSheet(PyfficeDocument):
             self.end_column = self.get_end_column(plus=num_cols)
         return self
 
-    def to_dict(self):
+    def to_dict(self) -> Any:
         """Convert this document to dict.
         
         Returns:

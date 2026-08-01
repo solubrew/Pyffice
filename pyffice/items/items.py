@@ -42,7 +42,7 @@ class PyfficeTable(PyfficeUnit):
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDataFrame")).override(cfg)
 
-    def load_unit(self, unit=None):
+    def load_unit(self, unit=None) -> "PyfficeTable":
         """Load a unit dict into this document.
         
         Args:
@@ -58,7 +58,7 @@ class PyfficeTable(PyfficeUnit):
         self.set_dataframe(unit.get("data", []), unit.get("columns", []))
         return self
 
-    def set_dataframe(self, data, columns=None):
+    def set_dataframe(self, data, columns=None) -> "PyfficeTable":
         """Set the dataframe.
         
         Args:

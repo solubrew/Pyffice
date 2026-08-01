@@ -51,7 +51,7 @@ class PyfficeCAM(PyfficeDocument):
         self.units: str = "mm"
         self._tools: list[dict[str, Any]] = []
 
-    def load(self, file_path):
+    def load(self, file_path) -> "PyfficeCAM":
         """Load CAM file.
 
         Args:
@@ -63,7 +63,7 @@ class PyfficeCAM(PyfficeDocument):
         self.file_path = file_path
         return self
 
-    def save_cam(self, file_path=None):
+    def save_cam(self, file_path=None) -> "PyfficeCAM":
         """Save CAM file.
 
         Args:
@@ -79,7 +79,7 @@ class PyfficeCAM(PyfficeDocument):
         self.file_path = target
         return self
 
-    def add_tool(self, tool):
+    def add_tool(self, tool) -> "PyfficeCAM":
         """Add a tool to the tool list.
 
         Args:
@@ -91,7 +91,7 @@ class PyfficeCAM(PyfficeDocument):
         self._tools.append(tool)
         return self
 
-    def get_tools(self):
+    def get_tools(self) -> list:
         """Get all tools.
 
         Returns:
@@ -99,7 +99,7 @@ class PyfficeCAM(PyfficeDocument):
         """
         return list(self._tools)
 
-    def set_units(self, units):
+    def set_units(self, units) -> "PyfficeCAM":
         """Set measurement units.
 
         Args:
@@ -124,7 +124,7 @@ class PyfficeCAMManager(PyfficeDocumentManager):
         # pyffice/cam/cam.py PyfficeCAMManager class.
         self._projects: dict[str, PyfficeCAM] = {}
 
-    def create(self, project_name, **kwargs):
+    def create(self, project_name, **kwargs) -> None:
         """Create a new CAM project.
 
         Args:
@@ -139,7 +139,7 @@ class PyfficeCAMManager(PyfficeDocumentManager):
         self._projects[project_name] = cam
         return cam
 
-    def get(self, name):
+    def get(self, name) -> Any:
         """Get CAM project by name.
 
         Args:
@@ -150,7 +150,7 @@ class PyfficeCAMManager(PyfficeDocumentManager):
         """
         return self._projects.get(name)
 
-    def list_projects(self):
+    def list_projects(self) -> list:
         """List all project names.
 
         Returns:
@@ -158,7 +158,7 @@ class PyfficeCAMManager(PyfficeDocumentManager):
         """
         return list(self._projects.keys())
 
-    def remove(self, project_name):
+    def remove(self, project_name) -> bool:
         """Remove CAM project.
 
         Args:
@@ -172,7 +172,7 @@ class PyfficeCAMManager(PyfficeDocumentManager):
             return True
         return False
 
-    def clear(self):
+    def clear(self) -> None:
         """Clear all projects."""
         self._projects.clear()
 # ====================================================================================================================||

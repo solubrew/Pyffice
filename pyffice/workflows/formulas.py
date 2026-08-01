@@ -167,19 +167,19 @@ class PyfficeFormulasLibrary(PyfficeDocumentManager):
         }
         self.formulas = None
 
-    def get_formula(self, formula):
+    def get_formula(self, formula) -> bool:
         """Look up a registered formula by name."""
         if self.formulas is None:
             self.set_formulas()
         return self.formulas.get(formula, None) or f"Formula {formula} Unknown"
 
-    def get_formulas_list(self):
+    def get_formulas_list(self) -> list:
         """Return the names of all registered formulas."""
         if self.formulas is None:
             self.set_formulas()
         return list(self.formulas.keys())
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> "PyfficeFormulasLibrary":
         """Load formulas from a document dict into the library."""
         if document is None:
             document = self.config.dikt.get("document", {})
@@ -187,7 +187,7 @@ class PyfficeFormulasLibrary(PyfficeDocumentManager):
         self.set_formulas(document.get("formulas", {}))
         return self
 
-    def set_formulas(self, formulas=None):
+    def set_formulas(self, formulas=None) -> "PyfficeFormulasLibrary":
         """Register a dict of formulas; each becomes a PyfficeFormula."""
         # SPEED: offload this to a separate process or lazy load the list in pieces
         if formulas is None:
@@ -225,7 +225,7 @@ class PyfficeFormula(PyfficeUnit):
         self.parsed = None
         self.protocol_name = "builtin"
 
-    def add_parameter(self, parameter, value):
+    def add_parameter(self, parameter, value) -> None:
         """Add a parameter.
         
         Args:
@@ -237,7 +237,7 @@ class PyfficeFormula(PyfficeUnit):
         """
         self.parameters[parameter] = value
 
-    def convert(self, protocol_name: str = "builtin"):
+    def convert(self, protocol_name: str = "builtin") -> "PyfficeFormula":
         """Re-parse self.formula using the named protocol.
 
         Args:
@@ -275,7 +275,7 @@ class PyfficeFormula(PyfficeUnit):
             f"available without a PyfficeFormulasLibrary context"
         )
 
-    def load_unit(self, unit):
+    def load_unit(self, unit) -> "PyfficeFormula":
         """Load a unit dict into this document.
         
         Args:
@@ -291,7 +291,7 @@ class PyfficeFormula(PyfficeUnit):
         self.formula_tag = "<{" + self.formula + "}>"
         return self
 
-    def parse(self):
+    def parse(self) -> "PyfficeFormula":
         """Parse self.formula using the assigned protocol (default builtin).
 
         Stores the parsed representation in self.parsed; subsequent
@@ -301,7 +301,7 @@ class PyfficeFormula(PyfficeUnit):
         self.parsed = proto.parse(self.formula)
         return self
 
-    def execute(self):
+    def execute(self) -> Any:
         """Execute self.parsed against self.parameters via the protocol.
 
         Returns the result. If self.parsed is unset, runs parse() first.
@@ -332,7 +332,7 @@ class PyfficeFormulaABS(PyfficeFormula):
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeFormula").override(cfg))
 
-    def execute(self):
+    def execute(self) -> None:
         """Execute.
         
         Returns:
@@ -341,7 +341,7 @@ class PyfficeFormulaABS(PyfficeFormula):
         result = abs(list(self.parameters.values())[0])
         return result
 
-    def validate(self):
+    def validate(self) -> None:
         """Validate .
         
         Returns:
@@ -362,7 +362,7 @@ class PyfficeFormulaSUM(PyfficeFormula):
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeFormula").override(cfg))
 
-    def execute(self):
+    def execute(self) -> None:
         """Execute.
         
         Returns:
@@ -371,7 +371,7 @@ class PyfficeFormulaSUM(PyfficeFormula):
         result = sum(self.parameters.values())
         return result
 
-    def validate(self):
+    def validate(self) -> None:
         """Validate .
         
         Returns:
@@ -382,7 +382,7 @@ class PyfficeFormulaSUM(PyfficeFormula):
             raise InvalidParameterTypeError("Non Number Values in Parameters")
 
 
-def is_number(value):
+def is_number(value) -> bool:
     """Return whether this document is number.
     
     Args:

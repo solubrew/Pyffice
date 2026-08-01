@@ -88,7 +88,7 @@ class PyfficeChart(PyfficeDocument):
         user_data = user_data or {}
         return {f: user_data.get(f, defaults.get(f)) for f in fields}
 
-    def add_axis(self, axis):
+    def add_axis(self, axis) -> "PyfficeChart":
         """Add a axis.
         
         Args:
@@ -104,7 +104,7 @@ class PyfficeChart(PyfficeDocument):
         self.axes.append(axis)
         return self
 
-    def add_legend(self, legend):
+    def add_legend(self, legend) -> "PyfficeChart":
         """Add a legend.
         
         Args:
@@ -125,7 +125,7 @@ class PyfficeChart(PyfficeDocument):
         self.legends.append(legend)
         return self
 
-    def add_plotarea(self, plotarea):
+    def add_plotarea(self, plotarea) -> "PyfficeChart":
         """Add a plotarea.
         
         Args:
@@ -146,7 +146,7 @@ class PyfficeChart(PyfficeDocument):
         self.plotareas.append(plotarea)
         return self
 
-    def add_series(self, label, x_index: list, y_index: list, z_index=None, format_=None):
+    def add_series(self, label, x_index: list, y_index: list, z_index=None, format_=None) -> "PyfficeChart":
         """
         Add a new series to the chart.
 
@@ -169,7 +169,7 @@ class PyfficeChart(PyfficeDocument):
         self.series[label] = {"x": x_index, "y": y_index, "z": z_index, "format": format_}
         return self
 
-    def del_axis(self, axis):
+    def del_axis(self, axis) -> "PyfficeChart":
         """Remove the axis.
         
         Args:
@@ -182,7 +182,7 @@ class PyfficeChart(PyfficeDocument):
         del self.axes[axis]
         return self
 
-    def del_legend(self, legend):
+    def del_legend(self, legend) -> "PyfficeChart":
         """Remove the legend.
         
         Args:
@@ -195,7 +195,7 @@ class PyfficeChart(PyfficeDocument):
         del self.legends[legend]
         return self
 
-    def del_plotarea(self, plotarea):
+    def del_plotarea(self, plotarea) -> "PyfficeChart":
         """Remove the plotarea.
         
         Args:
@@ -208,7 +208,7 @@ class PyfficeChart(PyfficeDocument):
         del self.plotareas[plotarea]
         return self
 
-    def del_series(self, series):
+    def del_series(self, series) -> "PyfficeChart":
         """Remove the series.
         
         Args:
@@ -221,7 +221,7 @@ class PyfficeChart(PyfficeDocument):
         del self.series[series]
         return self
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> "PyfficeChart":
         """Load document into this document.
         
         Args:
@@ -250,7 +250,7 @@ class PyfficeChart(PyfficeDocument):
         self.set_title(document.get("title", None))
         return self
 
-    def save(self, path=None, syntax=None, encrypt_key=None):
+    def save(self, path=None, syntax=None, encrypt_key=None) -> "PyfficeChart":
         """Save the document.
         
         Args:
@@ -277,7 +277,7 @@ class PyfficeChart(PyfficeDocument):
                 self.save_pyffice(path, syntax, encrypt_key)
         return self
 
-    def save_excel(self, path):
+    def save_excel(self, path) -> None:
         """Save the document.
         
         Args:
@@ -289,30 +289,30 @@ class PyfficeChart(PyfficeDocument):
         porter = PyfficePortExcel({"parent": self})
         porter.file_export(self, path)
 
-    def save_html(self, path):
+    def save_html(self, path) -> "PyfficeChart":
         """Save chart as HTML file."""
         import os
         # Placeholder - would use plotting library to generate HTML
         return self
 
-    def save_latex(self, path):
+    def save_latex(self, path) -> "PyfficeChart":
         """Save chart as LaTeX file."""
         if not path:
             return self
         # Placeholder - would use plotting library to generate LaTeX
         return self
 
-    def set_axes(self, axes):
+    def set_axes(self, axes) -> "PyfficeChart":
         """Set chart axes."""
         self.axes = axes
         return self
 
-    def set_background(self, color=None):
+    def set_background(self, color=None) -> "PyfficeChart":
         """Set chart background."""
         self.background = color or "white"
         return self
 
-    def set_chart_type(self, chart_type):
+    def set_chart_type(self, chart_type) -> Any:
         """Set the chart type.
         
         Args:
@@ -323,7 +323,7 @@ class PyfficeChart(PyfficeDocument):
         """
         return self._set_with_change("type", chart_type)
 
-    def set_compatibility(self, compatibility):
+    def set_compatibility(self, compatibility) -> Any:
         """Set the compatibility.
 
         Args:
@@ -334,12 +334,12 @@ class PyfficeChart(PyfficeDocument):
         """
         return self._set_with_change("compatibility", compatibility)
 
-    def set_data(self, data):
+    def set_data(self, data) -> "PyfficeChart":
         """Set chart data."""
         self.data = data
         return self
 
-    def set_figsize(self, figsize):
+    def set_figsize(self, figsize) -> Any:
         """Set the figsize.
         
         Args:
@@ -350,7 +350,7 @@ class PyfficeChart(PyfficeDocument):
         """
         return self._set_with_change("figsize", figsize)
 
-    def set_label_xaxis(self, label):
+    def set_label_xaxis(self, label) -> Any:
         """Set the label xaxis.
         
         Args:
@@ -361,7 +361,7 @@ class PyfficeChart(PyfficeDocument):
         """
         return self._set_with_change("xlabel", label)
 
-    def set_label_yaxis(self, label):
+    def set_label_yaxis(self, label) -> Any:
         """Set the label yaxis.
         
         Args:
@@ -372,7 +372,7 @@ class PyfficeChart(PyfficeDocument):
         """
         return self._set_with_change("ylabel", label)
 
-    def set_legends(self, legends: list = None):
+    def set_legends(self, legends: list = None) -> Any:
         """Set the legends.
         
         Args:
@@ -383,7 +383,7 @@ class PyfficeChart(PyfficeDocument):
         """
         return self._set_with_change("legends", legends)
 
-    def set_orientation(self, orientation):
+    def set_orientation(self, orientation) -> Any:
         """Set the orientation.
         
         Args:
@@ -394,7 +394,7 @@ class PyfficeChart(PyfficeDocument):
         """
         return self._set_with_change("orientation", orientation)
 
-    def set_origin(self, origin: list = None):
+    def set_origin(self, origin: list = None) -> Any:
         """Set the origin.
         
         Args:
@@ -405,7 +405,7 @@ class PyfficeChart(PyfficeDocument):
         """
         return self._set_with_change("origin", origin)
 
-    def set_plotareas(self, plotareas):
+    def set_plotareas(self, plotareas) -> Any:
         """Set the plotareas.
         
         Args:
@@ -416,7 +416,7 @@ class PyfficeChart(PyfficeDocument):
         """
         return self._set_with_change("plotareas", plotareas)
 
-    def set_position(self, position):
+    def set_position(self, position) -> Any:
         """Set the position.
         
         Args:
@@ -427,17 +427,17 @@ class PyfficeChart(PyfficeDocument):
         """
         return self._set_with_change("position", position)
 
-    def set_position_plotarea(self, position, plotarea=None):
+    def set_position_plotarea(self, position, plotarea=None) -> "PyfficeChart":
         """Set plot area position."""
         self.plotarea_position = position
         return self
 
-    def set_position_legend(self, position, legend=None):
+    def set_position_legend(self, position, legend=None) -> "PyfficeChart":
         """Set legend position."""
         self.legend_position = position
         return self
 
-    def set_series(self, series: list = None):
+    def set_series(self, series: list = None) -> Any:
         """Set the series.
         
         Args:
@@ -448,7 +448,7 @@ class PyfficeChart(PyfficeDocument):
         """
         return self._set_with_change("series", series)
 
-    def set_size(self, size):
+    def set_size(self, size) -> Any:
         """Set the size.
         
         Args:
@@ -459,17 +459,17 @@ class PyfficeChart(PyfficeDocument):
         """
         return self._set_with_change("size", size)
 
-    def set_size_plotarea(self, size, plotarea):
+    def set_size_plotarea(self, size, plotarea) -> "PyfficeChart":
         """Set plot area size."""
         self.plotarea_size = size
         return self
 
-    def set_size_legend(self, size, legend):
+    def set_size_legend(self, size, legend) -> "PyfficeChart":
         """Set legend size."""
         self.legend_size = size
         return self
 
-    def set_theme(self, theme="whitegrid"):
+    def set_theme(self, theme="whitegrid") -> Any:
         """Set the theme.
         
         Args:
@@ -480,7 +480,7 @@ class PyfficeChart(PyfficeDocument):
         """
         return self._set_with_change("theme", theme, label="style")
 
-    def set_title(self, title, size: int = 12, color: str = "black"):
+    def set_title(self, title, size: int = 12, color: str = "black") -> "PyfficeChart":
         """Set the title.
         
         Args:

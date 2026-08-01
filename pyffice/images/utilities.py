@@ -38,31 +38,31 @@ logma = Logma(__name__)
 pxcfg = join(here, "_data_", "utilities.yaml")
 
 
-def hex_to_rgb(hex_color):
+def hex_to_rgb(hex_color) -> tuple:
     """Convert a hex color to an RGB tuple."""
     hex_color = hex_color.lstrip("#")
     return tuple(int(hex_color[i : i + 2], 16) for i in (0, 2, 4))
 
 
-def rgb_to_hex(rgb_color):
+def rgb_to_hex(rgb_color) -> Any:
     """Convert an RGB tuple back to a hex color."""
     return "#{:02x}{:02x}{:02x}".format(*rgb_color)
 
 
-def rgb_to_hsl(r, g, b):
+def rgb_to_hsl(r, g, b) -> tuple:
     """Convert RGB to HSL (Hue, Saturation, Lightness)."""
     r, g, b = r / 255.0, g / 255.0, b / 255.0
     h, l, s = colorsys.rgb_to_hls(r, g, b)
     return h * 360, s, l
 
 
-def hsl_to_rgb(h, s, l):
+def hsl_to_rgb(h, s, l) -> tuple:
     """Convert HSL (Hue, Saturation, Lightness) back to RGB."""
     r, g, b = colorsys.hls_to_rgb(h / 360, l, s)
     return int(r * 255), int(g * 255), int(b * 255)
 
 
-def is_similar_hue(hue1, hue2, hue_tolerance):
+def is_similar_hue(hue1, hue2, hue_tolerance) -> bool:
     """
     Check if two hues are similar, within a certain tolerance.
     Hue is a value between 0 and 360 degrees.
@@ -72,7 +72,7 @@ def is_similar_hue(hue1, hue2, hue_tolerance):
     return diff <= hue_tolerance
 
 
-def convert_shades_of_color(input_path, output_path, source_color, target_color, hue_tolerance):
+def convert_shades_of_color(input_path, output_path, source_color, target_color, hue_tolerance) -> None:
     """Convert shades of color.
     
     Args:
@@ -96,7 +96,7 @@ def convert_shades_of_color(input_path, output_path, source_color, target_color,
         raise ValueError("Invalid image type.")
 
 
-def convert_shades_of_color_in_svg(input_path, output_path, source_color, target_color, hue_tolerance):
+def convert_shades_of_color_in_svg(input_path, output_path, source_color, target_color, hue_tolerance) -> None:
     """
     Change all shades of a color in an SVG to similar shades of another color.
 
@@ -138,7 +138,7 @@ def convert_shades_of_color_in_svg(input_path, output_path, source_color, target
     logma.info(f"SVG shades updated and saved to '{output_path}'.")
 
 
-def convert_shades_of_color_in_jpg(image_path, output_path, source_color, target_color, tolerance=40):
+def convert_shades_of_color_in_jpg(image_path, output_path, source_color, target_color, tolerance=40) -> None:
     """Convert shades of color in jpg.
     
     Args:
@@ -154,7 +154,7 @@ def convert_shades_of_color_in_jpg(image_path, output_path, source_color, target
     convert_shades_of_color_in_png(image_path, output_path, source_color, target_color, tolerance)
 
 
-def convert_shades_of_color_in_png(image_path, output_path, source_color, target_color, tolerance=40):
+def convert_shades_of_color_in_png(image_path, output_path, source_color, target_color, tolerance=40) -> None:
     """
     Convert shades of `source_color` to corresponding shades of `target_color` in an image.
 
@@ -206,7 +206,7 @@ def convert_shades_of_color_in_png(image_path, output_path, source_color, target
     return result_img
 
 
-def check_image_type(input_path):
+def check_image_type(input_path) -> None:
     """Check image type.
     
     Args:

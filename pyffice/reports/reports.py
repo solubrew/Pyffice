@@ -47,26 +47,26 @@ class PyfficeReport(PyfficeScript):
         self.summary = None
         self.appendices = []
 
-    def add_summary(self, summary=None):
+    def add_summary(self, summary=None) -> None:
         """Add a summary to the report"""
         if summary is None:
             summary = self.generate_summary()
         self.summary = summary
 
-    def add_appendix(self, appendix):
+    def add_appendix(self, appendix) -> None:
         """Add an appendix to the report"""
         self.appendices.append(appendix)
 
-    def generate_summary(self):
+    def generate_summary(self) -> str:
         """Generate a summary of the report"""
         return f"Summary of {self.config['title']} report"
 
-    def import_report(self):
+    def import_report(self) -> "PyfficeReport":
         """Import a report from a file"""
         _placeholder = True  # Would import report
         return self
 
-    def export_report(self):
+    def export_report(self) -> "PyfficeReport":
         """Export the report to a file"""
         _placeholder = True  # Would export report
         return self

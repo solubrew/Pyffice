@@ -49,7 +49,7 @@ class PyfficeShape(PyfficeUnit):
         self.size = None
         self.texts = None
 
-    def add_shape(self, shape):
+    def add_shape(self, shape) -> "PyfficeShape":
         """Add a shape.
         
         Args:
@@ -62,7 +62,7 @@ class PyfficeShape(PyfficeUnit):
         self.shapes[shape] = PyfficeShape(cfg)
         return self
 
-    def add_text(self, text, position=None):
+    def add_text(self, text, position=None) -> "PyfficeShape":
         """Add a text.
         
         Args:
@@ -80,7 +80,7 @@ class PyfficeShape(PyfficeUnit):
         self.texts[str(position)] = text
         return self
 
-    def load_unit(self, unit=None):
+    def load_unit(self, unit=None) -> "PyfficeShape":
         """Load a unit dict into this document.
         
         Args:
@@ -99,7 +99,7 @@ class PyfficeShape(PyfficeUnit):
         self.set_shapes(unit.get("shapes", []))
         return self
 
-    def mirror_shape(self, axis):
+    def mirror_shape(self, axis) -> "PyfficeShape":
         """Mirror shape.
         
         Args:
@@ -116,22 +116,22 @@ class PyfficeShape(PyfficeUnit):
             self.set_size([self.size[0], -self.size[1]])
         return self
 
-    def mirror_text(self):
+    def mirror_text(self) -> "PyfficeShape":
         """Mirror text horizontally."""
         self.text_flipped = not getattr(self, 'text_flipped', False)
         return self
 
-    def move_shape(self, x, y):
+    def move_shape(self, x, y) -> "PyfficeShape":
         """Move shape by offset."""
         self.set_origin([self.origin[0] + x, self.origin[1] + y])
         return self
 
-    def move_text(self, x, y):
+    def move_text(self, x, y) -> "PyfficeShape":
         """Move text by offset."""
         self.text_offset = (x, y)
         return self
 
-    def rotate_shape(self, axis, angle):
+    def rotate_shape(self, axis, angle) -> "PyfficeShape":
         """Rotate shape."""
         if axis == "x":
             self.set_origin([-self.origin[1], self.origin[0]])
@@ -141,12 +141,12 @@ class PyfficeShape(PyfficeUnit):
             self.set_size([self.size[0], -self.size[1]])
         return self
 
-    def rotate_text(self, axis, angle):
+    def rotate_text(self, axis, angle) -> "PyfficeShape":
         """Rotate text."""
         self.text_rotation = angle
         return self
 
-    def set_background(self, background, item="0"):
+    def set_background(self, background, item="0") -> "PyfficeShape":
         """Set the background.
         
         Args:
@@ -170,7 +170,7 @@ class PyfficeShape(PyfficeUnit):
             self.shapes[item].background_color = background_color
         return self
 
-    def set_origin(self, origin):
+    def set_origin(self, origin) -> "PyfficeShape":
         """Set the origin.
         
         Args:
@@ -186,7 +186,7 @@ class PyfficeShape(PyfficeUnit):
         self._set_envelope(self.origin, corner)
         return self
 
-    def set_shapes(self, shapes):
+    def set_shapes(self, shapes) -> "PyfficeShape":
         """Set the shapes.
         
         Args:
@@ -220,7 +220,7 @@ class PyfficeShape(PyfficeUnit):
                     self.shape_size = self.corner[0] - self.shape_origin[0]
         return self
 
-    def set_size(self, size):
+    def set_size(self, size) -> "PyfficeShape":
         """Set the size.
         
         Args:

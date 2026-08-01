@@ -139,17 +139,17 @@ class DiagramConverter(ABC):
         self.cfg = cfg or {}
 
     @abstractmethod
-    def load(self, file_path):
+    def load(self, file_path) -> None:
         """Load diagram from file and convert to PyfficeDiagram"""
         raise NotImplementedError("Subclass must implement load()")
 
     @abstractmethod
-    def save(self, diagram, file_path):
+    def save(self, diagram, file_path) -> None:
         """Save PyfficeDiagram to file"""
         raise NotImplementedError("Subclass must implement save()")
 
     @staticmethod
-    def detect_format(file_path):
+    def detect_format(file_path) -> None:
         """Detect diagram format from file extension"""
         for ext, fmt in DIAGRAM_FORMATS.items():
             if file_path.lower().endswith(ext):
@@ -160,7 +160,7 @@ class DiagramConverter(ABC):
 class DiaConverter(DiagramConverter):
     """Converter for Dia diagram files (.dia, .dia.gz)"""
 
-    def load(self, file_path):
+    def load(self, file_path) -> None:
         """Load Dia file and convert to PyfficeDiagram"""
         sketch = PyfficeDiagram(self.cfg)
 
@@ -255,7 +255,7 @@ class DiaConverter(DiagramConverter):
 
         return edge
 
-    def save(self, diagram, file_path):
+    def save(self, diagram, file_path) -> "DiaConverter":
         """Save PyfficeDiagram to Dia format"""
         content = _build_dia_xml(diagram)
         self.lines_written = content.count("\n")
@@ -274,7 +274,7 @@ class DiaConverter(DiagramConverter):
 class DotConverter(DiagramConverter):
     """Converter for DOT/Graphviz files"""
 
-    def load(self, file_path):
+    def load(self, file_path) -> None:
         """Load DOT file and convert to PyfficeDiagram"""
         sketch = PyfficeDiagram(self.cfg)
 
@@ -331,7 +331,7 @@ class DotConverter(DiagramConverter):
         match = re.search(pattern, attr_str)
         return match.group(1) if match else None
 
-    def save(self, diagram, file_path):
+    def save(self, diagram, file_path) -> bool:
         """Save PyfficeDiagram to DOT format"""
         lines = ["digraph diagram {"]
         lines.append("  rankdir=LR;")
@@ -357,7 +357,7 @@ class DotConverter(DiagramConverter):
 class GraphMLConverter(DiagramConverter):
     """Converter for GraphML files"""
 
-    def load(self, file_path):
+    def load(self, file_path) -> None:
         """Load GraphML file and convert to PyfficeDiagram"""
         sketch = PyfficeDiagram(self.cfg)
 
@@ -397,7 +397,7 @@ class GraphMLConverter(DiagramConverter):
 
         return sketch
 
-    def save(self, diagram, file_path):
+    def save(self, diagram, file_path) -> bool:
         """Save PyfficeDiagram to GraphML format"""
         lines = ['<?xml version="1.0" encoding="UTF-8"?>']
         lines.append('<graphml xmlns="http://graphml.graphdrawing.org/xmlns">')
@@ -426,7 +426,7 @@ class GraphMLConverter(DiagramConverter):
 class SVGConverter(DiagramConverter):
     """Converter for SVG files"""
 
-    def load(self, file_path):
+    def load(self, file_path) -> None:
         """Load SVG file and convert to PyfficeDiagram"""
         sketch = PyfficeDiagram(self.cfg)
 
@@ -485,7 +485,7 @@ class SVGConverter(DiagramConverter):
 
         return sketch
 
-    def save(self, diagram, file_path):
+    def save(self, diagram, file_path) -> bool:
         """Save PyfficeDiagram to SVG format"""
         lines = ['<?xml version="1.0" encoding="UTF-8"?>']
         lines.append('<svg xmlns="http://www.w3.org/2000/svg">')
@@ -521,7 +521,7 @@ class SVGConverter(DiagramConverter):
 class DrawIOConverter(DiagramConverter):
     """Converter for DrawIO/MXGraph files"""
 
-    def load(self, file_path):
+    def load(self, file_path) -> None:
         """Load DrawIO file and convert to PyfficeDiagram"""
         sketch = PyfficeDiagram(self.cfg)
 
@@ -600,7 +600,7 @@ class DrawIOConverter(DiagramConverter):
 
         return sketch
 
-    def save(self, diagram, file_path):
+    def save(self, diagram, file_path) -> bool:
         """Save PyfficeDiagram to DrawIO format"""
         content = _build_drawio_xml(diagram)
         self.lines_written = content.count("\n")
@@ -615,7 +615,7 @@ class DrawIOConverter(DiagramConverter):
 class FreemindConverter(DiagramConverter):
     """Converter for FreeMind mind map files"""
 
-    def load(self, file_path):
+    def load(self, file_path) -> None:
         """Load FreeMind file and convert to PyfficeDiagram"""
         sketch = PyfficeDiagram(self.cfg)
 
@@ -647,7 +647,7 @@ class FreemindConverter(DiagramConverter):
 class VSDXConverter(DiagramConverter):
     """Converter for Visio files (.vsdx)"""
 
-    def load(self, file_path):
+    def load(self, file_path) -> None:
         """Load VSDX file and convert to PyfficeDiagram"""
         sketch = PyfficeDiagram(self.cfg)
 
@@ -667,7 +667,7 @@ class VSDXConverter(DiagramConverter):
 
         return sketch
 
-    def save(self, diagram, file_path):
+    def save(self, diagram, file_path) -> bool:
         """Save PyfficeDiagram to VSDX (simplified)"""
         # VSDX is complex - create basic structure
         # This would need proper Visio XML generation
@@ -678,7 +678,7 @@ class VSDXConverter(DiagramConverter):
 class XMindConverter(DiagramConverter):
     """Converter for XMind mind map files"""
 
-    def load(self, file_path):
+    def load(self, file_path) -> None:
         """Load XMind file and convert to PyfficeDiagram"""
         sketch = PyfficeDiagram(self.cfg)
 
@@ -711,7 +711,7 @@ class XMindConverter(DiagramConverter):
         sketch.add_node(node)
         return node.did
 
-    def save(self, diagram, file_path):
+    def save(self, diagram, file_path) -> bool:
         """Save PyfficeDiagram to XMind format"""
         logma.warn("XMind save not fully implemented")
         return False
@@ -720,7 +720,7 @@ class XMindConverter(DiagramConverter):
 class BPMNConverter(DiagramConverter):
     """Converter for BPMN 2.0 files"""
 
-    def load(self, file_path):
+    def load(self, file_path) -> None:
         """Load BPMN file and convert to PyfficeDiagram"""
         sketch = PyfficeDiagram(self.cfg)
 
@@ -760,7 +760,7 @@ class BPMNConverter(DiagramConverter):
 
         return sketch
 
-    def save(self, diagram, file_path):
+    def save(self, diagram, file_path) -> bool:
         """Save PyfficeDiagram to BPMN format"""
         lines = ['<?xml version="1.0" encoding="UTF-8"?>']
         lines.append('<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" ')
@@ -785,7 +785,7 @@ class BPMNConverter(DiagramConverter):
 class MindManagerConverter(DiagramConverter):
     """Converter for MindManager files (.mmap)"""
 
-    def load(self, file_path):
+    def load(self, file_path) -> None:
         """Load MindManager file and convert to PyfficeDiagram"""
         # MindManager uses XML format
         sketch = PyfficeDiagram(self.cfg)
@@ -815,14 +815,14 @@ class MindManagerConverter(DiagramConverter):
 
         return sketch
 
-    def save(self, diagram, file_path):
+    def save(self, diagram, file_path) -> bool:
         """Save PyfficeDiagram to MindManager format"""
         logma.warn("MindManager save not fully implemented")
         return False
 
 
 # Factory function to get converter
-def get_converter(file_path):
+def get_converter(file_path) -> Any:
     """Get appropriate converter for file format"""
     fmt = DiagramConverter.detect_format(file_path)
 
@@ -842,7 +842,7 @@ def get_converter(file_path):
     return None
 
 
-def load_diagram(file_path):
+def load_diagram(file_path) -> Any:
     """Load diagram from file and convert to PyfficeDiagram"""
     converter = get_converter(file_path)
     if converter:
@@ -850,7 +850,7 @@ def load_diagram(file_path):
     return None
 
 
-def save_diagram(diagram, file_path):
+def save_diagram(diagram, file_path) -> Any:
     """Save PyfficeDiagram to file"""
     converter = get_converter(file_path)
     if converter:

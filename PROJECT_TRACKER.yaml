@@ -3,7 +3,7 @@ analysis:
   counts:
     files: 447
     python_files: 234
-    python_lines: 33921
+    python_lines: 33920
     test_files: 78
 audit_date: '1785470638.3677874'
 dimensions:
@@ -158,8 +158,8 @@ dimensions:
           project: kahndor
         internal_imports: 169
         internal_projects_used:
-        - pyffice
         - kahndor
+        - pyffice
         leverage_score: 27.0
         score: 100
         status: pass
@@ -262,7 +262,7 @@ dimensions:
           branches:
             local: []
             remote: []
-          commit_count: 347
+          commit_count: 348
           commits: []
           contributors: []
           is_repo: true
@@ -332,17 +332,35 @@ dimensions:
         issues:
         - fix: Use named functions instead of complex lambdas
           items:
-          - file: pyffice/workflows/formulas.py
-            line: 145
-          rule: 'Lambda anti-patterns detected: 1 instances'
+          - file: pyffice/ports/msports.py
+            line: 43
+          - file: pyffice/ports/msports.py
+            line: 44
+          - file: pyffice/ports/msports.py
+            line: 45
+          - file: pyffice/ports/msports.py
+            line: 46
+          - file: pyffice/ports/msports.py
+            line: 47
+          - file: pyffice/ports/msports.py
+            line: 48
+          - file: pyffice/ports/msports.py
+            line: 49
+          - file: pyffice/ports/msports.py
+            line: 50
+          - file: pyffice/ports/msports.py
+            line: 51
+          - file: pyffice/ports/msports.py
+            line: 52
+          rule: 'Lambda anti-patterns detected: 12 instances'
           severity: medium
-        lambda_count: 1
-        score: 98
-        status: pass
-      score: 98
-      status: pass
-    score: 98
-    status: pass
+        lambda_count: 12
+        score: 76
+        status: partial
+      score: 76
+      status: partial
+    score: 76
+    status: partial
   license_dependencies:
     details:
       details:
@@ -1703,22 +1721,18 @@ dimensions:
             file: pyffice/items/colors.py
             function: hue_to_rgb
             var: t
-          - count: 11
-            file: pyffice/ports/msports.py
-            function: set_chart_type
-            var: chart_type
           - count: 7
             file: pyffice/web/prompts.py
             function: set_response_scope
             var: scope
-          rule: 'Switch abuse detected: 5 instances'
+          rule: 'Switch abuse detected: 4 instances'
           severity: medium
-        score: 50
+        score: 60
         status: partial
-        switch_abuse_count: 5
-      score: 50
+        switch_abuse_count: 4
+      score: 60
       status: partial
-    score: 50
+    score: 60
     status: partial
   testing:
     details:
@@ -1792,29 +1806,29 @@ dimensions:
       status: pass
     score: 100
     status: pass
-overall_score: 92.87
+overall_score: 92.76
 project: pyffice
 rubric:
-  audit_overall: 92.87
+  audit_overall: 92.76
   categories: []
   max_points: 0
   percentage: 0.0
-  rubric_name: 06a6da13-c6f2-7900-8000-a815bf4ca70f
+  rubric_name: 06a6da7b-83e7-70e2-8000-b06a43414a43
   rubric_score: 0
   rubric_version: '1.0'
-  score_difference: -92.87
+  score_difference: -92.76
   total_points: 0
   weighted_score: 0
 summary:
   failing: 0
-  partial: 6
-  passing: 46
-  tasks_created: 6
+  partial: 7
+  passing: 45
+  tasks_created: 7
   total_auditors: 11
   total_dimensions: 53
 test_execution:
-  duration_seconds: 49.06977033615112
-  project_score: 92.87
+  duration_seconds: 45.56688189506531
+  project_score: 92.76
   report_file: /home/solubrew/.hermes/projects/pyffice/FALCON_TEST.yaml
   results:
     tests_failed: 29
@@ -1829,7 +1843,7 @@ test_execution:
   status_message: no change (849/882 tests passed)
   timestamp: ''
 versions:
-  project: c34de7a
+  project: c5b2675
   project_status: dirty
-  project_uncommitted_changes: 3
+  project_uncommitted_changes: 59
   sasquatch: a16c01c

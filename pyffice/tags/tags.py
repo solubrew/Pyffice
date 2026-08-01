@@ -46,7 +46,7 @@ class PyfficeTag(object):
         self.value = None
         self.doc_type = "tags"
 
-    def load_tag(self, tag=None):
+    def load_tag(self, tag=None) -> "PyfficeTag":
         """Load tag into this document.
         
         Args:
@@ -62,7 +62,7 @@ class PyfficeTag(object):
         self.set_value(tag.get("value", None))
         return self
 
-    def set_description(self, description):
+    def set_description(self, description) -> "PyfficeTag":
         """Set the description.
         
         Args:
@@ -74,7 +74,7 @@ class PyfficeTag(object):
         self.description = description
         return self
 
-    def set_label(self, label):
+    def set_label(self, label) -> "PyfficeTag":
         """Set the label.
         
         Args:
@@ -86,7 +86,7 @@ class PyfficeTag(object):
         self.label = label
         return self
 
-    def set_value(self, value):
+    def set_value(self, value) -> "PyfficeTag":
         """Set the value.
         
         Args:

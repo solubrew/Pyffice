@@ -61,7 +61,7 @@ class PyfficeScript(PyfficeDocument):
         self.full_text = None
         self.doc_type = "script"
 
-    def add_comment(self, text: str):
+    def add_comment(self, text: str) -> "PyfficeScript":
         """
         Adds a comment to the CSS document.
         :param text: The comment text.
@@ -69,14 +69,14 @@ class PyfficeScript(PyfficeDocument):
         self.rules.append(f"/* {text} */\n\n")
         return self
 
-    def add_entry(self, text):
+    def add_entry(self, text) -> "PyfficeScript":
         """Add an entry to script."""
         entries = getattr(self, 'entries', [])
         entries.append(text)
         self.entries = entries
         return self
 
-    def add_footer(self, text, to_document=False):
+    def add_footer(self, text, to_document=False) -> "PyfficeScript":
         """
         Adds a footer to the document.
 
@@ -93,7 +93,7 @@ class PyfficeScript(PyfficeDocument):
             self.active_page["footer"]["text"] = text
         return self
 
-    def add_header(self, title, author, to_document=False):
+    def add_header(self, title, author, to_document=False) -> "PyfficeScript":
         """
         Adds a header to the document.
 
@@ -109,7 +109,7 @@ class PyfficeScript(PyfficeDocument):
         self.doc.add_heading(text, level)
         return self
 
-    def add_keyframes(self, name: str, frames: dict):
+    def add_keyframes(self, name: str, frames: dict) -> "PyfficeScript":
         """
         Adds a CSS animation keyframes block.
         :param name: The name of the animation.
@@ -125,7 +125,7 @@ class PyfficeScript(PyfficeDocument):
         self.rules.append("}\n\n")
         return self
 
-    def add_media_query(self, query: str, rules: list):
+    def add_media_query(self, query: str, rules: list) -> "PyfficeScript":
         """
         Adds a media query with rules to the CSS document.
         :param query: The media query condition (e.g., '@media screen and (max-width: 768px)').
@@ -140,7 +140,7 @@ class PyfficeScript(PyfficeDocument):
         self.rules.append("}\n\n")
         return self
 
-    def add_page(self):
+    def add_page(self) -> "PyfficeScript":
         """Add a page.
         
         Returns:
@@ -161,7 +161,7 @@ class PyfficeScript(PyfficeDocument):
         self.pages[len(self.pages)] = self.active_page
         return self
 
-    def add_paragraph(self, text, alignment="left"):
+    def add_paragraph(self, text, alignment="left") -> "PyfficeScript":
         """
         Adds a paragraph to the document.
 
@@ -182,7 +182,7 @@ class PyfficeScript(PyfficeDocument):
 
         return self
 
-    def add_picture(self, image_path, width=None, height=None):
+    def add_picture(self, image_path, width=None, height=None) -> "PyfficeScript":
         """
         Adds a picture to the document.
 
@@ -204,7 +204,7 @@ class PyfficeScript(PyfficeDocument):
 
         return self
 
-    def add_rule(self, selector: str, properties: dict):
+    def add_rule(self, selector: str, properties: dict) -> None:
         """
         Adds a CSS rule to the document.
         :param selector: The selector for the rule (e.g., 'body', '.class', '#id').
@@ -215,7 +215,7 @@ class PyfficeScript(PyfficeDocument):
             self.rules.append(f"    {prop}: {value};\n")
         self.rules.append("}\n\n")
 
-    def add_table(self, data):
+    def add_table(self, data) -> "PyfficeScript":
         """
         Adds a table to the document.
 
@@ -231,16 +231,16 @@ class PyfficeScript(PyfficeDocument):
 
         return self
 
-    def format_select(self, text, paragraph):
+    def format_select(self, text, paragraph) -> "PyfficeScript":
         """Format selected text."""
         _p = True  # placeholder
         return self
 
-    def get_size(self):
+    def get_size(self) -> int:
         """Get script size."""
         return len(getattr(self, 'entries', []))
 
-    def get_entry(self, index=0):
+    def get_entry(self, index=0) -> Any:
         """
         Gets a specific paragraph by index.
 
@@ -252,7 +252,7 @@ class PyfficeScript(PyfficeDocument):
         """
         return self.active_page[str(index)]
 
-    def get_entry_text(self, index=0):
+    def get_entry_text(self, index=0) -> Any:
         """
         Gets the text of a specific paragraph by index.
 
@@ -264,7 +264,7 @@ class PyfficeScript(PyfficeDocument):
         """
         return self.self.active_page[str(index)].value
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> "PyfficeScript":
         """Load document into this document.
         
         Args:
@@ -285,7 +285,7 @@ class PyfficeScript(PyfficeDocument):
         self.set_compatibility(self.config.dikt.get("compatibility", "nchantdmatrix"))
         return self
 
-    def open_file(self, file_=None, if_text_only=True):
+    def open_file(self, file_=None, if_text_only=True) -> "PyfficeScript":
         """Open file.
         
         Args:
@@ -319,7 +319,7 @@ class PyfficeScript(PyfficeDocument):
             return self
         raise UnknownFileTypeError(f"File format not supported {file_}")
 
-    def open_file_txt(self):
+    def open_file_txt(self) -> "PyfficeScript":
         """Open file txt.
         
         Returns:
@@ -331,7 +331,7 @@ class PyfficeScript(PyfficeDocument):
         self.set_text(text)
         return self
 
-    def open_file_doc(self):
+    def open_file_doc(self) -> "PyfficeScript":
         """Open file doc.
         
         Returns:
@@ -345,7 +345,7 @@ class PyfficeScript(PyfficeDocument):
         # RESOLVED: Full document structure implemented
         return self
 
-    def parse_content(self, content=None, page_size=100000, entry_size=10000):
+    def parse_content(self, content=None, page_size=100000, entry_size=10000) -> "PyfficeScript":
         """Parse content.
         
         Args:
@@ -386,7 +386,7 @@ class PyfficeScript(PyfficeDocument):
         self.set_text()
         return self
 
-    def parse_document(self):
+    def parse_document(self) -> tuple:
         """Parse document.
         
         Returns:
@@ -395,7 +395,7 @@ class PyfficeScript(PyfficeDocument):
         doc_media, doc_media_content = super().parse_document()
         return doc_media, doc_media_content
 
-    def save(self, path=None, format_=None, encrypt=None):
+    def save(self, path=None, format_=None, encrypt=None) -> None:
         """Save the document.
         
         Args:
@@ -408,12 +408,12 @@ class PyfficeScript(PyfficeDocument):
         """
         super().save(path, format_, encrypt)
 
-    def set_alignment(self, start_pos, end_pos, alignment):
+    def set_alignment(self, start_pos, end_pos, alignment) -> "PyfficeScript":
         """Set text alignment."""
         _p = True  # placeholder
         return self
 
-    def set_file_format(self, format_=None):
+    def set_file_format(self, format_=None) -> "PyfficeScript":
         """Set the file format.
         
         Args:
@@ -438,7 +438,7 @@ class PyfficeScript(PyfficeDocument):
             self.file_format = format_
         return self
 
-    def set_file_format_options(self):
+    def set_file_format_options(self) -> "PyfficeScript":
         """Set the file format options.
         
         Returns:
@@ -448,7 +448,7 @@ class PyfficeScript(PyfficeDocument):
         self.file_formats = {ext: key for key, extensions in formats.items() for ext in extensions}
         return self
 
-    def set_full_text(self, text=None):
+    def set_full_text(self, text=None) -> "PyfficeScript":
         """Set the full text.
         
         Args:
@@ -460,7 +460,7 @@ class PyfficeScript(PyfficeDocument):
         self.full_text = text
         return self
 
-    def set_pages(self, pages):
+    def set_pages(self, pages) -> "PyfficeScript":
         """Set the pages.
         
         Args:
@@ -478,7 +478,7 @@ class PyfficeScript(PyfficeDocument):
             self.pages = pages
         return self
 
-    def set_text(self, text=None):
+    def set_text(self, text=None) -> "PyfficeScript":
         """Set the text.
         
         Args:
@@ -516,7 +516,7 @@ class PyfficeScript(PyfficeDocument):
         self.set_full_text(self.text.value)
         return self
 
-    def to_dict(self):
+    def to_dict(self) -> Any:
         """Convert this document to dict.
         
         Returns:
@@ -546,7 +546,7 @@ class PyfficeScript(PyfficeDocument):
                     doc["data"]["pages"][str(i)]["entries"][str(entry)] = text.to_dict()
         return self._canonicalize(doc)
 
-    def to_html(self):
+    def to_html(self) -> None:
         """Convert this document to html.
         
         Returns:
@@ -557,7 +557,7 @@ class PyfficeScript(PyfficeDocument):
         return html
 
 
-def get_table_positions(docx_path):
+def get_table_positions(docx_path) -> None:
     """
     Identify the position of each table in the document relative to other content.
 

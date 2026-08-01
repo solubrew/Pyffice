@@ -44,7 +44,7 @@ class PyfficeNotebook(PyfficeDocument):
         self.cells = []
         self.notebook = None
 
-    def add_cell(self, cell):
+    def add_cell(self, cell) -> "PyfficeNotebook":
         """Add a cell.
         
         Args:
@@ -56,7 +56,7 @@ class PyfficeNotebook(PyfficeDocument):
         self.cells.append(cell)
         return self
 
-    def clear_cell(self, dex):
+    def clear_cell(self, dex) -> "PyfficeNotebook":
         """Clear cell.
         
         Args:
@@ -68,7 +68,7 @@ class PyfficeNotebook(PyfficeDocument):
         self.cells[dex]["outputs"] = []
         return self
 
-    def clear_cells(self):
+    def clear_cells(self) -> "PyfficeNotebook":
         """Clear cells.
         
         Returns:
@@ -78,7 +78,7 @@ class PyfficeNotebook(PyfficeDocument):
             cell["outputs"] = []
         return self
 
-    def del_cell(self, dex):
+    def del_cell(self, dex) -> "PyfficeNotebook":
         """Remove the cell.
         
         Args:
@@ -90,7 +90,7 @@ class PyfficeNotebook(PyfficeDocument):
         self.cells.pop(dex)
         return self
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> "PyfficeNotebook":
         """Load document into this document.
         
         Args:
@@ -109,7 +109,7 @@ class PyfficeNotebook(PyfficeDocument):
         self.set_cells(document.get("notebook", None))
         return self
 
-    def set_cells(self, cells):
+    def set_cells(self, cells) -> "PyfficeNotebook":
         """Set the cells.
         
         Args:
@@ -123,7 +123,7 @@ class PyfficeNotebook(PyfficeDocument):
             self.cells = cells
         return self
 
-    def set_cell_source(self, text, position=0):
+    def set_cell_source(self, text, position=0) -> "PyfficeNotebook":
         """Set the cell source.
         
         Args:
@@ -138,7 +138,7 @@ class PyfficeNotebook(PyfficeDocument):
         self.cells[position]["source"] = text
         return self
 
-    def set_notebook(self, notebook=None):
+    def set_notebook(self, notebook=None) -> "PyfficeNotebook":
         """Set the notebook.
         
         Args:
@@ -156,11 +156,11 @@ class PyfficeNotebook(PyfficeDocument):
             self.notebook = notebook
         return self
 
-    def set_pinned(self, pinned):
+    def set_pinned(self, pinned) -> "PyfficeNotebook":
         """Set pinned state."""
         self.pinned = pinned
         return self
-    def to_html(self):
+    def to_html(self) -> Any:
         """Convert this document to html.
         
         Returns:

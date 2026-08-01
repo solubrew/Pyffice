@@ -60,7 +60,7 @@ class SankeyChart:
         self.values = values
         self.labels = labels if labels else []
 
-    def create_sankey_chart(self, title="Sankey Diagram"):
+    def create_sankey_chart(self, title="Sankey Diagram") -> None:
         """
         Create and render a Sankey diagram.
 

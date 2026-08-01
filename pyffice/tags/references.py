@@ -54,7 +54,7 @@ class PyfficeReference(PyfficeTag):
         self.publisher = None
         self.style = None
 
-    def load_tag(self, tag):
+    def load_tag(self, tag) -> "PyfficeReference":
         """Load tag into this document.
         
         Args:
@@ -80,7 +80,7 @@ class PyfficeReference(PyfficeTag):
         self.set_edition(tag.get("edition", None))
         return self
 
-    def set_author(self, author):
+    def set_author(self, author) -> "PyfficeReference":
         """Set the document author.
         
         Args:
@@ -92,17 +92,17 @@ class PyfficeReference(PyfficeTag):
         self.author = author
         return self
 
-    def set_date(self, year, month=None, day=None):
+    def set_date(self, year, month=None, day=None) -> "PyfficeReference":
         """Set publication date."""
         self.date = (year, month, day)
         return self
 
-    def set_doi(self, doi):
+    def set_doi(self, doi) -> "PyfficeReference":
         """Set DOI."""
         self.doi = doi
         return self
 
-    def set_edition(self, edition):
+    def set_edition(self, edition) -> "PyfficeReference":
         """Set the edition.
         
         Args:
@@ -114,7 +114,7 @@ class PyfficeReference(PyfficeTag):
         self.edition = edition
         return self
 
-    def set_issue(self, issue):
+    def set_issue(self, issue) -> "PyfficeReference":
         """Set the issue.
         
         Args:
@@ -126,7 +126,7 @@ class PyfficeReference(PyfficeTag):
         self.issue = issue
         return self
 
-    def set_media_type(self, media_type):
+    def set_media_type(self, media_type) -> None:
         """Set the media type.
         
         Args:
@@ -154,7 +154,7 @@ class PyfficeReference(PyfficeTag):
             case _:
                 raise UnknownMediaTypeError(f"Media Type Unknown {media_type}")
 
-    def set_page_range(self, page_range=None):
+    def set_page_range(self, page_range=None) -> "PyfficeReference":
         """Set the page range.
         
         Args:
@@ -166,7 +166,7 @@ class PyfficeReference(PyfficeTag):
         self.page_range = page_range
         return self
 
-    def set_publisher(self, publisher):
+    def set_publisher(self, publisher) -> "PyfficeReference":
         """Set the publisher.
         
         Args:
@@ -178,7 +178,7 @@ class PyfficeReference(PyfficeTag):
         self.publisher = publisher
         return self
 
-    def set_style(self, style):
+    def set_style(self, style) -> "PyfficeReference":
         """Set the style.
         
         Args:
@@ -190,7 +190,7 @@ class PyfficeReference(PyfficeTag):
         self.style = style
         return self
 
-    def set_title(self, title):
+    def set_title(self, title) -> "PyfficeReference":
         """Set the title.
         
         Args:
@@ -202,7 +202,7 @@ class PyfficeReference(PyfficeTag):
         self.title = title
         return self
 
-    def set_volume(self, volume):
+    def set_volume(self, volume) -> "PyfficeReference":
         """Set the volume.
         
         Args:
@@ -214,7 +214,7 @@ class PyfficeReference(PyfficeTag):
         self.volume = volume
         return self
 
-    def set_url(self, url):
+    def set_url(self, url) -> "PyfficeReference":
         """Set the url.
         
         Args:

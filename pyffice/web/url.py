@@ -61,18 +61,18 @@ class PyfficeURL(PyfficeUnit):
             self._parse(self.active_url)
         self.doc_type = "url"
 
-    def check_pattern(self, pattern):
+    def check_pattern(self, pattern) -> bool:
         """Check if pattern exists in any URL variant."""
         urls_to_check = [self.given_url, self.active_url, self.found_url]
         return any(pattern in url for url in urls_to_check if url)
 
-    def expand_url(self, url):
+    def expand_url(self, url) -> None:
         """Add http:// prefix if no scheme is present."""
         if not (url.startswith(self.HTTP_PREFIX) or url.startswith(self.HTTPS_PREFIX)):
             url = f"{self.HTTP_PREFIX}{url}"
         return url
 
-    def filter(self, url):
+    def filter(self, url) -> bool:
         """Apply filters to URL."""
         if not self.filters:
             return False
@@ -82,7 +82,7 @@ class PyfficeURL(PyfficeUnit):
                 return url
         return False
 
-    def get_domain_and_subdomain(self, netloc):
+    def get_domain_and_subdomain(self, netloc) -> tuple:
         """Extract domain and subdomain from netloc."""
         if ":" in netloc:  # Remove port number if present
             netloc = netloc.split(":")[0]
@@ -99,22 +99,22 @@ class PyfficeURL(PyfficeUnit):
             domain = None
         return domain, subdomain
 
-    def get_parameters(self):
+    def get_parameters(self) -> Any:
         """Get URL parameters."""
         self._ensure_parsed()
         return self.parameters
 
-    def get_domain(self):
+    def get_domain(self) -> Any:
         """Get domain component."""
         self._ensure_parsed()
         return self.domain
 
-    def get_sub_domain(self):
+    def get_sub_domain(self) -> Any:
         """Get subdomain component."""
         self._ensure_parsed()
         return self.sub_domain
 
-    def get_url(self):
+    def get_url(self) -> Any:
         """Build and return processed URL."""
         url = f"{self.scheme}{self.netloc}{self.path}{self.parameters}{self.query}{self.fragment}"
         if self.block_ads and hasattr(self, "block_patterns"):
@@ -123,19 +123,19 @@ class PyfficeURL(PyfficeUnit):
             self.check_pattern(self.affiliate_patterns)
         return self.found_url
 
-    def initialize_ad_blocking(self):
+    def initialize_ad_blocking(self) -> Any:
         """Enable ad blocking."""
         return self.set_block_ads(True)
 
-    def is_changed(self):
+    def is_changed(self) -> bool:
         """Check if URL has been modified."""
         return self.found_url != self.given_url
 
-    def is_valid(self):
+    def is_valid(self) -> bool:
         """Validate URL structure."""
         return self.active_url is not None and self.get_domain() is not None
 
-    def load_unit(self, unit=None):
+    def load_unit(self, unit=None) -> "PyfficeURL":
         """Load configuration from unit dictionary."""
         if unit is None:
             unit = self.config.dikt.get("unit", {})
@@ -161,7 +161,7 @@ class PyfficeURL(PyfficeUnit):
 
         return self
 
-    def sanitize_url(self):
+    def sanitize_url(self) -> "PyfficeURL":
         """Ensure URL uses HTTPS and apply filters."""
         if self.found_url and not self.found_url.startswith("https"):
             self.found_url = f"https://{self.found_url}"
@@ -169,7 +169,7 @@ class PyfficeURL(PyfficeUnit):
         return self
 
     # Simplified setter methods using the generic pattern
-    def set_active_url(self, url=None):
+    def set_active_url(self, url=None) -> "PyfficeURL":
         """Set active URL with validation and expansion."""
         if url is None:
             url = self.default_url
@@ -182,37 +182,37 @@ class PyfficeURL(PyfficeUnit):
         logma.info(f"Active Url {self.active_url}")
         return self
 
-    def set_block_ads(self, block_ads):
+    def set_block_ads(self, block_ads) -> Any:
         """Set ad blocking preference."""
         return self._set_attribute("block_ads", block_ads)
 
-    def set_block_adult(self, block_adult):
+    def set_block_adult(self, block_adult) -> Any:
         """Set adult content blocking preference."""
         return self._set_attribute("block_adult", block_adult)
 
-    def set_default_url(self, url):
+    def set_default_url(self, url) -> Any:
         """Set default URL."""
         return self._set_attribute("default_url", url)
 
-    def set_domain(self, domain):
+    def set_domain(self, domain) -> Any:
         """Set domain component."""
         return self._set_attribute("domain", domain)
 
-    def set_filters(self, filters):
+    def set_filters(self, filters) -> Any:
         """Set URL filters."""
         return self._set_attribute("filters", filters)
 
-    def set_fragment(self, fragment):
+    def set_fragment(self, fragment) -> Any:
         """Set URL fragment."""
         return self._set_attribute("fragment", fragment)
 
-    def set_geofence(self, region, active=True):
+    def set_geofence(self, region, active=True) -> "PyfficeURL":
         """Set geofencing configuration."""
         self.geofence_active = active
         self.geofence_region = region
         return self
 
-    def set_given_url(self, url=None):
+    def set_given_url(self, url=None) -> "PyfficeURL":
         """Set the originally given URL."""
         if url != self.given_url:
             self.add_change("given_url", self.given_url, url)
@@ -220,53 +220,53 @@ class PyfficeURL(PyfficeUnit):
         logma.info(f"Given URL {self.given_url}")
         return self
 
-    def set_hostname(self, hostname):
+    def set_hostname(self, hostname) -> Any:
         """Set hostname component."""
         return self._set_attribute("hostname", hostname)
 
-    def set_level_of_trust(self, level_of_trust):
+    def set_level_of_trust(self, level_of_trust) -> Any:
         """Set trust level."""
         return self._set_attribute("level_of_trust", level_of_trust)
 
-    def set_link_style(self, link_style):
+    def set_link_style(self, link_style) -> Any:
         """Set link style preference."""
         return self._set_attribute("link_style", link_style)
 
-    def set_netloc(self, netloc):
+    def set_netloc(self, netloc) -> Any:
         """Set network location."""
         return self._set_attribute("netloc", netloc)
 
-    def set_path(self, path):
+    def set_path(self, path) -> Any:
         """Set URL path."""
         return self._set_attribute("path", path)
 
-    def set_parameters(self, parameters):
+    def set_parameters(self, parameters) -> Any:
         """Set URL parameters."""
         return self._set_attribute("parameters", parameters)
 
-    def set_parsed(self, parsed):
+    def set_parsed(self, parsed) -> Any:
         """Set parsed status."""
         return self._set_attribute("parsed", parsed)
 
-    def set_query(self, query):
+    def set_query(self, query) -> Any:
         """Set URL query string."""
         return self._set_attribute("query", query)
 
-    def set_password(self, password):
+    def set_password(self, password) -> Any:
         """Set password with hashing."""
         if password is None:
             password = ""
         return self._set_attribute("password", password, text_hashing_function)
 
-    def set_port(self, port):
+    def set_port(self, port) -> Any:
         """Set port number."""
         return self._set_attribute("port", port)
 
-    def set_redirect_affiliates(self, redirect_affiliates):
+    def set_redirect_affiliates(self, redirect_affiliates) -> Any:
         """Set affiliate redirection preference."""
         return self._set_attribute("redirect_affiliates", redirect_affiliates)
 
-    def set_secure(self):
+    def set_secure(self) -> "PyfficeURL":
         """Convert URL to HTTPS."""
         logma.info(f"Active Url {self.active_url}")
         if self.active_url.startswith(self.HTTP_PREFIX):
@@ -278,11 +278,11 @@ class PyfficeURL(PyfficeUnit):
         self.active_url = self.secure_url
         return self
 
-    def set_scheme(self, scheme):
+    def set_scheme(self, scheme) -> Any:
         """Set URL scheme."""
         return self._set_attribute("scheme", scheme)
 
-    def set_sub_domain(self, sub_domain):
+    def set_sub_domain(self, sub_domain) -> Any:
         """Set subdomain component."""
         return self._set_attribute("sub_domain", sub_domain)
 
@@ -290,16 +290,16 @@ class PyfficeURL(PyfficeUnit):
     #     """Set TwoFDNS preference."""
     #     return self._set_attribute("twofdns", twofdns)
 
-    def set_username(self, username):
+    def set_username(self, username) -> Any:
         """Set username component."""
         return self._set_attribute("username", username)
 
-    def set_whois(self, whois):
+    def set_whois(self, whois) -> "PyfficeURL":
         """Set WHOIS information."""
         self.whois = whois
         return self
 
-    def remove_www(self):
+    def remove_www(self) -> "PyfficeURL":
         """Remove www prefix from URL."""
         if self.active_url.startswith("www."):
             self.no_www = self.active_url[4:]
@@ -308,17 +308,17 @@ class PyfficeURL(PyfficeUnit):
         elif self.active_url.startswith("https://www."):
             self.no_www = f"https://{self.active_url[12:]}"
         return self
-    def validate(self):
+    def validate(self) -> None:
         """Ensure that URL is validly constructed."""
         pass
 
-    def verify(self):
+    def verify(self) -> bool:
         """Attempt to ensure web address is correct."""
         if hasattr(self, "library") and self.library.verify(self.active_url):
             return True
         return False
 
-    def verify_full_address(self, url):
+    def verify_full_address(self, url) -> None:
         """Verify full URL address."""
         return url
 
@@ -916,7 +916,7 @@ class PyfficeURLLibrary(PyfficeDocumentManager):
         self.affiliate_patterns = None
         self.block_patterns = None
 
-    def add_url(self, url):
+    def add_url(self, url) -> "PyfficeURLLibrary":
         """Add a URL to the library."""
         self.add_document(PyfficeURL(url))
         return self
@@ -928,29 +928,29 @@ class PyfficeURLLibrary(PyfficeDocumentManager):
         self.sanitize_link()
         return self
 
-    def find_affiliate_link(self, link=None, urllib=None):
+    def find_affiliate_link(self, link=None, urllib=None) -> Any:
         """Find and process affiliate links."""
         self.given_link = link
         return self._find_link(link, urllib)
 
-    def find_webapp_link(self, link=None, urllib=None):
+    def find_webapp_link(self, link=None, urllib=None) -> Any:
         """Find and process webapp links."""
         if link is None:
             link = self.given_link
         return self._find_link(link, urllib)
 
-    def get_malware_ad_patterns(self):
+    def get_malware_ad_patterns(self) -> None:
         """Get malware and ad patterns from services."""
         for service in self.services:
             if service.get("key", False):
                 self.given_malware += get_data(service)
 
-    def get_url_by_id(self, url_id):
+    def get_url_by_id(self, url_id) -> None:
         """Get URL by its ID."""
         url = self.known_urls[url_id].found_url
         return url
 
-    def get_urls(self):
+    def get_urls(self) -> None:
         """Get URLs from database."""
         table = "urls"
         cfg = {"table": table}
@@ -958,7 +958,7 @@ class PyfficeURLLibrary(PyfficeDocumentManager):
         reader = self.app.model.store.docs["db"].read(cfg, params)
         self.urls = next(reader).dikt[table]["df"]
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> "PyfficeURLLibrary":
         """Load document configuration."""
         if document is None:
             document = self.config.dikt.get("document", {})
@@ -968,7 +968,7 @@ class PyfficeURLLibrary(PyfficeDocumentManager):
         self.set_urls(document.get("urls", {}))
         return self
 
-    def lookup(self, code):
+    def lookup(self, code) -> "PyfficeURLLibrary":
         """Lookup URL by code."""
         if self.known_urls is None:
             self.known_urls = self.app.model.store["db"].get_urls()
@@ -977,7 +977,7 @@ class PyfficeURLLibrary(PyfficeDocumentManager):
             self.url = url
         return self
 
-    def search(self, url):
+    def search(self, url) -> None:
         """Search for URL in the library."""
         if self.urls is None:
             self.get_urls()
@@ -988,27 +988,27 @@ class PyfficeURLLibrary(PyfficeDocumentManager):
             url_row = url_data.iloc[0]
             return url_row
 
-    def set_affiliate_patterns(self, patterns):
+    def set_affiliate_patterns(self, patterns) -> "PyfficeURLLibrary":
         """Set affiliate patterns."""
         if patterns != self.affiliate_patterns:
             self.add_change("affiliate_patterns", self.affiliate_patterns, patterns)
             self.affiliate_patterns = patterns
         return self
 
-    def set_block_patterns(self, patterns):
+    def set_block_patterns(self, patterns) -> "PyfficeURLLibrary":
         """Set block patterns."""
         if patterns != self.block_patterns:
             self.add_change("block_patterns", self.block_patterns, patterns)
             self.block_patterns = patterns
         return self
 
-    def set_urls(self, urls):
+    def set_urls(self, urls) -> "PyfficeURLLibrary":
         """Set URLs collection."""
         if urls != self.urls:
             self.add_change("urls", self.urls, urls)
             self.urls = urls
         return self
-    def update_from_service(self, service_name):
+    def update_from_service(self, service_name) -> None:
         """Update URL data from external service."""
         stone = self.get_stone(service_name)
         data = stone.get_urls(cfg)

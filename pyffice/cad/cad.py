@@ -46,7 +46,7 @@ class PyfficeCADAssembly(PyfficeDocumentManager):
         super().__init__(self.config)
         self.config.override(cfg)
 
-    def add_document(self, document):
+    def add_document(self, document) -> None:
         """Add a child document to this manager.
         
         Args:
@@ -57,7 +57,7 @@ class PyfficeCADAssembly(PyfficeDocumentManager):
         """
         super().add_document(document)
 
-    def create_new_document(self, name, type_=None):
+    def create_new_document(self, name, type_=None) -> None:
         """Create a new document.
         
         Args:
@@ -79,7 +79,7 @@ class PyfficeCADAssembly(PyfficeDocumentManager):
             "build": {},
         }
 
-    def add_part(self, part, position=None):
+    def add_part(self, part, position=None) -> "PyfficeCADAssembly":
         """Add a part to the CAD document."""
         parts = getattr(self, 'parts', [])
         parts.append((part, position))
@@ -97,7 +97,7 @@ class PyfficeCADManager(PyfficeDocumentManager):
         super().__init__(self)
         self.config.override(cfg)
 
-    def add_document(self, document):
+    def add_document(self, document) -> None:
         """Add a child document to this manager.
         
         Args:
@@ -108,12 +108,12 @@ class PyfficeCADManager(PyfficeDocumentManager):
         """
         super().add_document(document)
 
-    def add_part(self, assembly):
+    def add_part(self, assembly) -> "PyfficeCADManager":
         """Add an assembly part."""
         _p = True  # placeholder
         return self
 
-    def create_new_document(self, name, type_=None):
+    def create_new_document(self, name, type_=None) -> None:
         """Create a new document.
         
         Args:
@@ -136,7 +136,7 @@ class PyfficeCADPart(PyfficePart):
         super().__init__(self)
         self.config.override(cfg)
 
-    def create_new_document(self, name):
+    def create_new_document(self, name) -> None:
         """Create a new document.
         
         Args:

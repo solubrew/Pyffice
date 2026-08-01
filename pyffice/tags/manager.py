@@ -43,7 +43,7 @@ class PyfficeTagsManager(PyfficeDocumentManager):
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeTagsManager")).override(cfg)
         self.tags = []
 
-    def add_tag(self, name, description="", group=None):
+    def add_tag(self, name, description="", group=None) -> "PyfficeTagsManager":
         """Attach a tag to this document.
         
         Args:
@@ -60,7 +60,7 @@ class PyfficeTagsManager(PyfficeDocumentManager):
         self.tags.append(tag)
         return self
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> "PyfficeTagsManager":
         """Load document into this document.
         
         Args:

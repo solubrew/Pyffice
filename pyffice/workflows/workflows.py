@@ -44,31 +44,31 @@ class PyfficeWorkflow(PyfficeUnit):
         self.config.override(kahndor.Instruct(pxcfg).override("PyfficeWorkflow")).override(cfg)
         self.workflows = None
 
-    def add_node(self, node_id, node_data=None):
+    def add_node(self, node_id, node_data=None) -> "PyfficeWorkflow":
         """Add a node to workflow."""
         nodes = getattr(self, 'nodes', {})
         nodes[node_id] = node_data or {}
         self.nodes = nodes
         return self
 
-    def add_edge(self, from_node, to_node):
+    def add_edge(self, from_node, to_node) -> "PyfficeWorkflow":
         """Add an edge between nodes."""
         edges = getattr(self, 'edges', [])
         edges.append((from_node, to_node))
         self.edges = edges
         return self
 
-    def execute_node(self, node_id):
+    def execute_node(self, node_id) -> "PyfficeWorkflow":
         """Execute a node."""
         _p = True  # placeholder
         return self
 
-    def update_nodes(self, edge):
+    def update_nodes(self, edge) -> "PyfficeWorkflow":
         """Update workflow nodes."""
         _p = True  # placeholder
         return self
 
-    def load_unit(self, unit):
+    def load_unit(self, unit) -> "PyfficeWorkflow":
         """Load a unit dict into this document.
         
         Args:

@@ -43,7 +43,7 @@ class PyfficeService(PyfficeDocument):
         self.key = None
         self.service = None
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> "PyfficeService":
         """Load document into this document.
         
         Args:
@@ -61,7 +61,7 @@ class PyfficeService(PyfficeDocument):
         self.set_service(document.get("service", None))
         return self
 
-    def set_key(self, key):
+    def set_key(self, key) -> "PyfficeService":
         """Set the key.
         
         Args:
@@ -75,7 +75,7 @@ class PyfficeService(PyfficeDocument):
             self.key = key
         return self
 
-    def set_service(self, service):
+    def set_service(self, service) -> "PyfficeService":
         """Set the service.
         
         Args:

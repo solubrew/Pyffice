@@ -93,7 +93,7 @@ class PyfficeUnit(object):
         self.version = 0
         self.versions = None
 
-    def add_change(self, label, value, new_value, action="set", params=None):
+    def add_change(self, label, value, new_value, action="set", params=None) -> "PyfficeUnit":
         """Record a change entry for this document.
         
         Args:
@@ -260,13 +260,13 @@ class PyfficeUnit(object):
                 setattr(self, attr, default)
         return self
 
-    def add_editor(self, editor):
+    def add_editor(self, editor) -> "PyfficeUnit":
         """Add an editor to the document."""
         self.editors = getattr(self, 'editors', [])
         self.editors.append(editor)
         return self
 
-    def add_tag(self, tag_name, description=""):
+    def add_tag(self, tag_name, description="") -> "PyfficeUnit":
         """Attach a tag to this document.
         
         Args:
@@ -281,21 +281,21 @@ class PyfficeUnit(object):
         self.tags.append(tag)
         return self
 
-    def del_editor(self, dex):
+    def del_editor(self, dex) -> "PyfficeUnit":
         """Delete an editor by index."""
         editors = getattr(self, 'editors', [])
         if 0 <= dex < len(editors):
             editors.pop(dex)
         return self
 
-    def del_reference(self, reference):
+    def del_reference(self, reference) -> "PyfficeUnit":
         """Delete a reference."""
         refs = getattr(self, 'references', [])
         if reference in refs:
             refs.remove(reference)
         return self
 
-    def del_tag(self, tag):
+    def del_tag(self, tag) -> "PyfficeUnit":
         """Remove a tag from this document.
         
         Args:
@@ -309,7 +309,7 @@ class PyfficeUnit(object):
         self.add_change("tags", tags, self.tags)
         return self
 
-    def get_context(self):
+    def get_context(self) -> Any:
         """Return the current document context as a string.
         
         Returns:
@@ -318,7 +318,7 @@ class PyfficeUnit(object):
         self.context = self.to_string()
         return self.context
 
-    def get_hash(self):
+    def get_hash(self) -> Any:
         """Return a hash of the current document context.
         
         Returns:
@@ -327,7 +327,7 @@ class PyfficeUnit(object):
         self.hash = text_hashing_function(self.context)
         return self.hash
 
-    def get_tags(self):
+    def get_tags(self) -> Any:
         """Return the list of tags attached to this document.
         
         Returns:
@@ -335,7 +335,7 @@ class PyfficeUnit(object):
         """
         return self.tags
 
-    def increment_version(self):
+    def increment_version(self) -> "PyfficeUnit":
         """Increment the document version counter.
         
         Returns:
@@ -370,7 +370,7 @@ class PyfficeUnit(object):
         # 2026-07-27 22:49:17,629 - nchantrs.widgets.browsers.browsers        336: INFO     - URL Changed: PySide6.QtCore.QUrl('https://duckduckgo.com/')
         return self
 
-    def load_unit(self, unit=None):
+    def load_unit(self, unit=None) -> "PyfficeUnit":
         """Load a unit dict into this document.
         
         Args:
@@ -407,7 +407,7 @@ class PyfficeUnit(object):
         self.redos = []
         return self
 
-    def redo_change(self):
+    def redo_change(self) -> "PyfficeUnit":
         """Redo the last undone change.
         
         Returns:
@@ -419,7 +419,7 @@ class PyfficeUnit(object):
             self.add_change(change["label"], change["value"], change["new_value"], "set")
         return self
 
-    def set_author(self, author):
+    def set_author(self, author) -> Any:
         """Set the document author.
         
         Args:
@@ -430,7 +430,7 @@ class PyfficeUnit(object):
         """
         return self._set_with_change("author", author, default='')
 
-    def set_change_limit(self, limit=None):
+    def set_change_limit(self, limit=None) -> "PyfficeUnit":
         """Set the change limit.
         
         Args:
@@ -444,7 +444,7 @@ class PyfficeUnit(object):
             self.change_limit = limit
         return self
 
-    def set_changes(self, changes):
+    def set_changes(self, changes) -> Any:
         """Set the changes.
         
         Args:
@@ -455,7 +455,7 @@ class PyfficeUnit(object):
         """
         return self._set_with_change("changes", changes, default=[])
 
-    def set_context(self, context):
+    def set_context(self, context) -> Any:
         """Set the context.
         
         Args:
@@ -466,7 +466,7 @@ class PyfficeUnit(object):
         """
         return self._set_with_change("context", context, default='')
 
-    def set_creon(self, creon=None):
+    def set_creon(self, creon=None) -> "PyfficeUnit":
         """Set the creon.
         
         Args:
@@ -482,7 +482,7 @@ class PyfficeUnit(object):
             self.creon = creon
         return self
 
-    def set_data(self, data):
+    def set_data(self, data) -> Any:
         """Set the data.
         
         Args:
@@ -493,7 +493,7 @@ class PyfficeUnit(object):
         """
         return self._set_with_change("data", data)
 
-    def set_description(self, description):
+    def set_description(self, description) -> Any:
         """Set the description.
         
         Args:
@@ -504,7 +504,7 @@ class PyfficeUnit(object):
         """
         return self._set_with_change("description", description, default='')
 
-    def set_did(self, did=None):
+    def set_did(self, did=None) -> "PyfficeUnit":
         """Set the did.
         
         Args:
@@ -520,7 +520,7 @@ class PyfficeUnit(object):
             self.did = did
         return self
 
-    def set_editors(self, editors):
+    def set_editors(self, editors) -> Any:
         """Set the editors.
         
         Args:
@@ -531,7 +531,7 @@ class PyfficeUnit(object):
         """
         return self._set_with_change("editors", editors, default=[])
 
-    def set_encoding(self, encoding=None):
+    def set_encoding(self, encoding=None) -> Any:
         """Set the encoding.
         
         Args:
@@ -542,7 +542,7 @@ class PyfficeUnit(object):
         """
         return self._set_with_change("encoding", encoding, default='utf-8')
 
-    def set_hash(self, hash_):
+    def set_hash(self, hash_) -> "PyfficeUnit":
         """Set the hash.
         
         Args:
@@ -560,7 +560,7 @@ class PyfficeUnit(object):
             self.hash = hash_
         return self
 
-    def set_location(self, location):
+    def set_location(self, location) -> Any:
         """Set the location.
         
         Args:
@@ -571,7 +571,7 @@ class PyfficeUnit(object):
         """
         return self._set_with_change("location", location, default='internal')
 
-    def set_meta_data(self, meta_data):
+    def set_meta_data(self, meta_data) -> Any:
         """Set the meta data.
         
         Args:
@@ -582,7 +582,7 @@ class PyfficeUnit(object):
         """
         return self._set_with_change("meta_data", meta_data)
 
-    def set_modon(self, modon=None):
+    def set_modon(self, modon=None) -> "PyfficeUnit":
         """Set the modon.
         
         Args:
@@ -598,7 +598,7 @@ class PyfficeUnit(object):
             self.modon = modon
         return self
 
-    def set_name(self, name):
+    def set_name(self, name) -> "PyfficeUnit":
         """Set the name.
         
         Args:
@@ -614,7 +614,7 @@ class PyfficeUnit(object):
             self.name = name
         return self
 
-    def set_path(self, path):
+    def set_path(self, path) -> Any:
         """Set the path.
         
         Args:
@@ -625,7 +625,7 @@ class PyfficeUnit(object):
         """
         return self._set_with_change("path", path, default='')
 
-    def set_redos(self, redos):
+    def set_redos(self, redos) -> Any:
         """Set the redos.
         
         Args:
@@ -636,7 +636,7 @@ class PyfficeUnit(object):
         """
         return self._set_with_change("redos", redos)
 
-    def set_references(self, references):
+    def set_references(self, references) -> Any:
         """Set the references.
         
         Args:
@@ -647,7 +647,7 @@ class PyfficeUnit(object):
         """
         return self._set_with_change("references", references, default=[])
 
-    def set_saved(self, saved):
+    def set_saved(self, saved) -> "PyfficeUnit":
         """Set the saved.
         
         Args:
@@ -661,7 +661,7 @@ class PyfficeUnit(object):
             self.is_saved = saved
         return self
 
-    def set_syntax(self, syntax):
+    def set_syntax(self, syntax) -> Any:
         """Set the syntax.
         
         Args:
@@ -672,7 +672,7 @@ class PyfficeUnit(object):
         """
         return self._set_with_change("syntax", syntax, default='plain-text')
 
-    def set_tags(self, tags):
+    def set_tags(self, tags) -> Any:
         """Set the tags.
         
         Args:
@@ -683,7 +683,7 @@ class PyfficeUnit(object):
         """
         return self._set_with_change("tags", tags, default=[])
 
-    def set_version(self, version):
+    def set_version(self, version) -> Any:
         """Set the version.
         
         Args:
@@ -694,7 +694,7 @@ class PyfficeUnit(object):
         """
         return self._set_with_change("version", version, default=0)
 
-    def to_dict(self):
+    def to_dict(self) -> None:
         """Serialize this object to a dict.
         
         Returns:
@@ -744,7 +744,7 @@ class PyfficeUnit(object):
         doc["unit"] = {"content": self.content}
         return doc
 
-    def to_html(self):
+    def to_html(self) -> Any:
         """Convert this document to html.
         
         Returns:
@@ -830,7 +830,7 @@ class PyfficeUnit(object):
             }
         return doc
 
-    def to_string(self):
+    def to_string(self) -> Any:
         """Convert this document to string.
         
         Returns:
@@ -838,7 +838,7 @@ class PyfficeUnit(object):
         """
         return j.dumps(self.to_dict())
 
-    def undo_change(self):
+    def undo_change(self) -> "PyfficeUnit":
         """Undo change.
         
         Returns:
@@ -849,7 +849,7 @@ class PyfficeUnit(object):
         setattr(self, last_change["label"], last_change["value"])
         return self
 
-    def update_unit_structure(self, unit):
+    def update_unit_structure(self, unit) -> None:
         """Update unit structure.
         
         Args:
@@ -886,7 +886,7 @@ class PyfficeDocument(PyfficeUnit):
         # self.lang = utils.invert_dict(self.config.dikt.get("imageLIST", None))
         # self.img = utils.invert_dict(self.config.dikt.get("textLIST", None))
 
-    def file_export(self, file_=None):
+    def file_export(self, file_=None) -> "PyfficeDocument":
         """Export document to file via the appropriate Port class.
 
         Dispatches on the destination file extension to select the
@@ -916,7 +916,7 @@ class PyfficeDocument(PyfficeUnit):
             port.export(self)
         return self
 
-    def file_import(self, file_path=None):
+    def file_import(self, file_path=None) -> "PyfficeDocument":
         """Import document content from a file via the matching Port.
 
         Detects the file extension and dispatches to the right Port
@@ -985,7 +985,7 @@ class PyfficeDocument(PyfficeUnit):
             return PyfficePortFileSystem()
         return cls()
 
-    def file_open(self, file_path, open_=True):
+    def file_open(self, file_path, open_=True) -> None:
         """Open a file and return its raw text content.
 
         For binary formats (.xlsx, .pdf, .png, etc.), this returns
@@ -1020,7 +1020,7 @@ class PyfficeDocument(PyfficeUnit):
                 text = f.read()
         return text
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> "PyfficeDocument":
         """Load document into this document.
         
         Args:
@@ -1044,7 +1044,7 @@ class PyfficeDocument(PyfficeUnit):
         self.set_version(document.get("version", None))
         return self
 
-    def update_document_time(self):
+    def update_document_time(self) -> "PyfficeDocument":
         """Update document time.
         
         Returns:
@@ -1053,7 +1053,7 @@ class PyfficeDocument(PyfficeUnit):
         self.set_modon(self.time.get_current_datetime_str())
         return self
 
-    def save(self, path=None, syntax=None, encrypt_key=None):
+    def save(self, path=None, syntax=None, encrypt_key=None) -> "PyfficeDocument":
         """Save the document.
         
         Args:
@@ -1074,7 +1074,7 @@ class PyfficeDocument(PyfficeUnit):
         #     self.is_saved = True
         return self
 
-    def save_copy(self, path, syntax=None, encrypt_key=None):
+    def save_copy(self, path, syntax=None, encrypt_key=None) -> "PyfficeDocument":
         """Save a copy of the document at the given path.
 
         Args:
@@ -1088,7 +1088,7 @@ class PyfficeDocument(PyfficeUnit):
         self.save_as(path, False, syntax, encrypt_key)
         return self
 
-    def save_pyffice(self, path, syntax, encrypt_key=None):
+    def save_pyffice(self, path, syntax, encrypt_key=None) -> "PyfficeDocument":
         """Save the document to a .pyof file in Pyffice native format.
 
         Args:
@@ -1109,7 +1109,7 @@ class PyfficeDocument(PyfficeUnit):
             yonql.Doc(path).write(self.to_dict())
         return self
 
-    def save_as(self, path, set_file_active=True, syntax=None, encrypt_key=None):
+    def save_as(self, path, set_file_active=True, syntax=None, encrypt_key=None) -> "PyfficeDocument":
         """Save the document.
         
         Args:
@@ -1126,7 +1126,7 @@ class PyfficeDocument(PyfficeUnit):
         self.save(path, syntax, encrypt_key)
         return self
 
-    def search_document(self, term):
+    def search_document(self, term) -> bool:
         """Search document.
         
         Args:
@@ -1139,12 +1139,12 @@ class PyfficeDocument(PyfficeUnit):
             return True
         return False
 
-    def search_vector(self, query):
+    def search_vector(self, query) -> list:
         """Search vectors for query."""
         # Placeholder - would use vector similarity search
         return []
 
-    def search_word(self, term):
+    def search_word(self, term) -> Any:
         """Search word.
         
         Args:
@@ -1155,7 +1155,7 @@ class PyfficeDocument(PyfficeUnit):
         """
         return self.search_document(term)
 
-    def set_cache(self, cache):
+    def set_cache(self, cache) -> "PyfficeDocument":
         """Set the cache.
         
         Args:
@@ -1168,7 +1168,7 @@ class PyfficeDocument(PyfficeUnit):
         self.cache.load(cache)
         return self
 
-    def set_compatibility(self, compatibility):
+    def set_compatibility(self, compatibility) -> "PyfficeDocument":
         """Set the compatibility.
         
         Args:
@@ -1182,7 +1182,7 @@ class PyfficeDocument(PyfficeUnit):
             self.compatibility = compatibility
         return self
 
-    def set_content(self, content):
+    def set_content(self, content) -> "PyfficeDocument":
         """Set the content.
         
         Args:
@@ -1201,7 +1201,7 @@ class PyfficeDocument(PyfficeUnit):
             self.content = content
         return self
 
-    def set_context(self, context):
+    def set_context(self, context) -> "PyfficeDocument":
         """Set the context.
         
         Args:
@@ -1218,7 +1218,7 @@ class PyfficeDocument(PyfficeUnit):
             self.context = context
         return self
 
-    def set_data(self, data):
+    def set_data(self, data) -> "PyfficeDocument":
         """Set the data.
         
         Args:
@@ -1234,7 +1234,7 @@ class PyfficeDocument(PyfficeUnit):
         super().set_data(data)
         return self
 
-    def set_document_type(self, document_type):
+    def set_document_type(self, document_type) -> "PyfficeDocument":
         """Set the document type.
         
         Args:
@@ -1248,7 +1248,7 @@ class PyfficeDocument(PyfficeUnit):
             self.document_type = document_type
         return self
 
-    def set_file_path(self, file_path):
+    def set_file_path(self, file_path) -> "PyfficeDocument":
         """Set the file path.
         
         Args:
@@ -1295,7 +1295,7 @@ class PyfficeDocument(PyfficeUnit):
         logma.info(f"[PyfficeDocument] File Path {self.file_path}")
         return self
 
-    def set_file_type(self, file_type):
+    def set_file_type(self, file_type) -> "PyfficeDocument":
         """Set the file type.
         
         Args:
@@ -1309,7 +1309,7 @@ class PyfficeDocument(PyfficeUnit):
             self.file_type = file_type
         return self
 
-    def to_dict(self):
+    def to_dict(self) -> Any:
         """Convert this document to dict.
         
         Returns:
@@ -1329,7 +1329,7 @@ class PyfficeDocument(PyfficeUnit):
         del doc["unit"]
         return self._canonicalize(doc)
 
-    def update_document_structure(self, document):
+    def update_document_structure(self, document) -> None:
         """Update document structure.
         
         Args:
@@ -1342,7 +1342,7 @@ class PyfficeDocument(PyfficeUnit):
         document = update.process()
         return document
 
-    def vectorize(self, content):
+    def vectorize(self, content) -> "PyfficeDocument":
         """create context and vectors for the document"""
         model = SentenceTransformer("all-MiniLM-L6-v2")
         embeddings = model.encode(content.split("\n"))
@@ -1363,7 +1363,7 @@ class PyfficeDocumentManager(PyfficeDocument):
         self.store = conql.Doc()
         self.documents = {}
 
-    def add_document(self, document):
+    def add_document(self, document) -> "PyfficeDocumentManager":
         """Add a child document to this manager.
         
         Args:
@@ -1375,7 +1375,7 @@ class PyfficeDocumentManager(PyfficeDocument):
         self.documents[document.name] = document
         return self
 
-    def del_document(self, name):
+    def del_document(self, name) -> "PyfficeDocumentManager":
         """Remove the document.
         
         Args:
@@ -1389,7 +1389,7 @@ class PyfficeDocumentManager(PyfficeDocument):
         del self.documents[name]
         return self
 
-    def get_context(self):
+    def get_context(self) -> Any:
         """Return the current document context as a string.
         
         Returns:
@@ -1397,7 +1397,7 @@ class PyfficeDocumentManager(PyfficeDocument):
         """
         return super().get_context()
 
-    def get_document(self, name):
+    def get_document(self, name) -> Any:
         """Return the document.
         
         Args:
@@ -1408,7 +1408,7 @@ class PyfficeDocumentManager(PyfficeDocument):
         """
         return self.documents[name]
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> "PyfficeDocumentManager":
         """Load document into this document.
         
         Args:
@@ -1427,7 +1427,7 @@ class PyfficeDocumentManager(PyfficeDocument):
         self.set_documents(document.get("documents", {}))
         return self
 
-    def search(self, term):
+    def search(self, term) -> Any:
         """Search.
         
         Args:
@@ -1441,7 +1441,7 @@ class PyfficeDocumentManager(PyfficeDocument):
             return None
         return self.documents[result]
 
-    def search_documents(self, term):
+    def search_documents(self, term) -> None:
         """Search documents.
         
         Args:
@@ -1455,7 +1455,7 @@ class PyfficeDocumentManager(PyfficeDocument):
                 return name
         return None
 
-    def set_documents(self, documents):
+    def set_documents(self, documents) -> "PyfficeDocumentManager":
         """Set the documents.
         
         Args:
@@ -1467,7 +1467,7 @@ class PyfficeDocumentManager(PyfficeDocument):
         self.documents = documents
         return self
 
-    def set_doc_types(self, doc_types):
+    def set_doc_types(self, doc_types) -> "PyfficeDocumentManager":
         """Set the doc types.
         
         Args:
@@ -1495,7 +1495,7 @@ class PyfficeDeque(PyfficeDocument, deque):
         self.set_max_items()
         self.history = deque()
 
-    def append(self, item):
+    def append(self, item) -> None:
         """Append.
         
         Args:
@@ -1509,14 +1509,14 @@ class PyfficeDeque(PyfficeDocument, deque):
                 self.history.append(self.popleft())
         super().append(item)
 
-    def appendleft(self, item):
+    def appendleft(self, item) -> None:
         """Add item to the left side of the deque."""
         if self.max_items is not None:
             if len(self) >= self.max_items:
                 self.history.append(self.pop())
         super().appendleft(item)
 
-    def set_max_items(self, max_items=None):
+    def set_max_items(self, max_items=None) -> "PyfficeDeque":
         """Set the max items.
         
         Args:

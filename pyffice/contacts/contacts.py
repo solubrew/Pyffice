@@ -50,7 +50,7 @@ class PyfficeAddress(PyfficeDocument):
         self.apt = None
 
     @classmethod
-    def from_dict(cls, dikt):
+    def from_dict(cls, dikt) -> Any:
         """From dict.
         
         Args:
@@ -100,7 +100,7 @@ class PyfficeContact(PyfficeDocument):
         self.preferred_channel = None
         self.salutation = None
 
-    def add_address(self, address):
+    def add_address(self, address) -> None:
         """Add a address.
         
         Args:
@@ -115,12 +115,12 @@ class PyfficeContact(PyfficeDocument):
             self.address = address
         self.addresses.append(address)
 
-    def add_connection(self, connection):
+    def add_connection(self, connection) -> "PyfficeContact":
         """A connection is another contact that this contact is connected to."""
         self.connections.append(connection)
         return self
 
-    def add_email_address(self, email):
+    def add_email_address(self, email) -> "PyfficeContact":
         """Add a email address.
         
         Args:
@@ -135,7 +135,7 @@ class PyfficeContact(PyfficeDocument):
             self.channels.append(email)
         return self
 
-    def add_emergency_contact(self, contact: "PyfficeContact"):
+    def add_emergency_contact(self, contact: "PyfficeContact") -> None:
         """Add a emergency contact.
         
         Args:
@@ -146,7 +146,7 @@ class PyfficeContact(PyfficeDocument):
         """
         self.emergency_contact = contact
 
-    def add_group(self, group):
+    def add_group(self, group) -> "PyfficeContact":
         """Add a group.
         
         Args:
@@ -160,7 +160,7 @@ class PyfficeContact(PyfficeDocument):
             self.groups.append(group)
         return self
 
-    def add_phone_address(self, phone):
+    def add_phone_address(self, phone) -> "PyfficeContact":
         """Add a phone address.
         
         Args:
@@ -177,7 +177,7 @@ class PyfficeContact(PyfficeDocument):
             self.channels.append(phone)
         return self
 
-    def add_postal_address(self, postal):
+    def add_postal_address(self, postal) -> "PyfficeContact":
         """Add a postal address.
         
         Args:
@@ -192,7 +192,7 @@ class PyfficeContact(PyfficeDocument):
             self.channels.append(postal)
         return self
 
-    def add_social_contact(self, handle, social_network):
+    def add_social_contact(self, handle, social_network) -> "PyfficeContact":
         """Add a social contact.
         
         Args:
@@ -208,21 +208,21 @@ class PyfficeContact(PyfficeDocument):
             self.channels.append(social_network)
         return self
 
-    def del_channel(self, dex):
+    def del_channel(self, dex) -> "PyfficeContact":
         """Remove the channel at index dex from self.channels."""
         if 0 <= dex < len(self.channels):
             removed = self.channels.pop(dex)
             self.add_change("channels", self.channels + [removed], self.channels)
         return self
 
-    def del_connection(self, dex):
+    def del_connection(self, dex) -> "PyfficeContact":
         """Remove the connection at index dex from self.connections."""
         if 0 <= dex < len(self.connections):
             removed = self.connections.pop(dex)
             self.add_change("connections", self.connections + [removed], self.connections)
         return self
 
-    def del_email_address(self):
+    def del_email_address(self) -> "PyfficeContact":
         """Remove all email-type channels from self.channels."""
         kept = [c for c in self.channels if c.get("type") != "email"]
         if kept != self.channels:
@@ -230,7 +230,7 @@ class PyfficeContact(PyfficeDocument):
             self.channels = kept
         return self
 
-    def del_add_phone_address(self, phone):
+    def del_add_phone_address(self, phone) -> "PyfficeContact":
         """Remove phone-type channels whose value matches phone."""
         kept = [c for c in self.channels
                 if not (c.get("type") == "phone" and c.get("contact") == phone)]
@@ -239,7 +239,7 @@ class PyfficeContact(PyfficeDocument):
             self.channels = kept
         return self
 
-    def del_postal_address(self, address):
+    def del_postal_address(self, address) -> "PyfficeContact":
         """Remove postal-address channels whose value matches address."""
         kept = [c for c in self.channels
                 if not (c.get("type") == "postal_address" and c.get("contact") == address)]
@@ -248,7 +248,7 @@ class PyfficeContact(PyfficeDocument):
             self.channels = kept
         return self
 
-    def del_social_contact(self, contact):
+    def del_social_contact(self, contact) -> "PyfficeContact":
         """Remove social-type channels whose handle matches contact."""
         kept = [c for c in self.channels
                 if not (c.get("type") == "social" and c.get("contact") == contact)]
@@ -257,7 +257,7 @@ class PyfficeContact(PyfficeDocument):
             self.channels = kept
         return self
 
-    def connect_contact(self):
+    def connect_contact(self) -> None:
         """Connect contact.
         
         Returns:
@@ -266,21 +266,21 @@ class PyfficeContact(PyfficeDocument):
         contact = {"id": self.did, "name": self.name, "channels": self.channels, "type": "contact"}
         return contact
 
-    def get_postal_address(self):
+    def get_postal_address(self) -> Any:
         """Return the first postal-address channel (or None)."""
         for c in self.channels:
             if c.get("type") == "postal_address":
                 return c.get("contact")
         return None
 
-    def get_email_address(self):
+    def get_email_address(self) -> Any:
         """Return the first email-type channel (or None)."""
         for c in self.channels:
             if c.get("type") == "email":
                 return c.get("contact")
         return None
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> "PyfficeContact":
         """Load document into this document.
         
         Args:
@@ -298,7 +298,7 @@ class PyfficeContact(PyfficeDocument):
         self.set_preferred_channel(document.get("preferred_channel", None))
         return self
 
-    def set_channels(self, document):
+    def set_channels(self, document) -> "PyfficeContact":
         """Set the channels.
         
         Args:
@@ -318,7 +318,7 @@ class PyfficeContact(PyfficeDocument):
                 self.add_social_contact(channel["contact"], channel["network"])
         return self
 
-    def set_groups(self, groups):
+    def set_groups(self, groups) -> "PyfficeContact":
         """Set the groups.
         
         Args:
@@ -334,7 +334,7 @@ class PyfficeContact(PyfficeDocument):
             self.groups = groups
         return self
 
-    def set_name_first(self, name):
+    def set_name_first(self, name) -> "PyfficeContact":
         """Set the name first.
         
         Args:
@@ -348,7 +348,7 @@ class PyfficeContact(PyfficeDocument):
             self.first_name = name
         return self
 
-    def set_name_full(self, name):
+    def set_name_full(self, name) -> "PyfficeContact":
         """Set the name full.
         
         Args:
@@ -362,7 +362,7 @@ class PyfficeContact(PyfficeDocument):
             self.full_name = name
         return self
 
-    def set_name_middle(self, name):
+    def set_name_middle(self, name) -> "PyfficeContact":
         """Set the name middle.
         
         Args:
@@ -376,7 +376,7 @@ class PyfficeContact(PyfficeDocument):
             self.middle_name = name
         return self
 
-    def set_name_nicknames(self, nicknames):
+    def set_name_nicknames(self, nicknames) -> "PyfficeContact":
         """Set the name nicknames.
         
         Args:
@@ -390,7 +390,7 @@ class PyfficeContact(PyfficeDocument):
             self.nicknames = nicknames
         return self
 
-    def set_name_last(self, name):
+    def set_name_last(self, name) -> "PyfficeContact":
         """Set the name last.
         
         Args:
@@ -404,7 +404,7 @@ class PyfficeContact(PyfficeDocument):
             self.last_name = name
         return self
 
-    def set_name_preferred(self, name):
+    def set_name_preferred(self, name) -> "PyfficeContact":
         """Set the name preferred.
         
         Args:
@@ -418,7 +418,7 @@ class PyfficeContact(PyfficeDocument):
             self.preferred_name = name
         return self
 
-    def set_name_sur(self, name):
+    def set_name_sur(self, name) -> "PyfficeContact":
         """Set the name sur.
         
         Args:
@@ -432,14 +432,14 @@ class PyfficeContact(PyfficeDocument):
             self.surname = name
         return self
 
-    def set_name_salutation(self, name):
+    def set_name_salutation(self, name) -> "PyfficeContact":
         """Set self.salutation to name."""
         if name != self.salutation:
             self.add_change("salutation", self.salutation, name)
             self.salutation = name
         return self
 
-    def set_name_suffix(self, name):
+    def set_name_suffix(self, name) -> "PyfficeContact":
         """Set the name suffix.
         
         Args:
@@ -453,7 +453,7 @@ class PyfficeContact(PyfficeDocument):
             self.suffix = name
         return self
 
-    def set_names(self, names):
+    def set_names(self, names) -> "PyfficeContact":
         """Set the names.
         
         Args:
@@ -480,7 +480,7 @@ class PyfficeContact(PyfficeDocument):
             )
         return self
 
-    def set_preferred_channel(self, channel):
+    def set_preferred_channel(self, channel) -> "PyfficeContact":
         """Set the preferred channel.
         
         Args:
@@ -494,7 +494,7 @@ class PyfficeContact(PyfficeDocument):
             self.preferred_channel = channel
         return self
 
-    def to_dict(self):
+    def to_dict(self) -> Any:
         """Convert this document to dict.
         
         Returns:
@@ -518,7 +518,7 @@ class PyfficeContact(PyfficeDocument):
         doc["data"]["groups"] = self.groups
         return self._canonicalize(doc)
 
-    def verify_phone_number(self, phone):
+    def verify_phone_number(self, phone) -> "PyfficeContact":
         """Verify phone number.
         
         Args:
@@ -532,7 +532,7 @@ class PyfficeContact(PyfficeDocument):
             self.channels = [{"type": "phone", "contact": phone}]
         return self
 
-    def verify_email(self, email):
+    def verify_email(self, email) -> "PyfficeContact":
         """Verify email.
         
         Args:
@@ -546,7 +546,7 @@ class PyfficeContact(PyfficeDocument):
             self.channels = [{"type": "email", "contact": email}]
         return self
 
-    def verify_postal_address(self, address):
+    def verify_postal_address(self, address) -> "PyfficeContact":
         """Verify postal address.
         
         Args:
@@ -560,7 +560,7 @@ class PyfficeContact(PyfficeDocument):
             self.channels = [{"type": "postal_address", "contact": address}]
         return self
 
-    def verify_social(self, handle, social_network):
+    def verify_social(self, handle, social_network) -> bool:
         """Verify social media handle."""
         return True  # Placeholder - would verify via API
 
@@ -577,7 +577,7 @@ class PyfficeRolodex(PyfficeDocumentManager):
         self.groups = []
         self.contacts = {}
 
-    def add_contact(self, contact, group=None):
+    def add_contact(self, contact, group=None) -> "PyfficeRolodex":
         """Add a contact.
         
         Args:
@@ -596,7 +596,7 @@ class PyfficeRolodex(PyfficeDocumentManager):
         # self.add_connection(contact.connection)
         return self
 
-    def add_group(self, group):
+    def add_group(self, group) -> "PyfficeRolodex":
         """Add a group.
         
         Args:
@@ -609,7 +609,7 @@ class PyfficeRolodex(PyfficeDocumentManager):
             self.groups.append(group)
         return self
 
-    def del_contact(self, name):
+    def del_contact(self, name) -> "PyfficeRolodex":
         """Remove the contact.
         
         Args:
@@ -621,19 +621,19 @@ class PyfficeRolodex(PyfficeDocumentManager):
         del self.contacts[name]
         return self
 
-    def filter_by_group(self, cfg):
+    def filter_by_group(self, cfg) -> list:
         """Filter contacts by group."""
         return []
 
-    def get_contacts(self, search_term=None):
+    def get_contacts(self, search_term=None) -> list:
         """Get all contacts."""
         return []
 
-    def get_contact(self, contact_id):
+    def get_contact(self, contact_id) -> None:
         """Get contact by ID."""
         return None
 
-    def get_count(self):
+    def get_count(self) -> int:
         """Return the count.
         
         Returns:
@@ -641,7 +641,7 @@ class PyfficeRolodex(PyfficeDocumentManager):
         """
         return len(self.contacts)
 
-    def get_group_by_name(self, name):
+    def get_group_by_name(self, name) -> None:
         """Return the group by name.
         
         Args:
@@ -653,7 +653,7 @@ class PyfficeRolodex(PyfficeDocumentManager):
         group = [self.contacts[contact] for contact in self.contacts if name in self.contacts[contact].groups]
         return group
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> "PyfficeRolodex":
         """Load document into this document.
         
         Args:
@@ -673,7 +673,7 @@ class PyfficeRolodex(PyfficeDocumentManager):
         self.set_group_default(document.get("default_group", None))
         return self
 
-    def set_contacts(self, contacts):
+    def set_contacts(self, contacts) -> "PyfficeRolodex":
         """Set the contacts.
         
         Args:
@@ -693,7 +693,7 @@ class PyfficeRolodex(PyfficeDocumentManager):
             self.add_contact(contact)
         return self
 
-    def set_group_default(self, group=None):
+    def set_group_default(self, group=None) -> "PyfficeRolodex":
         """Set the group default.
         
         Args:
@@ -709,7 +709,7 @@ class PyfficeRolodex(PyfficeDocumentManager):
             self.default_group = group
         return self
 
-    def set_groups(self, groups):
+    def set_groups(self, groups) -> "PyfficeRolodex":
         """Set the groups.
         
         Args:

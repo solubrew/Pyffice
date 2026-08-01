@@ -174,7 +174,7 @@ class PyfficeCodex(PyfficeDocumentManager):
         except (ValueError, OSError, AttributeError) as e:
             raise PyfficeCodexError(f"Failed to add URL: {e}") from e
 
-    def get_rolodex(self):
+    def get_rolodex(self) -> Any:
         """Return the contacts rolodex (may be None if uninitialized)."""
         return self.contacts
 
@@ -543,7 +543,7 @@ class PyfficeCodex(PyfficeDocumentManager):
 
         return yaml.dump(data, default_flow_style=False)
 
-    def update(self):
+    def update(self) -> Any:
         """Update the codex with new documents."""
         return PyfficeUpdater()
 

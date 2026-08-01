@@ -43,7 +43,7 @@ class PyfficeRating(PyfficeTag):
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeRating")).override(cfg)
 
-    def load_tag(self, tag):
+    def load_tag(self, tag) -> "PyfficeRating":
         """Load tag into this document.
         
         Args:

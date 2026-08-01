@@ -266,7 +266,7 @@ class PAXNConverter:
             data = yaml.safe_load(f)
         return PAXNProject.from_dict(data)
     
-    def save_paxn(self, project: PAXNProject, path: str):
+    def save_paxn(self, project: PAXNProject, path: str) -> None:
         """Save a PAXN project to file"""
         with open(path, 'w') as f:
             yaml.dump(project.to_dict(), f, default_flow_style=False, sort_keys=False)
@@ -277,7 +277,7 @@ class PAXNConverter:
             data = yaml.safe_load(f)
         return PAXNTask.from_dict(data)
     
-    def save_axn(self, task: PAXNTask, path: str):
+    def save_axn(self, task: PAXNTask, path: str) -> None:
         """Save an AXN task to file"""
         with open(path, 'w') as f:
             yaml.dump(task.to_dict(), f, default_flow_style=False, sort_keys=False)
@@ -398,7 +398,7 @@ def load_paxn(path: str) -> PAXNProject:
     """Load PAXN project from file"""
     return PAXNConverter().load_paxn(path)
 
-def save_paxn(project: PAXNProject, path: str):
+def save_paxn(project: PAXNProject, path: str) -> Any:
     """Save PAXN project to file"""
     return PAXNConverter().save_paxn(project, path)
 
@@ -406,6 +406,6 @@ def load_axn(path: str) -> PAXNTask:
     """Load AXN task from file"""
     return PAXNConverter().load_axn(path)
 
-def save_axn(task: PAXNTask, path: str):
+def save_axn(task: PAXNTask, path: str) -> Any:
     """Save AXN task to file"""
     return PAXNConverter().save_axn(task, path)

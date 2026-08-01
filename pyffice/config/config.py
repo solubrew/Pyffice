@@ -43,7 +43,7 @@ class PyfficeConfig(PyfficeDocument):
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeConfig").override(cfg))
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> "PyfficeConfig":
         """Load document into this document.
         
         Args:

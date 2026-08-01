@@ -42,7 +42,7 @@ class PyfficePersona(PyfficeDocument):
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("")).override(cfg)
 
-    def calculate_myers_briggs(self, ei=0.5, ns=0.5, tf=0.5, pj=0.5):
+    def calculate_myers_briggs(self, ei=0.5, ns=0.5, tf=0.5, pj=0.5) -> None:
         """Calculate myers briggs.
         
         Args:

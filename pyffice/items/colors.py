@@ -89,7 +89,7 @@ class PyfficeColor(PyfficeUnit):
         self.lms = None
         self.color_name = self.config.dikt.get("color_name", None)  # Optional name for the color
 
-    def calculate_complementary_color(self):
+    def calculate_complementary_color(self) -> tuple:
         """
         Calculate the opposite (or complementary) color by inverting the RGB components.
 
@@ -102,7 +102,7 @@ class PyfficeColor(PyfficeUnit):
         r, g, b = self.get_rgb()
         return (255 - r, 255 - g, 255 - b)
 
-    def calculate_text_color(self):
+    def calculate_text_color(self) -> str:
         """Given the color of this object calculate an appropriate text color to place on top of it.
         Determine whether text should be black or white based on the luminance of the background color.
         Args:
@@ -119,63 +119,63 @@ class PyfficeColor(PyfficeUnit):
         # If luminance is greater than 128, use black text; otherwise, use white text
         return "black" if luminance > 128 else "white"
 
-    def get_cmyk(self):
+    def get_cmyk(self) -> Any:
         """Return the color in CMYK format."""
         self.cmyk = self.rgb_to_cmyk(self.get_rgb())
         return self.cmyk
 
-    def get_hex(self):
+    def get_hex(self) -> Any:
         """Return the color in HEX format."""
         self.hex = self.rgb_to_hex(self.get_rgb())
         return self.hex
 
-    def get_hls(self):
+    def get_hls(self) -> Any:
         """Return the color in HLS format."""
 
         return self.hls
 
-    def get_hsl(self):
+    def get_hsl(self) -> Any:
         """Return the color in HSL format."""
         self.hsl = self.rgb_to_hsl(self.get_rgb())
         return self.hsl
 
-    def get_hsv(self):
+    def get_hsv(self) -> Any:
         """Return the color in HSV format."""
         self.hsv = colorsys.rgb_to_hsv(*[v / 255.0 for v in self.get_rgb()])
         return self.hsv
 
-    def get_lab(self):
+    def get_lab(self) -> Any:
         """Return the color in LAB format."""
         self.get_xyz()
         self.lab = self.xyz_to_lab(self.xyz)
         return self.lab
 
-    def get_lch(self):
+    def get_lch(self) -> Any:
         """Return the color in LCH format."""
         return self.lch
 
-    def get_lms(self):
+    def get_lms(self) -> Any:
         """Return the color in LMS format."""
         return self.lms
 
-    def get_rgb(self):
+    def get_rgb(self) -> Any:
         """Return the color in RGB format."""
         return self.rgb
 
-    def get_rgba(self):
+    def get_rgba(self) -> Any:
         """Return the color in RGB format."""
         return self.rgba
 
-    def get_xyz(self):
+    def get_xyz(self) -> Any:
         """Return the color in XYZ format."""
         self.xyz = self.rgb_to_xyz(self.get_rgb())
         return self.xyz
 
-    def get_yiq(self):
+    def get_yiq(self) -> Any:
         """Return the color in YIQ format."""
         return self.yiq
 
-    def load_unit(self, unit=None):
+    def load_unit(self, unit=None) -> "PyfficeColor":
         """Load a unit dict into this document.
         
         Args:
@@ -209,7 +209,7 @@ class PyfficeColor(PyfficeUnit):
         "lms": "set_lms",
     }
 
-    def set_color(self, color, style):
+    def set_color(self, color, style) -> None:
         """
         Set the initial color based on the provided style.
 
@@ -222,7 +222,7 @@ class PyfficeColor(PyfficeUnit):
             raise ValueError(f"Unsupported color style: {style}")
         getattr(self, method_name)(color)
 
-    def set_cmyk(self, value):
+    def set_cmyk(self, value) -> None:
         """
         Set the CMYK value.
 
@@ -233,7 +233,7 @@ class PyfficeColor(PyfficeUnit):
         # Convert to RGB (indirectly updates other formats as well)
         self.set_rgb(self.cmyk_to_rgb(value))
 
-    def set_hex(self, value):
+    def set_hex(self, value) -> None:
         """
         Set the HEX value and update other formats.
 
@@ -243,7 +243,7 @@ class PyfficeColor(PyfficeUnit):
         self.hex = value
         self.set_rgb(self.hex_to_rgb(value))
 
-    def set_hsl(self, value):
+    def set_hsl(self, value) -> None:
         """Set the hsl.
         
         Args:
@@ -256,7 +256,7 @@ class PyfficeColor(PyfficeUnit):
         self.set_rgb(self.hsl_to_rgb(value))
         self.set_hex(self.rgb_to_hex(self.get_rgb()))
 
-    def set_hsv(self, value):
+    def set_hsv(self, value) -> None:
         """
         Set the HSV value and update other formats.
 
@@ -266,7 +266,7 @@ class PyfficeColor(PyfficeUnit):
         self.hsv = value
         self.set_rgb(self.hsv_to_rgb(value))
 
-    def set_lab(self, value):
+    def set_lab(self, value) -> None:
         """
         Set the LAB value and update other formats.
 
@@ -278,7 +278,7 @@ class PyfficeColor(PyfficeUnit):
         xyz_color = self.lab_to_xyz(value)
         self.set_xyz(xyz_color)
 
-    def set_lms(self, value):
+    def set_lms(self, value) -> None:
         """
         Set the LMS value.
 
@@ -288,7 +288,7 @@ class PyfficeColor(PyfficeUnit):
         self.lms = value
         # LMS is typically derived from XYZ; no direct conversion provided here.
 
-    def set_color_name(self, value):
+    def set_color_name(self, value) -> "PyfficeColor":
         """Set the color name.
         
         Args:
@@ -302,7 +302,7 @@ class PyfficeColor(PyfficeUnit):
             self.set_hex(CSS4_COLORS[self.color_name])
         return self
 
-    def set_rgb(self, value):
+    def set_rgb(self, value) -> "PyfficeColor":
         """
         Set the RGB value and update other formats.
 
@@ -312,7 +312,7 @@ class PyfficeColor(PyfficeUnit):
         self.rgb = value
         return self
 
-    def set_rgba(self, value):
+    def set_rgba(self, value) -> "PyfficeColor":
         """
         Set the RGBA value and update other formats.
 
@@ -322,7 +322,7 @@ class PyfficeColor(PyfficeUnit):
         self.rgba = value
         return self
 
-    def set_xyz(self, value):
+    def set_xyz(self, value) -> None:
         """
         Set the XYZ color value.
 
@@ -334,7 +334,7 @@ class PyfficeColor(PyfficeUnit):
         rgb_color = self.xyz_to_rgb(value)
         self.set_rgb(rgb_color)
 
-    def set_yiq(self, value):
+    def set_yiq(self, value) -> None:
         """
         Set the YIQ value and update other formats.
 
@@ -348,7 +348,7 @@ class PyfficeColor(PyfficeUnit):
     # ---- Static Conversion Utilities ----
 
     @staticmethod
-    def rgb_to_cmyk(rgb):
+    def rgb_to_cmyk(rgb) -> tuple:
         """Rgb to cmyk.
         
         Args:
@@ -367,7 +367,7 @@ class PyfficeColor(PyfficeUnit):
         return round(c, 4), round(m, 4), round(y, 4), round(k, 4)
 
     @staticmethod
-    def rgb_to_hex(rgb):
+    def rgb_to_hex(rgb) -> Any:
         """Rgb to hex.
         
         Args:
@@ -381,7 +381,7 @@ class PyfficeColor(PyfficeUnit):
         return "#{:02X}{:02X}{:02X}".format(*rgb)
 
     @staticmethod
-    def hex_to_rgb(hex_color):
+    def hex_to_rgb(hex_color) -> tuple:
         """Hex to RGB.
 
         Args:
@@ -394,7 +394,7 @@ class PyfficeColor(PyfficeUnit):
         return tuple(int(hex_color[i : i + 2], 16) for i in (0, 2, 4))
 
     @staticmethod
-    def rgb_to_hsl(rgb):
+    def rgb_to_hsl(rgb) -> Any:
         """Rgb to hsl.
 
         Args:
@@ -406,7 +406,7 @@ class PyfficeColor(PyfficeUnit):
         return colorsys.rgb_to_hls(*[v / 255.0 for v in rgb])
 
     @staticmethod
-    def hsl_to_rgb(h, s, l):
+    def hsl_to_rgb(h, s, l) -> Any:
         """Convert HSL to RGB.
 
         Args:
@@ -454,7 +454,7 @@ class PyfficeColor(PyfficeUnit):
         return (round(r * 255), round(g * 255), round(b * 255))
 
     @staticmethod
-    def hsv_to_rgb(hsv):
+    def hsv_to_rgb(hsv) -> tuple:
         """Hsv to rgb.
         
         Args:
@@ -467,7 +467,7 @@ class PyfficeColor(PyfficeUnit):
         return int(r * 255), int(g * 255), int(b * 255)
 
     @staticmethod
-    def xyz_to_lab(xyz):
+    def xyz_to_lab(xyz) -> tuple:
         """Xyz to lab.
         
         Args:
@@ -481,7 +481,7 @@ class PyfficeColor(PyfficeUnit):
         return lab_color.lab_l, lab_color.lab_a, lab_color.lab_b
 
     @staticmethod
-    def xyz_to_rgb(xyz):
+    def xyz_to_rgb(xyz) -> tuple:
         # Use colormath to convert XYZ → sRGB
         """Xyz to rgb.
         
@@ -518,7 +518,7 @@ def calculate_hsl_complementary(h, s, l):
     return h_complementary, s, l
 
 
-def complementary_color(hex_color):
+def complementary_color(hex_color) -> None:
     """
     Generate a complementary color from a HEX value.
 
@@ -537,7 +537,7 @@ def complementary_color(hex_color):
     return complement_hex
 
 
-def calculate_complementary_color(rgb):
+def calculate_complementary_color(rgb) -> tuple:
     """
     Calculate the complementary color for the given RGB input.
 
@@ -551,7 +551,7 @@ def calculate_complementary_color(rgb):
     return (255 - r, 255 - g, 255 - b)
 
 
-def extract_colors_from_image(image=None, file_path=None):
+def extract_colors_from_image(image=None, file_path=None) -> None:
     """
     Extract colors from an image.
 
@@ -571,7 +571,7 @@ def extract_colors_from_image(image=None, file_path=None):
         self.add_color(PyfficeColor(rgb, "rgb", self))
 
 
-def extract_colors_from_svg(image=None, file_path=None):
+def extract_colors_from_svg(image=None, file_path=None) -> None:
     """
     Extract colors from an SVG file.
 
@@ -590,7 +590,7 @@ def extract_colors_from_svg(image=None, file_path=None):
     os.remove(temp_path)
 
 
-def extract_colors_from_video(file_path):
+def extract_colors_from_video(file_path) -> None:
     """
     Extract dominant colors from a video file by analyzing frames.
 

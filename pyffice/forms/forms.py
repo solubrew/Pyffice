@@ -54,7 +54,7 @@ class PyfficeForm(PyfficeDocument):
         self.sections = None
         self.responses = None
 
-    def add_answer(self, question_id, text, branch=None, sequence=None):
+    def add_answer(self, question_id, text, branch=None, sequence=None) -> "PyfficeForm":
         """Add a answer.
         
         Args:
@@ -107,7 +107,7 @@ class PyfficeForm(PyfficeDocument):
         }
         return sequence
 
-    def add_response(self, response):
+    def add_response(self, response) -> "PyfficeForm":
         """Add a response.
         
         Args:
@@ -119,7 +119,7 @@ class PyfficeForm(PyfficeDocument):
         self.responses.append(response)
         return self
 
-    def add_section(self, after_section_id=None, control_question_id=None, trigger=None):
+    def add_section(self, after_section_id=None, control_question_id=None, trigger=None) -> None:
         """
         Control Question Id and Trigger Control Branching
 
@@ -140,21 +140,21 @@ class PyfficeForm(PyfficeDocument):
         self.sections[section_id] = section
         return section_id
 
-    def del_field(self, field):
+    def del_field(self, field) -> "PyfficeForm":
         """Delete a field from the form."""
         fields = getattr(self, 'fields', [])
         if field in fields:
             fields.remove(field)
         return self
 
-    def del_response(self, response):
+    def del_response(self, response) -> "PyfficeForm":
         """Delete a response."""
         responses = getattr(self, 'responses', [])
         if response in responses:
             responses.remove(response)
         return self
 
-    def del_section(self, section_id):
+    def del_section(self, section_id) -> "PyfficeForm":
         """Remove the section.
         
         Args:
@@ -169,7 +169,7 @@ class PyfficeForm(PyfficeDocument):
         del self.sections[section_id]
         return self
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> "PyfficeForm":
         """Load document into this document.
         
         Args:
@@ -189,7 +189,7 @@ class PyfficeForm(PyfficeDocument):
         self.set_sections(document.get("sections", {}))
         return self
 
-    def set_form_footer_image(self, file_path):
+    def set_form_footer_image(self, file_path) -> "PyfficeForm":
         """Set the form footer image.
         
         Args:
@@ -205,12 +205,12 @@ class PyfficeForm(PyfficeDocument):
         self.footer_image = image
         return self
 
-    def set_form_id(self, form_id):
+    def set_form_id(self, form_id) -> "PyfficeForm":
         """Set the form ID."""
         self.form_id = form_id
         return self
 
-    def set_form_header_image(self, file_path):
+    def set_form_header_image(self, file_path) -> "PyfficeForm":
         """Set the form header image.
         
         Args:
@@ -226,7 +226,7 @@ class PyfficeForm(PyfficeDocument):
         self.header_image = image
         return self
 
-    def set_sections(self, sections):
+    def set_sections(self, sections) -> "PyfficeForm":
         """Set the sections.
         
         Args:
@@ -250,7 +250,7 @@ class PyfficeFormsManager(PyfficeDocumentManager):
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeFormsManager")).override(cfg)
         self.forms = None
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> "PyfficeFormsManager":
         """Load document into this document.
         
         Args:
@@ -267,7 +267,7 @@ class PyfficeFormsManager(PyfficeDocumentManager):
         self.set_forms(document.get("forms", []))
         return self
 
-    def set_forms(self, forms):
+    def set_forms(self, forms) -> "PyfficeFormsManager":
         """Set the forms.
         
         Args:
@@ -304,7 +304,7 @@ class PyfficeSurvey(PyfficeDocument):
         self.responses = None
         self.schedule = None
 
-    def add_field_response(self, field, field_id, response_id):
+    def add_field_response(self, field, field_id, response_id) -> "PyfficeSurvey":
         """Add a field response.
         
         Args:
@@ -320,7 +320,7 @@ class PyfficeSurvey(PyfficeDocument):
         self.responses[response_id][field_id] = field
         return self
 
-    def add_form_response(self, response, response_id=None):
+    def add_form_response(self, response, response_id=None) -> "PyfficeSurvey":
         """Add a form response.
         
         Args:
@@ -337,7 +337,7 @@ class PyfficeSurvey(PyfficeDocument):
         self.responses[response_id] = response
         return self
 
-    def add_recipient(self, recipient):
+    def add_recipient(self, recipient) -> "PyfficeSurvey":
         """Add a recipient for this document.
         
         Args:
@@ -352,24 +352,24 @@ class PyfficeSurvey(PyfficeDocument):
         self.distribution["recipients"].append(recipient)
         return self
 
-    def del_field_response(self, field, field_id, response_id):
+    def del_field_response(self, field, field_id, response_id) -> "PyfficeSurvey":
         """Delete a field response."""
         _p = True  # placeholder
         return self
 
-    def del_form_response(self, response_id):
+    def del_form_response(self, response_id) -> "PyfficeSurvey":
         """Delete a form response."""
         _p = True  # placeholder
         return self
 
-    def del_recipient(self, recipient):
+    def del_recipient(self, recipient) -> "PyfficeSurvey":
         """Delete a recipient."""
         recipients = getattr(self, 'recipients', [])
         if recipient in recipients:
             recipients.remove(recipient)
         return self
 
-    def get_form(self, form_id):
+    def get_form(self, form_id) -> None:
         """Return the form.
         
         Args:
@@ -382,7 +382,7 @@ class PyfficeSurvey(PyfficeDocument):
         form = PyfficeForm()
         return form
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> "PyfficeSurvey":
         """Load document into this document.
         
         Args:
@@ -403,7 +403,7 @@ class PyfficeSurvey(PyfficeDocument):
         self.set_responses(document.get("responses", None))
         return self
 
-    def set_channel(self, channel):
+    def set_channel(self, channel) -> "PyfficeSurvey":
         """Set the channel.
         
         Args:
@@ -417,7 +417,7 @@ class PyfficeSurvey(PyfficeDocument):
             self.distribution["channel"] = channel
         return self
 
-    def set_distribution(self, recipients, channel=None):
+    def set_distribution(self, recipients, channel=None) -> "PyfficeSurvey":
         """distribute survey to a list of specific recipients or posting locations"""
         distribution = {"recipients": recipients, "channel": channel}
         if self.distribution != distribution:
@@ -425,7 +425,7 @@ class PyfficeSurvey(PyfficeDocument):
             self.distribution = distribution
         return self
 
-    def set_end_date(self, end_datetime):
+    def set_end_date(self, end_datetime) -> "PyfficeSurvey":
         """Set the end date.
         
         Args:
@@ -439,7 +439,7 @@ class PyfficeSurvey(PyfficeDocument):
             self.schedule["end"] = end_datetime
         return self
 
-    def set_form(self, form):
+    def set_form(self, form) -> "PyfficeSurvey":
         """Set the form.
         
         Args:
@@ -454,7 +454,7 @@ class PyfficeSurvey(PyfficeDocument):
             self.set_form_id(form.did)
         return self
 
-    def set_form_id(self, form_id):
+    def set_form_id(self, form_id) -> "PyfficeSurvey":
         """Set the form id.
         
         Args:
@@ -470,7 +470,7 @@ class PyfficeSurvey(PyfficeDocument):
                 self.get_form(self.form.did)
         return self
 
-    def set_responses(self, responses=None):
+    def set_responses(self, responses=None) -> "PyfficeSurvey":
         """Set the responses.
         
         Args:
@@ -484,7 +484,7 @@ class PyfficeSurvey(PyfficeDocument):
             self.responses = responses
         return self
 
-    def set_schedule(self, schedule=None):
+    def set_schedule(self, schedule=None) -> "PyfficeSurvey":
         """Set the schedule.
         
         Args:
@@ -498,7 +498,7 @@ class PyfficeSurvey(PyfficeDocument):
             self.schedule = schedule
         return self
 
-    def set_start_date(self, start_datetime):
+    def set_start_date(self, start_datetime) -> "PyfficeSurvey":
         """Set the start date.
         
         Args:

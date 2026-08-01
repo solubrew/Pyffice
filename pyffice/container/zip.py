@@ -94,7 +94,7 @@ def compress(source_dir: str, archive_path: str) -> None:
     PyfficeZip.create(archive_path, files)
 
 
-def create(archive_path: str, files):
+def create(archive_path: str, files) -> None:
     """Module-level alias for ``PyfficeZip.create``.
 
     Args:

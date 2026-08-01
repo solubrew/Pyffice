@@ -51,7 +51,7 @@ class PyfficeCalendar(PyfficeDocumentManager):
         self.end_date = None
         self.time_unit = None
 
-    def add_event(self, event):
+    def add_event(self, event) -> "PyfficeCalendar":
         """Add a event.
         
         Args:
@@ -74,7 +74,7 @@ class PyfficeCalendar(PyfficeDocumentManager):
     #     self.tasks.append(task)
     #     return self
 
-    def del_event(self, event):
+    def del_event(self, event) -> None:
         """Remove the event.
         
         Args:
@@ -93,7 +93,7 @@ class PyfficeCalendar(PyfficeDocumentManager):
     #         self.tasks.remove(task)
     #         self.add_change("tasks", deepcopy(self.tasks), self.tasks, "del")
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> "PyfficeCalendar":
         """Load document into this document.
         
         Args:
@@ -117,7 +117,7 @@ class PyfficeCalendar(PyfficeDocumentManager):
         self.set_tasks(document.get("tasks", []))
         return self
 
-    def set_date_end(self, date):
+    def set_date_end(self, date) -> "PyfficeCalendar":
         """Set the date end.
         
         Args:
@@ -131,7 +131,7 @@ class PyfficeCalendar(PyfficeDocumentManager):
             self.end_date = date
         return self
 
-    def set_date_start(self, date):
+    def set_date_start(self, date) -> "PyfficeCalendar":
         """Set the date start.
         
         Args:
@@ -145,12 +145,12 @@ class PyfficeCalendar(PyfficeDocumentManager):
             self.start_date = date
         return self
 
-    def set_events(self, events):
+    def set_events(self, events) -> "PyfficeCalendar":
         """Replace self.events with [PyfficeEvent(e) for e in events]."""
         self.events = [PyfficeEvent({"event": x}) for x in events]
         return self
 
-    def set_tasks(self, tasks):
+    def set_tasks(self, tasks) -> None:
         """Set the tasks.
         
         Args:
@@ -161,7 +161,7 @@ class PyfficeCalendar(PyfficeDocumentManager):
         """
         self.tasks += tasks
 
-    def set_time_unit(self, time_unit):
+    def set_time_unit(self, time_unit) -> "PyfficeCalendar":
         """Set the time unit.
         
         Args:
@@ -184,7 +184,7 @@ class PyfficeCalendar(PyfficeDocumentManager):
     #     self.tasks.append(task)
     #     return self
 
-    def set_time_scale(self, time_scale):
+    def set_time_scale(self, time_scale) -> "PyfficeCalendar":
         """Set the time scale.
         
         Args:

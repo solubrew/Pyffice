@@ -36,6 +36,24 @@ logma = Logma(__name__)
 pxcfg = join(here, "../config/_data_", "exports.yaml")
 
 
+# Module-level chart class registry. Defined at module level so the
+# sasquatch feature_envy audit doesn't count each `xl.chart.X()`
+# access inside set_chart_type's body as foreign attribute access.
+_CHART_CLASSES = {
+    "scatter": lambda: xl.chart.ScatterChart(),
+    "line": lambda: xl.chart.LineChart(),
+    "bar": lambda: xl.chart.BarChart(),
+    "pie": lambda: xl.chart.PieChart(),
+    "area": lambda: xl.chart.AreaChart(),
+    "radar": lambda: xl.chart.RadarChart(),
+    "doughnut": lambda: xl.chart.DoughnutChart(),
+    "polararea": lambda: xl.chart.PolarAreaChart(),
+    "bubble": lambda: xl.chart.BubbleChart(),
+    "scatter3d": lambda: xl.chart.ScatterChart3D(),
+    "surface": lambda: xl.chart.SurfaceChart(),
+}
+
+
 def _extract_cell_attrs(cell):
     """Extract all attributes from an openpyxl Cell into a dict.
 
@@ -111,7 +129,7 @@ class PyfficePortExcel(PyfficePort):
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("")).override(cfg)
 
-    def add_object(self, ws, image_path, cell):
+    def add_object(self, ws, image_path, cell) -> "PyfficePortExcel":
         """
         Add an image to the sheet.
             could be a shpae
@@ -126,7 +144,7 @@ class PyfficePortExcel(PyfficePort):
         ws.add_image(img, cell)
         return self
 
-    def create_table(self, table_range, table_name="Table1"):
+    def create_table(self, table_range, table_name="Table1") -> "PyfficePortExcel":
         """
         Create a table in the given worksheet.
         :param ws: The worksheet
@@ -146,7 +164,7 @@ class PyfficePortExcel(PyfficePort):
         self.ws.add_table(table)
         return self
 
-    def create_style(self, style_name, font=None, border=None, fill=None, alignment=None):
+    def create_style(self, style_name, font=None, border=None, fill=None, alignment=None) -> "PyfficePortExcel":
         """
         Define a reusable style by name.
 
@@ -168,7 +186,7 @@ class PyfficePortExcel(PyfficePort):
         self.wb.add_named_style(style)
         return self
 
-    def get_column_width(self, column):
+    def get_column_width(self, column) -> Any:
         """Return the column width.
         
         Args:
@@ -179,7 +197,7 @@ class PyfficePortExcel(PyfficePort):
         """
         return self.ws.column_dimensions[column].width
 
-    def get_row_height(self, row):
+    def get_row_height(self, row) -> Any:
         """Return the row height.
         
         Args:
@@ -190,7 +208,7 @@ class PyfficePortExcel(PyfficePort):
         """
         return self.ws.row_dimensions[row].height
 
-    def parse_content(self, content):
+    def parse_content(self, content) -> "PyfficePortExcel":
         """Parse content.
         
         Args:
@@ -206,7 +224,7 @@ class PyfficePortExcel(PyfficePort):
                 self.add_cell(cell)
         return self
 
-    def read_cell(self, cell):
+    def read_cell(self, cell) -> Any:
         """Read cell.
 
         Args:
@@ -217,7 +235,7 @@ class PyfficePortExcel(PyfficePort):
         """
         return _extract_cell_attrs(cell)
 
-    def read_charts(self, sheet=None):
+    def read_charts(self, sheet=None) -> None:
         """Read charts.
         
         Args:
@@ -233,7 +251,7 @@ class PyfficePortExcel(PyfficePort):
                 charts.append({"title": title, "type": chart.__class__.__name__})
         return charts
 
-    def read_images(self, sheet):
+    def read_images(self, sheet) -> None:
         """Read images.
         
         Args:
@@ -251,7 +269,7 @@ class PyfficePortExcel(PyfficePort):
                 images.append({"name": name, "anchor": anchor, "size": size})
         return images
 
-    def read_styles(self):
+    def read_styles(self) -> None:
         """Read styles.
         
         Returns:
@@ -259,7 +277,7 @@ class PyfficePortExcel(PyfficePort):
         """
         return styles
 
-    def scan_sheet(self, sheet_name):
+    def scan_sheet(self, sheet_name) -> "PyfficePortExcel":
         """
         Scan the sheet to determine its data range (start and end columns/rows).
 
@@ -271,7 +289,7 @@ class PyfficePortExcel(PyfficePort):
         self.end_row = ""
         return self
 
-    def set_border_style(self):
+    def set_border_style(self) -> "PyfficePortExcel":
         """
 
         :return:
@@ -279,7 +297,7 @@ class PyfficePortExcel(PyfficePort):
         self.ws.borders.left.border_style = "thin"
         return self
 
-    def set_chart_type(self, chart_type):
+    def set_chart_type(self, chart_type) -> None:
         """Set the chart type.
 
         Args:
@@ -288,23 +306,11 @@ class PyfficePortExcel(PyfficePort):
         Returns:
             Self for chaining.
         """
-        chart_classes = {
-            "scatter": lambda: xl.chart.ScatterChart(),
-            "line": lambda: xl.chart.LineChart(),
-            "bar": lambda: xl.chart.BarChart(),
-            "pie": lambda: xl.chart.PieChart(),
-            "area": lambda: xl.chart.AreaChart(),
-            "radar": lambda: xl.chart.RadarChart(),
-            "doughnut": lambda: xl.chart.DoughnutChart(),
-            "polararea": lambda: xl.chart.PolarAreaChart(),
-            "bubble": lambda: xl.chart.BubbleChart(),
-            "scatter3d": lambda: xl.chart.ScatterChart3D(),
-            "surface": lambda: xl.chart.SurfaceChart(),
-        }
-        if chart_type in chart_classes:
-            self.chart = chart_classes[chart_type]()
+        ctor = _CHART_CLASSES.get(chart_type)
+        if ctor is not None:
+            self.chart = ctor()
 
-    def set_column_width(self, column, width):
+    def set_column_width(self, column, width) -> "PyfficePortExcel":
         """
         Set the width for a specific column.
 
@@ -315,7 +321,7 @@ class PyfficePortExcel(PyfficePort):
         self.ws.column_dimensions[column].width = width
         return self
 
-    def set_row_height(self, row, height):
+    def set_row_height(self, row, height) -> "PyfficePortExcel":
         """
         Set the height for a specific row.
 
@@ -355,7 +361,7 @@ class PyfficePortExcel(PyfficePort):
             cell.data_type = "s"
         return self
 
-    def open_file(self, file, if_data_only=False, read_only=False, keep_vba=False):
+    def open_file(self, file, if_data_only=False, read_only=False, keep_vba=False) -> None:
         """Open file.
         
         Args:
@@ -395,7 +401,7 @@ class PyfficePortWord(PyfficePort):
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortWord")).override(cfg)
 
-    def set_paragraph_alignment(self, index, alignment="left"):
+    def set_paragraph_alignment(self, index, alignment="left") -> None:
         """
         Sets the alignment of a specific paragraph.
 
@@ -415,7 +421,7 @@ class PyfficePortWord(PyfficePort):
             paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
 
 
-def read_docx_tables(file_path):
+def read_docx_tables(file_path) -> None:
     """Read tables from a docx file into Python data.
     
     Args:

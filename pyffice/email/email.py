@@ -44,27 +44,27 @@ class PyfficeEmailMessage(PyfficeMessage):
         super().__init__()
         self.config.override(cfg)
 
-    def add_bcc(self, bcc):
+    def add_bcc(self, bcc) -> "PyfficeEmailMessage":
         """Add BCC recipient to the message."""
         self.bcc = getattr(self, 'bcc', []) + [bcc]
         return self
 
-    def add_cc(self, cc):
+    def add_cc(self, cc) -> "PyfficeEmailMessage":
         """Add CC recipient to the message."""
         self.cc = getattr(self, 'cc', []) + [cc]
         return self
 
-    def add_recipient(self, recipient):
+    def add_recipient(self, recipient) -> "PyfficeEmailMessage":
         """Add recipient to the message."""
         self.recipients = getattr(self, 'recipients', []) + [recipient]
         return self
 
-    def add_label(self, label):
+    def add_label(self, label) -> "PyfficeEmailMessage":
         """Add label to the message."""
         self.labels = getattr(self, 'labels', []) + [label]
         return self
 
-    def create_new_document(self, name):
+    def create_new_document(self, name) -> None:
         """Create a new document.
         
         Args:
@@ -87,25 +87,25 @@ class PyfficeEmailMessage(PyfficeMessage):
             "status": None,
         }
 
-    def get_body(self):
+    def get_body(self) -> Any:
         """Get the message body."""
         return getattr(self, 'body', None)
 
-    def get_footer(self):
+    def get_footer(self) -> Any:
         """Get the message footer."""
         return getattr(self, 'footer', None)
 
-    def get_header(self, key):
+    def get_header(self, key) -> Any:
         """Get a header value by key."""
         headers = getattr(self, 'headers', {})
         return headers.get(key)
 
-    def get_recipient(self, index=0):
+    def get_recipient(self, index=0) -> Any:
         """Get recipient at index."""
         recipients = getattr(self, 'recipients', [])
         return recipients[index] if index < len(recipients) else None
 
-    def get_sender(self):
+    def get_sender(self) -> Any:
         """Get the sender address."""
         return getattr(self, 'from', None)
     def open_file(self, file_path):
@@ -118,20 +118,20 @@ class PyfficeEmailMessage(PyfficeMessage):
             self.message = msg
         return self
 
-    def save_message(self):
+    def save_message(self) -> "PyfficeEmailMessage":
         """Save the current message."""
         if not self.message:
             return self
         # Placeholder - would serialize to file
         return self
 
-    def connect_service(self):
+    def connect_service(self) -> "PyfficeEmailMessage":
         """Connect to email service."""
         # Placeholder - would use imaplib/smtp
         self.connected = True
         return self
 
-    def remove_label(self, label):
+    def remove_label(self, label) -> "PyfficeEmailMessage":
         """Remove label from message."""
         labels = getattr(self, 'labels', [])
         if label in labels:
@@ -153,53 +153,53 @@ class PyfficeMailBox(PyfficeDocumentManager):
         self.active_message = None
         self.messages = []
 
-    def connect_service(self):
+    def connect_service(self) -> "PyfficeMailBox":
         """Connect to email service (OAuth/imap)."""
         # Placeholder - would connect to IMAP/SMTP
         self.connected = True
         return self
 
-    def create_label(self, name):
+    def create_label(self, name) -> "PyfficeMailBox":
         """Create a new label."""
         self.labels = getattr(self, 'labels', {})
         self.labels[name] = []
         return self
 
-    def create_message(self):
+    def create_message(self) -> Any:
         """Create a new email message."""
         self.active_message = PyfficeEmailMessage()
         return self.active_message
 
-    def create_rule(self, condition, action):
+    def create_rule(self, condition, action) -> "PyfficeMailBox":
         """Create a new mail rule."""
         self.rules = getattr(self, 'rules', [])
         self.rules.append({'condition': condition, 'action': action})
         return self
 
-    def destroy_label(self, name):
+    def destroy_label(self, name) -> "PyfficeMailBox":
         """Delete a label."""
         labels = getattr(self, 'labels', {})
         if name in labels:
             del labels[name]
         return self
 
-    def delete_mail(self, uid):
+    def delete_mail(self, uid) -> "PyfficeMailBox":
         """Delete mail by UID."""
         self.messages = [m for m in getattr(self, 'messages', []) if m.get('uid') != uid]
         return self
 
-    def delete_rule(self, rule_id):
+    def delete_rule(self, rule_id) -> "PyfficeMailBox":
         """Delete a mail rule."""
         rules = getattr(self, 'rules', [])
         self.rules = [r for i, r in enumerate(rules) if i != rule_id]
         return self
 
-    def disconnect_service(self):
+    def disconnect_service(self) -> "PyfficeMailBox":
         """Disconnect from email service."""
         self.connected = False
         return self
 
-    def get_mail(self, uid):
+    def get_mail(self, uid) -> None:
         """Get mail by UID."""
         messages = getattr(self, 'messages', [])
         for m in messages:
@@ -207,20 +207,20 @@ class PyfficeMailBox(PyfficeDocumentManager):
                 return m
         return None
 
-    def get_message(self, index=0):
+    def get_message(self, index=0) -> Any:
         """Get message at index."""
         messages = getattr(self, 'messages', [])
         return messages[index] if index < len(messages) else None
 
-    def get_labels(self):
+    def get_labels(self) -> Any:
         """Get all labels."""
         return getattr(self, 'labels', {})
 
-    def get_messages(self):
+    def get_messages(self) -> Any:
         """Get all messages."""
         return getattr(self, 'messages', [])
 
-    def get_message_by_id(self, msg_id):
+    def get_message_by_id(self, msg_id) -> None:
         """Get message by ID."""
         messages = getattr(self, 'messages', [])
         for m in messages:
@@ -228,16 +228,16 @@ class PyfficeMailBox(PyfficeDocumentManager):
                 return m
         return None
 
-    def get_rule(self, index):
+    def get_rule(self, index) -> Any:
         """Get rule at index."""
         rules = getattr(self, 'rules', [])
         return rules[index] if index < len(rules) else None
 
-    def get_rules(self):
+    def get_rules(self) -> Any:
         """Get all rules."""
         return getattr(self, 'rules', [])
 
-    def process_rules(self):
+    def process_rules(self) -> "PyfficeMailBox":
         """Apply all rules to inbox."""
         rules = getattr(self, 'rules', [])
         for rule in rules:
@@ -245,24 +245,24 @@ class PyfficeMailBox(PyfficeDocumentManager):
             pass
         return self
 
-    def send_mail(self, message):
+    def send_mail(self, message) -> "PyfficeMailBox":
         """Send an email message."""
         if not message:
             return self
         # Placeholder - would use SMTP to send
         return self
 
-    def send_message(self):
+    def send_message(self) -> Any:
         """Send the current message."""
         return self.send_mail(self.active_message) if self.active_message else self
 
-    def store_mail(self, message):
+    def store_mail(self, message) -> "PyfficeMailBox":
         """Store a message in the mailbox."""
         self.messages = getattr(self, 'messages', [])
         self.messages.append(message)
         return self
 
-    def write_message(self, subject, body, recipients=None):
+    def write_message(self, subject, body, recipients=None) -> "PyfficeMailBox":
         """Write message.
         
         Args:

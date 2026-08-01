@@ -59,7 +59,7 @@ class PyfficeBOM(PyfficeDocumentManager):
         self.revision: str = "A"
         self.items: list[dict[str, Any]] = []
 
-    def add_part(self, part):
+    def add_part(self, part) -> None:
         """Add a part.
 
         Args:
@@ -70,7 +70,7 @@ class PyfficeBOM(PyfficeDocumentManager):
         """
         super().add_document(part)
 
-    def add_item(self, part_number, description, quantity=1, **kwargs):
+    def add_item(self, part_number, description, quantity=1, **kwargs) -> "PyfficeBOM":
         """Add item to BOM.
 
         Args:
@@ -91,7 +91,7 @@ class PyfficeBOM(PyfficeDocumentManager):
         self.items.append(item)
         return self
 
-    def remove_item(self, part_number):
+    def remove_item(self, part_number) -> bool:
         """Remove item by part number.
 
         Args:
@@ -106,7 +106,7 @@ class PyfficeBOM(PyfficeDocumentManager):
                 return True
         return False
 
-    def get_item(self, part_number):
+    def get_item(self, part_number) -> None:
         """Get item by part number.
 
         Args:
@@ -120,7 +120,7 @@ class PyfficeBOM(PyfficeDocumentManager):
                 return item
         return None
 
-    def total_quantity(self):
+    def total_quantity(self) -> int:
         """Get total quantity of all items.
 
         Returns:
@@ -147,7 +147,7 @@ class PyfficeSoftwareBOM(PyfficeBOM):
         self.version: str = "SPDX"
         self.packages: list[dict[str, Any]] = []
 
-    def add_part(self, part):
+    def add_part(self, part) -> None:
         """Add a part.
 
         Args:
@@ -158,7 +158,7 @@ class PyfficeSoftwareBOM(PyfficeBOM):
         """
         super().add_part(part)
 
-    def add_package(self, name, version, license_=None, **kwargs):
+    def add_package(self, name, version, license_=None, **kwargs) -> "PyfficeSoftwareBOM":
         """Add package to SBOM.
 
         Args:
@@ -179,7 +179,7 @@ class PyfficeSoftwareBOM(PyfficeBOM):
         self.packages.append(pkg)
         return self
 
-    def remove_package(self, name):
+    def remove_package(self, name) -> bool:
         """Remove package by name.
 
         Args:
@@ -194,7 +194,7 @@ class PyfficeSoftwareBOM(PyfficeBOM):
                 return True
         return False
 
-    def get_package(self, name):
+    def get_package(self, name) -> None:
         """Get package by name.
 
         Args:

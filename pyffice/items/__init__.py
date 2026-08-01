@@ -49,7 +49,7 @@ class Item:
         return self._parent
     
     @parent.setter
-    def parent(self, value: "Item | None"):
+    def parent(self, value: "Item | None") -> None:
         """Parent.
         
         Args:

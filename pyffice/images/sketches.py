@@ -49,7 +49,7 @@ class PyfficeSketch(PyfficeDocument):
         self.layers = None
         self.lock = None
 
-    def add_layer(self, layer):
+    def add_layer(self, layer) -> "PyfficeSketch":
         """Add a layer.
         
         Args:
@@ -64,7 +64,7 @@ class PyfficeSketch(PyfficeDocument):
         self.layers[layer.name] = layer
         return self
 
-    def del_layer(self, layer):
+    def del_layer(self, layer) -> Any:
         """Remove the layer.
 
         Args:
@@ -75,7 +75,7 @@ class PyfficeSketch(PyfficeDocument):
         """
         return self._del_from_dict("layers", layer.name, "layers")
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> "PyfficeSketch":
         """Load document into this document.
         
         Args:
@@ -96,26 +96,26 @@ class PyfficeSketch(PyfficeDocument):
         self.set_nodes(document.get("nodes", {}))
         return self
 
-    def set_lock(self, lock):
+    def set_lock(self, lock) -> "PyfficeSketch":
         """Set lock state."""
         self.lock = lock
         return self
 
-    def set_edges(self, edges):
+    def set_edges(self, edges) -> "PyfficeSketch":
         """Set edges."""
         self.edges = edges
         return self
 
-    def set_endpoints(self, endpoints):
+    def set_endpoints(self, endpoints) -> "PyfficeSketch":
         """Set endpoints."""
         self.endpoints = endpoints
         return self
 
-    def set_nodes(self, nodes):
+    def set_nodes(self, nodes) -> "PyfficeSketch":
         """Set nodes."""
         self.nodes = nodes
         return self
-    def to_md(self):
+    def to_md(self) -> str:
         """Convert to Markdown."""
         # Placeholder - would generate markdown
         return ""

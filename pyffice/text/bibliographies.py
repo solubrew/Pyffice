@@ -44,7 +44,7 @@ class PyfficeBibliography(PyfficeDocument):
         self.references = None
         self.style = None
 
-    def add_reference(self, cfg=None):
+    def add_reference(self, cfg=None) -> "PyfficeBibliography":
         """Add a reference.
         
         Args:
@@ -58,7 +58,7 @@ class PyfficeBibliography(PyfficeDocument):
         self.references.append(reference)
         return self
 
-    def del_reference(self, index):
+    def del_reference(self, index) -> "PyfficeBibliography":
         """Remove a reference from this document.
         
         Args:
@@ -71,7 +71,7 @@ class PyfficeBibliography(PyfficeDocument):
         del self.references[index]
         return self
 
-    def del_references(self):
+    def del_references(self) -> "PyfficeBibliography":
         """Remove the references.
         
         Returns:
@@ -81,7 +81,7 @@ class PyfficeBibliography(PyfficeDocument):
         self.references = None
         return self
 
-    def get_reference(self, index):
+    def get_reference(self, index) -> Any:
         """Return the reference.
         
         Args:
@@ -92,7 +92,7 @@ class PyfficeBibliography(PyfficeDocument):
         """
         return self.references[index]
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> "PyfficeBibliography":
         """Load document into this document.
         
         Args:
@@ -111,7 +111,7 @@ class PyfficeBibliography(PyfficeDocument):
         self.set_references(document.get("references", None))
         return self
 
-    def set_references(self, references):
+    def set_references(self, references) -> "PyfficeBibliography":
         """Set the references.
         
         Args:
@@ -125,7 +125,7 @@ class PyfficeBibliography(PyfficeDocument):
         self.references = references if references is not None else []
         return self
 
-    def set_style(self, style):
+    def set_style(self, style) -> Any:
         """Set the style.
 
         Args:

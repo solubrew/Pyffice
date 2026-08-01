@@ -47,7 +47,7 @@ class PyfficeVideo(PyfficeDocument):
         self.has_audio = False
         self.audio = None
 
-    def check_audio(self):
+    def check_audio(self) -> "PyfficeVideo":
         """Check audio.
         
         Returns:
@@ -57,7 +57,7 @@ class PyfficeVideo(PyfficeDocument):
             self.audio = PyfficeAudio()
         return self
 
-    def cut_section(self, start, end, keep=False):
+    def cut_section(self, start, end, keep=False) -> "PyfficeVideo":
         """Cut section.
         
         Args:
@@ -80,21 +80,21 @@ class PyfficeVideo(PyfficeDocument):
 
         return self
 
-    def find_pause(self):
+    def find_pause(self) -> list:
         """Find pause points in video."""
         # Placeholder - would analyze video for pauses
         return []
 
-    def find_unpause(self):
+    def find_unpause(self) -> list:
         """Find unpause points in video."""
         # Placeholder - would analyze video for resumes
         return []
 
-    def get_duration(self):
+    def get_duration(self) -> Any:
         """Get video duration."""
         return getattr(self, 'duration', 0)
 
-    def get_palette(self):
+    def get_palette(self) -> Any:
         """Get color palette."""
         return getattr(self, 'palette', [])
 # ====================================================================================================================||

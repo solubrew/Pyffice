@@ -52,7 +52,7 @@ class PyfficeAlarm(PyfficeEvent):
         self.postpones = []
         self.tasks = None
 
-    def add_postpone(self, postpone):
+    def add_postpone(self, postpone) -> "PyfficeAlarm":
         """Add a postpone.
         
         Args:
@@ -64,7 +64,7 @@ class PyfficeAlarm(PyfficeEvent):
         self.postpones.append(PyfficeTask(postpone))
         return self
 
-    def load_unit(self, unit):
+    def load_unit(self, unit) -> "PyfficeAlarm":
         """Load a unit dict into this document.
         
         Args:
@@ -79,7 +79,7 @@ class PyfficeAlarm(PyfficeEvent):
         self.set_tasks(unit.get("tasks", None))
         return self
 
-    def set_acknowledge(self, acknowledge):
+    def set_acknowledge(self, acknowledge) -> "PyfficeAlarm":
         """Set the acknowledge.
         
         Args:
@@ -92,7 +92,7 @@ class PyfficeAlarm(PyfficeEvent):
         self.acknowledge_task = PyfficeTask(cfg)
         return self
 
-    def set_limit(self, limit):
+    def set_limit(self, limit) -> "PyfficeAlarm":
         """Set the limit.
         
         Args:
@@ -106,7 +106,7 @@ class PyfficeAlarm(PyfficeEvent):
             self.limit = limit
         return self
 
-    def set_notify(self, notify):
+    def set_notify(self, notify) -> "PyfficeAlarm":
         """Set the notify.
         
         Args:
@@ -119,7 +119,7 @@ class PyfficeAlarm(PyfficeEvent):
         self.notify_task = PyfficeTask(cfg)
         return self
 
-    def set_postpone(self, postpone):
+    def set_postpone(self, postpone) -> "PyfficeAlarm":
         """Set the postpone.
         
         Args:
@@ -132,7 +132,7 @@ class PyfficeAlarm(PyfficeEvent):
         self.postpone_task = PyfficeTask(cfg)
         return self
 
-    def set_tasks(self, tasks):
+    def set_tasks(self, tasks) -> "PyfficeAlarm":
         """Set the tasks.
         
         Args:
