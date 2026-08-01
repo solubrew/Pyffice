@@ -4,12 +4,13 @@ The pptx module exposes module-level helpers (load/read/write/dump) that
 wrap ``pyffice.io_helpers.load_bytes`` / ``write_bytes``. Tests assert
 on the bytes that come back, not on log lines.
 """
+
 import os
 import tempfile
 
 import pytest
 
-from pyffice.presentation import pptx as pptx_doc
+from pyffice.ports import pptx as pptx_doc
 
 
 @pytest.fixture

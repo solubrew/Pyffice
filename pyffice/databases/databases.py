@@ -45,12 +45,31 @@ class PyfficeDatabaseConnection(sonql.Doc):
         self.config = kahndor.Instruct(pxcfg).select("PyfficeDatabaseConnection")
         super().__init__(path)
         self.config.override(cfg)
+
     def open_file(self, document) -> Self:
         """Open a database file."""
         if isinstance(document, str):
             import sqlite3
+
             conn = sqlite3.connect(document)
             self.database = conn
+        return self
+
+    def load_document(self, document=None) -> Self:
+        """"""
+        super().load_document(document)
+        # TODO implement method
+        return self
+
+    def save(self, path=None, format_=None, encrypt=None):
+        """"""
+        super().save(path, format_, encrypt)
+        # TODO implement method
+        return self
+
+    def to_dict(self):
+        # TODO implement method
+        super().to_dict()
         return self
 
 
@@ -69,10 +88,10 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
 
     def load_database(self, database) -> Any:
         """Load database into this document.
-        
+
         Args:
             database: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -89,7 +108,7 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
 
     def add_server(self, name, server) -> Self:
         """Add a database server."""
-        self.servers = getattr(self, 'servers', {})
+        self.servers = getattr(self, "servers", {})
         self.servers[name] = server
         return self
 
@@ -105,7 +124,7 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
 
     def get_indexes(self, name) -> Any:
         """Get indexes for a database."""
-        if name in self.databases and hasattr(self.databases[name], 'execute'):
+        if name in self.databases and hasattr(self.databases[name], "execute"):
             try:
                 cursor = self.databases[name].execute("SELECT name FROM sqlite_master WHERE type='index'")
                 return [row[0] for row in cursor.fetchall()]
@@ -120,7 +139,7 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
 
     def get_tables(self, name) -> Any:
         """Get tables for a database."""
-        if name in self.databases and hasattr(self.databases[name], 'execute'):
+        if name in self.databases and hasattr(self.databases[name], "execute"):
             try:
                 cursor = self.databases[name].execute("SELECT name FROM sqlite_master WHERE type='table'")
                 return [row[0] for row in cursor.fetchall()]
@@ -135,7 +154,7 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
 
     def get_views(self, name) -> Any:
         """Get views for a database."""
-        if name in self.databases and hasattr(self.databases[name], 'execute'):
+        if name in self.databases and hasattr(self.databases[name], "execute"):
             try:
                 cursor = self.databases[name].execute("SELECT name FROM sqlite_master WHERE type='view'")
                 return [row[0] for row in cursor.fetchall()]
@@ -147,6 +166,31 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
         """Get a specific view."""
         views = self.get_views(name)
         return views[view] if 0 <= view < len(views) else None
+
+    def load_document(self, document=None) -> Self:
+        """"""
+        super().load_document(document)
+        # TODO implement method
+        return self
+
+    def open_file(self, file_=None):
+        """"""
+        super().open_file(file_)
+        # TODO implement method
+        return self
+
+    def save(self, path=None, format_=None, encrypt=None):
+        """"""
+        super().save(path, format_, encrypt)
+        # TODO implement method
+        return self
+
+    def to_dict(self):
+        # TODO implement method
+        super().to_dict()
+        return self
+
+
 # ====================================================================================================================||
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||

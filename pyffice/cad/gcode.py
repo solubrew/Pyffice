@@ -63,7 +63,7 @@ class PyfficeGCode(PyfficeDocument):
         if self.units == "inch":
             self._add("G20")
         self._add("G90")  # Absolute positioning
-        self._add("M3")   # Start spindle
+        self._add("M3")  # Start spindle
 
     def _add(self, code: str) -> None:
         """Add a G-code line."""
@@ -195,7 +195,7 @@ class PyfficeGCode(PyfficeDocument):
         Returns:
             Self for chaining.
         """
-        self._add("M5")   # Stop spindle
+        self._add("M5")  # Stop spindle
         self._add("M30")  # End program
         return self
 
@@ -223,6 +223,30 @@ class PyfficeGCode(PyfficeDocument):
         with open(target, "w") as f:
             f.write(self.to_string())
         return self
+
+    def load_document(self, document=None) -> Self:
+        """"""
+        super().load_document(document)
+        # TODO implement method
+        return self
+
+    def open_file(self, file_=None):
+        """"""
+        super().open_file(file_)
+        # TODO implement method
+        return self
+
+    def save(self, path=None, format_=None, encrypt=None):
+        """"""
+        super().save(path, format_, encrypt)
+        # TODO implement method
+        return self
+
+    def to_dict(self):
+        # TODO implement method
+        super().to_dict()
+        return self
+
 
 # ====================================================================================================================||
 

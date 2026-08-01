@@ -81,13 +81,36 @@ class PyfficeMessage(PyfficeDocument):
             "did": self.did,
             "meta_data": {"schema_version": list(self.SERIALIZATION_VERSION)},
             "data": {
-                "body": getattr(self, 'body', None),
-                "from": getattr(self, 'from_', None),
-                "subject": getattr(self, 'subject', None),
-                "to": getattr(self, 'to', None),
+                "body": getattr(self, "body", None),
+                "from": getattr(self, "from_", None),
+                "subject": getattr(self, "subject", None),
+                "to": getattr(self, "to", None),
             },
         }
         return self._canonicalize(doc)
+
+    def load_document(self, document=None) -> Self:
+        """"""
+        super().load_document(document)
+        # TODO implement method
+        return self
+
+    def open_file(self, file_=None):
+        """"""
+        super().open_file(file_)
+        # TODO implement method
+        return self
+
+    def save(self, path=None, format_=None, encrypt=None):
+        """"""
+        super().save(path, format_, encrypt)
+        # TODO implement method
+        return self
+
+    def to_dict(self):
+        # TODO implement method
+        super().to_dict()
+        return self
 
 
 # ====================================================================================================================||

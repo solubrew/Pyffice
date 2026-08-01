@@ -7,6 +7,7 @@ from typing import Optional
 
 import click
 
+
 # Import all modules for CLI coverage.
 # T-NEW-044: previously this was `from pyffice import (...)` with 25
 # subpackage names that pyffice/__init__.py never re-exported (the
@@ -26,8 +27,7 @@ def _safe_import(module_name: str, attr: str) -> object:
         mod = __import__(module_name, fromlist=[attr])
         return getattr(mod, attr, None)
     except (ImportError, AttributeError, ModuleNotFoundError) as exc:  # noqa: BLE001 - reported, not raised
-        print(f"[pyffice.cli] skipping {module_name}.{attr}: {exc}",
-              file=sys.stderr)
+        print(f"[pyffice.cli] skipping {module_name}.{attr}: {exc}", file=sys.stderr)
         return None
 
 
@@ -69,18 +69,18 @@ Pyffice = PyfficeCodex
 
 
 @click.group()
-@click.option('--verbose', '-v', is_flag=True, help='Enable verbose output')
-@click.option('--quiet', '-q', is_flag=True, help='Suppress output')
-@click.option('--config', type=click.Path(), help='Specify config file')
+@click.option("--verbose", "-v", is_flag=True, help="Enable verbose output")
+@click.option("--quiet", "-q", is_flag=True, help="Suppress output")
+@click.option("--config", type=click.Path(), help="Specify config file")
 @click.pass_context
 def cli(ctx: click.Context, verbose: bool, quiet: bool, config: Optional[str]) -> None:
     """Pyffice - Comprehensive document and media framework."""
     ctx.ensure_object(dict)
-    ctx.obj['verbose'] = verbose
-    ctx.obj['quiet'] = quiet
-    ctx.obj['config'] = config
+    ctx.obj["verbose"] = verbose
+    ctx.obj["quiet"] = quiet
+    ctx.obj["config"] = config
     # Initialize Pyffice instance
-    ctx.obj['pyffice'] = Pyffice()
+    ctx.obj["pyffice"] = Pyffice()
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -89,29 +89,31 @@ def cli(ctx: click.Context, verbose: bool, quiet: bool, config: Optional[str]) -
 
 
 @cli.command()
-@click.argument('input', type=click.Path(exists=True))
-@click.argument('output', type=click.Path())
-@click.option('--format', '-f', help='Output format')
-@click.option('--template', '-t', help='Template to use')
+@click.argument("input", type=click.Path(exists=True))
+@click.argument("output", type=click.Path())
+@click.option("--format", "-f", help="Output format")
+@click.option("--template", "-t", help="Template to use")
 @click.pass_context
-def document_convert(ctx: click.Context, input: str, output: str, format: Optional[str], template: Optional[str]) -> None:
+def document_convert(
+    ctx: click.Context, input: str, output: str, format: Optional[str], template: Optional[str]
+) -> None:
     """Convert documents between formats.
 
     INPUT: Source document path
     OUTPUT: Destination document path
     """
-    pyffice = ctx.obj.get('pyffice')
+    pyffice = ctx.obj.get("pyffice")
     try:
         doc = PyfficeDocument()
         doc.file_open(input)
-        doc.save(output, syntax=format or 'pdf')
+        doc.save(output, syntax=format or "pdf")
         click.echo(f"✓ Converted document: {input} -> {output}")
     except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
 @cli.command()
-@click.argument('input', type=click.Path(exists=True))
+@click.argument("input", type=click.Path(exists=True))
 @click.pass_context
 def document_info(ctx: click.Context, input: str) -> None:
     """Show document information.
@@ -136,9 +138,9 @@ def document_info(ctx: click.Context, input: str) -> None:
 
 
 @cli.command()
-@click.argument('input', type=click.Path(exists=True))
-@click.argument('output', type=click.Path())
-@click.option('--format', '-f', type=click.Choice(['xlsx', 'csv', 'ods']), help='Output format')
+@click.argument("input", type=click.Path(exists=True))
+@click.argument("output", type=click.Path())
+@click.option("--format", "-f", type=click.Choice(["xlsx", "csv", "ods"]), help="Output format")
 @click.pass_context
 def spreadsheet_convert(ctx: click.Context, input: str, output: str, format: Optional[str]) -> None:
     """Convert spreadsheets between formats.
@@ -147,17 +149,18 @@ def spreadsheet_convert(ctx: click.Context, input: str, output: str, format: Opt
     OUTPUT: Destination spreadsheet path
     """
     from pyffice.spreadsheet.spreadsheet import PyfficeMatrix
+
     try:
         wb = PyfficeMatrix()
         wb.file_import(input)
-        wb.save(output, syntax=format or 'excel')
+        wb.save(output, syntax=format or "excel")
         click.echo(f"✓ Converted spreadsheet: {input} -> {output}")
     except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
 @cli.command()
-@click.argument('input', type=click.Path(exists=True))
+@click.argument("input", type=click.Path(exists=True))
 @click.pass_context
 def spreadsheet_info(ctx: click.Context, input: str) -> None:
     """Show spreadsheet information.
@@ -165,6 +168,7 @@ def spreadsheet_info(ctx: click.Context, input: str) -> None:
     INPUT: Spreadsheet path to inspect
     """
     from pyffice.spreadsheet.spreadsheet import PyfficeMatrix
+
     try:
         wb = PyfficeMatrix()
         wb.file_import(input)
@@ -181,9 +185,9 @@ def spreadsheet_info(ctx: click.Context, input: str) -> None:
 
 
 @cli.command()
-@click.argument('input', type=click.Path(exists=True))
-@click.argument('output', type=click.Path())
-@click.option('--format', '-f', type=click.Choice(['pptx', 'odp']), help='Output format')
+@click.argument("input", type=click.Path(exists=True))
+@click.argument("output", type=click.Path())
+@click.option("--format", "-f", type=click.Choice(["pptx", "odp"]), help="Output format")
 @click.pass_context
 def presentation_convert(ctx: click.Context, input: str, output: str, format: Optional[str]) -> None:
     """Convert presentations between formats.
@@ -192,10 +196,11 @@ def presentation_convert(ctx: click.Context, input: str, output: str, format: Op
     OUTPUT: Destination presentation path
     """
     from pyffice.presentation.presentation import PyfficePresentation
+
     try:
         pres = PyfficePresentation()
         pres.file_import(input)
-        pres.save(output, syntax=format or 'pptx')
+        pres.save(output, syntax=format or "pptx")
         click.echo(f"✓ Converted presentation: {input} -> {output}")
     except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
@@ -210,10 +215,12 @@ def presentation_convert(ctx: click.Context, input: str, output: str, format: Op
 def diagram() -> None:
     """Diagram operations."""
     return None
-@diagram.command(name='convert')
-@click.argument('input', type=click.Path(exists=True))
-@click.argument('output', type=click.Path())
-@click.option('--format', '-f', help='Output format')
+
+
+@diagram.command(name="convert")
+@click.argument("input", type=click.Path(exists=True))
+@click.argument("output", type=click.Path())
+@click.option("--format", "-f", help="Output format")
 @click.pass_context
 def diagram_convert(ctx: click.Context, input: str, output: str, format: Optional[str]) -> None:
     """Convert diagram formats.
@@ -222,17 +229,18 @@ def diagram_convert(ctx: click.Context, input: str, output: str, format: Optiona
     OUTPUT: Destination diagram file
     """
     from pyffice.diagrams.diagrams import PyfficeDiagram
+
     try:
         sketch = PyfficeDiagram()
         sketch.load(input)
-        sketch.save(output, format=format or 'svg')
+        sketch.save(output, format=format or "svg")
         click.echo(f"✓ Converted diagram: {input} -> {output}")
     except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
-@diagram.command(name='validate')
-@click.argument('input', type=click.Path(exists=True))
+@diagram.command(name="validate")
+@click.argument("input", type=click.Path(exists=True))
 @click.pass_context
 def diagram_validate(ctx: click.Context, input: str) -> None:
     """Validate diagram file.
@@ -240,6 +248,7 @@ def diagram_validate(ctx: click.Context, input: str) -> None:
     INPUT: Diagram file to validate
     """
     from pyffice.diagrams.formats import DiaConverter
+
     try:
         converter = DiaConverter({})
         converter.validate(input)
@@ -248,8 +257,8 @@ def diagram_validate(ctx: click.Context, input: str) -> None:
         click.echo(f"Invalid: {e}", err=True)
 
 
-@diagram.command(name='info')
-@click.argument('input', type=click.Path(exists=True))
+@diagram.command(name="info")
+@click.argument("input", type=click.Path(exists=True))
 @click.pass_context
 def diagram_info(ctx: click.Context, input: str) -> None:
     """Show diagram information.
@@ -257,6 +266,7 @@ def diagram_info(ctx: click.Context, input: str) -> None:
     INPUT: Diagram file to inspect
     """
     from pyffice.diagrams.diagrams import PyfficeDiagram
+
     try:
         sketch = PyfficeDiagram()
         sketch.load(input)
@@ -276,10 +286,14 @@ def diagram_info(ctx: click.Context, input: str) -> None:
 def image() -> None:
     """Image operations."""
     return None
-@image.command(name='convert')
-@click.argument('input', type=click.Path(exists=True))
-@click.argument('output', type=click.Path())
-@click.option('--format', '-f', type=click.Choice(['png', 'jpg', 'jpeg', 'gif', 'bmp', 'tiff', 'webp']), help='Output format')
+
+
+@image.command(name="convert")
+@click.argument("input", type=click.Path(exists=True))
+@click.argument("output", type=click.Path())
+@click.option(
+    "--format", "-f", type=click.Choice(["png", "jpg", "jpeg", "gif", "bmp", "tiff", "webp"]), help="Output format"
+)
 @click.pass_context
 def image_convert(ctx: click.Context, input: str, output: str, format: Optional[str]) -> None:
     """Convert images between formats.
@@ -288,20 +302,21 @@ def image_convert(ctx: click.Context, input: str, output: str, format: Optional[
     OUTPUT: Destination image path
     """
     from pyffice.images.images import PyfficeImage
+
     try:
         img = PyfficeImage()
         img.load(input)
-        img.convert(output, format=format or 'png')
+        img.convert(output, format=format or "png")
         click.echo(f"✓ Converted image: {input} -> {output}")
     except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
-@image.command(name='resize')
-@click.argument('input', type=click.Path(exists=True))
-@click.argument('output', type=click.Path())
-@click.option('--width', '-w', type=int, help='Target width')
-@click.option('--height', '-h', type=int, help='Target height')
+@image.command(name="resize")
+@click.argument("input", type=click.Path(exists=True))
+@click.argument("output", type=click.Path())
+@click.option("--width", "-w", type=int, help="Target width")
+@click.option("--height", "-h", type=int, help="Target height")
 @click.pass_context
 def image_resize(ctx: click.Context, input: str, output: str, width: Optional[int], height: Optional[int]) -> None:
     """Resize an image.
@@ -310,6 +325,7 @@ def image_resize(ctx: click.Context, input: str, output: str, width: Optional[in
     OUTPUT: Destination image path
     """
     from pyffice.images.images import PyfficeImage
+
     try:
         img = PyfficeImage()
         img.load(input)
@@ -320,8 +336,8 @@ def image_resize(ctx: click.Context, input: str, output: str, width: Optional[in
         click.echo(f"Error: {e}", err=True)
 
 
-@image.command(name='info')
-@click.argument('input', type=click.Path(exists=True))
+@image.command(name="info")
+@click.argument("input", type=click.Path(exists=True))
 @click.pass_context
 def image_info(ctx: click.Context, input: str) -> None:
     """Show image information.
@@ -329,6 +345,7 @@ def image_info(ctx: click.Context, input: str) -> None:
     INPUT: Image path to inspect
     """
     from pyffice.images.images import PyfficeImage
+
     try:
         img = PyfficeImage()
         img.load(input)
@@ -348,10 +365,12 @@ def image_info(ctx: click.Context, input: str) -> None:
 def video() -> None:
     """Video operations."""
     return None
-@video.command(name='convert')
-@click.argument('input', type=click.Path(exists=True))
-@click.argument('output', type=click.Path())
-@click.option('--format', '-f', type=click.Choice(['mp4', 'avi', 'mov', 'mkv']), help='Output format')
+
+
+@video.command(name="convert")
+@click.argument("input", type=click.Path(exists=True))
+@click.argument("output", type=click.Path())
+@click.option("--format", "-f", type=click.Choice(["mp4", "avi", "mov", "mkv"]), help="Output format")
 @click.pass_context
 def video_convert(ctx: click.Context, input: str, output: str, format: Optional[str]) -> None:
     """Convert videos between formats.
@@ -360,17 +379,18 @@ def video_convert(ctx: click.Context, input: str, output: str, format: Optional[
     OUTPUT: Destination video path
     """
     from pyffice.video.video import PyfficeVideo
+
     try:
         vid = PyfficeVideo()
         vid.load(input)
-        vid.convert(output, format=format or 'mp4')
+        vid.convert(output, format=format or "mp4")
         click.echo(f"✓ Converted video: {input} -> {output}")
     except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
-@video.command(name='info')
-@click.argument('input', type=click.Path(exists=True))
+@video.command(name="info")
+@click.argument("input", type=click.Path(exists=True))
 @click.pass_context
 def video_info(ctx: click.Context, input: str) -> None:
     """Show video information.
@@ -378,6 +398,7 @@ def video_info(ctx: click.Context, input: str) -> None:
     INPUT: Video path to inspect
     """
     from pyffice.video.video import PyfficeVideo
+
     try:
         vid = PyfficeVideo()
         vid.load(input)
@@ -397,10 +418,12 @@ def video_info(ctx: click.Context, input: str) -> None:
 def audio() -> None:
     """Audio operations."""
     return None
-@audio.command(name='convert')
-@click.argument('input', type=click.Path(exists=True))
-@click.argument('output', type=click.Path())
-@click.option('--format', '-f', type=click.Choice(['mp3', 'wav', 'ogg', 'flac']), help='Output format')
+
+
+@audio.command(name="convert")
+@click.argument("input", type=click.Path(exists=True))
+@click.argument("output", type=click.Path())
+@click.option("--format", "-f", type=click.Choice(["mp3", "wav", "ogg", "flac"]), help="Output format")
 @click.pass_context
 def audio_convert(ctx: click.Context, input: str, output: str, format: Optional[str]) -> None:
     """Convert audio between formats.
@@ -409,17 +432,18 @@ def audio_convert(ctx: click.Context, input: str, output: str, format: Optional[
     OUTPUT: Destination audio path
     """
     from pyffice.audio.audio import PyfficeAudio
+
     try:
         aud = PyfficeAudio()
         aud.load(input)
-        aud.convert(output, format=format or 'mp3')
+        aud.convert(output, format=format or "mp3")
         click.echo(f"✓ Converted audio: {input} -> {output}")
     except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
-@audio.command(name='info')
-@click.argument('input', type=click.Path(exists=True))
+@audio.command(name="info")
+@click.argument("input", type=click.Path(exists=True))
 @click.pass_context
 def audio_info(ctx: click.Context, input: str) -> None:
     """Show audio information.
@@ -427,6 +451,7 @@ def audio_info(ctx: click.Context, input: str) -> None:
     INPUT: Audio path to inspect
     """
     from pyffice.audio.audio import PyfficeAudio
+
     try:
         aud = PyfficeAudio()
         aud.load(input)
@@ -446,9 +471,11 @@ def audio_info(ctx: click.Context, input: str) -> None:
 def cad() -> None:
     """CAD operations."""
     return None
-@cad.command(name='convert')
-@click.argument('input', type=click.Path(exists=True))
-@click.argument('output', type=click.Path())
+
+
+@cad.command(name="convert")
+@click.argument("input", type=click.Path(exists=True))
+@click.argument("output", type=click.Path())
 @click.pass_context
 def cad_convert(ctx: click.Context, input: str, output: str) -> None:
     """Convert CAD formats.
@@ -457,6 +484,7 @@ def cad_convert(ctx: click.Context, input: str, output: str) -> None:
     OUTPUT: Destination CAD file
     """
     from pyffice.cad.cad import PyfficeCAD
+
     try:
         cad = PyfficeCAD()
         cad.load(input)
@@ -466,8 +494,8 @@ def cad_convert(ctx: click.Context, input: str, output: str) -> None:
         click.echo(f"Error: {e}", err=True)
 
 
-@cad.command(name='info')
-@click.argument('input', type=click.Path(exists=True))
+@cad.command(name="info")
+@click.argument("input", type=click.Path(exists=True))
 @click.pass_context
 def cad_info(ctx: click.Context, input: str) -> None:
     """Show CAD file information.
@@ -475,6 +503,7 @@ def cad_info(ctx: click.Context, input: str) -> None:
     INPUT: CAD file to inspect
     """
     from pyffice.cad.cad import PyfficeCAD
+
     try:
         cad = PyfficeCAD()
         cad.load(input)
@@ -493,10 +522,12 @@ def cad_info(ctx: click.Context, input: str) -> None:
 def chart() -> None:
     """Chart operations."""
     return None
-@chart.command(name='create')
-@click.argument('input', type=click.Path(exists=True))
-@click.argument('output', type=click.Path())
-@click.option('--type', '-t', type=click.Choice(['bar', 'line', 'pie', 'scatter']), help='Chart type')
+
+
+@chart.command(name="create")
+@click.argument("input", type=click.Path(exists=True))
+@click.argument("output", type=click.Path())
+@click.option("--type", "-t", type=click.Choice(["bar", "line", "pie", "scatter"]), help="Chart type")
 @click.pass_context
 def chart_create(ctx: click.Context, input: str, output: str, type: str) -> None:
     """Create a chart from data.
@@ -505,10 +536,11 @@ def chart_create(ctx: click.Context, input: str, output: str, type: str) -> None
     OUTPUT: Output chart file
     """
     from pyffice.charts.charts import PyfficeChart
+
     try:
         chart = PyfficeChart()
         chart.load_data(input)
-        chart.set_type(type or 'bar')
+        chart.set_type(type or "bar")
         chart.save(output)
         click.echo(f"✓ Created chart: {output}")
     except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
@@ -524,9 +556,11 @@ def chart_create(ctx: click.Context, input: str, output: str, type: str) -> None
 def calendar() -> None:
     """Calendar operations."""
     return None
-@calendar.command(name='list')
-@click.option('--from', 'from_date', help='Start date (YYYY-MM-DD)')
-@click.option('--to', 'to_date', help='End date (YYYY-MM-DD)')
+
+
+@calendar.command(name="list")
+@click.option("--from", "from_date", help="Start date (YYYY-MM-DD)")
+@click.option("--to", "to_date", help="End date (YYYY-MM-DD)")
 @click.pass_context
 def calendar_list(ctx: click.Context, from_date: Optional[str], to_date: Optional[str]) -> None:
     """List calendar events.
@@ -535,6 +569,7 @@ def calendar_list(ctx: click.Context, from_date: Optional[str], to_date: Optiona
     TO: End date
     """
     from pyffice.calendars.calendars import PyfficeCalendar
+
     try:
         cal = PyfficeCalendar()
         events = cal.get_events(from_date, to_date)
@@ -554,11 +589,14 @@ def calendar_list(ctx: click.Context, from_date: Optional[str], to_date: Optiona
 def contact() -> None:
     """Contact operations."""
     return None
-@contact.command(name='list')
+
+
+@contact.command(name="list")
 @click.pass_context
 def contact_list(ctx: click.Context) -> None:
     """List contacts."""
     from pyffice.contacts.contacts import PyfficeContacts
+
     try:
         contacts = PyfficeContacts()
         all_contacts = contacts.get_all()
@@ -567,8 +605,8 @@ def contact_list(ctx: click.Context) -> None:
         click.echo(f"Error: {e}", err=True)
 
 
-@contact.command(name='search')
-@click.argument('query')
+@contact.command(name="search")
+@click.argument("query")
 @click.pass_context
 def contact_search(ctx: click.Context, query: str) -> None:
     """Search contacts.
@@ -576,6 +614,7 @@ def contact_search(ctx: click.Context, query: str) -> None:
     QUERY: Search term
     """
     from pyffice.contacts.contacts import PyfficeContacts
+
     try:
         contacts = PyfficeContacts()
         results = contacts.search(query)
@@ -593,11 +632,13 @@ def contact_search(ctx: click.Context, query: str) -> None:
 def email_cmd() -> None:
     """Email operations."""
     return None
-@email_cmd.command(name='send')
-@click.option('--to', required=True, help='Recipient address')
-@click.option('--subject', required=True, help='Email subject')
-@click.option('--body', help='Email body')
-@click.option('--attach', multiple=True, help='Attachment files')
+
+
+@email_cmd.command(name="send")
+@click.option("--to", required=True, help="Recipient address")
+@click.option("--subject", required=True, help="Email subject")
+@click.option("--body", help="Email body")
+@click.option("--attach", multiple=True, help="Attachment files")
 @click.pass_context
 def email_send(ctx: click.Context, to: str, subject: str, body: Optional[str], attach: tuple) -> None:
     """Send an email.
@@ -607,9 +648,10 @@ def email_send(ctx: click.Context, to: str, subject: str, body: Optional[str], a
     BODY: Email body text
     """
     from pyffice.email.email import PyfficeEmail
+
     try:
         email = PyfficeEmail()
-        email.send(to, subject, body or '', list(attach))
+        email.send(to, subject, body or "", list(attach))
         click.echo(f"✓ Sent email to {to}: {subject}")
     except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
@@ -624,8 +666,10 @@ def email_send(ctx: click.Context, to: str, subject: str, body: Optional[str], a
 def database() -> None:
     """Database operations."""
     return None
-@database.command(name='connect')
-@click.argument('connection_string')
+
+
+@database.command(name="connect")
+@click.argument("connection_string")
 @click.pass_context
 def database_connect(ctx: click.Context, connection_string: str) -> None:
     """Connect to a database.
@@ -633,6 +677,7 @@ def database_connect(ctx: click.Context, connection_string: str) -> None:
     CONNECTION_STRING: Database connection string
     """
     from pyffice.databases.databases import PyfficeDatabase
+
     try:
         db = PyfficeDatabase()
         db.connect(connection_string)
@@ -641,8 +686,8 @@ def database_connect(ctx: click.Context, connection_string: str) -> None:
         click.echo(f"Error: {e}", err=True)
 
 
-@database.command(name='query')
-@click.argument('query')
+@database.command(name="query")
+@click.argument("query")
 @click.pass_context
 def database_query(ctx: click.Context, query: str) -> None:
     """Execute a database query.
@@ -650,6 +695,7 @@ def database_query(ctx: click.Context, query: str) -> None:
     QUERY: SQL query to execute
     """
     from pyffice.databases.databases import PyfficeDatabase
+
     try:
         db = PyfficeDatabase()
         results = db.execute(query)
@@ -667,9 +713,11 @@ def database_query(ctx: click.Context, query: str) -> None:
 def filesystem() -> None:
     """Filesystem operations."""
     return None
-@filesystem.command(name='list')
-@click.argument('path', type=click.Path(exists=True))
-@click.option('--recursive', '-r', is_flag=True, help='List recursively')
+
+
+@filesystem.command(name="list")
+@click.argument("path", type=click.Path(exists=True))
+@click.option("--recursive", "-r", is_flag=True, help="List recursively")
 @click.pass_context
 def filesystem_list(ctx: click.Context, path: str, recursive: bool) -> None:
     """List filesystem contents.
@@ -677,6 +725,7 @@ def filesystem_list(ctx: click.Context, path: str, recursive: bool) -> None:
     PATH: Directory path to list
     """
     from pyffice.filesystems.filesystems import PyfficeFileSystem
+
     try:
         fs = PyfficeFileSystem()
         items = fs.list(path, recursive=recursive)
@@ -685,9 +734,9 @@ def filesystem_list(ctx: click.Context, path: str, recursive: bool) -> None:
         click.echo(f"Error: {e}", err=True)
 
 
-@filesystem.command(name='sync')
-@click.argument('source', type=click.Path(exists=True))
-@click.argument('destination', type=click.Path())
+@filesystem.command(name="sync")
+@click.argument("source", type=click.Path(exists=True))
+@click.argument("destination", type=click.Path())
 @click.pass_context
 def filesystem_sync(ctx: click.Context, source: str, destination: str) -> None:
     """Sync directories.
@@ -696,6 +745,7 @@ def filesystem_sync(ctx: click.Context, source: str, destination: str) -> None:
     DESTINATION: Destination directory
     """
     from pyffice.filesystems.filesystems import PyfficeFileSystem
+
     try:
         fs = PyfficeFileSystem()
         fs.sync(source, destination)
@@ -713,9 +763,11 @@ def filesystem_sync(ctx: click.Context, source: str, destination: str) -> None:
 def analytics() -> None:
     """Analytics operations."""
     return None
-@analytics.command(name='report')
-@click.argument('input', type=click.Path(exists=True))
-@click.argument('output', type=click.Path())
+
+
+@analytics.command(name="report")
+@click.argument("input", type=click.Path(exists=True))
+@click.argument("output", type=click.Path())
 @click.pass_context
 def analytics_report(ctx: click.Context, input: str, output: str) -> None:
     """Generate analytics report.
@@ -724,6 +776,7 @@ def analytics_report(ctx: click.Context, input: str, output: str) -> None:
     OUTPUT: Report output path
     """
     from pyffice.analytics.sources import PyfficeAnalytics
+
     try:
         an = PyfficeAnalytics()
         an.generate_report(input, output)
@@ -741,9 +794,11 @@ def analytics_report(ctx: click.Context, input: str, output: str) -> None:
 def project() -> None:
     """Project operations."""
     return None
-@project.command(name='create')
-@click.argument('name')
-@click.argument('output', type=click.Path())
+
+
+@project.command(name="create")
+@click.argument("name")
+@click.argument("output", type=click.Path())
 @click.pass_context
 def project_create(ctx: click.Context, name: str, output: str) -> None:
     """Create a new project.
@@ -752,6 +807,7 @@ def project_create(ctx: click.Context, name: str, output: str) -> None:
     OUTPUT: Output directory
     """
     from pyffice.projects.paxn import PyfficeProject
+
     try:
         proj = PyfficeProject()
         proj.create(name, output)
@@ -769,11 +825,14 @@ def project_create(ctx: click.Context, name: str, output: str) -> None:
 def config() -> None:
     """Configuration operations."""
     return None
-@config.command(name='show')
+
+
+@config.command(name="show")
 @click.pass_context
 def config_show(ctx: click.Context) -> None:
     """Show current configuration."""
     from pyffice.config.config import PyfficeConfig
+
     try:
         cfg = PyfficeConfig()
         click.echo("Pyffice Configuration:")
@@ -782,11 +841,12 @@ def config_show(ctx: click.Context) -> None:
         click.echo(f"Error: {e}", err=True)
 
 
-@config.command(name='validate')
+@config.command(name="validate")
 @click.pass_context
 def config_validate(ctx: click.Context) -> None:
     """Validate configuration."""
     from pyffice.config.config import PyfficeConfig
+
     try:
         cfg = PyfficeConfig()
         if cfg.validate():
@@ -795,9 +855,9 @@ def config_validate(ctx: click.Context) -> None:
         click.echo(f"Invalid: {e}", err=True)
 
 
-@config.command(name='set')
-@click.argument('key')
-@click.argument('value')
+@config.command(name="set")
+@click.argument("key")
+@click.argument("value")
 @click.pass_context
 def config_set(ctx: click.Context, key: str, value: str) -> None:
     """Set configuration value.
@@ -806,6 +866,7 @@ def config_set(ctx: click.Context, key: str, value: str) -> None:
     VALUE: Configuration value
     """
     from pyffice.config.config import PyfficeConfig
+
     try:
         cfg = PyfficeConfig()
         cfg.set(key, value)
@@ -823,9 +884,11 @@ def config_set(ctx: click.Context, key: str, value: str) -> None:
 def form() -> None:
     """Form operations."""
     return None
-@form.command(name='create')
-@click.argument('output', type=click.Path())
-@click.option('--title', help='Form title')
+
+
+@form.command(name="create")
+@click.argument("output", type=click.Path())
+@click.option("--title", help="Form title")
 @click.pass_context
 def form_create(ctx: click.Context, output: str, title: Optional[str]) -> None:
     """Create a new form.
@@ -833,17 +896,18 @@ def form_create(ctx: click.Context, output: str, title: Optional[str]) -> None:
     OUTPUT: Output file path
     """
     from pyffice.forms.forms import PyfficeForm
+
     try:
         frm = PyfficeForm()
-        frm.create(title or 'Untitled')
+        frm.create(title or "Untitled")
         frm.save(output)
         click.echo(f"✓ Created form: {output}")
     except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
 
 
-@form.command(name='validate')
-@click.argument('input', type=click.Path(exists=True))
+@form.command(name="validate")
+@click.argument("input", type=click.Path(exists=True))
 @click.pass_context
 def form_validate(ctx: click.Context, input: str) -> None:
     """Validate a form.
@@ -851,6 +915,7 @@ def form_validate(ctx: click.Context, input: str) -> None:
     INPUT: Form file to validate
     """
     from pyffice.forms.forms import PyfficeForm
+
     try:
         frm = PyfficeForm()
         frm.load(input)
@@ -869,9 +934,11 @@ def form_validate(ctx: click.Context, input: str) -> None:
 def notebook() -> None:
     """Notebook operations."""
     return None
-@notebook.command(name='convert')
-@click.argument('input', type=click.Path(exists=True))
-@click.argument('output', type=click.Path())
+
+
+@notebook.command(name="convert")
+@click.argument("input", type=click.Path(exists=True))
+@click.argument("output", type=click.Path())
 @click.pass_context
 def notebook_convert(ctx: click.Context, input: str, output: str) -> None:
     """Convert notebook formats.
@@ -880,6 +947,7 @@ def notebook_convert(ctx: click.Context, input: str, output: str) -> None:
     OUTPUT: Destination notebook file
     """
     from pyffice.notebooks.notebooks import PyfficeNotebook
+
     try:
         nb = PyfficeNotebook()
         nb.load(input)
@@ -898,9 +966,11 @@ def notebook_convert(ctx: click.Context, input: str, output: str) -> None:
 def report() -> None:
     """Report operations."""
     return None
-@report.command(name='generate')
-@click.argument('input', type=click.Path(exists=True))
-@click.argument('output', type=click.Path())
+
+
+@report.command(name="generate")
+@click.argument("input", type=click.Path(exists=True))
+@click.argument("output", type=click.Path())
 @click.pass_context
 def report_generate(ctx: click.Context, input: str, output: str) -> None:
     """Generate a report.
@@ -909,6 +979,7 @@ def report_generate(ctx: click.Context, input: str, output: str) -> None:
     OUTPUT: Report output path
     """
     from pyffice.reports.reports import PyfficeReport
+
     try:
         rep = PyfficeReport()
         rep.generate(input, output)
@@ -926,9 +997,11 @@ def report_generate(ctx: click.Context, input: str, output: str) -> None:
 def social() -> None:
     """Social operations."""
     return None
-@social.command(name='post')
-@click.argument('message')
-@click.option('--platform', '-p', help='Target platform')
+
+
+@social.command(name="post")
+@click.argument("message")
+@click.option("--platform", "-p", help="Target platform")
 @click.pass_context
 def social_post(ctx: click.Context, message: str, platform: Optional[str]) -> None:
     """Post to social media.
@@ -936,6 +1009,7 @@ def social_post(ctx: click.Context, message: str, platform: Optional[str]) -> No
     MESSAGE: Message to post
     """
     from pyffice.socials.socials import PyfficeSocial
+
     try:
         soc = PyfficeSocial()
         soc.post(message, platform)
@@ -953,8 +1027,10 @@ def social_post(ctx: click.Context, message: str, platform: Optional[str]) -> No
 def tag() -> None:
     """Tag operations."""
     return None
-@tag.command(name='list')
-@click.argument('input', type=click.Path(exists=True))
+
+
+@tag.command(name="list")
+@click.argument("input", type=click.Path(exists=True))
 @click.pass_context
 def tag_list(ctx: click.Context, input: str) -> None:
     """List tags in a file.
@@ -962,6 +1038,7 @@ def tag_list(ctx: click.Context, input: str) -> None:
     INPUT: File to list tags from
     """
     from pyffice.tags.manager import PyfficeTagManager
+
     try:
         mgr = PyfficeTagManager()
         tags = mgr.list_tags(input)
@@ -979,10 +1056,12 @@ def tag_list(ctx: click.Context, input: str) -> None:
 def text() -> None:
     """Text operations."""
     return None
-@text.command(name='convert')
-@click.argument('input', type=click.Path(exists=True))
-@click.argument('output', type=click.Path())
-@click.option('--format', '-f', help='Output format')
+
+
+@text.command(name="convert")
+@click.argument("input", type=click.Path(exists=True))
+@click.argument("output", type=click.Path())
+@click.option("--format", "-f", help="Output format")
 @click.pass_context
 def text_convert(ctx: click.Context, input: str, output: str, format: Optional[str]) -> None:
     """Convert text documents.
@@ -991,10 +1070,11 @@ def text_convert(ctx: click.Context, input: str, output: str, format: Optional[s
     OUTPUT: Destination text file
     """
     from pyffice.items.text import PyfficeText
+
     try:
         txt = PyfficeText()
         txt.load(input)
-        txt.save(output, format=format or 'txt')
+        txt.save(output, format=format or "txt")
         click.echo(f"✓ Converted text: {input} -> {output}")
     except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
         click.echo(f"Error: {e}", err=True)
@@ -1009,11 +1089,14 @@ def text_convert(ctx: click.Context, input: str, output: str, format: Optional[s
 def update() -> None:
     """Update operations."""
     return None
-@update.command(name='check')
+
+
+@update.command(name="check")
 @click.pass_context
 def update_check(ctx: click.Context) -> None:
     """Check for updates."""
     from pyffice.updates.updates import PyfficeUpdates
+
     try:
         up = PyfficeUpdates()
         if up.check():
@@ -1024,8 +1107,8 @@ def update_check(ctx: click.Context) -> None:
         click.echo(f"Error: {e}", err=True)
 
 
-@update.command(name='install')
-@click.argument('package')
+@update.command(name="install")
+@click.argument("package")
 @click.pass_context
 def update_install(ctx: click.Context, package: str) -> None:
     """Install an update.
@@ -1033,6 +1116,7 @@ def update_install(ctx: click.Context, package: str) -> None:
     PACKAGE: Package name to update
     """
     from pyffice.updates.updates import PyfficeUpdates
+
     try:
         up = PyfficeUpdates()
         up.install(package)
@@ -1050,9 +1134,11 @@ def update_install(ctx: click.Context, package: str) -> None:
 def web() -> None:
     """Web operations."""
     return None
-@web.command(name='fetch')
-@click.argument('url')
-@click.argument('output', type=click.Path())
+
+
+@web.command(name="fetch")
+@click.argument("url")
+@click.argument("output", type=click.Path())
 @click.pass_context
 def web_fetch(ctx: click.Context, url: str, output: str) -> None:
     """Fetch a web page.
@@ -1061,6 +1147,7 @@ def web_fetch(ctx: click.Context, url: str, output: str) -> None:
     OUTPUT: Output file path
     """
     from pyffice.web.web import PyfficeWeb
+
     try:
         wb = PyfficeWeb()
         wb.fetch(url, output)
@@ -1069,9 +1156,9 @@ def web_fetch(ctx: click.Context, url: str, output: str) -> None:
         click.echo(f"Error: {e}", err=True)
 
 
-@web.command(name='parse')
-@click.argument('input', type=click.Path(exists=True))
-@click.option('--format', '-f', help='Output format')
+@web.command(name="parse")
+@click.argument("input", type=click.Path(exists=True))
+@click.option("--format", "-f", help="Output format")
 @click.pass_context
 def web_parse(ctx: click.Context, input: str, format: Optional[str]) -> None:
     """Parse web content.
@@ -1079,6 +1166,7 @@ def web_parse(ctx: click.Context, input: str, format: Optional[str]) -> None:
     INPUT: Input file
     """
     from pyffice.web.web import PyfficeWeb
+
     try:
         wb = PyfficeWeb()
         data = wb.parse(input)
@@ -1096,8 +1184,10 @@ def web_parse(ctx: click.Context, input: str, format: Optional[str]) -> None:
 def workflow() -> None:
     """Workflow operations."""
     return None
-@workflow.command(name='run')
-@click.argument('workflow_file', type=click.Path(exists=True))
+
+
+@workflow.command(name="run")
+@click.argument("workflow_file", type=click.Path(exists=True))
 @click.pass_context
 def workflow_run(ctx: click.Context, workflow_file: str) -> None:
     """Run a workflow.
@@ -1105,6 +1195,7 @@ def workflow_run(ctx: click.Context, workflow_file: str) -> None:
     WORKFLOW_FILE: Workflow definition file
     """
     from pyffice.workflows.workflows import PyfficeWorkflow
+
     try:
         wf = PyfficeWorkflow()
         wf.load(workflow_file)
@@ -1114,11 +1205,12 @@ def workflow_run(ctx: click.Context, workflow_file: str) -> None:
         click.echo(f"Error: {e}", err=True)
 
 
-@workflow.command(name='list')
+@workflow.command(name="list")
 @click.pass_context
 def workflow_list(ctx: click.Context) -> None:
     """List available workflows."""
     from pyffice.workflows.workflows import PyfficeWorkflow
+
     try:
         wf = PyfficeWorkflow()
         workflows = wf.list()
@@ -1136,9 +1228,11 @@ def workflow_list(ctx: click.Context) -> None:
 def cam() -> None:
     """CAM operations."""
     return None
-@cam.command(name='generate')
-@click.argument('input', type=click.Path(exists=True))
-@click.argument('output', type=click.Path())
+
+
+@cam.command(name="generate")
+@click.argument("input", type=click.Path(exists=True))
+@click.argument("output", type=click.Path())
 @click.pass_context
 def cam_generate(ctx: click.Context, input: str, output: str) -> None:
     """Generate CNC code.
@@ -1149,8 +1243,9 @@ def cam_generate(ctx: click.Context, input: str, output: str) -> None:
     # Use the canonical cad/ implementation rather than the
     # parallel cam/ dataclass module (see review: PyfficeCAM
     # duplicated across pyffice/cam/cam.py and
-    # pyffice/cad/cad_cam.py).
-    from pyffice.cad.cad_gcode import PyfficeGCode
+    # pyffice/cad/cam.py).
+    from pyffice.cad.gcode import PyfficeGCode
+
     try:
         gcode = PyfficeGCode()
         gcode.file_import(input)
@@ -1165,17 +1260,17 @@ def cam_generate(ctx: click.Context, input: str, output: str) -> None:
 # ══════════════════════════════════════════════════════════════════════════════
 
 
-@cli.command(name='formats')
+@cli.command(name="formats")
 def list_formats() -> None:
     """List supported file formats."""
     formats = {
-        'documents': ['docx', 'odt', 'rtf', 'txt', 'pdf'],
-        'spreadsheets': ['xlsx', 'ods', 'csv'],
-        'presentations': ['pptx', 'odp'],
-        'diagrams': ['dia', 'svg', 'dot', 'graphml', 'vsdx', 'drawio'],
-        'images': ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'tiff', 'webp'],
-        'video': ['mp4', 'avi', 'mov', 'mkv'],
-        'audio': ['mp3', 'wav', 'ogg', 'flac'],
+        "documents": ["docx", "odt", "rtf", "txt", "pdf"],
+        "spreadsheets": ["xlsx", "ods", "csv"],
+        "presentations": ["pptx", "odp"],
+        "diagrams": ["dia", "svg", "dot", "graphml", "vsdx", "drawio"],
+        "images": ["png", "jpg", "jpeg", "gif", "bmp", "tiff", "webp"],
+        "video": ["mp4", "avi", "mov", "mkv"],
+        "audio": ["mp3", "wav", "ogg", "flac"],
     }
     for category, items in formats.items():
         click.echo(f"{category}: {', '.join(items)}")
@@ -1192,17 +1287,11 @@ def cloud() -> None:
     pass
 
 
-@cloud.command(name='auth')
-@click.option('--service', '-s', required=True,
-              type=click.Choice(['google', 'dropbox']),
-              help='Cloud service')
-@click.option('--credential-file', '-c',
-              type=click.Path(exists=True),
-              help='Path to credential JSON file')
-@click.option('--token', '-t',
-              help='Raw access token')
-def cloud_auth(service: str, credential_file: Optional[str],
-               token: Optional[str]) -> None:
+@cloud.command(name="auth")
+@click.option("--service", "-s", required=True, type=click.Choice(["google", "dropbox"]), help="Cloud service")
+@click.option("--credential-file", "-c", type=click.Path(exists=True), help="Path to credential JSON file")
+@click.option("--token", "-t", help="Raw access token")
+def cloud_auth(service: str, credential_file: Optional[str], token: Optional[str]) -> None:
     """Authenticate with a cloud service."""
     import json as _json
     from pyffice.ports.cloud_ports import PyfficePortGoogleDrive, PyfficePortDropbox
@@ -1218,11 +1307,11 @@ def cloud_auth(service: str, credential_file: Optional[str],
         return
 
     try:
-        if service == 'google':
+        if service == "google":
             port = PyfficePortGoogleDrive()
             port.authenticate(creds)
             click.echo(f"✓ Google Drive authenticated")
-        elif service == 'dropbox':
+        elif service == "dropbox":
             port = PyfficePortDropbox()
             port.authenticate(creds)
             click.echo(f"✓ Dropbox authenticated")
@@ -1232,14 +1321,11 @@ def cloud_auth(service: str, credential_file: Optional[str],
         click.echo(f"Error: {e}", err=True)
 
 
-@cloud.command(name='list')
-@click.option('--service', '-s', required=True,
-              type=click.Choice(['google', 'dropbox']))
-@click.option('--credential-file', '-c', required=True,
-              type=click.Path(exists=True))
-@click.option('--folder', '-f', default=None, help='Folder ID or path')
-def cloud_list(service: str, credential_file: str,
-               folder: Optional[str]) -> None:
+@cloud.command(name="list")
+@click.option("--service", "-s", required=True, type=click.Choice(["google", "dropbox"]))
+@click.option("--credential-file", "-c", required=True, type=click.Path(exists=True))
+@click.option("--folder", "-f", default=None, help="Folder ID or path")
+def cloud_list(service: str, credential_file: str, folder: Optional[str]) -> None:
     """List files in a cloud folder."""
     import json as _json
     from pyffice.ports.cloud_ports import PyfficePortGoogleDrive, PyfficePortDropbox
@@ -1248,11 +1334,11 @@ def cloud_list(service: str, credential_file: str,
         creds = _json.load(f)
 
     try:
-        if service == 'google':
+        if service == "google":
             port = PyfficePortGoogleDrive()
             port.authenticate(creds)
             files = port.list_files(folder)
-        elif service == 'dropbox':
+        elif service == "dropbox":
             port = PyfficePortDropbox()
             port.authenticate(creds)
             files = port.list_files(folder)
@@ -1262,15 +1348,12 @@ def cloud_list(service: str, credential_file: str,
         click.echo(f"Error: {e}", err=True)
 
 
-@cloud.command(name='pull')
-@click.option('--service', '-s', required=True,
-              type=click.Choice(['google', 'dropbox']))
-@click.option('--credential-file', '-c', required=True,
-              type=click.Path(exists=True))
-@click.option('--file-id', '-i', required=True, help='Cloud file ID or path')
-@click.option('--output', '-o', required=True, type=click.Path(), help='Local output path')
-def cloud_pull(service: str, credential_file: str,
-               file_id: str, output: str) -> None:
+@cloud.command(name="pull")
+@click.option("--service", "-s", required=True, type=click.Choice(["google", "dropbox"]))
+@click.option("--credential-file", "-c", required=True, type=click.Path(exists=True))
+@click.option("--file-id", "-i", required=True, help="Cloud file ID or path")
+@click.option("--output", "-o", required=True, type=click.Path(), help="Local output path")
+def cloud_pull(service: str, credential_file: str, file_id: str, output: str) -> None:
     """Download a file from cloud storage."""
     import json as _json
     from pyffice.ports.cloud_ports import PyfficePortGoogleDrive, PyfficePortDropbox
@@ -1279,11 +1362,11 @@ def cloud_pull(service: str, credential_file: str,
         creds = _json.load(f)
 
     try:
-        if service == 'google':
+        if service == "google":
             port = PyfficePortGoogleDrive()
             port.authenticate(creds)
             port.download_file(file_id, output)
-        elif service == 'dropbox':
+        elif service == "dropbox":
             port = PyfficePortDropbox()
             port.authenticate(creds)
             port.download_file(file_id, output)
@@ -1292,15 +1375,12 @@ def cloud_pull(service: str, credential_file: str,
         click.echo(f"Error: {e}", err=True)
 
 
-@cloud.command(name='push')
-@click.option('--service', '-s', required=True,
-              type=click.Choice(['google', 'dropbox']))
-@click.option('--credential-file', '-c', required=True,
-              type=click.Path(exists=True))
-@click.option('--file', '-f', required=True, type=click.Path(exists=True), help='Local file to upload')
-@click.option('--folder-id', default=None, help='Cloud destination folder ID')
-def cloud_push(service: str, credential_file: str,
-               file: str, folder_id: Optional[str]) -> None:
+@cloud.command(name="push")
+@click.option("--service", "-s", required=True, type=click.Choice(["google", "dropbox"]))
+@click.option("--credential-file", "-c", required=True, type=click.Path(exists=True))
+@click.option("--file", "-f", required=True, type=click.Path(exists=True), help="Local file to upload")
+@click.option("--folder-id", default=None, help="Cloud destination folder ID")
+def cloud_push(service: str, credential_file: str, file: str, folder_id: Optional[str]) -> None:
     """Upload a file to cloud storage."""
     import json as _json
     from pyffice.ports.cloud_ports import PyfficePortGoogleDrive, PyfficePortDropbox
@@ -1309,11 +1389,11 @@ def cloud_push(service: str, credential_file: str,
         creds = _json.load(f)
 
     try:
-        if service == 'google':
+        if service == "google":
             port = PyfficePortGoogleDrive()
             port.authenticate(creds)
             result = port.upload_file(file, folder_id)
-        elif service == 'dropbox':
+        elif service == "dropbox":
             port = PyfficePortDropbox()
             port.authenticate(creds)
             result = port.upload_file(file, folder_id)
@@ -1332,5 +1412,5 @@ def main() -> None:
     cli(obj={})
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

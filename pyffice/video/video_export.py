@@ -51,7 +51,7 @@ class PyfficeVideo(PyfficeDocument):
 
     def check_audio(self) -> Self:
         """Check audio.
-        
+
         Returns:
             Self for chaining.
         """
@@ -61,12 +61,12 @@ class PyfficeVideo(PyfficeDocument):
 
     def cut_section(self, start, end, keep=False) -> Self:
         """Cut section.
-        
+
         Args:
             start: Parameter.
             end: Parameter.
             keep: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -94,11 +94,36 @@ class PyfficeVideo(PyfficeDocument):
 
     def get_duration(self) -> Any:
         """Get video duration."""
-        return getattr(self, 'duration', 0)
+        return getattr(self, "duration", 0)
 
     def get_palette(self) -> Any:
         """Get color palette."""
-        return getattr(self, 'palette', [])
+        return getattr(self, "palette", [])
+
+    def load_document(self, document=None) -> Self:
+        """"""
+        super().load_document(document)
+        # TODO implement method
+        return self
+
+    def open_file(self, file_=None):
+        """"""
+        super().open_file(file_)
+        # TODO implement method
+        return self
+
+    def save(self, path=None, format_=None, encrypt=None):
+        """"""
+        super().save(path, format_, encrypt)
+        # TODO implement method
+        return self
+
+    def to_dict(self):
+        # TODO implement method
+        super().to_dict()
+        return self
+
+
 # ====================================================================================================================||
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||

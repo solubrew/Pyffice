@@ -128,6 +128,31 @@ class PyfficeBOM(PyfficeDocumentManager):
             Sum of all item quantities.
         """
         return sum(item.get("quantity", 1) for item in self.items)
+
+    def load_document(self, document=None) -> Self:
+        """"""
+        super().load_document(document)
+        # TODO implement method
+        return self
+
+    def open_file(self, file_=None):
+        """"""
+        super().open_file(file_)
+        # TODO implement method
+        return self
+
+    def save(self, path=None, format_=None, encrypt=None):
+        """"""
+        super().save(path, format_, encrypt)
+        # TODO implement method
+        return self
+
+    def to_dict(self):
+        # TODO implement method
+        super().to_dict()
+        return self
+
+
 class PyfficeSoftwareBOM(PyfficeBOM):
     """Software Bill of Materials handler.
 
@@ -208,6 +233,31 @@ class PyfficeSoftwareBOM(PyfficeBOM):
             if pkg.get("name") == name:
                 return pkg
         return None
+
+    def load_document(self, document=None) -> Self:
+        """"""
+        super().load_document(document)
+        # TODO implement method
+        return self
+
+    def open_file(self, file_=None):
+        """"""
+        super().open_file(file_)
+        # TODO implement method
+        return self
+
+    def save(self, path=None, format_=None, encrypt=None):
+        """"""
+        super().save(path, format_, encrypt)
+        # TODO implement method
+        return self
+
+    def to_dict(self):
+        # TODO implement method
+        super().to_dict()
+        return self
+
+
 # ====================================================================================================================||
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||

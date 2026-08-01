@@ -48,30 +48,30 @@ class PyfficeEmailMessage(PyfficeMessage):
 
     def add_bcc(self, bcc) -> Self:
         """Add BCC recipient to the message."""
-        self.bcc = getattr(self, 'bcc', []) + [bcc]
+        self.bcc = getattr(self, "bcc", []) + [bcc]
         return self
 
     def add_cc(self, cc) -> Self:
         """Add CC recipient to the message."""
-        self.cc = getattr(self, 'cc', []) + [cc]
+        self.cc = getattr(self, "cc", []) + [cc]
         return self
 
     def add_recipient(self, recipient) -> Self:
         """Add recipient to the message."""
-        self.recipients = getattr(self, 'recipients', []) + [recipient]
+        self.recipients = getattr(self, "recipients", []) + [recipient]
         return self
 
     def add_label(self, label) -> Self:
         """Add label to the message."""
-        self.labels = getattr(self, 'labels', []) + [label]
+        self.labels = getattr(self, "labels", []) + [label]
         return self
 
     def create_new_document(self, name) -> None:
         """Create a new document.
-        
+
         Args:
             name: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -91,31 +91,33 @@ class PyfficeEmailMessage(PyfficeMessage):
 
     def get_body(self) -> Any:
         """Get the message body."""
-        return getattr(self, 'body', None)
+        return getattr(self, "body", None)
 
     def get_footer(self) -> Any:
         """Get the message footer."""
-        return getattr(self, 'footer', None)
+        return getattr(self, "footer", None)
 
     def get_header(self, key) -> Any:
         """Get a header value by key."""
-        headers = getattr(self, 'headers', {})
+        headers = getattr(self, "headers", {})
         return headers.get(key)
 
     def get_recipient(self, index=0) -> Any:
         """Get recipient at index."""
-        recipients = getattr(self, 'recipients', [])
+        recipients = getattr(self, "recipients", [])
         return recipients[index] if index < len(recipients) else None
 
     def get_sender(self) -> Any:
         """Get the sender address."""
-        return getattr(self, 'from', None)
+        return getattr(self, "from", None)
+
     def open_file(self, file_path) -> Self:
         """Open an email file."""
         if not file_path:
             return self
         import email
-        with open(file_path, 'rb') as f:
+
+        with open(file_path, "rb") as f:
             msg = email.message_from_bytes(f.read())
             self.message = msg
         return self
@@ -135,14 +137,38 @@ class PyfficeEmailMessage(PyfficeMessage):
 
     def remove_label(self, label) -> Self:
         """Remove label from message."""
-        labels = getattr(self, 'labels', [])
+        labels = getattr(self, "labels", [])
         if label in labels:
             labels.remove(label)
+        return self
+
+    def load_document(self, document=None) -> Self:
+        """"""
+        super().load_document(document)
+        # TODO implement method
+        return self
+
+    def open_file(self, file_=None):
+        """"""
+        super().open_file(file_)
+        # TODO implement method
+        return self
+
+    def save(self, path=None, format_=None, encrypt=None):
+        """"""
+        super().save(path, format_, encrypt)
+        # TODO implement method
+        return self
+
+    def to_dict(self):
+        # TODO implement method
+        super().to_dict()
         return self
 
 
 class PyfficeMailBox(PyfficeDocumentManager):
     """"""
+
     SERIALIZATION_VERSION = (1, 0, 0)
 
     VERSION = "0.0.1.0.1.0"
@@ -163,7 +189,7 @@ class PyfficeMailBox(PyfficeDocumentManager):
 
     def create_label(self, name) -> Self:
         """Create a new label."""
-        self.labels = getattr(self, 'labels', {})
+        self.labels = getattr(self, "labels", {})
         self.labels[name] = []
         return self
 
@@ -174,25 +200,25 @@ class PyfficeMailBox(PyfficeDocumentManager):
 
     def create_rule(self, condition, action) -> Self:
         """Create a new mail rule."""
-        self.rules = getattr(self, 'rules', [])
-        self.rules.append({'condition': condition, 'action': action})
+        self.rules = getattr(self, "rules", [])
+        self.rules.append({"condition": condition, "action": action})
         return self
 
     def destroy_label(self, name) -> Self:
         """Delete a label."""
-        labels = getattr(self, 'labels', {})
+        labels = getattr(self, "labels", {})
         if name in labels:
             del labels[name]
         return self
 
     def delete_mail(self, uid) -> Self:
         """Delete mail by UID."""
-        self.messages = [m for m in getattr(self, 'messages', []) if m.get('uid') != uid]
+        self.messages = [m for m in getattr(self, "messages", []) if m.get("uid") != uid]
         return self
 
     def delete_rule(self, rule_id) -> Self:
         """Delete a mail rule."""
-        rules = getattr(self, 'rules', [])
+        rules = getattr(self, "rules", [])
         self.rules = [r for i, r in enumerate(rules) if i != rule_id]
         return self
 
@@ -203,45 +229,45 @@ class PyfficeMailBox(PyfficeDocumentManager):
 
     def get_mail(self, uid) -> Any:
         """Get mail by UID."""
-        messages = getattr(self, 'messages', [])
+        messages = getattr(self, "messages", [])
         for m in messages:
-            if m.get('uid') == uid:
+            if m.get("uid") == uid:
                 return m
         return None
 
     def get_message(self, index=0) -> Any:
         """Get message at index."""
-        messages = getattr(self, 'messages', [])
+        messages = getattr(self, "messages", [])
         return messages[index] if index < len(messages) else None
 
     def get_labels(self) -> Any:
         """Get all labels."""
-        return getattr(self, 'labels', {})
+        return getattr(self, "labels", {})
 
     def get_messages(self) -> Any:
         """Get all messages."""
-        return getattr(self, 'messages', [])
+        return getattr(self, "messages", [])
 
     def get_message_by_id(self, msg_id) -> Any:
         """Get message by ID."""
-        messages = getattr(self, 'messages', [])
+        messages = getattr(self, "messages", [])
         for m in messages:
-            if m.get('id') == msg_id:
+            if m.get("id") == msg_id:
                 return m
         return None
 
     def get_rule(self, index) -> Any:
         """Get rule at index."""
-        rules = getattr(self, 'rules', [])
+        rules = getattr(self, "rules", [])
         return rules[index] if index < len(rules) else None
 
     def get_rules(self) -> Any:
         """Get all rules."""
-        return getattr(self, 'rules', [])
+        return getattr(self, "rules", [])
 
     def process_rules(self) -> Self:
         """Apply all rules to inbox."""
-        rules = getattr(self, 'rules', [])
+        rules = getattr(self, "rules", [])
         for rule in rules:
             # Placeholder - would apply each rule
             pass
@@ -260,18 +286,18 @@ class PyfficeMailBox(PyfficeDocumentManager):
 
     def store_mail(self, message) -> Self:
         """Store a message in the mailbox."""
-        self.messages = getattr(self, 'messages', [])
+        self.messages = getattr(self, "messages", [])
         self.messages.append(message)
         return self
 
     def write_message(self, subject, body, recipients=None) -> Self:
         """Write message.
-        
+
         Args:
             subject: Parameter.
             body: Parameter.
             recipients: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -280,6 +306,29 @@ class PyfficeMailBox(PyfficeDocumentManager):
         if recipients:
             for recipient in recipients:
                 self.active_message.add_recipient(recipient)
+        return self
+
+    def load_document(self, document=None) -> Self:
+        """"""
+        super().load_document(document)
+        # TODO implement method
+        return self
+
+    def open_file(self, file_=None):
+        """"""
+        super().open_file(file_)
+        # TODO implement method
+        return self
+
+    def save(self, path=None, format_=None, encrypt=None):
+        """"""
+        super().save(path, format_, encrypt)
+        # TODO implement method
+        return self
+
+    def to_dict(self):
+        # TODO implement method
+        super().to_dict()
         return self
 
 

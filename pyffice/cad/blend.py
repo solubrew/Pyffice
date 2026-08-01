@@ -1,6 +1,7 @@
 """
 Blender (.blend) 3D model format support.
 """
+
 from typing import Any, Optional
 import io
 
@@ -12,7 +13,7 @@ class PyfficeBLEND(PyfficeDocument):
     SERIALIZATION_VERSION = (1, 0, 0)
     """Blender .blend file handler"""
 
-    EXTENSIONS = {'.blend'}
+    EXTENSIONS = {".blend"}
     DEFAULT_LIMIT = 512 * 1024 * 1024  # 512MB
 
     def __init__(self, file_path: str = None, cfg=None) -> None:
@@ -22,13 +23,36 @@ class PyfficeBLEND(PyfficeDocument):
 
     def read(self) -> bytes:
         """Load Blender file contents."""
-        with open(self.file_path, 'rb') as f:
+        with open(self.file_path, "rb") as f:
             return f.read()
 
     def write(self, data: bytes) -> None:
         """Write data to Blender file."""
-        with open(self.file_path, 'wb') as f:
+        with open(self.file_path, "wb") as f:
             f.write(data)
+
+    def load_document(self, document=None) -> Self:
+        """"""
+        super().load_document(document)
+        # TODO implement method
+        return self
+
+    def open_file(self, file_=None):
+        """"""
+        super().open_file(file_)
+        # TODO implement method
+        return self
+
+    def save(self, path=None, format_=None, encrypt=None):
+        """"""
+        super().save(path, format_, encrypt)
+        # TODO implement method
+        return self
+
+    def to_dict(self):
+        # TODO implement method
+        super().to_dict()
+        return self
 
 
 # Module-level convenience functions
@@ -52,4 +76,4 @@ def dump(data: bytes, path: str) -> None:
     write(data, path)
 
 
-__all__ = ['PyfficeBLEND', 'load', 'read', 'write', 'dump']
+__all__ = ["PyfficeBLEND", "load", "read", "write", "dump"]

@@ -1,6 +1,7 @@
 """
 glTF 3D model format support.
 """
+
 from typing import Any, Optional, Dict, List
 import json
 
@@ -11,24 +12,47 @@ from pyffice.io_helpers import load_via_class, dump_via_class
 class PyfficeGLTF(PyfficeDocument):
     SERIALIZATION_VERSION = (1, 0, 0)
     """glTF 3D model handler"""
-    
-    EXTENSIONS = {'.gltf', '.glb'}
+
+    EXTENSIONS = {".gltf", ".glb"}
     DEFAULT_LIMIT = 256 * 1024 * 1024  # 256MB
-    
+
     def __init__(self, file_path: str = None, cfg=None) -> None:
         super().__init__(cfg)
         self.file_path = file_path
-    
+
     def read(self) -> Dict[str, Any]:
         """Load glTF model."""
-        with open(self.file_path, 'r') as f:
+        with open(self.file_path, "r") as f:
             return json.load(f)
-    
+
     def write(self, data: Dict[str, Any]) -> None:
         """Write glTF model."""
-        with open(self.file_path, 'w') as f:
+        with open(self.file_path, "w") as f:
             json.dump(data, f, indent=2)
-    
+
+    def load_document(self, document=None) -> Self:
+        """"""
+        super().load_document(document)
+        # TODO implement method
+        return self
+
+    def open_file(self, file_=None):
+        """"""
+        super().open_file(file_)
+        # TODO implement method
+        return self
+
+    def save(self, path=None, format_=None, encrypt=None):
+        """"""
+        super().save(path, format_, encrypt)
+        # TODO implement method
+        return self
+
+    def to_dict(self):
+        # TODO implement method
+        super().to_dict()
+        return self
+
 
 # Module-level convenience functions
 def load(path: str) -> Dict[str, Any]:
@@ -51,4 +75,4 @@ def dump(data: Dict[str, Any], path: str) -> None:
     write(data, path)
 
 
-__all__ = ['PyfficeGLTF', 'load', 'read', 'write', 'dump']
+__all__ = ["PyfficeGLTF", "load", "read", "write", "dump"]

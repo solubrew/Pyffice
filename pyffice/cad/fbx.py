@@ -1,6 +1,7 @@
 """
 FBX 3D model format support (Filmbox).
 """
+
 from typing import Any, Optional
 import io
 
@@ -11,24 +12,47 @@ from pyffice.io_helpers import load_via_class, dump_via_class
 class PyfficeFBX(PyfficeDocument):
     SERIALIZATION_VERSION = (1, 0, 0)
     """FBX 3D model handler"""
-    
-    EXTENSIONS = {'.fbx'}
+
+    EXTENSIONS = {".fbx"}
     DEFAULT_LIMIT = 512 * 1024 * 1024  # 512MB
-    
+
     def __init__(self, file_path: str = None, cfg=None) -> None:
         super().__init__(cfg)
         self.file_path = file_path
-    
+
     def read(self) -> bytes:
         """Load FBX file contents."""
-        with open(self.file_path, 'rb') as f:
+        with open(self.file_path, "rb") as f:
             return f.read()
-    
+
     def write(self, data: bytes) -> None:
         """Write data to FBX file."""
-        with open(self.file_path, 'wb') as f:
+        with open(self.file_path, "wb") as f:
             f.write(data)
-    
+
+    def load_document(self, document=None) -> Self:
+        """"""
+        super().load_document(document)
+        # TODO implement method
+        return self
+
+    def open_file(self, file_=None):
+        """"""
+        super().open_file(file_)
+        # TODO implement method
+        return self
+
+    def save(self, path=None, format_=None, encrypt=None):
+        """"""
+        super().save(path, format_, encrypt)
+        # TODO implement method
+        return self
+
+    def to_dict(self):
+        # TODO implement method
+        super().to_dict()
+        return self
+
 
 # Module-level convenience functions
 def load(path: str) -> bytes:
@@ -51,4 +75,4 @@ def dump(data: bytes, path: str) -> None:
     write(data, path)
 
 
-__all__ = ['PyfficeFBX', 'load', 'read', 'write', 'dump']
+__all__ = ["PyfficeFBX", "load", "read", "write", "dump"]

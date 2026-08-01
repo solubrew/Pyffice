@@ -1102,13 +1102,13 @@ dimensions:
           severity: 60
         - category: getattr_dynamic
           content: target = file_path or getattr(self, "file_path", None)
-          file: pyffice/cad/cad_cam.py
+          file: pyffice/cad/cam.py
           line: 77
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: target = filepath or getattr(self, "file_path", None)
-          file: pyffice/cad/cad_gcode.py
+          file: pyffice/cad/gcode.py
           line: 220
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60

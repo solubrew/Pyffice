@@ -46,9 +46,33 @@ class PyfficeContext(PyfficeDocument):
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeContext")).override(cfg)
 
+    def load_document(self, document=None) -> Self:
+        """"""
+        super().load_document(document)
+        # TODO implement method
+        return self
+
+    def open_file(self, file_=None):
+        """"""
+        super().open_file(file_)
+        # TODO implement method
+        return self
+
+    def save(self, path=None, format_=None, encrypt=None):
+        """"""
+        super().save(path, format_, encrypt)
+        # TODO implement method
+        return self
+
+    def to_dict(self):
+        # TODO implement method
+        super().to_dict()
+        return self
+
 
 class PyfficePrompt(PyfficeDocument):
     """"""
+
     SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None) -> None:
@@ -71,7 +95,7 @@ class PyfficePrompt(PyfficeDocument):
 
     def get_metrics(self) -> Any:
         """Return the metrics.
-        
+
         Returns:
             Self for chaining.
         """
@@ -80,10 +104,10 @@ class PyfficePrompt(PyfficeDocument):
 
     def load_document(self, document=None) -> Self:
         """Load document into this document.
-        
+
         Args:
             document: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -99,10 +123,10 @@ class PyfficePrompt(PyfficeDocument):
 
     def set_context(self, context) -> Self:
         """Set the context.
-        
+
         Args:
             context: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -116,10 +140,10 @@ class PyfficePrompt(PyfficeDocument):
 
     def set_input(self, input) -> Self:
         """Set the input.
-        
+
         Args:
             input: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -173,10 +197,10 @@ class PyfficePrompt(PyfficeDocument):
 
     def set_prompt(self, prompt) -> Self:
         """Set the prompt.
-        
+
         Args:
             prompt: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -189,10 +213,10 @@ class PyfficePrompt(PyfficeDocument):
 
     def set_response(self, response) -> Self:
         """Set the response.
-        
+
         Args:
             response: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -205,10 +229,10 @@ class PyfficePrompt(PyfficeDocument):
 
     def set_response_scope(self, scope) -> Self:
         """Set the response scope.
-        
+
         Args:
             scope: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -254,10 +278,10 @@ class PyfficePrompt(PyfficeDocument):
 
     def set_topic(self, topic) -> Self:
         """Set the topic.
-        
+
         Args:
             topic: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -268,7 +292,7 @@ class PyfficePrompt(PyfficeDocument):
 
     def to_dict(self) -> Self:
         """Convert this document to dict.
-        
+
         Returns:
             Self for chaining.
         """
@@ -286,6 +310,7 @@ class PyfficePrompt(PyfficeDocument):
 
 class PyfficeResponse(PyfficeDocument):
     """"""
+
     SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None) -> None:
@@ -305,10 +330,10 @@ class PyfficeResponse(PyfficeDocument):
 
     def set_sources(self, sources) -> Self:
         """Set the sources.
-        
+
         Args:
             sources: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -320,6 +345,7 @@ class PyfficeResponse(PyfficeDocument):
 
 class PyfficePromptsManager(PyfficeDocumentManager):
     """"""
+
     SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None) -> None:
@@ -336,12 +362,12 @@ class PyfficePromptsManager(PyfficeDocumentManager):
 
     def add_prompt(self, input=None, context=None, tags=None) -> Self:
         """Add a prompt.
-        
+
         Args:
             input: Parameter.
             context: Parameter.
             tags: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -359,13 +385,13 @@ class PyfficePromptsManager(PyfficeDocumentManager):
 
     def add_prompt_response(self, text, service, metrics=None, prompt=None) -> Self:
         """Add a prompt response.
-        
+
         Args:
             text: Parameter.
             service: Parameter.
             metrics: Parameter.
             prompt: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -386,10 +412,10 @@ class PyfficePromptsManager(PyfficeDocumentManager):
 
     def add_prompt(self, prompt) -> Self:
         """Add a prompt.
-        
+
         Args:
             prompt: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -401,12 +427,12 @@ class PyfficePromptsManager(PyfficeDocumentManager):
 
     def add_service(self, service, metrics, model) -> Self:
         """Add a service.
-        
+
         Args:
             service: Parameter.
             metrics: Parameter.
             model: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -417,10 +443,10 @@ class PyfficePromptsManager(PyfficeDocumentManager):
 
     def load_document(self, document=None) -> Self:
         """Load document into this document.
-        
+
         Args:
             document: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -436,10 +462,10 @@ class PyfficePromptsManager(PyfficeDocumentManager):
 
     def set_browser_left(self, browser) -> Self:
         """Set the browser left.
-        
+
         Args:
             browser: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -449,10 +475,10 @@ class PyfficePromptsManager(PyfficeDocumentManager):
 
     def set_browser_right(self, browser) -> Self:
         """Set the browser right.
-        
+
         Args:
             browser: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -462,10 +488,10 @@ class PyfficePromptsManager(PyfficeDocumentManager):
 
     def set_service_active(self, service) -> Self:
         """Set the service active.
-        
+
         Args:
             service: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -478,10 +504,10 @@ class PyfficePromptsManager(PyfficeDocumentManager):
 
     def set_services(self, services) -> Self:
         """Set the services.
-        
+
         Args:
             services: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -494,10 +520,10 @@ class PyfficePromptsManager(PyfficeDocumentManager):
 
     def set_prompts(self, prompts) -> Self:
         """Set the prompts.
-        
+
         Args:
             prompts: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -507,6 +533,7 @@ class PyfficePromptsManager(PyfficeDocumentManager):
             self.add_change("prompts", self.prompts, prompts)
             self.prompts = prompts
         return self
+
 
 # ====================================================================================================================||
 

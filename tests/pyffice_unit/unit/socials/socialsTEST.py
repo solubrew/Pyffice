@@ -2,7 +2,7 @@
 
 import pytest
 
-from pyffice.socials.socials_messages import PyfficeSMS, PyfficeMMS, PyfficePostalMail
+from pyffice.socials.messages import PyfficeSMS, PyfficeMMS, PyfficePostalMail
 from pyffice.text.text_messages import PyfficeMessage
 
 
