@@ -210,3 +210,47 @@ class TestPyfficeDeque:
         d.append("c")  # triggers popleft -> history
         assert "a" in d.history
         assert list(d) == ["b", "c"]
+
+
+class TestPyfficeUnitEnsureInitState:
+    """The _ensure_init_state helper initializes state dicts in one call.
+
+    Replaces the recurring `if self.X is None: self.X = <default>`
+    pattern that appears in to_dict() overrides (e.g. spreadsheet.py
+    guarding cells/tables/charts/images/shapes). The helper does
+    NOT record a change entry — it's a state initialization, not
+    a mutation.
+    """
+
+    def test_initializes_none_attrs(self):
+        u = PyfficeUnit()
+        u.x = None
+        u.y = None
+        u._ensure_init_state({"x": [], "y": {}})
+        assert u.x == []
+        assert u.y == {}
+
+    def test_preserves_set_attrs(self):
+        u = PyfficeUnit()
+        u.x = "already_set"
+        u.y = [1, 2, 3]
+        u._ensure_init_state({"x": [], "y": {}})
+        assert u.x == "already_set"
+        assert u.y == [1, 2, 3]
+
+    def test_empty_dict_is_noop(self):
+        u = PyfficeUnit()
+        u._ensure_init_state({})
+        # No attrs touched. Nothing to assert beyond no exception.
+
+    def test_returns_self_for_chaining(self):
+        u = PyfficeUnit()
+        result = u._ensure_init_state({"x": []})
+        assert result is u
+
+    def test_helper_available_on_document_subclasses(self):
+        """The helper is reachable on PyfficeDocument (and via MRO
+        on all PyfficeDocument subclasses including PyfficeSpreadSheet).
+        """
+        from pyffice.document import PyfficeDocument
+        assert hasattr(PyfficeDocument, "_ensure_init_state")

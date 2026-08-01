@@ -238,6 +238,28 @@ class PyfficeUnit(object):
         collection.remove(value)
         return self
 
+    def _ensure_init_state(self, defaults: dict):
+        """Initialize ``self.X`` to a default value if currently ``None``.
+
+        Consolidates the recurring ``if self.X is None: self.X = <default>``
+        pattern that appears in ``to_dict()`` overrides and other
+        ``__init__``-tolerant paths (e.g. spreadsheet.py:387-397,
+        cells.py:271/287/303). The helper does NOT record a change
+        entry — it's a state initialization, not a mutation.
+
+        Args:
+            defaults: A mapping of ``attr_name -> default_value``.
+                For each entry, if ``self.<attr_name>`` is currently
+                ``None``, it is set to ``default_value``.
+
+        Returns:
+            Self for chaining.
+        """
+        for attr, default in defaults.items():
+            if getattr(self, attr, None) is None:
+                setattr(self, attr, default)
+        return self
+
     def add_editor(self, editor):
         """Add an editor to the document."""
         self.editors = getattr(self, 'editors', [])

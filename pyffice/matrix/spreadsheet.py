@@ -384,17 +384,14 @@ class PyfficeSpreadSheet(PyfficeDocument):
         """
         doc = super().to_dict()
         doc["data"]["document_type"] = "sheet"
-        if self.cells is None:
-            self.cells = {}
+        self._ensure_init_state({
+            "cells": {},
+            "tables": [],
+            "charts": [],
+            "images": [],
+            "shapes": [],
+        })
         doc["data"]["cells"] = {x: cell.to_dict() for x, cell in self.cells.items()}
-        if self.tables is None:
-            self.tables = []
-        if self.charts is None:
-            self.charts = []
-        if self.images is None:
-            self.images = []
-        if self.shapes is None:
-            self.shapes = []
         doc["data"]["objects"] = {
             "tables": [x.to_dict() for x in self.tables],
             "charts": [x.to_dict() for x in self.charts],
