@@ -33,16 +33,12 @@ logma.off()
 pxcfg = join(here, "_data_", ".yaml")
 
 
-from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
-
-
 class PyfficeColorPalette(PyfficeDocument):
     SERIALIZATION_VERSION = (1, 0, 0)
     """
     PyfficeColorPalette is responsible for creating and managing color palettes.
     It supports adding colors manually, retrieving colors, and extracting colors
     from various content types like images, SVG files, and videos.
-
     """
 
     def __init__(self, cfg=None):
@@ -60,7 +56,7 @@ class PyfficeColorPalette(PyfficeDocument):
         self.hex_colors = None  # Store as HEX values for quick lookup
         self.palette_table = None
 
-    def add_color(self, color) -> "PyfficeColorPalette":
+    def add_color(self, color):
         """
         Add a new color to the palette.
 
@@ -84,7 +80,7 @@ class PyfficeColorPalette(PyfficeDocument):
         self.add_change("hex_colors", self.hex_colors, color, "add")
         return self
 
-    def convert_color_palette(self, red_fx, green_fx, blue_fx) -> None:
+    def convert_color_palette(self, red_fx, green_fx, blue_fx):
         """
         Generalized algorithm to transform any color palette to any target mapping.
 
@@ -113,7 +109,7 @@ class PyfficeColorPalette(PyfficeDocument):
             transformed_palette.append(new_color)
         return transformed_palette
 
-    def create_analogous_colors(self, color) -> None:
+    def create_analogous_colors(self, color):
         """Create a analogous colors.
         
         Args:
@@ -130,7 +126,7 @@ class PyfficeColorPalette(PyfficeDocument):
         new_color.set_hsl(h, s, l)
         return new_color
 
-    def create_clash_colors(self, color) -> None:
+    def create_clash_colors(self, color):
         """Create a clash colors.
         
         Args:
@@ -147,7 +143,7 @@ class PyfficeColorPalette(PyfficeDocument):
         new_color.set_hsl(h, s, l)
         return new_color
 
-    def create_complimentary_colors(self, color) -> None:
+    def create_complimentary_colors(self, color):
         """Create a complimentary colors.
         
         Args:
@@ -160,7 +156,7 @@ class PyfficeColorPalette(PyfficeDocument):
         _h, _s, _l = new_color.get_hsl()
         return new_color
 
-    def create_neutral_colors(self, color) -> None:
+    def create_neutral_colors(self, color):
         """Create a neutral colors.
         
         Args:
@@ -177,7 +173,7 @@ class PyfficeColorPalette(PyfficeDocument):
         new_color.set_hsl(h, s, l)
         return new_color
 
-    def create_square_colors(self, color) -> "PyfficeColorPalette":
+    def create_square_colors(self, color):
         """Create a square colors.
         
         Args:
@@ -189,7 +185,7 @@ class PyfficeColorPalette(PyfficeDocument):
         self.create_tone_colors(color, num_tones=4)
         return self
 
-    def create_tone_colors(self, color, num_tones=5) -> None:
+    def create_tone_colors(self, color, num_tones=5):
         """Create a tone colors.
         
         Args:
@@ -205,7 +201,7 @@ class PyfficeColorPalette(PyfficeDocument):
             new_color.set_hsl((h + (i * 360 / num_tones)) % 1.0)
             self.add_color(new_color)
 
-    def create_tetradic_colors(self, color) -> "PyfficeColorPalette":
+    def create_tetradic_colors(self, color):
         """Create a tetradic colors.
         
         Args:
@@ -217,7 +213,7 @@ class PyfficeColorPalette(PyfficeDocument):
         self.create_tone_colors(color, num_tones=4)
         return self
 
-    def create_triadic_colors(self, color) -> "PyfficeColorPalette":
+    def create_triadic_colors(self, color):
         """Create a triadic colors.
         
         Args:
@@ -229,7 +225,7 @@ class PyfficeColorPalette(PyfficeDocument):
         self.create_tone_colors(color, num_tones=3)
         return self
 
-    def del_color(self, color) -> "PyfficeColorPalette":
+    def del_color(self, color):
         """Remove the color.
         
         Args:
@@ -244,7 +240,7 @@ class PyfficeColorPalette(PyfficeDocument):
         self.add_change("hex_colors", self.hex_colors, color, "del")
         return self
 
-    def extract_colors(self, content_path) -> None:
+    def extract_colors(self, content_path):
         """
         Extract colors from the provided content file.
         Args:
@@ -262,7 +258,7 @@ class PyfficeColorPalette(PyfficeDocument):
         else:
             raise ValueError("Invalid file type. Supported types are: images, SVG, or videos.")
 
-    def get_color(self, color_name) -> None:
+    def get_color(self, color_name):
         """
         Retrieve a color from the palette by its name.
 
@@ -277,7 +273,7 @@ class PyfficeColorPalette(PyfficeDocument):
                 return color
         raise ValueError(f"Color with name '{color_name}' not found in the palette.")
 
-    def get_palette(self, format_="table") -> Any:
+    def get_palette(self, format_="table"):
         """Return the palette.
         
         Args:
@@ -298,7 +294,7 @@ class PyfficeColorPalette(PyfficeDocument):
             return self.palette_table.to_dataframe()
         return self.palette_table.to_dict("records-only")
 
-    def get_usage(self, color) -> None:
+    def get_usage(self, color):
         """Return the usage.
         
         Args:
@@ -312,7 +308,7 @@ class PyfficeColorPalette(PyfficeDocument):
         usage = 0
         return usage
 
-    def load_document(self, document=None) -> "PyfficeColorPalette":
+    def load_document(self, document=None):
         """
         Load an image file using PIL.
 
@@ -328,7 +324,7 @@ class PyfficeColorPalette(PyfficeDocument):
         # return Image.open(self.file_path)
         return self
 
-    def scale_fx(self, factor) -> None:
+    def scale_fx(self, factor):
         """Scale fx.
         
         Args:
@@ -339,12 +335,12 @@ class PyfficeColorPalette(PyfficeDocument):
         """
         return lambda r, g, b: (r * factor, g * factor, b * factor)
 
-    def set_palette(self) -> "PyfficeColorPalette":
+    def set_palette(self):
         """Set color palette."""
         _p = True  # placeholder
         return self
 
-    def set_palette_darker(self, factor) -> None:
+    def set_palette_darker(self, factor):
         """Set the palette darker.
         
         Args:
@@ -355,7 +351,7 @@ class PyfficeColorPalette(PyfficeDocument):
         """
         self.scale_fx(factor)
 
-    def set_palette_grayscale(self) -> None:
+    def set_palette_grayscale(self):
         """Set the palette grayscale.
         
         Returns:
@@ -364,7 +360,7 @@ class PyfficeColorPalette(PyfficeDocument):
         grayscale_fx = lambda r, g, b: (r * 0.2126 + g * 0.7152 + b * 0.0722) / 255.0
         self.convert_color_palette(grayscale_fx, grayscale_fx, grayscale_fx)
 
-    def set_palette_lighter(self, factor) -> None:
+    def set_palette_lighter(self, factor):
         """Set the palette lighter.
         
         Args:

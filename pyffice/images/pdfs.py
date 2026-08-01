@@ -1,5 +1,3 @@
-
-from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
 """
 ---
@@ -67,7 +65,7 @@ class PyfficePDF(PyfficeDocument):
         self.storage = "external"
         self.writer = None
 
-    def add_page(self, new_page=None) -> "PyfficePDF":
+    def add_page(self, new_page=None):
         """
         Add a blank page or an existing page to the PDF.
 
@@ -80,7 +78,7 @@ class PyfficePDF(PyfficeDocument):
             self.writer.add_blank_page(width=8.5 * 72, height=11 * 72)  # Default 8.5x11 inches
         return self
 
-    def add_annotation(self, page_n, annotation_text, coords) -> "PyfficePDF":
+    def add_annotation(self, page_n, annotation_text, coords):
         """
         Add an annotation (like a comment or text highlight) to a specific page.
 
@@ -99,7 +97,7 @@ class PyfficePDF(PyfficeDocument):
         page.add_annotation(annotation)
         return self
 
-    def edit(self) -> "PyfficePDF":
+    def edit(self):
         """Edit.
         
         Returns:
@@ -111,7 +109,7 @@ class PyfficePDF(PyfficeDocument):
             self.writer.add_page(page)
         return self
 
-    def embed_media(self, media_path, page_n=0, rect=(100, 500, 200, 600)) -> "PyfficePDF":
+    def embed_media(self, media_path, page_n=0, rect=(100, 500, 200, 600)):
         """
         Embed media (like audio or video) into a specific page.
 
@@ -140,7 +138,7 @@ class PyfficePDF(PyfficeDocument):
         page.add_annotation(annotation)
         return self
 
-    def encrypt(self, owner_password, user_password=None) -> "PyfficePDF":
+    def encrypt(self, owner_password, user_password=None):
         """
         Encrypt the PDF with a password, allowing controlled access.
 
@@ -152,20 +150,20 @@ class PyfficePDF(PyfficeDocument):
         self.writer.encrypt(user_password=user_password, owner_password=owner_password)
         return self
 
-    def extract_text(self, page_n=0) -> None:
+    def extract_text(self, page_n=0):
         """Extract the text from a specific page."""
         mat = fitz.Matrix(self.scale, self.scale)
         pix = page.get_pixmap(matrix=mat)
 
-    def get_binary(self) -> bytes:
+    def get_binary(self):
         """Get PDF as binary."""
         return b""
 
-    def get_content(self) -> str:
+    def get_content(self):
         """Get PDF content."""
         return ""
 
-    def get_page_size(self, page_n=0) -> tuple:
+    def get_page_size(self, page_n=0):
         """
         Get the size (width and height) of a specific page.
 
@@ -176,7 +174,7 @@ class PyfficePDF(PyfficeDocument):
         media_box = page.mediabox
         return float(media_box.width), float(media_box.height)
 
-    def get_page_text(self, page_n=0) -> Any:
+    def get_page_text(self, page_n=0):
         """
         Extract the text from a specific page.
 
@@ -186,7 +184,7 @@ class PyfficePDF(PyfficeDocument):
         page = self.reader.pages[page_n]
         return page.extract_text()
 
-    def initialize_writer(self) -> "PyfficePDF":
+    def initialize_writer(self):
         """Initialize writer.
         
         Returns:
@@ -196,7 +194,7 @@ class PyfficePDF(PyfficeDocument):
             self.writer = PdfWriter()  # For writing to new PDFs
         return self
 
-    def load_document(self, document=None) -> "PyfficePDF":
+    def load_document(self, document=None):
         """Load document into this document.
         
         Args:
@@ -215,14 +213,14 @@ class PyfficePDF(PyfficeDocument):
         self.set_file_path(content.get("file_path", None))
         return self
 
-    def load_pdf_pages(self) -> "PyfficePDF":
+    def load_pdf_pages(self):
         """Render PDF pages as images to display."""
         for page_num in range(len(self.reader)):
             page = self.reader.load_page(page_num)  # Load page securely
             pix = page.get_pixmap()  # Render the page into a pixmap
         return self
 
-    def open_file(self, file_=None) -> "PyfficePDF":
+    def open_file(self, file_=None):
         """Open file.
         
         Args:
@@ -242,7 +240,7 @@ class PyfficePDF(PyfficeDocument):
         self.pdf_fitz = fitz.open(file_)
         return self
 
-    def open_file_full_feature(self, file_) -> "PyfficePDF":
+    def open_file_full_feature(self, file_):
         """Open file full feature.
         
         Args:
@@ -254,7 +252,7 @@ class PyfficePDF(PyfficeDocument):
         self.reader = PdfReader(file_)  # For reading PDF content
         return self
 
-    def open_file_no_javascript(self, file_) -> "PyfficePDF":
+    def open_file_no_javascript(self, file_):
         """Open file no javascript.
         
         Args:
@@ -267,7 +265,7 @@ class PyfficePDF(PyfficeDocument):
         self.load_pdf_pages()
         return self
 
-    def remove_page(self, page_n) -> "PyfficePDF":
+    def remove_page(self, page_n):
         """
         Remove a specific page from the PDF.
 
@@ -280,7 +278,7 @@ class PyfficePDF(PyfficeDocument):
                 self.writer.add_page(page)
         return self
 
-    def save(self, path=None, syntax=None, encrypt_key=None) -> "PyfficePDF":
+    def save(self, path=None, syntax=None, encrypt_key=None):
         """
         Save changes to a new file.
 
@@ -290,7 +288,7 @@ class PyfficePDF(PyfficeDocument):
         super().save(path, syntax, encrypt_key)
         return self
 
-    def set_content(self, content) -> "PyfficePDF":
+    def set_content(self, content):
         """Set the content.
         
         Args:
@@ -300,7 +298,6 @@ class PyfficePDF(PyfficeDocument):
             Self for chaining.
         """
         from pyffice.pyffice import UnknownLocationError
-
         logma.info(f"Content {content}")
         if self.location is None:
             self.set_location(None)
@@ -319,7 +316,7 @@ class PyfficePDF(PyfficeDocument):
             self.content = content
         return self
 
-    def to_dict(self) -> Any:
+    def to_dict(self):
         """Convert this document to dict.
         
         Returns:

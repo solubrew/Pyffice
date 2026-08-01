@@ -1,5 +1,3 @@
-
-from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
 """
 ---
@@ -55,7 +53,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.content = None
         self.tree = None
 
-    def add_directory(self, directory) -> "PyfficeFileSystem":
+    def add_directory(self, directory):
         """Add a directory.
         
         Args:
@@ -68,7 +66,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.directories.append(directory)
         return self
 
-    def add_file(self, file_) -> "PyfficeFileSystem":
+    def add_file(self, file_):
         """Add a file.
         
         Args:
@@ -81,7 +79,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.files.append(file_)
         return self
 
-    def add_root(self, root) -> "PyfficeFileSystem":
+    def add_root(self, root):
         """Add a root.
         
         Args:
@@ -94,7 +92,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.roots.append(root)
         return self
 
-    def del_directory(self, index) -> "PyfficeFileSystem":
+    def del_directory(self, index):
         """Remove the directory.
         
         Args:
@@ -107,7 +105,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.directories.pop(index)
         return self
 
-    def del_file(self, index) -> "PyfficeFileSystem":
+    def del_file(self, index):
         """Remove the file.
         
         Args:
@@ -120,11 +118,11 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.files.pop(index)
         return self
 
-    def get_files(self) -> list:
+    def get_files(self):
         """Get list of files."""
         return []
 
-    def load_document(self, document=None) -> "PyfficeFileSystem":
+    def load_document(self, document=None):
         """Load document into this document.
         
         Args:
@@ -144,7 +142,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.set_table(document.get("table", {}))
         return self
 
-    def set_tree(self, tree) -> "PyfficeFileSystem":
+    def set_tree(self, tree):
         """Set the tree.
         
         Args:
@@ -157,7 +155,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.tree = tree.get("children", None)
         return self
 
-    def set_table(self, table) -> "PyfficeFileSystem":
+    def set_table(self, table):
         """Set the table.
         
         Args:
@@ -170,7 +168,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.set_files(table.get("files", []))
         return self
 
-    def open_file(self, file=None) -> "PyfficeFileSystem":
+    def open_file(self, file=None):
         """Open file.
         
         Args:
@@ -185,7 +183,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
         self.set_files()
         return self
 
-    def set_content(self, content) -> "PyfficeFileSystem":
+    def set_content(self, content):
         """Set the content.
         
         Args:
@@ -195,7 +193,6 @@ class PyfficeFileSystem(PyfficeDocumentManager):
             Self for chaining.
         """
         from pyffice.pyffice import UnknownLocationError
-
         if self.location is None:
             self.set_location(None)
         if self.location == "external":
@@ -207,7 +204,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
             self.content = content
         return self
 
-    def set_directories(self, directories=[]) -> "PyfficeFileSystem":
+    def set_directories(self, directories=[]):
         """Set the directories.
         
         Args:
@@ -227,7 +224,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
             self.directories = directories
         return self
 
-    def set_files(self, files=[]) -> "PyfficeFileSystem":
+    def set_files(self, files=[]):
         """Set the files.
         
         Args:
@@ -244,7 +241,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
             self.files = files
         return self
 
-    def set_root(self, root=None) -> "PyfficeFileSystem":
+    def set_root(self, root=None):
         """Set the root.
         
         Args:
@@ -262,7 +259,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
             self.root = root
         return self
 
-    def to_dict(self) -> Any:
+    def to_dict(self):
         """Convert this document to dict.
         
         Returns:

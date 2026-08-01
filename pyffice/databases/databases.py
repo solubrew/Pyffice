@@ -1,5 +1,3 @@
-
-from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
 """
 ---
@@ -49,7 +47,6 @@ class PyfficeDatabaseConnection(sonql.Doc):
         """Open a database file."""
         if isinstance(document, str):
             import sqlite3
-
             conn = sqlite3.connect(document)
             self.database = conn
         return self
@@ -68,7 +65,7 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
         self.databases = {}
         self.connections = {}
 
-    def load_database(self, database) -> Any:
+    def load_database(self, database):
         """Load database into this document.
         
         Args:
@@ -83,28 +80,28 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
             return self.databases[database]
         return None
 
-    def add_connection(self, name, connection) -> "PyfficeDatabaseManager":
+    def add_connection(self, name, connection):
         """Add a database connection."""
         self.connections[name] = connection
         return self
 
-    def add_server(self, name, server) -> "PyfficeDatabaseManager":
+    def add_server(self, name, server):
         """Add a database server."""
         self.servers = getattr(self, 'servers', {})
         self.servers[name] = server
         return self
 
-    def add_database(self, name, database) -> "PyfficeDatabaseManager":
+    def add_database(self, name, database):
         """Add a database."""
         self.databases[name] = database
         return self
 
-    def create_database(self, name, server, database) -> "PyfficeDatabaseManager":
+    def create_database(self, name, server, database):
         """Create a new database."""
         self.databases[name] = {"server": server, "database": database}
         return self
 
-    def get_indexes(self, name) -> list:
+    def get_indexes(self, name):
         """Get indexes for a database."""
         if name in self.databases and hasattr(self.databases[name], 'execute'):
             try:
@@ -114,12 +111,12 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
                 pass
         return []
 
-    def get_index(self, name, index) -> Any:
+    def get_index(self, name, index):
         """Get a specific index."""
         indexes = self.get_indexes(name)
         return indexes[index] if 0 <= index < len(indexes) else None
 
-    def get_tables(self, name) -> list:
+    def get_tables(self, name):
         """Get tables for a database."""
         if name in self.databases and hasattr(self.databases[name], 'execute'):
             try:
@@ -129,12 +126,12 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
                 pass
         return []
 
-    def get_table(self, name, table) -> Any:
+    def get_table(self, name, table):
         """Get a specific table."""
         tables = self.get_tables(name)
         return tables[table] if 0 <= table < len(tables) else None
 
-    def get_views(self, name) -> list:
+    def get_views(self, name):
         """Get views for a database."""
         if name in self.databases and hasattr(self.databases[name], 'execute'):
             try:
@@ -144,7 +141,7 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
                 pass
         return []
 
-    def get_view(self, name, view) -> Any:
+    def get_view(self, name, view):
         """Get a specific view."""
         views = self.get_views(name)
         return views[view] if 0 <= view < len(views) else None

@@ -24,8 +24,6 @@ from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 from pyffice.items.text import PyfficeText
 
-from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
-
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True
@@ -46,7 +44,7 @@ class PyfficeNotebook(PyfficeDocument):
         self.cells = []
         self.notebook = None
 
-    def add_cell(self, cell) -> "PyfficeNotebook":
+    def add_cell(self, cell):
         """Add a cell.
         
         Args:
@@ -58,7 +56,7 @@ class PyfficeNotebook(PyfficeDocument):
         self.cells.append(cell)
         return self
 
-    def clear_cell(self, dex) -> "PyfficeNotebook":
+    def clear_cell(self, dex):
         """Clear cell.
         
         Args:
@@ -70,7 +68,7 @@ class PyfficeNotebook(PyfficeDocument):
         self.cells[dex]["outputs"] = []
         return self
 
-    def clear_cells(self) -> "PyfficeNotebook":
+    def clear_cells(self):
         """Clear cells.
         
         Returns:
@@ -80,7 +78,7 @@ class PyfficeNotebook(PyfficeDocument):
             cell["outputs"] = []
         return self
 
-    def del_cell(self, dex) -> "PyfficeNotebook":
+    def del_cell(self, dex):
         """Remove the cell.
         
         Args:
@@ -92,7 +90,7 @@ class PyfficeNotebook(PyfficeDocument):
         self.cells.pop(dex)
         return self
 
-    def load_document(self, document=None) -> "PyfficeNotebook":
+    def load_document(self, document=None):
         """Load document into this document.
         
         Args:
@@ -111,7 +109,7 @@ class PyfficeNotebook(PyfficeDocument):
         self.set_cells(document.get("notebook", None))
         return self
 
-    def set_cells(self, cells) -> "PyfficeNotebook":
+    def set_cells(self, cells):
         """Set the cells.
         
         Args:
@@ -125,7 +123,7 @@ class PyfficeNotebook(PyfficeDocument):
             self.cells = cells
         return self
 
-    def set_cell_source(self, text, position=0) -> "PyfficeNotebook":
+    def set_cell_source(self, text, position=0):
         """Set the cell source.
         
         Args:
@@ -140,7 +138,7 @@ class PyfficeNotebook(PyfficeDocument):
         self.cells[position]["source"] = text
         return self
 
-    def set_notebook(self, notebook=None) -> "PyfficeNotebook":
+    def set_notebook(self, notebook=None):
         """Set the notebook.
         
         Args:
@@ -158,11 +156,11 @@ class PyfficeNotebook(PyfficeDocument):
             self.notebook = notebook
         return self
 
-    def set_pinned(self, pinned) -> "PyfficeNotebook":
+    def set_pinned(self, pinned):
         """Set pinned state."""
         self.pinned = pinned
         return self
-    def to_html(self) -> Any:
+    def to_html(self):
         """Convert this document to html.
         
         Returns:

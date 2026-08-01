@@ -21,7 +21,7 @@ _LAZY_EXPORTS = {
     "PyfficeRaw": ("pyffice.media.raw", "PyfficeRaw"),
 }
 
-def __getattr__(name: str):
+def __getattr__(name: str) -> None:
     if name in _LAZY_EXPORTS:
         mod_path, attr = _LAZY_EXPORTS[name]
         mod = __import__(mod_path, fromlist=[attr])

@@ -23,8 +23,6 @@ from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.document import PyfficeUnit
 
-from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
-
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True
@@ -55,7 +53,7 @@ class PyfficeTimeUnit(PyfficeUnit):
         self.decades = None
         self.centuries = None
 
-    def get_centuries(self) -> Any:
+    def get_centuries(self):
         """Return the centuries.
         
         Returns:
@@ -69,7 +67,7 @@ class PyfficeTimeUnit(PyfficeUnit):
             self.centuries = centuries
         return self.centuries
 
-    def get_days(self) -> Any:
+    def get_days(self):
         """Return the days.
         
         Returns:
@@ -83,7 +81,7 @@ class PyfficeTimeUnit(PyfficeUnit):
             self.days = days
         return self.days
 
-    def get_decades(self) -> Any:
+    def get_decades(self):
         """Return the decades.
         
         Returns:
@@ -97,7 +95,7 @@ class PyfficeTimeUnit(PyfficeUnit):
             self.decades = decades
         return self.decades
 
-    def get_hours(self) -> Any:
+    def get_hours(self):
         """Return the hours.
         
         Returns:
@@ -111,7 +109,7 @@ class PyfficeTimeUnit(PyfficeUnit):
             self.hours = hours
         return self.hours
 
-    def get_minutes(self) -> Any:
+    def get_minutes(self):
         """Return the minutes.
         
         Returns:
@@ -125,7 +123,7 @@ class PyfficeTimeUnit(PyfficeUnit):
             self.minutes = minutes
         return self.minutes
 
-    def get_months(self) -> Any:
+    def get_months(self):
         """Return the months.
         
         Returns:
@@ -139,7 +137,7 @@ class PyfficeTimeUnit(PyfficeUnit):
             self.months = months
         return self.months
 
-    def get_seconds(self) -> Any:
+    def get_seconds(self):
         """Return the seconds.
         
         Returns:
@@ -153,7 +151,7 @@ class PyfficeTimeUnit(PyfficeUnit):
             self.seconds = seconds
         return self.seconds
 
-    def get_weeks(self) -> Any:
+    def get_weeks(self):
         """Return the weeks.
         
         Returns:
@@ -167,7 +165,7 @@ class PyfficeTimeUnit(PyfficeUnit):
             self.weeks = weeks
         return self.weeks
 
-    def get_years(self) -> Any:
+    def get_years(self):
         """Return the years.
         
         Returns:
@@ -181,7 +179,7 @@ class PyfficeTimeUnit(PyfficeUnit):
             self.years = years
         return self.years
 
-    def load_unit(self, unit) -> "PyfficeTimeUnit":
+    def load_unit(self, unit):
         """Load a unit dict into this document.
         
         Args:
@@ -208,7 +206,7 @@ class PyfficeTimeUnit(PyfficeUnit):
         self.get_centuries()
         return self
 
-    def set_scale_unit(self, scale_unit) -> "PyfficeTimeUnit":
+    def set_scale_unit(self, scale_unit):
         """Set the scale unit.
         
         Args:
@@ -239,7 +237,7 @@ class PyfficeTimeUnit(PyfficeUnit):
                 raise ValueError(f"tframe {scale_unit} is not supported")
         return self
 
-    def set_time_end(self, end_time) -> "PyfficeTimeUnit":
+    def set_time_end(self, end_time):
         """Set the time end.
         
         Args:
@@ -253,7 +251,7 @@ class PyfficeTimeUnit(PyfficeUnit):
             self.end_time = end_time
         return self
 
-    def set_time_start(self, start_time) -> "PyfficeTimeUnit":
+    def set_time_start(self, start_time):
         """Set the time start.
         
         Args:
@@ -281,7 +279,7 @@ class PyfficeEvent(PyfficeUnit):
         self.location_attendance = None
         self.start_dttm = None
 
-    def load_unit(self, unit) -> "PyfficeEvent":
+    def load_unit(self, unit):
         """Load a unit dict into this document.
         
         Args:
@@ -299,7 +297,7 @@ class PyfficeEvent(PyfficeUnit):
         self.set_location(unit.get("location", None))
         return self
 
-    def set_end_dttm(self, end_dttm) -> "PyfficeEvent":
+    def set_end_dttm(self, end_dttm):
         """Set the end dttm.
         
         Args:
@@ -313,7 +311,7 @@ class PyfficeEvent(PyfficeUnit):
             self.end_dttm = end_dttm
         return self
 
-    def set_event(self, event) -> "PyfficeEvent":
+    def set_event(self, event):
         """Set the event.
         
         Args:
@@ -327,7 +325,7 @@ class PyfficeEvent(PyfficeUnit):
             self.event = event
         return self
 
-    def set_attendance_location(self, location) -> "PyfficeEvent":
+    def set_attendance_location(self, location):
         """Set the attendance location.
         
         Args:
@@ -341,7 +339,7 @@ class PyfficeEvent(PyfficeUnit):
             self.location_attendance = location
         return self
 
-    def set_start_dttm(self, start_dttm) -> "PyfficeEvent":
+    def set_start_dttm(self, start_dttm):
         """Set the start dttm.
         
         Args:

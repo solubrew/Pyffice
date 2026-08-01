@@ -26,8 +26,6 @@ from kahndor.logma import Logma
 from pyffice.audio.audio_export import PyfficeAudio
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 
-from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
-
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True
@@ -49,7 +47,7 @@ class PyfficeVideo(PyfficeDocument):
         self.has_audio = False
         self.audio = None
 
-    def check_audio(self) -> "PyfficeVideo":
+    def check_audio(self):
         """Check audio.
         
         Returns:
@@ -59,7 +57,7 @@ class PyfficeVideo(PyfficeDocument):
             self.audio = PyfficeAudio()
         return self
 
-    def cut_section(self, start, end, keep=False) -> "PyfficeVideo":
+    def cut_section(self, start, end, keep=False):
         """Cut section.
         
         Args:
@@ -82,21 +80,21 @@ class PyfficeVideo(PyfficeDocument):
 
         return self
 
-    def find_pause(self) -> list:
+    def find_pause(self):
         """Find pause points in video."""
         # Placeholder - would analyze video for pauses
         return []
 
-    def find_unpause(self) -> list:
+    def find_unpause(self):
         """Find unpause points in video."""
         # Placeholder - would analyze video for resumes
         return []
 
-    def get_duration(self) -> Any:
+    def get_duration(self):
         """Get video duration."""
         return getattr(self, 'duration', 0)
 
-    def get_palette(self) -> Any:
+    def get_palette(self):
         """Get color palette."""
         return getattr(self, 'palette', [])
 # ====================================================================================================================||

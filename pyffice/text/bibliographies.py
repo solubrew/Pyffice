@@ -24,8 +24,6 @@ from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument
 from pyffice.tags.references import PyfficeReference
 
-from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
-
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True
@@ -46,7 +44,7 @@ class PyfficeBibliography(PyfficeDocument):
         self.references = None
         self.style = None
 
-    def add_reference(self, cfg=None) -> "PyfficeBibliography":
+    def add_reference(self, cfg=None):
         """Add a reference.
         
         Args:
@@ -60,7 +58,7 @@ class PyfficeBibliography(PyfficeDocument):
         self.references.append(reference)
         return self
 
-    def del_reference(self, index) -> "PyfficeBibliography":
+    def del_reference(self, index):
         """Remove a reference from this document.
         
         Args:
@@ -73,7 +71,7 @@ class PyfficeBibliography(PyfficeDocument):
         del self.references[index]
         return self
 
-    def del_references(self) -> "PyfficeBibliography":
+    def del_references(self):
         """Remove the references.
         
         Returns:
@@ -83,7 +81,7 @@ class PyfficeBibliography(PyfficeDocument):
         self.references = None
         return self
 
-    def get_reference(self, index) -> Any:
+    def get_reference(self, index):
         """Return the reference.
         
         Args:
@@ -94,7 +92,7 @@ class PyfficeBibliography(PyfficeDocument):
         """
         return self.references[index]
 
-    def load_document(self, document=None) -> "PyfficeBibliography":
+    def load_document(self, document=None):
         """Load document into this document.
         
         Args:
@@ -113,7 +111,7 @@ class PyfficeBibliography(PyfficeDocument):
         self.set_references(document.get("references", None))
         return self
 
-    def set_references(self, references) -> "PyfficeBibliography":
+    def set_references(self, references):
         """Set the references.
         
         Args:
@@ -127,7 +125,7 @@ class PyfficeBibliography(PyfficeDocument):
         self.references = references if references is not None else []
         return self
 
-    def set_style(self, style) -> Any:
+    def set_style(self, style):
         """Set the style.
 
         Args:

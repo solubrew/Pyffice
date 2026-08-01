@@ -26,8 +26,6 @@ from pyffice.items.text import PyfficeText
 from pyffice.items.colors import PyfficeColor
 from pyffice.images.images import PyfficeImage
 
-from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
-
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True
@@ -52,7 +50,7 @@ class PyfficeBackground(PyfficeUnit):
         self.pattern = None
         self.transparency = None
 
-    def load_unit(self, unit) -> "PyfficeBackground":
+    def load_unit(self, unit):
         """Load a unit dict into this document.
         
         Args:
@@ -71,7 +69,7 @@ class PyfficeBackground(PyfficeUnit):
         self.set_transparency(unit.get("transparency", None))
         return self
 
-    def set_color(self, color) -> "PyfficeBackground":
+    def set_color(self, color):
         """Set the color.
         
         Args:
@@ -87,7 +85,7 @@ class PyfficeBackground(PyfficeUnit):
         self.color = color
         return self
 
-    def set_image(self, path) -> "PyfficeBackground":
+    def set_image(self, path):
         """Set the image.
         
         Args:
@@ -106,12 +104,12 @@ class PyfficeBackground(PyfficeUnit):
         self.file_path = self.image.file_path
         return self
 
-    def set_pattern(self, pattern) -> "PyfficeBackground":
+    def set_pattern(self, pattern):
         """Set cell pattern."""
         self.pattern = pattern
         return self
 
-    def set_transparency(self, transparency) -> "PyfficeBackground":
+    def set_transparency(self, transparency):
         """Set the transparency.
         
         Args:
@@ -151,7 +149,7 @@ class PyfficeCell(PyfficeUnit):
         self.selections = None
         self.transparency = None
 
-    def evaluate(self) -> None:
+    def evaluate(self):
         """Evaluate.
         
         Returns:
@@ -161,7 +159,7 @@ class PyfficeCell(PyfficeUnit):
         inputs = self.get_inputs()
         self.parent.compiler.evaluate(formula, inputs)
 
-    def get_format(self) -> None:
+    def get_format(self):
         """
         :return:
         """
@@ -186,11 +184,11 @@ class PyfficeCell(PyfficeUnit):
         }
         return format_
 
-    def get_formula(self) -> Any:
+    def get_formula(self):
         """Get cell formula."""
         return getattr(self, 'formula', None)
 
-    def get_inputs(self) -> Any:
+    def get_inputs(self):
         """Return the inputs.
         
         Returns:
@@ -198,11 +196,11 @@ class PyfficeCell(PyfficeUnit):
         """
         return self.formula_inputs
 
-    def get_value(self) -> Any:
+    def get_value(self):
         """Get cell value."""
         return getattr(self, 'value', None)
 
-    def load_unit(self, unit) -> "PyfficeCell":
+    def load_unit(self, unit):
         """Load a unit dict into this document.
         
         Args:
@@ -228,7 +226,7 @@ class PyfficeCell(PyfficeUnit):
         logma.info("Pyffice Cell Loaded")
         return self
 
-    def set_address(self, address) -> "PyfficeCell":
+    def set_address(self, address):
         """Set the address.
         
         Args:
@@ -244,7 +242,7 @@ class PyfficeCell(PyfficeUnit):
             self.address = address
         return self
 
-    def set_background(self, background) -> "PyfficeCell":
+    def set_background(self, background):
         """Set the background.
         
         Args:
@@ -260,7 +258,7 @@ class PyfficeCell(PyfficeUnit):
         self.background = background
         return self
 
-    def set_border_size(self, size, position="top") -> "PyfficeCell":
+    def set_border_size(self, size, position="top"):
         """Set the border size.
         
         Args:
@@ -276,7 +274,7 @@ class PyfficeCell(PyfficeUnit):
         self.border_size[position] = size
         return self
 
-    def set_border_color(self, color, position="top") -> "PyfficeCell":
+    def set_border_color(self, color, position="top"):
         """Set the border color.
         
         Args:
@@ -292,7 +290,7 @@ class PyfficeCell(PyfficeUnit):
         self.border_color[position] = color
         return self
 
-    def set_border_style(self, style, position="top") -> "PyfficeCell":
+    def set_border_style(self, style, position="top"):
         """Set the border style.
         
         Args:
@@ -308,12 +306,12 @@ class PyfficeCell(PyfficeUnit):
         self.border_style[position] = style
         return self
 
-    def set_format(self, format_) -> "PyfficeCell":
+    def set_format(self, format_):
         """Set cell format."""
         self.format = format_
         return self
 
-    def set_formula(self, formula, inputs=None) -> "PyfficeCell":
+    def set_formula(self, formula, inputs=None):
         """Set the formula.
         
         Args:
@@ -331,12 +329,12 @@ class PyfficeCell(PyfficeUnit):
         self.formula_inputs = inputs
         return self
 
-    def set_object(self, object_) -> "PyfficeCell":
+    def set_object(self, object_):
         """Set cell object."""
         self.object = object_
         return self
 
-    def set_value(self, value, font=None) -> "PyfficeCell":
+    def set_value(self, value, font=None):
         """Set the value.
         
         Args:
@@ -352,7 +350,7 @@ class PyfficeCell(PyfficeUnit):
         self.value = value
         return self
 
-    def set_transparency(self, transparency) -> "PyfficeCell":
+    def set_transparency(self, transparency):
         """Set the transparency.
         
         Args:

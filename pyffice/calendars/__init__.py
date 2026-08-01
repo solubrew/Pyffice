@@ -10,7 +10,7 @@ _LAZY_EXPORTS = {
     "PyfficeEvent": ("pyffice.calendars.events", "PyfficeEvent"),
 }
 
-def __getattr__(name: str):
+def __getattr__(name: str) -> None:
     if name in _LAZY_EXPORTS:
         mod_path, attr = _LAZY_EXPORTS[name]
         mod = __import__(mod_path, fromlist=[attr])

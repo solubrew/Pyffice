@@ -26,8 +26,6 @@ from subtrix.utilities import uuid
 from pyffice.web.web import PyfficeWebBrowser
 from pyffice.items.text import PyfficeText
 
-from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
-
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True
@@ -69,7 +67,7 @@ class PyfficePrompt(PyfficeDocument):
         self.scope = None
         self.topic = None
 
-    def get_metrics(self) -> None:
+    def get_metrics(self):
         """Return the metrics.
         
         Returns:
@@ -78,7 +76,7 @@ class PyfficePrompt(PyfficeDocument):
         metrics = {}
         return metrics
 
-    def load_document(self, document=None) -> "PyfficePrompt":
+    def load_document(self, document=None):
         """Load document into this document.
         
         Args:
@@ -97,7 +95,7 @@ class PyfficePrompt(PyfficeDocument):
         self.set_response(document.get("responses", []))
         return self
 
-    def set_context(self, context) -> "PyfficePrompt":
+    def set_context(self, context):
         """Set the context.
         
         Args:
@@ -114,7 +112,7 @@ class PyfficePrompt(PyfficeDocument):
             self.context_metrics = {"tokens": len(context.to_string().split()), "characters": len(context.to_string())}
         return self
 
-    def set_input(self, input) -> "PyfficePrompt":
+    def set_input(self, input):
         """Set the input.
         
         Args:
@@ -131,7 +129,7 @@ class PyfficePrompt(PyfficeDocument):
             self.input_metrics = {"tokens": len(input.to_string().split()), "characters": len(input.to_string())}
         return self
 
-    def set_persona(self, persona=0) -> "PyfficePrompt":
+    def set_persona(self, persona=0):
         """How to define and organize personas: https://www.personality-is-graph.com/"""
         personas = [
             "teacher",
@@ -171,7 +169,7 @@ class PyfficePrompt(PyfficeDocument):
             self.persona = persona
         return self
 
-    def set_prompt(self, prompt) -> "PyfficePrompt":
+    def set_prompt(self, prompt):
         """Set the prompt.
         
         Args:
@@ -187,7 +185,7 @@ class PyfficePrompt(PyfficeDocument):
             self.prompt = prompt
         return self
 
-    def set_response(self, response) -> "PyfficePrompt":
+    def set_response(self, response):
         """Set the response.
         
         Args:
@@ -203,7 +201,7 @@ class PyfficePrompt(PyfficeDocument):
             self.response = response
         return self
 
-    def set_response_scope(self, scope) -> "PyfficePrompt":
+    def set_response_scope(self, scope):
         """Set the response scope.
         
         Args:
@@ -252,7 +250,7 @@ class PyfficePrompt(PyfficeDocument):
         self.response_scope = response_scope
         return self
 
-    def set_topic(self, topic) -> "PyfficePrompt":
+    def set_topic(self, topic):
         """Set the topic.
         
         Args:
@@ -266,7 +264,7 @@ class PyfficePrompt(PyfficeDocument):
             self.topic = topic
         return self
 
-    def to_dict(self) -> Any:
+    def to_dict(self):
         """Convert this document to dict.
         
         Returns:
@@ -293,17 +291,17 @@ class PyfficeResponse(PyfficeDocument):
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeResponse")).override(cfg)
 
-    def add_source(self) -> "PyfficeResponse":
+    def add_source(self):
         """Add a source."""
         _p = True  # placeholder
         return self
 
-    def load_document(self, document=None) -> "PyfficeResponse":
+    def load_document(self, document=None):
         """Load document."""
         _p = True  # placeholder
         return self
 
-    def set_sources(self, sources) -> "PyfficeResponse":
+    def set_sources(self, sources):
         """Set the sources.
         
         Args:
@@ -334,7 +332,7 @@ class PyfficePromptsManager(PyfficeDocumentManager):
         self.prompts = None
         self.responses = None
 
-    def add_prompt(self, input=None, context=None, tags=None) -> "PyfficePromptsManager":
+    def add_prompt(self, input=None, context=None, tags=None):
         """Add a prompt.
         
         Args:
@@ -357,7 +355,7 @@ class PyfficePromptsManager(PyfficeDocumentManager):
         self.prompt = prompt
         return self
 
-    def add_prompt_response(self, text, service, metrics=None, prompt=None) -> "PyfficePromptsManager":
+    def add_prompt_response(self, text, service, metrics=None, prompt=None):
         """Add a prompt response.
         
         Args:
@@ -384,7 +382,7 @@ class PyfficePromptsManager(PyfficeDocumentManager):
         self.response = response
         return self
 
-    def add_prompt(self, prompt) -> "PyfficePromptsManager":
+    def add_prompt(self, prompt):
         """Add a prompt.
         
         Args:
@@ -399,7 +397,7 @@ class PyfficePromptsManager(PyfficeDocumentManager):
         self.prompts.append(prompt)
         return self
 
-    def add_service(self, service, metrics, model) -> "PyfficePromptsManager":
+    def add_service(self, service, metrics, model):
         """Add a service.
         
         Args:
@@ -415,7 +413,7 @@ class PyfficePromptsManager(PyfficeDocumentManager):
         self.document["document"]["services"].append(service)
         return self
 
-    def load_document(self, document=None) -> "PyfficePromptsManager":
+    def load_document(self, document=None):
         """Load document into this document.
         
         Args:
@@ -434,7 +432,7 @@ class PyfficePromptsManager(PyfficeDocumentManager):
         self.set_service_active(document.get("active_service", None))
         return self
 
-    def set_browser_left(self, browser) -> "PyfficePromptsManager":
+    def set_browser_left(self, browser):
         """Set the browser left.
         
         Args:
@@ -447,7 +445,7 @@ class PyfficePromptsManager(PyfficeDocumentManager):
         self.browser_left = PyfficeWebBrowser(cfg)
         return self
 
-    def set_browser_right(self, browser) -> "PyfficePromptsManager":
+    def set_browser_right(self, browser):
         """Set the browser right.
         
         Args:
@@ -460,7 +458,7 @@ class PyfficePromptsManager(PyfficeDocumentManager):
         self.browser_right = PyfficeWebBrowser(cfg)
         return self
 
-    def set_service_active(self, service) -> "PyfficePromptsManager":
+    def set_service_active(self, service):
         """Set the service active.
         
         Args:
@@ -476,7 +474,7 @@ class PyfficePromptsManager(PyfficeDocumentManager):
                 self.services.append(service)
         return self
 
-    def set_services(self, services) -> "PyfficePromptsManager":
+    def set_services(self, services):
         """Set the services.
         
         Args:
@@ -492,7 +490,7 @@ class PyfficePromptsManager(PyfficeDocumentManager):
             self.services = services
         return self
 
-    def set_prompts(self, prompts) -> "PyfficePromptsManager":
+    def set_prompts(self, prompts):
         """Set the prompts.
         
         Args:

@@ -24,8 +24,6 @@ from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument
 from pyffice.items.layers import PyfficeLayer
 
-from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
-
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True
@@ -51,7 +49,7 @@ class PyfficeSketch(PyfficeDocument):
         self.layers = None
         self.lock = None
 
-    def add_layer(self, layer) -> "PyfficeSketch":
+    def add_layer(self, layer):
         """Add a layer.
         
         Args:
@@ -66,7 +64,7 @@ class PyfficeSketch(PyfficeDocument):
         self.layers[layer.name] = layer
         return self
 
-    def del_layer(self, layer) -> Any:
+    def del_layer(self, layer):
         """Remove the layer.
 
         Args:
@@ -77,7 +75,7 @@ class PyfficeSketch(PyfficeDocument):
         """
         return self._del_from_dict("layers", layer.name, "layers")
 
-    def load_document(self, document=None) -> "PyfficeSketch":
+    def load_document(self, document=None):
         """Load document into this document.
         
         Args:
@@ -98,26 +96,26 @@ class PyfficeSketch(PyfficeDocument):
         self.set_nodes(document.get("nodes", {}))
         return self
 
-    def set_lock(self, lock) -> "PyfficeSketch":
+    def set_lock(self, lock):
         """Set lock state."""
         self.lock = lock
         return self
 
-    def set_edges(self, edges) -> "PyfficeSketch":
+    def set_edges(self, edges):
         """Set edges."""
         self.edges = edges
         return self
 
-    def set_endpoints(self, endpoints) -> "PyfficeSketch":
+    def set_endpoints(self, endpoints):
         """Set endpoints."""
         self.endpoints = endpoints
         return self
 
-    def set_nodes(self, nodes) -> "PyfficeSketch":
+    def set_nodes(self, nodes):
         """Set nodes."""
         self.nodes = nodes
         return self
-    def to_md(self) -> str:
+    def to_md(self):
         """Convert to Markdown."""
         # Placeholder - would generate markdown
         return ""

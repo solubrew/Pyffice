@@ -177,17 +177,13 @@ class TestPyfficeFileSystemGetFiles:
 
 
 class TestPyfficeFileSystemToDict:
-    """to_dict returns a dict (canonical envelope).
+    """to_dict returns a dict (canonical envelope)."""
 
-    Note: to_dict() triggers a deep import chain
-    (pyffice.pyffice -> matrix.spreadsheet -> thingery.numbers)
-    that fails with ModuleNotFoundError when the ``thingery`` package
-    is not installed in this environment. We document that error path
-    rather than skip the test.
-    """
-
-    def test_to_dict_raises_without_thingery_dep(self):
+    def test_to_dict_returns_dict(self):
         fs = PyfficeFileSystem()
         fs.path = None
-        with pytest.raises(ModuleNotFoundError):
-            fs.to_dict()
+        result = fs.to_dict()
+        assert isinstance(result, dict)
+        assert "meta_data" in result
+        assert "data" in result
+        assert "pyffice_compat" in result

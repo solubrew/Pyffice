@@ -24,8 +24,6 @@ from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeUnit, PyfficeDocumentManager
 from pyffice.items.items import PyfficeTable
 
-from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
-
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True
@@ -46,27 +44,27 @@ class PyfficeSource(PyfficeDocumentManager):
         self.data_sets = []
         self.data_views = []
 
-    def add_data_set(self, data_set) -> "PyfficeSource":
+    def add_data_set(self, data_set):
         """Append a data set to self.data_sets."""
         self.data_sets.append(data_set)
         return self
 
-    def add_data_view(self, data_set) -> "PyfficeSource":
+    def add_data_view(self, data_set):
         """Append a data view to self.data_views."""
         self.data_views.append(data_set)
         return self
 
-    def edit_data_set(self, changes) -> "PyfficeSource":
+    def edit_data_set(self, changes):
         """Replace self.data_sets with changes (full snapshot)."""
         self.data_sets = list(changes)
         return self
 
-    def edit_data_view(self, changes) -> "PyfficeSource":
+    def edit_data_view(self, changes):
         """Replace self.data_views with changes (full snapshot)."""
         self.data_views = list(changes)
         return self
 
-    def load_document(self, document=None) -> "PyfficeSource":
+    def load_document(self, document=None):
         """Load document into this document.
         
         Args:
@@ -90,7 +88,7 @@ class PyfficeSourceManager(PyfficeDocumentManager):
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeSourceManager").override(cfg))
         self.sources = []
 
-    def add_source(self, source, type_="file") -> Any:
+    def add_source(self, source, type_="file"):
         """Add a source reference.
         
         Args:
@@ -103,7 +101,7 @@ class PyfficeSourceManager(PyfficeDocumentManager):
         source = PyfficeSource({"name": source.name, "type": type_, "path": source.path})
         return self._add_to_collection("sources", source, "sources")
 
-    def load_document(self, document=None) -> "PyfficeSourceManager":
+    def load_document(self, document=None):
         """Load document into this document.
         
         Args:
@@ -118,7 +116,7 @@ class PyfficeSourceManager(PyfficeDocumentManager):
         self.set_sources(document.get("sources", []))
         return self
 
-    def set_sources(self, sources) -> "PyfficeSourceManager":
+    def set_sources(self, sources):
         """Set the sources.
         
         Args:
@@ -147,7 +145,7 @@ class PyfficeDataSet(PyfficeDocument):
         self.relationships = None
         self.views = set()
 
-    def add_relationship(self, left_view, right_view, relationship_type=None, relationship_name=None) -> "PyfficeDataSet":
+    def add_relationship(self, left_view, right_view, relationship_type=None, relationship_name=None):
         """Add a relationship.
         
         Args:
@@ -168,7 +166,7 @@ class PyfficeDataSet(PyfficeDocument):
         self.relationships.add(relationship)
         return self
 
-    def add_view(self, datatable, name=None) -> Any:
+    def add_view(self, datatable, name=None):
         """Add a view.
         
         Args:
@@ -182,7 +180,7 @@ class PyfficeDataSet(PyfficeDocument):
         view = PyfficeDataView(cfg)
         return self._add_to_collection("views", view, "views")
 
-    def del_source(self, source) -> Any:
+    def del_source(self, source):
         """Remove the source.
         
         Args:
@@ -193,7 +191,7 @@ class PyfficeDataSet(PyfficeDocument):
         """
         return self._del_from_collection("sources", source, "sources")
 
-    def del_relationship(self, relationship) -> Any:
+    def del_relationship(self, relationship):
         """Remove the relationship.
         
         Args:
@@ -204,7 +202,7 @@ class PyfficeDataSet(PyfficeDocument):
         """
         return self._del_from_collection("relationships", relationship, "relationships")
 
-    def del_view(self, view) -> Any:
+    def del_view(self, view):
         """Remove the view.
         
         Args:
@@ -215,7 +213,7 @@ class PyfficeDataSet(PyfficeDocument):
         """
         return self._del_from_collection("views", view, "views")
 
-    def load_document(self, document=None) -> "PyfficeDataSet":
+    def load_document(self, document=None):
         """Load document into this document.
         
         Args:
@@ -235,7 +233,7 @@ class PyfficeDataSet(PyfficeDocument):
         self.set_views(document.get("views", self.config.dikt.get("views", [])))
         return self
 
-    def set_relationships(self, relationships) -> "PyfficeDataSet":
+    def set_relationships(self, relationships):
         """Set the relationships.
         
         Args:
@@ -250,7 +248,7 @@ class PyfficeDataSet(PyfficeDocument):
             self.relationships = relationships
         return self
 
-    def set_sources(self, sources) -> "PyfficeDataSet":
+    def set_sources(self, sources):
         """Set the sources.
         
         Args:
@@ -265,7 +263,7 @@ class PyfficeDataSet(PyfficeDocument):
             self.sources = sources
         return self
 
-    def set_views(self, views) -> "PyfficeDataSet":
+    def set_views(self, views):
         """Set the views.
         
         Args:
@@ -294,7 +292,7 @@ class PyfficeDataView(PyfficeDocument):
         self.summarizations = None
         self.type = None
 
-    def add_filter(self, column, operator, value) -> Any:
+    def add_filter(self, column, operator, value):
         """Add a filter.
         
         Args:
@@ -308,7 +306,7 @@ class PyfficeDataView(PyfficeDocument):
         filter_ = {"operator": operator, "column": column, "value": value}
         return self._add_to_collection("filters", filter_, "filters")
 
-    def add_summarization(self, column, formula, name=None) -> Any:
+    def add_summarization(self, column, formula, name=None):
         """Add a summarization.
         
         Args:
@@ -322,7 +320,7 @@ class PyfficeDataView(PyfficeDocument):
         summarization = {"column": column, "formula": formula, "name": name}
         return self._add_to_collection("summarizations", summarization, "summarizations")
 
-    def apply_filters(self, df) -> None:
+    def apply_filters(self, df):
         """Apply filters.
         
         Args:
@@ -381,7 +379,7 @@ class PyfficeDataView(PyfficeDocument):
                     raise ValueError(f"Invalid operator: {filter_['operator']}")
         return df
 
-    def apply_summarizations(self, df) -> None:
+    def apply_summarizations(self, df):
         """Apply summarizations.
         
         Args:
@@ -392,7 +390,7 @@ class PyfficeDataView(PyfficeDocument):
         """
         return df
 
-    def del_filter(self, column, operator, value) -> Any:
+    def del_filter(self, column, operator, value):
         """Remove the filter.
         
         Args:
@@ -406,7 +404,7 @@ class PyfficeDataView(PyfficeDocument):
         filter_ = {"operator": operator, "column": column, "value": value}
         return self._del_from_collection("filters", filter_, "filters")
 
-    def del_summarization(self, column, formula, name=None) -> Any:
+    def del_summarization(self, column, formula, name=None):
         """Remove the summarization.
         
         Args:
@@ -420,7 +418,7 @@ class PyfficeDataView(PyfficeDocument):
         summarization = {"column": column, "formula": formula, "name": name}
         return self._del_from_collection("summarizations", summarization, "summarizations")
 
-    def get_data(self) -> None:
+    def get_data(self):
         """Return the data.
         
         Returns:
@@ -430,7 +428,7 @@ class PyfficeDataView(PyfficeDocument):
         df = self.apply_summarizations(df)
         return df
 
-    def load_document(self, document) -> "PyfficeDataView":
+    def load_document(self, document):
         """Load document into this document.
         
         Args:
@@ -451,7 +449,7 @@ class PyfficeDataView(PyfficeDocument):
         self.set_summarizations(document.get("summarizations", []))
         return self
 
-    def set_columns(self, columns) -> "PyfficeDataView":
+    def set_columns(self, columns):
         """Set the columns.
         
         Args:
@@ -465,7 +463,7 @@ class PyfficeDataView(PyfficeDocument):
         self.columns = columns
         return self
 
-    def set_data(self, data) -> "PyfficeDataView":
+    def set_data(self, data):
         """Set the data.
         
         Args:
@@ -481,7 +479,7 @@ class PyfficeDataView(PyfficeDocument):
             self.data = data
         return self
 
-    def set_filters(self, filters) -> "PyfficeDataView":
+    def set_filters(self, filters):
         """Set the filters.
         
         Args:
@@ -496,7 +494,7 @@ class PyfficeDataView(PyfficeDocument):
             self.filters = filters
         return self
 
-    def set_summarizations(self, summarizations) -> "PyfficeDataView":
+    def set_summarizations(self, summarizations):
         """Set the summarizations.
         
         Args:

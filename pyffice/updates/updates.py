@@ -53,14 +53,13 @@ class PyfficeUpdate(object):
         """Returns True if the document is missing fields not in the schema at the schema levels"""
         return None
 
-    def create_temp_file(self) -> "PyfficeUpdate":
+    def create_temp_file(self) -> None:
         """Create a temporary file."""
         import tempfile
         import os
         fd, path = tempfile.mkstemp()
         os.close(fd)
         self.temp_file = path
-        return self
 
 
 class PyfficeUnitUpdate(PyfficeUpdate):

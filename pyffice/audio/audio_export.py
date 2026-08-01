@@ -1,5 +1,3 @@
-
-from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
 """
 ---
@@ -33,7 +31,6 @@ has_ffmpeg = False
 try:
     import ffmpeg
 
-
     has_ffmpeg = True
 except ImportError:
     logma.warning("FFMPEG not Available.")
@@ -58,7 +55,7 @@ class PyfficeAudio(PyfficeDocument):
         self.path = path
         # self.audio = pydub.AudioSegment.from_file(path)
 
-    def add_fade(self, inn=False, out=False, in_duration=None, out_duration=None) -> "PyfficeAudio":
+    def add_fade(self, inn=False, out=False, in_duration=None, out_duration=None):
         """Add a fade.
         
         Args:
@@ -80,7 +77,7 @@ class PyfficeAudio(PyfficeDocument):
             self.audio = self.audio.fade_out(out_duration)
         return self
 
-    def convert_mp3_to_wave(self, new_path) -> "PyfficeAudio":
+    def convert_mp3_to_wave(self, new_path):
         """Convert mp3 to wave.
         
         Args:
@@ -93,7 +90,7 @@ class PyfficeAudio(PyfficeDocument):
             logma.warning(f"MP3 Not Supported without FFMPEG.")
         return self
 
-    def convert_wav_to_mp3(self, new_path) -> "PyfficeAudio":
+    def convert_wav_to_mp3(self, new_path):
         """Convert wav to mp3.
         
         Args:
@@ -107,7 +104,7 @@ class PyfficeAudio(PyfficeDocument):
         self.audio.export(new_path, format="mp3")
         return self
 
-    def cut_section(self, start, end, keep=False) -> "PyfficeAudio":
+    def cut_section(self, start, end, keep=False):
         """Cut section.
         
         Args:
@@ -122,25 +119,25 @@ class PyfficeAudio(PyfficeDocument):
         trimmed_audio.export(self.path, format="mp3")
         return self
 
-    def find_pause(self) -> list:
+    def find_pause(self):
         """Find pause points in audio."""
         return []
 
-    def find_unpause(self) -> list:
+    def find_unpause(self):
         """Find unpause points in audio."""
         return []
 
-    def get_duration(self) -> Any:
+    def get_duration(self):
         """Get audio duration."""
         return getattr(self, 'duration', 0)
 
-    def increase_volume(self, percent) -> "PyfficeAudio":
+    def increase_volume(self, percent):
         """Increase volume by percent."""
         current = getattr(self, 'volume', 100)
         self.volume = min(100, current + percent)
         return self
 
-    def decrease_volume(self, percent) -> "PyfficeAudio":
+    def decrease_volume(self, percent):
         """Decrease volume by percent."""
         current = getattr(self, 'volume', 100)
         self.volume = max(0, current - percent)

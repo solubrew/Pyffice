@@ -29,8 +29,6 @@ from pyffice.document import PyfficeDocument, PyfficeDocumentManager, PyfficeDeq
 from pyffice.web.url import PyfficeURL, PyfficeURLLibrary
 from pycurity.pyhash import text_hashing_function, encode64, decode64
 
-from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
-
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = False
@@ -60,7 +58,7 @@ class PyfficeWebBrowser(PyfficeDocument):
         self.profile_manager = None
         self.doc_type = "browser"
 
-    def add_page(self, page) -> "PyfficeWebBrowser":
+    def add_page(self, page):
         """Add a page.
         
         Args:
@@ -79,7 +77,7 @@ class PyfficeWebBrowser(PyfficeDocument):
         self.pages.append(page)
         return self
 
-    def add_profile(self, profile) -> "PyfficeWebBrowser":
+    def add_profile(self, profile):
         """Add a profile.
         
         Args:
@@ -97,17 +95,17 @@ class PyfficeWebBrowser(PyfficeDocument):
         self.profile_manager.add_profile(profile)
         return self
 
-    def del_page(self) -> "PyfficeWebBrowser":
+    def del_page(self):
         """Delete a page."""
         _p = True  # placeholder
         return self
 
-    def del_profile(self, name) -> "PyfficeWebBrowser":
+    def del_profile(self, name):
         """Delete a profile."""
         _p = True  # placeholder
         return self
 
-    def get_active_profile(self) -> Any:
+    def get_active_profile(self):
         """Return the active profile.
         
         Returns:
@@ -115,7 +113,7 @@ class PyfficeWebBrowser(PyfficeDocument):
         """
         return self.profile_manager.active_profile
 
-    def get_active_page(self) -> Any:
+    def get_active_page(self):
         """Return the active page.
         
         Returns:
@@ -123,7 +121,7 @@ class PyfficeWebBrowser(PyfficeDocument):
         """
         return self.pages.get_active_page()
 
-    def is_pinned(self) -> Any:
+    def is_pinned(self):
         """Return whether this document is pinned.
         
         Returns:
@@ -131,7 +129,7 @@ class PyfficeWebBrowser(PyfficeDocument):
         """
         return self.active_page.is_pinned()
 
-    def load_document(self, document=None) -> "PyfficeWebBrowser":
+    def load_document(self, document=None):
         """Load document into this document.
         
         Args:
@@ -159,7 +157,7 @@ class PyfficeWebBrowser(PyfficeDocument):
         self.set_page_active(document.get("active_page", None))
         return self
 
-    def set_library(self, library) -> "PyfficeWebBrowser":
+    def set_library(self, library):
         """Set the library.
         
         Args:
@@ -176,7 +174,7 @@ class PyfficeWebBrowser(PyfficeDocument):
             self.library = library
         return self
 
-    def set_page_active(self, page) -> "PyfficeWebBrowser":
+    def set_page_active(self, page):
         """Set the page active.
         
         Args:
@@ -205,7 +203,7 @@ class PyfficeWebBrowser(PyfficeDocument):
             raise ValueError(f"page: {page}")
         return self
 
-    def set_page_home(self, page) -> "PyfficeWebBrowser":
+    def set_page_home(self, page):
         """Set the page home.
         
         Args:
@@ -222,7 +220,7 @@ class PyfficeWebBrowser(PyfficeDocument):
             self.home_page = page
         return self
 
-    def set_pages(self, pages) -> "PyfficeWebBrowser":
+    def set_pages(self, pages):
         """Set the pages.
         
         Args:
@@ -243,7 +241,7 @@ class PyfficeWebBrowser(PyfficeDocument):
             self.pages = page_objs
         return self
 
-    def set_pinned(self, pin) -> "PyfficeWebBrowser":
+    def set_pinned(self, pin):
         """Set the pinned.
         
         Args:
@@ -255,7 +253,7 @@ class PyfficeWebBrowser(PyfficeDocument):
         self.pinned = pin
         return self
 
-    def set_profile_active(self, profile) -> "PyfficeWebBrowser":
+    def set_profile_active(self, profile):
         """Set the profile active.
         
         Args:
@@ -276,7 +274,7 @@ class PyfficeWebBrowser(PyfficeDocument):
             self.active_profile = profile
         return self
 
-    def set_profile_manager(self, profiles) -> "PyfficeWebBrowser":
+    def set_profile_manager(self, profiles):
         """Set the profile manager.
         
         Args:
@@ -295,7 +293,7 @@ class PyfficeWebBrowser(PyfficeDocument):
             self.profile_manager = profile_manager
         return self
 
-    def set_refresh_time(self) -> "PyfficeWebBrowser":
+    def set_refresh_time(self):
         """Set the refresh time.
         
         Returns:
@@ -325,7 +323,7 @@ class PyfficeWebBrowser(PyfficeDocument):
     #         self.home_url = home_url
     #     return self
 
-    def to_dict(self) -> Any:
+    def to_dict(self):
         """Convert this document to dict.
         
         Returns:
@@ -362,7 +360,7 @@ class PyfficeWebPage(PyfficeDocument):
         self.last_refresh = None
         self.trust = None
 
-    def add_history(self, url) -> "PyfficeWebPage":
+    def add_history(self, url):
         """Add a history.
         
         Args:
@@ -375,7 +373,7 @@ class PyfficeWebPage(PyfficeDocument):
         self.history.append(url)
         return self
 
-    def add_snapshot(self, snapshot) -> "PyfficeWebPage":
+    def add_snapshot(self, snapshot):
         """Add a snapshot.
         
         Args:
@@ -390,7 +388,7 @@ class PyfficeWebPage(PyfficeDocument):
         self.snapshots.append(snapshot)
         return self
 
-    def add_version(self, content) -> "PyfficeWebPage":
+    def add_version(self, content):
         """Add a version.
         
         Args:
@@ -405,7 +403,7 @@ class PyfficeWebPage(PyfficeDocument):
         self.versions.append(version)
         return self
 
-    def load_document(self, document=None) -> "PyfficeWebPage":
+    def load_document(self, document=None):
         """Load document into this document.
         
         Args:
@@ -425,7 +423,7 @@ class PyfficeWebPage(PyfficeDocument):
         self.set_level_of_trust(document.get("level_of_trust", 0))
         return self
 
-    def get_finger_print(self, content) -> Any:
+    def get_finger_print(self, content):
         """Return the finger print.
         
         Args:
@@ -436,7 +434,7 @@ class PyfficeWebPage(PyfficeDocument):
         """
         return text_hashing_function(content)
 
-    def set_history(self, history, max_items) -> "PyfficeWebPage":
+    def set_history(self, history, max_items):
         """Set the history.
         
         Args:
@@ -453,7 +451,7 @@ class PyfficeWebPage(PyfficeDocument):
             self.history = history
         return self
 
-    def set_page_pinned(self, pinned=None) -> "PyfficeWebPage":
+    def set_page_pinned(self, pinned=None):
         """Set the page pinned.
         
         Args:
@@ -471,7 +469,7 @@ class PyfficeWebPage(PyfficeDocument):
             self.pinned_on_dttm = pinned_on_dttm
         return self
 
-    def set_page_unpinned(self) -> "PyfficeWebPage":
+    def set_page_unpinned(self):
         """Set the page unpinned.
         
         Returns:
@@ -493,7 +491,7 @@ class PyfficeWebPage(PyfficeDocument):
     #         self.active_profile = profile
     #     return self
 
-    def set_refresh_time(self) -> "PyfficeWebPage":
+    def set_refresh_time(self):
         """Set the refresh time.
         
         Returns:
@@ -502,7 +500,7 @@ class PyfficeWebPage(PyfficeDocument):
         self.last_refresh = dt.datetime.now().isoformat()
         return self
 
-    def set_level_of_trust(self, level) -> "PyfficeWebPage":
+    def set_level_of_trust(self, level):
         """Set the level of trust.
         
         Args:
@@ -520,7 +518,7 @@ class PyfficeWebPage(PyfficeDocument):
             self.trust = level
         return self
 
-    def set_snapshots(self, snapshots) -> "PyfficeWebPage":
+    def set_snapshots(self, snapshots):
         """Set the snapshots.
         
         Args:
@@ -534,7 +532,7 @@ class PyfficeWebPage(PyfficeDocument):
             self.snapshots = snapshots
         return self
 
-    def set_url(self, url) -> "PyfficeWebPage":
+    def set_url(self, url):
         """Set the url.
         
         Args:
@@ -551,7 +549,7 @@ class PyfficeWebPage(PyfficeDocument):
                 self.active_url = active_url
         return self
 
-    def set_versions(self, versions) -> "PyfficeWebPage":
+    def set_versions(self, versions):
         """Set the versions.
         
         Args:
@@ -565,7 +563,7 @@ class PyfficeWebPage(PyfficeDocument):
             self.versions = versions
         return self
 
-    def to_dict(self) -> Any:
+    def to_dict(self):
         """Convert this document to dict.
         
         Returns:
@@ -597,7 +595,7 @@ class PyfficeWebProfile(PyfficeContact):
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeWebProfile")).override(cfg)
 
-    def load_document(self, document=None) -> "PyfficeWebProfile":
+    def load_document(self, document=None):
         """Load document into this document.
         
         Args:
@@ -628,7 +626,7 @@ class PyfficeWebProfileManager(PyfficeRolodex):
         self.active_profile = None
         self.profiles = None
 
-    def add_profile(self, profile) -> "PyfficeWebProfileManager":
+    def add_profile(self, profile):
         """Add a profile.
         
         Args:
@@ -645,7 +643,7 @@ class PyfficeWebProfileManager(PyfficeRolodex):
         self.add_contact(profile, "profile")
         return self
 
-    def add_profiles(self, profiles) -> "PyfficeWebProfileManager":
+    def add_profiles(self, profiles):
         """Add a profiles.
         
         Args:
@@ -658,7 +656,7 @@ class PyfficeWebProfileManager(PyfficeRolodex):
             self.add_profile(profile)
         return self
 
-    def del_profile(self, name) -> "PyfficeWebProfileManager":
+    def del_profile(self, name):
         """Remove the profile.
         
         Args:
@@ -670,7 +668,7 @@ class PyfficeWebProfileManager(PyfficeRolodex):
         self.del_contact(name)
         return self
 
-    def get_count(self) -> int:
+    def get_count(self):
         """Return the count.
         
         Returns:
@@ -678,7 +676,7 @@ class PyfficeWebProfileManager(PyfficeRolodex):
         """
         return len(self.profiles)
 
-    def get_profile(self, name) -> Any:
+    def get_profile(self, name):
         """Return the profile.
         
         Args:
@@ -689,7 +687,7 @@ class PyfficeWebProfileManager(PyfficeRolodex):
         """
         return self.get_contact(name)
 
-    def get_current_profile(self) -> Any:
+    def get_current_profile(self):
         """Return the current profile.
         
         Returns:
@@ -697,7 +695,7 @@ class PyfficeWebProfileManager(PyfficeRolodex):
         """
         return self.active_profile
 
-    def load_document(self, document=None) -> "PyfficeWebProfileManager":
+    def load_document(self, document=None):
         """Load document into this document.
         
         Args:
@@ -713,7 +711,7 @@ class PyfficeWebProfileManager(PyfficeRolodex):
         self.set_profile_active(document.get("active_profile", None))
         return self
 
-    def set_profile_active(self, profile) -> "PyfficeWebProfileManager":
+    def set_profile_active(self, profile):
         """Set the profile active.
         
         Args:
@@ -730,7 +728,7 @@ class PyfficeWebProfileManager(PyfficeRolodex):
             self.active_profile = profile
         return self
 
-    def set_profiles(self, profiles) -> "PyfficeWebProfileManager":
+    def set_profiles(self, profiles):
         """Set the profiles.
         
         Args:
@@ -746,7 +744,7 @@ class PyfficeWebProfileManager(PyfficeRolodex):
             self.profiles = profiles
         return self
 
-    def to_dict(self) -> Any:
+    def to_dict(self):
         """Convert this document to dict.
         
         Returns:

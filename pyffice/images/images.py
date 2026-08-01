@@ -1,5 +1,3 @@
-
-from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
 """
 ---
@@ -79,7 +77,7 @@ class PyfficeImage(PyfficeDocument):
         self.texts = None  # Text objects
         self.doc_type = "image"
 
-    def add_filter(self, filter_type) -> "PyfficeImage":
+    def add_filter(self, filter_type):
         """
         Apply a filter to the image (BLUR, CONTOUR, DETAIL, etc.).
 
@@ -89,7 +87,7 @@ class PyfficeImage(PyfficeDocument):
         self.image = self.image.filter(filter_type)
         return self
 
-    def add_image(self, image_path, x=0, y=0) -> "PyfficeImage":
+    def add_image(self, image_path, x=0, y=0):
         """
         Add another image on top of the current image at the specified position.
 
@@ -102,7 +100,7 @@ class PyfficeImage(PyfficeDocument):
         self.image.paste(overlay, (x, y), overlay if overlay.mode == "RGBA" else None)
         return self
 
-    def add_layer(self, layer_path=None) -> "PyfficeImage":
+    def add_layer(self, layer_path=None):
         """
         Add a new image layer.
 
@@ -116,7 +114,7 @@ class PyfficeImage(PyfficeDocument):
         self.layers.append(layer)
         return self
 
-    def add_shape(self, x, y, w, h, shape="rectangle", color="red") -> "PyfficeImage":
+    def add_shape(self, x, y, w, h, shape="rectangle", color="red"):
         """
         Add a shape to the image (rectangle or ellipse).
 
@@ -136,13 +134,13 @@ class PyfficeImage(PyfficeDocument):
         self.shapes.append((x, y, w, h, shape, color))
         return self
 
-    def add_tag(self, tag_name, tag_value) -> "PyfficeImage":
+    def add_tag(self, tag_name, tag_value):
         """Add metadata tag to image."""
         self.tags = getattr(self, 'tags', {})
         self.tags[tag_name] = tag_value
         return self
 
-    def add_text(self, text, position=(10, 10), font_size=20, color="black", font_path=None) -> "PyfficeImage":
+    def add_text(self, text, position=(10, 10), font_size=20, color="black", font_path=None):
         """
         Add text to the image.
 
@@ -159,7 +157,7 @@ class PyfficeImage(PyfficeDocument):
         self.texts.append((text, position, font_size, color))
         return self
 
-    def create_thumbnail(self, size=(128, 128)) -> "PyfficeImage":
+    def create_thumbnail(self, size=(128, 128)):
         """
         Generate a thumbnail image.
 
@@ -169,7 +167,7 @@ class PyfficeImage(PyfficeDocument):
         self.thumbnail = self.image.copy()
         self.thumbnail.thumbnail(size)
         return self
-    def convert_to(self, format) -> None:
+    def convert_to(self, format):
         """Convert to.
         
         Args:
@@ -188,26 +186,26 @@ class PyfficeImage(PyfficeDocument):
             filters.remove(filter_name)
         return self
 
-    def del_image(self) -> "PyfficeImage":
+    def del_image(self):
         """Delete the current image."""
         self.image = None
         return self
 
-    def del_layer(self, layer_index) -> "PyfficeImage":
+    def del_layer(self, layer_index):
         """Delete a layer by index."""
         layers = getattr(self, 'layers', [])
         if 0 <= layer_index < len(layers):
             layers.pop(layer_index)
         return self
 
-    def del_shape(self, shape_index) -> "PyfficeImage":
+    def del_shape(self, shape_index):
         """Delete a shape by index."""
         shapes = getattr(self, 'shapes', [])
         if 0 <= shape_index < len(shapes):
             shapes.pop(shape_index)
         return self
 
-    def del_tag(self, tag_name) -> "PyfficeImage":
+    def del_tag(self, tag_name):
         """
         Remove a specific EXIF tag if present.
 
@@ -222,14 +220,14 @@ class PyfficeImage(PyfficeDocument):
                     break
         return self
 
-    def del_text(self, text_index) -> "PyfficeImage":
+    def del_text(self, text_index):
         """Delete text at specified index."""
         texts = getattr(self, 'texts', [])
         if 0 <= text_index < len(texts):
             texts.pop(text_index)
         return self
 
-    def get_image_palette(self) -> None:
+    def get_image_palette(self):
         """
         Get the color palette of the image (if applicable).
 
@@ -244,7 +242,7 @@ class PyfficeImage(PyfficeDocument):
         #     return self.image.getpalette()
         return None
 
-    def load_document(self, document=None) -> "PyfficeImage":
+    def load_document(self, document=None):
         """
         Load an image from the specified path.
 
@@ -258,7 +256,7 @@ class PyfficeImage(PyfficeDocument):
         self.get_image_palette()
         return self
 
-    def open_file(self, file=None, if_text_only=True) -> "PyfficeImage":
+    def open_file(self, file=None, if_text_only=True):
         """Open file.
         
         Args:
@@ -275,21 +273,21 @@ class PyfficeImage(PyfficeDocument):
             self.set_file_path(file)
         return self
 
-    def remove_background(self) -> "PyfficeImage":
+    def remove_background(self):
         """Remove background from image."""
         if not self.image:
             return self
         # Placeholder - requires ML library (e.g., rembg)
         return self
 
-    def remove_faces(self) -> "PyfficeImage":
+    def remove_faces(self):
         """Detect and remove faces from image."""
         if not self.image:
             return self
         # Placeholder - requires face detection library
         return self
 
-    def set_content(self, content) -> "PyfficeImage":
+    def set_content(self, content):
         """Set the content.
         
         Args:
@@ -299,7 +297,6 @@ class PyfficeImage(PyfficeDocument):
             Self for chaining.
         """
         from pyffice.pyffice import UnknownLocationError
-
         if content is None:
             return self
         logma.info(f"Content {content}")
@@ -317,7 +314,7 @@ class PyfficeImage(PyfficeDocument):
             self.content = content
         return self
 
-    def set_crop(self, box) -> "PyfficeImage":
+    def set_crop(self, box):
         """
         Crop the image to the specified bounding box.
 
@@ -329,7 +326,7 @@ class PyfficeImage(PyfficeDocument):
         self.image = self.image.crop(box)
         return self
 
-    def set_objects(self, objects) -> "PyfficeImage":
+    def set_objects(self, objects):
         """Set the objects.
         
         Args:
@@ -343,7 +340,7 @@ class PyfficeImage(PyfficeDocument):
             self.objects = objects
         return self
 
-    def set_palette(self, palette) -> "PyfficeImage":
+    def set_palette(self, palette):
         """Set the palette.
         
         Args:
@@ -357,7 +354,7 @@ class PyfficeImage(PyfficeDocument):
             self.palette = palette
         return self
 
-    def set_size(self, width, height) -> "PyfficeImage":
+    def set_size(self, width, height):
         """
         Resize the image.
 
@@ -372,7 +369,7 @@ class PyfficeImage(PyfficeDocument):
             self.image = self.image.resize(size)
         return self
 
-    def to_dict(self) -> Any:
+    def to_dict(self):
         """Convert this document to dict.
         
         Returns:
@@ -397,7 +394,7 @@ class PyfficeImageManager(PyfficeDocumentManager):
         if self.config.dikt.get("document", None) is not None:
             self.load_document(self.config.dikt.get("document", {}))
 
-    def add_image(self, image) -> "PyfficeImageManager":
+    def add_image(self, image):
         """Add a image.
         
         Args:
@@ -410,13 +407,13 @@ class PyfficeImageManager(PyfficeDocumentManager):
         self.images.append(image)
         return self
 
-    def copy_image(self, image) -> Any:
+    def copy_image(self, image):
         """Create a copy of the image."""
         if hasattr(image, 'copy'):
             return image.copy()
         return None
 
-    def get_similar_images(self, image) -> list:
+    def get_similar_images(self, image):
         """
         Compare images being managed using tools to determine similarity.
 
@@ -426,7 +423,7 @@ class PyfficeImageManager(PyfficeDocumentManager):
         # Placeholder - requires image similarity algorithm
         return []
 
-    def load_document(self, document=None) -> "PyfficeImageManager":
+    def load_document(self, document=None):
         """Load document into this document.
         
         Args:
@@ -442,13 +439,13 @@ class PyfficeImageManager(PyfficeDocumentManager):
         super().load_document(document)
         return self
 
-    def move_image(self, image, new_position) -> "PyfficeImageManager":
+    def move_image(self, image, new_position):
         """Move image to new position."""
         if hasattr(image, 'position'):
             image.position = new_position
         return self
 
-    def remove_image(self, image, delete_=False) -> None:
+    def remove_image(self, image, delete_=False):
         """Remove the image.
         
         Args:
@@ -475,7 +472,7 @@ class PyfficeScreenShot(PyfficeDocument):
         self.config.override(kahndor.Instruct(pxcfg).override("PyfficeScreenShot")).override(cfg)
         self.image = None
 
-    def load_document(self, document=None) -> "PyfficeScreenShot":
+    def load_document(self, document=None):
         """Load document into this document.
         
         Args:
@@ -491,17 +488,17 @@ class PyfficeScreenShot(PyfficeDocument):
         super().load_document(document)
         return self
 
-    def set_image(self, image) -> "PyfficeScreenShot":
+    def set_image(self, image):
         """Set the image data."""
         self.image = image
         return self
 
-    def set_position(self, x, y) -> "PyfficeScreenShot":
+    def set_position(self, x, y):
         """Set image position."""
         self.position = (x, y)
         return self
 
-    def set_size(self, width, height) -> "PyfficeScreenShot":
+    def set_size(self, width, height):
         """Set image size."""
         self.size = (width, height)
         if self.image:
