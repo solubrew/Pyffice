@@ -1182,6 +1182,147 @@ def list_formats() -> None:
 
 
 # ══════════════════════════════════════════════════════════════════════════════
+# CLOUD COMMANDS (T-NEW-070)
+# ══════════════════════════════════════════════════════════════════════════════
+
+
+@cli.group()
+def cloud() -> None:
+    """Cloud storage operations (Google Drive, Dropbox)."""
+    pass
+
+
+@cloud.command(name='auth')
+@click.option('--service', '-s', required=True,
+              type=click.Choice(['google', 'dropbox']),
+              help='Cloud service')
+@click.option('--credential-file', '-c',
+              type=click.Path(exists=True),
+              help='Path to credential JSON file')
+@click.option('--token', '-t',
+              help='Raw access token')
+def cloud_auth(service: str, credential_file: Optional[str],
+               token: Optional[str]) -> None:
+    """Authenticate with a cloud service."""
+    import json as _json
+    from pyffice.ports.cloud_ports import PyfficePortGoogleDrive, PyfficePortDropbox
+
+    creds = {}
+    if credential_file:
+        with open(credential_file) as f:
+            creds = _json.load(f)
+    elif token:
+        creds = {"access_token": token}
+    else:
+        click.echo("Error: --credential-file or --token required", err=True)
+        return
+
+    try:
+        if service == 'google':
+            port = PyfficePortGoogleDrive()
+            port.authenticate(creds)
+            click.echo(f"✓ Google Drive authenticated")
+        elif service == 'dropbox':
+            port = PyfficePortDropbox()
+            port.authenticate(creds)
+            click.echo(f"✓ Dropbox authenticated")
+    except ImportError as e:
+        click.echo(f"Error: {e}", err=True)
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
+
+
+@cloud.command(name='list')
+@click.option('--service', '-s', required=True,
+              type=click.Choice(['google', 'dropbox']))
+@click.option('--credential-file', '-c', required=True,
+              type=click.Path(exists=True))
+@click.option('--folder', '-f', default=None, help='Folder ID or path')
+def cloud_list(service: str, credential_file: str,
+               folder: Optional[str]) -> None:
+    """List files in a cloud folder."""
+    import json as _json
+    from pyffice.ports.cloud_ports import PyfficePortGoogleDrive, PyfficePortDropbox
+
+    with open(credential_file) as f:
+        creds = _json.load(f)
+
+    try:
+        if service == 'google':
+            port = PyfficePortGoogleDrive()
+            port.authenticate(creds)
+            files = port.list_files(folder)
+        elif service == 'dropbox':
+            port = PyfficePortDropbox()
+            port.authenticate(creds)
+            files = port.list_files(folder)
+        for f_info in files:
+            click.echo(f"  {f_info['id']:<40} {f_info['name']}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
+
+
+@cloud.command(name='pull')
+@click.option('--service', '-s', required=True,
+              type=click.Choice(['google', 'dropbox']))
+@click.option('--credential-file', '-c', required=True,
+              type=click.Path(exists=True))
+@click.option('--file-id', '-i', required=True, help='Cloud file ID or path')
+@click.option('--output', '-o', required=True, type=click.Path(), help='Local output path')
+def cloud_pull(service: str, credential_file: str,
+               file_id: str, output: str) -> None:
+    """Download a file from cloud storage."""
+    import json as _json
+    from pyffice.ports.cloud_ports import PyfficePortGoogleDrive, PyfficePortDropbox
+
+    with open(credential_file) as f:
+        creds = _json.load(f)
+
+    try:
+        if service == 'google':
+            port = PyfficePortGoogleDrive()
+            port.authenticate(creds)
+            port.download_file(file_id, output)
+        elif service == 'dropbox':
+            port = PyfficePortDropbox()
+            port.authenticate(creds)
+            port.download_file(file_id, output)
+        click.echo(f"✓ Downloaded {file_id} -> {output}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
+
+
+@cloud.command(name='push')
+@click.option('--service', '-s', required=True,
+              type=click.Choice(['google', 'dropbox']))
+@click.option('--credential-file', '-c', required=True,
+              type=click.Path(exists=True))
+@click.option('--file', '-f', required=True, type=click.Path(exists=True), help='Local file to upload')
+@click.option('--folder-id', default=None, help='Cloud destination folder ID')
+def cloud_push(service: str, credential_file: str,
+               file: str, folder_id: Optional[str]) -> None:
+    """Upload a file to cloud storage."""
+    import json as _json
+    from pyffice.ports.cloud_ports import PyfficePortGoogleDrive, PyfficePortDropbox
+
+    with open(credential_file) as f:
+        creds = _json.load(f)
+
+    try:
+        if service == 'google':
+            port = PyfficePortGoogleDrive()
+            port.authenticate(creds)
+            result = port.upload_file(file, folder_id)
+        elif service == 'dropbox':
+            port = PyfficePortDropbox()
+            port.authenticate(creds)
+            result = port.upload_file(file, folder_id)
+        click.echo(f"✓ Uploaded {file} -> {result.get('id', 'unknown')}")
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
+
+
+# ══════════════════════════════════════════════════════════════════════════════
 # MAIN ENTRY POINT
 # ══════════════════════════════════════════════════════════════════════════════
 

@@ -5,9 +5,11 @@ Ports module for pyffice.
 # Lazy __getattr__ proxy to break circular imports when
 # subpkg modules are partially initialized (PEP 562).
 _LAZY_EXPORTS = {
+    # T-NEW-070: Google Workspace ports (built out from stubs)
     "PyfficePortGoogleDocs": ("pyffice.ports.gports", "PyfficePortGoogleDocs"),
     "PyfficePortGoogleForms": ("pyffice.ports.gports", "PyfficePortGoogleForms"),
     "PyfficePortGoogleSheets": ("pyffice.ports.gports", "PyfficePortGoogleSheets"),
+    "PyfficePortGoogleSlides": ("pyffice.ports.gports", "PyfficePortGoogleSlides"),
     "PyfficePortExcel": ("pyffice.ports.msports", "PyfficePortExcel"),
     "PyfficePortWord": ("pyffice.ports.msports", "PyfficePortWord"),
     "read_docx_tables": ("pyffice.ports.msports", "read_docx_tables"),
@@ -59,6 +61,7 @@ __all__ = [
     "PyfficePortGoogleDocs",
     "PyfficePortGoogleForms",
     "PyfficePortGoogleSheets",
+    "PyfficePortGoogleSlides",
     "PyfficePortExcel",
     "PyfficePortWord",
     "read_docx_tables",
