@@ -21,7 +21,7 @@ import datetime as dt
 # ======================================Solutions Brewer Library Modules==============================================||
 from kahndor import kahndor
 from kahndor.logma import Logma
-from pyffice.text.messages import PyfficeMessage
+from pyffice.text.text_messages import PyfficeMessage
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
