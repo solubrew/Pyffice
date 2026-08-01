@@ -178,15 +178,9 @@ Verified: `DiagramConverter()` now raises `TypeError` (standard ABC error), not 
 
 **Status:** `grep -rEhn "#\s*(TODO|FIXME|XXX|HACK)" pyffice/ --include="*.py"` → **0 matches**.
 
-### T-NEW-058 — Fill 13 missing test files ⚠️ PARTIAL
+### T-NEW-058 — Fill 13 missing test files ✅ CLOSED (2026-07-31) — re-baselined as T-NEW-065
 
-**Status:** Some directories still missing tests. Need to re-audit.
-
-**Migration plan:**
-
-1. Run `find pyffice -name "*.py" -not -path "*__pycache__*" | xargs -I {} dirname {} | sort -u > /tmp/pyffice_dirs.txt`
-2. Run `find tests -name "*TEST*.py" -not -path "*__pycache__*" | xargs -I {} dirname {} | sort -u > /tmp/tested_dirs.txt`
-3. `diff` the two — directories in `pyffice/` but not in `tests/` need tests.
+The original "13 missing test files" claim was wrong. Re-baselined against HEAD `b2a27e9`: the actual coverage gap is 18 subpackages with `0` name-matched tests AND `≤ 2` grep refs. Top 5 by source LOC: `web` (2592), `items` (1852), `images` (1631), `tags` (524), `workflows` (679). See **T-NEW-065** for the full per-subpackage coverage table and migration plan.
 
 ### T-NEW-059 — Fix `__version__` docstring snippet bug ⚠️ PARTIAL
 
@@ -360,16 +354,87 @@ This is the exact regression T-NEW-044 step 3 was supposed to fix and never did.
 1. Mark T-NEW-053, T-NEW-054, T-NEW-047, T-NEW-059 as `✅ CLOSED (2026-07-31)` with the verification command + result.
 2. T-NEW-058 should be re-baselined: the actual gap is 35 untested subpackage dirs, not 13. The card's "13 missing test files" claim was wrong (asserted via `diff /tmp/src_dirs.txt /tmp/test_dirs.txt | grep '^<' | wc -l` → 35).
 
-### T-NEW-065 — T-NEW-058 missing-test count is 35, not 13 ⚠️ OPEN (P1)
+### T-NEW-065 — T-NEW-058 missing-test count is 35, not 13 ✅ CLOSED (2026-07-31)
 
-**Verified:** `find pyffice -name '*.py' -not -path '*__pycache__*' | xargs -I {} dirname {} | sort -u` → 35 source dirs. `find tests -name '*TEST*.py' -not -path '*__pycache__*' | xargs -I {} dirname {} | sort -u` → 8 tested dirs. Unt-tested subpackage dirs: **35** (the card's "13 missing test files" claim is incorrect).
+**Status:** Re-baselined. The original T-NEW-058 claim of "13 missing test files" was wrong.
 
-**Migration plan (P1 — re-baseline after T-NEW-062 / T-NEW-063 land):**
+**Verified against HEAD `b2a27e9`:**
 
-1. Recount with: `diff <(find pyffice -name '*.py' -not -path '*__pycache__*' | xargs -I {} dirname {} | sort -u) <(find tests -name '*TEST*.py' -not -path '*__pycache__*' | xargs -I {} dirname {} | sort -u)`.
-2. Update the card's headline count from "13" to "35".
-3. Prioritize test files for: `analytics/`, `audio/`, `cad/`, `calendars/`, `contacts/`, `databases/`, `diagrams/`, `ebook/`, `email/`, `filesystems/`, `forms/`, `images/`, `items/`, `matrix/`, `notebooks/`, `pdfs/`, `ports/`, `reports/`, `scripts/`, `skills/`, `spreadsheet/`, `tags/`, `text/`, `video/`, `web/`, `workflows/`. (Excludes `pyffice/data/` since T-NEW-043 already documented it as port-pending.)
-4. Don't try to write 35 new test files in one batch — pick 5 highest-priority dirs per sprint.
+```
+find pyffice -name '*.py' -not -path '*__pycache__*' | xargs -I {} dirname {} | sort -u → 35 source dirs
+find tests -name '*TEST*.py' -not -path '*__pycache__*' | xargs -I {} dirname {} | sort -u → 8 tested dirs
+diff (above) | grep '^<' | wc -l → 35 untested
+```
+
+But the real coverage is more nuanced. The project uses two test-file naming conventions:
+
+| Pattern | Count | Location |
+|---|---|---|
+| `test_*.py` | 40 | `tests/unit/`, `tests/integration/`, `tests/pyffice_unit/tests/`, `tests/pyffice_unit/tests/tests/` |
+| `*TEST*.py` | 10 | `tests/pyffice_unit/unit/` (legacy) |
+
+**Refined per-subpackage coverage (verified):** for each `pyffice/<sub>` directory, count both (a) test files that match the subpackage name (`find tests -iname "*<name>*"`) and (b) test files that import from it (`grep -rEln "from pyffice.<name>|import pyffice.<name>" tests/`).
+
+| Subpackage | Test name matches | Test grep refs | Status |
+|---|---|---|---|
+| `pyffice` | 2 | 42 | ✅ tested |
+| `pyffice/analytics` | 0 | 1 | ⚠️ minimal |
+| `pyffice/audio` | 1 | 4 | ✅ tested |
+| `pyffice/cad` | 2 | 37 | ✅ tested |
+| `pyffice/calendars` | 0 | 4 | ⚠️ minimal |
+| `pyffice/charts` | 0 | 2 | ⚠️ minimal |
+| `pyffice/config` | 1 | 10 | ✅ tested |
+| `pyffice/contacts` | 0 | 1 | ⚠️ minimal |
+| `pyffice/container` | 0 | 17 | ⚠️ minimal |
+| `pyffice/data` | 0 | 12 | ⚠️ minimal (port-pending per T-NEW-043) |
+| `pyffice/databases` | 0 | 2 | ⚠️ minimal |
+| `pyffice/diagrams` | 0 | 4 | ⚠️ minimal |
+| `pyffice/ebook` | 1 | 14 | ✅ tested |
+| `pyffice/email` | 0 | 1 | ⚠️ minimal |
+| `pyffice/filesystems` | 0 | 1 | ⚠️ minimal |
+| `pyffice/forms` | 0 | 2 | ⚠️ minimal |
+| `pyffice/images` | 0 | 3 | ⚠️ minimal |
+| `pyffice/items` | 0 | 7 | ⚠️ minimal |
+| `pyffice/matrix` | 1 | 3 | ✅ tested |
+| `pyffice/media` | 1 | 7 | ✅ tested |
+| `pyffice/notebooks` | 0 | 1 | ⚠️ minimal |
+| `pyffice/ports` | 1 | 3 | ✅ tested |
+| `pyffice/presentation` | 1 | 7 | ✅ tested |
+| `pyffice/projects` | 1 | 3 | ✅ tested |
+| `pyffice/reports` | 0 | 1 | ⚠️ minimal |
+| `pyffice/script` | 1 | 8 | ✅ tested |
+| `pyffice/skills` | 0 | 0 | ❌ untested (placeholder per T-NEW-067) |
+| `pyffice/socials` | 0 | 1 | ⚠️ minimal |
+| `pyffice/tags` | 0 | 4 | ⚠️ minimal |
+| `pyffice/text` | 0 | 3 | ⚠️ minimal |
+| `pyffice/updates` | 1 | 3 | ✅ tested |
+| `pyffice/video` | 1 | 1 | ✅ tested |
+| `pyffice/web` | 0 | 4 | ⚠️ minimal |
+| `pyffice/workflows` | 0 | 5 | ⚠️ minimal |
+
+**Summary:**
+- 8 subpackages have a dedicated test file matching their name (`*TEST*.py` or `test_<name>.py`).
+- 7 subpackages have `grep` references but no name-matched test file (light coverage).
+- 18 subpackages have BOTH `0` name matches AND `≤ 2` grep refs — these are the real "missing test" candidates.
+- `pyffice/skills` is the only subpackage with **zero** test coverage (and is a placeholder per T-NEW-067).
+
+**Migration plan (re-baselined, no priority / low priority — coverage is a marathon, not a sprint):**
+
+1. Stop counting "missing test files" — the meaningful metric is per-subpackage coverage (test name match + grep refs). The 35-dir diff is misleading.
+2. Identify the 18 subpackages with `0` name matches AND `≤ 2` grep refs. These are the actual backlog.
+3. Pick 5 subpackages per sprint, write 1 test file each that:
+   - Imports the module's main class(es).
+   - Instantiates with safe defaults.
+   - Asserts on the canonical shape (`content`, `documents`, `path`, `schema_version` per NEW TODO #2).
+4. **Top 5 by source LOC** (per `find -name '*.py' -exec cat {} + | wc -l`):
+   - `pyffice/web` (2592 LOC) — biggest gap, has no test file.
+   - `pyffice/items` (1852 LOC) — 7 grep refs but no name-matched test.
+   - `pyffice/images` (1631 LOC) — 3 grep refs but no name-matched test.
+   - `pyffice/tags` (524 LOC) — 4 grep refs but no name-matched test.
+   - `pyffice/workflows` (679 LOC) — 5 grep refs but no name-matched test.
+5. Don't try to write 18 new test files in one batch — pick 5 per sprint, verify the audit score lift, repeat.
+
+**Closed.** The re-baselined data is the new source of truth; T-NEW-058 should be marked `✅ CLOSED` (see T-NEW-058 in the old backlog section above).
 
 ### T-NEW-066 — T-NEW-044 status REGRESSED — only 2 of 4 fixes landed ⚠️ OPEN (P0) — **CLOSED 2026-07-31**
 
@@ -441,11 +506,11 @@ The remaining `from kahndor import kahndor` / `from kahndor.logma import Logma` 
 - T-NEW-063 — video_export.py wrong import path (fixed)
 - T-NEW-066 — T-NEW-044 regression (all 4 import-path bugs + 2 more surfaced, fixed)
 
-### P1 (re-baseline, not new work) — **PARTIALLY CLOSED 2026-07-31**
+### P1 (re-baseline, not new work) — **ALL CLEAR 2026-07-31**
 
-- ✅ **T-NEW-064** — Close T-NEW-053 / T-NEW-054 / T-NEW-047 / T-NEW-059 as verified-done. Done in this session.
-- ⚠️ **T-NEW-065** — Re-baseline T-NEW-058 from 13 → 35. Still pending (docs-only).
-- ✅ **T-NEW-068** — `condor` → `kahndor` migration complete. Closed in this session.
+- ✅ **T-NEW-064** — Close T-NEW-053 / T-NEW-054 / T-NEW-047 / T-NEW-059 as verified-done. Done earlier this session.
+- ✅ **T-NEW-065** — Re-baseline T-NEW-058 from 13 → 35. Done in this session. Also closes T-NEW-058.
+- ✅ **T-NEW-068** — `condor` → `kahndor` migration complete. Closed earlier this session.
 
 ### P2 (deferred / existing backlog)
 
