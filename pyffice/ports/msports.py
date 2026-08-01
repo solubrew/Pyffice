@@ -281,35 +281,28 @@ class PyfficePortExcel(PyfficePort):
 
     def set_chart_type(self, chart_type):
         """Set the chart type.
-        
+
         Args:
             chart_type: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
-        if chart_type == "scatter":
-            self.chart = xl.chart.ScatterChart()
-        elif chart_type == "line":
-            self.chart = xl.chart.LineChart()
-        elif chart_type == "bar":
-            self.chart = xl.chart.BarChart()
-        elif chart_type == "pie":
-            self.chart = xl.chart.PieChart()
-        elif chart_type == "area":
-            self.chart = xl.chart.AreaChart()
-        elif chart_type == "radar":
-            self.chart = xl.chart.RadarChart()
-        elif chart_type == "doughnut":
-            self.chart = xl.chart.DoughnutChart()
-        elif chart_type == "polararea":
-            self.chart = xl.chart.PolarAreaChart()
-        elif chart_type == "bubble":
-            self.chart = xl.chart.BubbleChart()
-        elif chart_type == "scatter3d":
-            self.chart = xl.chart.ScatterChart3D()
-        elif chart_type == "surface":
-            self.chart = xl.chart.SurfaceChart()
+        chart_classes = {
+            "scatter": lambda: xl.chart.ScatterChart(),
+            "line": lambda: xl.chart.LineChart(),
+            "bar": lambda: xl.chart.BarChart(),
+            "pie": lambda: xl.chart.PieChart(),
+            "area": lambda: xl.chart.AreaChart(),
+            "radar": lambda: xl.chart.RadarChart(),
+            "doughnut": lambda: xl.chart.DoughnutChart(),
+            "polararea": lambda: xl.chart.PolarAreaChart(),
+            "bubble": lambda: xl.chart.BubbleChart(),
+            "scatter3d": lambda: xl.chart.ScatterChart3D(),
+            "surface": lambda: xl.chart.SurfaceChart(),
+        }
+        if chart_type in chart_classes:
+            self.chart = chart_classes[chart_type]()
 
     def set_column_width(self, column, width):
         """

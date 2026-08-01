@@ -3,7 +3,7 @@ analysis:
   counts:
     files: 447
     python_files: 234
-    python_lines: 33812
+    python_lines: 33921
     test_files: 78
 audit_date: '1785470638.3677874'
 dimensions:
@@ -126,6 +126,15 @@ dimensions:
         info: 'Hint: 30 GitVein projects available but not used: condor, eaglis, falcon,
           glain, goalt...'
         internal_import_details:
+        - file: tests/pyffice_unit/unit/documentTEST.py
+          module: kahndor.logma
+          project: kahndor
+        - file: tests/pyffice_unit/unit/cliTEST.py
+          module: kahndor.logma
+          project: kahndor
+        - file: tests/pyffice_unit/unit/diagrams/diagramsTEST.py
+          module: kahndor.logma
+          project: kahndor
         - file: tests/pyffice_unit/unit/diagrams/diagramsTEST.py
           module: pyffice.document
           project: pyffice
@@ -135,35 +144,26 @@ dimensions:
         - file: tests/pyffice_unit/unit/diagrams/diagramsTEST.py
           module: pyffice.document
           project: pyffice
-        - file: tests/pyffice_unit/unit/ebook/ebookTEST.py
-          module: pyffice.ebook.azw
-          project: pyffice
-        - file: tests/pyffice_unit/unit/analytics/analyticsTEST.py
-          module: pyffice.document
-          project: pyffice
-        - file: tests/pyffice_unit/unit/analytics/analyticsTEST.py
-          module: pyffice.document
-          project: pyffice
-        - file: tests/pyffice_unit/unit/ports/gportsTEST.py
-          module: pyffice.ports.cloud_ports
-          project: pyffice
-        - file: tests/pyffice_unit/unit/ports/portsTEST.py
-          module: pyffice.ports.msports
-          project: pyffice
-        - file: tests/pyffice_unit/unit/ports/portsTEST.py
-          module: pyffice.ports.msports
-          project: pyffice
-        - file: tests/pyffice_unit/unit/ports/portsTEST.py
-          module: pyffice.ports.msports
-          project: pyffice
-        internal_imports: 143
+        - file: tests/pyffice_unit/unit/notebooks/notebooksTEST.py
+          module: kahndor.logma
+          project: kahndor
+        - file: tests/pyffice_unit/unit/databases/databasesTEST.py
+          module: kahndor.logma
+          project: kahndor
+        - file: tests/pyffice_unit/unit/items/itemsTEST.py
+          module: kahndor.logma
+          project: kahndor
+        - file: tests/pyffice_unit/unit/charts/chartsTEST.py
+          module: kahndor.logma
+          project: kahndor
+        internal_imports: 169
         internal_projects_used:
-        - kahndor
         - pyffice
-        leverage_score: 23.83
+        - kahndor
+        leverage_score: 27.0
         score: 100
         status: pass
-        total_imports: 600
+        total_imports: 626
       score: 100
       status: pass
     score: 100
@@ -195,7 +195,7 @@ dimensions:
         count: 1
         examples:
         - file: tests/pyffice_unit/unit/documentTEST.py
-          line: 5
+          line: 7
           text: '- increment_version bumps version (T-NEW-057: removed # TODO comment)'
         issues:
         - dimension: embedded_todos
@@ -262,7 +262,7 @@ dimensions:
           branches:
             local: []
             remote: []
-          commit_count: 346
+          commit_count: 347
           commits: []
           contributors: []
           is_repo: true
@@ -385,35 +385,17 @@ dimensions:
     details:
       details:
         examples:
-          silent_classes:
-          - class: TestPyfficeUnitAddChange
-            file: tests/pyffice_unit/unit/documentTEST.py
-            method_count: 5
-          - class: TestPyfficeDocumentManager
-            file: tests/pyffice_unit/unit/documentTEST.py
-            method_count: 5
-          - class: TestPyfficeUnitEnsureInitState
-            file: tests/pyffice_unit/unit/documentTEST.py
-            method_count: 5
-          - class: TestCliGroup
-            file: tests/pyffice_unit/unit/cliTEST.py
-            method_count: 12
-          - class: TestPyfficeDiagram
-            file: tests/pyffice_unit/unit/diagrams/diagramsTEST.py
-            method_count: 7
+          silent_classes: []
           unused_logma: []
-        issues:
-        - dimension: logging_coverage
-          rule: Add logging to silent modules/classes
-          severity: medium
-        score: 50
-        silent_classes: 57
-        status: partial
+        issues: []
+        score: 100
+        silent_classes: 0
+        status: pass
         unused_logma_files: 0
-      score: 50
-      status: partial
-    score: 50
-    status: partial
+      score: 100
+      status: pass
+    score: 100
+    status: pass
   long_method:
     details:
       details:
@@ -1810,29 +1792,29 @@ dimensions:
       status: pass
     score: 100
     status: pass
-overall_score: 91.96
+overall_score: 92.87
 project: pyffice
 rubric:
-  audit_overall: 91.96
+  audit_overall: 92.87
   categories: []
   max_points: 0
   percentage: 0.0
-  rubric_name: 06a6da09-d157-7e63-8000-e84d8e76367b
+  rubric_name: 06a6da13-c6f2-7900-8000-a815bf4ca70f
   rubric_score: 0
   rubric_version: '1.0'
-  score_difference: -91.96
+  score_difference: -92.87
   total_points: 0
   weighted_score: 0
 summary:
   failing: 0
-  partial: 7
-  passing: 45
-  tasks_created: 7
+  partial: 6
+  passing: 46
+  tasks_created: 6
   total_auditors: 11
   total_dimensions: 53
 test_execution:
-  duration_seconds: 45.85648703575134
-  project_score: 91.96
+  duration_seconds: 49.06977033615112
+  project_score: 92.87
   report_file: /home/solubrew/.hermes/projects/pyffice/FALCON_TEST.yaml
   results:
     tests_failed: 29
@@ -1847,7 +1829,7 @@ test_execution:
   status_message: no change (849/882 tests passed)
   timestamp: ''
 versions:
-  project: '3523357'
+  project: c34de7a
   project_status: dirty
   project_uncommitted_changes: 3
   sasquatch: a16c01c
