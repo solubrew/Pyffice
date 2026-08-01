@@ -991,7 +991,7 @@ def text_convert(ctx: click.Context, input: str, output: str, format: Optional[s
     INPUT: Source text file
     OUTPUT: Destination text file
     """
-    from pyffice.text.text import PyfficeText
+    from pyffice.items.text import PyfficeText
     try:
         txt = PyfficeText()
         txt.load(input)

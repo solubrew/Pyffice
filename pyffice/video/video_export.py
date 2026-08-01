@@ -23,7 +23,7 @@ import ffmpeg
 from kahndor import kahndor
 from kahndor.logma import Logma
 
-from pyffice.audio.audio import PyfficeAudio
+from pyffice.audio.audio_export import PyfficeAudio
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 
 # ====================================================================================================================||

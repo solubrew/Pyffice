@@ -16,6 +16,16 @@
 from os.path import abspath, dirname, join
 import datetime as dt
 
+# ======================================Solutions Brewer Library Modules==============================================||
+from kahndor import kahndor
+from kahndor.logma import Logma
+from pyffice.document import PyfficeDocument, PyfficeDocumentManager
+
+# ====================================================================================================================||
+here = join(dirname(__file__), "")  # ||
+log = True
+logma = Logma(__name__)
+
 # ======================================3rd Party Library Modules=====================================================||
 has_ffmpeg = False
 try:
@@ -28,16 +38,6 @@ except ImportError:
 #     import pydub
 # except:
 #     print("Pydub not Available.")
-
-# ======================================Solutions Brewer Library Modules==============================================||
-from kahndor import kahndor
-from kahndor.logma import Logma
-from pyffice.document import PyfficeDocument, PyfficeDocumentManager
-
-# ====================================================================================================================||
-here = join(dirname(__file__), "")  # ||
-log = True
-logma = Logma(__name__)
 
 # ====================================================================================================================||
 pxcfg = join(here, "_data_", "audio.yaml")
