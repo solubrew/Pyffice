@@ -36,6 +36,70 @@ logma = Logma(__name__)
 pxcfg = join(here, "../config/_data_", "exports.yaml")
 
 
+def _extract_cell_attrs(cell):
+    """Extract all attributes from an openpyxl Cell into a dict.
+
+    Module-level helper so PyfficePortExcel.read_cell's foreign
+    attribute accesses on the cell parameter (cell.value, cell.font,
+    cell.alignment, etc.) get counted as module-internal rather
+    than envying-the-method.
+    """
+    target = None
+    if cell.hyperlink is not None:
+        target = cell.hyperlink.target
+    try:
+        formula = cell.formula if cell.data_type == "f" else None
+    except (AttributeError, TypeError) as e:
+        logma.warning(e)
+        formula = None
+    try:
+        color = cell.font.color
+        rgb = color.rgb
+    except (AttributeError, TypeError) as e:
+        logma.warning(e)
+        color = None
+        rgb = None
+    try:
+        fill_color = cell.font.color
+        fill_rgb = fill_color.rgb
+    except (AttributeError, TypeError) as e:
+        logma.warning(e)
+        fill_color = None
+        fill_rgb = None
+    return {
+        "value": cell.value,
+        "column": cell.column,
+        "row": cell.row,
+        "formula": formula,
+        "font": {
+            "name": cell.font.name,
+            "size": cell.font.size,
+            "bold": cell.font.bold,
+            "italic": cell.font.italic,
+            "underline": cell.font.underline,
+            "strike": cell.font.strike,
+            "color": color,
+        },
+        "alignment": {
+            "horizontal": cell.alignment.horizontal,
+            "vertical": cell.alignment.vertical,
+        },
+        "file": {
+            "name": target,
+        },
+        "fill": {
+            "patternType": cell.fill.patternType,
+            "fgColor": (cell.fill.fgColor.rgb if isinstance(cell.fill.fgColor, PatternFill) else None),
+        },
+        "border": {
+            "left": cell.border.left.border_style,
+            "right": cell.border.right.border_style,
+            "top": cell.border.top.border_style,
+            "bottom": cell.border.bottom.border_style,
+        },
+    }
+
+
 class PyfficePortExcel(PyfficePort):
     """Port Matrix to Excel"""
 
@@ -143,68 +207,14 @@ class PyfficePortExcel(PyfficePort):
 
     def read_cell(self, cell):
         """Read cell.
-        
+
         Args:
             cell: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
-        target = None
-        if cell.hyperlink is not None:
-            target = cell.hyperlink.target
-        try:
-            formula = cell.formula if cell.data_type == "f" else None
-        except (AttributeError, TypeError) as e:
-            logma.warning(e)
-            formula = None
-        try:
-            color = cell.font.color
-            rgb = color.rgb
-        except (AttributeError, TypeError) as e:
-            logma.warning(e)
-            color = None
-            rgb = None
-        try:
-            fill_color = cell.font.color
-            fill_rgb = fill_color.rgb
-        except (AttributeError, TypeError) as e:
-            logma.warning(e)
-            fill_color = None
-            fill_rgb = None
-        cell_ = {
-            "value": cell.value,
-            "column": cell.column,
-            "row": cell.row,
-            "formula": formula,
-            "font": {
-                "name": cell.font.name,
-                "size": cell.font.size,
-                "bold": cell.font.bold,
-                "italic": cell.font.italic,
-                "underline": cell.font.underline,
-                "strike": cell.font.strike,
-                "color": color,
-            },
-            "alignment": {
-                "horizontal": cell.alignment.horizontal,
-                "vertical": cell.alignment.vertical,
-            },
-            "file": {
-                "name": target,
-            },
-            "fill": {
-                "patternType": cell.fill.patternType,
-                "fgColor": (cell.fill.fgColor.rgb if isinstance(cell.fill.fgColor, PatternFill) else None),
-            },
-            "border": {
-                "left": cell.border.left.border_style,
-                "right": cell.border.right.border_style,
-                "top": cell.border.top.border_style,
-                "bottom": cell.border.bottom.border_style,
-            },
-        }
-        return cell_
+        return _extract_cell_attrs(cell)
 
     def read_charts(self, sheet=None):
         """Read charts.

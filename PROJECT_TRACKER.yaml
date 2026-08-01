@@ -3,7 +3,7 @@ analysis:
   counts:
     files: 447
     python_files: 234
-    python_lines: 33613
+    python_lines: 33689
     test_files: 78
 audit_date: '1785470638.3677874'
 dimensions:
@@ -158,8 +158,8 @@ dimensions:
           project: pyffice
         internal_imports: 142
         internal_projects_used:
-        - pyffice
         - kahndor
+        - pyffice
         leverage_score: 23.71
         score: 100
         status: pass
@@ -235,7 +235,7 @@ dimensions:
   feature_envy:
     details:
       details:
-        feature_envy_count: 10
+        feature_envy_count: 4
         issues:
         - fix: Move method to the class it uses most
           items:
@@ -251,32 +251,26 @@ dimensions:
             foreign_calls: 13
             method: save
             own_calls: 1
-          - class: PyfficeChart
-            envy_of: format_
-            file: pyffice/charts/charts.py
-            foreign_calls: 9
-            method: add_series
-            own_calls: 2
-          - class: PAXNTask
-            envy_of: data
+          - class: PAXNConverter
+            envy_of: pyffice_item
             file: pyffice/projects/paxn.py
-            foreign_calls: 18
-            method: from_dict
+            foreign_calls: 16
+            method: convert_task_from_pyffice
             own_calls: 0
-          - class: PAXNProject
-            envy_of: data
-            file: pyffice/projects/paxn.py
-            foreign_calls: 14
-            method: from_dict
+          - class: PyfficePortExcel
+            envy_of: cell
+            file: pyffice/ports/msports.py
+            foreign_calls: 24
+            method: read_cell
             own_calls: 0
-          rule: 'Feature envy detected: 10 methods'
+          rule: 'Feature envy detected: 4 methods'
           severity: medium
-        score: 0
-        status: fail
-      score: 0
-      status: fail
-    score: 0
-    status: fail
+        score: 60
+        status: partial
+      score: 60
+      status: partial
+    score: 60
+    status: partial
   file_sizes:
     details:
       details:
@@ -296,7 +290,7 @@ dimensions:
           branches:
             local: []
             remote: []
-          commit_count: 341
+          commit_count: 342
           commits: []
           contributors: []
           is_repo: true
@@ -1810,13 +1804,13 @@ dimensions:
         issues:
         - rule: low_coverage
           severity: medium
-          total: 1663
-          typed: 391
+          total: 1667
+          typed: 392
         score: 23
         status: partial
-        total_functions: 1663
-        typed_functions: 391
-        untyped_functions: 1272
+        total_functions: 1667
+        typed_functions: 392
+        untyped_functions: 1275
       score: 23
       status: partial
     score: 23
@@ -1844,29 +1838,29 @@ dimensions:
       status: pass
     score: 100
     status: pass
-overall_score: 91.05
+overall_score: 91.6
 project: pyffice
 rubric:
-  audit_overall: 91.05
+  audit_overall: 91.6
   categories: []
   max_points: 0
   percentage: 0.0
-  rubric_name: 06a6d6aa-ae79-7223-8000-2d37ed50cf08
+  rubric_name: 06a6d980-06c8-7bd3-8000-9841e31299ea
   rubric_score: 0
   rubric_version: '1.0'
-  score_difference: -91.05
+  score_difference: -91.6
   total_points: 0
   weighted_score: 0
 summary:
-  failing: 1
-  partial: 7
+  failing: 0
+  partial: 8
   passing: 44
   tasks_created: 8
   total_auditors: 11
   total_dimensions: 53
 test_execution:
-  duration_seconds: 45.95858931541443
-  project_score: 91.05
+  duration_seconds: 46.05984592437744
+  project_score: 91.6
   report_file: /home/solubrew/.hermes/projects/pyffice/FALCON_TEST.yaml
   results:
     tests_failed: 29
@@ -1881,7 +1875,7 @@ test_execution:
   status_message: no change (849/882 tests passed)
   timestamp: ''
 versions:
-  project: 13f5d27
+  project: 3fb7496
   project_status: dirty
-  project_uncommitted_changes: 2
+  project_uncommitted_changes: 4
   sasquatch: a16c01c

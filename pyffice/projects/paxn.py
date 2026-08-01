@@ -361,24 +361,30 @@ class PAXNConverter:
     
     def convert_task_from_pyffice(self, pyffice_item: Dict[str, Any]) -> PAXNTask:
         """Convert Pyffice item to PAXN task"""
-        return PAXNTask(
-            id=pyffice_item.get('id', str(uuid.uuid4())),
-            title=pyffice_item.get('title', ''),
-            description=pyffice_item.get('description', ''),
-            status=pyffice_item.get('status', 'pending'),
-            priority=REVERSE_PRIORITY_MAP.get(pyffice_item.get('priority', 3), 'medium'),
-            assignee=pyffice_item.get('assignee'),
-            tags=pyffice_item.get('tags', []),
-            created=pyffice_item.get('created'),
-            updated=pyffice_item.get('updated'),
-            due=pyffice_item.get('due_date'),
-            start=pyffice_item.get('start_date'),
-            completed=pyffice_item.get('completed_date'),
-            dependencies=pyffice_item.get('dependencies', []),
-            notes=pyffice_item.get('notes', ''),
-            effort_estimate=pyffice_item.get('effort_estimate'),
-            time_spent=pyffice_item.get('time_spent'),
-        )
+        priority = REVERSE_PRIORITY_MAP.get(pyffice_item.get('priority', 3), 'medium')
+        defaults = {
+            'id': str(uuid.uuid4()),
+            'title': '',
+            'description': '',
+            'status': 'pending',
+            'priority': priority,
+            'assignee': None,
+            'tags': [],
+            'created': None,
+            'updated': None,
+            'due': None,
+            'start': None,
+            'completed': None,
+            'dependencies': [],
+            'notes': '',
+            'effort_estimate': None,
+            'time_spent': None,
+        }
+        merged = _paxn_kwargs(pyffice_item, defaults)
+        merged['due'] = pyffice_item.get('due_date')
+        merged['start'] = pyffice_item.get('start_date')
+        merged['completed'] = pyffice_item.get('completed_date')
+        return PAXNTask(**merged)
 
 
 # Convenience functions
