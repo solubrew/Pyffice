@@ -35,13 +35,24 @@ logma.off()
 pxcfg = join(here, "_data_", "presentation.yaml")
 
 
-class PyfficePresentation(PyfficeDocument):
+class PyfficeShow(PyfficeDocumentManager):
     SERIALIZATION_VERSION = (1, 0, 0)
-    """"""
+    """A Presentation document type that can link to individual slides, or any other PyfficeDocument type"""
 
     def __init__(self, cfg=None) -> None:
         """"""
-        self.config = kahndor.Instruct(pxcfg).select("PyfficeSlideShow").override(cfg)
+        self.config = kahndor.Instruct(pxcfg).select("PyfficeShow").override(cfg)
+
+
+class PyfficeSlide(PyfficeDocument):
+    SERIALIZATION_VERSION = (1, 0, 0)
+    """A single slide document type"""
+
+    def __init__(self, cfg=None) -> None:
+        """"""
+        self.config = kahndor.Instruct(pxcfg).select("PyfficeSlide").override(cfg)
+
+
 # ====================================================================================================================||
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
