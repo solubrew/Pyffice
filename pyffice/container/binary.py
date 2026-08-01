@@ -75,7 +75,7 @@ def set_limit_for_type(ext: str, limit: int) -> None:
 class PyfficeBinaryContainer:
     """Container that stores documents either as inline base64 or as file paths."""
     
-    def __init__(self, mode: str = 'auto', custom_limits: Optional[dict] = None):
+    def __init__(self, mode: str = 'auto', custom_limits: Optional[dict] = None) -> None:
         """
         mode: 'auto' (auto-detect), 'inline' (always embed), 'path' (always reference)
         custom_limits: dict of ext -> bytes

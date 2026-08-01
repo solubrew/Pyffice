@@ -1,3 +1,4 @@
+from typing import Any
 """
 Charts module for pyffice.
 """
@@ -21,7 +22,7 @@ def __getattr__(name: str) -> None:
     )
 
 
-def __dir__():
+def __dir__() -> Any:
     return sorted(list(globals().keys()) + list(_LAZY_EXPORTS.keys()))
 
 __all__ = [

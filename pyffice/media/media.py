@@ -36,7 +36,7 @@ class Media:
     data: bytes | None = None
     metadata: dict | None = None
     
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         if self.metadata is None:
             self.metadata = {}
     
@@ -66,7 +66,7 @@ class Media:
 class MediaProcessor:
     """Processes media assets for documents."""
     
-    def __init__(self):
+    def __init__(self) -> None:
         self._handlers: dict[MediaType, callable] = {}
         logma.debug(f"MediaProcessor.__init__ called")
     

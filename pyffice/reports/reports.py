@@ -22,6 +22,7 @@ import datetime as dt
 from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.script.script import PyfficeScript
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -39,7 +40,7 @@ class PyfficeReport(PyfficeScript):
 
     VERSION = "0.0.1.0.1.0"
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         logma.debug(f"PyfficeReport.__init__ called")
         super().__init__(cfg)
@@ -61,12 +62,12 @@ class PyfficeReport(PyfficeScript):
         """Generate a summary of the report"""
         return f"Summary of {self.config['title']} report"
 
-    def import_report(self) -> "PyfficeReport":
+    def import_report(self) -> Self:
         """Import a report from a file"""
         _placeholder = True  # Would import report
         return self
 
-    def export_report(self) -> "PyfficeReport":
+    def export_report(self) -> Self:
         """Export the report to a file"""
         _placeholder = True  # Would export report
         return self

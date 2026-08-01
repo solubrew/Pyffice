@@ -22,6 +22,7 @@ import datetime as dt
 from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -37,13 +38,13 @@ class PyfficeConfig(PyfficeDocument):
     SERIALIZATION_VERSION = (1, 0, 0)
     """"""
 
-    def __init__(self, cfg=None, parent=None):
+    def __init__(self, cfg=None, parent=None) -> None:
         """"""
         self.parent = parent
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeConfig").override(cfg))
 
-    def load_document(self, document=None) -> "PyfficeConfig":
+    def load_document(self, document=None) -> Self:
         """Load document into this document.
         
         Args:
@@ -65,7 +66,7 @@ class PyfficeTOML(PyfficeConfig):
 
     VERSION = "0.0.1.0.1.0"
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).override("PyfficeTOML")).override(cfg)
@@ -76,7 +77,7 @@ class PyfficeHelp(PyfficeConfig):
 
     VERSION = "0.0.1.0.1.0"
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeHelp")).override(cfg)

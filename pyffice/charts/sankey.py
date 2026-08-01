@@ -44,7 +44,7 @@ class SankeyChart:
 
     VERSION = "0.0.1.0.1.0"
 
-    def __init__(self, sources, targets, values, labels=None):
+    def __init__(self, sources, targets, values, labels=None) -> None:
         """
         Initialize the Sankey chart data.
 
@@ -92,7 +92,7 @@ class SankeyChart:
         # Create the figure and render it
         fig = go.Figure(data=[sankey_data], layout=layout)
         fig.show()
-    def save_sankey_chart(self, filename="sankey_chart.html"):
+    def save_sankey_chart(self, filename="sankey_chart.html") -> None:
         """
         Save the Sankey diagram to an HTML file.
 

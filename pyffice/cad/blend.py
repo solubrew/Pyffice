@@ -15,7 +15,7 @@ class PyfficeBLEND(PyfficeDocument):
     EXTENSIONS = {'.blend'}
     DEFAULT_LIMIT = 512 * 1024 * 1024  # 512MB
 
-    def __init__(self, file_path: str = None, cfg=None):
+    def __init__(self, file_path: str = None, cfg=None) -> None:
         super().__init__(cfg)
         if file_path:
             self.file_path = file_path

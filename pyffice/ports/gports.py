@@ -15,6 +15,7 @@ with try/except so the module loads without them).
 
 from os.path import dirname, join
 from typing import Any, Optional
+from typing_extensions import Self
 
 from kahndor import kahndor
 from kahndor.logma import Logma
@@ -44,7 +45,7 @@ class _GoogleWorkspacePortBase(PyfficeCloudPort):
     API_VERSION = ""
     SCOPES = []
 
-    def authenticate(self, credentials: Optional[dict] = None) -> "_GoogleWorkspacePortBase":
+    def authenticate(self, credentials: Optional[dict] = None) -> Self:
         """Authenticate and build the googleapiclient service.
 
         Args:

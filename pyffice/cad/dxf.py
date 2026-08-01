@@ -15,7 +15,7 @@ class PyfficeDXF(PyfficeDocument):
     EXTENSIONS = {'.dxf'}
     DEFAULT_LIMIT = 100 * 1024 * 1024  # 100MB
     
-    def __init__(self, file_path: str = None, cfg=None):
+    def __init__(self, file_path: str = None, cfg=None) -> None:
         super().__init__(cfg)
         self.file_path = file_path
     

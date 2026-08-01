@@ -21,6 +21,7 @@ import datetime as dt
 # ======================================Solutions Brewer Library Modules==============================================||
 from kahndor import kahndor
 from kahndor.logma import Logma
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -37,7 +38,7 @@ class PyfficeTag(object):
 
     VERSION = "0.0.1.0.1.0"
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         logma.debug(f"PyfficeTag.__init__ called")
         self.config = kahndor.Instruct(pxcfg).select("PyfficeTag").override(cfg)
@@ -46,7 +47,7 @@ class PyfficeTag(object):
         self.value = None
         self.doc_type = "tags"
 
-    def load_tag(self, tag=None) -> "PyfficeTag":
+    def load_tag(self, tag=None) -> Self:
         """Load tag into this document.
         
         Args:
@@ -62,7 +63,7 @@ class PyfficeTag(object):
         self.set_value(tag.get("value", None))
         return self
 
-    def set_description(self, description) -> "PyfficeTag":
+    def set_description(self, description) -> Self:
         """Set the description.
         
         Args:
@@ -74,7 +75,7 @@ class PyfficeTag(object):
         self.description = description
         return self
 
-    def set_label(self, label) -> "PyfficeTag":
+    def set_label(self, label) -> Self:
         """Set the label.
         
         Args:
@@ -86,7 +87,7 @@ class PyfficeTag(object):
         self.label = label
         return self
 
-    def set_value(self, value) -> "PyfficeTag":
+    def set_value(self, value) -> Self:
         """Set the value.
         
         Args:

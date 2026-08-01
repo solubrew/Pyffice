@@ -145,7 +145,7 @@ class PyfficeCodex(PyfficeDocumentManager):
             raise InitializationError(f"Failed to initialize PyfficeCodex: {e}") from e
 
     @classmethod
-    def from_yaml(cls, yaml_str: str, cfg: Optional[dict[str, Any]] = None) -> "PyfficeCodex":
+    def from_yaml(cls, yaml_str: str, cfg: Optional[dict[str, Any]] = None) -> PyfficeCodex:
         """Load a codex from a YAML string."""
         import yaml
 
@@ -384,7 +384,7 @@ class PyfficeCodex(PyfficeDocumentManager):
 
     def save(
         self, path: Optional[str] = None, syntax: Optional[str] = None, encrypt_key: Optional[str] = None
-    ) -> "PyfficeCodex":
+    ) -> PyfficeCodex:
         """Save the codex to a file."""
         if path is None:
             raise PyfficeCodexError("Save path is required")
@@ -406,7 +406,7 @@ class PyfficeCodex(PyfficeDocumentManager):
         logger.info(f"Saved codex to {path}")
         return self
 
-    def set_imports(self, imports: Optional[dict[str, Any]] = None) -> "PyfficeCodex":
+    def set_imports(self, imports: Optional[dict[str, Any]] = None) -> PyfficeCodex:
         """Set imports with change tracking."""
         if imports is None:
             imports = {}

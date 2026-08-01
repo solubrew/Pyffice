@@ -37,7 +37,7 @@ class PyfficePersona(PyfficeDocument):
     SERIALIZATION_VERSION = (1, 0, 0)
     """"""
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("")).override(cfg)

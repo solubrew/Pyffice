@@ -11,7 +11,7 @@ class PyfficeOBJ(PyfficeDocument):
     EXTENSIONS = {'.obj'}
     DEFAULT_LIMIT = 256 * 1024 * 1024  # 256MB
     
-    def __init__(self, file_path: str):
+    def __init__(self, file_path: str) -> None:
         self.file_path = Path(file_path)
         self.vertices: List[Tuple[float, float, float]] = []
         self.normals: List[Tuple[float, float, float]] = []

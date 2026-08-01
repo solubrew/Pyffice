@@ -13,6 +13,7 @@
 
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
+from __future__ import annotations
 from os.path import abspath, dirname, join
 import datetime as dt
 from dataclasses import dataclass, field, asdict
@@ -83,7 +84,7 @@ class PyfficeFont:
         }
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> "PyfficeFont":
+    def from_dict(cls, data: Dict[str, Any]) -> PyfficeFont:
         """Create font from dictionary."""
         return cls(
             name=data.get("name", "Arial"),
@@ -350,7 +351,7 @@ class PyfficeText(PyfficeUnit):
     #     text: str,
     #     font: Optional[PyfficeFont] = None,
     #     alignment: TextAlignment = TextAlignment.LEFT,
-    # ) -> "PyfficeText":
+    # ) -> PyfficeText:
     #     """Add text as a new paragraph (fluent interface)."""
     #     self.add_paragraph(text, alignment, font)
     #     return self

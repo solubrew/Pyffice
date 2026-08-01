@@ -38,7 +38,7 @@ class PyfficeSMS(PyfficeMessage):
 
     VERSION = "0.0.1.0.1.0"
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("")).override(cfg)
@@ -49,7 +49,7 @@ class PyfficeMMS(PyfficeMessage):
 
     VERSION = "0.0.1.0.1.0"
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("")).override(cfg)
@@ -60,7 +60,7 @@ class PyfficePostalMail(PyfficeMessage):
 
     VERSION = "0.0.1.0.1.0"
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("")).override(cfg)

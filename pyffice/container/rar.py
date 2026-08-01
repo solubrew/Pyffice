@@ -11,7 +11,7 @@ class PyfficeRAR(ArchiveHandler):
     EXTENSIONS = {'.rar', '.rar5'}
     DEFAULT_LIMIT = 256 * 1024 * 1024  # 256MB
 
-    def __init__(self, file_path: str, mode: str = 'r'):
+    def __init__(self, file_path: str, mode: str = 'r') -> None:
         self.file_path = file_path
 
     @classmethod

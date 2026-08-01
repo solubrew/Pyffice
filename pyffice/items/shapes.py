@@ -147,7 +147,7 @@ class PyfficeShape(PyfficeUnit):
         self.text_rotation = angle
         return self
 
-    def set_background(self, background, item=Self) -> "PyfficeShape":
+    def set_background(self, background, item=Self) -> Self:
         """Set the background.
         
         Args:

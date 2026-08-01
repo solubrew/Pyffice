@@ -23,6 +23,7 @@ from pandas import DataFrame
 from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.document import PyfficeUnit
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -37,12 +38,12 @@ class PyfficeTable(PyfficeUnit):
     SERIALIZATION_VERSION = (1, 0, 0)
     """"""
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeDataFrame")).override(cfg)
 
-    def load_unit(self, unit=None) -> "PyfficeTable":
+    def load_unit(self, unit=None) -> Self:
         """Load a unit dict into this document.
         
         Args:
@@ -58,7 +59,7 @@ class PyfficeTable(PyfficeUnit):
         self.set_dataframe(unit.get("data", []), unit.get("columns", []))
         return self
 
-    def set_dataframe(self, data, columns=None) -> "PyfficeTable":
+    def set_dataframe(self, data, columns=None) -> Self:
         """Set the dataframe.
         
         Args:
@@ -82,7 +83,7 @@ class PyfficePart(PyfficeUnit):
     """"""
     SERIALIZATION_VERSION = (1, 0, 0)
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(pxcfg).select("PyfficePart").override(cfg)

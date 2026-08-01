@@ -22,6 +22,7 @@ import datetime as dt
 from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -36,14 +37,14 @@ class PyfficeService(PyfficeDocument):
     SERIALIZATION_VERSION = (1, 0, 0)
     """"""
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeService")).override(cfg)
         self.key = None
         self.service = None
 
-    def load_document(self, document=None) -> "PyfficeService":
+    def load_document(self, document=None) -> Self:
         """Load document into this document.
         
         Args:
@@ -61,7 +62,7 @@ class PyfficeService(PyfficeDocument):
         self.set_service(document.get("service", None))
         return self
 
-    def set_key(self, key) -> "PyfficeService":
+    def set_key(self, key) -> Self:
         """Set the key.
         
         Args:
@@ -75,7 +76,7 @@ class PyfficeService(PyfficeDocument):
             self.key = key
         return self
 
-    def set_service(self, service) -> "PyfficeService":
+    def set_service(self, service) -> Self:
         """Set the service.
         
         Args:

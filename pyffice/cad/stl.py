@@ -19,7 +19,7 @@ class PyfficeSTL(PyfficeDocument):
     EXTENSIONS = {'.stl'}
     DEFAULT_LIMIT = 256 * 1024 * 1024  # 256MB
     
-    def __init__(self, file_path: str):
+    def __init__(self, file_path: str) -> None:
         self.file_path = Path(file_path)
         logma.debug(f"PyfficeSTL.__init__ called")
         self.faces: List[Dict[str, Any]] = []

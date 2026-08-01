@@ -15,7 +15,7 @@ class PyfficeFBX(PyfficeDocument):
     EXTENSIONS = {'.fbx'}
     DEFAULT_LIMIT = 512 * 1024 * 1024  # 512MB
     
-    def __init__(self, file_path: str = None, cfg=None):
+    def __init__(self, file_path: str = None, cfg=None) -> None:
         super().__init__(cfg)
         self.file_path = file_path
     

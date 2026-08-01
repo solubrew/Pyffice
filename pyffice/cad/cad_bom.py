@@ -24,6 +24,7 @@ from typing import Any, Optional
 from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -49,7 +50,7 @@ class PyfficeBOM(PyfficeDocumentManager):
 
     SERIALIZATION_VERSION = (1, 0, 0)
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """Initialize the BOM handler."""
         logma.debug(f"PyfficeBOM.__init__ called")
         self.config = kahndor.Instruct(pxcfg).override("PyfficeBOM")
@@ -70,7 +71,7 @@ class PyfficeBOM(PyfficeDocumentManager):
         """
         super().add_document(part)
 
-    def add_item(self, part_number, description, quantity=1, **kwargs) -> "PyfficeBOM":
+    def add_item(self, part_number, description, quantity=1, **kwargs) -> Self:
         """Add item to BOM.
 
         Args:
@@ -138,7 +139,7 @@ class PyfficeSoftwareBOM(PyfficeBOM):
 
     SERIALIZATION_VERSION = (1, 0, 0)
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """Initialize the Software BOM handler."""
         logma.debug(f"PyfficeSoftwareBOM.__init__ called")
         self.config = kahndor.Instruct(pxcfg).override("PyfficeSoftwareBOM")
@@ -158,7 +159,7 @@ class PyfficeSoftwareBOM(PyfficeBOM):
         """
         super().add_part(part)
 
-    def add_package(self, name, version, license_=None, **kwargs) -> "PyfficeSoftwareBOM":
+    def add_package(self, name, version, license_=None, **kwargs) -> Self:
         """Add package to SBOM.
 
         Args:

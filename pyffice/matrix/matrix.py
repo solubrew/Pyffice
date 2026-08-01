@@ -13,6 +13,7 @@
 
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
+from __future__ import annotations
 from os.path import dirname, join, exists
 from typing import Any
 
@@ -838,7 +839,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         return schema
 
     @classmethod
-    def from_list(cls, data: list[list[Any]]) -> "PyfficeMatrix":
+    def from_list(cls, data: list[list[Any]]) -> PyfficeMatrix:
         """Create matrix from 2D list."""
         if not data:
             return cls()
@@ -849,7 +850,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         return matrix
 
     @classmethod
-    def identity(cls, size: int) -> "PyfficeMatrix":
+    def identity(cls, size: int) -> PyfficeMatrix:
         """Create identity matrix."""
         matrix = cls(rows=size, cols=size)
         for i in range(size):
@@ -864,7 +865,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
         """Set cell value."""
         self._data[row][col] = value
 
-    def add(self, other: "PyfficeMatrix") -> "PyfficeMatrix":
+    def add(self, other: "PyfficeMatrix") -> PyfficeMatrix:
         """Add two matrices."""
         if self.rows != other.rows or self.cols != other.cols:
             raise ValueError("Matrix dimensions must match")
@@ -874,7 +875,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
                 result._data[i][j] = self._data[i][j] + other._data[i][j]
         return result
 
-    def multiply(self, other: "PyfficeMatrix") -> "PyfficeMatrix":
+    def multiply(self, other: "PyfficeMatrix") -> PyfficeMatrix:
         """Multiply two matrices."""
         if self.cols != other.rows:
             raise ValueError("Matrix dimensions incompatible for multiplication")
@@ -887,7 +888,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
                 result._data[i][j] = total
         return result
 
-    def transpose(self) -> "PyfficeMatrix":
+    def transpose(self) -> PyfficeMatrix:
         """Return transpose of matrix."""
         result = PyfficeMatrix(rows=self.cols, cols=self.rows)
         for i in range(self.rows):

@@ -22,6 +22,7 @@ import datetime as dt
 from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.tags.tags import PyfficeTag
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -38,12 +39,12 @@ class PyfficeRating(PyfficeTag):
 
     VERSION = "0.0.1.0.1.0"
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeRating")).override(cfg)
 
-    def load_tag(self, tag) -> "PyfficeRating":
+    def load_tag(self, tag) -> Self:
         """Load tag into this document.
         
         Args:

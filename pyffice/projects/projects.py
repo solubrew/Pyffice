@@ -13,6 +13,7 @@
 
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
+from __future__ import annotations
 from os.path import abspath, dirname, join
 import datetime as dt
 from typing import Optional, Any
@@ -90,22 +91,22 @@ class PyfficeProject(PyfficeDocumentManager):
         self.milestones = []
         self.dependencies = []
 
-    def add_task(self, task: Self) -> "PyfficeProject":
+    def add_task(self, task: Self) -> PyfficeProject:
         """Add a task to the project."""
         self.tasks.append(task)
         return self
 
-    def add_resource(self, resource: Self) -> "PyfficeProject":
+    def add_resource(self, resource: Self) -> PyfficeProject:
         """Add a resource to the project."""
         self.resources.append(resource)
         return self
 
-    def add_milestone(self, milestone: Self) -> "PyfficeProject":
+    def add_milestone(self, milestone: Self) -> PyfficeProject:
         """Add a milestone to the project."""
         self.milestones.append(milestone)
         return self
 
-    def add_dependency(self, from_task: str, to_task: str, dependency_type: str = Self) -> "PyfficeProject":
+    def add_dependency(self, from_task: str, to_task: str, dependency_type: str = Self) -> PyfficeProject:
         """Add a task dependency (Finish-to-Start by default)."""
         self.dependencies.append({"from": from_task, "to": to_task, "type": dependency_type})
         return self
@@ -136,7 +137,7 @@ class PyfficeProject(PyfficeDocumentManager):
         return self._canonicalize(doc)
 
     @classmethod
-    def from_microsoft_project(cls, file_path: str, cfg: Optional[dict] = None) -> "PyfficeProject":
+    def from_microsoft_project(cls, file_path: str, cfg: Optional[dict] = None) -> PyfficeProject:
         """Import from Microsoft Project format."""
         import struct
 
@@ -158,7 +159,7 @@ class PyfficeProject(PyfficeDocumentManager):
         return project
 
     @classmethod
-    def from_projectlibre(cls, file_path: str, cfg: Optional[dict] = None) -> "PyfficeProject":
+    def from_projectlibre(cls, file_path: str, cfg: Optional[dict] = None) -> PyfficeProject:
         """Import from ProjectLibre format."""
         import xml.etree.ElementTree as ET
 
@@ -177,7 +178,7 @@ class PyfficeProject(PyfficeDocumentManager):
         return project
 
     @classmethod
-    def from_ganttproject(cls, file_path: str, cfg: Optional[dict] = None) -> "PyfficeProject":
+    def from_ganttproject(cls, file_path: str, cfg: Optional[dict] = None) -> PyfficeProject:
         """Import from GanttProject format."""
         import xml.etree.ElementTree as ET
 

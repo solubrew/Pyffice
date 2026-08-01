@@ -15,7 +15,7 @@ class PyfficeGLTF(PyfficeDocument):
     EXTENSIONS = {'.gltf', '.glb'}
     DEFAULT_LIMIT = 256 * 1024 * 1024  # 256MB
     
-    def __init__(self, file_path: str = None, cfg=None):
+    def __init__(self, file_path: str = None, cfg=None) -> None:
         super().__init__(cfg)
         self.file_path = file_path
     

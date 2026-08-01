@@ -14,7 +14,7 @@ class PyfficeSCAD(PyfficeDocument):
     SERIALIZATION_VERSION = (1, 0, 0)
     """OpenSCAD script document."""
     
-    def __init__(self, path: Optional[str] = None, content: Optional[str] = None):
+    def __init__(self, path: Optional[str] = None, content: Optional[str] = None) -> None:
         super().__init__(path=path, content=content)
         logma.debug(f"PyfficeSCAD.__init__ called")
         self.doc_type = "scad"

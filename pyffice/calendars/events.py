@@ -376,7 +376,7 @@ class PyfficeTask(PyfficeUnit):
         """Return the stored payload dict (or None if constructed empty)."""
         return self.payload
 
-    def set_payload(self, payload) -> "PyfficeTask":
+    def set_payload(self, payload) -> Self:
         """Replace the stored payload, returning self for chaining."""
         if payload != self.payload:
             self.add_change("payload", self.payload, payload)

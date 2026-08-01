@@ -11,6 +11,7 @@ PAXN Format:
 Author: Nchantrs Stack
 """
 
+from __future__ import annotations
 from typing import Dict, Any, List, Optional
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -167,7 +168,7 @@ class PAXNTask:
         }
     
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> 'PAXNTask':
+    def from_dict(cls, data: Dict[str, Any]) -> PAXNTask:
         """Create from dictionary"""
         defaults = {
             'id': str(uuid.uuid4()),
@@ -230,7 +231,7 @@ class PAXNProject:
         }
     
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> 'PAXNProject':
+    def from_dict(cls, data: Dict[str, Any]) -> PAXNProject:
         """Create from dictionary"""
         tasks = [PAXNTask.from_dict(t) for t in data.get('tasks', [])]
         defaults = {

@@ -32,7 +32,7 @@ class Pyffice7Z(ArchiveHandler):
     EXTENSIONS = {'.7z', '.7zip'}
     DEFAULT_LIMIT = 256 * 1024 * 1024  # 256MB
 
-    def __init__(self, file_path: str, mode: str = 'r'):
+    def __init__(self, file_path: str, mode: str = 'r') -> None:
         self.file_path = file_path
         self.mode = mode
 

@@ -17,6 +17,7 @@ The two methods that PyfficeDataMixin actually contributed
 file-level functions are preserved verbatim.
 """
 
+from __future__ import annotations
 import json
 from pathlib import Path
 from typing import Any, Optional
@@ -50,7 +51,7 @@ def to_string(data: Any, indent: int = 2) -> str:
     return json.dumps(data, indent=indent, ensure_ascii=False)
 
 
-def create(initial: Any = None) -> "PyfficeJSON":
+def create(initial: Any = None) -> PyfficeJSON:
     """Create a new PyfficeJSON instance, optionally seeded with data."""
     obj = PyfficeJSON()
     if initial is not None:
@@ -130,7 +131,7 @@ class PyfficeJSON:
         return json.dumps(self._data, indent=indent, ensure_ascii=False)
 
     @staticmethod
-    def from_string(json_string: str) -> "PyfficeJSON":
+    def from_string(json_string: str) -> PyfficeJSON:
         """
         Create PyfficeJSON from string.
 

@@ -21,6 +21,9 @@ PATCH)`` so callers can compare programmatically:
         ...
 """
 
+
+from typing import Any
+
 # Lazy __getattr__ proxy decouples package import from
 # pyffice.pyffice import chain. Callers use PyfficeCodex
 # directly (no Pyffice facade).
@@ -48,7 +51,7 @@ def __getattr__(name: str) -> None:
     raise AttributeError(f"module 'pyffice' has no attribute {name!r}")
 
 
-def __dir__():
+def __dir__() -> Any:
     return sorted(list(globals().keys()) + list(_LAZY_EXPORTS.keys()))
 
 

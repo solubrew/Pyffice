@@ -41,7 +41,7 @@ class PyfficeTextDocument(PyfficeDocument):
     SERIALIZATION_VERSION = (1, 0, 0)
     """Text document with full formatting support."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.text = PyfficeText()
         logma.debug(f"PyfficeTextDocument.__init__ called")
         self.metadata: Dict[str, Any] = {}
