@@ -1,10 +1,17 @@
-"""
-Pyffice CSV Data Handler
+"""CSV file handler for the ports layer.
+
+Migrated from pyffice/data/csv.py (T-NEW-069). The data/ directory
+was deprecated because every file in it had zero callers; the CSV
+functionality moves here where it belongs alongside the other file
+format handlers (PyfficePort, PyfficePDF, etc.).
+
+Behavior is preserved verbatim from the original csv.py — same
+function signatures, same return shapes, same field defaults.
 """
 
 import csv
 from pathlib import Path
-from typing import List, Dict, Any, Optional, Iterator
+from typing import Any, Iterator, List, Dict, Optional
 
 
 def read(filepath: str, delimiter: str = ",", encoding: str = "utf-8") -> List[Dict[str, Any]]:
@@ -43,7 +50,7 @@ def append(filepath: str, row: Dict[str, Any], delimiter: str = ",", encoding: s
     """Append single row to CSV file."""
     file_path = Path(filepath)
     write_header = not file_path.exists() or file_path.stat().st_size == 0
-    
+
     with open(filepath, "a", encoding=encoding, newline="") as f:
         writer = csv.DictWriter(f, fieldnames=row.keys(), delimiter=delimiter)
         if write_header:
@@ -56,6 +63,7 @@ def append_row(filepath: str, row: List[str], delimiter: str = ",", encoding: st
     with open(filepath, "a", encoding=encoding, newline="") as f:
         writer = csv.writer(f, delimiter=delimiter)
         writer.writerow(row)
+
 
 class PyfficeCSV:
     """Handler for CSV file operations."""

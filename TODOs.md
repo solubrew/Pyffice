@@ -434,6 +434,56 @@ But the real coverage is more nuanced. The project uses two test-file naming con
 
 **Closed.** The re-baselined data is the new source of truth; T-NEW-058 should be marked `✅ CLOSED` (see T-NEW-058 in the old backlog section above).
 
+### T-NEW-069 — Migrate `pyffice/data/` to `pyffice/ports/` and delete ✅ CLOSED (2026-07-31)
+
+**Status:** Per user direction (2026-07-31), the directory migration is shipped.
+
+**Audit findings (zero callers):**
+
+- `pyffice/data/base.py` (PyfficeDataBase, PyfficeDataMixin) — 0 callers; `PyfficeDataMixin` is a typo-alias for itself
+- `pyffice/data/csv.py` (PyfficeCSV + 7 free fns) — 0 callers; CSV handling is a port concern
+- `pyffice/data/json.py` (PyfficeJSON) — 0 callers; JSON is the canonical wire format already
+- `pyffice/data/yaml.py` (PyfficeYAML) — 0 callers; references undefined `PyfficeDictBase` (broken)
+- `pyffice/data/xml.py` (5 free fns) — 0 callers
+- `pyffice/data/data/__init__.py` — 0 callers; empty module with just a docstring
+
+**Migration:**
+
+| Was | Now | Notes |
+|---|---|---|
+| `pyffice/data/csv.py` | `pyffice/ports/csv_handler.py` | `PyfficeCSV` class + 7 module fns, behavior preserved verbatim |
+| `pyffice/data/json.py` | `pyffice/ports/json_handler.py` | `PyfficeJSON` class + 6 module fns; `PyfficeDataMixin` inheritance dropped (the two methods that were added — `get` / `set` — are reimplemented as plain helpers) |
+| `pyffice/data/__init__.py` | same path, rewritten as lazy proxy | Re-exports `PyfficeCSV`, `PyfficeJSON`, csv_*, json_* from the new ports modules; legacy `from pyffice.data import PyfficeCSV` keeps working |
+| `pyffice/data/base.py` | deleted | zero callers; `PyfficeUnit._set_with_change` already provides the primitives |
+| `pyffice/data/yaml.py` | deleted | zero callers; references undefined `PyfficeDictBase` |
+| `pyffice/data/xml.py` | deleted | zero callers |
+| `pyffice/data/data/` | deleted | empty nested dir with only a docstring |
+
+**`pyffice/ports/__init__.py` updated** to add the new handlers to the lazy proxy: `PyfficeCSV`, `PyfficeJSON`, csv_*, json_* (avoiding name collisions with the existing `PyfficePortCSV` which is a port type, not a file handler).
+
+**Tests added (56 new, all passing):**
+
+- `tests/pyffice_unit/unit/ports/csv_handlerTEST.py` — 15 tests (module fns, class methods, delimiter support)
+- `tests/pyffice_unit/unit/ports/json_handlerTEST.py` — 19 tests (module fns, class methods, dotted get/set)
+
+**Verified:**
+
+- `from pyffice.ports import PyfficeCSV, PyfficeJSON` → works
+- `from pyffice.data import PyfficeCSV, PyfficeJSON` → still works (via lazy proxy)
+- Both paths resolve to the SAME class object (identity check)
+- 56/56 new tests pass
+- 310/313 pre-existing tests still pass (3 pre-existing failures: 2 thingery env errors, 1 updates placeholder)
+- No behavioral changes for any caller (the migration of `get`/`set` methods is a refactor that preserves PyfficeDataMixin's contract)
+
+**Directory state after migration:**
+
+```
+pyffice/data/
+  __init__.py    (re-export bridge, 2.7 KB)
+```
+
+Down from 7 files + 1 nested dir to 1 file.
+
 ### T-NEW-066 — T-NEW-044 status REGRESSED — only 2 of 4 fixes landed ⚠️ OPEN (P0) — **CLOSED 2026-07-31**
 
 **Verified against HEAD `0674ce8`:**
@@ -483,6 +533,7 @@ The remaining `from kahndor import kahndor` / `from kahndor.logma import Logma` 
 - ✅ **T-NEW-064** — Close T-NEW-053 / T-NEW-054 / T-NEW-047 / T-NEW-059 as verified-done. Done earlier this session.
 - ✅ **T-NEW-065** — Re-baseline T-NEW-058 from 13 → 35. Done in this session. Also closes T-NEW-058.
 - ✅ **T-NEW-068** — `condor` → `kahndor` migration complete. Closed earlier this session.
+- ✅ **T-NEW-069** — Migrate `pyffice/data/` to `pyffice/ports/` and delete. Done in this session.
 - ✅ **T-NEW-067** — `PyfficeSkill` etc. placeholder. Closed by deletion (commit `d9d4fa9`).
 
 ### P2 (deferred / existing backlog)
@@ -493,4 +544,4 @@ The remaining `from kahndor import kahndor` / `from kahndor.logma import Logma` 
 
 ---
 
-*File last edited: 2026-07-31 (T-NEW-CANDIDATE closed — top 5 test-coverage marathon shipped: web+items+images+workflows+tags = 134 new tests; T-NEW-045 closed; T-NEW-060 closed; P0/P1/P2 all clear; verified against HEAD `617875b`)*
+*File last edited: 2026-07-31 (T-NEW-069 closed — `pyffice/data/` migrated to `pyffice/ports/csv_handler.py` + `json_handler.py`; 6 dead files deleted; 56 new tests; directory now 1 file; verified against HEAD `pending`)*

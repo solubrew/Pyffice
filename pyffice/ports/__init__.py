@@ -21,6 +21,19 @@ _LAZY_EXPORTS = {
     "PyfficePortJupyter": ("pyffice.ports.ports", "PyfficePortJupyter"),
     "PyfficePortText": ("pyffice.ports.ports", "PyfficePortText"),
     "PyfficePortWebSession": ("pyffice.ports.ports", "PyfficePortWebSession"),
+    # T-NEW-069: file format handlers migrated from pyffice/data/
+    "PyfficeCSV": ("pyffice.ports.csv_handler", "PyfficeCSV"),
+    "PyfficeJSON": ("pyffice.ports.json_handler", "PyfficeJSON"),
+    "csv_read": ("pyffice.ports.csv_handler", "read"),
+    "csv_write": ("pyffice.ports.csv_handler", "write"),
+    "csv_read_rows": ("pyffice.ports.csv_handler", "read_rows"),
+    "csv_write_rows": ("pyffice.ports.csv_handler", "write_rows"),
+    "csv_append": ("pyffice.ports.csv_handler", "append"),
+    "csv_append_row": ("pyffice.ports.csv_handler", "append_row"),
+    "json_read": ("pyffice.ports.json_handler", "read"),
+    "json_write": ("pyffice.ports.json_handler", "write"),
+    "json_parse": ("pyffice.ports.json_handler", "parse"),
+    "json_to_string": ("pyffice.ports.json_handler", "to_string"),
 }
 
 def __getattr__(name: str):
@@ -55,4 +68,17 @@ __all__ = [
     "PyfficePortJupyter",
     "PyfficePortText",
     "PyfficePortWebSession",
+    # T-NEW-069: file format handlers (migrated from pyffice/data/)
+    "PyfficeCSV",
+    "PyfficeJSON",
+    "csv_read",
+    "csv_write",
+    "csv_read_rows",
+    "csv_write_rows",
+    "csv_append",
+    "csv_append_row",
+    "json_read",
+    "json_write",
+    "json_parse",
+    "json_to_string",
 ]
