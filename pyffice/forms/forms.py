@@ -24,6 +24,8 @@ from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager, PyfficeUnit
 from subtrix.utilities import uuid
 from pyffice.images.images import PyfficeImage
+from typing import Any
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -42,7 +44,7 @@ class PyfficeForm(PyfficeDocument):
     removing elements within the form dynamically.
     """
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         logma.debug(f"PyfficeForm.__init__ called")
         super().__init__(cfg)
@@ -54,7 +56,7 @@ class PyfficeForm(PyfficeDocument):
         self.sections = None
         self.responses = None
 
-    def add_answer(self, question_id, text, branch=None, sequence=None):
+    def add_answer(self, question_id, text, branch=None, sequence=None) -> Self:
         """Add a answer.
         
         Args:
@@ -82,7 +84,7 @@ class PyfficeForm(PyfficeDocument):
 
     def add_field(
         self, section_id, field, sequence=-1, response_scope="text", style="normal", required=False, always_show=False
-    ):
+    ) -> Any:
         """Add a form field.
         
         Args:
@@ -107,7 +109,7 @@ class PyfficeForm(PyfficeDocument):
         }
         return sequence
 
-    def add_response(self, response):
+    def add_response(self, response) -> Self:
         """Add a response.
         
         Args:
@@ -119,7 +121,7 @@ class PyfficeForm(PyfficeDocument):
         self.responses.append(response)
         return self
 
-    def add_section(self, after_section_id=None, control_question_id=None, trigger=None):
+    def add_section(self, after_section_id=None, control_question_id=None, trigger=None) -> Any:
         """
         Control Question Id and Trigger Control Branching
 
@@ -140,21 +142,21 @@ class PyfficeForm(PyfficeDocument):
         self.sections[section_id] = section
         return section_id
 
-    def del_field(self, field):
+    def del_field(self, field) -> Self:
         """Delete a field from the form."""
         fields = getattr(self, 'fields', [])
         if field in fields:
             fields.remove(field)
         return self
 
-    def del_response(self, response):
+    def del_response(self, response) -> Self:
         """Delete a response."""
         responses = getattr(self, 'responses', [])
         if response in responses:
             responses.remove(response)
         return self
 
-    def del_section(self, section_id):
+    def del_section(self, section_id) -> Self:
         """Remove the section.
         
         Args:
@@ -169,7 +171,7 @@ class PyfficeForm(PyfficeDocument):
         del self.sections[section_id]
         return self
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> Self:
         """Load document into this document.
         
         Args:
@@ -189,7 +191,7 @@ class PyfficeForm(PyfficeDocument):
         self.set_sections(document.get("sections", {}))
         return self
 
-    def set_form_footer_image(self, file_path):
+    def set_form_footer_image(self, file_path) -> Self:
         """Set the form footer image.
         
         Args:
@@ -205,12 +207,12 @@ class PyfficeForm(PyfficeDocument):
         self.footer_image = image
         return self
 
-    def set_form_id(self, form_id):
+    def set_form_id(self, form_id) -> Self:
         """Set the form ID."""
         self.form_id = form_id
         return self
 
-    def set_form_header_image(self, file_path):
+    def set_form_header_image(self, file_path) -> Self:
         """Set the form header image.
         
         Args:
@@ -226,7 +228,7 @@ class PyfficeForm(PyfficeDocument):
         self.header_image = image
         return self
 
-    def set_sections(self, sections):
+    def set_sections(self, sections) -> Self:
         """Set the sections.
         
         Args:
@@ -244,13 +246,13 @@ class PyfficeFormsManager(PyfficeDocumentManager):
     """"""
     SERIALIZATION_VERSION = (1, 0, 0)
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeFormsManager")).override(cfg)
         self.forms = None
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> Self:
         """Load document into this document.
         
         Args:
@@ -267,7 +269,7 @@ class PyfficeFormsManager(PyfficeDocumentManager):
         self.set_forms(document.get("forms", []))
         return self
 
-    def set_forms(self, forms):
+    def set_forms(self, forms) -> Self:
         """Set the forms.
         
         Args:
@@ -293,7 +295,7 @@ class PyfficeSurvey(PyfficeDocument):
 
     """
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeSurvey")).override(cfg)
@@ -304,7 +306,7 @@ class PyfficeSurvey(PyfficeDocument):
         self.responses = None
         self.schedule = None
 
-    def add_field_response(self, field, field_id, response_id):
+    def add_field_response(self, field, field_id, response_id) -> Self:
         """Add a field response.
         
         Args:
@@ -320,7 +322,7 @@ class PyfficeSurvey(PyfficeDocument):
         self.responses[response_id][field_id] = field
         return self
 
-    def add_form_response(self, response, response_id=None):
+    def add_form_response(self, response, response_id=None) -> Self:
         """Add a form response.
         
         Args:
@@ -337,7 +339,7 @@ class PyfficeSurvey(PyfficeDocument):
         self.responses[response_id] = response
         return self
 
-    def add_recipient(self, recipient):
+    def add_recipient(self, recipient) -> Self:
         """Add a recipient for this document.
         
         Args:
@@ -352,24 +354,24 @@ class PyfficeSurvey(PyfficeDocument):
         self.distribution["recipients"].append(recipient)
         return self
 
-    def del_field_response(self, field, field_id, response_id):
+    def del_field_response(self, field, field_id, response_id) -> Self:
         """Delete a field response."""
         _p = True  # placeholder
         return self
 
-    def del_form_response(self, response_id):
+    def del_form_response(self, response_id) -> Self:
         """Delete a form response."""
         _p = True  # placeholder
         return self
 
-    def del_recipient(self, recipient):
+    def del_recipient(self, recipient) -> Self:
         """Delete a recipient."""
         recipients = getattr(self, 'recipients', [])
         if recipient in recipients:
             recipients.remove(recipient)
         return self
 
-    def get_form(self, form_id):
+    def get_form(self, form_id) -> Any:
         """Return the form.
         
         Args:
@@ -382,7 +384,7 @@ class PyfficeSurvey(PyfficeDocument):
         form = PyfficeForm()
         return form
 
-    def load_document(self, document=None):
+    def load_document(self, document=None) -> Self:
         """Load document into this document.
         
         Args:
@@ -403,7 +405,7 @@ class PyfficeSurvey(PyfficeDocument):
         self.set_responses(document.get("responses", None))
         return self
 
-    def set_channel(self, channel):
+    def set_channel(self, channel) -> Self:
         """Set the channel.
         
         Args:
@@ -417,7 +419,7 @@ class PyfficeSurvey(PyfficeDocument):
             self.distribution["channel"] = channel
         return self
 
-    def set_distribution(self, recipients, channel=None):
+    def set_distribution(self, recipients, channel=None) -> Self:
         """distribute survey to a list of specific recipients or posting locations"""
         distribution = {"recipients": recipients, "channel": channel}
         if self.distribution != distribution:
@@ -425,7 +427,7 @@ class PyfficeSurvey(PyfficeDocument):
             self.distribution = distribution
         return self
 
-    def set_end_date(self, end_datetime):
+    def set_end_date(self, end_datetime) -> Self:
         """Set the end date.
         
         Args:
@@ -439,7 +441,7 @@ class PyfficeSurvey(PyfficeDocument):
             self.schedule["end"] = end_datetime
         return self
 
-    def set_form(self, form):
+    def set_form(self, form) -> Self:
         """Set the form.
         
         Args:
@@ -454,7 +456,7 @@ class PyfficeSurvey(PyfficeDocument):
             self.set_form_id(form.did)
         return self
 
-    def set_form_id(self, form_id):
+    def set_form_id(self, form_id) -> Self:
         """Set the form id.
         
         Args:
@@ -470,7 +472,7 @@ class PyfficeSurvey(PyfficeDocument):
                 self.get_form(self.form.did)
         return self
 
-    def set_responses(self, responses=None):
+    def set_responses(self, responses=None) -> Self:
         """Set the responses.
         
         Args:
@@ -484,7 +486,7 @@ class PyfficeSurvey(PyfficeDocument):
             self.responses = responses
         return self
 
-    def set_schedule(self, schedule=None):
+    def set_schedule(self, schedule=None) -> Self:
         """Set the schedule.
         
         Args:
@@ -498,7 +500,7 @@ class PyfficeSurvey(PyfficeDocument):
             self.schedule = schedule
         return self
 
-    def set_start_date(self, start_datetime):
+    def set_start_date(self, start_datetime) -> Self:
         """Set the start date.
         
         Args:

@@ -26,6 +26,8 @@ from openpyxl.worksheet.table import Table, TableStyleInfo
 from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.ports.ports import PyfficePort
+from typing import Any
+from typing_extensions import Self
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -36,7 +38,7 @@ logma = Logma(__name__)
 pxcfg = join(here, "../config/_data_", "exports.yaml")
 
 
-def _extract_cell_attrs(cell):
+def _extract_cell_attrs(cell) -> Any:
     """Extract all attributes from an openpyxl Cell into a dict.
 
     Module-level helper so PyfficePortExcel.read_cell's foreign
@@ -105,13 +107,13 @@ class PyfficePortExcel(PyfficePort):
 
     VERSION = "0.0.1.0.1.0"
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         logma.debug(f"PyfficePortExcel.__init__ called")
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("")).override(cfg)
 
-    def add_object(self, ws, image_path, cell):
+    def add_object(self, ws, image_path, cell) -> Self:
         """
         Add an image to the sheet.
             could be a shpae
@@ -126,7 +128,7 @@ class PyfficePortExcel(PyfficePort):
         ws.add_image(img, cell)
         return self
 
-    def create_table(self, table_range, table_name="Table1"):
+    def create_table(self, table_range, table_name="Table1") -> Self:
         """
         Create a table in the given worksheet.
         :param ws: The worksheet
@@ -146,7 +148,7 @@ class PyfficePortExcel(PyfficePort):
         self.ws.add_table(table)
         return self
 
-    def create_style(self, style_name, font=None, border=None, fill=None, alignment=None):
+    def create_style(self, style_name, font=None, border=None, fill=None, alignment=None) -> Self:
         """
         Define a reusable style by name.
 
@@ -168,7 +170,7 @@ class PyfficePortExcel(PyfficePort):
         self.wb.add_named_style(style)
         return self
 
-    def get_column_width(self, column):
+    def get_column_width(self, column) -> Any:
         """Return the column width.
         
         Args:
@@ -179,7 +181,7 @@ class PyfficePortExcel(PyfficePort):
         """
         return self.ws.column_dimensions[column].width
 
-    def get_row_height(self, row):
+    def get_row_height(self, row) -> Any:
         """Return the row height.
         
         Args:
@@ -190,7 +192,7 @@ class PyfficePortExcel(PyfficePort):
         """
         return self.ws.row_dimensions[row].height
 
-    def parse_content(self, content):
+    def parse_content(self, content) -> Self:
         """Parse content.
         
         Args:
@@ -206,7 +208,7 @@ class PyfficePortExcel(PyfficePort):
                 self.add_cell(cell)
         return self
 
-    def read_cell(self, cell):
+    def read_cell(self, cell) -> Any:
         """Read cell.
 
         Args:
@@ -217,7 +219,7 @@ class PyfficePortExcel(PyfficePort):
         """
         return _extract_cell_attrs(cell)
 
-    def read_charts(self, sheet=None):
+    def read_charts(self, sheet=None) -> Any:
         """Read charts.
         
         Args:
@@ -233,7 +235,7 @@ class PyfficePortExcel(PyfficePort):
                 charts.append({"title": title, "type": chart.__class__.__name__})
         return charts
 
-    def read_images(self, sheet):
+    def read_images(self, sheet) -> Any:
         """Read images.
         
         Args:
@@ -251,7 +253,7 @@ class PyfficePortExcel(PyfficePort):
                 images.append({"name": name, "anchor": anchor, "size": size})
         return images
 
-    def read_styles(self):
+    def read_styles(self) -> Any:
         """Read styles.
         
         Returns:
@@ -259,7 +261,7 @@ class PyfficePortExcel(PyfficePort):
         """
         return styles
 
-    def scan_sheet(self, sheet_name):
+    def scan_sheet(self, sheet_name) -> Self:
         """
         Scan the sheet to determine its data range (start and end columns/rows).
 
@@ -271,7 +273,7 @@ class PyfficePortExcel(PyfficePort):
         self.end_row = ""
         return self
 
-    def set_border_style(self):
+    def set_border_style(self) -> Self:
         """
 
         :return:
@@ -279,7 +281,7 @@ class PyfficePortExcel(PyfficePort):
         self.ws.borders.left.border_style = "thin"
         return self
 
-    def set_chart_type(self, chart_type):
+    def set_chart_type(self, chart_type) -> None:
         """Set the chart type.
         
         Args:
@@ -311,7 +313,7 @@ class PyfficePortExcel(PyfficePort):
         elif chart_type == "surface":
             self.chart = xl.chart.SurfaceChart()
 
-    def set_column_width(self, column, width):
+    def set_column_width(self, column, width) -> Self:
         """
         Set the width for a specific column.
 
@@ -322,7 +324,7 @@ class PyfficePortExcel(PyfficePort):
         self.ws.column_dimensions[column].width = width
         return self
 
-    def set_row_height(self, row, height):
+    def set_row_height(self, row, height) -> Self:
         """
         Set the height for a specific row.
 
@@ -333,7 +335,7 @@ class PyfficePortExcel(PyfficePort):
         self.ws.row_dimensions[row].height = height
         return self
 
-    def _set_cell_value(self, cell, val):
+    def _set_cell_value(self, cell, val) -> Self:
         """
         Set the value of a cell with appropriate formatting.
 
@@ -362,7 +364,7 @@ class PyfficePortExcel(PyfficePort):
             cell.data_type = "s"
         return self
 
-    def open_file(self, file, if_data_only=False, read_only=False, keep_vba=False):
+    def open_file(self, file, if_data_only=False, read_only=False, keep_vba=False) -> Any:
         """Open file.
         
         Args:
@@ -397,12 +399,12 @@ class PyfficePortWord(PyfficePort):
 
     VERSION = "0.0.1.0.1.0"
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortWord")).override(cfg)
 
-    def set_paragraph_alignment(self, index, alignment="left"):
+    def set_paragraph_alignment(self, index, alignment="left") -> None:
         """
         Sets the alignment of a specific paragraph.
 
@@ -422,7 +424,7 @@ class PyfficePortWord(PyfficePort):
             paragraph.alignment = WD_ALIGN_PARAGRAPH.LEFT
 
 
-def read_docx_tables(file_path):
+def read_docx_tables(file_path) -> Any:
     """Read tables from a docx file into Python data.
     
     Args:
@@ -440,7 +442,7 @@ def read_docx_tables(file_path):
     return table_data
 
 
-def _write_dataframe(self, ws, dataframe):
+def _write_dataframe(self, ws, dataframe) -> Self:
     """
     Write a Pandas DataFrame to the worksheet.
 
@@ -453,7 +455,7 @@ def _write_dataframe(self, ws, dataframe):
     return self
 
 
-def _write_dictionary(self, ws, data):
+def _write_dictionary(self, ws, data) -> Self:
     """
     Write a dictionary's keys and values into the sheet.
 
@@ -466,7 +468,7 @@ def _write_dictionary(self, ws, data):
     return self
 
 
-def _write_table(self, ws, data):
+def _write_table(self, ws, data) -> Self:
     """
     Write data as a table into the worksheet.
 
@@ -478,7 +480,7 @@ def _write_table(self, ws, data):
             ws.cell(row=r_idx, column=c_idx, value=value)
     return self
 
-    def save(self, path, name):
+    def save(self, path, name) -> Self:
         """Save the current workbook to the given path."""
         super().save()
         try:
@@ -492,19 +494,19 @@ def _write_table(self, ws, data):
         self.wb.save(filename=f"{path}/{name}.xlsx")
         return self
 
-    def save_as(self, name, path):
+    def save_as(self, name, path) -> Self:
         """Save the workbook with a new filename and path."""
         super().save_as(name, path)
         self.save(path, name)
         return self
 
-    def save_copy_as(self, name, path):
+    def save_copy_as(self, name, path) -> Self:
         """Save a copy of the workbook with a different name and path."""
         super().save_copy_as(name, path)
         self.save(path, name)
         return self
 
-    def write(self, sheet_name, row, col, value):
+    def write(self, sheet_name, row, col, value) -> Self:
         """
         Write data to a specific cell in a sheet.
 

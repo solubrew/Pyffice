@@ -48,7 +48,7 @@ class PyfficeMatrix(PyfficeDocumentManager):
     SERIALIZATION_VERSION = (1, 0, 0)
     """A Pyffice Matrix is a top level pyffice document type that can be included in a Pyffice Book"""
 
-    def __init__(self, cfg=None):
+    def __init__(self, cfg=None) -> None:
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficeMatrix").override(cfg))
