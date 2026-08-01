@@ -796,11 +796,13 @@ class PyfficeMatrix(PyfficeDocumentManager):
         doc["data"]["compatibility"] = self.compatibility
         doc["data"]["documents"] = {x: y.to_dict() for x, y in self.documents.items()}
         doc["data"]["document_type"] = "matrix"
-        try:
-            doc["data"]["content"]["data"] = doc["data"]["content"]["data"].values.tolist()
-        except (AttributeError, TypeError) as e:
-            logma.warning(e)
-        logma.warning(f"Matrix Doc {doc}")
+        # The line below used to attempt a redundant DataFrame→list
+        # conversion on `data["content"]["data"]`, but ``_canonicalize``
+        # (called via ``super().to_dict()`` above) already mirrors
+        # ``data["table"]`` into ``data["content"]`` — so the access
+        # ``data["content"]["data"]`` raises TypeError on every call
+        # (silently logged). The line-793 conversion above is the
+        # single source of truth for table→list-of-lists.
         return self._canonicalize(doc)
 
     def to_json_schema(self) -> dict:

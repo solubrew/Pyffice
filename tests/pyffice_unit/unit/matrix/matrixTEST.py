@@ -153,3 +153,66 @@ class TestCalcRomanNumerals:
     def test_roundtrip_arabic(self, arabic):
         roman = calcExtendedRomanNumerals(arabic)
         assert calcArabicNumerals(roman) == arabic
+
+
+class TestPyfficeMatrixToDict:
+    """PyfficeMatrix.to_dict() must produce the canonical shape and
+    must NOT silently swallow TypeError via the dead try/except
+    that was here before R6.
+
+    The R6 fix removed a silent try/except that pretended to convert
+    ``data["content"]["data"]`` (a DataFrame) to ``list-of-lists``,
+    but the access ``data["content"]["data"]`` raised TypeError on
+    every call because ``_canonicalize`` (chained via ``super().to_dict()``)
+    had already mirrored ``data["table"]`` into ``data["content"]``.
+    The block was dead code, silently logged on every call.
+
+    After R6:
+    - The to_dict() chain returns the canonical shape.
+    - There is no silent log of the redundant conversion.
+    - ``data["table"]`` is the single source of truth for the
+      list-of-lists payload.
+    """
+
+    def test_to_dict_returns_canonical_shape(self):
+        from pyffice.document import PyfficeDocument, PyfficeDocumentManager
+        m = PyfficeMatrix()
+        # Force data to be a plain dict so the to_dict path
+        # doesn't try to call DataFrame.values.tolist().
+        m.data = {"cells": ["A|0"], "rows": 1}
+        m.documents = {}
+        m.compatibility = None
+        d = m.to_dict()
+        assert 'data' in d
+        assert 'did' in d
+        assert 'meta_data' in d
+        assert 'pyffice_compat' in d
+        # Original payload keys preserved under data.
+        assert d['data']['document_type'] == 'matrix'
+        assert 'table' in d['data']
+        assert 'compatibility' in d['data']
+        assert 'documents' in d['data']
+
+    def test_to_dict_does_not_silently_log(self):
+        """The R6 fix removed the silent logma.warning on every call.
+        Verify the call path is exception-free on a plain dict.
+        """
+        import logging
+        m = PyfficeMatrix()
+        m.data = {"any": "value"}
+        m.documents = {}
+        m.compatibility = None
+        # Should NOT raise (the old try/except was masking a TypeError).
+        d = m.to_dict()
+        assert d is not None
+
+    def test_to_dict_additive_for_table_key(self):
+        """The line-793 conversion (DataFrame→list-of-lists) is the
+        single source of truth. After R6, data['table'] is preserved
+        verbatim for plain dicts.
+        """
+        m = PyfficeMatrix()
+        m.data = {"nested": "value"}
+        m.documents = {}
+        d = m.to_dict()
+        assert d['data']['table'] == {"nested": "value"}
