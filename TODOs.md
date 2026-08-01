@@ -186,13 +186,17 @@ The original "13 missing test files" claim was wrong. Re-baselined against HEAD 
 2. Replace with `if __version_info__ >= (0, 2, 0):`.
 3. Add `tests/test_version.py` if not present.
 
-### T-NEW-060 — Squirl import-time `print()` pollution ⚠️ OPEN (out of scope)
+### T-NEW-060 — Squirl import-time `print()` pollution ✅ CLOSED (2026-07-31) — tracked in squirl repo
 
-Squirl still prints `MySQL client not found.` and `reql not installed` at import time. Live in squirl repo, not pyffice. Pytest fixture redirect won't help (these fire during collection).
+Filed as **T-NEW-061** in `~/.hermes/projects/squirl/TODOs.md`. The fix:
 
-**Migration plan:**
+1. Replace `print(f"reql not installed")` in `squirl/squirl/orgnql/yonql.py:63` with `warnings.warn(..., ImportWarning, stacklevel=2)`.
+2. Replace `print(f"MySQL client not found. ...")` in `squirl/squirl/orgnql/sonql.py:39` with the same pattern.
+3. Add `import warnings` to each file.
+4. Add a smoke test `squirl/tests/test_no_import_time_prints.py` that runs `import squirl` with `capsys` and asserts stdout/stderr do NOT contain the reql/MySQL strings.
+5. Verify in `pyffice`: `pytest tests/ -q 2>&1` no longer contains "MySQL client not found" or "reql not installed" in stdout.
 
-1. File a T-NEW card in `~/.hermes/projects/squirl/TODOs.md` to replace `print()` with `warnings.warn(..., ImportWarning)`.
+Pyffice has no action — the fix lives in the squirl repo. Closing this card as a cross-project pointer.
 
 ### T-NEW-061 — 185 stub methods (docstring + return self/None) ✅ CLOSED (2026-07-31)
 
@@ -272,7 +276,7 @@ All 185 stub methods were implemented across commits `40775bd`, `7be33f6`, `9745
 
 ### P3 — Out of scope
 
-- **T-NEW-060** — Squirl import-time `print()` (lives in squirl repo, not pyffice).
+- **T-NEW-060** — Squirl import-time `print()`. ✅ CLOSED (tracked in squirl as T-NEW-061).
 
 ---
 
@@ -484,9 +488,9 @@ The remaining `from kahndor import kahndor` / `from kahndor.logma import Logma` 
 ### P2 (deferred / existing backlog)
 
 - **T-NEW-045** — Public API facade decision. ✅ CLOSED (Option B, no facade).
-- **T-NEW-060** — Squirl import-time `print()` (out of scope, lives in squirl repo).
+- **T-NEW-060** — Squirl import-time `print()`. ✅ CLOSED (tracked in squirl as T-NEW-061).
 - **T-NEW-CANDIDATE** — Test coverage for 18 under-tested subpackages (top 5 by source LOC: `web` 2592 / `items` 1852 / `images` 1631 / `workflows` 679 / `tags` 524). See T-NEW-065 migration plan step 4. No priority — coverage is a marathon, not a sprint.
 
 ---
 
-*File last edited: 2026-07-31 (reconsolidation + 5 new P0/P1 cards T-NEW-062..066; skills/ placeholder deleted in commit `d9d4fa9`; T-NEW-045 closed (Option B, no facade); verified against HEAD `ed8e3d6`)*
+*File last edited: 2026-07-31 (P0/P1/P2 all clear; T-NEW-045 closed — users use PyfficeCodex directly, no facade; T-NEW-060 closed — squirl import-time prints tracked in squirl repo as T-NEW-061; pyffice/skills/ deleted in commit `d9d4fa9`; verified against HEAD `da63413`)*
