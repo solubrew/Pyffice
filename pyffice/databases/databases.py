@@ -84,9 +84,21 @@ class PyfficeDatabaseConnection(sonql.Doc):
         return
 
     def to_dict(self):
-        # TODO implement method
-        super().to_dict()
-        return self
+        logma.debug(f"{self.__class__.__name__}.to_dict called")
+        super().to_dict()  # populate canonical envelope
+        attrs = {
+            "config": getattr(self, "config", None),
+            "database": getattr(self, "database", None),
+        }
+        doc = {
+            "did": self.did,
+            "meta_data": {"schema_version": list(self.SERIALIZATION_VERSION)},
+            "data": {
+                "content": attrs,
+                "document_type": "databaseconnection",
+            },
+        }
+        return self._canonicalize(doc)
 
 
 class PyfficeDatabaseManager(PyfficeDocumentManager):
@@ -232,9 +244,23 @@ class PyfficeDatabaseManager(PyfficeDocumentManager):
         return
 
     def to_dict(self):
-        # TODO implement method
-        super().to_dict()
-        return self
+        logma.debug(f"{self.__class__.__name__}.to_dict called")
+        super().to_dict()  # populate canonical envelope
+        attrs = {
+            "config": getattr(self, "config", None),
+            "databases": getattr(self, "databases", None),
+            "connections": getattr(self, "connections", None),
+            "servers": getattr(self, "servers", None),
+        }
+        doc = {
+            "did": self.did,
+            "meta_data": {"schema_version": list(self.SERIALIZATION_VERSION)},
+            "data": {
+                "content": attrs,
+                "document_type": "databasemanager",
+            },
+        }
+        return self._canonicalize(doc)
 
 
 # ====================================================================================================================||

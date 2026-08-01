@@ -197,9 +197,26 @@ class PyfficeEmailMessage(PyfficeMessage):
         return
 
     def to_dict(self):
-        # TODO implement method
-        super().to_dict()
-        return self
+        logma.debug(f"{self.__class__.__name__}.to_dict called")
+        super().to_dict()  # populate canonical envelope
+        attrs = {
+            "config": getattr(self, "config", None),
+            "bcc": getattr(self, "bcc", None),
+            "cc": getattr(self, "cc", None),
+            "recipients": getattr(self, "recipients", None),
+            "labels": getattr(self, "labels", None),
+            "message": getattr(self, "message", None),
+            "connected": getattr(self, "connected", None),
+        }
+        doc = {
+            "did": self.did,
+            "meta_data": {"schema_version": list(self.SERIALIZATION_VERSION)},
+            "data": {
+                "content": attrs,
+                "document_type": "emailmessage",
+            },
+        }
+        return self._canonicalize(doc)
 
 
 class PyfficeMailBox(PyfficeDocumentManager):
@@ -395,9 +412,24 @@ class PyfficeMailBox(PyfficeDocumentManager):
         return
 
     def to_dict(self):
-        # TODO implement method
-        super().to_dict()
-        return self
+        logma.debug(f"{self.__class__.__name__}.to_dict called")
+        super().to_dict()  # populate canonical envelope
+        attrs = {
+            "active_message": getattr(self, "active_message", None),
+            "messages": getattr(self, "messages", None),
+            "connected": getattr(self, "connected", None),
+            "labels": getattr(self, "labels", None),
+            "rules": getattr(self, "rules", None),
+        }
+        doc = {
+            "did": self.did,
+            "meta_data": {"schema_version": list(self.SERIALIZATION_VERSION)},
+            "data": {
+                "content": attrs,
+                "document_type": "mailbox",
+            },
+        }
+        return self._canonicalize(doc)
 
 
 # ====================================================================================================================||

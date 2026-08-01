@@ -106,9 +106,23 @@ class PyfficeAudio(PyfficeDocument):
         return
 
     def to_dict(self):
-        # TODO implement method
-        super().to_dict()
-        return self
+        logma.debug(f"{self.__class__.__name__}.to_dict called")
+        super().to_dict()  # populate canonical envelope
+        attrs = {
+            "config": getattr(self, "config", None),
+            "path": getattr(self, "path", None),
+            "audio": getattr(self, "audio", None),
+            "volume": getattr(self, "volume", None),
+        }
+        doc = {
+            "did": self.did,
+            "meta_data": {"schema_version": list(self.SERIALIZATION_VERSION)},
+            "data": {
+                "content": attrs,
+                "document_type": "audio",
+            },
+        }
+        return self._canonicalize(doc)
 
     def add_fade(self, inn=False, out=False, in_duration=None, out_duration=None) -> Self:
         """Add a fade.
@@ -253,9 +267,20 @@ class PyfficePlayList(PyfficeDocumentManager):
         return
 
     def to_dict(self):
-        # TODO implement method
-        super().to_dict()
-        return self
+        logma.debug(f"{self.__class__.__name__}.to_dict called")
+        super().to_dict()  # populate canonical envelope
+        attrs = {
+            "config": getattr(self, "config", None),
+        }
+        doc = {
+            "did": self.did,
+            "meta_data": {"schema_version": list(self.SERIALIZATION_VERSION)},
+            "data": {
+                "content": attrs,
+                "document_type": "playlist",
+            },
+        }
+        return self._canonicalize(doc)
 
 
 # ====================================================================================================================||

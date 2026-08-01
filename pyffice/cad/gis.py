@@ -88,9 +88,20 @@ class PyfficeGIS(PyfficeDocument):
         return
 
     def to_dict(self):
-        # TODO implement method
-        super().to_dict()
-        return self
+        logma.debug(f"{self.__class__.__name__}.to_dict called")
+        super().to_dict()  # populate canonical envelope
+        attrs = {
+            "file_path": getattr(self, "file_path", None),
+        }
+        doc = {
+            "did": self.did,
+            "meta_data": {"schema_version": list(self.SERIALIZATION_VERSION)},
+            "data": {
+                "content": attrs,
+                "document_type": "gis",
+            },
+        }
+        return self._canonicalize(doc)
 
 
 # ====================================================================================================================||

@@ -87,9 +87,20 @@ class PyfficeShow(PyfficeDocumentManager):
         return
 
     def to_dict(self):
-        # TODO implement method
-        super().to_dict()
-        return self
+        logma.debug(f"{self.__class__.__name__}.to_dict called")
+        super().to_dict()  # populate canonical envelope
+        attrs = {
+            "config": getattr(self, "config", None),
+        }
+        doc = {
+            "did": self.did,
+            "meta_data": {"schema_version": list(self.SERIALIZATION_VERSION)},
+            "data": {
+                "content": attrs,
+                "document_type": "show",
+            },
+        }
+        return self._canonicalize(doc)
 
 
 class PyfficeSlide(PyfficeDocument):
@@ -143,9 +154,20 @@ class PyfficeSlide(PyfficeDocument):
         return
 
     def to_dict(self):
-        # TODO implement method
-        super().to_dict()
-        return self
+        logma.debug(f"{self.__class__.__name__}.to_dict called")
+        super().to_dict()  # populate canonical envelope
+        attrs = {
+            "config": getattr(self, "config", None),
+        }
+        doc = {
+            "did": self.did,
+            "meta_data": {"schema_version": list(self.SERIALIZATION_VERSION)},
+            "data": {
+                "content": attrs,
+                "document_type": "slide",
+            },
+        }
+        return self._canonicalize(doc)
 
 
 # ====================================================================================================================||
