@@ -2,6 +2,7 @@
 Pyffice STL 3D Model Handler - Read/Write STL files (ASCII and Binary)
 """
 
+from typing_extensions import Self
 from pathlib import Path
 from typing import List, Dict, Any, Tuple
 import struct

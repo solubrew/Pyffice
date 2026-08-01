@@ -2,6 +2,7 @@
 Pyffice HEIC/AVIF Image Handler
 """
 
+from typing_extensions import Self
 from pathlib import Path
 
 

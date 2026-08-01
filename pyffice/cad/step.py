@@ -1,5 +1,6 @@
 """STEP CAD format support (Standard for the Exchange of Product model data)."""
 
+from typing_extensions import Self
 from typing import Any, Optional
 import io
 

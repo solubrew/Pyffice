@@ -2,6 +2,7 @@
 Pyffice OBJ 3D Model Handler - Read/Write OBJ files
 """
 
+from typing_extensions import Self
 from pathlib import Path
 from typing import List, Dict, Any, Tuple, Optional
 from pyffice.document import PyfficeDocument

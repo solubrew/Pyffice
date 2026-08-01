@@ -2,6 +2,7 @@
 FBX 3D model format support (Filmbox).
 """
 
+from typing_extensions import Self
 from typing import Any, Optional
 import io
 

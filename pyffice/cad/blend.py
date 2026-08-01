@@ -2,6 +2,7 @@
 Blender (.blend) 3D model format support.
 """
 
+from typing_extensions import Self
 from typing import Any, Optional
 import io
 

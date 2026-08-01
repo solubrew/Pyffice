@@ -11,6 +11,7 @@
         <(WT)>: -32
 """
 
+from typing_extensions import Self
 # -*- coding: utf-8 -*
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join

@@ -1,5 +1,6 @@
 """IGES CAD format support (Initial Graphics Exchange Specification)."""
 
+from typing_extensions import Self
 from typing import Any, Optional
 import io
 

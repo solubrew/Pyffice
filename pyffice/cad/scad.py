@@ -1,5 +1,6 @@
 """OpenSCAD script format support."""
 
+from typing_extensions import Self
 from typing import Any, Optional
 import io
 

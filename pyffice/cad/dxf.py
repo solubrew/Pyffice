@@ -2,6 +2,7 @@
 DXF CAD drawing format support.
 """
 
+from typing_extensions import Self
 from typing import Any, Optional, List, Dict
 import io
 
