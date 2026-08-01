@@ -3,6 +3,11 @@ import base64
 from pathlib import Path
 from typing import Any, Optional
 
+from kahndor.logma import Logma
+
+logma = Logma(__name__)
+logma.off()
+
 
 # Per-type size limits (bytes)
 DEFAULT_LIMITS = {
@@ -75,6 +80,7 @@ class PyfficeBinaryContainer:
         mode: 'auto' (auto-detect), 'inline' (always embed), 'path' (always reference)
         custom_limits: dict of ext -> bytes
         """
+        logma.debug(f"PyfficeBinaryContainer.__init__ called")
         self.mode = mode
         self.limits = {**DEFAULT_LIMITS, **(custom_limits or {})}
         self._documents: dict = {}

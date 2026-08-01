@@ -5,7 +5,11 @@ import zipfile
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 
+from kahndor.logma import Logma
 from pyffice.io_helpers import ArchiveHandler
+
+logma = Logma(__name__)
+logma.off()
 
 
 class PyfficeZip(ArchiveHandler):
@@ -14,6 +18,7 @@ class PyfficeZip(ArchiveHandler):
 
     def _open_read(self, mode: str = 'r') -> Any:
         """Open the underlying ZIP file for reading."""
+        logma.debug(f"PyfficeZip._open_read called")
         return zipfile.ZipFile(self.file_path, mode)
 
     def _list_members(self, handle: Any) -> List[Dict[str, Any]]:

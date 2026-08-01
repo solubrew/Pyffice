@@ -13,6 +13,11 @@ import csv
 from pathlib import Path
 from typing import Any, Iterator, List, Dict, Optional
 
+from kahndor.logma import Logma
+
+logma = Logma(__name__)
+logma.off()
+
 
 def read(filepath: str, delimiter: str = ",", encoding: str = "utf-8") -> List[Dict[str, Any]]:
     """Read CSV file and return list of dictionaries."""
@@ -75,6 +80,7 @@ class PyfficeCSV:
         Args:
             file_path: Optional path to CSV file
         """
+        logma.debug(f"PyfficeCSV.__init__ called")
         self.file_path = Path(file_path) if file_path else None
         self.headers: list[str] = []
         self._data: list[dict[str, Any]] = []

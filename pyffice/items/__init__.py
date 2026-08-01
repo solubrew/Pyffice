@@ -8,6 +8,11 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from pyffice.core.document import Document
 
+from kahndor.logma import Logma
+
+logma = Logma(__name__)
+logma.off()
+
 __all__ = ["Item", "ItemType", "Document"]
 
 
@@ -30,6 +35,7 @@ class Item:
     
     def __init__(self, item_type: str, properties: dict | None = None):
         self.item_type = item_type
+        logma.debug(f"Item.__init__ called")
         self.properties = properties or {}
         self._parent: "Item | None" = None
     

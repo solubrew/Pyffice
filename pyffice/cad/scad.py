@@ -4,6 +4,11 @@ import io
 
 from pyffice.document import PyfficeDocument
 
+from kahndor.logma import Logma
+
+logma = Logma(__name__)
+logma.off()
+
 
 class PyfficeSCAD(PyfficeDocument):
     SERIALIZATION_VERSION = (1, 0, 0)
@@ -11,6 +16,7 @@ class PyfficeSCAD(PyfficeDocument):
     
     def __init__(self, path: Optional[str] = None, content: Optional[str] = None):
         super().__init__(path=path, content=content)
+        logma.debug(f"PyfficeSCAD.__init__ called")
         self.doc_type = "scad"
     
     def load(self, path: str) -> str:

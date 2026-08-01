@@ -42,6 +42,11 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Callable, List, Dict, Optional
 
+from kahndor.logma import Logma
+
+logma = Logma(__name__)
+logma.off()
+
 
 def load_bytes(path: str) -> bytes:
     """Read the entire contents of ``path`` as bytes."""
@@ -125,6 +130,7 @@ class ArchiveHandler:
             file_path: Path to the archive file.
             mode: Open mode (read/write/append).
         """
+        logma.debug(f"ArchiveHandler.__init__ called")
         self.file_path = Path(file_path)
         self.mode = mode
 

@@ -21,6 +21,11 @@ import json
 from pathlib import Path
 from typing import Any, Optional
 
+from kahndor.logma import Logma
+
+logma = Logma(__name__)
+logma.off()
+
 
 def read(filepath: str) -> dict:
     """Read a JSON file and return the parsed dict."""
@@ -68,6 +73,7 @@ class PyfficeJSON:
         Args:
             file_path: Optional path to JSON file
         """
+        logma.debug(f"PyfficeJSON.__init__ called")
         self.file_path = Path(file_path) if file_path else None
         self._data: Any = None
 

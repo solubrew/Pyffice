@@ -17,6 +17,11 @@ from datetime import datetime
 import yaml
 import uuid
 
+from kahndor.logma import Logma
+
+logma = Logma(__name__)
+logma.off()
+
 
 # PAXN Status Mapping
 PAXN_STATUS_MAP = {
@@ -252,6 +257,7 @@ class PAXNConverter:
     
     def __init__(self):
         self.status_map = PAXN_STATUS_MAP
+        logma.debug(f"PAXNConverter.__init__ called")
         self.priority_map = PAXN_PRIORITY_MAP
     
     def load_paxn(self, path: str) -> PAXNProject:

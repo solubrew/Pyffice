@@ -8,6 +8,11 @@ from typing import List, Dict, Any, Optional
 
 from pyffice.io_helpers import ArchiveHandler
 
+from kahndor.logma import Logma
+
+logma = Logma(__name__)
+logma.off()
+
 
 class PyfficeTar(ArchiveHandler):
     EXTENSIONS = {'.tar', '.tar.gz', '.tgz', '.tar.bz2', '.tbz2', '.tar.xz', '.txz'}
@@ -15,6 +20,7 @@ class PyfficeTar(ArchiveHandler):
 
     def _open_read(self, mode: str = 'r') -> Any:
         """Open the underlying TAR file. Read-mode auto-detects compression."""
+        logma.debug(f"PyfficeTar._open_read called")
         return tarfile.open(self.file_path, 'r:*' if mode == 'r' else mode)
 
     def _list_members(self, handle: Any) -> List[Dict[str, Any]]:

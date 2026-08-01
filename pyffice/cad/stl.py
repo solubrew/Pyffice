@@ -8,6 +8,11 @@ import re
 
 from pyffice.document import PyfficeDocument
 
+from kahndor.logma import Logma
+
+logma = Logma(__name__)
+logma.off()
+
 
 class PyfficeSTL(PyfficeDocument):
     SERIALIZATION_VERSION = (1, 0, 0)
@@ -16,6 +21,7 @@ class PyfficeSTL(PyfficeDocument):
     
     def __init__(self, file_path: str):
         self.file_path = Path(file_path)
+        logma.debug(f"PyfficeSTL.__init__ called")
         self.faces: List[Dict[str, Any]] = []
     
     def read(self) -> Dict[str, Any]:

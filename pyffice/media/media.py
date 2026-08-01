@@ -7,6 +7,11 @@ from typing import Any
 from dataclasses import dataclass
 from enum import Enum
 
+from kahndor.logma import Logma
+
+logma = Logma(__name__)
+logma.off()
+
 __all__ = ["Media", "MediaType", "MediaProcessor", "MediaError"]
 
 
@@ -63,6 +68,7 @@ class MediaProcessor:
     
     def __init__(self):
         self._handlers: dict[MediaType, callable] = {}
+        logma.debug(f"MediaProcessor.__init__ called")
     
     def register_handler(self, media_type: MediaType, handler: callable) -> None:
         """Register a handler for a media type."""
