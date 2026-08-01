@@ -31,7 +31,6 @@ from pycurity.pysan import Sanitized
 from typing import Any
 from typing_extensions import Self
 
-
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 logma = Logma(__name__)
@@ -73,7 +72,7 @@ class PyfficeScript(PyfficeDocument):
 
     def add_entry(self, text) -> Self:
         """Add an entry to script."""
-        entries = getattr(self, 'entries', [])
+        entries = getattr(self, "entries", [])
         entries.append(text)
         self.entries = entries
         return self
@@ -144,7 +143,7 @@ class PyfficeScript(PyfficeDocument):
 
     def add_page(self) -> Self:
         """Add a page.
-        
+
         Returns:
             Self for chaining.
         """
@@ -240,7 +239,7 @@ class PyfficeScript(PyfficeDocument):
 
     def get_size(self) -> Any:
         """Get script size."""
-        return len(getattr(self, 'entries', []))
+        return len(getattr(self, "entries", []))
 
     def get_entry(self, index=0) -> Any:
         """
@@ -268,10 +267,10 @@ class PyfficeScript(PyfficeDocument):
 
     def load_document(self, document=None) -> Self:
         """Load document into this document.
-        
+
         Args:
             document: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -289,15 +288,16 @@ class PyfficeScript(PyfficeDocument):
 
     def open_file(self, file_=None, if_text_only=True) -> Self:
         """Open file.
-        
+
         Args:
             file_: Parameter.
             if_text_only: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
         from pyffice.pyffice import UnknownFileTypeError
+
         if file_ is None:
             file_ = self.file_path
         self.set_syntax("file")
@@ -323,7 +323,7 @@ class PyfficeScript(PyfficeDocument):
 
     def open_file_txt(self) -> Self:
         """Open file txt.
-        
+
         Returns:
             Self for chaining.
         """
@@ -335,7 +335,7 @@ class PyfficeScript(PyfficeDocument):
 
     def open_file_doc(self) -> Self:
         """Open file doc.
-        
+
         Returns:
             Self for chaining.
         """
@@ -349,12 +349,12 @@ class PyfficeScript(PyfficeDocument):
 
     def parse_content(self, content=None, page_size=100000, entry_size=10000) -> Self:
         """Parse content.
-        
+
         Args:
             content: Parameter.
             page_size: Parameter.
             entry_size: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -390,25 +390,26 @@ class PyfficeScript(PyfficeDocument):
 
     def parse_document(self) -> Any:
         """Parse document.
-        
+
         Returns:
             Self for chaining.
         """
         doc_media, doc_media_content = super().parse_document()
         return doc_media, doc_media_content
 
-    def save(self, path=None, format_=None, encrypt=None) -> None:
+    def save(self, path=None, format_=None, encrypt=None) -> Self:
         """Save the document.
-        
+
         Args:
             path: Parameter.
             format_: Parameter.
             encrypt: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
         super().save(path, format_, encrypt)
+        return self
 
     def set_alignment(self, start_pos, end_pos, alignment) -> Self:
         """Set text alignment."""
@@ -417,10 +418,10 @@ class PyfficeScript(PyfficeDocument):
 
     def set_file_format(self, format_=None) -> Self:
         """Set the file format.
-        
+
         Args:
             format_: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -442,7 +443,7 @@ class PyfficeScript(PyfficeDocument):
 
     def set_file_format_options(self) -> Self:
         """Set the file format options.
-        
+
         Returns:
             Self for chaining.
         """
@@ -452,10 +453,10 @@ class PyfficeScript(PyfficeDocument):
 
     def set_full_text(self, text=None) -> Self:
         """Set the full text.
-        
+
         Args:
             text: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -464,10 +465,10 @@ class PyfficeScript(PyfficeDocument):
 
     def set_pages(self, pages) -> Self:
         """Set the pages.
-        
+
         Args:
             pages: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -482,10 +483,10 @@ class PyfficeScript(PyfficeDocument):
 
     def set_text(self, text=None) -> Self:
         """Set the text.
-        
+
         Args:
             text: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -520,7 +521,7 @@ class PyfficeScript(PyfficeDocument):
 
     def to_dict(self) -> Self:
         """Convert this document to dict.
-        
+
         Returns:
             Self for chaining.
         """
@@ -550,7 +551,7 @@ class PyfficeScript(PyfficeDocument):
 
     def to_html(self) -> Any:
         """Convert this document to html.
-        
+
         Returns:
             Self for chaining.
         """
