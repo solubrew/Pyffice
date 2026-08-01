@@ -160,24 +160,12 @@ class PyfficeChart(PyfficeDocument):
             "marker", "markersize", "linestyle", "linewidth", "pattern",
             "fill", "fill_color", "marker_color", "line_color", "show_labels",
         ])
-        if format_.get("marker") is None:
-            format_["marker"] = "circle"
-        if format_.get("markersize") is None:
-            format_["markersize"] = 10
-        if format_.get("linestyle") is None:
-            format_["linestyle"] = "solid"
-        if format_.get("linewidth") is None:
-            format_["linewidth"] = 1
-        if format_.get("fill") is None:
-            format_["fill"] = True
-        if format_.get("fill_color") is None:
-            format_["fill_color"] = "blue"
-        if format_.get("marker_color") is None:
-            format_["marker_color"] = "blue"
-        if format_.get("line_color") is None:
-            format_["line_color"] = "blue"
-        if format_.get("show_labels") is None:
-            format_["show_labels"] = True
+        defaults = {"marker": "circle", "markersize": 10, "linestyle": "solid",
+                     "linewidth": 1, "fill": True, "fill_color": "blue",
+                     "marker_color": "blue", "line_color": "blue", "show_labels": True}
+        for key, val in defaults.items():
+            if format_.get(key) is None:
+                format_[key] = val
         self.series[label] = {"x": x_index, "y": y_index, "z": z_index, "format": format_}
         return self
 
