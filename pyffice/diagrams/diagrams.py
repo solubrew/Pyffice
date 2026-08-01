@@ -189,10 +189,7 @@ class PyfficeEdge(PyfficeUnit):
         Returns:
             Self for chaining.
         """
-        if endpoints != self.endpoints:
-            self.add_change("endpoints", self.endpoints, endpoints, "set")
-            self.endpoints = endpoints
-        return self
+        return self._set_with_change("endpoints", endpoints)
 
     def set_envelope_size(self, envelope_size=None):
         """Set the envelope size.
@@ -219,10 +216,7 @@ class PyfficeEdge(PyfficeUnit):
         Returns:
             Self for chaining.
         """
-        if line_width != self.line_width:
-            self.add_change("line_width", self.line_width, line_width, "set")
-        self.line_width = line_width
-        return self
+        return self._set_with_change("line_width", line_width)
 
     def set_lock(self, lock=True, absolute=True):
         """Set the lock.
@@ -234,10 +228,7 @@ class PyfficeEdge(PyfficeUnit):
         Returns:
             Self for chaining.
         """
-        if lock != self.lock:
-            self.add_change("lock", self.lock, lock)
-        self.lock = lock
-        return self
+        return self._set_with_change("lock", lock)
 
     def set_position(self, position):
         """Set the position.
@@ -290,10 +281,7 @@ class PyfficeEdge(PyfficeUnit):
         Returns:
             Self for chaining.
         """
-        if texts != self.texts:
-            self.add_change("texts", self.texts, texts, "set")
-        self.texts = texts
-        return self
+        return self._set_with_change("texts", texts)
 
     def to_dict(self):
         """Convert this document to dict.
@@ -488,10 +476,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
         Returns:
             Self for chaining.
         """
-        if edges != self.edges:
-            self.add_change("edges", self.edges, edges, "set")
-        self.edges = edges
-        return self
+        return self._set_with_change("edges", edges)
 
     def set_endpoint_position(self, endpoint, position, maintain_connection=True):
         """Set the endpoint position.
@@ -516,10 +501,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
         Returns:
             Self for chaining.
         """
-        if endpoints != self.endpoints:
-            self.add_change("endpoints", self.endpoints, endpoints)
-            self.endpoints = endpoints
-        return self
+        return self._set_with_change("endpoints", endpoints)
 
     def set_node_position(self, node, position, maintain_connections=True):
         """Set the node position.
@@ -547,10 +529,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
         Returns:
             Self for chaining.
         """
-        if nodes != self.nodes:
-            self.add_change("nodes", self.nodes, nodes, "set")
-            self.nodes = nodes
-        return self
+        return self._set_with_change("nodes", nodes)
 
     def to_dict(self):
         """Convert to dictionary."""
@@ -596,12 +575,7 @@ class PyfficeDiagramLayer(PyfficeUnit):
         Returns:
             Self for chaining.
         """
-        if objects is None:
-            objects = []
-        if objects != self.objects:
-            self.add_change("objects", self.objects, objects, "set")
-            self.objects = objects
-        return self
+        return self._set_with_change("objects", objects)
 
     def to_dict(self):
         """Convert this document to dict.
@@ -674,10 +648,7 @@ class PyfficeNode(PyfficeUnit):
         Returns:
             Self for chaining.
         """
-        if cells != self.cells:
-            self.add_change("cells", self.cells, cells, "set")
-        self.cells = cells
-        return self
+        return self._set_with_change("cells", cells)
 
     def set_lock(self, lock=True):
         """Set the lock.
@@ -688,10 +659,7 @@ class PyfficeNode(PyfficeUnit):
         Returns:
             Self for chaining.
         """
-        if lock != self.lock:
-            self.add_change("lock", self.lock, lock)
-        self.lock = lock
-        return self
+        return self._set_with_change("lock", lock)
 
     def set_position(self, position):
         """Set the position.

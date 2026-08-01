@@ -318,10 +318,7 @@ class PyfficeChart(PyfficeDocument):
         Returns:
             Self for chaining.
         """
-        if chart_type != self.type:
-            self.add_change("type", self.type, chart_type)
-            self.type = chart_type
-        return self
+        return self._set_with_change("type", chart_type)
 
     def set_compatibility(self, compatibility):
         """Set the compatibility.
@@ -348,10 +345,7 @@ class PyfficeChart(PyfficeDocument):
         Returns:
             Self for chaining.
         """
-        if figsize != self.figsize:
-            self.add_change("figsize", self.figsize, figsize)
-            self.figsize = figsize
-        return self
+        return self._set_with_change("figsize", figsize)
 
     def set_label_xaxis(self, label):
         """Set the label xaxis.
@@ -362,10 +356,7 @@ class PyfficeChart(PyfficeDocument):
         Returns:
             Self for chaining.
         """
-        if label != self.xlabel:
-            self.add_change("xlabel", self.xlabel, label)
-            self.xlabel = label
-        return self
+        return self._set_with_change("xlabel", label)
 
     def set_label_yaxis(self, label):
         """Set the label yaxis.
@@ -376,10 +367,7 @@ class PyfficeChart(PyfficeDocument):
         Returns:
             Self for chaining.
         """
-        if label != self.ylabel:
-            self.add_change("ylabel", self.ylabel, label)
-            self.ylabel = label
-        return self
+        return self._set_with_change("ylabel", label)
 
     def set_legends(self, legends: list = None):
         """Set the legends.
@@ -390,10 +378,7 @@ class PyfficeChart(PyfficeDocument):
         Returns:
             Self for chaining.
         """
-        if legends != self.legends:
-            self.add_change("legends", self.legends, legends)
-            self.legends = legends
-        return self
+        return self._set_with_change("legends", legends)
 
     def set_orientation(self, orientation):
         """Set the orientation.
@@ -404,10 +389,7 @@ class PyfficeChart(PyfficeDocument):
         Returns:
             Self for chaining.
         """
-        if orientation != self.orientation:
-            self.add_change("orientation", self.orientation, orientation)
-            self.orientation = orientation
-        return self
+        return self._set_with_change("orientation", orientation)
 
     def set_origin(self, origin: list = None):
         """Set the origin.
@@ -418,10 +400,7 @@ class PyfficeChart(PyfficeDocument):
         Returns:
             Self for chaining.
         """
-        if origin != self.origin:
-            self.add_change("origin", self.origin, origin)
-            self.origin = origin
-        return self
+        return self._set_with_change("origin", origin)
 
     def set_plotareas(self, plotareas):
         """Set the plotareas.
@@ -432,10 +411,7 @@ class PyfficeChart(PyfficeDocument):
         Returns:
             Self for chaining.
         """
-        if plotareas != self.plotareas:
-            self.add_change("plotareas", self.plotareas, plotareas)
-            self.plotareas = plotareas
-        return self
+        return self._set_with_change("plotareas", plotareas)
 
     def set_position(self, position):
         """Set the position.
@@ -446,10 +422,7 @@ class PyfficeChart(PyfficeDocument):
         Returns:
             Self for chaining.
         """
-        if position != self.position:
-            self.add_change("position", self.position, position)
-            self.position = position
-        return self
+        return self._set_with_change("position", position)
 
     def set_position_plotarea(self, position, plotarea=None):
         """Set plot area position."""
@@ -470,10 +443,7 @@ class PyfficeChart(PyfficeDocument):
         Returns:
             Self for chaining.
         """
-        if series != self.series:
-            self.add_change("series", self.series, series)
-            self.series = series
-        return self
+        return self._set_with_change("series", series)
 
     def set_size(self, size):
         """Set the size.
@@ -484,10 +454,7 @@ class PyfficeChart(PyfficeDocument):
         Returns:
             Self for chaining.
         """
-        if size != self.size:
-            self.add_change("size", self.size, size)
-            self.size = size
-        return self
+        return self._set_with_change("size", size)
 
     def set_size_plotarea(self, size, plotarea):
         """Set plot area size."""
@@ -508,10 +475,7 @@ class PyfficeChart(PyfficeDocument):
         Returns:
             Self for chaining.
         """
-        if theme != self.theme:
-            self.add_change("style", self.theme, theme)
-            self.theme = theme
-        return self
+        return self._set_with_change("theme", theme, label="style")
 
     def set_title(self, title, size: int = 12, color: str = "black"):
         """Set the title.
