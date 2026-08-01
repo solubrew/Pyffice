@@ -1,3 +1,5 @@
+
+from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
 """
 ---
@@ -812,6 +814,7 @@ class PyfficePortImage(PyfficePort):
     def open_file_png(self, file_) -> "PyfficePortImage":
         """Open PNG file."""
         from PIL import Image
+
         self.image = Image.open(file_)
         return self
 

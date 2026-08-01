@@ -24,6 +24,8 @@ from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument
 from pyffice.tags.references import PyfficeReference
 
+from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
+
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True

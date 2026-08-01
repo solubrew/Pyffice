@@ -29,6 +29,8 @@ from pyffice.document import PyfficeDocument, PyfficeDocumentManager, PyfficeDeq
 from pyffice.web.url import PyfficeURL, PyfficeURLLibrary
 from pycurity.pyhash import text_hashing_function, encode64, decode64
 
+from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
+
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = False

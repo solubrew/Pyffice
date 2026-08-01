@@ -24,6 +24,8 @@ from kahndor.logma import Logma
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 from pycurity.pyvalid import validate_email_address, validate_phone_number, validate_postal_address
 
+from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
+
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True

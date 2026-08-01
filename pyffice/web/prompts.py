@@ -26,6 +26,8 @@ from subtrix.utilities import uuid
 from pyffice.web.web import PyfficeWebBrowser
 from pyffice.items.text import PyfficeText
 
+from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
+
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True

@@ -26,6 +26,8 @@ from kahndor.logma import Logma
 from pyffice.audio.audio_export import PyfficeAudio
 from pyffice.document import PyfficeDocument, PyfficeDocumentManager
 
+from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
+
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True

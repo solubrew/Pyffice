@@ -82,7 +82,7 @@ class PyfficeForm(PyfficeDocument):
 
     def add_field(
         self, section_id, field, sequence=-1, response_scope="text", style="normal", required=False, always_show=False
-    ):
+    ) -> None:
         """Add a form field.
         
         Args:

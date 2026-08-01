@@ -1,3 +1,5 @@
+
+from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
 """
 ---
@@ -296,6 +298,7 @@ class PyfficeScript(PyfficeDocument):
             Self for chaining.
         """
         from pyffice.pyffice import UnknownFileTypeError
+
         if file_ is None:
             file_ = self.file_path
         self.set_syntax("file")

@@ -29,6 +29,8 @@ from kahndor.logma import Logma
 
 from pyffice.pyffice import PyfficeDocument
 
+from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
+
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True

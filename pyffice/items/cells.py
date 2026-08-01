@@ -26,6 +26,8 @@ from pyffice.items.text import PyfficeText
 from pyffice.items.colors import PyfficeColor
 from pyffice.images.images import PyfficeImage
 
+from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
+
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True

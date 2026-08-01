@@ -1,3 +1,5 @@
+
+from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
 """
 ---
@@ -592,6 +594,7 @@ class DrawIOConverter(DiagramConverter):
                 if value:
                     # Strip HTML tags for basic label
                     import re
+
 
                     label = re.sub(r"<[^>]+>", "", value)
                     node.set_name(label)

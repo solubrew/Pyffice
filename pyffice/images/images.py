@@ -1,3 +1,5 @@
+
+from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
 """
 ---
@@ -297,6 +299,7 @@ class PyfficeImage(PyfficeDocument):
             Self for chaining.
         """
         from pyffice.pyffice import UnknownLocationError
+
         if content is None:
             return self
         logma.info(f"Content {content}")

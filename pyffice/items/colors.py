@@ -15,6 +15,7 @@
 # ======================================Standard Library Modules======================================================||
 from os.path import abspath, dirname, join
 import datetime as dt
+from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
 
 # ======================================3rd Party Library Modules=====================================================||
 import colorsys
@@ -581,11 +582,15 @@ def extract_colors_from_svg(image=None, file_path=None) -> None:
     # Convert SVG to a PNG image
     import cairosvg
 
-    temp_path = self.path + ".tmp.png"
-    cairosvg.svg2png(url=self.path, write_to=temp_path)
+    target_path = file_path or (image.path if image else None)
+    if target_path is None:
+        return
+    temp_path = target_path + ".tmp.png"
+    cairosvg.svg2png(url=target_path, write_to=temp_path)
     # Load the rendered PNG and extract its colors
     image = Image.open(temp_path)
-    self.extract_colors_from_image(image)
+    if image is not None and hasattr(image, "extract_colors_from_image"):
+        image.extract_colors_from_image(image)
     # Clean up the temporary file
     os.remove(temp_path)
 

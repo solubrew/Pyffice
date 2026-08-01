@@ -1,3 +1,5 @@
+
+from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
 """
 ---
@@ -298,6 +300,7 @@ class PyfficePDF(PyfficeDocument):
             Self for chaining.
         """
         from pyffice.pyffice import UnknownLocationError
+
         logma.info(f"Content {content}")
         if self.location is None:
             self.set_location(None)

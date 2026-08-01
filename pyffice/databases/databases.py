@@ -1,3 +1,5 @@
+
+from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
 """
 ---
@@ -47,6 +49,7 @@ class PyfficeDatabaseConnection(sonql.Doc):
         """Open a database file."""
         if isinstance(document, str):
             import sqlite3
+
             conn = sqlite3.connect(document)
             self.database = conn
         return self

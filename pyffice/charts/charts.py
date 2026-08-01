@@ -1,3 +1,5 @@
+
+from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
 """
 ---
@@ -292,6 +294,7 @@ class PyfficeChart(PyfficeDocument):
     def save_html(self, path) -> "PyfficeChart":
         """Save chart as HTML file."""
         import os
+
         # Placeholder - would use plotting library to generate HTML
         return self
 

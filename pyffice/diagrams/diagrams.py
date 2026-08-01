@@ -29,6 +29,8 @@ from pyffice.document import PyfficeDocument, PyfficeDocumentManager, PyfficeUni
 from pyffice.items.colors import PyfficeColor
 from pyffice.items.text import PyfficeText
 
+from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
+
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True
@@ -318,7 +320,7 @@ class PyfficeDiagram(PyfficeDocumentManager):
         version=None,
         visible=None,
         active=None,
-    ):
+    ) -> "PyfficeDiagram":
         """Add a edge.
         
         Args:

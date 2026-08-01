@@ -262,7 +262,7 @@ dimensions:
           branches:
             local: []
             remote: []
-          commit_count: 348
+          commit_count: 349
           commits: []
           contributors: []
           is_repo: true
@@ -1773,15 +1773,15 @@ dimensions:
         - rule: low_coverage
           severity: medium
           total: 1670
-          typed: 392
-        score: 23
+          typed: 806
+        score: 48
         status: partial
         total_functions: 1670
-        typed_functions: 392
-        untyped_functions: 1278
-      score: 23
+        typed_functions: 806
+        untyped_functions: 864
+      score: 48
       status: partial
-    score: 23
+    score: 48
     status: partial
   unfinished_code:
     details:
@@ -1806,17 +1806,17 @@ dimensions:
       status: pass
     score: 100
     status: pass
-overall_score: 92.76
+overall_score: 83.22
 project: pyffice
 rubric:
-  audit_overall: 92.76
+  audit_overall: 93.22
   categories: []
   max_points: 0
   percentage: 0.0
-  rubric_name: 06a6da7b-83e7-70e2-8000-b06a43414a43
+  rubric_name: 06a6da94-edd8-71fb-8000-1d3be1d70981
   rubric_score: 0
   rubric_version: '1.0'
-  score_difference: -92.76
+  score_difference: -93.22
   total_points: 0
   weighted_score: 0
 summary:
@@ -1827,23 +1827,23 @@ summary:
   total_auditors: 11
   total_dimensions: 53
 test_execution:
-  duration_seconds: 45.56688189506531
-  project_score: 92.76
+  duration_seconds: 8.137019157409668
+  project_score: 93.22
   report_file: /home/solubrew/.hermes/projects/pyffice/FALCON_TEST.yaml
   results:
-    tests_failed: 29
-    tests_passed: 849
-    tests_run: 882
-    tests_skipped: 3
+    tests_failed: 0
+    tests_passed: 0
+    tests_run: 2
+    tests_skipped: 0
   runner: falcon
-  score_adjustment: 0
+  score_adjustment: -10
   score_threshold: 80.0
   should_run: true
-  status: failed
-  status_message: no change (849/882 tests passed)
+  status: passed
+  status_message: -10% penalty (all tests failed)
   timestamp: ''
 versions:
-  project: c5b2675
+  project: 63cc622
   project_status: dirty
-  project_uncommitted_changes: 59
+  project_uncommitted_changes: 4
   sasquatch: a16c01c

@@ -1,3 +1,5 @@
+
+from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
 """
 ---
@@ -193,6 +195,7 @@ class PyfficeFileSystem(PyfficeDocumentManager):
             Self for chaining.
         """
         from pyffice.pyffice import UnknownLocationError
+
         if self.location is None:
             self.set_location(None)
         if self.location == "external":

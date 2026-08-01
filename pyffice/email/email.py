@@ -1,3 +1,5 @@
+
+from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
 """
 ---
@@ -113,6 +115,7 @@ class PyfficeEmailMessage(PyfficeMessage):
         if not file_path:
             return self
         import email
+
         with open(file_path, 'rb') as f:
             msg = email.message_from_bytes(f.read())
             self.message = msg

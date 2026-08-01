@@ -26,6 +26,8 @@ from kahndor.logma import Logma
 from pyffice.document import PyfficeUnit, PyfficeDocumentManager
 from pycurity.pyhash import text_hashing_function
 
+from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
+
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True

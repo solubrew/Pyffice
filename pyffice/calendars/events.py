@@ -23,6 +23,8 @@ from kahndor import kahndor
 from kahndor.logma import Logma
 from pyffice.document import PyfficeUnit
 
+from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
+
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 log = True

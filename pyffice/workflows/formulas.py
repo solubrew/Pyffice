@@ -1,3 +1,5 @@
+
+from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
 """
 ---
@@ -378,6 +380,7 @@ class PyfficeFormulaSUM(PyfficeFormula):
             Self for chaining.
         """
         from pyffice.pyffice import InvalidParameterTypeError
+
         if len([x for x in self.parameters.values() if not is_number(x)]) > 0:
             raise InvalidParameterTypeError("Non Number Values in Parameters")
 

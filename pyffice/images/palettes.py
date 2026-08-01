@@ -33,12 +33,16 @@ logma.off()
 pxcfg = join(here, "_data_", ".yaml")
 
 
+from typing import Any, Dict, List, Optional, Tuple, Union, Set, FrozenSet
+
+
 class PyfficeColorPalette(PyfficeDocument):
     SERIALIZATION_VERSION = (1, 0, 0)
     """
     PyfficeColorPalette is responsible for creating and managing color palettes.
     It supports adding colors manually, retrieving colors, and extracting colors
     from various content types like images, SVG files, and videos.
+
     """
 
     def __init__(self, cfg=None):
