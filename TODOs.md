@@ -521,7 +521,9 @@ The remaining `from kahndor import kahndor` / `from kahndor.logma import Logma` 
 
 ## 🟡 NEW FEATURE REQUEST — Cloud Connection Ports (2026-07-31)
 
-### T-NEW-070 — Implement cloud connection in ports to Google Drive and Dropbox
+### T-NEW-070 — Implement cloud connection in ports to Google Drive and Dropbox ✅ CLOSED (2026-07-31)
+
+**Status:** Implemented in commit `9509eec`. Auth model: API key / service account (Option B).
 
 **Goal:** Add real cloud storage connectivity to `pyffice/ports/` so documents can be imported from and exported to Google Drive and Dropbox directly — not just the current empty stubs.
 
@@ -601,11 +603,11 @@ The user should confirm the auth model before implementation begins.
 
 ### P2 (deferred / existing backlog)
 
-- **T-NEW-070** — Cloud connection ports (Google Drive + Dropbox). ⚠️ OPEN — design decision first (OAuth vs API key auth model).
+- **T-NEW-070** — Cloud connection ports (Google Drive + Dropbox). ✅ CLOSED (commit `9509eec`). 3 new classes, 42 tests, graceful optional-dep handling.
 - **T-NEW-045** — Public API facade decision. ✅ CLOSED (Option B, no facade).
 - **T-NEW-060** — Squirl import-time `print()`. ✅ CLOSED (tracked in squirl as T-NEW-061).
 - **T-NEW-CANDIDATE** — Test coverage marathon. ✅ CLOSED (2026-07-31) — 630 tests across 26 subpackages.
 
 ---
 
-*File last edited: 2026-07-31 (T-NEW-070 added — cloud connection ports for Google Drive + Dropbox; test coverage marathon complete: 630 tests across 26 subpackages; verified against HEAD `98e60ab`)*
+*File last edited: 2026-07-31 (T-NEW-070 CLOSED — cloud ports shipped: PyfficeCloudPort + GoogleDrive + Dropbox, 42 tests; 672 total tests; verified against HEAD `9509eec`)*
