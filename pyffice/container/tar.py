@@ -82,7 +82,7 @@ def load(tar_path: str) -> List[Dict[str, Any]]:
 
 def write(tar_path: str, files: Dict[str, str], compression: str = 'gz') -> None:
     """Create TAR from dict of arcname -> file_path"""
-    PyfficeTar.create(tar_path, files, compression)
+    PyfficeTar.create(tar_path, files, compression=compression)
 
 
 def extract(tar_path: str, path: str = '.') -> None:

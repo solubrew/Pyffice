@@ -1,14 +1,38 @@
-"""Test DXF CAD file handling."""
-import pytest
-import tempfile
+"""Test DXF CAD round-trip via real captured bytes.
+
+The dxf module exposes:
+- PyfficeDXF(file_path, cfg) — class with read()/write(data) instance methods
+- load(path) -> str — module-level read (returns text)
+- read(path) -> str — alias for load
+- write(data, path) — module-level write
+- dump(data, path) — alias for write
+
+Tests assert on the actual text bytes, not on log lines.
+"""
 import os
-from pathlib import Path
+import tempfile
+
+import pytest
+
+from pyffice.cad import dxf as dxf_doc
 
 
-def test_read_dxf():
-    """Test reading DXF files."""
-    # Create a minimal DXF file for testing
-    dxf_content = """0
+@pytest.fixture
+def tmp_path():
+    d = tempfile.mkdtemp(prefix="dxf_test_")
+    try:
+        yield d
+    finally:
+        for root, dirs, files in os.walk(d, topdown=False):
+            for f in files:
+                os.unlink(os.path.join(root, f))
+            for sub in dirs:
+                os.rmdir(os.path.join(root, sub))
+        os.rmdir(d)
+
+
+# Minimal DXF structure — a single LINE entity
+SAMPLE_DXF = """0
 SECTION
 2
 ENTITIES
@@ -33,34 +57,48 @@ ENDSEC
 0
 EOF
 """
-    with tempfile.NamedTemporaryFile(mode='w', suffix='.dxf', delete=False) as f:
-        f.write(dxf_content)
-        temp_path = f.name
-    
-    try:
-        from pyffice.cad.dxf import read_dxf
-        # Test reading the DXF file
-        entities = read_dxf(temp_path)
-        assert entities is not None
-    finally:
-        os.unlink(temp_path)
 
 
-def test_write_dxf():
-    """Test writing DXF files."""
-    from pyffice.cad.dxf import write_dxf
-    
-    entities = [
-        {"type": "LINE", "start": (0, 0, 0), "end": (10, 10, 0), "layer": "0"}
-    ]
-    
-    with tempfile.NamedTemporaryFile(mode='w', suffix='.dxf', delete=False) as f:
-        temp_path = f.name
-    
-    try:
-        write_dxf(entities, temp_path)
-        assert os.path.exists(temp_path)
-        assert os.path.getsize(temp_path) > 0
-    finally:
-        if os.path.exists(temp_path):
-            os.unlink(temp_path)
+def test_load_read_return_text(tmp_path):
+    """load(path) and read(path) return the file text content."""
+    p = os.path.join(tmp_path, "line.dxf")
+    with open(p, "w") as f:
+        f.write(SAMPLE_DXF)
+    text = dxf_doc.load(p)
+    assert "SECTION" in text
+    assert "LINE" in text
+    assert dxf_doc.read(p) == text
+
+
+def test_write_dump_roundtrip(tmp_path):
+    """write(data, path) + dump(data, path) produce files with identical content."""
+    payload = "PYFFICE_DXF_PAYLOAD_v1\n"
+    p1 = os.path.join(tmp_path, "via_write.dxf")
+    p2 = os.path.join(tmp_path, "via_dump.dxf")
+    dxf_doc.write(payload, p1)
+    dxf_doc.dump(payload, p2)
+    assert os.path.getsize(p1) == len(payload)
+    assert dxf_doc.read(p1) == dxf_doc.read(p2)
+
+
+def test_pyffice_dxf_class_reads_text(tmp_path):
+    """PyfficeDXF(path).read() returns the file text content."""
+    p = os.path.join(tmp_path, "via_class.dxf")
+    with open(p, "w") as f:
+        f.write(SAMPLE_DXF)
+    d = dxf_doc.PyfficeDXF(p)
+    text = d.read()
+    assert "ENTITIES" in text
+
+
+def test_read_missing_file_raises(tmp_path):
+    with pytest.raises((FileNotFoundError, OSError)):
+        dxf_doc.read(os.path.join(tmp_path, "missing.dxf"))
+
+
+def test_write_then_load_roundtrip(tmp_path):
+    """Write payload, load it back, bytes match."""
+    p = os.path.join(tmp_path, "roundtrip.dxf")
+    payload = SAMPLE_DXF
+    dxf_doc.write(payload, p)
+    assert dxf_doc.load(p) == payload

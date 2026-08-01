@@ -133,19 +133,25 @@ class PyfficeCADPart(PyfficePart):
     def __init__(self, cfg=None):
         """"""
         self.config = kahndor.Instruct(pxcfg).override("PyfficeCADPart")
-        super().__init__(self)
+        super().__init__(cfg)
         self.config.override(cfg)
 
-    def create_new_document(self, name) -> None:
+    def create_new_document(self, name) -> "PyfficeCADPart":
         """Create a new document.
-        
+
         Args:
             name: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
-        super().create_new_document(name, "cadpart")
+        # PyfficePart (our parent) does not expose create_new_document; the
+        # original code called super().create_new_document(name, "cadpart")
+        # which raised AttributeError at runtime. Record the part-name as
+        # state and return self for chaining (matches PyfficeCADAssembly /
+        # PyfficeCADManager caller expectations).
+        self.name = name
+        return self
 
 # ====================================================================================================================||
 
