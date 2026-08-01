@@ -37,6 +37,7 @@ pxcfg = join(here, "_data_", "sources.yaml")
 
 class PyfficeSource(PyfficeDocumentManager):
     """"""
+
     SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg) -> None:
@@ -68,10 +69,10 @@ class PyfficeSource(PyfficeDocumentManager):
 
     def load_document(self, document=None) -> Self:
         """Load document into this document.
-        
+
         Args:
             document: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -79,6 +80,67 @@ class PyfficeSource(PyfficeDocumentManager):
         document = document or self.config.dikt.get("document", {}) or {}
         super().load_document(document)
         return self
+
+    def load_document(self, document=None) -> Self:
+        logma.debug(f"{self.__class__.__name__}.load_document called")
+        super().load_document(document)
+        if not isinstance(document, dict):
+            return self
+        data = document.get("data", {}) or {}
+        content = data.get("content", {}) or {}
+        if isinstance(content, dict):
+            if "config" in content:
+                setattr(self, "config", content["config"])
+        return self
+
+    def open_file(self, file_=None):
+        import json as _json
+        from os.path import exists
+
+        if file_ is None:
+            file_ = self.file_path
+        if not file_ or not exists(file_):
+            logma.warning(f"{self.__class__.__name__}.open_file: no such path {file_!r}")
+            return self
+        try:
+            with open(file_, "r") as f:
+                doc = _json.load(f)
+        except (OSError, ValueError) as e:
+            logma.warning(f"{self.__class__.__name__}.open_file failed for {file_!r}: {e}")
+            return self
+        return self.load_document(doc)
+
+    def save(self, path=None, format_=None, encrypt=None):
+        logma.debug(f"{self.__class__.__name__}.save called path={path!r}")
+        super().save(path, format_, encrypt)
+        if path is None:
+            path = self.file_path
+        if not path:
+            logma.warning(f"{self.__class__.__name__}.save: no path available")
+            return
+        import json as _json
+
+        doc = self.to_dict()
+        with open(path, "w") as f:
+            _json.dump(doc, f, indent=2, default=str)
+        return
+
+    def to_dict(self):
+        logma.debug(f"{self.__class__.__name__}.to_dict called")
+        super().to_dict()  # populate canonical envelope
+        attrs = {
+            "config": getattr(self, "config", None),
+        }
+        doc = {
+            "did": self.did,
+            "meta_data": {"schema_version": list(self.SERIALIZATION_VERSION)},
+            "data": {
+                "content": attrs,
+                "document_type": "slide",
+            },
+        }
+        return self._canonicalize(doc)
+
 
 class PyfficeSourceManager(PyfficeDocumentManager):
     SERIALIZATION_VERSION = (1, 0, 0)
@@ -92,11 +154,11 @@ class PyfficeSourceManager(PyfficeDocumentManager):
 
     def add_source(self, source, type_="file") -> Self:
         """Add a source reference.
-        
+
         Args:
             source: Parameter.
             type_: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -105,10 +167,10 @@ class PyfficeSourceManager(PyfficeDocumentManager):
 
     def load_document(self, document=None) -> Self:
         """Load document into this document.
-        
+
         Args:
             document: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -120,10 +182,10 @@ class PyfficeSourceManager(PyfficeDocumentManager):
 
     def set_sources(self, sources) -> Self:
         """Set the sources.
-        
+
         Args:
             sources: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -134,8 +196,70 @@ class PyfficeSourceManager(PyfficeDocumentManager):
             self.sources = sources
         return self
 
+    def load_document(self, document=None) -> Self:
+        logma.debug(f"{self.__class__.__name__}.load_document called")
+        super().load_document(document)
+        if not isinstance(document, dict):
+            return self
+        data = document.get("data", {}) or {}
+        content = data.get("content", {}) or {}
+        if isinstance(content, dict):
+            if "config" in content:
+                setattr(self, "config", content["config"])
+        return self
+
+    def open_file(self, file_=None):
+        import json as _json
+        from os.path import exists
+
+        if file_ is None:
+            file_ = self.file_path
+        if not file_ or not exists(file_):
+            logma.warning(f"{self.__class__.__name__}.open_file: no such path {file_!r}")
+            return self
+        try:
+            with open(file_, "r") as f:
+                doc = _json.load(f)
+        except (OSError, ValueError) as e:
+            logma.warning(f"{self.__class__.__name__}.open_file failed for {file_!r}: {e}")
+            return self
+        return self.load_document(doc)
+
+    def save(self, path=None, format_=None, encrypt=None):
+        logma.debug(f"{self.__class__.__name__}.save called path={path!r}")
+        super().save(path, format_, encrypt)
+        if path is None:
+            path = self.file_path
+        if not path:
+            logma.warning(f"{self.__class__.__name__}.save: no path available")
+            return
+        import json as _json
+
+        doc = self.to_dict()
+        with open(path, "w") as f:
+            _json.dump(doc, f, indent=2, default=str)
+        return
+
+    def to_dict(self):
+        logma.debug(f"{self.__class__.__name__}.to_dict called")
+        super().to_dict()  # populate canonical envelope
+        attrs = {
+            "config": getattr(self, "config", None),
+        }
+        doc = {
+            "did": self.did,
+            "meta_data": {"schema_version": list(self.SERIALIZATION_VERSION)},
+            "data": {
+                "content": attrs,
+                "document_type": "slide",
+            },
+        }
+        return self._canonicalize(doc)
+
+
 class PyfficeDataSet(PyfficeDocument):
     """"""
+
     SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None) -> None:
@@ -149,13 +273,13 @@ class PyfficeDataSet(PyfficeDocument):
 
     def add_relationship(self, left_view, right_view, relationship_type=None, relationship_name=None) -> Self:
         """Add a relationship.
-        
+
         Args:
             left_view: Parameter.
             right_view: Parameter.
             relationship_type: Parameter.
             relationship_name: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -170,11 +294,11 @@ class PyfficeDataSet(PyfficeDocument):
 
     def add_view(self, datatable, name=None) -> Self:
         """Add a view.
-        
+
         Args:
             datatable: Parameter.
             name: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -184,10 +308,10 @@ class PyfficeDataSet(PyfficeDocument):
 
     def del_source(self, source) -> Self:
         """Remove the source.
-        
+
         Args:
             source: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -195,10 +319,10 @@ class PyfficeDataSet(PyfficeDocument):
 
     def del_relationship(self, relationship) -> Self:
         """Remove the relationship.
-        
+
         Args:
             relationship: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -206,10 +330,10 @@ class PyfficeDataSet(PyfficeDocument):
 
     def del_view(self, view) -> Self:
         """Remove the view.
-        
+
         Args:
             view: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -217,10 +341,10 @@ class PyfficeDataSet(PyfficeDocument):
 
     def load_document(self, document=None) -> Self:
         """Load document into this document.
-        
+
         Args:
             document: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -237,10 +361,10 @@ class PyfficeDataSet(PyfficeDocument):
 
     def set_relationships(self, relationships) -> Self:
         """Set the relationships.
-        
+
         Args:
             relationships: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -252,10 +376,10 @@ class PyfficeDataSet(PyfficeDocument):
 
     def set_sources(self, sources) -> Self:
         """Set the sources.
-        
+
         Args:
             sources: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -267,10 +391,10 @@ class PyfficeDataSet(PyfficeDocument):
 
     def set_views(self, views) -> Self:
         """Set the views.
-        
+
         Args:
             views: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -280,8 +404,70 @@ class PyfficeDataSet(PyfficeDocument):
             self.views = views
         return self
 
+    def load_document(self, document=None) -> Self:
+        logma.debug(f"{self.__class__.__name__}.load_document called")
+        super().load_document(document)
+        if not isinstance(document, dict):
+            return self
+        data = document.get("data", {}) or {}
+        content = data.get("content", {}) or {}
+        if isinstance(content, dict):
+            if "config" in content:
+                setattr(self, "config", content["config"])
+        return self
+
+    def open_file(self, file_=None):
+        import json as _json
+        from os.path import exists
+
+        if file_ is None:
+            file_ = self.file_path
+        if not file_ or not exists(file_):
+            logma.warning(f"{self.__class__.__name__}.open_file: no such path {file_!r}")
+            return self
+        try:
+            with open(file_, "r") as f:
+                doc = _json.load(f)
+        except (OSError, ValueError) as e:
+            logma.warning(f"{self.__class__.__name__}.open_file failed for {file_!r}: {e}")
+            return self
+        return self.load_document(doc)
+
+    def save(self, path=None, format_=None, encrypt=None):
+        logma.debug(f"{self.__class__.__name__}.save called path={path!r}")
+        super().save(path, format_, encrypt)
+        if path is None:
+            path = self.file_path
+        if not path:
+            logma.warning(f"{self.__class__.__name__}.save: no path available")
+            return
+        import json as _json
+
+        doc = self.to_dict()
+        with open(path, "w") as f:
+            _json.dump(doc, f, indent=2, default=str)
+        return
+
+    def to_dict(self):
+        logma.debug(f"{self.__class__.__name__}.to_dict called")
+        super().to_dict()  # populate canonical envelope
+        attrs = {
+            "config": getattr(self, "config", None),
+        }
+        doc = {
+            "did": self.did,
+            "meta_data": {"schema_version": list(self.SERIALIZATION_VERSION)},
+            "data": {
+                "content": attrs,
+                "document_type": "slide",
+            },
+        }
+        return self._canonicalize(doc)
+
+
 class PyfficeDataView(PyfficeDocument):
     """"""
+
     SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None) -> None:
@@ -296,12 +482,12 @@ class PyfficeDataView(PyfficeDocument):
 
     def add_filter(self, column, operator, value) -> Self:
         """Add a filter.
-        
+
         Args:
             column: Parameter.
             operator: Parameter.
             value: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -310,12 +496,12 @@ class PyfficeDataView(PyfficeDocument):
 
     def add_summarization(self, column, formula, name=None) -> Self:
         """Add a summarization.
-        
+
         Args:
             column: Parameter.
             formula: Parameter.
             name: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -324,10 +510,10 @@ class PyfficeDataView(PyfficeDocument):
 
     def apply_filters(self, df) -> Any:
         """Apply filters.
-        
+
         Args:
             df: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -383,10 +569,10 @@ class PyfficeDataView(PyfficeDocument):
 
     def apply_summarizations(self, df) -> Any:
         """Apply summarizations.
-        
+
         Args:
             df: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -394,12 +580,12 @@ class PyfficeDataView(PyfficeDocument):
 
     def del_filter(self, column, operator, value) -> Self:
         """Remove the filter.
-        
+
         Args:
             column: Parameter.
             operator: Parameter.
             value: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -408,12 +594,12 @@ class PyfficeDataView(PyfficeDocument):
 
     def del_summarization(self, column, formula, name=None) -> Self:
         """Remove the summarization.
-        
+
         Args:
             column: Parameter.
             formula: Parameter.
             name: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -422,7 +608,7 @@ class PyfficeDataView(PyfficeDocument):
 
     def get_data(self) -> Any:
         """Return the data.
-        
+
         Returns:
             Self for chaining.
         """
@@ -432,10 +618,10 @@ class PyfficeDataView(PyfficeDocument):
 
     def load_document(self, document) -> Self:
         """Load document into this document.
-        
+
         Args:
             document: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -453,10 +639,10 @@ class PyfficeDataView(PyfficeDocument):
 
     def set_columns(self, columns) -> Self:
         """Set the columns.
-        
+
         Args:
             columns: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -467,10 +653,10 @@ class PyfficeDataView(PyfficeDocument):
 
     def set_data(self, data) -> Self:
         """Set the data.
-        
+
         Args:
             data: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -483,10 +669,10 @@ class PyfficeDataView(PyfficeDocument):
 
     def set_filters(self, filters) -> Self:
         """Set the filters.
-        
+
         Args:
             filters: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -498,10 +684,10 @@ class PyfficeDataView(PyfficeDocument):
 
     def set_summarizations(self, summarizations) -> Self:
         """Set the summarizations.
-        
+
         Args:
             summarizations: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -510,6 +696,67 @@ class PyfficeDataView(PyfficeDocument):
             self.add_change("summarizations", self.summarizations, summarizations)
             self.summarizations = summarizations
         return self
+
+    def load_document(self, document=None) -> Self:
+        logma.debug(f"{self.__class__.__name__}.load_document called")
+        super().load_document(document)
+        if not isinstance(document, dict):
+            return self
+        data = document.get("data", {}) or {}
+        content = data.get("content", {}) or {}
+        if isinstance(content, dict):
+            if "config" in content:
+                setattr(self, "config", content["config"])
+        return self
+
+    def open_file(self, file_=None):
+        import json as _json
+        from os.path import exists
+
+        if file_ is None:
+            file_ = self.file_path
+        if not file_ or not exists(file_):
+            logma.warning(f"{self.__class__.__name__}.open_file: no such path {file_!r}")
+            return self
+        try:
+            with open(file_, "r") as f:
+                doc = _json.load(f)
+        except (OSError, ValueError) as e:
+            logma.warning(f"{self.__class__.__name__}.open_file failed for {file_!r}: {e}")
+            return self
+        return self.load_document(doc)
+
+    def save(self, path=None, format_=None, encrypt=None):
+        logma.debug(f"{self.__class__.__name__}.save called path={path!r}")
+        super().save(path, format_, encrypt)
+        if path is None:
+            path = self.file_path
+        if not path:
+            logma.warning(f"{self.__class__.__name__}.save: no path available")
+            return
+        import json as _json
+
+        doc = self.to_dict()
+        with open(path, "w") as f:
+            _json.dump(doc, f, indent=2, default=str)
+        return
+
+    def to_dict(self):
+        logma.debug(f"{self.__class__.__name__}.to_dict called")
+        super().to_dict()  # populate canonical envelope
+        attrs = {
+            "config": getattr(self, "config", None),
+        }
+        doc = {
+            "did": self.did,
+            "meta_data": {"schema_version": list(self.SERIALIZATION_VERSION)},
+            "data": {
+                "content": attrs,
+                "document_type": "slide",
+            },
+        }
+        return self._canonicalize(doc)
+
 
 # ====================================================================================================================||
 

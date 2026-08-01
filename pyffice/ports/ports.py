@@ -49,7 +49,6 @@ from pycurity.pyhash import decode64
 from squirl.objnql import tblonql
 from squirl.orgnql import yonql
 
-
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
 logma = Logma(__name__)
@@ -71,10 +70,10 @@ class PyfficePort(PyfficeDocumentManager):
 
     def file_export(self, file_=None) -> Self:
         """File export.
-        
+
         Args:
             file_: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -147,15 +146,16 @@ class PyfficePort(PyfficeDocumentManager):
     def to_xml(self) -> Any:
         """Convert to XML format."""
         import xml.etree.ElementTree as ET
-        return ET.tostring(self.document, encoding='unicode') if self.document else ""
+
+        return ET.tostring(self.document, encoding="unicode") if self.document else ""
 
     def file_open(self, file_path, open_=True) -> Any:
         """File open.
-        
+
         Args:
             file_path: Parameter.
             open_: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -164,11 +164,11 @@ class PyfficePort(PyfficeDocumentManager):
 
     def file_write(self, path, dikt) -> Self:
         """File write.
-        
+
         Args:
             path: Parameter.
             dikt: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -176,382 +176,6 @@ class PyfficePort(PyfficeDocumentManager):
         #     f.write(text)
         yonql.Doc(path).write(dikt)
         return self
-
-class PyfficePortCherryTree(PyfficePort):
-    """"""
-
-    VERSION = "0.0.1.0.1.0"
-
-    def __init__(self, cfg=None) -> None:
-        """"""
-        logma.info(f"Init Cherry Tree {cfg}")
-        super().__init__(cfg)
-        self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortCherryTree")).override(cfg)
-        logma.info(f"Init Cherry Tree {self.config.dikt}")
-        self.nodes = None
-        self.root = None
-        self.tree = None
-        self.codeboxes = None
-        self.links = None
-        self.tables = None
-        self.images = None
-
-    def extract_codeboxes(self, node) -> Self:
-        """Extract codeboxes.
-        
-        Args:
-            node: Parameter.
-        
-        Returns:
-            Self for chaining.
-        """
-        codeboxes = node.findall("codebox")
-        self.codeboxes = []
-        for code in codeboxes:
-            cfg = {"document": {"content": code.text, "syntax": code.attrib.get("prog_lang", "")}}
-            box = PyfficeScript(cfg)
-            box.load_document()
-            self.codeboxes.append(box)
-        return self
-
-    def extract_images(self, node) -> Self:
-        """Extract images.
-        
-        Args:
-            node: Parameter.
-        
-        Returns:
-            Self for chaining.
-        """
-        images = node.findall("encoded_png")
-        self.images = []
-        for image in images:
-            if image.attrib.get("filename", "") == "__ct_special.tex":
-                continue
-            logma.info(f"Image {image.text}")
-            cfg = {
-                "data": {
-                    "content": {"L0": {"bytes": image.text}},
-                },
-                "location": "internal",
-            }
-            image_ = PyfficeImage({"document": cfg})
-            image_.load_document()
-            self.images.append(image_)
-        return self
-
-    def extract_tables(self, node) -> Any:
-        """Extract tables.
-        
-        Args:
-            node: Parameter.
-        
-        Returns:
-            Self for chaining.
-        """
-        tables = node.findall("table")
-        tables_ = []
-        for table in tables:
-            rows = table.findall("row")
-            rows_ = []
-            for i, row in enumerate(rows):
-                cells = row.findall("cell")
-                row_ = []
-                for j, cell in enumerate(cells):
-                    row_.append(cell.text)
-                    # if i == 0:
-                    #     tables_[j] = cell.text if j < len(tables_) else cell.text + "|"
-                    # else:
-                    #     tables_[j] = tables_[j] + "\n" + cell.text + "|"
-                rows_.append(row_)
-            cfg = {"rows": rows}
-            table_ = PyfficeTable(cfg)
-            table_.load_unit()
-            tables_.append(table_)
-        return tables_
-
-    def extract_text(self, node) -> Any:
-        """Extract text.
-        
-        Args:
-            node: Parameter.
-        
-        Returns:
-            Self for chaining.
-        """
-        full_text = ""
-        script = None
-        if node.text is not None:
-            full_text = self.parse_text(node)
-            logma.info(f"Full Text {full_text}")
-            script = PyfficeScript({})
-            script.load_document()
-            script.parse_content(full_text)
-        logma.info(f"Full Text {full_text}")
-        return script
-
-    def file_import(self, file_path=None) -> Self:
-        """File import.
-        
-        Args:
-            file_path: Parameter.
-        
-        Returns:
-            Self for chaining.
-        """
-        self.file_open(file_path)
-        return self.to_dict()
-
-    def file_open(self, file_path) -> Self:
-        """File open.
-        
-        Args:
-            file_path: Parameter.
-        
-        Returns:
-            Self for chaining.
-        """
-        # logma.info(f"Open Cherry Tree {self.config.dikt["file_path"]}")
-        self.load_document(self.config.dikt.get("document", {}))
-        if file_path is None:
-            file_path = self.file_path
-        logma.info(f"Open Cherry Tree {self.file_path}")
-        xml_string = super().file_open(file_path)
-        self.tree = ET.ElementTree(ET.fromstring(xml_string))
-        self.root = self.tree.getroot()
-        self.parse()
-        return self
-
-    def load_document(self, document=None) -> Self:
-        """Load document into this document.
-        
-        Args:
-            document: Parameter.
-        
-        Returns:
-            Self for chaining.
-        """
-        logma.info(f"Load Cherry Tree {document}")
-        super().load_document(document)
-        return self
-
-    def parse(self) -> Self:
-        """
-        Parse the entire XML structure starting from the root.
-
-        :return: A list of parsed nodes.
-        """
-        self.nodes = [self.parse_node(node) for node in self.root.findall("node")]
-        return self
-
-    def parse_links(self, text) -> Self:
-        # extract urls
-        """Parse URL links from the document content.
-        
-        Args:
-            text: Parameter.
-        
-        Returns:
-            Self for chaining.
-        """
-        links = extract_urls(text)
-        logma.info(f"Links: {links}")
-        self.links = []
-        if links is not None:
-            for link in links:
-                logma.info(f"Link: {link}")
-                link = link.replace("}", "").replace("{", "").strip()
-                if not link.startswith("http"):
-                    continue
-                DOWNLOAD_EXTENSIONS = [".zip", ".exe", ".pdf", ".jpg", ".png", ".mp4"]
-                url_string = link  # If this is a QUrl object
-                for ext in DOWNLOAD_EXTENSIONS:
-                    if url_string.endswith(ext):
-                        continue
-                # try:
-                # browser = PyfficeWebBrowser({"url": link}) Not sure how this should be organized at this level
-                # due to the PyfficeWebBrowser-PyfficeWebPage-PyfficeURL hiearchy
-                cfg = {"document": {"data": {"original_path": link}}}
-                browser = PyfficeWebBrowser(cfg)
-                browser.load_document()
-                browser.set_url_active(link)
-                # except Exception as e:
-                #     logma.info(f"Link: {link}")
-                #     continue
-                logma.info(f"Link {browser.to_dict()}")
-                logma.info(f"Active URL {browser.active_url.to_dict()}")
-                if browser.active_url.domain is None:
-                    continue
-                logma.info(f"Active Link {browser.active_url} {browser.active_url.domain}")
-                self.links.append(browser)
-        return self
-
-    def parse_node(self, node) -> Any:
-        """
-        Parse a single node and its children recursively.
-
-        :param node: The XML element representing the node.
-        :return: A dictionary representation of the node.
-        """
-        tab_id = uuid()
-        name = node.attrib.get("name", None)
-        if name is None or name == "":
-            name = tab_id[len(tab_id) - 5 :]
-        script = self.extract_text(node)
-        script_dict = {}
-        if script is not None:
-            script_dict = script.to_dict()
-            self.parse_links(script.full_text)
-        self.extract_images(node)
-        # self.codeboxes = self.extract_codeboxes(node)
-        # self.tables = self.extract_tables(node)
-        # is this needed?
-        node_ = {
-            "name": name,
-            "custom_icon_id": node.attrib.get("custom_icon_id", ""),
-            "readonly": node.attrib.get("readonly", ""),
-            "tags": node.attrib.get("tags", ""),
-            "creation_dttm": node.attrib.get("ts_creation", self.time.get_current_datetime_str()),
-            "last_save_dttm": node.attrib.get("ts_lastsave", self.time.get_current_datetime_str()),
-            "unique_id": node.attrib.get("unique_id", uuid()),
-            "is_bold": node.attrib.get("is_bold", ""),
-            "foreground": node.attrib.get("foreground", ""),
-            "tabs": [
-                {
-                    "tags": node.attrib.get("tags", ""),
-                    "readonly": node.attrib.get("readonly", ""),
-                    "prog_lang": node.attrib.get("prog_lang", ""),
-                    "name": name,
-                    "unique_id": tab_id,
-                    "rich_text": script_dict,
-                    "type": "script",
-                    "creation_dttm": node.attrib.get("ts_creation", self.time.store_now()),
-                    "last_save_dttm": node.attrib.get("ts_lastsave", self.time.store_now()),
-                }
-            ],
-        }
-        logma.info(f"Links: {self.links}")
-        if self.links is not None:
-            for i, link in enumerate(self.links):
-                logma.info(f"Link: {link.active_url} {link.active_url.domain}")
-                name = link.active_url.domain[:30]
-                if name is None or name == "":
-                    name = tab_id[len(tab_id) - 5 :] + f"_{i}"
-                node_["tabs"].append(
-                    {
-                        "tags": "",
-                        "readonly": "",
-                        "prog_lang": "",
-                        "name": link.active_url.domain[:30],
-                        "unique_id": link.did,
-                        "type": "browser",
-                        "rich_text": link.to_dict(),
-                        "creation_timestamp": self.time.store_now(),
-                        "last_save_timestamp": self.time.store_now(),
-                    }
-                )
-        self.links = None
-        if self.images is not None:
-            for image in self.images:
-                node_["tabs"].append(
-                    {
-                        "tags": "",
-                        # "widget": "widgets.documents.media.images.NchantdOfficeImage",
-                        "readonly": "",
-                        "prog_lang": "",
-                        "name": image.did[-8:],
-                        "unique_id": image.did,
-                        "type": "image",
-                        "rich_text": image.to_dict(),
-                        "creation_timestamp": self.time.store_now(),
-                        "last_save_timestamp": self.time.store_now(),
-                    }
-                )
-                logma.info(f"Image: {image.to_dict()}")
-        if self.tables is not None:
-            for table in self.tables:
-                node_["tabs"].append(
-                    {
-                        "tags": "",
-                        # "widget": "widgets.documents.workbooks.matricies.NchantdOfficeMatrix",
-                        "readonly": "",
-                        "prog_lang": "",
-                        "name": table.name[:30],
-                        "unique_id": table.did,
-                        "type": "table",
-                        "rich_text": table.to_dict(),
-                        "creation_timestamp": self.time.store_now(),
-                        "last_save_timestamp": self.time.store_now(),
-                    }
-                )
-        if self.codeboxes is not None:
-            for codebox in self.codeboxes:
-                logma.info(f"Codebox: {codebox}")
-                node_["tabs"].append(
-                    {
-                        "tags": "",
-                        # "widget": "widgets.documents.media.scripts.NchantdOfficeScript",
-                        "readonly": "",
-                        "prog_lang": codebox.syntax,
-                        "name": codebox.name[:30],
-                        "unique_id": codebox.did,
-                        "type": "script",
-                        "rich_text": codebox.to_dict(),
-                        "creation_timestamp": self.time.store_now(),
-                        "last_save_timestamp": self.time.store_now(),
-                    }
-                )
-        node_["nodes"] = [self.parse_node(child) for child in node.findall("node")]
-        return node_
-
-    def parse_tables(self, node) -> Self:
-        """Parse tables.
-        
-        Args:
-            node: Parameter.
-        
-        Returns:
-            Self for chaining.
-        """
-        # extract tables
-        tables = node.findall("table")
-        for table in tables:
-            cfg = {"document": {"content": table}}
-            table_ = PyfficeMatrix(cfg)
-            table_.load_document()
-        return self
-
-    def parse_text(self, node) -> Any:
-        """Parse text.
-        
-        Args:
-            node: Parameter.
-        
-        Returns:
-            Self for chaining.
-        """
-        text = node.findall("rich_text")
-        all_combined_text = []
-        if len(text) > 0:
-            for i, tag in enumerate(text):
-                tag_text = tag.text
-                if tag_text is None:
-                    tag_text = ""
-                tag_text = html.escape(tag_text).replace("\n", "<br>")
-                all_combined_text.append(tag_text)
-        combined_text = " ".join(filter(None, all_combined_text))
-        return combined_text
-
-    def to_dict(self) -> Self:
-        """Convert this document to dict.
-        
-        Returns:
-            Self for chaining.
-        """
-        doc = super().to_dict()
-        for node in self.nodes:
-            doc["data"]["documents"].append(node)
-        return self._canonicalize(doc)
 
 
 class PyfficePortOffice(PyfficePort):
@@ -563,17 +187,18 @@ class PyfficePortOffice(PyfficePort):
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortOffice")).override(cfg)
+
     def parse_file(self) -> Self:
         """Parse the loaded file."""
         # Placeholder - subclasses implement specific parsing
-        if not hasattr(self, 'file_path'):
+        if not hasattr(self, "file_path"):
             return self
         return self
 
     def parse_table(self) -> Self:
         """Parse tables from document."""
         # Placeholder - subclasses implement specific parsing
-        if not hasattr(self, 'document'):
+        if not hasattr(self, "document"):
             return self
         return self
 
@@ -583,6 +208,7 @@ class PyfficePortOffice(PyfficePort):
         if not file_:
             return self
         return self
+
 
 class PyfficePortCSV(PyfficePort):
     """"""
@@ -596,19 +222,20 @@ class PyfficePortCSV(PyfficePort):
 
     def open_file(self, file, if_data_only=False, read_only=False, keep_vba=False) -> Any:
         """Open file.
-        
+
         Args:
             file: Parameter.
             if_data_only: Parameter.
             read_only: Parameter.
             keep_vba: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
         rdr = tblonql.Doc(file)
         data = next(rdr.read(), None)
         return data
+
 
 class PyfficePortDia(PyfficePort):
     """Port Dia File and convert to Pyffice Sketch Document"""
@@ -629,10 +256,10 @@ class PyfficePortDia(PyfficePort):
 
     def import_file(self, file_path=None) -> Self:
         """Import file.
-        
+
         Args:
             file_path: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -642,10 +269,10 @@ class PyfficePortDia(PyfficePort):
 
     def open_file(self, file_path) -> None:
         """Open file.
-        
+
         Args:
             file_path: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -662,7 +289,7 @@ class PyfficePortDia(PyfficePort):
 
     def parse(self) -> Self:
         """Parse .
-        
+
         Returns:
             Self for chaining.
         """
@@ -687,7 +314,7 @@ class PyfficePortDia(PyfficePort):
 
     def parse_xml(self) -> None:
         """Parse xml.
-        
+
         Returns:
             Self for chaining.
         """
@@ -711,6 +338,7 @@ class PyfficePortDia(PyfficePort):
             for attr in obj.findall("dia:attribute", namespace):
                 attr_name = attr.get("name", "Unknown")
 
+
 class PyfficePortFileSystem(PyfficePort):
     """"""
 
@@ -721,144 +349,6 @@ class PyfficePortFileSystem(PyfficePort):
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortFileSystem")).override(cfg)
 
-class PyfficePortImage(PyfficePort):
-    """"""
-
-    VERSION = "0.0.1.0.1.0"
-
-    def __init__(self, cfg=None) -> None:
-        """"""
-        logma.debug(f"PyfficePortImage.__init__ called")
-        super().__init__(cfg)
-        self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortImage")).override(cfg)
-
-    def convert_svg_color(self, input_color, output_color) -> Self:
-        """Convert svg color.
-        
-        Args:
-            input_color: Parameter.
-            output_color: Parameter.
-        
-        Returns:
-            Self for chaining.
-        """
-        if self.content is None:
-            self.read()
-        self.content = re.sub(input_color, output_color, self.content, flags=re.IGNORECASE)
-        return self
-
-    def encode(self, format="JPEG") -> Any:
-        """
-        Encode the image to a specific format and return bytes.
-
-        :param format: Image format to encode (e.g., JPEG, PNG).
-        :return: Bytes of the encoded image.
-        """
-        buffer = BytesIO()
-        self.image.save(buffer, format=format)
-        return buffer.getvalue()
-    def open_file(self, file_=None) -> Self:
-        """Open file.
-        
-        Args:
-            file_: Parameter.
-        
-        Returns:
-            Self for chaining.
-        """
-        from pyffice.pyffice import (
-            MissingPathError,
-            UnknownFileTypeError,
-        )
-        if file_ is None:
-            file_ = self.file_path
-        else:
-            self.file_path = file_
-        if file_ is None:
-            raise MissingPathError(f"No File Provided {file_}")
-        match file_.lower():
-            case s if s.endswith(".bmp"):
-                self.open_file_bmp(file_)
-            case s if s.endswith(".jpeg"):
-                self.open_file_jpeg(file_)
-            case s if s.endswith(".jpg"):
-                self.open_file_jpeg(file_)
-            case s if s.endswith(".gif"):
-                self.open_file_gif(file_)
-            case s if s.endswith(".png"):
-                self.open_file_png(file_)
-            case s if s.endswith(".svg"):
-                self.open_file_svg(file_)
-            case _:
-                raise UnknownFileTypeError(f"Unknown File Type {file_}")
-        return self
-
-    def open_file_bmp(self, file_) -> Self:
-        """Open BMP file."""
-        from PIL import Image
-        self.image = Image.open(file_)
-        return self
-
-    def open_file_jpeg(self, file_) -> Self:
-        """Open JPEG file."""
-        from PIL import Image
-        self.image = Image.open(file_)
-        return self
-
-    def open_file_gif(self, file_) -> Self:
-        """Open GIF file."""
-        from PIL import Image
-        self.image = Image.open(file_)
-        return self
-
-    def open_file_png(self, file_) -> Self:
-        """Open PNG file."""
-        from PIL import Image
-        self.image = Image.open(file_)
-        return self
-
-    def open_file_svg(self, file_) -> Self:
-        """Open SVG file."""
-        # Placeholder - SVG requires special handling
-        if not file_:
-            return self
-        return self
-
-    def save(self, output_path, format_=None) -> Self:
-        """
-        Save the current image to a file.
-
-        :param output_path: The output path to save the image.
-        :param format: Optional image format (e.g., 'JPEG', 'PNG').
-        :return: self
-        """
-        super().save(output_path, format_=format_)
-        if self.image is not None:
-            self.image.save(output_path, format=format_ or self.image.format)
-        return self
-
-    def set_layers(self, method="flatten") -> Self:
-        """
-        Merge all layers with the base image.
-
-        :return: self
-        """
-        self.image = self.image.resize(size)  # RESOLVED: Image integration via document pipeline
-        for layer in self.layers:
-            self.image = Image.alpha_composite(self.image.convert("RGBA"), layer)
-        self.layers = []  # Clear layers after merging
-        return self
-
-    def set_size(self, width, height) -> Self:
-        """
-        Resize the image.
-
-        :param width: New width.
-        :param height: New height.
-        :return: self
-        """
-        self.image = self.image.resize((width, height))
-        return self
 
 class PyfficePortJupyter(PyfficePort):
     """"""
@@ -873,10 +363,10 @@ class PyfficePortJupyter(PyfficePort):
 
     def file_export(self, file_=None) -> Self:
         """File export.
-        
+
         Args:
             file_: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -888,10 +378,10 @@ class PyfficePortJupyter(PyfficePort):
 
     def file_import(self, file_path=None) -> Self:
         """File import.
-        
+
         Args:
             file_path: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -900,10 +390,10 @@ class PyfficePortJupyter(PyfficePort):
 
     def file_open(self, file_path) -> Self:
         """File open.
-        
+
         Args:
             file_path: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -911,6 +401,8 @@ class PyfficePortJupyter(PyfficePort):
         with open(self.file_path, "r", encoding="utf-8") as f:
             self.notebook = nbformat.read(f, as_version=4)
         return self
+
+
 class PyfficePortText(PyfficePort):
     """"""
 
@@ -920,6 +412,7 @@ class PyfficePortText(PyfficePort):
         """"""
         super().__init__(cfg)
         self.config.override(kahndor.Instruct(pxcfg).select("PyfficePortWebSession")).override(cfg)
+
 
 class PyfficePortWebSession(PyfficePort):
     """"""
@@ -935,10 +428,10 @@ class PyfficePortWebSession(PyfficePort):
 
     def file_import(self, file_path=None) -> Self:
         """File import.
-        
+
         Args:
             file_path: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -947,10 +440,10 @@ class PyfficePortWebSession(PyfficePort):
 
     def file_open(self, file_path) -> Self:
         """File open.
-        
+
         Args:
             file_path: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -962,10 +455,10 @@ class PyfficePortWebSession(PyfficePort):
 
     def load_document(self, document=None) -> Self:
         """Load document into this document.
-        
+
         Args:
             document: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -976,7 +469,7 @@ class PyfficePortWebSession(PyfficePort):
 
     def parse_session(self) -> Self:
         """Parse session.
-        
+
         Returns:
             Self for chaining.
         """
@@ -995,10 +488,10 @@ class PyfficePortWebSession(PyfficePort):
 
     def parse_tab(self, tab) -> Any:
         """Parse tab.
-        
+
         Args:
             tab: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -1007,6 +500,7 @@ class PyfficePortWebSession(PyfficePort):
         favicon = tab["favIconUrl"]
         metadata = tab
         return {"url": url, "favicon": favicon, "metadata": metadata}
+
 
 # ====================================================================================================================||
 

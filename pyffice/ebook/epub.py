@@ -7,10 +7,51 @@ from pathlib import Path
 from typing import List, Optional
 import xml.etree.ElementTree as ET
 
+#!/usr/bin/env python3
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
+"""
+---
+<(META)>:
+        docid:
+        name:
+        description: >
+        version: 0.0.0.0.0.0
+        authority: filesystem
+        security: seclvl2
+        <(WT)>: -32
+"""
+
+# -*- coding: utf-8 -*
+# ======================================Standard Library Modules======================================================||
+from os.path import abspath, dirname, join
+from datetime import datetime, timezone
+from typing import Any, Dict, List, Optional, Union
+
+# ======================================3rd Party Library Modules=====================================================||
+
+
+# ======================================Solutions Brewer Library Modules==============================================||
+from kahndor import kahndor
+from kahndor.logma import Logma
+
+# ====================================================================================================================||
+HERE = join(dirname(__file__), "")  # ||
+log = True
+logma = Logma(__name__)
+if not log:
+    logma.off()
+# ====================================================================================================================||
+PXCFG = join(HERE, "_data_", ".yaml")
+
+# ====================================================================================================================||
+
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@||
+
 
 def create(title: str, author: str, content: str, output: str) -> None:
     """Create EPUB file from content."""
     import io
+
     with zipfile.ZipFile(output, "w", zipfile.ZIP_DEFLATED) as zf:
         # mimetype must be first and uncompressed
         zf.writestr("mimetype", b"application/epub+zip", compress_type=zipfile.ZIP_STORED)
@@ -46,16 +87,16 @@ def list_chapters(epub_path: str) -> List[str]:
 
 
 def _container_xml() -> str:
-    return '''<?xml version="1.0"?>
+    return """<?xml version="1.0"?>
 <container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
   <rootfiles>
     <rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/>
   </rootfiles>
-</container>'''
+</container>"""
 
 
 def _opf(title: str, author: str) -> str:
-    return f'''<?xml version="1.0" encoding="utf-8"?>
+    return f"""<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://www.idpf.org/2007/opf" version="2.0">
   <metadata>
     <dc:title>{title}</dc:title>
@@ -70,11 +111,11 @@ def _opf(title: str, author: str) -> str:
   <spine toc="ncx">
     <itemref idref="chapter1"/>
   </spine>
-</package>'''
+</package>"""
 
 
 def _toc_ncx(title: str) -> str:
-    return f'''<?xml version="1.0" encoding="UTF-8"?>
+    return f"""<?xml version="1.0" encoding="UTF-8"?>
 <ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">
   <head>
     <meta name="dtb:uid" content="pyffice-generated"/>
@@ -86,18 +127,19 @@ def _toc_ncx(title: str) -> str:
       <content src="Text/chapter1.xhtml"/>
     </navPoint>
   </navMap>
-</ncx>'''
+</ncx>"""
 
 
 def _xhtml(content: str) -> str:
     newline = "\n"
-    return f'''<?xml version="1.0" encoding="utf-8"?>
+    return f"""<?xml version="1.0" encoding="utf-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head><title>Chapter 1</title><link href="../Styles/style.css" type="text/css" rel="stylesheet"/></head>
 <body><p>{newline.join(content.split(newline))}</p></body>
-</html>'''
+</html>"""
+
 
 # Alias for compatibility
 load = read
 write = create
-__all__ = ['create', 'read', 'list_chapters', 'load', 'write']
+__all__ = ["create", "read", "list_chapters", "load", "write"]
