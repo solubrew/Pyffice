@@ -29,6 +29,7 @@ from pyffice.calendars.tasks import PyfficeEvent, PyfficeTask
 here = join(dirname(__file__), "")  # ||
 log = True
 logma = Logma(__name__)
+logma.off()
 
 # ====================================================================================================================||
 pxcfg = join(here, "_data_", "alarms.yaml")

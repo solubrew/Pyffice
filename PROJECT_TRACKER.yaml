@@ -1,10 +1,10 @@
 agent: m3rl1n
 analysis:
   counts:
-    files: 419
-    python_files: 217
-    python_lines: 24871
-    test_files: 51
+    files: 447
+    python_files: 234
+    python_lines: 33568
+    test_files: 78
 audit_date: '1785470638.3677874'
 dimensions:
   base_class_duplication:
@@ -122,15 +122,30 @@ dimensions:
   dependency_strategy:
     details:
       details:
-        external_imports: 397
-        info: 'Hint: 29 GitVein projects available but not used: eaglis, falcon, glain,
-          goalt, hermes-agent-main...'
+        external_imports: 457
+        info: 'Hint: 30 GitVein projects available but not used: condor, eaglis, falcon,
+          glain, goalt...'
         internal_import_details:
+        - file: tests/pyffice_unit/unit/diagrams/diagramsTEST.py
+          module: pyffice.document
+          project: pyffice
+        - file: tests/pyffice_unit/unit/diagrams/diagramsTEST.py
+          module: pyffice.document
+          project: pyffice
+        - file: tests/pyffice_unit/unit/diagrams/diagramsTEST.py
+          module: pyffice.document
+          project: pyffice
         - file: tests/pyffice_unit/unit/ebook/ebookTEST.py
           module: pyffice.ebook.azw
           project: pyffice
-        - file: tests/pyffice_unit/unit/ports/portsTEST.py
-          module: pyffice.ports.msports
+        - file: tests/pyffice_unit/unit/analytics/analyticsTEST.py
+          module: pyffice.document
+          project: pyffice
+        - file: tests/pyffice_unit/unit/analytics/analyticsTEST.py
+          module: pyffice.document
+          project: pyffice
+        - file: tests/pyffice_unit/unit/ports/gportsTEST.py
+          module: pyffice.ports.cloud_ports
           project: pyffice
         - file: tests/pyffice_unit/unit/ports/portsTEST.py
           module: pyffice.ports.msports
@@ -138,33 +153,17 @@ dimensions:
         - file: tests/pyffice_unit/unit/ports/portsTEST.py
           module: pyffice.ports.msports
           project: pyffice
-        - file: tests/pyffice_unit/unit/media/mediaTEST.py
-          module: pyffice.media.heic
+        - file: tests/pyffice_unit/unit/ports/portsTEST.py
+          module: pyffice.ports.msports
           project: pyffice
-        - file: pyffice/cli.py
-          module: pyffice
-          project: pyffice
-        - file: pyffice/pyffice.py
-          module: kahndor.kahndor
-          project: kahndor
-        - file: pyffice/pyffice.py
-          module: kahndor.kahndor
-          project: kahndor
-        - file: pyffice/document.py
-          module: kahndor
-          project: kahndor
-        - file: pyffice/document.py
-          module: kahndor
-          project: kahndor
-        internal_imports: 141
+        internal_imports: 142
         internal_projects_used:
-        - condor
-        - pyffice
         - kahndor
-        leverage_score: 26.21
+        - pyffice
+        leverage_score: 23.71
         score: 100
         status: pass
-        total_imports: 538
+        total_imports: 599
       score: 100
       status: pass
     score: 100
@@ -182,18 +181,13 @@ dimensions:
   duplicate_filenames:
     details:
       details:
-        duplicate_count: 1
-        issues:
-        - paths:
-          - pyffice/items/items.py
-          - pyffice/cad/items.py
-          rule: 'Duplicate filename: items.py'
-          severity: medium
-        score: 95
+        duplicate_count: 0
+        issues: []
+        score: 100
         status: pass
-      score: 95
+      score: 100
       status: pass
-    score: 95
+    score: 100
     status: pass
   embedded_todos:
     details:
@@ -302,7 +296,7 @@ dimensions:
           branches:
             local: []
             remote: []
-          commit_count: 278
+          commit_count: 340
           commits: []
           contributors: []
           is_repo: true
@@ -335,7 +329,7 @@ dimensions:
   import_cycle:
     details:
       details:
-        bad_import_files: 10
+        bad_import_files: 6
         issues: []
         score: 100
       score: 100
@@ -426,34 +420,44 @@ dimensions:
       details:
         examples:
           silent_classes:
-          - class: PyfficeDeque
-            file: pyffice/document.py
-            method_count: 5
+          - class: ArchiveHandler
+            file: pyffice/io_helpers.py
+            method_count: 18
           - class: TestPyfficeUnitAddChange
             file: tests/pyffice_unit/unit/documentTEST.py
             method_count: 5
           - class: TestPyfficeDocumentManager
             file: tests/pyffice_unit/unit/documentTEST.py
             method_count: 5
+          - class: TestPyfficeUnitEnsureInitState
+            file: tests/pyffice_unit/unit/documentTEST.py
+            method_count: 5
           - class: TestCliGroup
             file: tests/pyffice_unit/unit/cliTEST.py
             method_count: 12
-          - class: TestPyfficeProjectConstruction
-            file: tests/pyffice_unit/unit/projects/projectsTEST.py
-            method_count: 5
-          unused_logma: []
+          unused_logma:
+          - file: pyffice/diagrams/diagrams.py
+            logma_imported: true
+          - file: pyffice/databases/databases.py
+            logma_imported: true
+          - file: pyffice/items/layers.py
+            logma_imported: true
+          - file: pyffice/tags/references.py
+            logma_imported: true
+          - file: pyffice/tags/tags.py
+            logma_imported: true
         issues:
         - dimension: logging_coverage
           rule: Add logging to silent modules/classes
           severity: medium
-        score: 50
-        silent_classes: 66
-        status: partial
-        unused_logma_files: 0
-      score: 50
-      status: partial
-    score: 50
-    status: partial
+        score: 0
+        silent_classes: 106
+        status: fail
+        unused_logma_files: 24
+      score: 0
+      status: fail
+    score: 0
+    status: fail
   long_method:
     details:
       details:
@@ -505,42 +509,72 @@ dimensions:
     details:
       details:
         issues:
+        - message: Module io_helpers has no corresponding CLI command
+          module: io_helpers
+          type: no_cli
         - message: Module __main__ has no corresponding CLI command
           module: __main__
           type: no_cli
-        score: 85
-        status: pass
-      score: 85
-      status: pass
-    score: 85
-    status: pass
+        score: 70
+        status: partial
+      score: 70
+      status: partial
+    score: 70
+    status: partial
   not_implemented:
     details:
       details:
-        count: 1
+        count: 7
         examples:
-        - class: PyfficeDataBase
-          file: pyffice/data/base.py
-          line: 166
-          method: from_dict
+        - class: DiagramConverter
+          file: pyffice/diagrams/formats.py
+          line: 84
+          method: load
+        - class: DiagramConverter
+          file: pyffice/diagrams/formats.py
+          line: 89
+          method: save
+        - class: PyfficeCloudPort
+          file: pyffice/ports/cloud_ports.py
+          line: 133
+          method: list_files
+        - class: PyfficeCloudPort
+          file: pyffice/ports/cloud_ports.py
+          line: 145
+          method: download_file
+        - class: PyfficeCloudPort
+          file: pyffice/ports/cloud_ports.py
+          line: 157
+          method: upload_file
+        - class: PyfficeCloudPort
+          file: pyffice/ports/cloud_ports.py
+          line: 169
+          method: create_folder
+        - class: PyfficeCloudPort
+          file: pyffice/ports/cloud_ports.py
+          line: 181
+          method: delete_file
         issues:
         - dimension: not_implemented
           rule: NotImplementedError stubs need implementation
           severity: high
-        score: 92
-        status: pass
-      score: 92
-      status: pass
-    score: 92
-    status: pass
+        score: 44
+        status: partial
+      score: 44
+      status: partial
+    score: 44
+    status: partial
   note_comments:
     details:
       details:
-        count: 1
+        count: 2
         examples:
-        - file: pyffice/skills/skills.py
-          line: 38
-          text: '# NOTE: this skills framework is intentionally scoped to creating'
+        - file: pyffice/databases/__init__.py
+          line: 10
+          text: '# NOTE: PyfficeTable is NOT re-exported here. The canonical'
+        - file: pyffice/cad/__init__.py
+          line: 46
+          text: '# NOTE: PyfficeShape is NOT re-exported here. The canonical'
         issues: []
         score: 100
         status: pass
@@ -551,21 +585,13 @@ dimensions:
   parallel_inheritance:
     details:
       details:
-        issues:
-        - fix: Consider merging hierarchies or using composition
-          items:
-          - class: PyfficeShape
-            locations:
-            - pyffice/items/shapes.py
-            - pyffice/cad/items.py
-          rule: 'Parallel inheritance detected: 1 classes'
-          severity: medium
-        parallel_inheritance_count: 1
-        score: 95
+        issues: []
+        parallel_inheritance_count: 0
+        score: 100
         status: pass
-      score: 95
+      score: 100
       status: pass
-    score: 95
+    score: 100
     status: pass
   pii_secrets:
     details:
@@ -655,75 +681,68 @@ dimensions:
       details:
         issues:
         - file: /home/solubrew/.hermes/projects/pyffice/pyffice/container/tar.py
-          line: 38
+          line: 33
           rule: 'Bandit: tarfile.extractall used without any validation. Please check
             and discard dangerous members.'
           severity: high
-        - file: /home/solubrew/.hermes/projects/pyffice/pyffice/data/xml.py
-          line: 12
-          rule: 'Bandit: Using xml.etree.ElementTree.parse to parse untrusted XML
-            data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.parse
-            with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
-            is called'
-          severity: medium
         - file: /home/solubrew/.hermes/projects/pyffice/pyffice/diagrams/formats.py
-          line: 119
+          line: 122
           rule: 'Bandit: Using xml.etree.ElementTree.fromstring to parse untrusted
             XML data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.fromstring
             with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
             is called'
           severity: medium
         - file: /home/solubrew/.hermes/projects/pyffice/pyffice/diagrams/formats.py
-          line: 328
+          line: 331
           rule: 'Bandit: Using xml.etree.ElementTree.parse to parse untrusted XML
             data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.parse
             with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
             is called'
           severity: medium
         - file: /home/solubrew/.hermes/projects/pyffice/pyffice/diagrams/formats.py
-          line: 397
+          line: 400
           rule: 'Bandit: Using xml.etree.ElementTree.parse to parse untrusted XML
             data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.parse
             with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
             is called'
           severity: medium
         - file: /home/solubrew/.hermes/projects/pyffice/pyffice/diagrams/formats.py
-          line: 519
+          line: 522
           rule: 'Bandit: Using xml.etree.ElementTree.fromstring to parse untrusted
             XML data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.fromstring
             with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
             is called'
           severity: medium
         - file: /home/solubrew/.hermes/projects/pyffice/pyffice/diagrams/formats.py
-          line: 610
+          line: 613
           rule: 'Bandit: Using xml.etree.ElementTree.parse to parse untrusted XML
             data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.parse
             with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
             is called'
           severity: medium
         - file: /home/solubrew/.hermes/projects/pyffice/pyffice/diagrams/formats.py
-          line: 649
+          line: 652
           rule: 'Bandit: Using xml.etree.ElementTree.fromstring to parse untrusted
             XML data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.fromstring
             with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
             is called'
           severity: medium
         - file: /home/solubrew/.hermes/projects/pyffice/pyffice/diagrams/formats.py
-          line: 716
+          line: 719
           rule: 'Bandit: Using xml.etree.ElementTree.parse to parse untrusted XML
             data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.parse
             with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
             is called'
           severity: medium
         - file: /home/solubrew/.hermes/projects/pyffice/pyffice/diagrams/formats.py
-          line: 782
+          line: 785
           rule: 'Bandit: Using xml.etree.ElementTree.parse to parse untrusted XML
             data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.parse
             with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
             is called'
           severity: medium
         - file: /home/solubrew/.hermes/projects/pyffice/pyffice/images/utilities.py
-          line: 99
+          line: 110
           rule: 'Bandit: Using xml.etree.ElementTree.parse to parse untrusted XML
             data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.parse
             with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
@@ -735,28 +754,28 @@ dimensions:
             or custom schemes is often unexpected.'
           severity: medium
         - file: /home/solubrew/.hermes/projects/pyffice/pyffice/ports/ports.py
-          line: 216
+          line: 317
           rule: 'Bandit: Using xml.etree.ElementTree.fromstring to parse untrusted
             XML data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.fromstring
             with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
             is called'
           severity: medium
         - file: /home/solubrew/.hermes/projects/pyffice/pyffice/ports/ports.py
-          line: 505
+          line: 651
           rule: 'Bandit: Using xml.etree.ElementTree.fromstring to parse untrusted
             XML data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.fromstring
             with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
             is called'
           severity: medium
         - file: /home/solubrew/.hermes/projects/pyffice/pyffice/projects/projects.py
-          line: 154
+          line: 169
           rule: 'Bandit: Using xml.etree.ElementTree.parse to parse untrusted XML
             data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.parse
             with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
             is called'
           severity: medium
         - file: /home/solubrew/.hermes/projects/pyffice/pyffice/projects/projects.py
-          line: 173
+          line: 188
           rule: 'Bandit: Using xml.etree.ElementTree.parse to parse untrusted XML
             data is known to be vulnerable to XML attacks. Replace xml.etree.ElementTree.parse
             with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib()
@@ -790,15 +809,51 @@ dimensions:
           pattern: ast_call
           severity: 80
         - category: getattr_dynamic
+          content: self.editors = getattr(self, 'editors', [])
+          file: pyffice/document.py
+          line: 265
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: editors = getattr(self, 'editors', [])
+          file: pyffice/document.py
+          line: 286
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: refs = getattr(self, 'references', [])
+          file: pyffice/document.py
+          line: 293
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: data["path"] = meta.get("path") or getattr(self, "file_path", None)
+          file: pyffice/document.py
+          line: 817
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: setattr(self, attr, value)
+          file: pyffice/document.py
+          line: 175
+          pattern: setattr\(
+          severity: 60
+        - category: getattr_dynamic
+          content: setattr(self, attr, default)
+          file: pyffice/document.py
+          line: 260
+          pattern: setattr\(
+          severity: 60
+        - category: getattr_dynamic
           content: setattr(self, change["label"], change["new_value"])
           file: pyffice/document.py
-          line: 236
+          line: 417
           pattern: setattr\(
           severity: 60
         - category: getattr_dynamic
           content: setattr(self, last_change["label"], last_change["value"])
           file: pyffice/document.py
-          line: 488
+          line: 849
           pattern: setattr\(
           severity: 60
         - category: dynamic_import
@@ -825,6 +880,18 @@ dimensions:
           line: 14
           pattern: ast_call
           severity: 80
+        - category: getattr_dynamic
+          content: 'return {"name": getattr(self, ''name'', None),'
+          file: pyffice/diagrams/diagrams.py
+          line: 515
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: '"type": getattr(self, ''type'', None)}'
+          file: pyffice/diagrams/diagrams.py
+          line: 516
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
         - category: dynamic_import
           content: mod = __import__(mod_path, fromlist=[attr])
           file: pyffice/notebooks/__init__.py
@@ -837,16 +904,52 @@ dimensions:
           line: 14
           pattern: ast_call
           severity: 80
+        - category: getattr_dynamic
+          content: self.servers = getattr(self, 'servers', {})
+          file: pyffice/databases/databases.py
+          line: 88
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
         - category: dynamic_import
           content: mod = __import__(mod_path, fromlist=[attr])
           file: pyffice/databases/__init__.py
-          line: 16
+          line: 20
           pattern: __import__\(
           severity: 80
         - category: dynamic_import_ast
           content: __import__(...)
           file: pyffice/databases/__init__.py
-          line: 16
+          line: 20
+          pattern: ast_call
+          severity: 80
+        - category: getattr_dynamic
+          content: self.text_flipped = not getattr(self, 'text_flipped', False)
+          file: pyffice/items/shapes.py
+          line: 121
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: return getattr(self, 'formula', None)
+          file: pyffice/items/cells.py
+          line: 189
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: return getattr(self, 'value', None)
+          file: pyffice/items/cells.py
+          line: 201
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: dynamic_import
+          content: mod = __import__(mod_path, fromlist=[attr])
+          file: pyffice/data/__init__.py
+          line: 46
+          pattern: __import__\(
+          severity: 80
+        - category: dynamic_import_ast
+          content: __import__(...)
+          file: pyffice/data/__init__.py
+          line: 46
           pattern: ast_call
           severity: 80
         - category: dynamic_import
@@ -888,140 +991,146 @@ dimensions:
         - category: getattr_dynamic
           content: self.bcc = getattr(self, 'bcc', []) + [bcc]
           file: pyffice/email/email.py
-          line: 48
+          line: 47
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: self.cc = getattr(self, 'cc', []) + [cc]
           file: pyffice/email/email.py
-          line: 53
+          line: 52
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: self.recipients = getattr(self, 'recipients', []) + [recipient]
           file: pyffice/email/email.py
-          line: 58
+          line: 57
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: self.labels = getattr(self, 'labels', []) + [label]
           file: pyffice/email/email.py
-          line: 63
+          line: 62
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: return getattr(self, 'body', None)
           file: pyffice/email/email.py
-          line: 84
+          line: 90
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: return getattr(self, 'footer', None)
           file: pyffice/email/email.py
-          line: 88
+          line: 94
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: headers = getattr(self, 'headers', {})
           file: pyffice/email/email.py
-          line: 92
+          line: 98
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: recipients = getattr(self, 'recipients', [])
           file: pyffice/email/email.py
-          line: 97
+          line: 103
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: return getattr(self, 'from', None)
           file: pyffice/email/email.py
-          line: 102
+          line: 108
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: labels = getattr(self, 'labels', [])
           file: pyffice/email/email.py
-          line: 121
+          line: 134
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: self.labels = getattr(self, 'labels', {})
           file: pyffice/email/email.py
-          line: 146
+          line: 161
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: self.rules = getattr(self, 'rules', [])
           file: pyffice/email/email.py
-          line: 157
+          line: 172
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: labels = getattr(self, 'labels', {})
           file: pyffice/email/email.py
-          line: 163
+          line: 178
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: self.messages = [m for m in getattr(self, 'messages', []) if m.get('uid')
             != uid]
           file: pyffice/email/email.py
-          line: 170
+          line: 185
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: rules = getattr(self, 'rules', [])
           file: pyffice/email/email.py
-          line: 175
+          line: 190
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: messages = getattr(self, 'messages', [])
           file: pyffice/email/email.py
-          line: 185
+          line: 201
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: messages = getattr(self, 'messages', [])
           file: pyffice/email/email.py
-          line: 193
+          line: 209
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: return getattr(self, 'labels', {})
           file: pyffice/email/email.py
-          line: 198
+          line: 214
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: return getattr(self, 'messages', [])
           file: pyffice/email/email.py
-          line: 202
+          line: 218
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: messages = getattr(self, 'messages', [])
           file: pyffice/email/email.py
-          line: 206
+          line: 222
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: rules = getattr(self, 'rules', [])
           file: pyffice/email/email.py
-          line: 214
+          line: 230
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: return getattr(self, 'rules', [])
           file: pyffice/email/email.py
-          line: 219
+          line: 235
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: rules = getattr(self, 'rules', [])
+          file: pyffice/email/email.py
+          line: 239
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: self.messages = getattr(self, 'messages', [])
           file: pyffice/email/email.py
-          line: 237
+          line: 258
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: dynamic_import
@@ -1048,90 +1157,114 @@ dimensions:
           line: 24
           pattern: ast_call
           severity: 80
+        - category: getattr_dynamic
+          content: parts = getattr(self, 'parts', [])
+          file: pyffice/cad/cad.py
+          line: 83
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: target = file_path or getattr(self, "file_path", None)
+          file: pyffice/cad/cad_cam.py
+          line: 74
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: target = filepath or getattr(self, "file_path", None)
+          file: pyffice/cad/cad_gcode.py
+          line: 216
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
         - category: dynamic_import
           content: mod = __import__(mod_path, fromlist=[attr])
           file: pyffice/cad/__init__.py
-          line: 66
+          line: 70
           pattern: __import__\(
           severity: 80
         - category: dynamic_import_ast
           content: __import__(...)
           file: pyffice/cad/__init__.py
-          line: 66
+          line: 70
           pattern: ast_call
           severity: 80
         - category: unicode_escape
           content: 'if header[:4] == b"\xd0\xcf\x11\xe0":'
           file: pyffice/projects/projects.py
-          line: 135
+          line: 150
           pattern: \\x[0-9a-fA-F]{2}
           severity: 40
         - category: unicode_escape
           content: 'if header[:4] == b"\xd0\xcf\x11\xe0":'
           file: pyffice/projects/projects.py
-          line: 135
+          line: 150
           pattern: \\x[0-9a-fA-F]{2}
           severity: 40
         - category: unicode_escape
           content: 'if header[:4] == b"\xd0\xcf\x11\xe0":'
           file: pyffice/projects/projects.py
-          line: 135
+          line: 150
           pattern: \\x[0-9a-fA-F]{2}
           severity: 40
         - category: unicode_escape
           content: 'if header[:4] == b"\xd0\xcf\x11\xe0":'
           file: pyffice/projects/projects.py
-          line: 135
+          line: 150
           pattern: \\x[0-9a-fA-F]{2}
           severity: 40
         - category: unicode_escape
           content: ole_header = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
           file: pyffice/projects/projects.py
-          line: 191
+          line: 206
           pattern: \\x[0-9a-fA-F]{2}
           severity: 40
         - category: unicode_escape
           content: ole_header = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
           file: pyffice/projects/projects.py
-          line: 191
+          line: 206
           pattern: \\x[0-9a-fA-F]{2}
           severity: 40
         - category: unicode_escape
           content: ole_header = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
           file: pyffice/projects/projects.py
-          line: 191
+          line: 206
           pattern: \\x[0-9a-fA-F]{2}
           severity: 40
         - category: unicode_escape
           content: ole_header = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
           file: pyffice/projects/projects.py
-          line: 191
+          line: 206
           pattern: \\x[0-9a-fA-F]{2}
           severity: 40
         - category: unicode_escape
           content: ole_header = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
           file: pyffice/projects/projects.py
-          line: 191
+          line: 206
           pattern: \\x[0-9a-fA-F]{2}
           severity: 40
         - category: unicode_escape
           content: ole_header = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
           file: pyffice/projects/projects.py
-          line: 191
+          line: 206
           pattern: \\x[0-9a-fA-F]{2}
           severity: 40
         - category: unicode_escape
           content: ole_header = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
           file: pyffice/projects/projects.py
-          line: 191
+          line: 206
           pattern: \\x[0-9a-fA-F]{2}
           severity: 40
         - category: unicode_escape
           content: ole_header = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
           file: pyffice/projects/projects.py
-          line: 191
+          line: 206
           pattern: \\x[0-9a-fA-F]{2}
           severity: 40
+        - category: getattr_dynamic
+          content: '"version": getattr(self, "VERSION", None),'
+          file: pyffice/projects/projects.py
+          line: 128
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
         - category: dynamic_import
           content: mod = __import__(mod_path, fromlist=[attr])
           file: pyffice/calendars/__init__.py
@@ -1180,6 +1313,18 @@ dimensions:
           line: 17
           pattern: ast_call
           severity: 80
+        - category: getattr_dynamic
+          content: entries = getattr(self, 'entries', [])
+          file: pyffice/script/script.py
+          line: 74
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: return len(getattr(self, 'entries', []))
+          file: pyffice/script/script.py
+          line: 241
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
         - category: dynamic_import
           content: mod = __import__(mod_path, fromlist=[attr])
           file: pyffice/script/__init__.py
@@ -1204,16 +1349,28 @@ dimensions:
           line: 17
           pattern: ast_call
           severity: 80
+        - category: getattr_dynamic
+          content: return getattr(self, 'duration', 0)
+          file: pyffice/video/video_export.py
+          line: 93
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: return getattr(self, 'palette', [])
+          file: pyffice/video/video_export.py
+          line: 97
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
         - category: input_usage
           content: file_ = ffmpeg.input(self.path, start, end)
           file: pyffice/video/video_export.py
-          line: 58
+          line: 70
           pattern: \binput\(
           severity: 20
         - category: input_usage
           content: file_ = ffmpeg.input(self.path, start, end)
           file: pyffice/video/video_export.py
-          line: 62
+          line: 74
           pattern: \binput\(
           severity: 20
         - category: dynamic_import
@@ -1231,13 +1388,13 @@ dimensions:
         - category: dynamic_import
           content: mod = __import__(mod_path, fromlist=[attr])
           file: pyffice/ports/__init__.py
-          line: 29
+          line: 48
           pattern: __import__\(
           severity: 80
         - category: dynamic_import_ast
           content: __import__(...)
           file: pyffice/ports/__init__.py
-          line: 29
+          line: 48
           pattern: ast_call
           severity: 80
         - category: dynamic_import
@@ -1252,6 +1409,24 @@ dimensions:
           line: 17
           pattern: ast_call
           severity: 80
+        - category: getattr_dynamic
+          content: return getattr(self, 'duration', 0)
+          file: pyffice/audio/audio_export.py
+          line: 132
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: current = getattr(self, 'volume', 100)
+          file: pyffice/audio/audio_export.py
+          line: 136
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: current = getattr(self, 'volume', 100)
+          file: pyffice/audio/audio_export.py
+          line: 142
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
         - category: dynamic_import
           content: mod = __import__(mod_path, fromlist=[attr])
           file: pyffice/audio/__init__.py
@@ -1273,25 +1448,25 @@ dimensions:
         - category: getattr_dynamic
           content: filters = getattr(self, 'filters', [])
           file: pyffice/images/images.py
-          line: 173
+          line: 184
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: layers = getattr(self, 'layers', [])
           file: pyffice/images/images.py
-          line: 185
+          line: 196
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: shapes = getattr(self, 'shapes', [])
           file: pyffice/images/images.py
-          line: 192
+          line: 203
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: texts = getattr(self, 'texts', [])
           file: pyffice/images/images.py
-          line: 214
+          line: 225
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: dynamic_import
@@ -1306,6 +1481,30 @@ dimensions:
           line: 29
           pattern: ast_call
           severity: 80
+        - category: getattr_dynamic
+          content: '"body": getattr(self, ''body'', None),'
+          file: pyffice/text/text_messages.py
+          line: 81
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: '"from": getattr(self, ''from_'', None),'
+          file: pyffice/text/text_messages.py
+          line: 82
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: '"subject": getattr(self, ''subject'', None),'
+          file: pyffice/text/text_messages.py
+          line: 83
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: '"to": getattr(self, ''to'', None),'
+          file: pyffice/text/text_messages.py
+          line: 84
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
         - category: dynamic_import
           content: mod = __import__(mod_path, fromlist=[attr])
           file: pyffice/text/__init__.py
@@ -1327,19 +1526,19 @@ dimensions:
         - category: getattr_dynamic
           content: parent = getattr(self, "_library", None)
           file: pyffice/workflows/formulas.py
-          line: 256
+          line: 258
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: proto = self._resolve_protocol(getattr(self, "protocol_name", "builtin"))
           file: pyffice/workflows/formulas.py
-          line: 288
+          line: 297
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: getattr_dynamic
           content: proto = self._resolve_protocol(getattr(self, "protocol_name", "builtin"))
           file: pyffice/workflows/formulas.py
-          line: 298
+          line: 307
           pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
           severity: 60
         - category: exec_calls_ast
@@ -1348,6 +1547,18 @@ dimensions:
           line: 131
           pattern: ast_call
           severity: 100
+        - category: getattr_dynamic
+          content: nodes = getattr(self, 'nodes', {})
+          file: pyffice/workflows/workflows.py
+          line: 47
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: edges = getattr(self, 'edges', [])
+          file: pyffice/workflows/workflows.py
+          line: 54
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
         - category: dynamic_import
           content: mod = __import__(mod_path, fromlist=[attr])
           file: pyffice/workflows/__init__.py
@@ -1363,9 +1574,27 @@ dimensions:
         - category: base64_decode
           content: return base64.b64decode(doc['data'])
           file: pyffice/container/binary.py
-          line: 126
+          line: 143
           pattern: base64\.b64decode\(
           severity: 70
+        - category: getattr_dynamic
+          content: fields = getattr(self, 'fields', [])
+          file: pyffice/forms/forms.py
+          line: 144
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: responses = getattr(self, 'responses', [])
+          file: pyffice/forms/forms.py
+          line: 151
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
+        - category: getattr_dynamic
+          content: recipients = getattr(self, 'recipients', [])
+          file: pyffice/forms/forms.py
+          line: 366
+          pattern: getattr\([^,]+,\s*['\"][\w]+['\"]
+          severity: 60
         - category: dynamic_import
           content: mod = __import__(mod_path, fromlist=[attr])
           file: pyffice/forms/__init__.py
@@ -1393,13 +1622,13 @@ dimensions:
         - category: getattr_dynamic
           content: setattr(self, attr, None)
           file: pyffice/web/url.py
-          line: 376
+          line: 362
           pattern: setattr\(
           severity: 60
         - category: getattr_dynamic
           content: setattr(self, attr_name, new_value)
           file: pyffice/web/url.py
-          line: 459
+          line: 445
           pattern: setattr\(
           severity: 60
         - category: dynamic_import
@@ -1524,7 +1753,7 @@ dimensions:
         issues:
         - fix: Use polymorphism or a mapping instead of complex if-else
           items:
-          - count: 6
+          - count: 8
             file: pyffice/document.py
             function: set_file_path
             var: file_path
@@ -1556,13 +1785,13 @@ dimensions:
   testing:
     details:
       details:
-        coverage: 32.323232323232325
-        files_with_tests: 32
+        coverage: 54.83870967741935
+        files_with_tests: 51
         score: 90
         status: pass
         test_dir: tests
-        test_file_count: 50
-        total_source_files: 99
+        test_file_count: 77
+        total_source_files: 93
       score: 90
       status: pass
     score: 90
@@ -1591,121 +1820,78 @@ dimensions:
         issues:
         - rule: low_coverage
           severity: medium
-          total: 1736
-          typed: 375
-        score: 21
+          total: 1662
+          typed: 391
+        score: 23
         status: partial
-        total_functions: 1736
-        typed_functions: 375
-        untyped_functions: 1361
-      score: 21
+        total_functions: 1662
+        typed_functions: 391
+        untyped_functions: 1271
+      score: 23
       status: partial
-    score: 21
+    score: 23
     status: partial
   unfinished_code:
     details:
       details:
-        empty_methods: 139
-        examples:
-        - class: PyfficeUnit
-          file: pyffice/document.py
-          line: 132
-          method: add_editor
-        - class: PyfficeUnit
-          file: pyffice/document.py
-          line: 143
-          method: del_editor
-        - class: PyfficeUnit
-          file: pyffice/document.py
-          line: 147
-          method: del_reference
-        - class: PyfficeDocument
-          file: pyffice/document.py
-          line: 521
-          method: file_export
-        - class: PyfficeDocument
-          file: pyffice/document.py
-          line: 525
-          method: file_import
-        - class: PyfficeDocument
-          file: pyffice/document.py
-          line: 604
-          method: search_vector
-        - class: PyfficeFileSystem
-          file: pyffice/filesystems/filesystems.py
-          line: 86
-          method: get_files
-        - class: PyfficeDiagram
-          file: pyffice/diagrams/diagrams.py
-          line: 334
-          method: to_dict
-        - class: PyfficeDiagram
-          file: pyffice/diagrams/diagrams.py
-          line: 338
-          method: to_md
-        - class: PyfficeNotebook
-          file: pyffice/notebooks/notebooks.py
-          line: 105
-          method: set_pinned
-        issues:
-        - dimension: unfinished_code
-          rule: Empty methods need implementation
-          severity: high
-        score: 0
-        status: fail
-      score: 0
-      status: fail
-    score: 0
-    status: fail
+        empty_methods: 0
+        examples: []
+        issues: []
+        score: 100
+        status: pass
+      score: 100
+      status: pass
+    score: 100
+    status: pass
   wrapper_antipattern:
     details:
       details:
         issues: []
         score: 100
         status: pass
-        wrapper_count: 33
+        wrapper_count: 30
       score: 100
       status: pass
     score: 100
     status: pass
-overall_score: 89.76
+overall_score: 90.13
 project: pyffice
 rubric:
-  audit_overall: 89.76
+  audit_overall: 90.13
   categories: []
   max_points: 0
   percentage: 0.0
-  rubric_name: 06a6d05b-a801-7ca5-8000-10b2910bb5f4
+  rubric_name: 06a6d696-8cc9-7c03-8000-ef991f773030
   rubric_score: 0
   rubric_version: '1.0'
-  score_difference: -89.76
+  score_difference: -90.13
   total_points: 0
   weighted_score: 0
 summary:
   failing: 2
-  partial: 5
-  passing: 45
-  tasks_created: 7
+  partial: 6
+  passing: 44
+  tasks_created: 8
   total_auditors: 11
   total_dimensions: 53
 test_execution:
-  duration_seconds: 26.925709009170532
-  project_score: 89.76
+  duration_seconds: 47.17589235305786
+  project_score: 90.13
   report_file: /home/solubrew/.hermes/projects/pyffice/FALCON_TEST.yaml
   results:
-    tests_failed: 27
-    tests_passed: 283
-    tests_run: 310
-    tests_skipped: 0
+    tests_failed: 29
+    tests_passed: 849
+    tests_run: 882
+    tests_skipped: 3
   runner: falcon
   score_adjustment: 0
   score_threshold: 80.0
   should_run: true
   status: failed
-  status_message: no change (283/310 tests passed)
+  status_message: no change (849/882 tests passed)
   timestamp: ''
 versions:
-  project: da6c40d
+  project: 8c96dc2
   project_status: dirty
-  project_uncommitted_changes: 4
+  project_uncommitted_changes: 2
   sasquatch: a16c01c

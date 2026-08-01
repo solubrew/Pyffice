@@ -30,6 +30,7 @@ from pyffice.items.items import PyfficePart
 here = join(dirname(__file__), "")  # ||
 log = True
 logma = Logma(__name__)
+logma.off()
 
 # ====================================================================================================================||
 pxcfg = join(here, "_data_", "cad.yaml")

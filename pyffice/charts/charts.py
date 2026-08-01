@@ -73,6 +73,21 @@ class PyfficeChart(PyfficeDocument):
         self.xlabel = None
         self.ylabel = None
 
+    def _merge_config(self, user_data, config_key, fields):
+        """Merge user-supplied dict with defaults from config.
+
+        Args:
+            user_data: User-supplied dict (may be None).
+            config_key: Key in self.config.dikt for defaults.
+            fields: List of field names to merge.
+
+        Returns:
+            Merged dict.
+        """
+        defaults = self.config.dikt.get(config_key, {})
+        user_data = user_data or {}
+        return {f: user_data.get(f, defaults.get(f)) for f in fields}
+
     def add_axis(self, axis):
         """Add a axis.
         
@@ -82,19 +97,10 @@ class PyfficeChart(PyfficeDocument):
         Returns:
             Self for chaining.
         """
-        default_axis = self.config.dikt.get("axis", {})
-        axis = {
-            "dimension": axis.get("dimension", default_axis.get("dimension", None)),
-            "title": axis.get("title", default_axis.get("title", None)),
-            "label": axis.get("label", default_axis.get("label", None)),
-            "position": axis.get("position", default_axis.get("position", None)),
-            "size": axis.get("size", default_axis.get("size", None)),
-            "orientation": axis.get("orientation", default_axis.get("orientation", None)),
-            "start": axis.get("start", default_axis.get("start", None)),
-            "step": axis.get("step", default_axis.get("step", None)),
-            "labels": axis.get("labels", default_axis.get("labels", None)),
-            "primary": axis.get("primary", default_axis.get("primary", None)),
-        }
+        axis = self._merge_config(axis, "axis", [
+            "dimension", "title", "label", "position", "size",
+            "orientation", "start", "step", "labels", "primary",
+        ])
         self.axes.append(axis)
         return self
 
@@ -150,20 +156,29 @@ class PyfficeChart(PyfficeDocument):
             label (str): Label for the legend.
             **kwargs: Additional keyword arguments for Seaborn or Matplotlib plots (e.g., color, linestyle).
         """
-        default_series = self.config.dikt.get("series", {})
-        self.series[label] = {"x": x_index, "y": y_index, "z": z_index, "format": {}}
-        self.series[label]["format"] = {
-            "marker": format_.get("marker", default_series.get("marker", "circle")),
-            "markersize": format_.get("markersize", default_series.get("markersize", 10)),
-            "linestyle": format_.get("linestyle", default_series.get("linestyle", "solid")),
-            "linewidth": format_.get("linewidth", default_series.get("linewidth", 1)),
-            "pattern": format_.get("pattern", default_series.get("pattern", None)),
-            "fill": format_.get("fill", default_series.get("fill", True)),
-            "fill_color": format_.get("fill_color", default_series.get("fill_color", "blue")),
-            "marker_color": format_.get("marker_color", default_series.get("marker_color", "blue")),
-            "line_color": format_.get("line_color", default_series.get("line_color", "blue")),
-            "show_labels": format_.get("show_labels", default_series.get("show_labels", True)),
-        }
+        format_ = self._merge_config(format_, "series", [
+            "marker", "markersize", "linestyle", "linewidth", "pattern",
+            "fill", "fill_color", "marker_color", "line_color", "show_labels",
+        ])
+        if format_.get("marker") is None:
+            format_["marker"] = "circle"
+        if format_.get("markersize") is None:
+            format_["markersize"] = 10
+        if format_.get("linestyle") is None:
+            format_["linestyle"] = "solid"
+        if format_.get("linewidth") is None:
+            format_["linewidth"] = 1
+        if format_.get("fill") is None:
+            format_["fill"] = True
+        if format_.get("fill_color") is None:
+            format_["fill_color"] = "blue"
+        if format_.get("marker_color") is None:
+            format_["marker_color"] = "blue"
+        if format_.get("line_color") is None:
+            format_["line_color"] = "blue"
+        if format_.get("show_labels") is None:
+            format_["show_labels"] = True
+        self.series[label] = {"x": x_index, "y": y_index, "z": z_index, "format": format_}
         return self
 
     def del_axis(self, axis):

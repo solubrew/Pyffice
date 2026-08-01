@@ -224,6 +224,8 @@ class DiaConverter(DiagramConverter):
         lines.append("</dia:diagram>")
 
         content = "\n".join(lines)
+        self.lines_written = len(lines)
+        logma.info(f"DiaConverter: wrote {len(lines)} lines to {file_path}")
 
         # Handle .dia.gz
         if file_path.endswith(".gz"):
@@ -597,8 +599,12 @@ class DrawIOConverter(DiagramConverter):
         lines.append("  </diagram>")
         lines.append("</mxfile>")
 
+        content = "\n".join(lines)
+        self.lines_written = len(lines)
+        logma.info(f"DrawIOConverter: wrote {len(lines)} lines to {file_path}")
+
         with open(file_path, "w", encoding="utf-8") as f:
-            f.write("\n".join(lines))
+            f.write(content)
 
         return True
 
