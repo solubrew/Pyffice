@@ -13,7 +13,7 @@ Rationale:
   a PyfficeService instance, not directly.
 
 Each cloud port overrides the PyfficePort file I/O surface
-(``file_open``, ``file_write``, ``file_export``, ``file_import``)
+(``open_file``, ``file_write``, ``file_export``, ``file_import``)
 so the standard port API works transparently for cloud-hosted files.
 
 Optional dependencies (guarded with try/except so the module loads
@@ -71,6 +71,7 @@ except ImportError:
 # ============================================================================================#
 #  BASE CLOUD PORT
 # ============================================================================================#
+
 
 class CloudPortProtocol(Protocol):
     """Structural type for cloud-storage ports.
@@ -259,7 +260,7 @@ class PyfficeCloudPort(PyfficePort):
     def cloud_download(self, file_id: str) -> bytes:
         """Download a cloud file and return raw bytes.
 
-        Override of PyfficePort.file_open for cloud sources.
+        Override of PyfficePort.open_file for cloud sources.
         Uses download_file to a temp path, then reads bytes.
         """
         import tempfile
@@ -295,6 +296,7 @@ class PyfficeCloudPort(PyfficePort):
 # ============================================================================================#
 #  GOOGLE DRIVE
 # ============================================================================================#
+
 
 class PyfficePortGoogleDrive(PyfficeCloudPort):
     """Google Drive cloud storage port.
@@ -338,20 +340,19 @@ class PyfficePortGoogleDrive(PyfficeCloudPort):
         elif "service_account_json" in creds:
             from io import BytesIO
             import json
+
             sa_info = creds["service_account_json"]
             if isinstance(sa_info, str):
                 sa_info = json.loads(sa_info)
-            self._client = service_account.ServiceAccountCredentials.from_service_account_info(
-                sa_info, scopes=scopes
-            )
+            self._client = service_account.ServiceAccountCredentials.from_service_account_info(sa_info, scopes=scopes)
         elif "access_token" in creds:
             import requests
             from google.oauth2.credentials import Credentials
+
             self._client = Credentials(token=creds["access_token"])
         else:
             raise ValueError(
-                "Google credentials must contain 'service_account_path', "
-                "'service_account_json', or 'access_token'"
+                "Google credentials must contain 'service_account_path', " "'service_account_json', or 'access_token'"
             )
 
         self._service = gbuild("drive", "v3", credentials=self._client)
@@ -375,12 +376,9 @@ class PyfficePortGoogleDrive(PyfficeCloudPort):
             q = f"'{folder_id}' in parents and trashed=false"
         else:
             q = "'root' in parents and trashed=false"
-        results = self._service.files().list(
-            q=q, pageSize=100, fields="files(id, name, mimeType, size)"
-        ).execute()
+        results = self._service.files().list(q=q, pageSize=100, fields="files(id, name, mimeType, size)").execute()
         return [
-            {"id": f["id"], "name": f["name"],
-             "mime_type": f.get("mimeType", ""), "size": f.get("size", "0")}
+            {"id": f["id"], "name": f["name"], "mime_type": f.get("mimeType", ""), "size": f.get("size", "0")}
             for f in results.get("files", [])
         ]
 
@@ -418,13 +416,12 @@ class PyfficePortGoogleDrive(PyfficeCloudPort):
         if not self.authenticated:
             raise RuntimeError("Not authenticated. Call authenticate() first.")
         import os
+
         media = MediaFileUpload(local_path, resumable=True)
         metadata = {"name": os.path.basename(local_path)}
         if parent_folder_id:
             metadata["parents"] = [parent_folder_id]
-        result = self._service.files().create(
-            body=metadata, media_body=media, fields="id,name"
-        ).execute()
+        result = self._service.files().create(body=metadata, media_body=media, fields="id,name").execute()
         logma.info(f"Uploaded {local_path} -> {result.get('id')}")
         return {"id": result.get("id"), "name": result.get("name")}
 
@@ -467,6 +464,7 @@ class PyfficePortGoogleDrive(PyfficeCloudPort):
 #  DROPBOX
 # ============================================================================================#
 
+
 class PyfficePortDropbox(PyfficeCloudPort):
     """Dropbox cloud storage port.
 
@@ -493,9 +491,7 @@ class PyfficePortDropbox(PyfficeCloudPort):
         """
         super().authenticate(credentials)
         if not HAS_DROPBOX:
-            raise ImportError(
-                "dropbox package is required. Install: pip install dropbox"
-            )
+            raise ImportError("dropbox package is required. Install: pip install dropbox")
         creds = self._credentials
         if "access_token" in creds:
             self._client = dbx_pkg.Dropbox(oauth2_access_token=creds["access_token"])
@@ -506,10 +502,7 @@ class PyfficePortDropbox(PyfficeCloudPort):
                 oauth2_refresh_token=creds["refresh_token"],
             )
         else:
-            raise ValueError(
-                "Dropbox credentials must contain 'access_token' or "
-                "('app_key' + 'refresh_token')"
-            )
+            raise ValueError("Dropbox credentials must contain 'access_token' or " "('app_key' + 'refresh_token')")
         self.authenticated = True
         logma.info(f"Dropbox authenticated ({self.PROVIDER})")
         return self
@@ -530,21 +523,25 @@ class PyfficePortDropbox(PyfficeCloudPort):
         files = []
         for entry in result.entries:
             if isinstance(entry, FileMetadata):
-                files.append({
-                    "id": entry.id,
-                    "name": entry.name,
-                    "mime_type": "",
-                    "size": str(entry.size),
-                    "path": entry.path_display,
-                })
+                files.append(
+                    {
+                        "id": entry.id,
+                        "name": entry.name,
+                        "mime_type": "",
+                        "size": str(entry.size),
+                        "path": entry.path_display,
+                    }
+                )
             elif isinstance(entry, FolderMetadata):
-                files.append({
-                    "id": entry.id,
-                    "name": entry.name,
-                    "mime_type": "folder",
-                    "size": "0",
-                    "path": entry.path_display,
-                })
+                files.append(
+                    {
+                        "id": entry.id,
+                        "name": entry.name,
+                        "mime_type": "folder",
+                        "size": "0",
+                        "path": entry.path_display,
+                    }
+                )
         return files
 
     def download_file(self, file_id: str, local_path: str) -> Self:
@@ -576,6 +573,7 @@ class PyfficePortDropbox(PyfficeCloudPort):
         if not self.authenticated:
             raise RuntimeError("Not authenticated. Call authenticate() first.")
         import os
+
         dest = f"{parent_folder_id or ''}/{os.path.basename(local_path)}"
         with open(local_path, "rb") as f:
             result = self._client.files_upload(f.read(), dest)

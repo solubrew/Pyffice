@@ -38,6 +38,7 @@ logma = Logma(__name__)
 pxcfg = join(here, "_data_", "msports.yaml")
 
 
+# TODO data not being extracted properly
 def _extract_cell_attrs(cell) -> Any:
     """Extract all attributes from an openpyxl Cell into a dict.
 
@@ -50,7 +51,10 @@ def _extract_cell_attrs(cell) -> Any:
     if cell.hyperlink is not None:
         target = cell.hyperlink.target
     try:
-        formula = cell.formula if cell.data_type == "f" else None
+        if hasattr(cell, "formula"):
+            formula = cell.formula if cell.data_type == "f" else None
+        else:
+            formula = None
     except (AttributeError, TypeError) as e:
         logma.warning(e)
         formula = None

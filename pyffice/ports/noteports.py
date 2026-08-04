@@ -40,8 +40,7 @@ logma = Logma(__name__)
 if not log:
     logma.off()
 # ====================================================================================================================||
-PXCFG = join(HERE, "../config/_data_", ".yaml")
-pxcfg = PXCFG
+PXCFG = join(HERE, "_data_", ".yaml")
 
 
 class PyfficePortCherryTree(PyfficePort):
@@ -166,10 +165,10 @@ class PyfficePortCherryTree(PyfficePort):
         Returns:
             Self for chaining.
         """
-        self.file_open(file_path)
+        self.open_file(file_path)
         return self.to_dict()
 
-    def file_open(self, file_path) -> Self:
+    def open_file(self, file_path) -> Self:
         """File open.
 
         Args:
@@ -183,7 +182,7 @@ class PyfficePortCherryTree(PyfficePort):
         if file_path is None:
             file_path = self.file_path
         logma.info(f"Open Cherry Tree {self.file_path}")
-        xml_string = super().file_open(file_path)
+        xml_string = super().open_file(file_path)
         self.tree = ET.ElementTree(ET.fromstring(xml_string))
         self.root = self.tree.getroot()
         self.parse()

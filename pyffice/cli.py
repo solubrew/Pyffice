@@ -105,7 +105,7 @@ def document_convert(
     pyffice = ctx.obj.get("pyffice")
     try:
         doc = PyfficeDocument()
-        doc.file_open(input)
+        doc.open_file(input)
         doc.save(output, syntax=format or "pdf")
         click.echo(f"✓ Converted document: {input} -> {output}")
     except (OSError, ValueError, KeyError, AttributeError, TypeError, RuntimeError) as e:
@@ -122,7 +122,7 @@ def document_info(ctx: click.Context, input: str) -> None:
     """
     try:
         doc = PyfficeDocument()
-        doc.file_open(input)
+        doc.open_file(input)
         info = doc.to_dict()
         click.echo(f"Document: {input}")
         click.echo(f"  Name: {info.get('name', 'N/A')}")

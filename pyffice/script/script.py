@@ -327,6 +327,8 @@ class PyfficeScript(PyfficeDocument):
         Returns:
             Self for chaining.
         """
+        if self.file_path is None:
+            return None
         text = next(txtonql.Doc(self.file_path).read()).text
         self.set_file_type(None)
         logma.info(f"Text {text}")

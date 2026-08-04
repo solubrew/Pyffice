@@ -82,7 +82,7 @@ class PyfficePort(PyfficeDocumentManager):
 
     def file_import(self, file_path=None) -> Self:
         """Import from file path."""
-        self.file_open(file_path)
+        self.open_file(file_path)
         self.parse()
         return self
 
@@ -115,7 +115,7 @@ class PyfficePort(PyfficeDocumentManager):
 
         Subclasses override this for format-specific readers (xlsx,
         docx, png, etc.). The base implementation defers to
-        ``file_open`` and returns the raw text/bytes so subclasses
+        ``open_file`` and returns the raw text/bytes so subclasses
         that don't have a specialized reader can still expose
         something useful.
 
@@ -125,7 +125,7 @@ class PyfficePort(PyfficeDocumentManager):
         """
         if not self.file_path:
             return None
-        text = self.file_open(self.file_path, open_=True)
+        text = self.open_file(self.file_path, open_=True)
         if text is None:
             return None
         # YAML is the canonical interchange format; default to it
@@ -149,7 +149,7 @@ class PyfficePort(PyfficeDocumentManager):
 
         return ET.tostring(self.document, encoding="unicode") if self.document else ""
 
-    def file_open(self, file_path, open_=True) -> Any:
+    def open_file(self, file_path, open_=True) -> Any:
         """File open.
 
         Args:
@@ -159,7 +159,7 @@ class PyfficePort(PyfficeDocumentManager):
         Returns:
             Self for chaining.
         """
-        text = super().file_open(file_path, open_)
+        text = super().open_file(file_path, open_)
         return text
 
     def file_write(self, path, dikt) -> Self:
@@ -385,10 +385,10 @@ class PyfficePortJupyter(PyfficePort):
         Returns:
             Self for chaining.
         """
-        self.file_open(file_path)
+        self.open_file(file_path)
         return self.to_dict()
 
-    def file_open(self, file_path) -> Self:
+    def open_file(self, file_path) -> Self:
         """File open.
 
         Args:
@@ -397,7 +397,7 @@ class PyfficePortJupyter(PyfficePort):
         Returns:
             Self for chaining.
         """
-        super().file_open(file_path, False)
+        super().open_file(file_path, False)
         with open(self.file_path, "r", encoding="utf-8") as f:
             self.notebook = nbformat.read(f, as_version=4)
         return self
@@ -435,10 +435,10 @@ class PyfficePortWebSession(PyfficePort):
         Returns:
             Self for chaining.
         """
-        self.file_open(file_path)
+        self.open_file(file_path)
         return self.to_dict()
 
-    def file_open(self, file_path) -> Self:
+    def open_file(self, file_path) -> Self:
         """File open.
 
         Args:
@@ -449,7 +449,7 @@ class PyfficePortWebSession(PyfficePort):
         """
         # logma.info(f"Open Cherry Tree {self.config.dikt["file_path"]}")
         self.load_document(self.config.dikt.get("document", {}))
-        self.sessions = j.loads(super().file_open(file_path))
+        self.sessions = j.loads(super().open_file(file_path))
         self.parse_session()
         return self
 

@@ -43,6 +43,7 @@ from pyffice.web.prompts import PyfficePromptsManager
 from pyffice.web.url import PyfficeURLLibrary
 from pyffice.web.web import PyfficeWebBrowser
 from pyffice.filesystems.filesystems import PyfficeFileSystem
+from pyffice.config.config import PyfficeConfig
 
 # ====================================================================================================================||
 here = join(dirname(__file__), "")  # ||
@@ -230,6 +231,14 @@ class PyfficeCodex(PyfficeDocumentManager):
         chart = PyfficeChart(cfg)
         self.documents[chart.did] = chart
         return chart
+
+    def init_config(self, cfg: Optional[dict[str, Any]] = None) -> Optional[Any]:
+        """Initialize a note document."""
+        cfg = cfg or {}
+        cfg["codex"] = self
+        config = PyfficeConfig(cfg)
+        self.documents[config.did] = config
+        return config
 
     def init_contacts(self, cfg: Optional[dict[str, Any]] = None) -> Optional[Any]:
         """Initialize a contacts/rolodex document."""

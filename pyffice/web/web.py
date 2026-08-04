@@ -62,10 +62,10 @@ class PyfficeWebBrowser(PyfficeDocument):
 
     def add_page(self, page) -> Self:
         """Add a page.
-        
+
         Args:
             page: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -81,10 +81,10 @@ class PyfficeWebBrowser(PyfficeDocument):
 
     def add_profile(self, profile) -> Self:
         """Add a profile.
-        
+
         Args:
             profile: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -109,7 +109,7 @@ class PyfficeWebBrowser(PyfficeDocument):
 
     def get_active_profile(self) -> Any:
         """Return the active profile.
-        
+
         Returns:
             Self for chaining.
         """
@@ -117,7 +117,7 @@ class PyfficeWebBrowser(PyfficeDocument):
 
     def get_active_page(self) -> Any:
         """Return the active page.
-        
+
         Returns:
             Self for chaining.
         """
@@ -125,7 +125,7 @@ class PyfficeWebBrowser(PyfficeDocument):
 
     def is_pinned(self) -> Any:
         """Return whether this document is pinned.
-        
+
         Returns:
             Self for chaining.
         """
@@ -133,10 +133,10 @@ class PyfficeWebBrowser(PyfficeDocument):
 
     def load_document(self, document=None) -> Self:
         """Load document into this document.
-        
+
         Args:
             document: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -159,12 +159,15 @@ class PyfficeWebBrowser(PyfficeDocument):
         self.set_page_active(document.get("active_page", None))
         return self
 
+    def open_file(self, file=None):
+        """"""
+
     def set_library(self, library) -> Self:
         """Set the library.
-        
+
         Args:
             library: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -178,10 +181,10 @@ class PyfficeWebBrowser(PyfficeDocument):
 
     def set_page_active(self, page) -> Self:
         """Set the page active.
-        
+
         Args:
             page: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -207,10 +210,10 @@ class PyfficeWebBrowser(PyfficeDocument):
 
     def set_page_home(self, page) -> Self:
         """Set the page home.
-        
+
         Args:
             page: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -224,10 +227,10 @@ class PyfficeWebBrowser(PyfficeDocument):
 
     def set_pages(self, pages) -> Self:
         """Set the pages.
-        
+
         Args:
             pages: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -245,10 +248,10 @@ class PyfficeWebBrowser(PyfficeDocument):
 
     def set_pinned(self, pin) -> Self:
         """Set the pinned.
-        
+
         Args:
             pin: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -257,10 +260,10 @@ class PyfficeWebBrowser(PyfficeDocument):
 
     def set_profile_active(self, profile) -> Self:
         """Set the profile active.
-        
+
         Args:
             profile: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -278,10 +281,10 @@ class PyfficeWebBrowser(PyfficeDocument):
 
     def set_profile_manager(self, profiles) -> Self:
         """Set the profile manager.
-        
+
         Args:
             profiles: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -297,7 +300,7 @@ class PyfficeWebBrowser(PyfficeDocument):
 
     def set_refresh_time(self) -> Self:
         """Set the refresh time.
-        
+
         Returns:
             Self for chaining.
         """
@@ -327,7 +330,7 @@ class PyfficeWebBrowser(PyfficeDocument):
 
     def to_dict(self) -> Self:
         """Convert this document to dict.
-        
+
         Returns:
             Self for chaining.
         """
@@ -345,6 +348,7 @@ class PyfficeWebBrowser(PyfficeDocument):
 
 class PyfficeWebPage(PyfficeDocument):
     """"""
+
     SERIALIZATION_VERSION = (1, 0, 0)
 
     def __init__(self, cfg=None) -> None:
@@ -364,10 +368,10 @@ class PyfficeWebPage(PyfficeDocument):
 
     def add_history(self, url) -> Self:
         """Add a history.
-        
+
         Args:
             url: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -377,10 +381,10 @@ class PyfficeWebPage(PyfficeDocument):
 
     def add_snapshot(self, snapshot) -> Self:
         """Add a snapshot.
-        
+
         Args:
             snapshot: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -392,10 +396,10 @@ class PyfficeWebPage(PyfficeDocument):
 
     def add_version(self, content) -> Self:
         """Add a version.
-        
+
         Args:
             content: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -407,10 +411,10 @@ class PyfficeWebPage(PyfficeDocument):
 
     def load_document(self, document=None) -> Self:
         """Load document into this document.
-        
+
         Args:
             document: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -427,10 +431,10 @@ class PyfficeWebPage(PyfficeDocument):
 
     def get_finger_print(self, content) -> Any:
         """Return the finger print.
-        
+
         Args:
             content: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -438,11 +442,11 @@ class PyfficeWebPage(PyfficeDocument):
 
     def set_history(self, history, max_items) -> Self:
         """Set the history.
-        
+
         Args:
             history: Parameter.
             max_items: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -455,10 +459,10 @@ class PyfficeWebPage(PyfficeDocument):
 
     def set_page_pinned(self, pinned=None) -> Self:
         """Set the page pinned.
-        
+
         Args:
             pinned: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -473,7 +477,7 @@ class PyfficeWebPage(PyfficeDocument):
 
     def set_page_unpinned(self) -> Self:
         """Set the page unpinned.
-        
+
         Returns:
             Self for chaining.
         """
@@ -495,7 +499,7 @@ class PyfficeWebPage(PyfficeDocument):
 
     def set_refresh_time(self) -> Self:
         """Set the refresh time.
-        
+
         Returns:
             Self for chaining.
         """
@@ -504,10 +508,10 @@ class PyfficeWebPage(PyfficeDocument):
 
     def set_level_of_trust(self, level) -> Self:
         """Set the level of trust.
-        
+
         Args:
             level: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -522,10 +526,10 @@ class PyfficeWebPage(PyfficeDocument):
 
     def set_snapshots(self, snapshots) -> Self:
         """Set the snapshots.
-        
+
         Args:
             snapshots: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -536,10 +540,10 @@ class PyfficeWebPage(PyfficeDocument):
 
     def set_url(self, url) -> Self:
         """Set the url.
-        
+
         Args:
             url: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -553,10 +557,10 @@ class PyfficeWebPage(PyfficeDocument):
 
     def set_versions(self, versions) -> Self:
         """Set the versions.
-        
+
         Args:
             versions: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -567,7 +571,7 @@ class PyfficeWebPage(PyfficeDocument):
 
     def to_dict(self) -> Self:
         """Convert this document to dict.
-        
+
         Returns:
             Self for chaining.
         """
@@ -599,10 +603,10 @@ class PyfficeWebProfile(PyfficeContact):
 
     def load_document(self, document=None) -> Self:
         """Load document into this document.
-        
+
         Args:
             document: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -611,6 +615,7 @@ class PyfficeWebProfile(PyfficeContact):
         super().load_document(document)
         self.add_group("profile")
         return self
+
 
 class PyfficeWebProfileManager(PyfficeRolodex):
     """"""
@@ -630,10 +635,10 @@ class PyfficeWebProfileManager(PyfficeRolodex):
 
     def add_profile(self, profile) -> Self:
         """Add a profile.
-        
+
         Args:
             profile: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -647,10 +652,10 @@ class PyfficeWebProfileManager(PyfficeRolodex):
 
     def add_profiles(self, profiles) -> Self:
         """Add a profiles.
-        
+
         Args:
             profiles: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -660,10 +665,10 @@ class PyfficeWebProfileManager(PyfficeRolodex):
 
     def del_profile(self, name) -> Self:
         """Remove the profile.
-        
+
         Args:
             name: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -672,7 +677,7 @@ class PyfficeWebProfileManager(PyfficeRolodex):
 
     def get_count(self) -> Any:
         """Return the count.
-        
+
         Returns:
             Self for chaining.
         """
@@ -680,10 +685,10 @@ class PyfficeWebProfileManager(PyfficeRolodex):
 
     def get_profile(self, name) -> Self:
         """Return the profile.
-        
+
         Args:
             name: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -691,7 +696,7 @@ class PyfficeWebProfileManager(PyfficeRolodex):
 
     def get_current_profile(self) -> Any:
         """Return the current profile.
-        
+
         Returns:
             Self for chaining.
         """
@@ -699,10 +704,10 @@ class PyfficeWebProfileManager(PyfficeRolodex):
 
     def load_document(self, document=None) -> Self:
         """Load document into this document.
-        
+
         Args:
             document: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -715,10 +720,10 @@ class PyfficeWebProfileManager(PyfficeRolodex):
 
     def set_profile_active(self, profile) -> Self:
         """Set the profile active.
-        
+
         Args:
             profile: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -732,10 +737,10 @@ class PyfficeWebProfileManager(PyfficeRolodex):
 
     def set_profiles(self, profiles) -> Self:
         """Set the profiles.
-        
+
         Args:
             profiles: Parameter.
-        
+
         Returns:
             Self for chaining.
         """
@@ -748,7 +753,7 @@ class PyfficeWebProfileManager(PyfficeRolodex):
 
     def to_dict(self) -> Self:
         """Convert this document to dict.
-        
+
         Returns:
             Self for chaining.
         """

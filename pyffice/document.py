@@ -997,7 +997,7 @@ class PyfficeDocument(PyfficeUnit):
             return PyfficePortFileSystem()
         return cls()
 
-    def file_open(self, file_path, open_=True) -> Any:
+    def open_file(self, file_path, open_=True) -> Any:
         """Open a file and return its raw text content.
 
         For binary formats (.xlsx, .pdf, .png, etc.), this returns
@@ -1015,6 +1015,8 @@ class PyfficeDocument(PyfficeUnit):
         if file_path is None:
             file_path = self.file_path
         self.file_path = file_path
+        if not exists(self.file_path):
+            return ""
         text = None
         if open_ is True:
             from pathlib import Path
@@ -1136,6 +1138,8 @@ class PyfficeDocument(PyfficeUnit):
         # use syntax to select a template
         if path is None:
             raise MissingPathError(f"No path provided")
+        if not exists(path):
+            return self
         if encrypt_key:
             txtonql.Doc(path).write(encrypt256(self.to_string(), encrypt_key))
         else:
