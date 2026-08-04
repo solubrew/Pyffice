@@ -15,7 +15,7 @@ _LAZY_EXPORTS = {
     "PyfficePortWord": ("pyffice.ports.msports", "PyfficePortWord"),
     "read_docx_tables": ("pyffice.ports.msports", "read_docx_tables"),
     "PyfficePort": ("pyffice.ports.ports", "PyfficePort"),
-    "PyfficePortCherryTree": ("pyffice.ports.ports", "PyfficePortCherryTree"),
+    "PyfficePortCherryTree": ("pyffice.ports.noteports", "PyfficePortCherryTree"),
     "PyfficePortOffice": ("pyffice.ports.ports", "PyfficePortOffice"),
     "PyfficePortCSV": ("pyffice.ports.ports", "PyfficePortCSV"),
     "PyfficePortDia": ("pyffice.ports.ports", "PyfficePortDia"),

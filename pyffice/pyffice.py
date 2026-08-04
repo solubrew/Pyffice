@@ -30,7 +30,7 @@ from pyffice.analytics.sources import PyfficeSourceManager
 from pyffice.calendars.calendars import PyfficeCalendar
 from pyffice.charts.charts import PyfficeChart
 from pyffice.matrix.spreadsheet import PyfficeSpreadSheet
-from pyffice.ports.ports import PyfficePortCherryTree
+from pyffice.ports.noteports import PyfficePortCherryTree
 from pyffice.contacts.contacts import PyfficeRolodex, PyfficeContact
 from pyffice.forms.forms import PyfficeFormsManager
 from pyffice.images.images import PyfficeImage
